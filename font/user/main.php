@@ -167,7 +167,12 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><span class="badge badge-danger">Danger</span></td>
+                                                        <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
+                                                        <td></td>
+                                                        <td> เจ้าหน้าที่ </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="badge badge-success">อ่านแล้ว</span></td>
                                                         <td></td>
                                                         <td> เจ้าหน้าที่ </td>
                                                     </tr>
