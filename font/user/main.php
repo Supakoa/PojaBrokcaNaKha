@@ -127,148 +127,147 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            <div class="col-lg-1"></div>
                                         </div>
-                                        <div class="col-lg-1"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Tab panes 1-->
+                                <!-- Tab panes 1-->
 
-                            <!-- Tab panes 2-->
-                            <div id="menu1" class="container tab-pane fade" style="background-color:#45b8ac;"><br>
-                                <div class="container accordion" id="formreport">
+                                <!-- Tab panes 2-->
+                                <div id="menu1" class="container tab-pane fade" style="background-color:#45b8ac;"><br>
+                                    <div class="container accordion" id="formreport">
 
-                                    <div class="card">
-                                        <!-- form 1 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form1">
-                                            <div class="card-header">แบบคำร้องขอตรวจสอบผลการเรียน</div>
-                                        </a>
+                                        <div class="card">
+                                            <!-- form 1 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form1">
+                                                <div class="card-header">แบบคำร้องขอตรวจสอบผลการเรียน</div>
+                                            </a>
 
-                                        <div id="form1" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form1" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 1 -->
+                                            <!-- form 1 -->
 
-                                        <!-- form 2 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form2">
-                                            <div class="card-header">แบบฟอร์มแจ้งสาเหตุการขาดสอบรายวิชาศึกษาทั่วไป</div>
-                                        </a>
+                                            <!-- form 2 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form2">
+                                                <div class="card-header">แบบฟอร์มแจ้งสาเหตุการขาดสอบรายวิชาศึกษาทั่วไป</div>
+                                            </a>
 
-                                        <div id="form2" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form2" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 2 -->
+                                            <!-- form 2 -->
 
-                                        <!-- form 3 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form3">
-                                            <div class="card-header">แบบคำร้องขอแก้ไขผลการเรียน</div>
-                                        </a>
+                                            <!-- form 3 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form3">
+                                                <div class="card-header">แบบคำร้องขอแก้ไขผลการเรียน</div>
+                                            </a>
 
-                                        <div id="form3" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form3" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 3 -->
+                                            <!-- form 3 -->
 
-                                        <!-- form 4 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form4">
-                                            <div class="card-header">แบบคำร้องขอสอบภายหลัง</div>
-                                        </a>
+                                            <!-- form 4 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form4">
+                                                <div class="card-header">แบบคำร้องขอสอบภายหลัง</div>
+                                            </a>
 
-                                        <div id="form4" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form4" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 4 -->
+                                            <!-- form 4 -->
 
-                                        <!-- form 5 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form5">
-                                            <div class="card-header">แบบใบลาป่วย ลากิจ</div>
-                                        </a>
+                                            <!-- form 5 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form5">
+                                                <div class="card-header">แบบใบลาป่วย ลากิจ</div>
+                                            </a>
 
-                                        <div id="form5" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form5" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 5 -->
+                                            <!-- form 5 -->
 
-                                        <!-- form 6 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form6">
-                                            <div class="card-header">ใบคำร้องขอรหัสผ่านเข้าระบบ</div>
-                                        </a>
+                                            <!-- form 6 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form6">
+                                                <div class="card-header">ใบคำร้องขอรหัสผ่านเข้าระบบ</div>
+                                            </a>
 
-                                        <div id="form6" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form6" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 6 -->
+                                            <!-- form 6 -->
 
-                                        <!-- form 7 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form7">
-                                            <div class="card-header">แบบคำร้องทั่วไป</div>
-                                        </a>
+                                            <!-- form 7 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form7">
+                                                <div class="card-header">แบบคำร้องทั่วไป</div>
+                                            </a>
 
-                                        <div id="form7" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form7" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 7 -->
+                                            <!-- form 7 -->
 
-                                        <!-- form 8 -->
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#form8">
-                                            <div class="card-header">แบบประเมิณความพอใจ</div>
-                                        </a>
+                                            <!-- form 8 -->
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#form8">
+                                                <div class="card-header">แบบประเมิณความพอใจ</div>
+                                            </a>
 
-                                        <div id="form8" class="collapse" data-parent="#formreport">
-                                            <div class="card-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.
+                                            <div id="form8" class="collapse" data-parent="#formreport">
+                                                <div class="card-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    ex ea commodo consequat.
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- form 8 -->
-                                    </div><br>
+                                            <!-- form 8 -->
+                                        </div><br>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Tab panes 2-->
+                                <!-- Tab panes 2-->
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div><br>
-            <!-- card 1 -->
+                </div><br>
+                <!-- card 1 -->
 
 
             <!-- card 2-->
@@ -317,63 +316,62 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- Small modal -->
-                                                        </td>
-                                                        <td> เจ้าหน้าที่ </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span class="badge badge-success">อ่านแล้ว</span></td>
-                                                        <td>
-                                                            <!-- Small modal -->
-                                                            <button type="button" class="btn btn-info btn-sm"
-                                                                data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
+                                                                <!-- Small modal -->
+                                                            </td>
+                                                            <td> เจ้าหน้าที่ </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="badge badge-success">อ่านแล้ว</span></td>
+                                                            <td>
+                                                                <!-- Small modal -->
+                                                                <button type="button" class="btn btn-info btn-sm"
+                                                                        data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
 
-                                                            <div id="confirm1" class="modal fade bd-example-modal-sm"
-                                                                tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog modal-sm">
-                                                                    <div class="modal-content ">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center">
-                                                                            55555555555
+                                                                <div id="confirm1" class="modal fade bd-example-modal-sm"
+                                                                     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                                     aria-hidden="true">
+                                                                    <div class="modal-dialog modal-sm">
+                                                                        <div class="modal-content ">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
+                                                                                <button type="button" class="close"
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body text-center">
+                                                                                55555555555
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- Small modal -->
-                                                        </td>
-                                                        <td> เจ้าหน้าที่ </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                                <!-- Small modal -->
+                                                            </td>
+                                                            <td> เจ้าหน้าที่ </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div><!-- card 2.1 -->
-                            </div>
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-3">
-                                <div class="card">
-                                    <!-- card 2.2 -->
-                                    <div class="card-body">
-                                        <div class="container text-center">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ <i
-                                                    class="fas fa-comment"></i></button>
+                                    </div><!-- card 2.1 -->
+                                </div>
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <!-- card 2.2 -->
+                                        <div class="card-body">
+                                            <div class="container text-center">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ <i
+                                                        class="fas fa-comment"></i></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div><!-- card 2.2 -->
+                                    </div><!-- card 2.2 -->
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><br><!-- card 2-->
+                </div><br><!-- card 2-->
 
         </div>
     </section><!-- body -->
@@ -412,41 +410,40 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--modal card 3.2 -->
+        <!--modal card 3.2 -->
 
 
-    <!-- Jquery -->
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
-    <script>
-        //tap
-        $(document).ready(function () {
-            $(".nav-tabs a").click(function () {
-                $(this).tab('show');
+        <!-- Jquery -->
+        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+        <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
+        <script>
+            //tap
+            $(document).ready(function () {
+                $(".nav-tabs a").click(function () {
+                    $(this).tab('show');
+                });
             });
-        });
 
-        //time news
-        $('.carousel').carousel({
-            interval: 2000
-        })
-        //modal
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
+            //time news
+            $('.carousel').carousel({
+                interval: 2000
+            })
+            //modal
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+            })
 
-        //datatable
-        // $(document).ready( function () {
-        //     $('#table_id').DataTable();
-        // } );
-    </script>
+            //datatable
+            // $(document).ready( function () {
+            //     $('#table_id').DataTable();
+            // } );
+        </script>
 
-    <!-- bootstrap 4.2.1 -->
-    <script src="../node_modules/popper.js/dist/popper.min.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- bootstrap 4.2.1 -->
+        <script src="../node_modules/popper.js/dist/popper.min.js"></script>
+        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-</body>
+    </body>
 
 </html>
