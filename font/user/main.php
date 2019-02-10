@@ -96,13 +96,13 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <!-- Tab panes 1-->
-                            <div id="home" class="container tab-pane active" style="background-color:#009b77;margin-right:-15px;margin-left:-15px"><br>
+                            <div id="home" class="container tab-pane active" style="background-color:#009b77;"><br>
                                 <div class="container ">
                                     <div class="row">
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
                                             <div class="table-responsive">
-                                                <table class="table table-hover">
+                                                <table class="table table-hover overflow-y: hidden">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -131,7 +131,7 @@
                             <!-- Tab panes 1-->
 
                             <!-- Tab panes 2-->
-                            <div id="menu1" class="container tab-pane fade" style="background-color:#45b8ac;margin-right:-15px;margin-right:-15px;"><br>
+                            <div id="menu1" class="container tab-pane fade" style="background-color:#45b8ac;"><br>
                                 <div class="container accordion" id="formreport">
 
                                     <div class="card">
@@ -279,8 +279,8 @@
                                 <div class="card">
                                     <!-- card 2.1 -->
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table display">
+                                        <div class="table-responsive ">
+                                            <table class="table display overflow-y: hidden">
                                                 <thead>
                                                     <tr>
                                                         <th>status</th>
