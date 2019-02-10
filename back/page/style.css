@@ -1,0 +1,19 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+*,h1{
+    color: whitesmoke;
+}
+
+#body{
+    margin-top:1%;
+    margin-bottom:1%;
+    margin-left:2%;
+    margin-right:2%;
+}
+
+a:hover{
+    text-decoration: none;
+}
