@@ -1,5 +1,5 @@
 <!-- navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light container">
     <a class="navbar-brand" href="#">
         <img src="../picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
     </a>

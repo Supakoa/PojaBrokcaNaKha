@@ -37,14 +37,16 @@
 </head>
 
 <body>
+    
+    <div class="container fixed-top">
+        <?php require 'navbar/navbars.php'; ?>
+    </div>
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:blue">
         <div class="container" style="background-color:red">
-            <div class="container fixed-top">
-                <?php require 'navbar/navbars.php'; ?>
-            </div>
 
-            <br>
+
+            <br><br><br>
 
             <!-- News -->
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -55,8 +57,9 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <a href = "eiei.php" target="_blank">
-                            <img src="../picture/news/37869166_2315748691981362_1261623428901765120_n.jpg" class="d-block w-100" alt="...">
+                        <a href="eiei.php" target="_blank">
+                            <img src="../picture/news/37869166_2315748691981362_1261623428901765120_n.jpg" class="d-block w-100"
+                                alt="...">
                         </a>
                     </div>
                     <div class="carousel-item ">
@@ -86,7 +89,8 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs row">
                             <li class="nav-item col-lg-6">
-                                <a class="nav-link active" style="background-color:#009b77;color:black;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                <a class="nav-link active" style="background-color:#009b77;color:black;margin-right:-15px;margin-left:-15px"
+                                    data-toggle="tab" href="#home">ประวัติคำร้อง</a>
                             </li>
                             <li class="nav-item col-lg-6">
                                 <a class="nav-link" data-toggle="tab" href="#menu1" style="background-color:#45b8ac;color:black;margin-left:-15px;margin-right:-15px">แบบคำร้อง</a>
@@ -101,7 +105,7 @@
                                     <div class="row">
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
-                                            <div class="table-responsive">
+                                            <div class="table-responsive-lg">
                                                 <table class="table table-hover overflow-y: hidden">
                                                     <thead>
                                                         <tr>
@@ -279,7 +283,7 @@
                                 <div class="card">
                                     <!-- card 2.1 -->
                                     <div class="card-body">
-                                        <div class="table-responsive ">
+                                        <div class="table-responsive-lg">
                                             <table class="table display overflow-y: hidden">
                                                 <thead>
                                                     <tr>
@@ -372,10 +376,11 @@
             </div><br><!-- card 2-->
 
         </div>
-    </section><br><!-- body -->
+    </section><!-- body -->
+
     <footer class="text-center">
-        <p>Create by: CEFSSRU</p>
-        <p>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</p>
+        <label>Create by: CEFStyle</label><br>
+        <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
     </footer>
 
     <!-- modal card 3.2 -->
