@@ -48,10 +48,11 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../picture/news/37869166_2315748691981362_1261623428901765120_n.jpg" class="d-block w-100"
-                            alt="...">
+                        <a href = "eiei.php" target="_blank">
+                            <img src="../picture/news/37869166_2315748691981362_1261623428901765120_n.jpg" class="d-block w-100" alt="...">
+                        </a>
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item ">
                         <img src="../picture/news/37888947_2315748711981360_6369071917374111744_n.jpg" class="d-block w-100"
                             alt="...">
                     </div>
