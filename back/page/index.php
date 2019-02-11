@@ -4,7 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- title -->
     <title id="tab_title"></title>
+    <link rel="icon" type="image/ico" href="../image/icon/icon.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- bootstrap 4.2.1 -->
