@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BackDoor : Main</title>
+    <title id="tab_title"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- bootstrap 4.2.1 -->
@@ -29,19 +29,19 @@
 
     <!-- start sidebar -->
     <div class="w3-sidebar w3-bar-block w3-red" style="width:15%;border:solid;border-color:red;">
-        <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home');">
+        <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
         <div class="w3-container" style="margin-left:1%;">
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document');"><i class="far fa-folder-open"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
                 Document</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member');"><i class="fas fa-user-edit"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
                 Member</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise');"><i class="fas fa-bullhorn"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i class="fas fa-bullhorn"></i>
                 Advertise</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender');"><i class="fas fa-sort-amount-down"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i class="fas fa-sort-amount-down"></i>
                 Sender</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox');"><i class="fas fa-inbox"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i class="fas fa-inbox"></i>
                 Inbox<span class="w3-badge w3-right w3-white">7</span></a>
         </div>
     </div>
@@ -86,11 +86,12 @@
 
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('main.php', 'Page : Home');
+        call_content('main.php', 'Page : Home','BackDoor : Main');
     }
 
-    function call_content(content, title) {
-        document.getElementById('nav_title').innerHTML = title;
+    function call_content(content,nav_title,title) {
+        document.getElementById('nav_title').innerHTML = nav_title;
+        document.getElementById('tab_title').innerHTML = title;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
