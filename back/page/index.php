@@ -26,15 +26,15 @@
 
     <!-- start sidebar -->
     <div class="w3-sidebar w3-bar-block w3-red" style="width:15%;border:solid;border-color:red;">
-        <a href="#" class="w3-bar-item">
+        <a class="w3-bar-item w3-button" onclick="call_content('main.php');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
         <div class="w3-container" style="margin-left:1%;">
-            <a href="#" class="w3-bar-item w3-button"><i class="far fa-folder-open"></i> Document</a>
-            <a href="#" class="w3-bar-item w3-button"><i class="fas fa-user-edit"></i> Member</a>
-            <a href="#" class="w3-bar-item w3-button"><i class="fas fa-bullhorn"></i> Advertise</a>
-            <a href="#" class="w3-bar-item w3-button"><i class="fas fa-sort-amount-down"></i> Sender</a>
-            <a href="#" class="w3-bar-item w3-button"><i class="fas fa-inbox"></i> Inbox<span class="w3-badge w3-right w3-white">7</span></a>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php');"><i class="far fa-folder-open"></i> Document</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php');"><i class="fas fa-user-edit"></i> Member</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php');"><i class="fas fa-bullhorn"></i> Advertise</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php');"><i class="fas fa-sort-amount-down"></i> Sender</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php');"><i class="fas fa-inbox"></i> Inbox<span class="w3-badge w3-right w3-white">7</span></a>
         </div>
     </div>
     <!-- end sidebar -->
@@ -55,26 +55,11 @@
 
         <!-- start body -->
         <div class="w3-container-fluid w3-card-4 w3-purple" style="border:solid;border-color:purple;height:522px;" id="body">
-            <div class="w3-container w3-center">
-                <h1 style="margin:30px">MENU</h1>
-                <div class="w3-row w3-yellow w3-margin" style="border:solid;border-color:yellow;">
-                    <a href="">
-                        <div class="w3-col w3-gray" style="height:200px;width:200px;margin:15px;">1</div>
-                    </a>
-                    <a href="">
-                        <div class="w3-col w3-gray" style="height:200px;width:200px;margin:15px;">2</div>
-                    </a>
-                    <a href="">
-                        <div class="w3-col w3-gray" style="height:200px;width:200px;margin:15px;">3</div>
-                    </a>
-                    <a href="">
-                        <div class="w3-col w3-gray" style="height:200px;width:200px;margin:15px;">4</div>
-                    </a>
-                    <a href="">
-                        <div class="w3-col w3-gray" style="height:200px;width:200px;margin:15px;">5</div>
-                    </a>
-                </div>
-            </div>
+
+            <!-- html here -->
+            <div id="in_body"></div>
+            <?php //require 'main.php'; ?>
+
         </div>
         <!-- end body -->
 
@@ -92,6 +77,22 @@
 
     </div>
 </body>
+
+<script>
+    if(document.getElementById('in_body').innerHTML === ''){
+        call_content('main.php');
+    }
+    function call_content(content){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("in_body").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET",content, true);
+        xhttp.send();
+    }
+</script>
 
 <!-- bootstrap 4.2.1 -->
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
