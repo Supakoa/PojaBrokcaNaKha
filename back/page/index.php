@@ -32,7 +32,7 @@
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
-        <div class="w3-container" style="margin-left:1%;">
+        <div class="w3-container" style="margin-left:1%;"><hr>
             <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
                 Document</a>
             <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
@@ -42,7 +42,7 @@
             <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i class="fas fa-sort-amount-down"></i>
                 Sender</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i class="fas fa-inbox"></i>
-                Inbox<span class="w3-badge w3-right w3-white">7</span></a>
+                Inbox<span class="w3-badge w3-right w3-white">7</span></a><hr>
         </div>
     </div>
     <!-- end sidebar -->
