@@ -2,7 +2,7 @@
     <h1 style="padding-top:10px;">Serach : Document</h1>
     <hr>
     <input class="w3-center" type="search" id="search_document" style="background-color: #4d4d4d;color: white;"
-        placeholder="ID : xxxxx"><br>
+        placeholder="ID : 😁😁😁😁"><br>
     <button type="button" class="btn btn-outline-warning btn-lg" style="margin-top:10px;margin-bottom:10px;"><i class="fas fa-search"></i>
         <strong>Search</strong></button>
 </div>
