@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- bootstrap 4.2.1 -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 
     <!-- w3.css -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -30,11 +33,16 @@
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
         <div class="w3-container" style="margin-left:1%;">
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document');"><i class="far fa-folder-open"></i> Document</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member');"><i class="fas fa-user-edit"></i> Member</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise');"><i class="fas fa-bullhorn"></i> Advertise</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender');"><i class="fas fa-sort-amount-down"></i> Sender</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox');"><i class="fas fa-inbox"></i> Inbox<span class="w3-badge w3-right w3-white">7</span></a>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document');"><i class="far fa-folder-open"></i>
+                Document</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member');"><i class="fas fa-user-edit"></i>
+                Member</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise');"><i class="fas fa-bullhorn"></i>
+                Advertise</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender');"><i class="fas fa-sort-amount-down"></i>
+                Sender</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox');"><i class="fas fa-inbox"></i>
+                Inbox<span class="w3-badge w3-right w3-white">7</span></a>
         </div>
     </div>
     <!-- end sidebar -->
@@ -77,18 +85,19 @@
 </body>
 
 <script>
-    if(document.getElementById('in_body').innerHTML === ''){
-        call_content('main.php','Page : Home');
+    if (document.getElementById('in_body').innerHTML === '') {
+        call_content('main.php', 'Page : Home');
     }
-    function call_content(content,title){
+
+    function call_content(content, title) {
         document.getElementById('nav_title').innerHTML = title;
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("in_body").innerHTML = this.responseText;
+                document.getElementById("in_body").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET",content, true);
+        xhttp.open("GET", content, true);
         xhttp.send();
     }
 </script>
