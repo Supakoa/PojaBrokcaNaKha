@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User 1</title>
+    <title>นักศึกษา</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
 
@@ -55,7 +55,7 @@
             <div class="card" id="card1">
                 <div class="card-body">
                     <div class="container mt-3">
-                        
+
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs row">
                             <li class="nav-item col-lg-6">
@@ -76,13 +76,14 @@
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
                                             <div class="table-responsive-lg">
-                                                <table class="table table-hover overflow" id="table_id">
+                                                <table id="table1" class="table table-hover overflow display">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">สถานะ</th>
-                                                            <th scope="col">แบบคำร้อง</th>
-                                                            <th scope="col">หมายเหตุ <span style="color:red">*</span></th>
+                                                            <th>สถานะ</th>
+                                                            <th>แบบคำร้อง</th>
+                                                            <th>สถานะการดำเนินการ</th>
+                                                            <th>หมายเหตุ <span style="color:red">*</span></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -91,7 +92,61 @@
                                                             <td><span class="badge badge-danger">ไม่ผ่าน</span></td>
                                                             <td>ขอสอบย้อนหลัง</td>
                                                             <td>
-                                                                <button class="btn btn-warning btn-sm">แก้ไข</button>
+                                                                <!-- Button trigger modal -->
+                                                                <button type="button" class="btn btn-light btn-sm"
+                                                                    data-toggle="modal" data-target="#route">
+                                                                    แสดง
+                                                                </button>
+
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="route" tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="card-body">
+                                                                                    <div class="table-responsive">
+                                                                                        <table class="table table-hover overflow">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>แบบคำร้อง</th>
+                                                                                                    <th>วันที่ส่ง</th>
+                                                                                                    <th>เส้นทางการดำเนินการ</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td>แบบคำร้องทั่วไป</td>
+                                                                                                    <td>18-02-2562</td>
+                                                                                                    <td>เจา้หน้าที่ทั่วไป</td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td></td>
+                                                                                                    <td class="text-center"><i class="fas fa-angle-double-down"></i></td>
+                                                                                                    <td></td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit">แก้ไข</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -542,7 +597,7 @@
                                     <div class="card">
                                         <!-- card 2.1 -->
                                         <div class="card-body">
-                                            <div class="table-responsive-lg">
+                                            <div id="table2" class="table-responsive-lg display">
                                                 <table class="table display overflow-y: hidden">
                                                     <thead>
                                                         <tr>
@@ -675,8 +730,8 @@
 
         <!-- Jquery -->
         <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-        <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
-        <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         <script>
             //tap
             $(document).ready(function () {
@@ -696,7 +751,10 @@
 
             //datatable
             $(document).ready(function () {
-                $('#table_id').DataTable();
+                $('#table1').DataTable();
+            });
+            $(document).ready(function () {
+                $('#table2').DataTable();
             });
         </script>
 
