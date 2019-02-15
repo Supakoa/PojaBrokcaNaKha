@@ -7,6 +7,10 @@ body{
     color: whitesmoke;
 }
 
+th,td{
+    border-style: solid;
+}
+
 #body{
     margin-top:1%;
     margin-bottom:1%;

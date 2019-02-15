@@ -103,7 +103,7 @@
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-8" style="background-color:pink">
-                                    <div class="card">
+                                    <div class="card "  style="margin-top:100px">
                                         <div class="card-header text-center">
                                             <h4>เข้าสู่ระบบ</h4>
                                         </div>
@@ -112,23 +112,21 @@
                                                 <!-- form log-in -->
                                                 <form action="">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email address</label>
-                                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Enter email">
-                                                        <small id="emailHelp" class="form-text text-muted">We'll never
-                                                            share your email with anyone else.</small>
+                                                        <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
+                                                        <input type="email" class="form-control" id="user"
+                                                            aria-describedby="emailHelp" placeholder="User">
+                                                        <small id="emailHelp" class="form-text text-muted"><span style="color:red">*</span></small>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Password</label>
-                                                        <input type="password" class="form-control" id="exampleInputPassword1"
+                                                        <label for="Password1">วัน/เดือน/ปี</label>
+                                                        <input type="password" class="form-control" id="Password1"
                                                             placeholder="Password">
                                                     </div>
                                                     <div class="form-group form-check">
                                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Check me
-                                                            out</label>
+                                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                                    <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
                                                 </form>
                                                 <!-- form log-in -->
 

@@ -85,7 +85,7 @@
             <div class="card" id="card1">
                 <div class="card-body">
                     <div class="container mt-3">
-
+                        
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs row">
                             <li class="nav-item col-lg-6">
