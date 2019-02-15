@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>User 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/ico" href="../picture/icon.png" />
+
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -37,49 +39,17 @@
 </head>
 
 <body>
-    
+
     <div class="container fixed-top">
-        <?php require 'navbar/navbars.php'; ?>
+        <?php require 'other/navbars.php'; ?>
     </div>
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:blue">
         <div class="container" style="background-color:red">
-
-
             <br><br><br>
 
-            <!-- News -->
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a href="eiei.php" target="_blank">
-                            <img src="../picture/news/37869166_2315748691981362_1261623428901765120_n.jpg" class="d-block w-100"
-                                alt="...">
-                        </a>
-                    </div>
-                    <div class="carousel-item ">
-                        <img src="../picture/news/37888947_2315748711981360_6369071917374111744_n.jpg" class="d-block w-100"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../picture/news/38292707_2324643144425250_3892870529308164096_n.jpg" class="d-block w-100"
-                            alt="...">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div><br><!-- News -->
+            <?php require 'other/news.php'; ?>
+
 
             <!-- card 1 -->
             <div class="card" id="card1">
@@ -89,11 +59,11 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs row">
                             <li class="nav-item col-lg-6">
-                                <a class="nav-link active" style="background-color:#009b77;color:black;margin-right:-15px;margin-left:-15px"
-                                    data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                <a class="nav-link active" style="background-color:#009b77;color:black;" data-toggle="tab"
+                                    href="#home">ประวัติคำร้อง</a>
                             </li>
                             <li class="nav-item col-lg-6">
-                                <a class="nav-link" data-toggle="tab" href="#menu1" style="background-color:#45b8ac;color:black;margin-left:-15px;margin-right:-15px">แบบคำร้อง</a>
+                                <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#45b8ac;color:black;">แบบคำร้อง</a>
                             </li>
                         </ul>
 
@@ -106,7 +76,7 @@
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
                                             <div class="table-responsive-lg">
-                                                <table class="table table-hover overflow-y: hidden">
+                                                <table class="table table-hover overflow" id="table_id">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -134,7 +104,7 @@
                                 <!-- Tab panes 1-->
 
                                 <!-- Tab panes 2-->
-                                <div id="menu1" class="container tab-pane fade" style="background-color:#45b8ac;"><br>
+                                <div id="report" class="container tab-pane fade" style="background-color:#45b8ac;"><br>
                                     <div class="container accordion" id="formreport">
 
                                         <div class="card">
@@ -146,8 +116,10 @@
                                             <div id="form1" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -161,8 +133,10 @@
                                             <div id="form2" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -176,8 +150,10 @@
                                             <div id="form3" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -191,8 +167,10 @@
                                             <div id="form4" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -206,8 +184,10 @@
                                             <div id="form5" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -221,8 +201,10 @@
                                             <div id="form6" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -236,8 +218,10 @@
                                             <div id="form7" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -251,8 +235,10 @@
                                             <div id="form8" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad
+                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip
                                                     ex ea commodo consequat.
                                                 </div>
                                             </div>
@@ -270,53 +256,53 @@
                 <!-- card 1 -->
 
 
-            <!-- card 2-->
-            <div class="card" id="card2">
-                <div class="card-header text-center">
-                    <h3>ติดต่อเจ้าหน้าที่</h3>
-                </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="card">
-                                    <!-- card 2.1 -->
-                                    <div class="card-body">
-                                        <div class="table-responsive-lg">
-                                            <table class="table display overflow-y: hidden">
-                                                <thead>
-                                                    <tr>
-                                                        <th>status</th>
-                                                        <th>ข้อความ</th>
-                                                        <th>ผู้ส่ง</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
-                                                        <td>
-                                                            <!-- Small modal -->
-                                                            <button type="button" class="btn btn-info btn-sm"
-                                                                data-toggle="modal" data-target="#confirm">เจ้าหน้าที่</button>
+                <!-- card 2-->
+                <div class="card" id="card2">
+                    <div class="card-header text-center">
+                        <h3>ติดต่อเจ้าหน้าที่</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="card">
+                                        <!-- card 2.1 -->
+                                        <div class="card-body">
+                                            <div class="table-responsive-lg">
+                                                <table class="table display overflow-y: hidden">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>status</th>
+                                                            <th>ข้อความ</th>
+                                                            <th>ผู้ส่ง</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
+                                                            <td>
+                                                                <!-- Small modal -->
+                                                                <button type="button" class="btn btn-info btn-sm"
+                                                                    data-toggle="modal" data-target="#confirm">เจ้าหน้าที่</button>
 
-                                                            <div id="confirm" class="modal fade bd-example-modal-sm"
-                                                                tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog modal-sm">
-                                                                    <div class="modal-content ">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center">
-                                                                            55555555555
+                                                                <div id="confirm" class="modal fade bd-example-modal-sm"
+                                                                    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog modal-sm">
+                                                                        <div class="modal-content ">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body text-center">
+                                                                                55555555555
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!-- Small modal -->
+                                                                    <!-- Small modal -->
                                                             </td>
                                                             <td> เจ้าหน้าที่ </td>
                                                         </tr>
@@ -325,17 +311,17 @@
                                                             <td>
                                                                 <!-- Small modal -->
                                                                 <button type="button" class="btn btn-info btn-sm"
-                                                                        data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
+                                                                    data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
 
                                                                 <div id="confirm1" class="modal fade bd-example-modal-sm"
-                                                                     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                     aria-hidden="true">
+                                                                    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                                    aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
                                                                                 <button type="button" class="close"
-                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                    data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
@@ -362,8 +348,8 @@
                                         <div class="card-body">
                                             <div class="container text-center">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ <i
-                                                        class="fas fa-comment"></i></button>
+                                                    data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
+                                                    <i class="fas fa-comment"></i></button>
                                             </div>
                                         </div>
                                     </div><!-- card 2.2 -->
@@ -373,7 +359,7 @@
                     </div>
                 </div><br><!-- card 2-->
 
-        </div>
+            </div>
     </section><!-- body -->
 
     <footer class="text-center">
@@ -435,15 +421,15 @@
             })
 
             //datatable
-            // $(document).ready( function () {
-            //     $('#table_id').DataTable();
-            // } );
+            $(document).ready(function () {
+                $('#table_id').DataTable();
+            });
         </script>
 
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    </body>
+</body>
 
 </html>
