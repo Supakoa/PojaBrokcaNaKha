@@ -555,23 +555,6 @@
                                                 </div>
                                             </div>
                                             <!-- form 7 -->
-
-                                            <!-- form 8 -->
-                                            <a class="collapsed card-link" data-toggle="collapse" href="#form8">
-                                                <div class="card-header">แบบประเมิณความพอใจ</div>
-                                            </a>
-
-                                            <div id="form8" class="collapse" data-parent="#formreport">
-                                                <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
-                                                </div>
-                                            </div>
-                                            <!-- form 8 -->
                                         </div><br>
 
                                     </div>
