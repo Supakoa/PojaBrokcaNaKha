@@ -10,7 +10,7 @@
 
 
     <!-- bootstrap 4.2.1 -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="font/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
@@ -63,7 +63,7 @@
             <!-- navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                 <a class="navbar-brand" href="#">
-                    <img src="picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="font/picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,7 +105,7 @@
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-8" style="background-color:pink">
-                                    <div class="card "  style="margin-top:100px">
+                                    <div class="card "  style="margin-top:100px;margin-bottom:70px">
                                         <div class="card-header text-center">
                                             <h4>เข้าสู่ระบบ</h4>
                                         </div>
@@ -159,9 +159,9 @@
 
 
     <!-- bootstrap 4.2.1 -->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="font/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="font/node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="font/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>
 
