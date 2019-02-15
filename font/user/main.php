@@ -170,12 +170,40 @@
 
                                             <div id="form1" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                    <form action="" method="post">
+                                                        <div class = "row">
+                                                            <div class = "col-6">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <!-- form 1 -->
