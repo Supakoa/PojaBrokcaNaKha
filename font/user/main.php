@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User 1</title>
+    <title>นักศึกษา</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
 
@@ -55,7 +55,7 @@
             <div class="card" id="card1">
                 <div class="card-body">
                     <div class="container mt-3">
-                        
+
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs row">
                             <li class="nav-item col-lg-6">
@@ -76,13 +76,14 @@
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
                                             <div class="table-responsive-lg">
-                                                <table class="table table-hover overflow" id="table_id">
+                                                <table id="table1" class="table table-hover overflow display">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">สถานะ</th>
-                                                            <th scope="col">แบบคำร้อง</th>
-                                                            <th scope="col">หมายเหตุ <span style="color:red">*</span></th>
+                                                            <th>สถานะ</th>
+                                                            <th>แบบคำร้อง</th>
+                                                            <th>สถานะการดำเนินการ</th>
+                                                            <th>หมายเหตุ <span style="color:red">*</span></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -91,7 +92,61 @@
                                                             <td><span class="badge badge-danger">ไม่ผ่าน</span></td>
                                                             <td>ขอสอบย้อนหลัง</td>
                                                             <td>
-                                                                <button class="btn btn-warning btn-sm">แก้ไข</button>
+                                                                <!-- Button trigger modal -->
+                                                                <button type="button" class="btn btn-light btn-sm"
+                                                                    data-toggle="modal" data-target="#route">
+                                                                    แสดง
+                                                                </button>
+
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="route" tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="card-body">
+                                                                                    <div class="table-responsive">
+                                                                                        <table class="table table-hover overflow">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>แบบคำร้อง</th>
+                                                                                                    <th>วันที่ส่ง</th>
+                                                                                                    <th>เส้นทางการดำเนินการ</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td>แบบคำร้องทั่วไป</td>
+                                                                                                    <td>18-02-2562</td>
+                                                                                                    <td>เจา้หน้าที่ทั่วไป</td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td></td>
+                                                                                                    <td class="text-center"><i class="fas fa-angle-double-down"></i></td>
+                                                                                                    <td></td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit">แก้ไข</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -115,7 +170,7 @@
 
                                             <div id="form1" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    <form action="" method="post">
+                                                    <!-- <form action="" method="post"> -->
                                                         <div class = "row">
                                                             <div class = "col-6">
                                                                 <label for="sub">วิชา</label>
@@ -145,10 +200,10 @@
                                                             </div>
                                                             <div class = "col-12 text-center">
                                                                 <br>
-                                                                <button type="submit" class="btn-success" >ส่งแบบคำร้อง</button>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 1 -->
@@ -160,12 +215,56 @@
 
                                             <div id="form2" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                     <!-- <form action="" method="post"> -->
+                                                     <div class = "row">
+                                                            <div class = "col-4">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-4">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class ="col-4">
+                                                                <label for="sub">ประเภทการสอบ</label>
+                                                                    <select name="sub" class="form-control select2">
+                                                                        <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                        <option value="กลางภาค">กลางภาค</option>
+                                                                        <option value="ปลายภาค">ปลายภาค</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">สาเหตุ</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="สาเหตุการขาดสอบ" >
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="file">สำเนาบัตรนักศึกษา</label>
+                                                                <input type="file" name="file" id="file" class="form-control">
+                                                            </div>
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 2 -->
@@ -177,12 +276,52 @@
 
                                             <div id="form3" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                    <!-- <form action="" method="post"> -->
+                                                    <div class = "row">
+                                                            <div class = "col-4">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-4">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class = "col-4">
+                                                                <label for="group">ปีการศึกษา</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกปีการศึกษา" >
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">สาเหตุ</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอแก้ไขผลการเรียน  " >
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="file">สำเนาบัตรนักศึกษา</label>
+                                                                <input type="file" name="file" id="file" class="form-control">
+                                                            </div>
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 3 -->
@@ -194,12 +333,56 @@
 
                                             <div id="form4" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                    <!-- <form action="" method="post"> -->
+                                                    <div class = "row">
+                                                            <div class = "col-4">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-4">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class ="col-4">
+                                                                <label for="sub">ประเภทการสอบ</label>
+                                                                    <select name="sub" class="form-control select2">
+                                                                        <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                        <option value="กลางภาค">กลางภาค</option>
+                                                                        <option value="ปลายภาค">ปลายภาค</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">สาเหตุ</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอสอบ" >
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="file">หลักฐานสาเหตุ</label>
+                                                                <input type="file" name="file" id="file" class="form-control">
+                                                            </div>
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 4 -->
@@ -211,12 +394,56 @@
 
                                             <div id="form5" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                    <!-- <form action="" method="post"> -->
+                                                    <div class = "row">
+                                                            <div class = "col-4">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-4">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class ="col-4">
+                                                                <label for="sub">ประเภทการลา</label>
+                                                                    <select name="sub" class="form-control select2">
+                                                                        <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                        <option value="ลากิจ">ลากิจ</option>
+                                                                        <option value="ลาป่วย">ลาป่วย</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">สาเหตุ</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="สาเหตุการลา" >
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="ei">วันที่ลา</label>
+                                                                <input type="text" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่-วันที่">
+                                                            </div>
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 5 -->
@@ -228,12 +455,53 @@
 
                                             <div id="form6" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                   <!-- <form action="" method="post"> -->
+                                                   <div class = "row">
+                                                            <div class = "col-6">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class ="col-6">
+                                                                <label for="sub">ประเภทเว็ปไซต์</label>
+                                                                    <select name="sub" class="form-control select2">
+                                                                        <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                        <option value="เว็บไซต์รายวิชา">เว็บไซต์รายวิชา</option>
+                                                                        <option value="ระบบตรวจสอบคะแนน">ระบบตรวจสอบคะแนน (TSS)</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">สาเหตุ</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน" >
+                                                            </div>
+                                                        
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 6 -->
@@ -245,12 +513,45 @@
 
                                             <div id="form7" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat.
+                                                     <!-- <form action="" method="post"> -->
+                                                   <div class = "row">
+                                                            <div class = "col-6">
+                                                                <label for="sub">วิชา</label>
+                                                                <select name="sub" class="form-control select2" >
+                                                                    <option hidden="" selected="" value="">เลือกวิชา</option>
+                                                                    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+                                                                    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+                                                                    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+                                                                    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+                                                                    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+                                                                    <option value="GEH0205">GEH0205 : ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+                                                                    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+                                                                    <option value="GEL0102">GEL0102 : ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+                                                                    <option value="GEL0103">GEL0103 : ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+                                                                    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+                                                                    <option value="GEL0203">GEL0203 : ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+                                                                    <option value="GES0101">GES0101 : เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+                                                                    <option value="GES0102">GES0102 : วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+                                                                    <option value="GES0203">GES0203 : ความรู้เท่าทันสารสนเทศ</option>
+                                                                    <option value="GES0205">GES0205 : นันทนาการเพื่อคุณภาพชีวิต</option>
+                                                                    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class = "col-6">
+                                                                <label for="group">กลุ่มเรียน</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน" >
+                                                            </div>
+                                                            <div class = "col-12">
+                                                                <label for="group">ความประสงค์</label>
+                                                                <input type="text" id="group" class="form-control" placeholder="ความประสงค์" >
+                                                            </div>
+                                                        
+                                                            <div class = "col-12 text-center">
+                                                                <br>
+                                                                <button type="submit" class="btn btn-success" >ส่งแบบคำร้อง</button>
+                                                            </div>
+                                                        </div>
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                             <!-- form 7 -->
@@ -296,7 +597,7 @@
                                     <div class="card">
                                         <!-- card 2.1 -->
                                         <div class="card-body">
-                                            <div class="table-responsive-lg">
+                                            <div id="table2" class="table-responsive-lg display">
                                                 <table class="table display overflow-y: hidden">
                                                     <thead>
                                                         <tr>
@@ -429,8 +730,8 @@
 
         <!-- Jquery -->
         <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-        <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
-        <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         <script>
             //tap
             $(document).ready(function () {
@@ -450,7 +751,10 @@
 
             //datatable
             $(document).ready(function () {
-                $('#table_id').DataTable();
+                $('#table1').DataTable();
+            });
+            $(document).ready(function () {
+                $('#table2').DataTable();
             });
         </script>
 

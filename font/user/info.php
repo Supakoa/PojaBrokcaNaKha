@@ -53,22 +53,34 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
                             <div class="table-responsive">
                                 <table class="table table-hover overflow">
-                                    <thead>
-                                        <tr>
-                                            <th>ชื่อ - นามสกุล</th>
-                                            <th>Password</th>
-                                            <th>แก้ไข</th>
-                                        </tr>
 
-                                    </thead>
                                     <tbody>
                                         <tr>
+                                            <th scope="row">ชื่อ - นามสกุล</th>
                                             <td> ศุภกิจ กิจนะบำรุงศํกดิ์</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Password</th>
                                             <td>16/01/2540</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">เบอร์โทรศัพท์</th>
+                                            <td>095-59xx-xxx</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">E-mail</th>
+                                            <td>supakoa@gmail.com</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">แก้ไข</th>
+
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
@@ -100,6 +112,17 @@
                                                                             <label for="pass">Password</label>
                                                                             <input id="pass" type="text" placeholder="16/01/2540">
                                                                         </div>
+                                                                        <div class="col-lg-6">
+                                                                            <label for="phone">เบอร์โทรศัพท์</label>
+                                                                            <input id="phone" type="text" placeholder="095-59xx-xxx">
+
+
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <label for="email">E-mail</label>
+                                                                            <input id="email" type="text" placeholder="supakoa@gmail.com">
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -118,7 +141,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-lg-3"></div>
+                        <div class="col-lg-2"></div>
                     </div>
 
 
