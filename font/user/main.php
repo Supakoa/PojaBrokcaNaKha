@@ -115,8 +115,8 @@
 
                                             <div id="form1" class="collapse" data-parent="#formreport">
                                                 <div class="card-body">
-                                                    <div class = "row">
-                                                        <form action="" method="post">
+                                                    <form action="" method="post">
+                                                        <div class = "row">
                                                             <div class = "col-6">
                                                                 <label for="sub">วิชา</label>
                                                                 <select name="sub" class="form-control select2" >
@@ -147,8 +147,8 @@
                                                                 <br>
                                                                 <button type="submit" class="btn-success" >ส่งแบบคำร้อง</button>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <!-- form 1 -->
