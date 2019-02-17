@@ -264,7 +264,7 @@ $sub = '<label for="sub">วิชา</label>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                        <input type="file" name="file" id="file" class="form-control">
+                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
                                                     </div>
                                                     <div class="col-12 text-center">
                                                         <br>
@@ -304,7 +304,7 @@ $sub = '<label for="sub">วิชา</label>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                        <input type="file" name="file" id="file" class="form-control">
+                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
                                                     </div>
                                                     <div class="col-12 text-center">
                                                         <br>
@@ -348,7 +348,7 @@ $sub = '<label for="sub">วิชา</label>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="file">หลักฐานสาเหตุ</label>
-                                                        <input type="file" name="file" id="file" class="form-control">
+                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
                                                     </div>
                                                     <div class="col-12 text-center">
                                                         <br>
@@ -464,8 +464,8 @@ $sub = '<label for="sub">วิชา</label>
                                                         <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                     </div>
                                                     <div class="col-12">
-                                                        <label for="group">ความประสงค์</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="ความประสงค์">
+                                                        <label for="comment">ความประสงค์</label>
+                                                        <textarea class="form-control" id="comment" rows="3"></textarea>
                                                     </div>
 
                                                     <div class="col-12 text-center">
@@ -536,7 +536,7 @@ $sub = '<label for="sub">วิชา</label>
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body text-center">
-                                                                                    55555555555
+                                                                                   เอกสารไม่ครบ
                                                                                 </div>
                                                                             </div>
                                                                         </div>
