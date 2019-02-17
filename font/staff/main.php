@@ -57,7 +57,7 @@
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i>
-                            RaviKung</a>
+                            Mr.RVkung</a>
                         <a class="nav-link" href="#" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
                     </form>
                 </div>
@@ -148,7 +148,7 @@
                 <!-- card 3 -->
                 <div class="card " id="showdata">
                     <div class="card-header text-light" style="background-color:#78ABF2">
-                        <h5>ใบลากิจ ลาป่วย <i class="fas fa-angle-right"></i> 59123854</h5>
+                        <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> 59123854</h5>
                     </div>
                     <div class="card-body">
                         <div class="paper card-body">
@@ -173,22 +173,30 @@
 
                             <!-- subject -->
                             <div class="row container">
+                                <div class="col-lg-1"></div>
                                 <div class="col-lg-4">
                                     <p>เรื่อง ลาป่วย</p>
                                 </div>
-                                <div class="col-lg-8"></div>
+                                <div class="col-lg-7"></div>
+                                <div class="col-lg-1"></div>
                                 <div class="col-lg-4">
-                                    <p>เรียน อาจารย์ประจำวิชา GELH1101</p>
+                                    <p>วิชา GELH1101</p>
                                 </div>
                             </div>
                             <!-- subject -->
 
                             <!-- body -->
                             <div class="row">
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-10">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
                                     <div class="card-body">
                                         <p><span style="padding-left:6em"></span>
+                                        <?php
+                                        for( $i = 0; $i<800 ; $i++){
+                                            echo ".";
+                                        }
+                                       
+                                        ?>
                                         </p>
                                     </div>
                                 </div>
