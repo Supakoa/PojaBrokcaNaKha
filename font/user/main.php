@@ -1,3 +1,33 @@
+<?php 
+$sub = '<label for="sub">วิชา</label>
+<select name="sub" class="form-control select2">
+    <option hidden="" selected="" value="">เลือกวิชา</option>
+    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
+    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
+    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
+    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
+    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
+    <option value="GEH0205">GEH0205 :
+        ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
+    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
+    <option value="GEL0102">GEL0102 :
+        ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
+    <option value="GEL0103">GEL0103 :
+        ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
+    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
+    <option value="GEL0203">GEL0203 :
+        ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
+    <option value="GES0101">GES0101 :
+        เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
+    <option value="GES0102">GES0102 :
+        วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
+    <option value="GES0203">GES0203 :
+        ความรู้เท่าทันสารสนเทศ</option>
+    <option value="GES0205">GES0205 :
+        นันทนาการเพื่อคุณภาพชีวิต</option>
+    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
+</select>';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -47,38 +77,38 @@
         <?php require 'other/navbars.php'; ?>
     </div>
     <!-- body -->
-    <section class="container-fluid Gfonts" style="background-color:blue">
-        <div class="container" style="background-color:red">
-            <br><br><br>
+    <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
+        <div class="container" style="background-color:#E4EEFC">
+            <br><br>
 
             <?php require 'other/news.php'; ?>
 
 
             <!-- card 1 -->
-            <div class="card" id="card1">
+            <div class="card" id="card1"style="background-color:#AECDF7">
                 <div class="card-body">
                     <div class="container mt-3">
-
+                        <div class = "container">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs row">
                             <li class="nav-item col-lg-6">
-                                <a class="nav-link active" style="background-color:#009b77;color:black;" data-toggle="tab"
+                                <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab"
                                     href="#home">ประวัติคำร้อง</a>
                             </li>
                             <li class="nav-item col-lg-6">
-                                <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#45b8ac;color:black;">แบบคำร้อง</a>
+                                <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
                             </li>
                         </ul>
-
+                        </div>
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <!-- Tab panes 1-->
-                            <div id="home" class="container tab-pane active" style="background-color:#009b77;"><br>
-                                <div class="container ">
+                            <div id="home" class="container tab-pane active" style="background-color:#5796EE;" ><br>
+                                <div class="container "style="background-color:#F7FAFE">
                                     <div class="row">
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
-                                            <div class="table-responsive-lg">
+                                            <div class="table-responsive-lg" >
                                                 <table id="table1" class="table table-hover overflow display">
                                                     <thead>
                                                         <tr>
@@ -96,7 +126,7 @@
                                                             <td>ขอสอบย้อนหลัง</td>
                                                             <td>
                                                                 <!-- Button trigger modal -->
-                                                                <button type="button" class="btn btn-light btn-sm"
+                                                                <button type="button" class="btn btn-info btn-sm"
                                                                     data-toggle="modal" data-target="#route">
                                                                     แสดง
                                                                 </button>
@@ -157,15 +187,19 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            
                                             <div class="col-lg-1"></div>
+                                            <br>
                                         </div>
                                     </div>
+                                    
                                 </div>
+                                <br>
                             </div>
                             <!-- Tab panes 1-->
 
                             <!-- Tab panes 2-->
-                            <div id="report" class="container tab-pane fade" style="background-color:#45b8ac;"><br>
+                            <div id="report" class="container tab-pane fade" style="background-color:#3782EB;"><br>
                                 <div class="container accordion" id="formreport">
 
                                     <div class="card">
@@ -180,34 +214,7 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        <?php echo $sub;?>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -234,34 +241,8 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        <?php echo $sub;  ?>
+                                                        
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -304,34 +285,8 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        <?php echo $sub;  ?>
+                                                       
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -370,34 +325,8 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        <?php echo $sub;  ?>
+                                                        
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -440,34 +369,8 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        <?php echo $sub;  ?>
+                                                        
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -511,34 +414,8 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        <?php echo $sub;  ?>
+                                                        
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -578,34 +455,7 @@
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <label for="sub">วิชา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกวิชา</option>
-                                                            <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-                                                            <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-                                                            <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-                                                            <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-                                                            <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-                                                            <option value="GEH0205">GEH0205 :
-                                                                ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-                                                            <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-                                                            <option value="GEL0102">GEL0102 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-                                                            <option value="GEL0103">GEL0103 :
-                                                                ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-                                                            <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-                                                            <option value="GEL0203">GEL0203 :
-                                                                ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-                                                            <option value="GES0101">GES0101 :
-                                                                เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-                                                            <option value="GES0102">GES0102 :
-                                                                วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-                                                            <option value="GES0203">GES0203 :
-                                                                ความรู้เท่าทันสารสนเทศ</option>
-                                                            <option value="GES0205">GES0205 :
-                                                                นันทนาการเพื่อคุณภาพชีวิต</option>
-                                                            <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-                                                        </select>
+                                                        
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -633,16 +483,21 @@
 
                         </div>
                     </div>
-                </div><br>
+                </div>
+                </div>
                 <!-- card 1 -->
 
-
+                <br>
                 <!-- card 2-->
-                <div class="card" id="card2">
-                    <div class="card-header text-center">
+                <div class = "container " style="background-color:#AECDF7">
+                <br>
+                <div class = "container">
+                <div class="card" id="card2" >
+
+                    <div class="card-header text-center" style="background-color:#3782EB">
                         <h3>ติดต่อเจ้าหน้าที่</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="background-color:#F7FAFE">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-7">
@@ -739,11 +594,14 @@
                         </div>
                     </div>
                 </div><br><!-- card 2-->
-
+                </div>
+                </div>
             </div>
+            <br>
     </section><!-- body -->
 
-    <footer class="text-center">
+
+    <footer class="text-center" style="background-color:#87B4F3">
         <label>Create by: CEFStyle</label><br>
         <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
     </footer>

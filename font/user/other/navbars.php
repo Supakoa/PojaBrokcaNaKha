@@ -1,5 +1,5 @@
 <!-- navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light container">
+<nav class="navbar navbar-expand-lg navbar-light container Gfonts" style="background-color:#3782EB;">
     <a class="navbar-brand" href="#">
         <img src="../picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
     </a>
@@ -11,16 +11,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto ">
             <li class="nav-item active">
-                <a class="nav-link" href="main.php"><i class="fas fa-home"></i> หน้าแรก <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="main.php" style="color:#FFFFFF;" ><i class="fas fa-home"></i> หน้าแรก <span class="sr-only">(current)</span></a>
 
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="info.php"><i class="fas fa-info-circle"></i> ข้อมูลส่วนตัว</a>
+                <a class="nav-link" href="info.php" style="color:#FFFFFF;"><i class="fas fa-info-circle"></i> ข้อมูลส่วนตัว</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <a class="nav-link disabled" href="#"><i class="fas fa-user"></i> นางสาว ผมสั้นตาโต ตัวเล็ก</a>
-            <a class="nav-link" href="#">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
+            <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i> นางสาว ผมสั้นตาโต ตัวเล็ก</a>
+            <a class="nav-link" href="#" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
         </form>
     </div>
 </nav><!-- navbar -->
