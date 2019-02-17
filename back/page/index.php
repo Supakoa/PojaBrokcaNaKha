@@ -52,7 +52,7 @@
                 Sender</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i
                     class="fas fa-inbox"></i>
-                Inbox<span class="w3-badge w3-right w3-white">7</span></a>
+                Inbox<span class="w3-badge w3-right w3-white">4</span></a>
             <hr>
         </div>
     </div>
