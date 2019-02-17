@@ -137,12 +137,14 @@
                         <h3><i class="fas fa-lightbulb"></i> รหัสเอกสาร <i class="fas fa-angle-right"></i> 59123854</h3>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h3>แสดง เอกสารจากตาราง Inbox</h3>
                     </div>
                     <div class="card-footer text-muted">
-                        2 days ago
+                        <div class="row">
+                            <div class="col-lg-4"><button>5555</button></div>
+                            <div class="col-lg-4"><button>5555</button></div>
+                            <div class="col-lg-4"><button>5555</button></div>
+                        </div>
                     </div>
                 </div>
                 <!-- card 3 -->

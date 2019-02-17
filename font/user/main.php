@@ -738,9 +738,8 @@
                             </div>
                         </div>
                     </div>
-                </div><br><!-- card 2-->
-
-            </div>
+                </div><!-- card 2-->
+            </div><br>
     </section><!-- body -->
 
     <footer class="text-center">
