@@ -32,23 +32,19 @@
 <body class="" style = "background-color:#E8F5E9;">
 
     <!-- start sidebar -->
-    <div class="w3-sidebar w3-bar-block "  style="width:15%;background-color:#8CDCB1;text-shadow: -1px 0  black, 0 1px  black, 1px 0 3px black, 0 -1px black;">
+    <div class="w3-sidebar w3-bar-block "  style="width:15%;background-color:#56cb8d;color:black;">
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
         <div class="w3-container" style="margin-left:1%;">
             <hr>
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i
-                    class="far fa-folder-open"></i>
-                Document</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i
-                    class="fas fa-user-edit"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
+                เอกสาร</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
                 Member</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i
-                    class="fas fa-bullhorn"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i class="fas fa-bullhorn"></i>
                 Advertise</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i
-                    class="fas fa-sort-amount-down"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i class="fas fa-sort-amount-down"></i>
                 Sender</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i
                     class="fas fa-inbox"></i>
@@ -72,7 +68,7 @@
         <!-- End NavBar -->
 
         <!-- start body -->
-        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#c5edd8 ;text-shadow: -1px 0  black, 0 1px  black, 1px 0 3px black, 0 -1px black;" id="body">
+        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#ffffff ;" id="body">
 
             <!-- html here -->
             <div id="in_body"></div>
@@ -84,7 +80,7 @@
         <footer>
 <div class="w3-container-fluid " style="text-align:center; ">
             <!-- prefooter -->
-            <div class="" style="border:solid;border-color:#a8e4c4 ;background-color:#a8e4c4 " id="prefooter">
+            <div class="" style="border:solid;border-color:#8CDCB1 ;background-color:#8CDCB1 " id="prefooter">
                 <h1>Footer</h1>
             </div>
             <!-- footer -->
@@ -104,7 +100,7 @@
 
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('main.php', 'Page : Home', 'BackDoor : Main');
+        call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');
     }
 
     function call_content(content, nav_title, title) {
