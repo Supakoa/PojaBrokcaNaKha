@@ -50,10 +50,8 @@
                 </nav>
             </div>
             <!-- navbar -->
+            
         <div class="container" style="background-color:#AECDF7">
-
-           
-
             <!-- div 1 -->
             <div id="">
                 <br>
@@ -135,7 +133,7 @@
                 <!-- card 3 -->
                 <div class="card text-center" id="showdata">
                     <div class="card-header text-light" style="background-color:#78ABF2">
-                        <h3><i class="fas fa-lightbulb"></i> รหัสเอกสาร <i class="fas fa-angle-right"></i> 59123854</h3>
+                     <h5><i class="fas fa-lightbulb"></i> รหัสเอกสาร <i class="fas fa-angle-right"></i> 59123854</h5>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
@@ -152,13 +150,17 @@
             <!-- div 2 -->
 
 
-        </div>
+        </div><br>
     </div>
 
-    <footer class="text-center fixed-bottom"  style="background-color:#87B4F3">
-        <label>Create by: CEFStyle</label><br>
-        <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
-    </footer>
+    <div class="container-fluid" style="background-color:#87B4F3">
+        <div class="container">
+            <footer class="text-center" style="background-color:#87B4F3">
+                    <label>Create by: CEFStyle</label><br>
+                    <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
+            </footer>
+        </div>
+    </div>
 
     <!-- Jquery -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
