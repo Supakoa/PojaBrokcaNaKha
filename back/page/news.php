@@ -2,7 +2,11 @@
     <div class="w3-container-fluid" style="margin:20px;padding:20px;background-color:#8cdcb1;">
         <h1>Setting : NEWS</h1>
         <hr>
-        <div class="w3-container-fluid" style="padding:20px;background-color:#E8F5E9;">
+
+        <div class="w3-container-fluid w3-center w3-yellow" style="margin:20px;">
+            <button type="button" class="btn btn-success btn-lg"><i class="fas fa-plus-circle"></i> Add</button>
+        </div>
+        <div class="w3-container-fluid w3-orange" style="padding:20px;">
 
             <!-- start add -->
             <div class="row" style="padding:20px;">
@@ -40,7 +44,7 @@
 
         </div>
         <div class="w3-container-fluid w3-center w3-yellow" style="margin:20px;">
-            <button type="button" class="btn btn-success btn-lg"><i class="fas fa-plus-circle"></i> Add</button>
+            <button type="button" class="btn btn-success btn-lg"><i class="fas fa-plus-circle"></i> Submit</button>
         </div>
 
         <!-- start modal delete -->
