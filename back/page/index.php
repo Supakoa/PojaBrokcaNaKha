@@ -29,10 +29,10 @@
 
 </head>
 
-<body class="w3-dark-gray">
+<body class="" style = "background-color:#E8F5E9;">
 
     <!-- start sidebar -->
-    <div class="w3-sidebar w3-bar-block w3-red" style="width:15%;border:solid;border-color:red;">
+    <div class="w3-sidebar w3-bar-block "  style="width:15%;background-color:#8CDCB1;text-shadow: -1px 0  black, 0 1px  black, 1px 0 3px black, 0 -1px black;">
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
@@ -52,7 +52,7 @@
                 Sender</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i
                     class="fas fa-inbox"></i>
-                Inbox<span class="w3-badge w3-right w3-white">4</span></a>
+                Inbox<span class="w3-badge w3-right w3-white" style = "text-shadow: 0 0 0 black">4</span></a>
             <hr>
         </div>
     </div>
@@ -61,8 +61,8 @@
     <div style="margin-left:15%;">
 
         <!-- start NavBar -->
-        <div class="w3-bar w3-green" style="border:solid;border-color:green;">
-            <a class="w3-bar-item w3-blue w3-text w3-center" style="border:solid;border-color:blue;width:79%;" id="nav_title"></a>
+        <div class="w3-bar " style= "background-color:#2D935D">
+            <a class="w3-bar-item w3-text w3-center" style="width:79%;" id="nav_title"></a>
             <!-- set to right -->
             <div class="w3-right">
                 <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="far fa-user-circle"></i> Profile</a>
@@ -72,7 +72,7 @@
         <!-- End NavBar -->
 
         <!-- start body -->
-        <div class="w3-container-fluid w3-card-4 w3-purple" style="border:solid;border-color:purple;max-height:100%;" id="body">
+        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#c5edd8 ;text-shadow: -1px 0  black, 0 1px  black, 1px 0 3px black, 0 -1px black;" id="body">
 
             <!-- html here -->
             <div id="in_body"></div>
@@ -81,19 +81,26 @@
         <!-- end body -->
 
         <!-- set to bottom -->
-        <div class="w3-container-fluid " style="text-align:center;">
+        <footer>
+<div class="w3-container-fluid " style="text-align:center; ">
             <!-- prefooter -->
-            <div class="w3-orange" style="border:solid;border-color:orange;" id="prefooter">
+            <div class="" style="border:solid;border-color:#a8e4c4 ;background-color:#a8e4c4 " id="prefooter">
                 <h1>Footer</h1>
             </div>
             <!-- footer -->
-            <div class="w3-black" style="border:solid;border-color:black;" id="footer">
+            <div class="" style="border:solid;border-color:#2D935D;background-color:#2D935D" id="footer">
                 <p style="margin-top:1%">©Powered by CEFStyle</p>
             </div>
-        </div>
+</div>
+</footer>
+    
 
     </div>
+    
+       
+      
 </body>
+
 
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
@@ -120,6 +127,6 @@
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/popper.js/dist/popper.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
+
 
 </html>
