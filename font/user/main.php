@@ -183,8 +183,7 @@ $sub = '<label for="sub">วิชา</label>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                                    data-target="#edit">แก้ไข</button>
+                                                                <p>เอกสารไม่ครบ</p>
                                                             </td>
                                                         </tr>
                                                     </tbody>
