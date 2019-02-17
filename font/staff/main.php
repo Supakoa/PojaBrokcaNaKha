@@ -28,13 +28,16 @@
         border-radius: 5px;
         margin-top:20px;margin-bottom:20px
     }
+    .Gfonts {
+            font-family: 'Kanit', sans-serif;
+        }
+        
     </style>
 </head>
 
-<body>
-    <div class="container-fluid" style="background-color:#E4EEFC">
-        <!-- navbar -->
-        <div class="fix-top">
+<body class="Gfont">
+    <!-- navbar -->
+    <div class="fix-top container-fluid" style="background-color:#3782EB">
             <nav class="navbar navbar-expand-lg navbar-light  container" style="background-color:#3782EB">
                 <a class="navbar-brand" href="#">
                     <img src="../picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -62,6 +65,7 @@
         </div>
         <!-- navbar -->
 
+    <div class="container-fluid" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#AECDF7">
             <!-- div 1 -->
             <div id="">
@@ -142,9 +146,9 @@
             <!-- div 2 -->
             <div class="card-body" style="background-color:#F7FAFE">
                 <!-- card 3 -->
-                <div class="card text-center" id="showdata">
+                <div class="card " id="showdata">
                     <div class="card-header text-light" style="background-color:#78ABF2">
-                        <h5><i class="fas fa-lightbulb"></i> รหัสเอกสาร <i class="fas fa-angle-right"></i> 59123854</h5>
+                        <h5>ใบลากิจ ลาป่วย <i class="fas fa-angle-right"></i> 59123854</h5>
                     </div>
                     <div class="card-body">
                         <div class="paper card-body">
@@ -152,37 +156,51 @@
                             <div class="row">
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4">
-                                    <img src="../picture/icon.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
+                                    <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                                 </div>
-                                <div class="col-lg-4"></div>
                             </div>
                             <!-- head -->
 
+                            <!-- date -->
+                            <div class="row container">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4 text-right">
+                                    <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
+                                </div>
+                            </div>
+                            <!-- date -->
+
+                            <!-- subject -->
+                            <div class="row container">
+                                <div class="col-lg-4">
+                                    <p>เรื่อง ลาป่วย</p>
+                                </div>
+                                <div class="col-lg-8"></div>
+                                <div class="col-lg-4">
+                                    <p>เรียน อาจารย์ประจำวิชา GELH1101</p>
+                                </div>
+                            </div>
+                            <!-- subject -->
+
                             <!-- body -->
                             <div class="row">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-10">
                                     <div class="card-body">
-                                        <p>Cards are built with as little markup and styles as possible, but still
-                                            manage to deliver a ton of control and customization. Built with flexbox,
-                                            they offer easy alignment and mix well with other Bootstrap components.
-                                            They have no margin by default, so use spacing utilities as needed. Below
-                                            is an example of a basic card with mixed content and a fixed width. Cards
-                                            have no fixed width to start, so they’ll naturally fill the full width of
-                                            its parent element. This is easily customized with our various sizing
-                                            options.</p>
+                                        <p><span style="padding-left:6em"></span>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-lg-2"></div>
                             </div>
                             <!-- body -->
 
                             <!-- footer -->
-                            <div class="row">
+                            <div class="row container">
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4">
-                                    <div class="container">
+                                    <div class=" text-center">
                                         <p>ลายเซ็น</p>
                                         <br>
                                         <hr>
