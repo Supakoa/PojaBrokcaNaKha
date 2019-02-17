@@ -3,12 +3,25 @@ body{
     font-weight: bold;
 }
 
-*,h1{
-    color: whitesmoke;
+*{
+    color: rgb(73, 73, 73);
+    text-shadow: 
+    -1px 0  rgb(255, 255, 255),
+     0 1px  rgb(255, 255, 255), 
+     1px 0 rgb(255, 255, 255), 
+     0 -1px rgb(255, 255, 255);
+     font-size: 20px
 }
 
 th,td{
     border-style: solid;
+    font-size: 16px
+}
+hr{
+    border-color: rgb(155, 155, 155);
+}
+h1{
+    font-weight: 900;
 }
 
 #body{

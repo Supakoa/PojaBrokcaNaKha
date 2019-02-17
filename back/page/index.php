@@ -32,7 +32,7 @@
 <body class="" style = "background-color:#E8F5E9;">
 
     <!-- start sidebar -->
-    <div class="w3-sidebar w3-bar-block "  style="width:15%;background-color:#8CDCB1;text-shadow: -1px 0  black, 0 1px  black, 1px 0 3px black, 0 -1px black;">
+    <div class="w3-sidebar w3-bar-block "  style="width:15%;background-color:#56cb8d;color:black;">
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
@@ -72,7 +72,7 @@
         <!-- End NavBar -->
 
         <!-- start body -->
-        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#c5edd8 ;text-shadow: -1px 0  black, 0 1px  black, 1px 0 3px black, 0 -1px black;" id="body">
+        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#c5edd8 ;" id="body">
 
             <!-- html here -->
             <div id="in_body"></div>
@@ -84,7 +84,7 @@
         <footer>
 <div class="w3-container-fluid " style="text-align:center; ">
             <!-- prefooter -->
-            <div class="" style="border:solid;border-color:#a8e4c4 ;background-color:#a8e4c4 " id="prefooter">
+            <div class="" style="border:solid;border-color:#8CDCB1 ;background-color:#8CDCB1 " id="prefooter">
                 <h1>Footer</h1>
             </div>
             <!-- footer -->

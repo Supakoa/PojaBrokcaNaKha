@@ -1,5 +1,6 @@
-<div class="w3-container-fluid w3-center w3-red" style="margin:20px;max-height:100%;padding:30px;">
-    <h1 style="color:gray;"><strong>Choose : Search</strong></h1>
+<br>
+<div class="w3-container-fluid w3-center" style="margin:20px;max-height:100%;padding:30px;background-color:#8cdcb1;">
+    <h1 >Choose : Search</h1>
     <hr>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px;"><strong>All</strong></button>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px;"><strong>Specific</strong></button>
