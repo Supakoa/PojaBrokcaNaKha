@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>User 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/ico" href="../picture/icon.png" />
+
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -37,27 +39,30 @@
 
 <body>
 
-    <div class="container fixed-top">
-        <?php require 'other/navbars.php'; ?>
-    </div>
+    <!-- navbar -->
+    
+    <div class="container-fluid fixed-top" style="background-color:#3782EB;">
+            <?php require 'other/navbars.php'; ?>
+        </div>
+    <!-- navbar -->
+
     <!-- body -->
-    <section class="container-fluid Gfonts" style="background-color:blue">
-        <div class="container" style="background-color:red">
+    <section class="container-fluid Gfonts" style="background-color:#E4EEFC" >
+        <div class="container" style="background-color:#AECDF7">
             <br><br><br>
 
             <?php require 'other/news.php'; ?>
 
             <div class="card">
-                <div class="card-header text-center">
-                    <h3>ประวิตส่วนตัว</h3>
+                <div class="card-header text-center" style="background-color:#3782EB">
+                    <h3>ประวัติส่วนตัว</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="background-color:#F7FAFE">
                     <div class="row">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-8">
                             <div class="table-responsive">
                                 <table class="table table-hover overflow">
-
                                     <tbody>
                                         <tr>
                                             <th scope="row">ชื่อ - นามสกุล</th>
@@ -143,20 +148,19 @@
                         </div>
                         <div class="col-lg-2"></div>
                     </div>
-
-
                 </div>
-            </div>
-
-
-
-        </div>
+            </div><br>
+        </div><br>
     </section><!-- body -->
 
-    <footer class="text-center">
-        <label>Create by: CEFStyle</label><br>
-        <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
-    </footer>
+    <div class="container-fluid" style="background-color:#87B4F3">
+        <div class="container">
+            <footer class="text-center" style="background-color:#87B4F3">
+                    <label>Create by: CEFStyle</label><br>
+                    <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
+            </footer>
+        </div>
+    </div>
 
 
 
