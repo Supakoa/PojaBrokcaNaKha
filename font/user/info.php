@@ -48,7 +48,7 @@
 
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC" >
-        <div class="container" style="background-color:#E4EEFC">
+        <div class="container" style="background-color:#AECDF7">
             <br><br><br>
 
             <?php require 'other/news.php'; ?>
