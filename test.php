@@ -11,11 +11,22 @@
 </head>
 <body>
     
-    <button id = "eiei">กดหน่อยจ่ะ</button>
+    <button id = "new">กดหน่อยจ่ะ</button>
+    <button id = "clear">ขอล้างหน่อยนะคะ</button>
+    <button id = "check">ขอเช็คหน่อยค่ะ</button>
+    <p id ="show">เป็นไงน้าาา</p>
 </body>
 <script>
- $("#eiei").click(function(){
-    Push.create('Hello World!')
+ $("#new").click(function(){
+    Push.create('สวัสดีค่ะ')
  });
+ $("#clear").click(function(){
+    Push.clear();
+ });
+ $("#check").click(function(){
+    $("#show").text(Push.Permission.get());
+    
+ });
+ Push.Permission.has();
 </script>
 </html>
