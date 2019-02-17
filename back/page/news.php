@@ -1,12 +1,12 @@
-<div class="w3-container-fluid w3-center w3-yellow" style="margin:20px;">
-    <div class="w3-container-fluid w3-cyan" style="margin:20px;padding:20px;">
+<div class="w3-container-fluid w3-center" style="margin:20px;">
+    <div class="w3-container-fluid" style="margin:20px;padding:20px;background-color:#8cdcb1;">
         <h1>Setting : NEWS</h1>
         <hr>
-        <div class="w3-container-fluid w3-orange" style="padding:20px;">
+        <div class="w3-container-fluid" style="padding:20px;background-color:#E8F5E9;">
 
             <!-- start add -->
             <div class="row" style="padding:20px;">
-                <div class="col-1 w3-pink">
+                <div class="col-1 " style = "background-color:#c5edd8">
                     <p>1).</p><br>
                 </div>
                 <div class="col w3-amber">

@@ -39,7 +39,7 @@
         <div class="w3-container" style="margin-left:1%;">
             <hr>
             <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
-                Document</a>
+                เอกสาร</a>
             <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
                 Member</a>
             <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i class="fas fa-bullhorn"></i>
@@ -68,7 +68,7 @@
         <!-- End NavBar -->
 
         <!-- start body -->
-        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#c5edd8 ;" id="body">
+        <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#ffffff ;" id="body">
 
             <!-- html here -->
             <div id="in_body"></div>
@@ -100,7 +100,7 @@
 
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('main.php', 'Page : Home', 'BackDoor : Main');
+        call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');
     }
 
     function call_content(content, nav_title, title) {
