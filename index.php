@@ -52,16 +52,12 @@
     padding: 2px 16px;
     }
   </style>
+ 
 </head>
 
 <body>
-
-    <!-- body -->
-    <div class="container-fluid Gfonts" style="background-color:blue">
-        <div class="container" style="background-color:red">
-
-            <!-- navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+ <!-- navbar -->
+ <nav class="navbar navbar-expand-lg navbar-light Gfonts" style="background-color:#3782EB;">
                 <a class="navbar-brand" href="#">
                     <img src="font/picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 </a>
@@ -72,8 +68,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="main.php">หน้าแรก <span class="sr-only">(current)</span></a>
+                        <li class="nav-item active" >
+                            <a class="nav-link" href="main.php" style = "color:#FFFFFF;">หน้าแรก <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -93,66 +89,75 @@
                 </div>
             </nav><!-- navbar -->
 
+    <!-- body -->
+    <body>
+    <div class="container-fluid Gfonts" style="background-color:#E4EEFC">
 
-            <div class="container-fluid">
-                <div class="container" style="background-color:green">
-                    <!-- out row -->
+<div class="container" style="background-color:#AECDF7">
+
+    
+
+    <div class="container-fluid">
+        <div class="container" style="margin-top:130px;margin-bottom:150px">
+            <!-- out row -->
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+
+                    <!-- in row -->
                     <div class="row">
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-6">
-
-                            <!-- in row -->
-                            <div class="row">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8" style="background-color:pink">
-                                    <div class="card "  style="margin-top:100px;margin-bottom:70px">
-                                        <div class="card-header text-center">
-                                            <h4>เข้าสู่ระบบ</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="container">
-                                                <!-- form log-in -->
-                                                <form action="">
-                                                    <div class="form-group">
-                                                        <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
-                                                        <input type="email" class="form-control" id="user"
-                                                            aria-describedby="emailHelp" placeholder="User">
-                                                        <small id="emailHelp" class="form-text text-muted"><span style="color:red">*</span></small>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Password1">วัน/เดือน/ปี</label>
-                                                        <input type="password" class="form-control" id="Password1"
-                                                            placeholder="Password">
-                                                    </div>
-                                                    <div class="form-group form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
-                                                </form>
-                                                <!-- form log-in -->
-
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8" >
+                            <div class="card "  style="margin-top:100px;margin-bottom:70px">
+                                <div class="card-header text-center" style="background-color:#3782EB;color:#FFFFFF">
+                                    <h4>เข้าสู่ระบบ</h4>
+                                </div>
+                                <div class="card-body" style="background-color:#F7FAFE;" >
+                                    <div class="container">
+                                        <!-- form log-in -->
+                                        <form action="">
+                                            <div class="form-group">
+                                                <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
+                                                <input type="email" class="form-control" id="user"
+                                                    aria-describedby="emailHelp" placeholder="User">
+                                                <small id="emailHelp" class="form-text text-muted"><span style="color:red">*</span></small>
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="Password1">วัน/เดือน/ปี</label>
+                                                <input type="password" class="form-control" id="Password1"
+                                                    placeholder="Password">
+                                            </div>
+                                            <div class="form-group form-check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
+                                        </form>
+                                        <!-- form log-in -->
+
                                     </div>
                                 </div>
-                                <div class="col-lg-2"></div>
                             </div>
-                            <!-- in row -->
-
                         </div>
-                        <div class="col-lg-3"></div>
+                        <div class="col-lg-2"></div>
                     </div>
-                    <!-- out row -->
+                    <!-- in row -->
 
                 </div>
+                <div class="col-lg-2"></div>
             </div>
+            <!-- out row -->
 
         </div>
-    </div><!-- body -->
+    </div>
 
+</div>
+</div><!-- body --> 
+    </body>
+    
+    
 
-    <footer class="text-center fixed-bottom" style="background-color:gray">
+    <footer class="text-center fixed-bottom" style="background-color:#87B4F3">
         <label>Create by: CEFStyle</label><br>
         <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
     </footer>
