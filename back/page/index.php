@@ -38,17 +38,13 @@
         </a>
         <div class="w3-container" style="margin-left:1%;">
             <hr>
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i
-                    class="far fa-folder-open"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
                 Document</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i
-                    class="fas fa-user-edit"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
                 Member</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i
-                    class="fas fa-bullhorn"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i class="fas fa-bullhorn"></i>
                 Advertise</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i
-                    class="fas fa-sort-amount-down"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i class="fas fa-sort-amount-down"></i>
                 Sender</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i
                     class="fas fa-inbox"></i>
@@ -72,7 +68,8 @@
         <!-- End NavBar -->
 
         <!-- start body -->
-        <div class="w3-container-fluid w3-card-4 w3-purple" style="border:solid;border-color:purple;max-height:100%;" id="body">
+        <div class="w3-container-fluid w3-card-4 w3-purple" style="border:solid;border-color:purple;max-height:100%;"
+            id="body">
 
             <!-- html here -->
             <div id="in_body"></div>
