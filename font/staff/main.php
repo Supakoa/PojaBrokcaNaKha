@@ -23,12 +23,10 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="background-color:green">
-        <div class="container" style="background-color:pink">
-
-            <!-- navbar -->
-            <div class="fix-top">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+    <div class="container-fluid" style="background-color:#E4EEFC">
+     <!-- navbar -->
+     <div class="fix-top">
+                <nav class="navbar navbar-expand-lg navbar-light  container" style="background-color:#3782EB">
                     <a class="navbar-brand" href="#">
                         <img src="../picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     </a>
@@ -40,28 +38,31 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto ">
                             <li class="nav-item active">
-                                <a class="nav-link" href="main.php"><i class="fas fa-home"></i> หน้าแรก <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="main.php"  style="color:#FFFFFF;"><i class="fas fa-home"></i> หน้าแรก <span class="sr-only">(current)</span></a>
                             </li>
 
                         </ul>
                         <form class="form-inline my-2 my-lg-0">
-                            <a class="nav-link disabled" href="#"><i class="fas fa-user"></i> RaviKung</a>
-                            <a class="nav-link" href="#">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
+                            <a class="nav-link disabled" href="#"  style="color:#FFFFFF;"><i class="fas fa-user"></i> RaviKung</a>
+                            <a class="nav-link" href="#"  style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
                         </form>
                     </div>
                 </nav>
             </div>
             <!-- navbar -->
+        <div class="container" style="background-color:#AECDF7">
+
+           
 
             <!-- div 1 -->
             <div id="">
-
-                <div class="card-body" style="background-color:yellow">
+                <br>
+                <div class="card-body" style="background-color:#F7FAFE">
                     <div class="row">
                         <!-- card 1 -->
                         <div class="col-lg-7">
                             <div class="card mb-3">
-                                <div class="card-header">
+                                <div class="card-header text-light" style="background-color:#78ABF2">
                                     <h3>Inbox</h3>
                                 </div>
                                 <div class="card-body">
@@ -94,7 +95,7 @@
                         <!-- card 2 -->
                         <div class="col-lg-5">
                             <div class="card mb-3">
-                                <div class="card-header">
+                                <div class="card-header text-light" style="background-color:#78ABF2">
                                     <h3>Outbox</h3>
                                 </div>
                                 <div class="card-body">
@@ -130,10 +131,10 @@
             <!-- div 1 -->
 
             <!-- div 2 -->
-            <div class="card-body" style="background-color:blue">
+            <div class="card-body" style="background-color:#F7FAFE">
                 <!-- card 3 -->
                 <div class="card text-center" id="showdata">
-                    <div class="card-header">
+                    <div class="card-header text-light" style="background-color:#78ABF2">
                         <h3><i class="fas fa-lightbulb"></i> รหัสเอกสาร <i class="fas fa-angle-right"></i> 59123854</h3>
                     </div>
                     <div class="card-body">
@@ -154,7 +155,7 @@
         </div>
     </div>
 
-    <footer class="text-center">
+    <footer class="text-center fixed-bottom"  style="background-color:#87B4F3">
         <label>Create by: CEFStyle</label><br>
         <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
     </footer>
