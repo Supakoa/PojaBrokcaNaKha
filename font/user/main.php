@@ -73,17 +73,16 @@ $sub = '<label for="sub">วิชา</label>
 
 <body>
     <!-- navbar -->
-    <div class="container-fluid" style="background-color:#3782EB;">
-        <div class="container fixed-top">
+    
+        <div class="container-fluid fixed-top" style="background-color:#3782EB;">
             <?php require 'other/navbars.php'; ?>
         </div>
-    </div>
     <!-- navbar -->
     
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#E4EEFC">
-            <br><br>
+            <br><br><br>
 
             <?php require 'other/news.php'; ?>
 
