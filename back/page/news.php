@@ -7,13 +7,17 @@
             <!-- start add -->
             <div class="row" style="padding:20px;">
                 <div class="col-1 w3-pink">
-                    <p>1).</p>
+                    <p>1).</p><br>
+                    
                 </div>
                 <div class="col w3-amber">
                     <input type="file" class="form-control-file border" >
                 </div>
                 <div class="col w3-dark-gray">
                     <img class="w3-red" src="" width="200" height="100" >
+                </div>
+                <div class="col-2 w3-amber">
+                    <button type="button" class="btn btn-danger">Delete</button>
                 </div>
             </div>
             <!-- end add -->
@@ -28,6 +32,9 @@
                 </div>
                 <div class="col w3-dark-gray">
                     <img class="w3-red" src="" width="200" height="100" >
+                </div>
+                <div class="col-2 w3-amber">
+                    <button type="button" class="btn btn-danger">Delete</button>
                 </div>
             </div>
             <!-- end test 2 -->

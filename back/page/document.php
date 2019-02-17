@@ -1,3 +1,4 @@
+
 <div class="w3-container-fluid w3-center w3-green" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">Serach : Document</h1>
@@ -9,6 +10,7 @@
             <strong>Search</strong></button>
     </div>
 </div>
+
 <div class="w3-container-fluid w3-center w3-deep-orange" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">Document : Table</h1>
@@ -36,6 +38,20 @@
                         <td>ขอรหัสผ่าน</td>
                         <td>1/11/2019</td>
                         <td>2/11/2019</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>WSRC1MEXN</td>
+                        <td>สอบย้อนหลัง</td>
+                        <td>5/7/2019</td>
+                        <td>2/9/2019</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>WSRC1MEYE</td>
+                        <td>ลาป่วย</td>
+                        <td>1/5/2019</td>
+                        <td>10/5/2019</td>
                         <td></td>
                     </tr>
                 </tbody>
