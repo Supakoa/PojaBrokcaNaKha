@@ -34,23 +34,23 @@
     <!-- start sidebar -->
     <div class="w3-sidebar w3-bar-block " style="width:15%;background-color:#56cb8d;color:black;">
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
-            <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
+            <h1 class="w3-center" style="color: rgb(95, 95, 95);"><i class="fas fa-home"></i> หน้าแรก</h1>
         </a>
         <div class="w3-container" style="margin-left:1%;">
             <hr>
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');"><i class="far fa-folder-open"></i>
                 เอกสาร</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
-                Member</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','หน้า : สมาชิก','BackDoor : สมาชิก');"><i class="fas fa-user-edit"></i>
+                สมาชิก</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php','หน้า : หน้าข่าว','BackDoor : หน้าข่าว');"><i
                     class="fas fa-bullhorn"></i>
-                Advertise</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i
+                หน้าข่าว</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','หน้า : ผู้ส่ง','BackDoor : ผู้ส่ง');"><i
                     class="fas fa-sort-amount-down"></i>
-                Sender</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i
+                ผู้ส่ง</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
                     class="fas fa-bell"></i>
-                Inbox<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
+                ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
             <hr>
         </div>
     </div>
@@ -60,11 +60,11 @@
 
         <!-- start NavBar -->
         <div class="w3-bar " style="background-color:#2D935D">
-            <a class="w3-bar-item w3-text w3-center" style="width:70%;" id="nav_title"></a>
+            <a class="w3-bar-item w3-text w3-center" style="width:68%;" id="nav_title"></a>
             <!-- set to right -->
             <div class="w3-right">
-                <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="far fa-user-circle"></i> Profile</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="far fa-user-circle"></i> ข้อมูลส่วนตัว</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
             </div>
         </div>
         <!-- End NavBar -->
@@ -102,7 +102,7 @@
 
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');
+        call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
     }
 
     function call_content(content, nav_title, title) {

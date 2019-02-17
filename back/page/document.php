@@ -1,7 +1,7 @@
 
 <div class="w3-container-fluid w3-center w3-green" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
-        <h1 style="padding-top:10px;">Serach : Document</h1>
+        <h1 style="padding-top:10px;">ค้นหา : เอกสาร</h1>
         <hr>
         <input class="w3-center" type="search" id="search_document" style="background-color: #4d4d4d;color: white;"
             placeholder="ID : 🦄🦄🦄🦄"><br>
@@ -13,7 +13,7 @@
 
 <div class="w3-container-fluid w3-center w3-deep-orange" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
-        <h1 style="padding-top:10px;">Document : Table</h1>
+        <h1 style="padding-top:10px;">เอกสาร : ตาราง</h1>
         <hr>
 
         <!-- group of table -->
@@ -23,11 +23,11 @@
                 <!-- table header -->
                 <thead>
                     <tr>
-                        <td>ID</td>
-                        <td>Type</td>
-                        <td>Created_time</td>
-                        <td>edit_time</td>
-                        <td>Status</td>
+                        <td>รหัสเอกสาร</td>
+                        <td>เรื่อง</td>
+                        <td>เวลาสร้าง</td>
+                        <td>เวลาแก้ไขล่าสุด</td>
+                        <td>สถานะ</td>
                     </tr>
                 </thead>
 
