@@ -72,43 +72,46 @@ $sub = '<label for="sub">วิชา</label>
 </head>
 
 <body>
-
-    <div class="container fixed-top">
-        <?php require 'other/navbars.php'; ?>
-    </div>
+    <!-- navbar -->
+    
+        <div class="container-fluid fixed-top" style="background-color:#3782EB;">
+            <?php require 'other/navbars.php'; ?>
+        </div>
+    <!-- navbar -->
+    
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#E4EEFC">
-            <br><br>
+            <br><br><br>
 
             <?php require 'other/news.php'; ?>
 
 
             <!-- card 1 -->
-            <div class="card" id="card1"style="background-color:#AECDF7">
+            <div class="card" id="card1" style="background-color:#AECDF7">
                 <div class="card-body">
                     <div class="container mt-3">
-                        <div class = "container">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs row">
-                            <li class="nav-item col-lg-6">
-                                <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab"
-                                    href="#home">ประวัติคำร้อง</a>
-                            </li>
-                            <li class="nav-item col-lg-6">
-                                <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
-                            </li>
-                        </ul>
+                        <div class="container">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs row">
+                                <li class="nav-item col-lg-6">
+                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px"
+                                        data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                </li>
+                                <li class="nav-item col-lg-6">
+                                    <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
+                                </li>
+                            </ul>
                         </div>
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <!-- Tab panes 1-->
-                            <div id="home" class="container tab-pane active" style="background-color:#5796EE;" ><br>
-                                <div class="container "style="background-color:#F7FAFE">
+                            <div id="home" class="container tab-pane active" style="background-color:#5796EE;"><br>
+                                <div class="container " style="background-color:#F7FAFE">
                                     <div class="row">
                                         <div class="col-lg-1"></div>
                                         <div class="col-lg-10">
-                                            <div class="table-responsive-lg" >
+                                            <div class="table-responsive-lg">
                                                 <table id="table1" class="table table-hover overflow display">
                                                     <thead>
                                                         <tr>
@@ -187,12 +190,12 @@ $sub = '<label for="sub">วิชา</label>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            
+
                                             <div class="col-lg-1"></div>
                                             <br>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <br>
                             </div>
@@ -242,7 +245,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <?php echo $sub;  ?>
-                                                        
+
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -286,7 +289,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <?php echo $sub;  ?>
-                                                       
+
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -326,7 +329,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <?php echo $sub;  ?>
-                                                        
+
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -370,7 +373,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <?php echo $sub;  ?>
-                                                        
+
                                                     </div>
                                                     <div class="col-4">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -415,7 +418,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <?php echo $sub;  ?>
-                                                        
+
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -455,7 +458,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        
+
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -484,128 +487,133 @@ $sub = '<label for="sub">วิชา</label>
                         </div>
                     </div>
                 </div>
-                </div>
-                <!-- card 1 -->
+            </div>
+            <!-- card 1 -->
 
+            <br>
+            <!-- card 2-->
+            <div class="container " style="background-color:#AECDF7">
                 <br>
-                <!-- card 2-->
-                <div class = "container " style="background-color:#AECDF7">
-                <br>
-                <div class = "container">
-                <div class="card" id="card2" >
+                <div class="container">
+                    <div class="card" id="card2">
 
-                    <div class="card-header text-center" style="background-color:#3782EB">
-                        <h3>ติดต่อเจ้าหน้าที่</h3>
-                    </div>
-                    <div class="card-body" style="background-color:#F7FAFE">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    <div class="card">
-                                        <!-- card 2.1 -->
-                                        <div class="card-body">
-                                            <div  class="table-responsive-lg">
-                                                <table id="table2" class="table display overflow-y: hidden">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>status</th>
-                                                            <th>ข้อความ</th>
-                                                            <th>ผู้ส่ง</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
-                                                            <td>
-                                                                <!-- Small modal -->
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#confirm">เจ้าหน้าที่</button>
+                        <div class="card-header text-center" style="background-color:#3782EB">
+                            <h3>ติดต่อเจ้าหน้าที่</h3>
+                        </div>
+                        <div class="card-body" style="background-color:#F7FAFE">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="card">
+                                            <!-- card 2.1 -->
+                                            <div class="card-body">
+                                                <div class="table-responsive-lg">
+                                                    <table id="table2" class="table display overflow-y: hidden">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>status</th>
+                                                                <th>ข้อความ</th>
+                                                                <th>ผู้ส่ง</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
+                                                                <td>
+                                                                    <!-- Small modal -->
+                                                                    <button type="button" class="btn btn-info btn-sm"
+                                                                        data-toggle="modal" data-target="#confirm">เจ้าหน้าที่</button>
 
-                                                                <div id="confirm" class="modal fade bd-example-modal-sm"
-                                                                    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                    aria-hidden="true">
-                                                                    <div class="modal-dialog modal-sm">
-                                                                        <div class="modal-content ">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
+                                                                    <div id="confirm" class="modal fade bd-example-modal-sm"
+                                                                        tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm">
+                                                                            <div class="modal-content ">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body text-center">
+                                                                                    55555555555
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="modal-body text-center">
-                                                                                55555555555
+                                                                        </div>
+                                                                        <!-- Small modal -->
+                                                                </td>
+                                                                <td> เจ้าหน้าที่ </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="badge badge-success">อ่านแล้ว</span></td>
+                                                                <td>
+                                                                    <!-- Small modal -->
+                                                                    <button type="button" class="btn btn-info btn-sm"
+                                                                        data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
+
+                                                                    <div id="confirm1" class="modal fade bd-example-modal-sm"
+                                                                        tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm">
+                                                                            <div class="modal-content ">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body text-center">
+                                                                                    55555555555
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <!-- Small modal -->
-                                                            </td>
-                                                            <td> เจ้าหน้าที่ </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span class="badge badge-success">อ่านแล้ว</span></td>
-                                                            <td>
-                                                                <!-- Small modal -->
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
-
-                                                                <div id="confirm1" class="modal fade bd-example-modal-sm"
-                                                                    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                    aria-hidden="true">
-                                                                    <div class="modal-dialog modal-sm">
-                                                                        <div class="modal-content ">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body text-center">
-                                                                                55555555555
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Small modal -->
-                                                            </td>
-                                                            <td> เจ้าหน้าที่ </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                                </td>
+                                                                <td> เจ้าหน้าที่ </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div><!-- card 2.1 -->
-                                </div>
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <!-- card 2.2 -->
-                                        <div class="card-body">
-                                            <div class="container text-center">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
-                                                    <i class="fas fa-comment"></i></button>
+                                        </div><!-- card 2.1 -->
+                                    </div>
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-3">
+                                        <div class="card">
+                                            <!-- card 2.2 -->
+                                            <div class="card-body">
+                                                <div class="container text-center">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
+                                                        <i class="fas fa-comment"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div><!-- card 2.2 -->
+                                        </div><!-- card 2.2 -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div><br><!-- card 2-->
+                    </div><br><!-- card 2-->
                 </div>
-                </div>
-            </div>
-            <br>
+            </div><br>
+        </div>
+        
     </section><!-- body -->
 
+    <div class="container-fluid" style="background-color:#87B4F3">
+        <div class="container">
+            <footer class="text-center" style="background-color:#87B4F3">
+                    <label>Create by: CEFStyle</label><br>
+                    <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
+            </footer>
+        </div>
+    </div>
 
-    <footer class="text-center" style="background-color:#87B4F3">
-        <label>Create by: CEFStyle</label><br>
-        <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
-    </footer>
 
+    
     <!-- modal card 3.2 -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -664,9 +672,6 @@ $sub = '<label for="sub">วิชา</label>
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
             });
-
-            
-          
         </script>
 
         <!-- bootstrap 4.2.1 -->
