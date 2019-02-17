@@ -29,26 +29,30 @@
 
 </head>
 
-<body class="" style = "background-color:#E8F5E9;">
+<body class="" style="background-color:#E8F5E9;">
 
     <!-- start sidebar -->
-    <div class="w3-sidebar w3-bar-block "  style="width:15%;background-color:#56cb8d;color:black;">
+    <div class="w3-sidebar w3-bar-block " style="width:15%;background-color:#56cb8d;color:black;">
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center"><i class="fas fa-home"></i> Home</h1>
         </a>
         <div class="w3-container" style="margin-left:1%;">
             <hr>
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i class="far fa-folder-open"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','Page : Document','BackDoor : Document');"><i
+                    class="far fa-folder-open"></i>
                 Document</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i class="fas fa-user-edit"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','Page : Member','BackDoor : Member');"><i
+                    class="fas fa-user-edit"></i>
                 Member</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i class="fas fa-bullhorn"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('news.php','Page : Advertise','BackDoor : Advertise');"><i
+                    class="fas fa-bullhorn"></i>
                 Advertise</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i class="fas fa-sort-amount-down"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','Page : Sender','BackDoor : Sender');"><i
+                    class="fas fa-sort-amount-down"></i>
                 Sender</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','Page : Inbox','BackDoor : Inbox');"><i
-                    class="fas fa-inbox"></i>
-                Inbox<span class="w3-badge w3-right w3-white" style = "text-shadow: 0 0 0 black">4</span></a>
+                    class="fas fa-bell"></i>
+                Inbox<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
             <hr>
         </div>
     </div>
@@ -57,8 +61,8 @@
     <div style="margin-left:15%;">
 
         <!-- start NavBar -->
-        <div class="w3-bar " style= "background-color:#2D935D">
-            <a class="w3-bar-item w3-text w3-center" style="width:79%;" id="nav_title"></a>
+        <div class="w3-bar " style="background-color:#2D935D">
+            <a class="w3-bar-item w3-text w3-center" style="width:70%;" id="nav_title"></a>
             <!-- set to right -->
             <div class="w3-right">
                 <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="far fa-user-circle"></i> Profile</a>
@@ -78,23 +82,23 @@
 
         <!-- set to bottom -->
         <footer>
-<div class="w3-container-fluid " style="text-align:center; ">
-            <!-- prefooter -->
-            <div class="" style="border:solid;border-color:#8CDCB1 ;background-color:#8CDCB1 " id="prefooter">
-                <h1>Footer</h1>
+            <div class="w3-container-fluid " style="text-align:center; ">
+                <!-- prefooter -->
+                <div class="" style="border:solid;border-color:#8CDCB1 ;background-color:#8CDCB1 " id="prefooter">
+                    <h1>Footer</h1>
+                </div>
+                <!-- footer -->
+                <div class="" style="border:solid;border-color:#2D935D;background-color:#2D935D" id="footer">
+                    <p style="margin-top:1%">©Powered by CEFStyle</p>
+                </div>
             </div>
-            <!-- footer -->
-            <div class="" style="border:solid;border-color:#2D935D;background-color:#2D935D" id="footer">
-                <p style="margin-top:1%">©Powered by CEFStyle</p>
-            </div>
-</div>
-</footer>
-    
+        </footer>
+
 
     </div>
-    
-       
-      
+
+
+
 </body>
 
 
