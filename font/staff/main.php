@@ -144,10 +144,10 @@
                     <div class="card-footer text-muted">
                         2 days ago
                     </div>
-                </div><br>
+                </div>
                 <!-- card 3 -->
 
-            </div>
+            </div><br>
             <!-- div 2 -->
 
 
@@ -166,8 +166,11 @@
     <script>
         //datatable
         $(document).ready(function () {
-            $('#table').DataTable();
+            $('#table1').DataTable();
+            $('#table2').DataTable();
+
         });
+        
     </script>
 
     <!-- bootstrap 4.2.1 -->
