@@ -102,23 +102,36 @@
                                                 <form action="">
                                                     <div class="form-group">
                                                         <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
-                                                        <input type="text" class="form-control" id="user" placeholder="User">
+                                                        <input type="text" class="form-control" id="user" placeholder="ID">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Password1">วัน/เดือน/ปี</label>
                                                         <input type="password" class="form-control" id="Password1"
                                                             placeholder="Password">
                                                     </div>
-                                                    <!-- register modal -->
-                                                    <div class="text-right">
+                                                    <!-- check bot -->
+                                                    <div class="g-recaptcha" data-sitekey="6LfGSZIUAAAAAPX_Wv8XdRf8FnwaE4yht4Ee_5RP"></div>
+                                                    <!-- check bot -->
+<br>
 
-                                                        <button type="button" class="btn btn-link" data-toggle="modal"
-                                                            data-target="#modalregis"><i class="fas fa-registered"></i> สมัครเข้าใช้แบบคำร้อง
-                                                        </button>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
+
+                                                        </div>
+
+                                                        <!-- register modal -->
+                                                        <div class="col-lg-8 text-right">
+                                                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                                                data-target="#modalregis"><i class="fas fa-registered"></i>
+                                                                สมัครเข้าใช้แบบคำร้อง
+                                                            </button>
+                                                        </div>
+                                                        <!-- register modal -->
+
+
                                                     </div>
-                                                    <!-- register modal -->
-
-                                                    <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
                                                 </form>
                                                 <!-- form log-in -->
                                             </div>
@@ -241,6 +254,8 @@
     <script src="font/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="font/node_modules/popper.js/dist/popper.min.js"></script>
     <script src="font/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
     <script>
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
@@ -249,3 +264,9 @@
 </body>
 
 </html>
+<!-- {
+  "success": true|false,
+  "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+  "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
+  "error-codes": [...]        // optional
+} -->
