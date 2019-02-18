@@ -4,7 +4,8 @@
         <hr>
 
         <!-- button delete select -->
-        <button type="button" class="w3-btn w3-border w3-border-red w3-round-large" data-toggle="modal"  data-target="#delete_select"><i class="fas fa-trash" style = "color:red"></i>
+        <button type="button" class="w3-btn w3-border w3-border-red w3-round-large" data-toggle="modal" data-target="#delete_select"><i
+                class="fas fa-trash" style="color:red"></i>
             Delete Checked</button>
 
         <!-- modal delete select -->
@@ -28,10 +29,10 @@
         <!-- start table -->
         <div class="w3-container-fluid" style="margin-top:20px;margin-right:100px;margin-left:100px;">
             <table class="table table-bordered table-sm w3-striped w3-border-red">
-                <thead >
-                    <tr >
-                        <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks" ></i></i></th>
-                        <th >Order</th>
+                <thead>
+                    <tr>
+                        <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks"></i></i></th>
+                        <th>Order</th>
                         <th>Name</th>
                         <th>ID</th>
                         <th></th>
@@ -43,7 +44,11 @@
                         <td>1).</td>
                         <td>เอกสารขอขึ้นสอบ</td>
                         <td>DE-2019</td>
-                        <td><button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i class="far fa-edit " style = "color:#FBBC05"></i> Edit</button></td>
+                        <td>
+                            <button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i
+                                    class="far fa-edit " style="color:#FBBC05"></i> Edit</button>
+
+                        </td>
                     </tr>
                     <!-- start tmp 2 -->
                     <tr>
@@ -51,7 +56,8 @@
                         <td>2).</td>
                         <td>แบบคำร้องขอลาป่วย</td>
                         <td>RS-2019</td>
-                        <td><button type="button" class="w3-btn w3-round-large"  data-toggle="modal" data-target="#edit_modal"><i class="far fa-edit" style = "color:#FBBC05"></i> Edit</button></td>
+                        <td><button type="button" class="w3-btn w3-round-large" data-toggle="modal" data-target="#edit_modal"><i
+                                    class="far fa-edit" style="color:#FBBC05"></i> Edit</button></td>
                     </tr>
                     <!-- end tmp 2 -->
                 </tbody>
@@ -68,12 +74,101 @@
                     <h1>Modal Setting : Sender</h1>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
-                        
-                    </div>
-                </div>
-                <div class="modal-footer">
 
+                    <!-- info -->
+                    <div class="card-body text-left">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5 ">
+                                <p>รหัสเอกสาร </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>: 5912512</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5 ">
+                                <p>ชื่อ </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>: นายสมพง ดงดิบ</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- info -->
+
+                    <!-- work step -->
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col">
+                                <p>เส้นทางเอกสาร</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="">อ.บิน</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.บาน</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.โบย</label>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="row text-center">
+                            <div class="col">
+                                <p><i class="fas fa-arrow-circle-down"></i></p>
+                            </div>
+                        </div>
+                        <!-- line -->
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="">อ.ติบ</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.โตย</label>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="row text-center">
+                            <div class="col">
+                                <p><i class="fas fa-arrow-circle-down"></i></p>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="row">
+                            <div class="col">
+                                <label for="">อ.หึย</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.โห้ยย</label>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- add row -->
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- add row -->
+                    </div>
+                    <!-- work step -->
+                    
                 </div>
             </div>
         </div>
