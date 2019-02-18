@@ -95,24 +95,32 @@
                     </div>
                     <!-- info -->
 
-
                     <div class="container table-responsive">
                         <table class="table table-hover overflow table-bordered" >
                             <tbody>
                                 <tr>
                                     <th scope="row">1.</th>
                                     <td>อ.บิน</td>
+                                    <td>อ.บาน</td>
+                                    <td>อ.บิว</td>
                                     <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
+                                </tr>
+                                <tr class="text-center">
+                                    <th colspan="10"><i class="fas fa-arrow-circle-down"></i></th>
                                 </tr>
                                 <tr>
                                     <th scope="row">2.</th>
                                     <td>อ.บวง</td>
+                                    <td>อ.บวงไบ</td>
                                     <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
+                                </tr>
+                                <tr class="text-center">
+                                    <th colspan="4" ><i class="fas fa-arrow-circle-down"></i></th>
                                 </tr>
                                 <tr>
                                     <th scope="row">3.</th>
                                     <td>อ.พวง</td>
-                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
+                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td><hr>
                                 </tr>
                             </tbody>
                         </table>
