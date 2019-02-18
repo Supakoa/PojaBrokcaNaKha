@@ -55,7 +55,7 @@
 
 </head>
 
-<body class="Gfonts">
+<body class="Gfonts" style="background-color:#E4EEFC">
     <!-- navbar -->
     <div class="container-fluid fixed-top" style="background-color:#3782EB;">
         <nav class="navbar navbar-expand-lg navbar-light  container" style="background-color:#3782EB;">
@@ -72,113 +72,180 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="main.php" style="color:#FFFFFF;">หน้าแรก <span class="sr-only">(current)</span></a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    อื่นๆ
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-info-circle"></i> ข้อมูลส่วนตัว</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#card2"><i class="fas fa-headset"></i> ติดต่อเจ้าหน้าที่</a>
-                                </div>
-                            </li> -->
                 </ul>
-                <!-- <form class="form-inline my-2 my-lg-0">
-                            <a class="nav-link" href="#">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
-                        </form> -->
             </div>
         </nav>
     </div>
     <!-- navbar -->
 
     <!-- body -->
+    <div class="container-fluid Gfonts">
+        <!-- style="background-color:#E4EEFC" -->
+        <div class="container">
+            <div class="container-fluid">
+                <div class="container" style="margin-bottom:50px">
+                    <!-- out row -->
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <!-- in row -->
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="card " style="margin-top:100px;margin-bottom:70px">
+                                        <div class="card-header text-center" style="background-color:#3782EB;color:#FFFFFF">
+                                            <h4>เข้าสู่ระบบ</h4>
+                                        </div>
+                                        <div class="card-body" style="background-color:#F7FAFE;">
+                                            <div class="container">
+                                                <!-- form log-in -->
+                                                <form action="">
+                                                    <div class="form-group">
+                                                        <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
+                                                        <input type="text" class="form-control" id="user" placeholder="User">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Password1">วัน/เดือน/ปี</label>
+                                                        <input type="password" class="form-control" id="Password1"
+                                                            placeholder="Password">
+                                                    </div>
+                                                    <!-- register modal -->
+                                                    <div class="text-right">
 
-    <body>
-        <div class="container-fluid Gfonts" style="background-color:#E4EEFC">
+                                                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                                            data-target="#modalregis"><i class="fas fa-registered"></i> สมัครเข้าใช้แบบคำร้อง
+                                                        </button>
+                                                    </div>
+                                                    <!-- register modal -->
 
-            <div class="container" style="background-color:#AECDF7">
-
-
-
-                <div class="container-fluid">
-                    <div class="container" style="margin-bottom:50px">
-                        <!-- out row -->
-                        <div class="row">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-8">
-
-                                <!-- in row -->
-                                <div class="row">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-8">
-                                        <div class="card " style="margin-top:100px;margin-bottom:70px">
-                                            <div class="card-header text-center" style="background-color:#3782EB;color:#FFFFFF">
-                                                <h4>เข้าสู่ระบบ</h4>
-                                            </div>
-                                            <div class="card-body" style="background-color:#F7FAFE;">
-                                                <div class="container">
-                                                    <!-- form log-in -->
-                                                    <form action="">
-                                                        <div class="form-group">
-                                                            <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
-                                                            <input type="text" class="form-control" id="user"
-                                                                 placeholder="User">
-                                                            <small id="emailHelp" class="form-text text-muted"><span
-                                                                    style="color:red">*</span></small>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Password1">วัน/เดือน/ปี</label>
-                                                            <input type="password" class="form-control" id="Password1"
-                                                                placeholder="Password">
-                                                        </div>
-                                                        <div class="form-group form-check">
-                                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                            <label class="form-check-label" for="exampleCheck1">Check
-                                                                me out</label>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
-                                                    </form>
-                                                    <!-- form log-in -->
-
-                                                </div>
+                                                    <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
+                                                </form>
+                                                <!-- form log-in -->
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2"></div>
                                 </div>
-                                <!-- in row -->
+                                <div class="col-lg-2"></div>
+                            </div>
+                            <!-- in row -->
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+                    <!-- out row -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid fixed-bottom" style="background-color:#87B4F3">
+            <div class="container">
+                <footer class="text-center" style="background-color:#87B4F3">
+                    <label>Create by: CEFStyle</label><br>
+                    <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- body -->
+
+    <!-- Modal register-->
+    <div class="modal fade" id="modalregis" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">กรอกข้อมูลเข้าใช้แบบคำร้อง</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid card-body form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="id">รหัสนักศึกษา</label>
+                                <input id="id" type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="pass">รหัสผ่าน</label>
+                                <input id="pass" type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="fname">ชื่อ</label>
+                                <input id="fname" type="text" class="form-control">
 
                             </div>
-                            <div class="col-lg-2"></div>
+                            <div class="col-lg-6">
+                                <label for="lname">นามสกุล</label>
+                                <input id="lname" type="text" class="form-control">
+                            </div>
                         </div>
-                        <!-- out row -->
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <label for="email">E-mail</label>
+                                <input id="email" class="form-control" type="email">
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="phone">เบอร์โทรศัพท์</label>
+                                <input id="phone" class="form-control" type="text">
+                            </div>
+                            <div class="col-lg-6"></div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <label for="faculty">คณะ :</label>
+                                <select class="form-control custom-select" id="faculty">
+                                    <option disabled selected>กรุณาเลือกคณะ</option>
+                                    <option>เทคโนโลยี ฯ</option>
+                                    <option>วิทยาศาสตร์ ฯ</option>
+                                    <option>การจัดการ ฯ</option>
+                                    <option>พยาบาล ฯ</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <label for="major">สาขา :</label>
+                                <select class="form-control custom-select" id="major">
+                                    <option disabled selected>กรุณาเลือกสาขา</option>
+                                    <option>วิศวกรรมคอมพิวเตอร์</option>
+                                    <option>อุตสาหกรรม</option>
+                                    <option>ออกแบบภายใน</option>
+                                    <option>ไฟฟ้า</option>
+                                    <option>การพิมพ์</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="container-fluid fixed-bottom" style="background-color:#87B4F3">
-                <div class="container">
-                    <footer class="text-center" style="background-color:#87B4F3">
-                        <label>Create by: CEFStyle</label><br>
-                        <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
-                    </footer>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
                 </div>
             </div>
-        </div><!-- body -->
-
-
-
-    </body>
+        </div>
+    </div>
+    <!-- Modal register-->
 
 
     <!-- bootstrap 4.2.1 -->
     <script src="font/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="font/node_modules/popper.js/dist/popper.min.js"></script>
     <script src="font/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+    </script>
 </body>
 
 </html>
