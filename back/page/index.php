@@ -59,12 +59,12 @@
     <div style="margin-left:15%;">
 
         <!-- start NavBar -->
-        <div class="w3-bar " style="background-color:#2D935D">
+        <div class="w3-bar " style="background-color:#2D935D;color:whitesmoke;">
             <a class="w3-bar-item w3-text w3-center" style="width:68%;" id="nav_title"></a>
             <!-- set to right -->
             <div class="w3-right">
-                <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="far fa-user-circle"></i> ข้อมูลส่วนตัว</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding-large"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large" style="color:whitesmoke;"><i class="far fa-user-circle" style="color:whitesmoke;"></i> ข้อมูลส่วนตัว</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large" style="color:whitesmoke;"><i class="fas fa-sign-out-alt" style="color:whitesmoke;"></i> ออกจากระบบ</a>
             </div>
         </div>
         <!-- End NavBar -->
@@ -87,7 +87,7 @@
                 </div> -->
                 <!-- footer -->
                 <div class="" style="border:solid;border-color:#2D935D;background-color:#2D935D" id="footer">
-                    <p style="margin-top:1%">©Powered by CEFStyle</p>
+                    <p style="margin-top:1%;color:whitesmoke;">©Powered by CEFStyle</p>
                 </div>
             </div>
         </footer>
