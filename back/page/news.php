@@ -14,7 +14,7 @@
                     <p>1).</p><br>
                 </div>
                 <div class="col w3-amber">
-                    <input type="file" class="form-control-file border">
+                    <input class="form-control form-control-lg" type="text">
                 </div>
                 <div class="col w3-dark-gray">
                     <img class="w3-red" src="" width="200" height="100">
@@ -31,7 +31,7 @@
                     <p>2).</p>
                 </div>
                 <div class="col w3-amber">
-                    <input type="file" class="form-control-file border">
+                    <input class="form-control form-control-lg" type="text">
                 </div>
                 <div class="col w3-dark-gray">
                     <img class="w3-red" src="" width="200" height="100">
@@ -44,11 +44,11 @@
 
         </div>
         <div class="w3-container-fluid w3-center w3-yellow" style="margin:20px;">
-            <button type="button" class="btn btn-success btn-lg"><i class="fas fa-plus-circle"></i> Submit</button>
+            <button type="button" class="btn btn-success btn-lg"><i class="fas fa-sync-alt"></i> Update</button>
         </div>
 
-        <!-- start modal delete -->
 
+        <!-- start modal delete -->
         <!-- effect : fade_in -->
         <div class="modal fade" id="del_modal" tabindex="-1" role="dialog" aria-hidden="true">
             <!-- set_size : small -->
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <!-- end modal -->
+        <!-- end modal delete -->
 
     </div>
 </div>
