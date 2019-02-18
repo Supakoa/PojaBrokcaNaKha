@@ -42,12 +42,59 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- start tabel -->
-    <div class="table">
+
+        <div class="container-fluid">
+            <!-- start tabel -->
+            <table class="table table-sm table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ชื่อผู้ใช้งาน</th>
+                        <th>รหัสผ่าน</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>ประเภท</th>
+                        <th>ตำแหน่ง</th>
+                        <th>อีเมล</th>
+                        <th>เบอร์โทร</th>
+                        <th>สาขา</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>59122519032</td>
+                        <td>นาย สมชาย สุดกล้าหาญ</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>59122519068</td>
+                        <td>นางสาว สมหญิง ตั้งใจเรียน</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>59122519100</td>
+                        <td>นาย อัครเดช เดชะไชโย</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- end tabel -->
+        </div>
 
     </div>
-    <!-- end tabel -->
 </div>
 
 <!-- <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
