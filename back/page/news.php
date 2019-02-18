@@ -40,7 +40,7 @@
                     <p>1).</p><br>
                 </div>
                 <div class="col">
-                    <a href="https://www.google.co.th" target="_blank"> WWW.google.com </a>
+                    <a href="https://nuuneoi.com/blog" target="_blank"> https://nuuneoi.com/blog </a>
                 </div>
                 <div class="col">
                     <img class="w3-red" src="..\image\news\1.jpg" width="200" height="100">
