@@ -41,6 +41,7 @@ $sub = '<label for="sub">วิชา</label>
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
 
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
@@ -57,18 +58,7 @@ $sub = '<label for="sub">วิชา</label>
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 
 
-    <style>
-        /* Make the image fully responsive */
-        .carousel-inner img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .Gfonts {
-            font-family: 'Kanit', sans-serif;
-        }
-        
-    </style>
+    
 </head>
 
 <body>

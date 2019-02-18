@@ -7,6 +7,8 @@
     <title>อาจารย์</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
+    <link rel="stylesheet" href="../style.css">
+
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -20,19 +22,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <script src="main.js"></script>
-    <style>
-        .paper {
-        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
-        transition: 0.3s;
-        width: 100%;
-        border-radius: 5px;
-        margin-top:20px;margin-bottom:20px
-    }
-    .Gfonts {
-            font-family: 'Kanit', sans-serif;
-        }
-        
-    </style>
+    
 </head>
 
 <body class="Gfont">

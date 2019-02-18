@@ -1,0 +1,36 @@
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.Gfonts {
+    font-family: 'Kanit', sans-serif;
+}
+.paper {
+    box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    margin-top:20px;margin-bottom:20px
+}
+html {
+    font-size: 1rem;
+  }
+  
+  @include media-breakpoint-up(sm) {
+    html {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @include media-breakpoint-up(md) {
+    html {
+      font-size: 1.4rem;
+    }
+  }
+  
+  @include media-breakpoint-up(lg) {
+    html {
+      font-size: 1.6rem;
+    }
+  }
