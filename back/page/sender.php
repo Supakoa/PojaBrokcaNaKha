@@ -46,7 +46,7 @@
                         <td>DE-2019</td>
                         <td>
                             <button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i
-                                    class="far fa-edit " style="color:#FBBC05"></i> Edit</button>
+                                    class="far fa-edit " style="color:#FBBC05"></i> </button>
 
                         </td>
                     </tr>
@@ -57,7 +57,7 @@
                         <td>แบบคำร้องขอลาป่วย</td>
                         <td>RS-2019</td>
                         <td><button type="button" class="w3-btn w3-round-large" data-toggle="modal" data-target="#edit_modal"><i
-                                    class="far fa-edit" style="color:#FBBC05"></i> Edit</button></td>
+                                    class="far fa-edit" style="color:#FBBC05"></i> </button></td>
                     </tr>
                     <!-- end tmp 2 -->
                 </tbody>
