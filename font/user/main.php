@@ -373,15 +373,15 @@ $sub = '<label for="sub">วิชา</label>
                                             <div class="card-body">
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
-                                                    <div class="col-4">
+                                                    <div class="col-6">
                                                         <?php echo $sub;  ?>
 
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
                                                         <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-6">
                                                         <label for="sub">ประเภทการลา</label>
                                                         <select name="sub" class="form-control select2">
                                                             <option hidden="" selected="" value="">เลือกประเภท</option>
@@ -394,9 +394,18 @@ $sub = '<label for="sub">วิชา</label>
                                                         <input type="text" id="group" class="form-control" placeholder="สาเหตุการลา">
                                                     </div>
                                                     <div class="col-6">
-                                                        <label for="ei">วันที่ลา</label>
-                                                        <input type="text" name="eiei" id="ei" class="form-control"
-                                                            placeholder="ตั้งแต่วันที่-วันที่">
+                                                        <label for="ei">ตั้งแต่วันที่</label>
+                                                        <input type="date" name="eiei" id="ei" class="form-control"
+                                                            placeholder="ตั้งแต่วันที่">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="ei">ถึงวันที่</label>
+                                                        <input type="date" name="eiei" id="ei" class="form-control"
+                                                            placeholder="ตั้งแต่วันที่">
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <label for="file">หลักฐานสาเหตุการลา</label>
+                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
                                                     </div>
                                                     <div class="col-12 text-center">
                                                         <br>
