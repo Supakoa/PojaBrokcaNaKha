@@ -1,10 +1,8 @@
-
 <div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">ค้นหา : เอกสาร</h1>
         <hr>
-        <input class="" type="search" id="search_document" style=""
-            placeholder="รหัสเอกสาร"><br>
+        <input class="" type="search" id="search_document" style="" placeholder="รหัสเอกสาร"><br>
         <button type="button" class="btn btn-outline-warning btn-lg" style="margin-top:10px;margin-bottom:10px;"><i
                 class="fas fa-search"></i>
             <strong>Search</strong></button>
