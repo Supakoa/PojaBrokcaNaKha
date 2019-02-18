@@ -9,26 +9,29 @@
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">แยกกลุ่ม</button> -->
     <div class="card">
         <div class="card-body">
-        
             
             <!-- start form filter radio -->
             <div class="container-fluid">
-                <p>เลือกโดยกรอง :</p>
-                <div class="form-check-inline form-check">
-                    <input class="form-check-input" type="checkbox" value="admin">
-                    <label class="form-check-label">แอดมิน</label>
+                <label>กรองผู้ใช้งาน :</label>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="admin">แอดมิน
+                    </label>
                 </div>
-                <div class="form-check-inline form-check">
-                    <input class="form-check-input" type="checkbox" value="conformer">
-                    <label class="form-check-label">ผู้ตรวจ</label>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="conformer">ผู้ตรวจ
+                    </label>
                 </div>
-                <div class="form-check-inline form-check">
-                    <input class="form-check-input" type="checkbox" value="student">
-                    <label class="form-check-label">นักศึกษา</label>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="student">นักศึกษา
+                    </label>
                 </div>
-                <div class="form-check-inline form-check">
-                    <input class="form-check-input" type="checkbox" value="all">
-                    <label class="form-check-label">เลือกทั้งหมด</label>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="all">เลือกทั้งหมด
+                    </label>
                 </div>
             </div>
             <!-- end form filter radio -->
@@ -40,6 +43,11 @@
             </div>
         </div>
     </div>
+    <!-- start tabel -->
+    <div class="table">
+
+    </div>
+    <!-- end tabel -->
 </div>
 
 <!-- <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
