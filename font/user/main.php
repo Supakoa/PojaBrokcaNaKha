@@ -527,67 +527,7 @@ $sub = '<label for="sub">วิชา</label>
                                                                 <td>2019-01-18 14:20:47</td>
                                                                 <td>เลือกแบบคำร้องไม่ถูกครับ</td>
                                                                 <td>
-                                                                    <!-- Small modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm"
-                                                                        data-toggle="modal" data-target="#confirm">เจ้าหน้าที่</button>
 
-                                                                    <div id="confirm" class="modal fade bd-example-modal-sm"
-                                                                        tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-sm">
-                                                                            <div class="modal-content ">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                                                                                    <button type="button" class="close"
-                                                                                        data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body text-center">
-                                                                                    <!-- card user -->
-                                                                                    <div class="card-body">
-                                                                                        <!-- User -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <p>เรื่อง : </p>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <p>ข้าวร้านไหนอร่อย</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <p>ข้อความ : </p>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <p>พี่ว่าร้านข้าวใน ม.
-                                                                                                    เราร้านไหนอร่อยที่สุดครับช่วยแนะนำที</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!-- User -->
-                                                                                    </div>
-                                                                                    <!-- card user -->
-                                                                                    <hr>
-                                                                                    <!-- card staff -->
-                                                                                    <div class="card-body">
-                                                                                        <!-- staff -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <p>เจ้าหน้าที่ : </p>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <p>พี่ว่าร้านลงสวนอ้อยก็ดีนะ
-                                                                                                    แต่นานไปหน่อย</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!-- stafff -->
-                                                                                    </div>
-                                                                                    <!-- card staff -->
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- Small modal -->
                                                                 </td>
                                                                 <td> เจ้าหน้าที่ </td>
                                                             </tr>
@@ -622,7 +562,7 @@ $sub = '<label for="sub">วิชา</label>
                                                                                                 <p>เรื่อง : </p>
                                                                                             </div>
                                                                                             <div class="col-lg-8">
-                                                                                                <p>ข้าวร้านไหนอร่อย</p>
+                                                                                                <p>แนบเอกสารลากิจ</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="row">
@@ -630,8 +570,8 @@ $sub = '<label for="sub">วิชา</label>
                                                                                                 <p>ข้อความ : </p>
                                                                                             </div>
                                                                                             <div class="col-lg-8">
-                                                                                                <p>พี่ว่าร้านข้าวใน ม.
-                                                                                                    เราร้านไหนอร่อยที่สุดครับช่วยแนะนำที</p>
+                                                                                                <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา
+                                                                                                    เนื่องจากไปธุระกับครบครับ</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <!-- User -->
@@ -646,8 +586,8 @@ $sub = '<label for="sub">วิชา</label>
                                                                                                 <p>เจ้าหน้าที่ : </p>
                                                                                             </div>
                                                                                             <div class="col-lg-8">
-                                                                                                <p>พี่ว่าร้านลงสวนอ้อยก็ดีนะ
-                                                                                                    แต่นานไปหน่อย</p>
+                                                                                                <p>พอจะมีเอกสาร
+                                                                                                    หรือภาพถ่ายพอเป็นหลักฐานไหมค่ะ</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <!-- stafff -->
