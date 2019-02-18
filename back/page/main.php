@@ -1,5 +1,5 @@
 <div class="w3-container w3-center">
-    <h1 style="margin:30px;padding: 25px" >MENU</h1><hr>
+    <h1 style="margin:30px;padding: 25px" >เมนู</h1><hr>
     <div class="w3-row w3-margin " style="">
         <div class="w3-col">
             <button onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');" class="w3-btn"

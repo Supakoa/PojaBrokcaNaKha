@@ -45,9 +45,9 @@
             <a class="w3-bar-item w3-button" onclick="call_content('news.php','หน้า : หน้าข่าว','BackDoor : หน้าข่าว');"><i
                     class="fas fa-bullhorn"></i>
                 หน้าข่าว</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','หน้า : ผู้ส่ง','BackDoor : ผู้ส่ง');"><i
+            <a class="w3-bar-item w3-button" onclick="call_content('sender.php','หน้า : ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');"><i
                     class="fas fa-sort-amount-down"></i>
-                ผู้ส่ง</a>
+                ขั้นตอนเอกสาร</a>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
                     class="fas fa-bell"></i>
                 ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
@@ -103,19 +103,19 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
     <script>
     //datatable
-    $(document).ready(function () {
-                    $('#table1').click(function(){
-                        $(this).DataTable();
-                    });
-                    $('#table2').DataTable();
-                    $('#table3').DataTable();
+    // $(document).ready(function () {
+    //                 $('#table1').click(function(){
+    //                     $(this).DataTable();
+    //                 });
+    //                 $('#table2').DataTable();
+    //                 $('#table3').DataTable();
 
-                });
+    //             });
     </script>
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        // call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
-        call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
+        call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
+        // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
     function call_content(content, nav_title, title) {
