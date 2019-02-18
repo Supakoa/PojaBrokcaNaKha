@@ -98,74 +98,77 @@
                     </div>
                     <hr>
                     <!-- info -->
-                    <!-- work step -->
-                    <div class="row text-center">
-                        <div class="col">
-                            <p>เส้นทางเอกสาร</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
-                        </div>
-                    </div>
-                    <!-- line -->
-                    <div class="row text-center">
-                        <div class="col">
-                            <p><i class="fas fa-arrow-circle-down"></i></p>
-                        </div>
-                    </div>
-                    <!-- line -->
 
-                    <div class="row">
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
-                        </div>
-                    </div>
-                    <!-- line -->
-                    <div class="row text-center">
-                        <div class="col">
-                            <p><i class="fas fa-arrow-circle-down"></i></p>
-                        </div>
-                    </div>
-                    <!-- line -->
-                    <div class="row">
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <label for="">อ.บิน</label>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
-                        </div>
-                    </div>
-                    <hr>
                     <!-- work step -->
-                    <!-- add row -->
-                    <div class="row">
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-4">
-                            <button class="btn btn-light btn-sm"><i class="fas fa-plus"></i></button>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col">
+                                <p>เส้นทางเอกสาร</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- add row -->
+                        <div class="row">
+                            <div class="col">
+                                <label for="">อ.บิน</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.บาน</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.โบย</label>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="row text-center">
+                            <div class="col">
+                                <p><i class="fas fa-arrow-circle-down"></i></p>
+                            </div>
+                        </div>
+                        <!-- line -->
 
+                        <div class="row">
+                            <div class="col">
+                                <label for="">อ.ติบ</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.โตย</label>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="row text-center">
+                            <div class="col">
+                                <p><i class="fas fa-arrow-circle-down"></i></p>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="row">
+                            <div class="col">
+                                <label for="">อ.หึย</label>
+                            </div>
+                            <div class="col">
+                                <label for="">อ.โห้ยย</label>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- add row -->
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- add row -->
+                    </div>
+                    <!-- work step -->
+                    
                 </div>
             </div>
         </div>
