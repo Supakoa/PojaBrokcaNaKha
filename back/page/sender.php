@@ -4,7 +4,8 @@
         <hr>
 
         <!-- button delete select -->
-        <button type="button" class="w3-btn w3-border w3-border-red w3-round-large" data-toggle="modal"  data-target="#delete_select"><i class="fas fa-trash" style = "color:red"></i>
+        <button type="button" class="w3-btn w3-border w3-border-red w3-round-large" data-toggle="modal" data-target="#delete_select"><i
+                class="fas fa-trash" style="color:red"></i>
             Delete Checked</button>
 
         <!-- modal delete select -->
@@ -28,10 +29,10 @@
         <!-- start table -->
         <div class="w3-container-fluid" style="margin-top:20px;margin-right:100px;margin-left:100px;">
             <table class="table table-bordered table-sm w3-striped w3-border-red">
-                <thead >
-                    <tr >
-                        <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks" ></i></i></th>
-                        <th >Order</th>
+                <thead>
+                    <tr>
+                        <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks"></i></i></th>
+                        <th>Order</th>
                         <th>Name</th>
                         <th>ID</th>
                         <th></th>
@@ -44,7 +45,8 @@
                         <td>เอกสารขอขึ้นสอบ</td>
                         <td>DE-2019</td>
                         <td>
-                            <button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i class="far fa-edit " style = "color:#FBBC05"></i> Edit</button>
+                            <button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i
+                                    class="far fa-edit " style="color:#FBBC05"></i> Edit</button>
 
                         </td>
                     </tr>
@@ -54,7 +56,8 @@
                         <td>2).</td>
                         <td>แบบคำร้องขอลาป่วย</td>
                         <td>RS-2019</td>
-                        <td><button type="button" class="w3-btn w3-round-large"  data-toggle="modal" data-target="#edit_modal"><i class="far fa-edit" style = "color:#FBBC05"></i> Edit</button></td>
+                        <td><button type="button" class="w3-btn w3-round-large" data-toggle="modal" data-target="#edit_modal"><i
+                                    class="far fa-edit" style="color:#FBBC05"></i> Edit</button></td>
                     </tr>
                     <!-- end tmp 2 -->
                 </tbody>
@@ -93,47 +96,75 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <!-- info -->
-
-                    <div class="container table-responsive">
-                        <table class="table table-hover overflow table-bordered" >
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1.</th>
-                                    <td>อ.บิน</td>
-                                    <td>อ.บาน</td>
-                                    <td>อ.บิว</td>
-                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
-                                </tr>
-                                <tr class="text-center">
-                                    <th colspan="10"><i class="fas fa-arrow-circle-down"></i></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2.</th>
-                                    <td>อ.บวง</td>
-                                    <td>อ.บวงไบ</td>
-                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
-                                </tr>
-                                <tr class="text-center">
-                                    <th colspan="4" ><i class="fas fa-arrow-circle-down"></i></th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3.</th>
-                                    <td>อ.พวง</td>
-                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td><hr>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- work step -->
+                    <div class="row text-center">
+                        <div class="col">
+                            <p>เส้นทางเอกสาร</p>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                        </div>
+                    </div>
+                    <!-- line -->
+                    <div class="row text-center">
+                        <div class="col">
+                            <p><i class="fas fa-arrow-circle-down"></i></p>
+                        </div>
+                    </div>
+                    <!-- line -->
 
                     <div class="row">
-                        <div class="col-lg-4"></div>
-                            <div class="col-lg-4">
-                                <button class="btn btn-light btn-sm"><i class="fas fa-plus"></i></button>
-                            </div>
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
+                    <!-- line -->
+                    <div class="row text-center">
+                        <div class="col">
+                            <p><i class="fas fa-arrow-circle-down"></i></p>
+                        </div>
+                    </div>
+                    <!-- line -->
+                    <div class="row">
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <label for="">อ.บิน</label>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- work step -->
+                    <!-- add row -->
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <button class="btn btn-light btn-sm"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <!-- add row -->
 
                 </div>
             </div>
