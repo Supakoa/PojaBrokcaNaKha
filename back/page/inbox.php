@@ -5,12 +5,12 @@
 
         <div class="w3-container-fluid">
             <div class="row">
-                <div class="col">
+                <div class="col display">
                     <h1>Inbox</h1>
                     <hr>
                     <!-- start table inbox -->
                     <div>
-                        <table class="table table-striped table-dark table-hover table-bordered table-sm">
+                        <table class="table table-striped table-dark table-hover table-bordered table-sm" id="table1">
                             <thead>
                                 <tr>
                                     <th style="color:floralwhite;">Date</th>
@@ -65,10 +65,10 @@
                     </div>
                     <!-- end table inbox -->
                 </div>
-                <div class="col">
+                <div class="col display">
                     <h1>Outbox</h1>
                     <hr>
-                    <table class="table table-striped table-dark table-hover table-bordered table-sm">
+                    <table class="table table-striped table-dark table-hover table-bordered table-sm" id="table2">
                         <thead>
                             <tr>
                                 <th style="color:floralwhite;">Date</th>
