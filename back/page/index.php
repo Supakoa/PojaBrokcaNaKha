@@ -82,9 +82,9 @@
         <footer>
             <div class="w3-container-fluid " style="text-align:center; ">
                 <!-- prefooter -->
-                <div class="" style="border:solid;border-color:#8CDCB1 ;background-color:#8CDCB1 " id="prefooter">
+                <!-- <div class="" style="border:solid;border-color:#8CDCB1 ;background-color:#8CDCB1 " id="prefooter">
                     <h1>Footer</h1>
-                </div>
+                </div> -->
                 <!-- footer -->
                 <div class="" style="border:solid;border-color:#2D935D;background-color:#2D935D" id="footer">
                     <p style="margin-top:1%">©Powered by CEFStyle</p>

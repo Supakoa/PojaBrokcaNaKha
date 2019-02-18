@@ -27,7 +27,7 @@
                                     <td style="">10.58 PM.</td>
                                     <td style="">59122519095</td>
                                     <td style="">ช่วยเช็คเอกสารขอสอบให้หน่อยนะคะ</td>
-                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">Reply</button></td>
+                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">ตอบ</button></td>
                                 </tr>
                                 <!-- end data tmp 1 -->
 
@@ -37,7 +37,7 @@
                                     <td style="">10.58 PM.</td>
                                     <td style="">61403519095</td>
                                     <td style="">ผมเขียนเอกสารผิดไปสามารถสงใหม่ได้ไหมครับ</td>
-                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">Reply</button></td>
+                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">ตอบ</button></td>
                                 </tr>
                                 <!-- end data tmp 1 -->
 
@@ -47,7 +47,7 @@
                                     <td style="">10.58 PM.</td>
                                     <td style="">60125519095</td>
                                     <td style="">ถามเรื่องแบบฟอร์มหน่อยครับ</td>
-                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">Reply</button></td>
+                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">ตอบ</button></td>
                                 </tr>
                                 <!-- end data tmp 1 -->
 
@@ -57,7 +57,7 @@
                                     <td style="">10.58 PM.</td>
                                     <td style="">59203519095</td>
                                     <td style="">สอบถามเรื่องการส่งใบคำร้องครับ</td>
-                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">Reply</button></td>
+                                    <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">ตอบ</button></td>
                                 </tr>
                                 <!-- end data tmp 1 -->
                             </tbody>
@@ -86,7 +86,7 @@
                                 <td style="">10.58 PM.</td>
                                 <td style="">61122519095</td>
                                 <td style="">เอกสารถูกดำเนินการเรียบร้อยแล้วครับ</td>
-                                <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">Reply</button></td>
+                                <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">รายละเอียด</button></td>
                             </tr>
                             <!-- end data tmp 1 -->
 
@@ -96,7 +96,7 @@
                                 <td style="">10.58 PM.</td>
                                 <td style="">60122519095</td>
                                 <td style="">เอกสารสามารถส่งใหม่ได้ครับ</td>
-                                <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">Reply</button></td>
+                                <td style=""><button type="button" class="btn w3-border w3-border-green w3-round-large w3-white ">รายละเอียด</button></td>
                             </tr>
                             <!-- end data tmp 1 -->
                         </tbody>

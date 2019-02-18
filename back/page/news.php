@@ -6,7 +6,7 @@
         <!-- button add -->
         <div class="w3-container-fluid w3-center" style="margin:20px;">
             <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#add_modal"><i class="fas fa-plus-circle"></i>
-                Add</button>
+                เพิ่ม</button>
         </div>
 
         <!-- modal add -->
@@ -60,7 +60,7 @@
                     <img class="w3-red" src="..\image\news\1.jpg" width="200" height="100">
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                    <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
                 </div>
             </div>
             <!-- end add -->
@@ -77,7 +77,7 @@
                     <img class="w3-red" src="..\image\news\2.jpg" width="200" height="100">
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                    <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
                 </div>
             </div>
             <!-- end test 2 -->
@@ -94,7 +94,7 @@
                     <img class="w3-red" src="..\image\news\3.jpg" width="200" height="100">
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                    <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
                 </div>
             </div>
             <!-- end test 2 -->
