@@ -1,17 +1,17 @@
 
-<div class="w3-container-fluid w3-center w3-green" style="margin-top:20px;margin-left:50px;margin-right:50px;">
+<div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">ค้นหา : เอกสาร</h1>
         <hr>
-        <input class="w3-center" type="search" id="search_document" style="background-color: #4d4d4d;color: white;"
-            placeholder="ID : 🦄🦄🦄🦄"><br>
+        <input class="" type="search" id="search_document" style=""
+            placeholder="รหัสเอกสาร"><br>
         <button type="button" class="btn btn-outline-warning btn-lg" style="margin-top:10px;margin-bottom:10px;"><i
                 class="fas fa-search"></i>
             <strong>Search</strong></button>
     </div>
 </div>
 
-<div class="w3-container-fluid w3-center w3-deep-orange" style="margin-top:20px;margin-left:50px;margin-right:50px;">
+<div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">เอกสาร : ตาราง</h1>
         <hr>
@@ -23,11 +23,11 @@
                 <!-- table header -->
                 <thead>
                     <tr>
-                        <td>รหัสเอกสาร</td>
-                        <td>เรื่อง</td>
-                        <td>เวลาสร้าง</td>
-                        <td>เวลาแก้ไขล่าสุด</td>
-                        <td>สถานะ</td>
+                        <th>รหัสเอกสาร</th>
+                        <th>เรื่อง</th>
+                        <th>เวลาสร้าง</th>
+                        <th>เวลาแก้ไขล่าสุด</th>
+                        <th>สถานะ</th>
                     </tr>
                 </thead>
 
