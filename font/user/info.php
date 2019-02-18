@@ -7,6 +7,7 @@
     <title>User 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
+    <link rel="stylesheet" href="../style.css">
 
 
     <!-- bootstrap 4.2.1 -->
@@ -24,17 +25,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 
 
-    <style>
-        /* Make the image fully responsive */
-        .carousel-inner img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .Gfonts {
-            font-family: 'Kanit', sans-serif;
-        }
-    </style>
+    
 </head>
 
 <body>

@@ -38,10 +38,9 @@
             <div class="input-group mx-auto input-group-lg" style="width:500px;">
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 <div class="input-group-prepend">
-                    <button type="button" class="btn btn-info"><i class="fas fa-search" style="color:white;"></i> ค้นหา</button>
-                </div>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user"><i class="fas fa-plus"
-                        style="color:white;"></i> เพื่ม</button>
+                    <button type="button" class="btn btn-outline-info"><i class="fas fa-search" style=""></i> ค้นหา</button>
+                </div>    
+                
             </div>
 
             <!-- start modal new user -->
@@ -132,7 +131,8 @@
                         <th>เบอร์โทร</th>
                         <th>คณะ</th>
                         <th>สาขา</th>
-                        <th></th>
+                        <th><button type="button" class="btn w3-circle w3-tiny btn-outline-success btn-hover w3-white" data-toggle="modal" data-target="#add_user"  style="font-size: 2px"><i class="fas fa-plus"
+                        style="color:green;margin-top:5px"></i></button></th>
                         
                     </tr>
                 </thead>

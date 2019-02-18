@@ -5,7 +5,7 @@
         <input class="" type="search" id="search_document" style="" placeholder="รหัสเอกสาร"><br>
         <button type="button" class="btn btn-outline-info btn-lg" style="margin-top:10px;margin-bottom:10px;"><i
                 class="fas fa-search "></i>
-            <strong>Search</strong></button>
+            <strong>ค้นหา</strong></button>
     </div>
 </div>
 

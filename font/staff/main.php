@@ -7,6 +7,8 @@
     <title>อาจารย์</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
+    <link rel="stylesheet" href="../style.css">
+
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -20,19 +22,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <script src="main.js"></script>
-    <style>
-        .paper {
-        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
-        transition: 0.3s;
-        width: 100%;
-        border-radius: 5px;
-        margin-top:20px;margin-bottom:20px
-    }
-    .Gfonts {
-            font-family: 'Kanit', sans-serif;
-        }
-        
-    </style>
+    
 </head>
 
 <body class="Gfont">
@@ -73,7 +63,7 @@
                 <div class="card-body" style="background-color:#F7FAFE">
                     <div class="row">
                         <!-- card 1 -->
-                        <div class="col-lg-7">
+                        <div class="col-lg-12">
                             <div class="card mb-3">
                                 <div class="card-header text-light" style="background-color:#78ABF2">
                                     <h3>Inbox</h3>
@@ -85,18 +75,20 @@
                                                 <tr>
                                                     <th>รหัสเอกสาร</th>
                                                     <th>แบบคำร้อง</th>
-                                                    <th>ชื่อผู้ส่ง</th>
-                                                    <th>วันที่</th>
-                                                    <th>เช็คเอกสาร</th>
+                                                    <th>รหัสนักศึกษา</th>
+                                                    <th>ชื่อ-สกุล</th>
+                                                    <th>วันที่-เวลา</th>
+                                                    <th>ตรวจสอบ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>doc58874</td>
+                                                    <td>ลากิจ/ลาป่วย</td>
+                                                    <td>60122519112</td>
+                                                    <td>นาย มานี มีปู</td>
+                                                    <td>2019-02-16 12:45:47</td>
+                                                    <td><button class="btn btn-outline-info w3-white"><i class="fas fa-file-alt"></i></button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -106,7 +98,7 @@
                         </div>
                         <!-- card 1 -->
                         <!-- card 2 -->
-                        <div class="col-lg-5">
+                        <div class="col-lg-12">
                             <div class="card mb-3">
                                 <div class="card-header text-light" style="background-color:#78ABF2">
                                     <h3>Outbox</h3>
@@ -118,16 +110,20 @@
                                                 <tr>
                                                     <th>รหัสเอกสาร</th>
                                                     <th>แบบคำร้อง</th>
-                                                    <th>ชื่อผู้ส่ง</th>
-                                                    <th>วันที่</th>
+                                                    <th>รหัสนักศึกษา</th>
+                                                    <th>ชื่อ-สกุล</th>
+                                                    <th>วันที่-เวลา</th>
+                                                    <th>รายละเอียด</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>doc57574</td>
+                                                    <td>แบบคำร้องขอสอบภายหลัง</td>
+                                                    <td>60124879041</td>
+                                                    <td>นาย สิงหา มาปูนี</td>
+                                                    <td>2019-01-18 18:44:40</td>
+                                                    <td><button class="btn btn-outline-info w3-white " ><i class="fas fa-info-circle"></i></button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -175,12 +171,12 @@
                             <div class="row container">
                                 <div class="col-lg-1"></div>
                                 <div class="col-lg-4">
-                                    <p>เรื่อง ลาป่วย</p>
+                                    <p>เรื่อง ลากิจ/ลาป่วย</p>
                                 </div>
                                 <div class="col-lg-7"></div>
                                 <div class="col-lg-1"></div>
                                 <div class="col-lg-4">
-                                    <p>วิชา GELH1101</p>
+                                    <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
                                 </div>
                             </div>
                             <!-- subject -->
@@ -188,15 +184,13 @@
                             <!-- body -->
                             <div class="row">
                                 <div class="col-lg-2"></div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-9">
                                     <div class="card-body">
                                         <p><span style="padding-left:6em"></span>
-                                        <?php
-                                        for( $i = 0; $i<800 ; $i++){
-                                            echo ".";
-                                        }
-                                       
-                                        ?>
+                                           ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br> 
+                                           สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
+                                           ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
+                                           
                                         </p>
                                     </div>
                                 </div>
@@ -204,7 +198,7 @@
                             <!-- body -->
 
                             <!-- footer -->
-                            <div class="row container">
+                            <div class="row container" style = "margin-top:250px">
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4">
@@ -225,6 +219,10 @@
                             <!-- footer -->
                         </div>
                     </div>
+                    <div class = "text-center">
+                        <button class = "btn btn-outline-success" >ดาวโหลดเอกสารที่แนบมา</button>
+                    </div>
+                    <br>
                     <div class="card-footer text-muted">
                         <!-- option staff -->
                         <div class="row">
@@ -245,15 +243,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <label for="signatue">เพิ่มลายเซ็น</label>
+                                <label for="signatue">แนบเอกสาร</label>
                                 <div id="signature" >
-                                    <button  type="submit" class="btn btn-md btn-warning "><i class="fas fa-signature"></i></button>
+                                    <input type="file" name="" id="">
                                 </div>
                             </div>
                             <div class="col-lg-2"></div>
-
-                            <div class="col-lg-2">
-                                <button type="submit" class="btn btn-sm btn-info form-control">submit</button>
+                            <div class="col-lg-10"></div>
+                            <div class="col-lg-2 ">
+                                <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                             </div>
                         </div>
                         <!-- option staff -->
