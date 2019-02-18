@@ -104,7 +104,9 @@
     <script>
     //datatable
     $(document).ready(function () {
-                    $('#table1').DataTable();
+                    $('#table1').click(function(){
+                        $(this).DataTable();
+                    });
                     $('#table2').DataTable();
                     $('#table3').DataTable();
 
@@ -116,7 +118,7 @@
     }
 
     function call_content(content, nav_title, title) {
-
+        
         document.getElementById('nav_title').innerHTML = nav_title;
         document.getElementById('tab_title').innerHTML = title;
 
