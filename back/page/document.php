@@ -3,8 +3,8 @@
         <h1 style="padding-top:10px;">ค้นหา : เอกสาร</h1>
         <hr>
         <input class="" type="search" id="search_document" style="" placeholder="รหัสเอกสาร"><br>
-        <button type="button" class="btn btn-outline-warning btn-lg" style="margin-top:10px;margin-bottom:10px;"><i
-                class="fas fa-search"></i>
+        <button type="button" class="btn btn-outline-info btn-lg" style="margin-top:10px;margin-bottom:10px;"><i
+                class="fas fa-search "></i>
             <strong>Search</strong></button>
     </div>
 </div>
