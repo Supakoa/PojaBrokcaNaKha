@@ -17,8 +17,8 @@
         <hr>
 
         <!-- group of table -->
-        <div class="container">
-            <table class="table w3-center table-bordered table-sm">
+        <div class="container display">
+            <table class="table w3-center table-bordered table-sm" id="table3">
 
                 <!-- table header -->
                 <thead>
