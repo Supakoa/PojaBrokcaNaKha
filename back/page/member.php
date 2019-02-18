@@ -1,16 +1,19 @@
+
+<div class="w3-container-fluid w3-center" style="margin:20px;max-height:100%;padding:30px;">
+<h1>ค้นหา : สมาชิก</h1>
+<hr>
 <br>
-<div class="w3-container-fluid w3-center" style="margin:20px;max-height:100%;padding:30px;background-color:#8cdcb1;">
     <!-- <h1>เลือก : ค้นหา</h1>
     <hr>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">ทั้งหมด</button>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">แยกกลุ่ม</button> -->
     <div class="card">
         <div class="card-body">
-        <h1>ค้นหา :</h1>
-            <hr>
+        
+            
             <!-- start form filter radio -->
             <div class="container-fluid">
-                <h1>เลือกโดยกรอง :</label>
+                <p>เลือกโดยกรอง :</p>
                 <div class="form-check-inline form-check">
                     <input class="form-check-input" type="checkbox" value="admin">
                     <label class="form-check-label">แอดมิน</label>
