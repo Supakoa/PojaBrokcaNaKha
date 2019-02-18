@@ -9,7 +9,7 @@
 <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
     <h1 style="color:gray;">เลือก : ชนิด</h1>
     <hr>
-    <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">Admin</button>
+    <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">แอดมิน</button>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">ผู้ตรวจ</button>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">นักศึกษา</button>
 </div>

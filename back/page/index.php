@@ -114,7 +114,8 @@
     </script>
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
+        // call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
+        call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
     function call_content(content, nav_title, title) {
@@ -130,6 +131,7 @@
         };
         xhttp.open("GET", content, true);
         xhttp.send();
+        
     }
 </script>
 
