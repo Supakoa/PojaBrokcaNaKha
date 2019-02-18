@@ -113,8 +113,20 @@ $sub = '<label for="sub">วิชา</label>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                       <tr>
+                                                            <td>1</td>
+                                                            <td><span class="badge badge-info">กำลังดำเนินการ</span></td>
+                                                            <td>ลากิจ/ลาป่วย</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-info btn-sm"
+                                                                    data-toggle="modal" data-target="#route">
+                                                                    แสดง
+                                                                </button>
+                                                            </td>
+                                                            <td> - </td>
+                                                        </tr>
                                                         <tr>
-                                                            <th scope="row">1</th>
+                                                            <th scope="row">2</th>
                                                             <td><span class="badge badge-danger">ไม่ผ่าน</span></td>
                                                             <td>ขอสอบย้อนหลัง</td>
                                                             <td>
@@ -176,6 +188,7 @@ $sub = '<label for="sub">วิชา</label>
                                                                 <p>เอกสารไม่ครบ</p>
                                                             </td>
                                                         </tr>
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -501,13 +514,18 @@ $sub = '<label for="sub">วิชา</label>
                                                         <thead>
                                                             <tr>
                                                                 <th>status</th>
+                                                                <th>เวลาส่ง</th>
+                                                                <th>เรื่อง</th>
                                                                 <th>ข้อความ</th>
                                                                 <th>ผู้ส่ง</th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
                                                                 <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
+                                                                <td>2019-01-18 14:20:47</td>
+                                                                <td>เลือกแบบคำร้องไม่ถูกครับ</td>
                                                                 <td>
                                                                     <!-- Small modal -->
                                                                     <button type="button" class="btn btn-info btn-sm"
@@ -536,6 +554,8 @@ $sub = '<label for="sub">วิชา</label>
                                                             </tr>
                                                             <tr>
                                                                 <td><span class="badge badge-success">อ่านแล้ว</span></td>
+                                                                <td>2019-01-17 18:33:24</td>
+                                                                <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- Small modal -->
                                                                     <button type="button" class="btn btn-info btn-sm"

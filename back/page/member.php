@@ -1,15 +1,14 @@
-
 <div class="w3-container-fluid w3-center" style="margin:20px;max-height:100%;padding:30px;">
-<h1>ค้นหา : สมาชิก</h1>
-<hr>
-<br>
+    <h1>ค้นหา : สมาชิก</h1>
+    <hr>
+    <br>
     <!-- <h1>เลือก : ค้นหา</h1>
     <hr>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">ทั้งหมด</button>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">แยกกลุ่ม</button> -->
     <div class="card">
         <div class="card-body">
-            
+
             <!-- start form filter radio -->
             <div class="container-fluid">
                 <label>กรองผู้ใช้งาน :</label>
@@ -35,12 +34,88 @@
                 </div>
             </div>
             <!-- end form filter radio -->
+
             <div class="input-group mx-auto input-group-lg" style="width:500px;">
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 <div class="input-group-prepend">
-                    <button type="button" class="btn btn-info">ค้นหา</button>
+                    <button type="button" class="btn btn-info"><i class="fas fa-search" style="color:white;"></i> ค้นหา</button>
+                </div>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user"><i class="fas fa-plus"
+                        style="color:white;"></i> เพื่ม</button>
+            </div>
+
+            <!-- start modal new user -->
+            <div class="modal fade" id="add_user" tabindex="-1" role="dialog">
+                <!-- setup modal size : xl -->
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <label>เพิ่มข้อมูล : </label>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">รหัสผู้ใช้งาน</label>
+                                <div class="col">
+                                    <input type="text" class=" form-control" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">รหัสผ่าน</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">ชื่อ-นามสกุล</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">ประเภทผู้ใช้</label>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option selected disabled>Choose : role</option>
+                                            <option>admin</option>
+                                            <option>sender</option>
+                                            <option>student</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">ตำแหน่ง</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="rank">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">อีเมล</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="e-mail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">เบอร์โทร</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="tel.">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">สาขา</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="major">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- end modal new user -->
+
         </div>
 
         <div class="container-fluid">
@@ -48,7 +123,7 @@
             <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>ชื่อผู้ใช้งาน</th>
+                        <th>รหัสผู้ใช้งาน</th>
                         <th>รหัสผ่าน</th>
                         <th>ชื่อ-นามสกุล</th>
                         <th>ประเภท</th>
