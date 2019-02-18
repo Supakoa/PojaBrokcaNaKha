@@ -1,6 +1,6 @@
 <div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
     <div class="w3-container-fluid " style="margin:20px;padding:20px;">
-        <h1>Setting : Sender</h1>
+        <h1>ตั้งค่า : ขั้นตอนเอกสาร</h1>
         <hr>
 
         <!-- button delete select -->
