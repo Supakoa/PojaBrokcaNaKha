@@ -130,39 +130,72 @@
                         <th>ตำแหน่ง</th>
                         <th>อีเมล</th>
                         <th>เบอร์โทร</th>
+                        <th>คณะ</th>
                         <th>สาขา</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>59122519032</td>
+                        <td>Somchainaja</td>
                         <td>นาย สมชาย สุดกล้าหาญ</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>นักศึกษา</td>
+                        <td>นักศึกษา</td>
+                        <td>somchai@gmail.com</td>
+                        <td>0859665422</td>
+                        <td>เทคโนโลยีอุตสาหกรรม</td>
+                        <td>วิศวกรรมคอมพิวเตอร์</td>
+                        <td><button class = "btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style = "color:#FBBC05"></i></button> <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button></td>
                     </tr>
                     <tr>
                         <td>59122519068</td>
+                        <td>zaza1234</td>
                         <td>นางสาว สมหญิง ตั้งใจเรียน</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>นักศึกษา</td>
+                        <td>นักศึกษา</td>
+                        <td>somyhing@gmail.com</td>
+                        <td>0889665412</td>
+                        <td>เทคโนโลยีอุตสาหกรรม</td>
+                        <td>ออกแบบกราฟิกและมัลติมีเดีย</td>
+                        <td><button class = "btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style = "color:#FBBC05"></i></button> <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button></td>
                     </tr>
                     <tr>
                         <td>59122519100</td>
+                        <td>123456</td>
                         <td>นาย อัครเดช เดชะไชโย</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>นักศึกษา</td>
+                        <td>นักศึกษา</td>
+                        <td>maowmaew@gmail.com</td>
+                        <td>0985641254</td>
+                        <td>เทคโนโลยีอุตสาหกรรม</td>
+                        <td>อุตสาหกรรมการพิมพ์</td>
+                        <td><button class = "btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style = "color:#FBBC05"></i></button> <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>surasak.m</td>
+                        <td>ge_surasak</td>
+                        <td>นาย สุรศักดิ์ มงคล</td>
+                        <td>เจ้าหน้าที่</td>
+                        <td>พนักงาน</td>
+                        <td>surasak@gmail.com</td>
+                        <td>0965552147</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button class = "btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style = "color:#FBBC05"></i></button> <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>adminnaja</td>
+                        <td>ge_adminmin</td>
+                        <td>นาย แอดมิน สูงสุด</td>
+                        <td>ผู้ดูแลระบบ</td>
+                        <td>แอดมิน</td>
+                        <td>ge_admin@gmail.com</td>
+                        <td>0888888888</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button class = "btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style = "color:#FBBC05"></i></button> <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button></td>
                     </tr>
                 </tbody>
             </table>
