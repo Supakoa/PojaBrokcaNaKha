@@ -43,7 +43,10 @@
                         <td>1).</td>
                         <td>เอกสารขอขึ้นสอบ</td>
                         <td>DE-2019</td>
-                        <td><button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i class="far fa-edit " style = "color:#FBBC05"></i> Edit</button></td>
+                        <td>
+                            <button type="button" class="w3-btn  w3-round-large" data-toggle="modal" data-target="#edit_modal"><i class="far fa-edit " style = "color:#FBBC05"></i> Edit</button>
+
+                        </td>
                     </tr>
                     <!-- start tmp 2 -->
                     <tr>
@@ -68,8 +71,58 @@
                     <h1>Modal Setting : Sender</h1>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
-                        
+
+                    <!-- info -->
+                    <div class="card-body text-left">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5 ">
+                                <p>รหัสเอกสาร </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>: 5912512</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5 ">
+                                <p>ชื่อ </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>: นายสมพง ดงดิบ</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- info -->
+
+
+                    <div class="container table-responsive">
+                        <table class="table table-hover overflow table-bordered" >
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1.</th>
+                                    <td>อ.บิน</td>
+                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2.</th>
+                                    <td>อ.บวง</td>
+                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3.</th>
+                                    <td>อ.พวง</td>
+                                    <td><button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-plus"></i></button>
+                            </div>
                     </div>
                 </div>
                 <div class="modal-footer">
