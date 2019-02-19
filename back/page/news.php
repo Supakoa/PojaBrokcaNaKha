@@ -14,20 +14,20 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        Created New :
+                        เพิ่มข่าวใหม่ :
                     </div>
                     <div class="modal-body">
                         <!-- input file -->
-                        <label>Image File :</label>
+                        <label>ไฟล์ภาพ :</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <label class="custom-file-label" for="customFile">เลือกไฟล์</label>
                         </div>
-                        <label style="margin-top:20px;">Link :</label>
+                        <label style="margin-top:20px;">ที่อยู่เว็บไซต์ :</label>
                         <input class="form-control form-control-lg" type="text">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">New</button>
+                        <button type="button" class="btn btn-success">เพิ่ม</button>
                     </div>
                 </div>
             </div>

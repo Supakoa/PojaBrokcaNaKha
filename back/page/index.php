@@ -38,6 +38,9 @@
         </a>
         <div class="w3-container" style="margin-left:1%;">
             <hr>
+            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
+                    class="fas fa-bell"></i>
+                ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
             <a class="w3-bar-item w3-button" onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');"><i class="far fa-folder-open"></i>
                 เอกสาร</a>
             <a class="w3-bar-item w3-button" onclick="call_content('member.php','หน้า : สมาชิก','BackDoor : สมาชิก');"><i class="fas fa-user-edit"></i>
@@ -48,9 +51,7 @@
             <a class="w3-bar-item w3-button" onclick="call_content('sender.php','หน้า : ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');"><i
                     class="fas fa-sort-amount-down"></i>
                 ขั้นตอนเอกสาร</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
-                    class="fas fa-bell"></i>
-                ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
+            
             <hr>
         </div>
     </div>

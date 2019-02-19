@@ -71,7 +71,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1>Modal Setting : Sender</h1>
+                    <h1>ตั้งค่าเส้นทางเอกสาร</h1>
                 </div>
                 <div class="modal-body">
 
@@ -80,19 +80,19 @@
                         <div class="row">
                             <div class="col-lg-1"></div>
                             <div class="col-lg-5 ">
-                                <p>รหัสเอกสาร </p>
+                                <p>รหัสฟอร์มเอกสาร </p>
                             </div>
                             <div class="col-lg-6">
-                                <label>: 5912512</label>
+                                <label>: DE-2019</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"></div>
                             <div class="col-lg-5 ">
-                                <p>ชื่อ </p>
+                                <p>ชื่อฟอร์มเอกสาร </p>
                             </div>
                             <div class="col-lg-6">
-                                <label>: นายสมพง ดงดิบ</label>
+                                <label>: เอกสารขอขึ้นสอบ</label>
                             </div>
                         </div>
                     </div>
