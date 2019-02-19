@@ -144,7 +144,7 @@
                 <!-- card 3 -->
                 <div class="card " id="showdata">
                     <div class="card-header text-light" style="background-color:#78ABF2">
-                        <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> 59123854</h5>
+                        <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
                     </div>
                     <div class="card-body">
                         <div class="paper card-body">
