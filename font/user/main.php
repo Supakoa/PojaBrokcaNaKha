@@ -70,14 +70,14 @@ $sub = '<label for="sub">วิชา</label>
 
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
-        <div class="container" style="background-color:#E4EEFC">
+        <div class="container" style="background-color:#AECDF7">
             <br><br><br>
 
             <?php require 'other/news.php'; ?>
 
 
             <!-- card 1 -->
-            <div class="card" id="card1" style="background-color:#AECDF7">
+            <div id="card1" style="background-color:#AECDF7">
                 <div class="card-body">
                     <div class="container mt-3">
                         <div class="container">
@@ -95,10 +95,10 @@ $sub = '<label for="sub">วิชา</label>
                         <div class="tab-content">
                             <!-- Tab panes 1-->
                             <div id="home" class="container tab-pane active" style="background-color:#5796EE;"><br>
-                                <div class="container " style="background-color:#F7FAFE">
+                                <div class="container" style="background-color:#F7FAFE">
                                     <div class="row">
                                         <div class="col-lg-1"></div>
-                                        <div class="col-lg-10">
+                                        <div class="col-lg-10"><br>
                                             <div class="table-responsive-lg text-nowrap">
                                                 <table id="table1" class="table table-hover overflow display">
                                                     <thead>
@@ -140,7 +140,6 @@ $sub = '<label for="sub">วิชา</label>
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                             <div class="col-lg-1"></div>
                                             <br>
                                         </div>
@@ -453,7 +452,6 @@ $sub = '<label for="sub">วิชา</label>
                 <br>
                 <div class="container">
                     <div class="card" id="card2">
-
                         <div class="card-header text-center" style="background-color:#3782EB">
                             <h3>ติดต่อเจ้าหน้าที่</h3>
                         </div>
@@ -523,8 +521,7 @@ $sub = '<label for="sub">วิชา</label>
         </div>
 
     </section><!-- body -->
-   
-</div>
+
     <div class="container-fluid" style="background-color:#87B4F3">
         <div class="container">
             <footer class="text-center" style="background-color:#87B4F3">
@@ -679,7 +676,6 @@ $sub = '<label for="sub">วิชา</label>
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        
 
 </body>
 
