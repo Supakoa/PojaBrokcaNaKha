@@ -639,7 +639,8 @@ $sub = '<label for="sub">วิชา</label>
         </div>
 
     </section><!-- body -->
-
+   
+</div>
     <div class="container-fluid" style="background-color:#87B4F3">
         <div class="container">
             <footer class="text-center" style="background-color:#87B4F3">
@@ -714,6 +715,7 @@ $sub = '<label for="sub">วิชา</label>
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        
 
 </body>
 

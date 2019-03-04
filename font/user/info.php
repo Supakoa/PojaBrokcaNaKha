@@ -57,7 +57,7 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">ชื่อ - นามสกุล</th>
-                                            <td> ศุภกิจ กิจนะบำรุงศํกดิ์</td>
+                                            <td id = "name_edit"> ศุภกิจ กิจนะบำรุงศํกดิ์</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Password</th>
@@ -79,7 +79,7 @@
 
                                             <td>
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                <button type="button" id="btn" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#exampleModal">
                                                     แก้ไข
                                                 </button>
@@ -102,7 +102,7 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-6">
                                                                             <label for="name">ชื่อ - นามสกุล</label>
-                                                                            <input id="name" type="text" placeholder="ศุภกิจ กิจนะบำรุงศักดิ์">
+                                                                            <input id="new_name" type="text" placeholder="ศุภกิจ กิจนะบำรุงศักดิ์">
                                                                         </div>
                                                                         <div class="col-lg-6">
                                                                             <label for="pass">Password</label>
@@ -164,8 +164,23 @@
     <script>
         //tap
         $(document).ready(function () {
+            var old_name;
             $(".nav-tabs a").click(function () {
                 $(this).tab('show');
+            });
+            $('#btn').click(function () { 
+                // $('#name_edit').text("eieiei");
+                 old_name = $('#name_edit').text();
+            });
+           
+            $('#new_name').keyup(function (e) { 
+                var text =  $('#new_name').val();
+                if(text==''){
+                    $('#name_edit').text(old_name);
+                }else{
+                    $('#name_edit').text(text);
+                }
+                
             });
         });
 
