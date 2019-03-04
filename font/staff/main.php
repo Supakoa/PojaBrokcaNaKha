@@ -7,11 +7,11 @@
     <title>อาจารย์</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
-    <link rel="stylesheet" href="../style.css">
 
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
 
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
@@ -19,8 +19,6 @@
     <!-- icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
 
 </head>
 

@@ -49,8 +49,6 @@ $sub = '<label for="sub">วิชา</label>
     <!-- icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
 
     <!-- datatable -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/> -->
@@ -661,15 +659,14 @@ $sub = '<label for="sub">วิชา</label>
                 $(".nav-tabs a").click(function() {
                     $(this).tab('show');
                 });
-            });
-
-            //time news
-            $('.carousel').carousel({
-                interval: 2000
-            });
-            //modal
-            $('#myModal').on('shown.bs.modal', function() {
-                $('#myInput').trigger('focus')
+                //time news
+                $('.carousel').carousel({
+                    interval: 2000
+                });
+                //modal
+                $('#myModal').on('shown.bs.modal', function() {
+                    $('#myInput').trigger('focus')
+                });
             });
         </script>
 
