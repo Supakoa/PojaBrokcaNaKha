@@ -47,11 +47,8 @@ $sub = '<label for="sub">วิชา</label>
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
 
     <!-- datatable -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/> -->
@@ -71,22 +68,21 @@ $sub = '<label for="sub">วิชา</label>
 
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
-        <div class="container" style="background-color:#E4EEFC">
+        <div class="container" style="background-color:#AECDF7">
             <br><br><br>
 
             <?php require 'other/news.php'; ?>
 
 
             <!-- card 1 -->
-            <div class="card" id="card1" style="background-color:#AECDF7">
+            <div id="card1" style="background-color:#AECDF7">
                 <div class="card-body">
                     <div class="container mt-3">
                         <div class="container">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs row">
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px"
-                                        data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
                                 </li>
                                 <li class="nav-item col-lg-6">
                                     <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
@@ -97,11 +93,11 @@ $sub = '<label for="sub">วิชา</label>
                         <div class="tab-content">
                             <!-- Tab panes 1-->
                             <div id="home" class="container tab-pane active" style="background-color:#5796EE;"><br>
-                                <div class="container " style="background-color:#F7FAFE">
+                                <div class="container" style="background-color:#F7FAFE">
                                     <div class="row">
                                         <div class="col-lg-1"></div>
-                                        <div class="col-lg-10">
-                                            <div class="table-responsive-lg">
+                                        <div class="col-lg-10"><br>
+                                            <div class="table-responsive-lg text-nowrap">
                                                 <table id="table1" class="table table-hover overflow display">
                                                     <thead>
                                                         <tr>
@@ -118,8 +114,7 @@ $sub = '<label for="sub">วิชา</label>
                                                             <td><span class="badge badge-info">กำลังดำเนินการ</span></td>
                                                             <td>ลากิจ/ลาป่วย</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#route">
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route">
                                                                     แสดง
                                                                 </button>
                                                             </td>
@@ -130,59 +125,10 @@ $sub = '<label for="sub">วิชา</label>
                                                             <td><span class="badge badge-danger">ไม่ผ่าน</span></td>
                                                             <td>ขอสอบย้อนหลัง</td>
                                                             <td>
-                                                                <!-- Button trigger modal -->
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#route">
+                                                                <!-- show state modal -->
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route">
                                                                     แสดง
                                                                 </button>
-
-                                                                <!-- Modal -->
-                                                                <div class="modal fade" id="route" tabindex="-1" role="dialog"
-                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ</h5>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="card-body">
-                                                                                    <div class="table-responsive">
-                                                                                        <table class="table table-hover overflow">
-                                                                                            <thead>
-                                                                                                <tr>
-                                                                                                    <th>แบบคำร้อง</th>
-                                                                                                    <th>วันที่ส่ง</th>
-                                                                                                    <th>เส้นทางการดำเนินการ</th>
-                                                                                                </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td>แบบคำร้องทั่วไป</td>
-                                                                                                    <td>18-02-2562</td>
-                                                                                                    <td>เจา้หน้าที่ทั่วไป</td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td></td>
-                                                                                                    <td class="text-center"><i
-                                                                                                            class="fas fa-angle-double-down"></i></td>
-                                                                                                    <td></td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary"
-                                                                                    data-dismiss="modal">Close</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
                                                             </td>
                                                             <td>
                                                                 <p>เอกสารไม่ครบ</p>
@@ -192,7 +138,6 @@ $sub = '<label for="sub">วิชา</label>
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                             <div class="col-lg-1"></div>
                                             <br>
                                         </div>
@@ -219,7 +164,7 @@ $sub = '<label for="sub">วิชา</label>
                                                 <!-- <form action="" method="post"> -->
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <?php echo $sub;?>
+                                                        <?php echo $sub; ?>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="group">กลุ่มเรียน</label>
@@ -395,13 +340,11 @@ $sub = '<label for="sub">วิชา</label>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="ei">ตั้งแต่วันที่</label>
-                                                        <input type="date" name="eiei" id="ei" class="form-control"
-                                                            placeholder="ตั้งแต่วันที่">
+                                                        <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="ei">ถึงวันที่</label>
-                                                        <input type="date" name="eiei" id="ei" class="form-control"
-                                                            placeholder="ตั้งแต่วันที่">
+                                                        <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                     </div>
                                                     <div class="col-8">
                                                         <label for="file">หลักฐานสาเหตุการลา</label>
@@ -507,19 +450,18 @@ $sub = '<label for="sub">วิชา</label>
                 <br>
                 <div class="container">
                     <div class="card" id="card2">
-
                         <div class="card-header text-center" style="background-color:#3782EB">
                             <h3>ติดต่อเจ้าหน้าที่</h3>
                         </div>
                         <div class="card-body" style="background-color:#F7FAFE">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-10">
                                         <div class="card">
                                             <!-- card 2.1 -->
                                             <div class="card-body">
-                                                <div class="table-responsive-lg">
-                                                    <table id="table2" class="table display overflow-y: hidden">
+                                                <div class="table-responsive-lg text-nowrap">
+                                                    <table id="table2" class="table table-striped table-hover display ">
                                                         <thead>
                                                             <tr>
                                                                 <th>status</th>
@@ -545,69 +487,9 @@ $sub = '<label for="sub">วิชา</label>
                                                                 <td>2019-01-17 18:33:24</td>
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
-                                                                    <!-- Small modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm"
-                                                                        data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
+                                                                    <!-- text modal -->
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
 
-                                                                    <div id="confirm1" class="modal fade bd-example-modal-sm"
-                                                                        tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-md">
-                                                                            <div class="modal-content ">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                                                                                    <button type="button" class="close"
-                                                                                        data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-
-                                                                                    <!-- card user -->
-                                                                                    <div class="card-body">
-                                                                                        <!-- User -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <p>เรื่อง : </p>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <p>แนบเอกสารลากิจ</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <p>ข้อความ : </p>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา
-                                                                                                    เนื่องจากไปธุระกับครบครับ</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!-- User -->
-                                                                                    </div>
-                                                                                    <!-- card user -->
-                                                                                    <hr>
-                                                                                    <!-- card staff -->
-                                                                                    <div class="card-body">
-                                                                                        <!-- staff -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <p>เจ้าหน้าที่ : </p>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <p>พอจะมีเอกสาร
-                                                                                                    หรือภาพถ่ายพอเป็นหลักฐานไหมค่ะ</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!-- stafff -->
-                                                                                    </div>
-                                                                                    <!-- card staff -->
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- Small modal -->
                                                                 </td>
                                                                 <td> เจ้าหน้าที่ </td>
                                                             </tr>
@@ -617,14 +499,12 @@ $sub = '<label for="sub">วิชา</label>
                                             </div>
                                         </div><!-- card 2.1 -->
                                     </div>
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <div class="card">
                                             <!-- card 2.2 -->
                                             <div class="card-body">
                                                 <div class="container text-center">
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
                                                         <i class="fas fa-comment"></i></button>
                                                 </div>
                                             </div>
@@ -639,8 +519,7 @@ $sub = '<label for="sub">วิชา</label>
         </div>
 
     </section><!-- body -->
-   
-</div>
+
     <div class="container-fluid" style="background-color:#87B4F3">
         <div class="container">
             <footer class="text-center" style="background-color:#87B4F3">
@@ -649,12 +528,92 @@ $sub = '<label for="sub">วิชา</label>
             </footer>
         </div>
     </div>
+    <!-- show state modal -->
+    <div class="modal fade" id="route" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover overflow">
+                                <thead>
+                                    <tr>
+                                        <th>แบบคำร้อง</th>
+                                        <th>วันที่ส่ง</th>
+                                        <th>เส้นทางการดำเนินการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>แบบคำร้องทั่วไป</td>
+                                        <td>18-02-2562</td>
+                                        <td>เจา้หน้าที่ทั่วไป</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center"><i class="fas fa-angle-double-down"></i></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- show state modal -->
+    <!-- text modal -->
+    <div id="confirm1" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- User -->
+                    <dl class="row">
+                        <dt class="col-sm-3 text-truncate">เรื่อง : </dt>
+                        <dd class="col-sm-9">
+                            <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา เนื่องจากไปธุระกับครบครับ</p>
+                            <p>แนบเอกสารลากิจ</p>
+                        </dd>
 
+                        <dt class="col-sm-3 text-truncate">ข้อความ : </dt>
+                        <dd class="col-sm-9">
+                            <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา เนื่องจากไปธุระกับครบครับ</p>
+                        </dd>
+                    </dl>
+                    <!-- User -->
+                    <hr>
+                    <!-- staff -->
+                    <dl class="row">
+                        <dt class="col-sm-3">เจ้าหน้าที่ : </dt>
+                        <dd class="col-sm-9">
+                            <p>พอจะมีเอกสาร หรือภาพถ่ายพอเป็นหลักฐานไหมค่ะ</p>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- text modal -->
 
 
     <!-- modal card 3.2 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -690,33 +649,31 @@ $sub = '<label for="sub">วิชา</label>
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         <script>
             //datatable
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#table1').DataTable();
                 $('#table2').DataTable();
 
             });
             //tap
-            $(document).ready(function () {
-                $(".nav-tabs a").click(function () {
+            $(document).ready(function() {
+                $(".nav-tabs a").click(function() {
                     $(this).tab('show');
                 });
-            });
-
-            //time news
-            $('.carousel').carousel({
-                interval: 2000
-            });
-            //modal
-            $('#myModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')
+                //time news
+                $('.carousel').carousel({
+                    interval: 2000
+                });
+                //modal
+                $('#myModal').on('shown.bs.modal', function() {
+                    $('#myInput').trigger('focus')
+                });
             });
         </script>
 
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        
 
 </body>
 
-</html>
+</html> 
