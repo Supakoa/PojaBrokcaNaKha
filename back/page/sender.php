@@ -28,7 +28,7 @@
 
         <!-- start table -->
         <div class="w3-container-fluid" style="margin-top:20px;margin-right:100px;margin-left:100px;">
-            <table class="table table-bordered table-sm w3-striped w3-border-red">
+            <table class="table table-bordered table-sm w3-striped w3-border-red table_table">
                 <thead>
                     <tr>
                         <!-- <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks"></i></i></th> -->
@@ -175,3 +175,9 @@
     </div>
 
 </div>
+<script>
+$(document).ready(function () {
+            $('.table_table').DataTable();   
+            
+});
+</script>

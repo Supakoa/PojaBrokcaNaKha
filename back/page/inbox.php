@@ -10,7 +10,7 @@
                     <hr>
                     <!-- start table inbox -->
                     <div>
-                        <table class="table table-striped table-hover table-bordered table-sm" id="table1">
+                        <table class="table table-striped table-hover table-bordered table-sm table_table" id="table">
                             <thead>
                                 <tr>
                                     <th style="">Date</th>
@@ -68,7 +68,7 @@
                 <div class="col display">
                     <h1>Outbox</h1>
                     <hr>
-                    <table class="table table-striped table-hover table-bordered table-sm" id="table2">
+                    <table class="table table-striped table-hover table-bordered table-sm table_table" id="table2">
                         <thead>
                             <tr>
                                 <th style="">Date</th>
@@ -106,3 +106,8 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function () {
+            $('.table_table').DataTable();   
+});
+</script>

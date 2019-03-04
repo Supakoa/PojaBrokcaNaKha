@@ -16,7 +16,7 @@
 
         <!-- group of table -->
         <div class="container display">
-            <table class="table w3-center table-bordered table-sm" id="table3">
+            <table class="table w3-center table-bordered table-sm table_table" id="table3">
 
                 <!-- table header -->
                 <thead>
@@ -58,3 +58,8 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function () {
+            $('.table_table').DataTable();   
+});
+</script>
