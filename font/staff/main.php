@@ -69,7 +69,7 @@
                                     <h3>Inbox</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive text-nowrap">
                                         <table class="table table-hover overflow display" id="table1">
                                             <thead>
                                                 <tr>
@@ -88,7 +88,7 @@
                                                     <td>60122519112</td>
                                                     <td>นาย มานี มีปู</td>
                                                     <td>2019-02-16 12:45:47</td>
-                                                    <td><button class="btn btn-outline-info w3-white"><i class="fas fa-file-alt"></i></button></td>
+                                                    <td><button class="btn btn-outline-info"><i class="fas fa-file-alt"></i></button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -104,7 +104,7 @@
                                     <h3>Outbox</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive text-nowrap">
                                         <table class="table table-hover overflow display" id="table2">
                                             <thead>
                                                 <tr>
@@ -123,7 +123,7 @@
                                                     <td>60124879041</td>
                                                     <td>นาย สิงหา มาปูนี</td>
                                                     <td>2019-01-18 18:44:40</td>
-                                                    <td><button class="btn btn-outline-info w3-white " ><i class="fas fa-info-circle"></i></button></td>
+                                                    <td><button class="btn btn-outline-info " ><i class="fas fa-info-circle"></i></button></td>
                                                 </tr>
                                             </tbody>
                                         </table>

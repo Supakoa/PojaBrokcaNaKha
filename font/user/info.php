@@ -17,28 +17,27 @@
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- datatable -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/> -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 
 
-    
+
 </head>
 
 <body>
 
     <!-- navbar -->
-    
+
     <div class="container-fluid fixed-top" style="background-color:#3782EB;">
-            <?php require 'other/navbars.php'; ?>
-        </div>
+        <?php require 'other/navbars.php'; ?>
+    </div>
     <!-- navbar -->
 
     <!-- body -->
-    <section class="container-fluid Gfonts" style="background-color:#E4EEFC" >
+    <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#AECDF7">
             <br><br><br>
 
@@ -52,7 +51,7 @@
                     <div class="row">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-8">
-                            <div class="table-responsive">
+                            <div class="table-responsive text-nowrap">
                                 <table class="table table-hover overflow">
                                     <tbody>
                                         <tr>
@@ -78,59 +77,10 @@
                                             <th scope="row">แก้ไข</th>
 
                                             <td>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#exampleModal">
+                                                <!-- edit infor Modal -->
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">
                                                     แก้ไข
                                                 </button>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Modal
-                                                                    title</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <label for="name">ชื่อ - นามสกุล</label>
-                                                                            <input id="name" type="text" placeholder="ศุภกิจ กิจนะบำรุงศักดิ์">
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label for="pass">Password</label>
-                                                                            <input id="pass" type="text" placeholder="16/01/2540">
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label for="phone">เบอร์โทรศัพท์</label>
-                                                                            <input id="phone" type="text" placeholder="095-59xx-xxx">
-
-
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label for="email">E-mail</label>
-                                                                            <input id="email" type="text" placeholder="supakoa@gmail.com">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Save
-                                                                    changes</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -147,14 +97,58 @@
     <div class="container-fluid" style="background-color:#87B4F3">
         <div class="container">
             <footer class="text-center" style="background-color:#87B4F3">
-                    <label>Create by: CEFStyle</label><br>
-                    <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
+                <label>Create by: CEFStyle</label><br>
+                <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
             </footer>
         </div>
     </div>
 
 
+    <!-- edit infor Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal
+                        title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="name">ชื่อ - นามสกุล</label>
+                                <input id="name" type="text" placeholder="ศุภกิจ กิจนะบำรุงศักดิ์">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="pass">Password</label>
+                                <input id="pass" type="text" placeholder="16/01/2540">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="phone">เบอร์โทรศัพท์</label>
+                                <input id="phone" type="text" placeholder="095-59xx-xxx">
 
+
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="email">E-mail</label>
+                                <input id="email" type="text" placeholder="supakoa@gmail.com">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit infor Modal -->
 
 
     <!-- Jquery -->
@@ -163,8 +157,8 @@
     <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
     <script>
         //tap
-        $(document).ready(function () {
-            $(".nav-tabs a").click(function () {
+        $(document).ready(function() {
+            $(".nav-tabs a").click(function() {
                 $(this).tab('show');
             });
         });
@@ -174,7 +168,7 @@
             interval: 2000
         })
         //modal
-        $('#myModal').on('shown.bs.modal', function () {
+        $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
         })
 
@@ -190,4 +184,4 @@
 
 </body>
 
-</html>
+</html> 
