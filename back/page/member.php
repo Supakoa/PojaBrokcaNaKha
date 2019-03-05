@@ -119,7 +119,7 @@
 
         <div class="container-fluid">
             <!-- start tabel -->
-            <table class="table table-sm table-striped table-bordered table-hover">
+            <table class="table table-sm table-striped table-bordered table-hover table_table">
                 <thead>
                     <tr>
                         <th>รหัสผู้ใช้งาน</th>
@@ -215,7 +215,13 @@
 
     </div>
 </div>
+<script>
+$(document).ready(function () {
+            $('.table_table').DataTable();   
+            
+});
 
+</script>
 <!-- <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
     <h1 style="color:gray;">เลือก : ชนิด</h1>
     <hr>

@@ -26,6 +26,8 @@
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
+        
+
 
 </head>
 
@@ -119,8 +121,19 @@
     //             });
 </script>
 <script>
+    $(document).ready(function(){
+        // $('.table_table').DataTable();
+        
+        $("#btn_singha").click(function(){
+          
+            $('#btn_singha').text("กดแล้ว");
+            
+
+        });
+    });
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('Inbox.php', 'หน้า : ข้อความ', 'BackDoor : ข้อความ');
+        
+        call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
         // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
@@ -129,15 +142,16 @@
         document.getElementById('nav_title').innerHTML = nav_title;
         document.getElementById('tab_title').innerHTML = title;
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("in_body").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", content, true);
-        xhttp.send();
-
+        $("#in_body").load(content);
+        // var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function () {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         document.getElementById("in_body").innerHTML = this.responseText;
+        //     }
+        // };
+        // xhttp.open("GET", content, true);
+        // xhttp.send();
+      
     }
 </script>
 
