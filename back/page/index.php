@@ -41,9 +41,11 @@
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
                     class="fas fa-bell"></i>
                 ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
-            <a class="w3-bar-item w3-button" onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');"><i class="far fa-folder-open"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');"><i
+                    class="far fa-folder-open"></i>
                 เอกสาร</a>
-            <a class="w3-bar-item w3-button" onclick="call_content('member.php','หน้า : สมาชิก','BackDoor : สมาชิก');"><i class="fas fa-user-edit"></i>
+            <a class="w3-bar-item w3-button" onclick="call_content('member.php','หน้า : สมาชิก','BackDoor : สมาชิก');"><i
+                    class="fas fa-user-edit"></i>
                 สมาชิก</a>
             <a class="w3-bar-item w3-button" onclick="call_content('news.php','หน้า : หน้าข่าว','BackDoor : หน้าข่าว');"><i
                     class="fas fa-bullhorn"></i>
@@ -51,7 +53,7 @@
             <a class="w3-bar-item w3-button" onclick="call_content('sender.php','หน้า : ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');"><i
                     class="fas fa-sort-amount-down"></i>
                 ขั้นตอนเอกสาร</a>
-            
+
             <hr>
         </div>
     </div>
@@ -60,12 +62,15 @@
     <div style="margin-left:15%;">
 
         <!-- start NavBar -->
-        <div class="w3-bar " style="background-color:#2D935D;color:whitesmoke;">
-            <a class="w3-bar-item w3-text w3-center" style="width:68%;" id="nav_title"></a>
+        <div class="nav " style="background-color:#2D935D;color:whitesmoke;">
+            <h2 class="nav-item text-center w3-text" style="width:68%" id="nav_title"></h2>
+
             <!-- set to right -->
-            <div class="w3-right">
-                <a href="#" class="w3-bar-item w3-button w3-padding-large" style="color:whitesmoke;"><i class="far fa-user-circle" style="color:whitesmoke;"></i> ข้อมูลส่วนตัว</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding-large" style="color:whitesmoke;"><i class="fas fa-sign-out-alt" style="color:whitesmoke;"></i> ออกจากระบบ</a>
+            <div class="nav-item w3-right">
+                <a href="#" class="w3-bar-item w3-button w3-padding-large" style="color:whitesmoke;"><i class="far fa-user-circle"
+                        style="color:whitesmoke;"></i> ข้อมูลส่วนตัว</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large" style="color:whitesmoke;"><i class="fas fa-sign-out-alt"
+                        style="color:whitesmoke;"></i> ออกจากระบบ</a>
             </div>
         </div>
         <!-- End NavBar -->
@@ -74,7 +79,7 @@
         <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#ffffff ;" id="body">
 
             <!-- html here -->
-            <div id="in_body"></div>
+            <div id="in_body" ></div>
 
         </div>
         <!-- end body -->
@@ -99,10 +104,10 @@
 
 
 </body>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-    <script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+<script>
     //datatable
     // $(document).ready(function () {
     //                 $('#table1').click(function(){
@@ -112,15 +117,15 @@
     //                 $('#table3').DataTable();
 
     //             });
-    </script>
+</script>
 <script>
     if (document.getElementById('in_body').innerHTML === '') {
-        call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
+        call_content('Inbox.php', 'หน้า : ข้อความ', 'BackDoor : ข้อความ');
         // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
     function call_content(content, nav_title, title) {
-        
+
         document.getElementById('nav_title').innerHTML = nav_title;
         document.getElementById('tab_title').innerHTML = title;
 
@@ -132,7 +137,7 @@
         };
         xhttp.open("GET", content, true);
         xhttp.send();
-        
+
     }
 </script>
 
