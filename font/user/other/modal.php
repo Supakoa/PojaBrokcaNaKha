@@ -1,11 +1,12 @@
 <?php 
-
 require '../../../server/server.php';
+$iduser = $_SESSION['id'];
 $id = $_POST['id'];
 $type = $_POST['cate'];
 //paper_user
-$sql_paper_user = "SELECT * FROM `paper_user` WHERE paper_id = '$id' ";
+$sql_paper_user = "SELECT  FROM paper_user.comment,paper_user.timestamp,form.name,form.detail WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND paper_id = '$id' AND owner_id = '$isuser' ";
 $re_paper_user = mysqli_query($con, $sql_paper_user);
+$row_pu = mysqli_fetch_array($re_paper_user);
 //paper_user
 
 
@@ -34,16 +35,18 @@ $re_paper_user = mysqli_query($con, $sql_paper_user);
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php while($row_pu){ ?>
                                 <tr>
-                                    <td>แบบคำร้องทั่วไป</td>
-                                    <td>18-02-2562</td>
-                                    <td>เจา้หน้าที่ทั่วไป</td>
+                                    <td><?php $row_pu['name']; ?></td>
+                                    <td><?php $row_pu['timestamp']; ?></td>
+                                    <td><?php $row_pu['step_now']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td class="text-center"><i class="fas fa-angle-double-down"></i></td>
                                     <td></td>
                                 </tr>
+                            <?php }?>
                             </tbody>
                         </table>
                     </div>
@@ -82,7 +85,7 @@ $re_paper_user = mysqli_query($con, $sql_paper_user);
 
                     <dt class="col-sm-3 text-truncate">ข้อความ : </dt>
                     <dd class="col-sm-9">
-                        <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา เนื่องจากไปธุระกับครบครับ</p>
+                        <p><?php echo $row_pu['detail']; ?></p>
                     </dd>
                 </dl>
                 <!-- User -->
@@ -91,7 +94,7 @@ $re_paper_user = mysqli_query($con, $sql_paper_user);
                 <dl class="row">
                     <dt class="col-sm-3">เจ้าหน้าที่ : </dt>
                     <dd class="col-sm-9">
-                        <p>พอจะมีเอกสาร หรือภาพถ่ายพอเป็นหลักฐานไหมค่ะ</p>
+                        <p><?php echo $row_pu['comment']; ?></p>
                     </dd>
                 </dl>
             </div>

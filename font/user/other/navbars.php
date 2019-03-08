@@ -1,3 +1,5 @@
+
+
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light container Gfonts" style="background-color:#3782EB;">
     <a class="navbar-brand" href="#">
@@ -19,7 +21,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i> นางสาว ผมสั้นตาโต ตัวเล็ก</a>
+            <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i><?php echo ' '.$row_user['title'].$row_user['name'] ;?></a>
             <a class="nav-link" href="../../server/logout.php" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
         </form>
     </div>
