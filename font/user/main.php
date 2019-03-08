@@ -1,32 +1,22 @@
 <?php 
+require '../../server.php';
+/// subject
+$sql_sub = "SELECT `sub_id`, `sub_name` FROM `subject` WHERE 1";
+$re_sub = mysqli_query($con,$sql_sub);
+$id = $_SESSION['id'];
 $sub = '<label for="sub">วิชา</label>
-<select name="sub" class="form-control select2">
-    <option hidden="" selected="" value="">เลือกวิชา</option>
-    <option value="GEH0101">GEH0101 : สุนทรียภาพกับชีวิต</option>
-    <option value="GEH0102">GEH0102 : สังคมไทยในบริบทโลก</option>
-    <option value="GEH0201">GEH0201 : การพัฒนาตน</option>
-    <option value="GEH0202">GEH0202 : ความจริงของชีวิต</option>
-    <option value="GEH0204">GEH0204 : ความเป็นพลเมือง</option>
-    <option value="GEH0205">GEH0205 :
-        ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์</option>
-    <option value="GEL0101">GEL0101 : การใช้ภาษาไทย</option>
-    <option value="GEL0102">GEL0102 :
-        ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น</option>
-    <option value="GEL0103">GEL0103 :
-        ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน</option>
-    <option value="GEL0201">GEL0201 : ภาษาไทยเชิงวิชาการ</option>
-    <option value="GEL0203">GEL0203 :
-        ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)</option>
-    <option value="GES0101">GES0101 :
-        เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้</option>
-    <option value="GES0102">GES0102 :
-        วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต</option>
-    <option value="GES0203">GES0203 :
-        ความรู้เท่าทันสารสนเทศ</option>
-    <option value="GES0205">GES0205 :
-        นันทนาการเพื่อคุณภาพชีวิต</option>
-    <option value="GES0206">GES0206 : ชีวิตและสุขภาพ</option>
-</select>';
+        <select name="sub" class="form-control select2">
+        <option hidden="" selected="" value="">เลือกวิชา</option>';
+ while($row_sub = mysqli_fetch_array($re_sub)){
+    $sub .= '<option value="'.$row_sub['sub_id'].'">'.$row_sub['sub_name'].'</option>';
+ }
+    $sub .= '</select>';
+/// subject
+
+/// paper_user
+$sql_paper = "SELECT * FROM `paper_user`,`paper`,`form` WHERE  paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
+$re_paper = mysqli_query($con,$sql_paper);
+/// paper_user
 ?>
 <!DOCTYPE html>
 <html>
@@ -105,36 +95,23 @@ $sub = '<label for="sub">วิชา</label>
                                                             <th>สถานะ</th>
                                                             <th>แบบคำร้อง</th>
                                                             <th>สถานะการดำเนินการ</th>
-                                                            <th>หมายเหตุ <span style="color:red">*</span></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <?php $i = 0; while($row_paper= mysqli_fetch_array($re_paper)) { $i++;?>
                                                         <tr>
-                                                            <td>1</td>
-                                                            <td><span class="badge badge-info">กำลังดำเนินการ</span></td>
-                                                            <td>ลากิจ/ลาป่วย</td>
+                                                            <td><?php echo $i ;  ?></td>
+                                                            <?php if($row_paper['status'] == 1){ echo '<td><span class="badge badge-success">ผ่าน</span></td>';} ?>
+                                                            <?php if($row_paper['status'] == 2){ echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';} ?>
+                                                            <?php if($row_paper['status'] == 3){ echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';} ?>
+                                                            
+                                                            <td><?php echo $row_paper['name'] ;  ?></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route">
-                                                                    แสดง
-                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#route" onclick = "modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
                                                             </td>
-                                                            <td> - </td>
+                                                            
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td><span class="badge badge-danger">ไม่ผ่าน</span></td>
-                                                            <td>ขอสอบย้อนหลัง</td>
-                                                            <td>
-                                                                <!-- show state modal -->
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route">
-                                                                    แสดง
-                                                                </button>
-                                                            </td>
-                                                            <td>
-                                                                <p>เอกสารไม่ครบ</p>
-                                                            </td>
-                                                        </tr>
-
+                                                    <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -226,8 +203,7 @@ $sub = '<label for="sub">วิชา</label>
 
                                         <!-- form 3 -->
                                         <a class="collapsed card-link" data-toggle="collapse" href="#form3">
-                                            <div class="card-header"><i class="fas fa-angle-double-right"></i>
-                                                แบบคำร้องขอแก้ไขผลการเรียน</div>
+                                            <div class="card-header"><i class="fas fa-angle-double-right"></i>แบบคำร้องขอแก้ไขผลการเรียน</div>
                                         </a>
 
                                         <div id="form3" class="collapse" data-parent="#formreport">
@@ -528,50 +504,11 @@ $sub = '<label for="sub">วิชา</label>
             </footer>
         </div>
     </div>
-    <!-- show state modal -->
-    <div class="modal fade" id="route" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover overflow">
-                                <thead>
-                                    <tr>
-                                        <th>แบบคำร้อง</th>
-                                        <th>วันที่ส่ง</th>
-                                        <th>เส้นทางการดำเนินการ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>แบบคำร้องทั่วไป</td>
-                                        <td>18-02-2562</td>
-                                        <td>เจา้หน้าที่ทั่วไป</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-center"><i class="fas fa-angle-double-down"></i></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- show state modal -->
+    
+    <!-- modal show -->
+        <div id="modalshow"></div>
+    <!-- modal show -->
+    
     <!-- text modal -->
     <div id="confirm1" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
@@ -668,6 +605,18 @@ $sub = '<label for="sub">วิชา</label>
                     $('#myInput').trigger('focus')
                 });
             });
+
+            function modal_show(paperID, type){
+
+                $.post("other/modal.php",{id : paperID,cate : type},
+                    function(result){
+                        $("#modalshow").html(result);
+                        $("#route").modal("show");
+                    }
+                );
+
+
+            };
         </script>
 
         <!-- bootstrap 4.2.1 -->

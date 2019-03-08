@@ -6,7 +6,7 @@ $fac = '<option disabled selected value="">กรุณาเลือกคณ�
 while($r_fac = mysqli_fetch_array($re_fac)){
     $fac.= '<option value="'.$r_fac['fac_id'].'">'.$r_fac['name'].'</option>';
 }
-if
+
 
 ?>
 <!DOCTYPE html>
