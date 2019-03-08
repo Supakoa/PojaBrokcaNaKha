@@ -1,6 +1,6 @@
 <?php 
 
-require '../../../server.php';
+require '../../../server/server.php';
 $id = $_POST['id'];
 $type = $_POST['cate'];
 //paper_user

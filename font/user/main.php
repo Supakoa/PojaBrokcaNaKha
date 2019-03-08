@@ -1,5 +1,5 @@
 <?php 
-require '../../server.php';
+require '../../server/server.php';
 /// subject
 $sql_sub = "SELECT `sub_id`, `sub_name` FROM `subject` WHERE 1";
 $re_sub = mysqli_query($con,$sql_sub);
