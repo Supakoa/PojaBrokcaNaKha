@@ -1,9 +1,15 @@
 <?php 
 require '../../server/server.php';
+$id = $_SESSION['id'];
+echo '<br>'.'<br>'.'<br>'.'<br>'.'<br>'.$id;
+// user
+$sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
+$re_user = mysqli_query($con,$sql_user);
+$row_user = mysqli_fetch_array($re_user);
+
 /// subject
 $sql_sub = "SELECT `sub_id`, `sub_name` FROM `subject` WHERE 1";
 $re_sub = mysqli_query($con, $sql_sub);
-$id = $_SESSION['id'];
 $sub = '<label for="sub">วิชา</label>
         <select name="sub" class="form-control select2">
         <option hidden="" selected="" value="">เลือกวิชา</option>';
@@ -11,12 +17,14 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
     $sub .= '<option value="' . $row_sub['sub_id'] . '">' . $row_sub['sub_name'] . '</option>';
 }
 $sub .= '</select>';
-/// subject
 
 /// paper_user
-$sql_paper = "SELECT * FROM `paper_user`,`paper`,`form` WHERE  paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
+$sql_paper = "SELECT paper.status, form.name, paper.paper_id, paper_user.timestamp FROM `paper_user`,`paper`,`form` WHERE paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
 $re_paper = mysqli_query($con, $sql_paper);
+// $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -85,8 +93,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                             <div id="home" class="container tab-pane active" style="background-color:#5796EE;"><br>
                                 <div class="container" style="background-color:#F7FAFE">
                                     <div class="row">
-                                        <div class="col-lg-1"></div>
-                                        <div class="col-lg-10"><br>
+                                        <div class="col-lg-12"><br>
                                             <div class="table-responsive-lg text-nowrap">
                                                 <table id="table1" class="table table-hover overflow display">
                                                     <thead>
@@ -124,7 +131,6 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="col-lg-1"></div>
                                             <br>
                                         </div>
                                     </div>
@@ -449,26 +455,27 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                     <table id="table2" class="table table-striped table-hover display ">
                                                         <thead>
                                                             <tr>
-                                                                <th>status</th>
+                                                                <th></th>
                                                                 <th>เวลาส่ง</th>
                                                                 <th>เรื่อง</th>
                                                                 <th>ข้อความ</th>
-                                                                <th>ผู้ส่ง</th>
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <?php while($row_paper_user = mysqli_fetch_array($re_paper)){ ?>
                                                             <tr>
                                                                 <td><span class="badge badge-success">อ่านแล้ว</span></td>
-                                                                <td>2019-01-17 18:33:24</td>
+                                                                <td><?php $row_paper_user['timestamp'] ?></td>
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php  ?>,'Ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'Ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
-                                                                <td> เจ้าหน้าที่ </td>
                                                             </tr>
+
+                                                        <?php }?>
                                                         </tbody>
                                                     </table>
                                                 </div>
