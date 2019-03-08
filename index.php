@@ -1,12 +1,61 @@
 <?php 
-require 'server.php';
-$sql_fac = "SELECT * FROM `fac`";
+require 'server/server.php';
+$sql_fac = "SELECT * FROM `fac` ";
 $re_fac = mysqli_query($con,$sql_fac);
 $fac = '<option disabled selected value="">กรุณาเลือกคณะ</option>';
 while($r_fac = mysqli_fetch_array($re_fac)){
     $fac.= '<option value="'.$r_fac['fac_id'].'">'.$r_fac['name'].'</option>';
 }
-if
+if(isset($_POST['hide_login'])){
+     //ReCAPTSHA
+  $captcha;//ตัวแปร
+  if (isset($_POST['g-recaptcha-response'])) {
+      $captcha=$_POST['g-recaptcha-response'];
+  }
+    $secretKey = "6LfGSZIUAAAAAB5NSS778hOTKf3XpFy7SmQESQ1N";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+    $responseKeys = json_decode($response, true);
+    if (intval($responseKeys['success']) !== 1) {
+        $_SESSION['status'] = 1; //not match
+        header("Location: index.php");
+        echo '<h2>โปรดทำการยันยืนให้ถูกต้อง</h2>';
+        $_SESSION['alert'] = 27;
+        exit();
+    } else {
+       
+        $login_id = mysqli_real_escape_string($con, $_POST['user_name']);
+        $login_pw = mysqli_real_escape_string($con, $_POST['user_password']);
+        $sql = "SELECT `user_id`,`password`,`role` FROM `user` WHERE`user_id` = '$login_id' AND `password` = '$login_pw' ";
+        $result = mysqli_query($con,$sql);
+        $_SESSION['status'] = 0; //online
+        
+        if ($r_a = mysqli_fetch_array($result)) {
+            $_SESSION['id'] = $login_id;
+            if($r_a['role']=='1'){
+                header("Location: font/user/main.php");
+            }elseif($r_a['role']=='2'){
+                header("Location: font/staff/main.php");
+            }elseif($r_a['role']=='3'){
+                header("Location: back/page/index.php");
+            }
+            else{
+                header("Location: index.php");
+                $_SESSION['alert'] = 1;
+            }
+            exit();
+            
+           
+        } else {
+            $_SESSION['status'] = 1; //not match
+            $_SESSION['alert'] = 28;
+            header("Location: index.php");
+        }
+        exit();
+    }
+
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -29,6 +78,9 @@ if
     <!-- icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
+
+     <!-- sweet alert2 -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
     <style>
         /* Make the image fully responsive */
@@ -110,16 +162,17 @@ if
                                         <div class="card-body" style="background-color:#F7FAFE;">
                                             <div class="container">
                                                 <!-- form log-in -->
-                                                <form action="">
+                                                <form action="index.php" method="post">
                                                     <div class="form-group">
                                                         <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
-                                                        <input type="text" class="form-control" id="user" placeholder="ID">
+                                                        <input type="text" class="form-control" id="user" placeholder="ID" name = "user_name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Password1">วัน/เดือน/ปี</label>
-                                                        <input type="password" class="form-control" id="Password1"
+                                                        <input type="password" class="form-control" id="Password" name = "user_password"
                                                             placeholder="Password">
                                                     </div>
+                                                    <input type="hidden" name="hide_login" value = "eiei">
                                                     <!-- check bot -->
                                                     <div class="g-recaptcha" data-sitekey="6LfGSZIUAAAAAPX_Wv8XdRf8FnwaE4yht4Ee_5RP"></div>
                                                     <!-- check bot -->
@@ -273,7 +326,7 @@ if
             // $('#eiei').append(fac);
 
             // alert(fac)sasd
-            $.post("major.php", {
+            $.post("server/major.php", {
                     data: fac
                 },
                 function (result) {
@@ -289,12 +342,8 @@ if
             );
         });
     </script>
+    <!-- alert all -->
+<?php require 'server/alert.php'; ?>-
 </body>
 
 </html>
-<!-- {
-  "success": true|false,
-  "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
-  "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
-  "error-codes": [...]        // optional
-} -->
