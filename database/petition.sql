@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2019 at 06:22 PM
+-- Generation Time: Mar 08, 2019 at 08:51 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -132,7 +132,9 @@ CREATE TABLE `paper` (
   `owner_id` text NOT NULL,
   `form_id` text NOT NULL,
   `paper_detail` text NOT NULL,
-  `step_now` text NOT NULL
+  `step_now` text NOT NULL,
+  `status` int(1) NOT NULL,
+  `note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -155,6 +157,26 @@ CREATE TABLE `paper_user` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `role_id`
+--
+
+CREATE TABLE `role_id` (
+  `id` int(1) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `role_id`
+--
+
+INSERT INTO `role_id` (`id`, `name`) VALUES
+(1, 'นักศึกษา'),
+(2, 'ผู้มีอำนามลงนาม'),
+(3, 'ผู้ดูแลระบบ');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `signature`
 --
 
@@ -167,6 +189,27 @@ CREATE TABLE `signature` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status_id`
+--
+
+CREATE TABLE `status_id` (
+  `id` int(2) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `status_id`
+--
+
+INSERT INTO `status_id` (`id`, `name`) VALUES
+(0, 'ไม่ผ่าน'),
+(1, 'ผ่าน'),
+(2, 'แก้ไข'),
+(3, 'กำลังดำเนินการ');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subject`
 --
 
@@ -175,6 +218,28 @@ CREATE TABLE `subject` (
   `sub_name` text NOT NULL,
   `main_pro` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`sub_id`, `sub_name`, `main_pro`) VALUES
+('GEH0101', 'สุนทรียภาพกับชีวิต', ''),
+('GEH0102', 'สังคมไทยในบริบทโลก', ''),
+('GEH0201', 'การพัฒนาตน', ''),
+('GEH0202', 'ความจริงของชีวิต', ''),
+('GEH0204', 'ความเป็นพลเมือง', ''),
+('GEH0205', 'ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์', ''),
+('GEL0101', 'การใช้ภาษาไทย', ''),
+('GEL0102', 'ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น', ''),
+('GEL0103', 'ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน', ''),
+('GEL0201', 'ภาษาไทยเชิงวิชาการ', ''),
+('GEL0203', 'ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)', ''),
+('GES0101', 'เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้', ''),
+('GES0102', 'วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต', ''),
+('GES0203', 'ความรู้เท่าทันสารสนเทศ', ''),
+('GES0205', 'นันทนาการเพื่อคุณภาพชีวิต', ''),
+('GES0206', 'ชีวิตและสุขภาพ', '');
 
 -- --------------------------------------------------------
 
@@ -191,8 +256,16 @@ CREATE TABLE `user` (
   `email` text,
   `role` text,
   `status` text,
-  `major_id` int(5) NOT NULL
+  `major_id` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `password`, `title`, `name`, `tel`, `email`, `role`, `status`, `major_id`) VALUES
+('123456', 'ppzx00', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+('singha', 'ppzx00', NULL, NULL, NULL, NULL, '1', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -245,6 +318,12 @@ ALTER TABLE `paper_user`
 --
 ALTER TABLE `signature`
   ADD PRIMARY KEY (`sig_id`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`sub_id`);
 
 --
 -- Indexes for table `user`
