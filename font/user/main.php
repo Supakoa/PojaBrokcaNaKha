@@ -37,7 +37,8 @@ $re_paper = mysqli_query($con, $sql_paper);
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
 
 
     <!-- datatable -->
@@ -72,7 +73,8 @@ $re_paper = mysqli_query($con, $sql_paper);
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs row">
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px"
+                                        data-toggle="tab" href="#home">ประวัติคำร้อง</a>
                                 </li>
                                 <li class="nav-item col-lg-6">
                                     <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
@@ -102,7 +104,9 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         while ($row_paper = mysqli_fetch_array($re_paper)) {
                                                             $i++; ?>
                                                         <tr>
-                                                            <td><?php echo $i;  ?></td>
+                                                            <td>
+                                                                <?php echo $i;  ?>
+                                                            </td>
                                                             <?php if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
                                                             } ?>
@@ -113,9 +117,12 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
                                                             } ?>
 
-                                                            <td><?php echo $row_paper['name'];  ?></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
+                                                                <?php echo $row_paper['name'];  ?>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-info btn-sm"
+                                                                    data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
                                                             </td>
 
                                                         </tr>
@@ -147,21 +154,24 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form1" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <?php echo $sub; ?>
+                                                <form action="other/muti_form.php" method="post">
+                                                    <input type="hidden" name="form_1">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <?php echo $sub; ?>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
-                                                    </div>
-                                                </div>
-                                                <!-- </form> -->
+
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- form 1 -->
@@ -174,38 +184,41 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form2" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <?php echo $sub;  ?>
+                                                <form action="other/muti_form.php" method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" name="form_2">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <?php echo $sub;  ?>
 
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="sub">ประเภทการสอบ</label>
+                                                            <select name="sub" class="form-control select2">
+                                                                <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                <option value="กลางภาค">กลางภาค</option>
+                                                                <option value="ปลายภาค">ปลายภาค</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">สาเหตุ</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="สาเหตุการขาดสอบ">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="file">สำเนาบัตรนักศึกษา</label>
+                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-4">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <label for="sub">ประเภทการสอบ</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกประเภท</option>
-                                                            <option value="กลางภาค">กลางภาค</option>
-                                                            <option value="ปลายภาค">ปลายภาค</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">สาเหตุ</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="สาเหตุการขาดสอบ">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
-                                                    </div>
-                                                </div>
-                                                <!-- </form> -->
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- form 2 -->
@@ -217,34 +230,39 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form3" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <?php echo $sub;  ?>
+                                                <form action="other/muti_form.php" method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" name="form_3">
 
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <?php echo $sub;  ?>
+
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="group">ปีการศึกษา</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกปีการศึกษา">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">สาเหตุ</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="file">สำเนาบัตรนักศึกษา</label>
+                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-4">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <label for="group">ปีการศึกษา</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกปีการศึกษา">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">สาเหตุ</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
-                                                    </div>
-                                                </div>
-                                                <!-- </form> -->
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- form 3 -->
@@ -257,38 +275,42 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form4" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <?php echo $sub;  ?>
+                                                <form action="other/muti_form.php" method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" name="form_4">
 
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <?php echo $sub;  ?>
+
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="sub">ประเภทการสอบ</label>
+                                                            <select name="sub" class="form-control select2">
+                                                                <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                <option value="กลางภาค">กลางภาค</option>
+                                                                <option value="ปลายภาค">ปลายภาค</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">สาเหตุ</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="สาเหตุการขอสอบ">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="file">หลักฐานสาเหตุ</label>
+                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-4">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <label for="sub">ประเภทการสอบ</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกประเภท</option>
-                                                            <option value="กลางภาค">กลางภาค</option>
-                                                            <option value="ปลายภาค">ปลายภาค</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">สาเหตุ</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอสอบ">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="file">หลักฐานสาเหตุ</label>
-                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
-                                                    </div>
-                                                </div>
-                                                <!-- </form> -->
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- form 4 -->
@@ -301,46 +323,52 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form5" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <?php echo $sub;  ?>
+                                                <form action="other/muti_form.php" method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" name="form_5">
 
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <?php echo $sub;  ?>
+
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="sub">ประเภทการลา</label>
+                                                            <select name="sub" class="form-control select2">
+                                                                <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                <option value="ลากิจ">ลากิจ</option>
+                                                                <option value="ลาป่วย">ลาป่วย</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">สาเหตุ</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="สาเหตุการลา">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="ei">ตั้งแต่วันที่</label>
+                                                            <input type="date" name="eiei" id="ei" class="form-control"
+                                                                placeholder="ตั้งแต่วันที่">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="ei">ถึงวันที่</label>
+                                                            <input type="date" name="eiei" id="ei" class="form-control"
+                                                                placeholder="ตั้งแต่วันที่">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <label for="file">หลักฐานสาเหตุการลา</label>
+                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="sub">ประเภทการลา</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกประเภท</option>
-                                                            <option value="ลากิจ">ลากิจ</option>
-                                                            <option value="ลาป่วย">ลาป่วย</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">สาเหตุ</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="สาเหตุการลา">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="ei">ตั้งแต่วันที่</label>
-                                                        <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="ei">ถึงวันที่</label>
-                                                        <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <label for="file">หลักฐานสาเหตุการลา</label>
-                                                        <input type="file" name="file" id="file" class="form-control btn btn-light">
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
-                                                    </div>
-                                                </div>
-                                                <!-- </form> -->
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- form 5 -->
@@ -353,35 +381,39 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form6" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <?php echo $sub;  ?>
+                                                <form action="other/muti_form.php" method="post">
+                                                    <input type="hidden" name="form_6">
 
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="sub">ประเภทเว็ปไซต์</label>
-                                                        <select name="sub" class="form-control select2">
-                                                            <option hidden="" selected="" value="">เลือกประเภท</option>
-                                                            <option value="เว็บไซต์รายวิชา">เว็บไซต์รายวิชา</option>
-                                                            <option value="ระบบตรวจสอบคะแนน">ระบบตรวจสอบคะแนน (TSS)</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">สาเหตุ</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
-                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <?php echo $sub;  ?>
 
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="sub">ประเภทเว็ปไซต์</label>
+                                                            <select name="sub" class="form-control select2">
+                                                                <option hidden="" selected="" value="">เลือกประเภท</option>
+                                                                <option value="เว็บไซต์รายวิชา">เว็บไซต์รายวิชา</option>
+                                                                <option value="ระบบตรวจสอบคะแนน">ระบบตรวจสอบคะแนน (TSS)</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">สาเหตุ</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="สาเหตุการขอรหัสผ่าน">
+                                                        </div>
+
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- </form> -->
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- form 6 -->
@@ -394,26 +426,29 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                         <div id="form7" class="collapse" data-parent="#formreport">
                                             <div class="card-body">
-                                                <!-- <form action="" method="post"> -->
-                                                <div class="row">
-                                                    <div class="col-6">
+                                                <form action="other/muti_form.php" method="post">
+                                                    <input type="hidden" name="form_7">
 
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label for="group">กลุ่มเรียน</label>
-                                                        <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <label for="comment">ความประสงค์</label>
-                                                        <textarea class="form-control" id="comment" rows="3"></textarea>
-                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
 
-                                                    <div class="col-12 text-center">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="group">กลุ่มเรียน</label>
+                                                            <input type="text" id="group" class="form-control"
+                                                                placeholder="กรอกกลุ่มเรียน">
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="comment">ความประสงค์</label>
+                                                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                                                        </div>
+
+                                                        <div class="col-12 text-center">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success">ส่งแบบคำร้อง</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- </form> -->
+                                                </form>
                                             </div>
                                             <!-- form 7 -->
                                         </div>
@@ -464,7 +499,9 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php  ?>,'Ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm"
+                                                                        data-toggle="modal" data-target="#confirm1"
+                                                                        onclick="modal_ans(<?php  ?>,'Ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
                                                                 <td> เจ้าหน้าที่ </td>
@@ -480,7 +517,8 @@ $re_paper = mysqli_query($con, $sql_paper);
                                             <!-- card 2.2 -->
                                             <div class="card-body">
                                                 <div class="container text-center">
-                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
                                                         <i class="fas fa-comment"></i></button>
                                                 </div>
                                             </div>
@@ -515,7 +553,8 @@ $re_paper = mysqli_query($con, $sql_paper);
 
 
     <!-- modal card 3.2 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -551,14 +590,14 @@ $re_paper = mysqli_query($con, $sql_paper);
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         <script>
             //datatable
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#table1').DataTable();
                 $('#table2').DataTable();
 
             });
             //tap
-            $(document).ready(function() {
-                $(".nav-tabs a").click(function() {
+            $(document).ready(function () {
+                $(".nav-tabs a").click(function () {
                     $(this).tab('show');
                 });
                 //time news
@@ -566,7 +605,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                     interval: 2000
                 });
                 //modal
-                $('#myModal').on('shown.bs.modal', function() {
+                $('#myModal').on('shown.bs.modal', function () {
                     $('#myInput').trigger('focus')
                 });
             });
@@ -577,7 +616,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                         id: paperID,
                         cate: type
                     },
-                    function(result) {
+                    function (result) {
                         $("#modalshow").html(result);
                         $("#route").modal("show");
                     }
@@ -591,7 +630,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                         id: paperID,
                         cate: type
                     },
-                    function(result) {
+                    function (result) {
                         $("#modalAns").html(result);
                         $("#confirm1").modal("show");
                     }
@@ -607,4 +646,4 @@ $re_paper = mysqli_query($con, $sql_paper);
 
 </body>
 
-</html> 
+</html>
