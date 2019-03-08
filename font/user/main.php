@@ -2,20 +2,20 @@
 require '../../server/server.php';
 /// subject
 $sql_sub = "SELECT `sub_id`, `sub_name` FROM `subject` WHERE 1";
-$re_sub = mysqli_query($con,$sql_sub);
+$re_sub = mysqli_query($con, $sql_sub);
 $id = $_SESSION['id'];
 $sub = '<label for="sub">วิชา</label>
         <select name="sub" class="form-control select2">
         <option hidden="" selected="" value="">เลือกวิชา</option>';
- while($row_sub = mysqli_fetch_array($re_sub)){
-    $sub .= '<option value="'.$row_sub['sub_id'].'">'.$row_sub['sub_name'].'</option>';
- }
-    $sub .= '</select>';
+while ($row_sub = mysqli_fetch_array($re_sub)) {
+    $sub .= '<option value="' . $row_sub['sub_id'] . '">' . $row_sub['sub_name'] . '</option>';
+}
+$sub .= '</select>';
 /// subject
 
 /// paper_user
 $sql_paper = "SELECT * FROM `paper_user`,`paper`,`form` WHERE  paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
-$re_paper = mysqli_query($con,$sql_paper);
+$re_paper = mysqli_query($con, $sql_paper);
 /// paper_user
 ?>
 <!DOCTYPE html>
@@ -98,20 +98,29 @@ $re_paper = mysqli_query($con,$sql_paper);
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <?php $i = 0; while($row_paper= mysqli_fetch_array($re_paper)) { $i++;?>
+                                                        <?php $i = 0;
+                                                        while ($row_paper = mysqli_fetch_array($re_paper)) {
+                                                            $i++; ?>
                                                         <tr>
-                                                            <td><?php echo $i ;  ?></td>
-                                                            <?php if($row_paper['status'] == 1){ echo '<td><span class="badge badge-success">ผ่าน</span></td>';} ?>
-                                                            <?php if($row_paper['status'] == 2){ echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';} ?>
-                                                            <?php if($row_paper['status'] == 3){ echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';} ?>
-                                                            
-                                                            <td><?php echo $row_paper['name'] ;  ?></td>
+                                                            <td><?php echo $i;  ?></td>
+                                                            <?php if ($row_paper['status'] == 1) {
+                                                                echo '<td><span class="badge badge-success">ผ่าน</span></td>';
+                                                            } ?>
+                                                            <?php if ($row_paper['status'] == 2) {
+                                                                echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
+                                                            } ?>
+                                                            <?php if ($row_paper['status'] == 3) {
+                                                                echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
+                                                            } ?>
+
+                                                            <td><?php echo $row_paper['name'];  ?></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#route" onclick = "modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
                                                             </td>
-                                                            
+
                                                         </tr>
-                                                    <?php } ?>
+                                                        <?php 
+                                                    } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -504,49 +513,14 @@ $re_paper = mysqli_query($con,$sql_paper);
             </footer>
         </div>
     </div>
-    
-    <!-- modal show -->
-        <div id="modalshow"></div>
-    <!-- modal show -->
-    
-    <!-- text modal -->
-    <div id="confirm1" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content ">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เจ้าหน้าที่</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- User -->
-                    <dl class="row">
-                        <dt class="col-sm-3 text-truncate">เรื่อง : </dt>
-                        <dd class="col-sm-9">
-                            <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา เนื่องจากไปธุระกับครบครับ</p>
-                            <p>แนบเอกสารลากิจ</p>
-                        </dd>
 
-                        <dt class="col-sm-3 text-truncate">ข้อความ : </dt>
-                        <dd class="col-sm-9">
-                            <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา เนื่องจากไปธุระกับครบครับ</p>
-                        </dd>
-                    </dl>
-                    <!-- User -->
-                    <hr>
-                    <!-- staff -->
-                    <dl class="row">
-                        <dt class="col-sm-3">เจ้าหน้าที่ : </dt>
-                        <dd class="col-sm-9">
-                            <p>พอจะมีเอกสาร หรือภาพถ่ายพอเป็นหลักฐานไหมค่ะ</p>
-                        </dd>
-                    </dl>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- text modal -->
+    <!-- modal show -->
+    <div id="modalshow"></div>
+    <!-- modal show -->
+
+    <!-- modal message form admin -->
+    <div id="modalAns"></div>
+    <!-- modal message form admin -->
 
 
     <!-- modal card 3.2 -->
@@ -606,10 +580,13 @@ $re_paper = mysqli_query($con,$sql_paper);
                 });
             });
 
-            function modal_show(paperID, type){
+            function modal_show(paperID, type) {
 
-                $.post("other/modal.php",{id : paperID,cate : type},
-                    function(result){
+                $.post("other/modal.php", {
+                        id: paperID,
+                        cate: type
+                    },
+                    function(result) {
                         $("#modalshow").html(result);
                         $("#route").modal("show");
                     }
@@ -617,6 +594,20 @@ $re_paper = mysqli_query($con,$sql_paper);
 
 
             };
+
+            // function modal_show(paperID, type) {
+            //     $.post("other/modal.php", {
+            //             id: paperID,
+            //             cate: type
+            //         },
+            //         function(result) {
+            //             $("#modalAns").html(result);
+            //             $("#route").modal("show");
+            //         }
+            //     );
+
+
+            // };
         </script>
 
         <!-- bootstrap 4.2.1 -->
