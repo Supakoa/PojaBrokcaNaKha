@@ -20,7 +20,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i> นางสาว ผมสั้นตาโต ตัวเล็ก</a>
-            <a class="nav-link" href="#" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
+            <a class="nav-link" href="../../server/logout.php" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
         </form>
     </div>
 </nav><!-- navbar -->
