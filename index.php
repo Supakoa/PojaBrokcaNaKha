@@ -2,10 +2,12 @@
 require 'server.php';
 $sql_fac = "SELECT * FROM `fac`";
 $re_fac = mysqli_query($con,$sql_fac);
-$fac = '<option disabled selected >กรุณาเลือกคณะ</option>';
+$fac = '<option disabled selected value="">กรุณาเลือกคณะ</option>';
 while($r_fac = mysqli_fetch_array($re_fac)){
     $fac.= '<option value="'.$r_fac['fac_id'].'">'.$r_fac['name'].'</option>';
 }
+if
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -121,7 +123,7 @@ while($r_fac = mysqli_fetch_array($re_fac)){
                                                     <!-- check bot -->
                                                     <div class="g-recaptcha" data-sitekey="6LfGSZIUAAAAAPX_Wv8XdRf8FnwaE4yht4Ee_5RP"></div>
                                                     <!-- check bot -->
-<br>
+                                                    <br>
 
 
                                                     <div class="row">
@@ -174,79 +176,79 @@ while($r_fac = mysqli_fetch_array($re_fac)){
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <form action="index.php" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">กรอกข้อมูลเข้าใช้แบบคำร้อง</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid card-body form-group">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="id">รหัสนักศึกษา</label>
-                                <input id="id" name ="user_id" type="text" class="form-control" required>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">กรอกข้อมูลเข้าใช้แบบคำร้อง</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid card-body form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="id">รหัสนักศึกษา</label>
+                                    <input id="id" name="user_id" type="text" class="form-control" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="pass">รหัสผ่าน</label>
+                                    <input id="pass" name="password" type="text" class="form-control" required>
+                                </div>
+                                <div class="col-lg-6"></div>
                             </div>
-                            <div class="col-lg-6">
-                                <label for="pass">รหัสผ่าน</label>
-                                <input id="pass" name ="password" type="text" class="form-control" required>
-                            </div>
-                            <div class="col-lg-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="fname">ชื่อ</label>
-                                <input id="fname" name ="fname" type="text" class="form-control" required>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="fname">ชื่อ</label>
+                                    <input id="fname" name="fname" type="text" class="form-control" required>
 
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="lname">นามสกุล</label>
+                                    <input id="lname" name="lname" type="text" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <label for="lname">นามสกุล</label>
-                                <input id="lname" name ="lname" type="text" class="form-control" required>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <label for="email">E-mail</label>
+                                    <input id="email" name="email" class="form-control" type="email" required>
+                                </div>
+                                <div class="col-lg-4"></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <label for="email">E-mail</label>
-                                <input id="email" name ="email" class="form-control" type="email" required>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="phone">เบอร์โทรศัพท์</label>
+                                    <input id="phone" name="tel" class="form-control" type="text" required>
+                                </div>
+                                <div class="col-lg-6"></div>
                             </div>
-                            <div class="col-lg-4"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="phone">เบอร์โทรศัพท์</label>
-                                <input id="phone" name ="tel" class="form-control" type="text" required>
-                            </div>
-                            <div class="col-lg-6"></div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <label for="faculty">คณะ :</label>
-                                <select class="form-control custom-select" name ="fac" id="faculty" required>
-                                  <?php echo $fac ?>
-                                </select>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <label for="faculty">คณะ :</label>
+                                    <select class="form-control custom-select" name="fac" id="faculty" required>
+                                        <?php echo $fac ?>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4"></div>
                             </div>
-                            <div class="col-lg-4"></div>
-                        </div>
-                        <div id="eiei"></div>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <label for="major">สาขา :</label>
-                                <select class="form-control custom-select" name ="mar" id="major" required>
-                                    <option disabled selected >กรุณาเลือกจากคณะก่อน</option>
-                                    
-                                </select>
+                            <div id="eiei"></div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <label for="major">สาขา :</label>
+                                    <select class="form-control custom-select" name="mar" id="major" required disabled>
+                                        <option disabled selected value="">กรุณาเลือกจากคณะก่อน</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-4"></div>
                             </div>
-                            <div class="col-lg-4"></div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -258,28 +260,34 @@ while($r_fac = mysqli_fetch_array($re_fac)){
     <script src="font/node_modules/popper.js/dist/popper.min.js"></script>
     <script src="font/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
+
     <script>
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
         });
     </script>
     <script>
-    $('#faculty').click(function (e) { 
-        e.preventDefault();
-        fac = $('#faculty').val();
-        // $('#eiei').append(fac);
-        
-        // alert(fac);
-        $.post("major.php",{data : fac},
-					function(result){
-                        
-						$("#major").html(result);
-						// $("#del").modal("show");
-						}
-				
-			);
-    });
+        $('#faculty').click(function (e) {
+            e.preventDefault();
+            fac = $('#faculty').val();
+            // $('#eiei').append(fac);
+
+            // alert(fac)sasd
+            $.post("major.php", {
+                    data: fac
+                },
+                function (result) {
+                    if(fac!=null){
+                        $("#major").html(result);
+                        $('#major').prop("disabled", false);
+                    }
+                    
+
+                    // $("#del").modal("show");
+                }
+
+            );
+        });
     </script>
 </body>
 
