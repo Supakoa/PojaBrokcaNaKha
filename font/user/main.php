@@ -459,21 +459,12 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td><span class="badge badge-danger">ยังไม่ได้อ่าน</span></td>
-                                                                <td>2019-01-18 14:20:47</td>
-                                                                <td>เลือกแบบคำร้องไม่ถูกครับ</td>
-                                                                <td>
-
-                                                                </td>
-                                                                <td> เจ้าหน้าที่ </td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td><span class="badge badge-success">อ่านแล้ว</span></td>
                                                                 <td>2019-01-17 18:33:24</td>
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php  ?>,'Ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
                                                                 <td> เจ้าหน้าที่ </td>
@@ -595,19 +586,19 @@ $re_paper = mysqli_query($con, $sql_paper);
 
             };
 
-            // function modal_show(paperID, type) {
-            //     $.post("other/modal.php", {
-            //             id: paperID,
-            //             cate: type
-            //         },
-            //         function(result) {
-            //             $("#modalAns").html(result);
-            //             $("#route").modal("show");
-            //         }
-            //     );
+            function modal_ans(paperID, type) {
+                $.post("other/modal.php", {
+                        id: paperID,
+                        cate: type
+                    },
+                    function(result) {
+                        $("#modalAns").html(result);
+                        $("#confirm1").modal("show");
+                    }
+                );
 
 
-            // };
+            };
         </script>
 
         <!-- bootstrap 4.2.1 -->

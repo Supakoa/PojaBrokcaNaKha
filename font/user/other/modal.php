@@ -58,7 +58,7 @@ $re_paper_user = mysqli_query($con, $sql_paper_user);
 <!-- show state modal -->
 
 <?php 
-} else if ($type == '') { ?>
+} else if ($type == 'Ans') { ?>
 
 
 <!-- text modal -->
