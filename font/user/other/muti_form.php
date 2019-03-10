@@ -69,17 +69,19 @@ if(isset($_POST['form_1'])){
                 $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form' AND `step` ='1' ";
                 $re_form = mysqli_query($con, $sql_form);
                 $row_form = mysqli_fetch_array($re_form);
-                $user_id = $row_form['user_id'];
-                $sum_q = '(\''.$paper_id.'\',\''.$user_id.'\' )';
-                while($row_form = mysqli_fetch_array($re_form)){
+                if($row_form['user_id']!=null){
                     $user_id = $row_form['user_id'];
-                    $sum_q .= ',(\''.$paper_id.'\',\''.$user_id.'\' )';
-                }
-                $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES ".$sum_q." ";
-                if($re_user = mysqli_query($con, $sql_user)){
-                    $_SESSION['alert'] = 3;
-                }else{
-                    $_SESSION['alert'] = 4;
+                    $sum_q = '(\''.$paper_id.'\',\''.$user_id.'\' )';
+                    while($row_form = mysqli_fetch_array($re_form)){
+                        $user_id = $row_form['user_id'];
+                        $sum_q .= ',(\''.$paper_id.'\',\''.$user_id.'\' )';
+                    }
+                    $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES ".$sum_q." ";
+                    if($re_user = mysqli_query($con, $sql_user)){
+                        $_SESSION['alert'] = 3;
+                    }else{
+                        $_SESSION['alert'] = 4;
+                    }
                 }
     }else{
         $_SESSION['alert'] = 4;
@@ -96,17 +98,19 @@ if(isset($_POST['form_1'])){
                 $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form' AND `step` ='1' ";
                 $re_form = mysqli_query($con, $sql_form);
                 $row_form = mysqli_fetch_array($re_form);
-                $user_id = $row_form['user_id'];
-                $sum_q = '(\''.$paper_id.'\',\''.$user_id.'\' )';
-                while($row_form = mysqli_fetch_array($re_form)){
+                if($row_form['user_id']!=null){
                     $user_id = $row_form['user_id'];
-                    $sum_q .= ',(\''.$paper_id.'\',\''.$user_id.'\' )';
-                }
-                $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES ".$sum_q." ";
-                if($re_user = mysqli_query($con, $sql_user)){
-                    $_SESSION['alert'] = 3;
-                }else{
-                    $_SESSION['alert'] = 4;
+                    $sum_q = '(\''.$paper_id.'\',\''.$user_id.'\' )';
+                    while($row_form = mysqli_fetch_array($re_form)){
+                        $user_id = $row_form['user_id'];
+                        $sum_q .= ',(\''.$paper_id.'\',\''.$user_id.'\' )';
+                    }
+                    $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES ".$sum_q." ";
+                    if($re_user = mysqli_query($con, $sql_user)){
+                        $_SESSION['alert'] = 3;
+                    }else{
+                        $_SESSION['alert'] = 4;
+                    }
                 }
     }else{
         $_SESSION['alert'] = 4;
