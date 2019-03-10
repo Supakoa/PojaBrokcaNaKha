@@ -38,6 +38,7 @@ $re_paper = mysqli_query($con, $sql_paper);
 /// paper_user
 
 if (isset($_POST['senmessage'])) {
+    unset($_POST['senmessage']);
     $paper_id = getToken(10);
     // echo 'goooooooooooooo';
     $mix = $_POST['topic'] . "๛" . $_POST['cont'];
@@ -45,10 +46,22 @@ if (isset($_POST['senmessage'])) {
     $sql_pp = " INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`) VALUES ('$paper_id','$id','$mix','1','$num')";
     if (mysqli_query($con, $sql_pp)) {
         $_SESSION['alert'] = 3;
-        $sql_form_way = "SELECT * FROM `form_way` WHERE `form_id` = '8' AND `step` = '1'";
-        $re_form_way = mysqli_query($con, $sql_form_way);
-        while ($row_form_way = mysqli_fetch_array($re_form_way)) {
-            mysqli_query($con, "INSERT INTO `paper_user`( `paper_id`, `user_id`,) VALUES ('$paper_id','$id')");
+        $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
+        $re_form = mysqli_query($con, $sql_form);
+        $row_form = mysqli_fetch_array($re_form);
+        if ($row_form['user_id'] != null) {
+            $user_id = $row_form['user_id'];
+            $sum_q = '(\'' . $paper_id . '\',\'' . $user_id . '\' )';
+            while ($row_form = mysqli_fetch_array($re_form)) {
+                $user_id = $row_form['user_id'];
+                $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\' )';
+            }
+            $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES " . $sum_q . " ";
+            if ($re_user = mysqli_query($con, $sql_user)) {
+                $_SESSION['alert'] = 3;
+            } else {
+                $_SESSION['alert'] = 4;
+            }
         }
     } else {
         $_SESSION['alert'] = 4;
@@ -522,8 +535,8 @@ if (isset($_POST['senmessage'])) {
                                                             while ($row_paper_user = mysqli_fetch_array($re_paper)) { ?>
                                                             <tr>
                                                                 <td><span class="badge badge-success">อ่านแล้ว</span></td>
-                                                                <td><?php $row_paper_user['timestamp'] ?></td>
-                                                                <td>แนบเอกสารลากิจ</td>
+                                                                <td><?php echo $row_paper_user['timestamp'] ?></td>
+                                                                <td> <?php echo $row_paper_user['name'];  ?></td>
                                                                 <td>
                                                                     <!-- text modal -->
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
@@ -638,7 +651,7 @@ if (isset($_POST['senmessage'])) {
         </script>
         <script>
             function modal_show(paperID, type) {
-                // alert("123456");
+                $("#modalshow").html("");
                 $.post("other/modal.php", {
                         id: paperID,
                         cate: type
@@ -651,6 +664,7 @@ if (isset($_POST['senmessage'])) {
             };
 
             function modal_ans(paperID, type) {
+                $("#modalAns").html("");
                 $.post("other/modal.php", {
                         id: paperID,
                         cate: type
