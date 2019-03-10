@@ -24,7 +24,7 @@ $row_user = mysqli_fetch_array($re_user);
 $sql_sub = "SELECT `sub_id`, `sub_name` FROM `subject` WHERE 1";
 $re_sub = mysqli_query($con, $sql_sub);
 $sub = '<label for="sub">วิชา</label>
-        <select name="sub" class="form-control select2">
+        <select name="sub" name="sub" class="form-control select2">
         <option hidden="" selected="" value="">เลือกวิชา</option>';
 while ($row_sub = mysqli_fetch_array($re_sub)) {
     $sub .= '<option value="' . $row_sub['sub_id'] . '">' . $row_sub['sub_name'] . '</option>';
@@ -419,11 +419,11 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทเว็ปไซต์</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <select name="sub" class="form-control select2" name="type">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="เว็บไซต์รายวิชา">เว็บไซต์รายวิชา</option>
                                                                 <option value="ระบบตรวจสอบคะแนน">ระบบตรวจสอบคะแนน (TSS)</option>
@@ -431,7 +431,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
+                                                            <input type="text" id="group" name="note" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
                                                         </div>
 
                                                         <div class="col-12 text-center">
@@ -461,11 +461,11 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" name="group" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="comment">ความประสงค์</label>
-                                                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                                                            <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
                                                         </div>
 
                                                         <div class="col-12 text-center">
