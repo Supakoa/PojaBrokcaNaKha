@@ -1,7 +1,7 @@
 <?php 
 require '../../server/server.php';
 $id = $_SESSION['id'];
-echo '<br>'.'<br>'.'<br>'.'<br>'.'<br>'.$id;
+// echo '<br>'.'<br>'.'<br>'.'<br>'.'<br>'.$id;
 // user
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
 $re_user = mysqli_query($con,$sql_user);
@@ -470,7 +470,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'Ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
                                                             </tr>
@@ -517,7 +517,7 @@ $re_paper = mysqli_query($con, $sql_paper);
     <!-- modal show -->
 
     <!-- modal message form admin -->
-    <div id="modalAns"></div>
+    <div id="modalans"></div>
     <!-- modal message form admin -->
 
 
@@ -580,27 +580,19 @@ $re_paper = mysqli_query($con, $sql_paper);
 
             function modal_show(paperID, type) {
 
-                $.post("other/modal.php", {
-                        id: paperID,
-                        cate: type
-                    },
+                $.post("other/modal.php", {id: paperID, cate: type},
                     function(result) {
                         $("#modalshow").html(result);
-                        $("#route").modal("show");
+                        $("#route").modal('show');
                     }
                 );
-
-
             };
 
             function modal_ans(paperID, type) {
-                $.post("other/modal.php", {
-                        id: paperID,
-                        cate: type
-                    },
+                $.post("other/modal.php", {id: paperID,cate: type},
                     function(result) {
-                        $("#modalAns").html(result);
-                        $("#confirm1").modal("show");
+                        $("#modalans").html(result);
+                        $("#confirm1").modal('ans');
                     }
                 );
 

@@ -3,16 +3,18 @@ require '../../../server/server.php';
 $iduser = $_SESSION['id'];
 $id = $_POST['id'];
 $type = $_POST['cate'];
+
 //paper_user
-$sql_paper_user = "SELECT  FROM paper_user.comment,paper_user.timestamp,form.name,form.detail WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND paper_id = '$id' AND owner_id = '$isuser' ";
-$re_paper_user = mysqli_query($con, $sql_paper_user);
-$row_pu = mysqli_fetch_array($re_paper_user);
-//paper_user
+$sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name, form.detail, form_way.step FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
+$re_paper_user = mysqli_query($con,$sql_paper_user);
+// $row_pu = mysqli_fetch_array($re_paper_user);
+//paper_user 
 
 
 ?>
 
 <?php if ($type == 'show') { ?>
+   
 <!-- show state modal -->
 <div class="modal fade" id="route" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -25,7 +27,7 @@ $row_pu = mysqli_fetch_array($re_paper_user);
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive text-nowrap">
                         <table class="table table-hover overflow">
                             <thead>
                                 <tr>
@@ -35,11 +37,11 @@ $row_pu = mysqli_fetch_array($re_paper_user);
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php while($row_pu){ ?>
+                            <?php while($row_pu = mysqli_fetch_array($re_paper_user)){ ?>
                                 <tr>
-                                    <td><?php $row_pu['name']; ?></td>
-                                    <td><?php $row_pu['timestamp']; ?></td>
-                                    <td><?php $row_pu['step_now']; ?></td>
+                                    <td><?php echo $row_pu['name']; ?></td>
+                                    <td><?php echo $row_pu['timestamp']; ?></td>
+                                    <td><?php echo $row_pu['step']; ?>  </td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -61,8 +63,8 @@ $row_pu = mysqli_fetch_array($re_paper_user);
 <!-- show state modal -->
 
 <?php 
-} else if ($type == 'Ans') { ?>
-
+} else{ ?>
+<?php echo $type; ?>
 
 <!-- text modal -->
 <div id="confirm1" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
