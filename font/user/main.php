@@ -167,7 +167,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
+                                                            <input type="text" id="group" name = "group" class="form-control"
                                                                 placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
