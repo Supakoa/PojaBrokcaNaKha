@@ -32,7 +32,7 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 $sub .= '</select>';
 
 /// paper_user
-$sql_paper = "SELECT paper.status,form.name,paper.paper_id FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8' ";
+$sql_paper = "SELECT paper.status,form.name,paper.paper_id FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8' ORDER BY `paper`.`timestamp` ASC ";
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
