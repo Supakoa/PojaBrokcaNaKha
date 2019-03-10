@@ -64,7 +64,6 @@ $re_paper_user = mysqli_query($con,$sql_paper_user);
 
 <?php 
 } else{ ?>
-<?php echo $type; ?>
 
 <!-- text modal -->
 <div id="confirm1" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -109,3 +108,4 @@ $re_paper_user = mysqli_query($con,$sql_paper_user);
 
 <?php 
 } ?> 
+<!-- <script>alert("144477");</script> -->

@@ -32,7 +32,7 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 $sub .= '</select>';
 
 /// paper_user
-$sql_paper = "SELECT paper.status, form.name, paper.paper_id, paper.timestamp FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8' ORDER BY `paper`.`timestamp` ASC ";
+$sql_paper = "SELECT paper.status,form.name,paper.paper_id,`paper`.`timestamp` FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id  ORDER BY `paper`.`timestamp` ASC ";
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
@@ -155,7 +155,7 @@ if (isset($_POST['senmessage'])) {
                                                                 echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
                                                             } elseif ($row_paper['status'] == 0) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
-                                                            } else {
+                                                            } elseif($row_paper['status'] == 2) {
                                                                 echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
                                                             } ?>
 
@@ -518,8 +518,8 @@ if (isset($_POST['senmessage'])) {
                                                         </thead>
                                                         <tbody>
                                                             <?php 
-                                                            while ($row_paper = mysqli_fetch_array($re_paper)) {
-                                                                ?>
+                                                            $re_paper = mysqli_query($con, $sql_paper);
+                                                            while ($row_paper_user = mysqli_fetch_array($re_paper)) { ?>
                                                             <tr>
                                                                 <?php 
                                                                 if ($row_paper['status'] == 4) {
@@ -531,7 +531,7 @@ if (isset($_POST['senmessage'])) {
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
                                                             <tr>
@@ -583,7 +583,7 @@ if (isset($_POST['senmessage'])) {
     <!-- modal show -->
 
     <!-- modal message form admin -->
-    <div id="modalans"></div>
+    <div id="modalAns"></div>
     <!-- modal message form admin -->
 
 
