@@ -126,7 +126,10 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
                                                             $i++; ?>
                                                         <tr>
                                                             <td>
-                                                                <?php echo $i;  ?>
+                                                                <?php 
+                                                                echo $row_paper['paper_id'];
+                                                               // echo $i; 
+                                                                 ?>
                                                             </td>
                                                             <?php 
                                                             if ($row_paper['status'] == 1) {
@@ -143,7 +146,7 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
                                                                 <?php echo $row_paper['name'];  ?>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
+                                                                <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id'];?>','show')">แสดง</button>
                                                             </td>
 
                                                         </tr>
@@ -182,7 +185,7 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name = "group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -616,7 +619,7 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
         </script>
         <script>
             function modal_show(paperID, type) {
-
+                // alert("123456");
                 $.post("other/modal.php", {
                         id: paperID,
                         cate: type
