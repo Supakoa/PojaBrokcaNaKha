@@ -4,12 +4,15 @@ $id = $_SESSION['id'];
 // user
 //check edit
 if (isset($_POST['btn_edit'])) {
+    $_SESSION['alert'] = 3;
+
     $new_n = $_POST['new_name'];
     $new_tel = $_POST['new_num'];
     $new_pass = $_POST['new_pass'];
     $new_mar = $_POST['mar'];
-    
     mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'");
+}else{
+    $_SESSION['alert'] = 4;
 }
 $sql_user = "SELECT user.user_id, user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname, fac.fac_id, user.major_id FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
 $re_user = mysqli_query($con, $sql_user);
@@ -49,6 +52,8 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
     <!-- icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+    <!-- sweet alert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
     <!-- datatable -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/> -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
@@ -295,6 +300,8 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
     <!-- bootstrap 4.2.1 -->
     <script src="../node_modules/popper.js/dist/popper.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <?php require '../../server/alert.php'; ?>
+
 
 </body>
 

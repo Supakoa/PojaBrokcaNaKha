@@ -1,6 +1,20 @@
 <?php 
 require '../../server/server.php';
 $id = $_SESSION['id'];
+//random
+function getToken($length)
+{
+    $token = "";
+    $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $codeAlphabet .= "0123456789";
+    $max = strlen($codeAlphabet); // edited
+    for ($i = 0; $i < $length; $i++) {
+        $token .= $codeAlphabet[random_int(0, $max - 1)];
+    }
+    return $token;
+}
+
+
 // user
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
 $re_user = mysqli_query($con, $sql_user);
@@ -23,19 +37,23 @@ $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
 
-if(isset($_POST['senmessage'])){
+if (isset($_POST['senmessage'])) {
+    $paper_id = getToken(10);
     // echo 'goooooooooooooo';
-    $mix= $_POST['topic']."๛".$_POST['cont'];
+    $mix = $_POST['topic'] . "๛" . $_POST['cont'];
     $num = $_POST['number'];
-    $sql_pp =" INSERT INTO `paper`(`owner_id`, `paper_detail`, `step_now`, `form_id`) VALUES ('$id','$mix','1','$num')";
-    mysqli_query($con,$sql_pp);
+    $sql_pp = " INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`) VALUES ('$paper_id','$id','$mix','1','$num')";
+    if (mysqli_query($con, $sql_pp)) {
+        $_SESSION['alert'] = 3;
+        $sql_form_way = "SELECT * FROM `form_way` WHERE `form_id` = '8' AND `step` = '1'";
+        $re_form_way = mysqli_query($con, $sql_form_way);
+        while ($row_form_way = mysqli_fetch_array($re_form_way)) {
+            mysqli_query($con, "INSERT INTO `paper_user`( `paper_id`, `user_id`,) VALUES ('$paper_id','$id')");
+        }
+    } else {
+        $_SESSION['alert'] = 4;
+    }
 }
-$sql_form_way = "SELECT * FROM `form_way` WHERE `form_id` = '8' AND `step` = '1'";
-$re_form_way = mysqli_query($con, $sql_form_way);
-while($row_form_way = mysqli_fetch_array($re_form_way)){
-    mysqli_query($con,"INSERT INTO `paper_user`( `paper_id`, `user_id`,) VALUES ([value-1],[value-2])");
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -57,9 +75,8 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <!-- sweet alert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
@@ -127,26 +144,26 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
                                                         <tr>
                                                             <td>
                                                                 <?php 
-                                                                echo $row_paper['paper_id'];
-                                                               // echo $i; 
-                                                                 ?>
+                                                                // echo $row_paper['paper_id'];
+                                                                echo $i;
+                                                                ?>
                                                             </td>
                                                             <?php 
                                                             if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
-                                                            }elseif ($row_paper['status'] == 3) {
+                                                            } elseif ($row_paper['status'] == 3) {
                                                                 echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
-                                                            }elseif ($row_paper['status'] == 0) {
+                                                            } elseif ($row_paper['status'] == 0) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
-                                                            }else{
-                                                                echo '<td><span class="badge badge-danger">8;p</span></td>';
+                                                            } else {
+                                                                echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
                                                             } ?>
 
                                                             <td>
                                                                 <?php echo $row_paper['name'];  ?>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id'];?>','show')">แสดง</button>
+                                                                <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id']; ?>','show')">แสดง</button>
                                                             </td>
 
                                                         </tr>
@@ -185,7 +202,7 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" name = "group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -649,8 +666,8 @@ while($row_form_way = mysqli_fetch_array($re_form_way)){
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- alert all -->
-    <?php require '../../server/alert.php'; ?>-
+        <!-- alert all -->
+        <?php require '../../server/alert.php'; ?>
 </body>
 
 </html> 
