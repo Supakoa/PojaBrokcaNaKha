@@ -11,32 +11,8 @@
 
         <!-- button add -->
         <div class="w3-container-fluid w3-center" style="margin:20px;">
-            <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#add_modal"><i class="fas fa-plus-circle"></i>
+            <button onclick="openAddModal();" type="button" class="btn btn-outline-success btn-lg"><i class="fas fa-plus-circle"></i>
                 เพิ่ม</button>
-        </div>
-
-        <!-- modal add -->
-        <div class="modal fade" id="add_modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        เพิ่มข่าวใหม่ :
-                    </div>
-                    <div class="modal-body">
-                        <!-- input file -->
-                        <label>ไฟล์ภาพ :</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">เลือกไฟล์</label>
-                        </div>
-                        <label style="margin-top:20px;">ที่อยู่เว็บไซต์ :</label>
-                        <input class="form-control form-control-lg" type="text">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success">เพิ่ม</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="w3-container-fluid" style="padding:20px;">
@@ -72,7 +48,7 @@
                     <img class="w3-red" src="..\image\news\<?php echo $row_news['news_img'];?>" width="200" height="100">
                 </div>
                 <div class="col-2">
-                    <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
+                    <button class = "btn w3-border w3-border-red w3-round-large w3-white " onclick="openDelModal(<?php echo $row_news['news_id'] ?>,'<?php echo $order; ?>');"><i class="fas fa-trash" style = "color:red"></i></button>
                 </div>
             </div>
                 <?php } ?>
@@ -113,5 +89,28 @@
         </div>
         <!-- end modal delete -->
 
+        <!-- modal delete ajax -->
+        <div class="" id="news_mo"></div>
+
     </div>
 </div>
+
+<script>
+    function openDelModal(id_del,order){
+        $.post("../modal/news_del.php", 
+            { del_id:id_del , order:order },
+            function (data, textStatus, jqXHR) {
+                $("#news_mo").html(data);
+                $("#new_del").modal("show");
+            }
+        )
+    }
+    function openAddModal() {
+        $.post("../modal/news_add.php",
+            function (data, textStatus, jqXHR) {
+                $("#news_mo").html(data);
+                $("#add_modal").modal("show");
+            }
+        )
+    }
+</script>
