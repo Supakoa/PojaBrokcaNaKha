@@ -531,20 +531,20 @@ if (isset($_POST['senmessage'])) {
                                                         </thead>
                                                         <tbody>
                                                             <?php 
-                                                            $sql_mes = "SELECT paper.paper_detail, paper.timestamp, paper.status  FROM `user`, `paper`, `paper_user` WHERE user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8'";
+                                                            $sql_mes = "SELECT  paper.timestamp, paper.status  FROM `user`, `paper`, `paper_user`, `form` WHERE paper.form_id = form.form_id AND user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8'";
                                                             $re_mes = mysqli_query($con,$sql_mes);
-                                                            while ($row_paper_user = mysqli_fetch_array($re_mes)) { ?>
+                                                            while ($row_paper_mes = mysqli_fetch_array($re_mes)) { ?>
                                                             <tr>
                                                                
                                                                 
                                                                 <?php 
-                                                                if ($row_paper['status'] == 4) {
+                                                                if ($row_mes['status'] == 4) {
                                                                     echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
-                                                                } elseif ($row_paper['status'] == 5) {
+                                                                } elseif ($row_mes['status'] == 5) {
                                                                     echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
                                                                 }  ?>
-                                                                <td><?php echo $row_paper_user['timestamp'] ?></td>
-                                                                <td> <?php echo $row_paper_user['name'];  ?></td>
+                                                                <td><?php echo $row_paper_mes['timestamp'] ?></td>
+                                                                <td> <?php echo $row_paper_mes['name'];  ?></td>
                                                                 <td>
                                                                     <!-- text modal -->
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
