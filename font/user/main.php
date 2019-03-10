@@ -1,16 +1,30 @@
 <?php 
 require '../../server/server.php';
 $id = $_SESSION['id'];
+//random
+function getToken($length)
+{
+    $token = "";
+    $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $codeAlphabet .= "0123456789";
+    $max = strlen($codeAlphabet); // edited
+    for ($i = 0; $i < $length; $i++) {
+        $token .= $codeAlphabet[random_int(0, $max - 1)];
+    }
+    return $token;
+}
+
+
 // user
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
-$re_user = mysqli_query($con,$sql_user);
+$re_user = mysqli_query($con, $sql_user);
 $row_user = mysqli_fetch_array($re_user);
 
 /// subject
 $sql_sub = "SELECT `sub_id`, `sub_name` FROM `subject` WHERE 1";
 $re_sub = mysqli_query($con, $sql_sub);
 $sub = '<label for="sub">วิชา</label>
-        <select name="sub" class="form-control select2">
+        <select name="sub" name="sub" class="form-control select2">
         <option hidden="" selected="" value="">เลือกวิชา</option>';
 while ($row_sub = mysqli_fetch_array($re_sub)) {
     $sub .= '<option value="' . $row_sub['sub_id'] . '">' . $row_sub['sub_name'] . '</option>';
@@ -18,11 +32,28 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 $sub .= '</select>';
 
 /// paper_user
-$sql_paper = "SELECT paper.status, form.name, paper.paper_id, paper_user.timestamp FROM `paper_user`,`paper`,`form` WHERE paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
+$sql_paper = "SELECT paper.status,form.name,paper.paper_id,`paper`.`timestamp` FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id  ORDER BY `paper`.`timestamp` ASC ";
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
 
+if (isset($_POST['senmessage'])) {
+    $paper_id = getToken(10);
+    // echo 'goooooooooooooo';
+    $mix = $_POST['topic'] . "๛" . $_POST['cont'];
+    $num = $_POST['number'];
+    $sql_pp = " INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `paper.status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
+    if (mysqli_query($con, $sql_pp)) {
+        $_SESSION['alert'] = 3;
+        $sql_form_way = "SELECT * FROM `form_way` WHERE `form_id` = '8' AND `step` = '1'";
+        $re_form_way = mysqli_query($con, $sql_form_way);
+        while ($row_form_way = mysqli_fetch_array($re_form_way)) {
+            mysqli_query($con, "INSERT INTO `paper_user`( `paper_id`, `user_id`,) VALUES ('$paper_id','$id')");
+        }
+    } else {
+        $_SESSION['alert'] = 4;
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -44,8 +75,10 @@ $re_paper = mysqli_query($con, $sql_paper);
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- sweet alert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
     <!-- datatable -->
@@ -67,7 +100,7 @@ $re_paper = mysqli_query($con, $sql_paper);
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#AECDF7">
-            <br><br><br>
+            <br><br>
 
             <?php require 'other/news.php'; ?>
 
@@ -80,8 +113,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs row">
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px"
-                                        data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
                                 </li>
                                 <li class="nav-item col-lg-6">
                                     <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
@@ -111,24 +143,27 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                             $i++; ?>
                                                         <tr>
                                                             <td>
-                                                                <?php echo $i;  ?>
+                                                                <?php 
+                                                                // echo $row_paper['paper_id'];
+                                                                echo $i;
+                                                                ?>
                                                             </td>
-                                                            <?php if ($row_paper['status'] == 1) {
+                                                            <?php 
+                                                            if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
-                                                            } ?>
-                                                            <?php if ($row_paper['status'] == 2) {
+                                                            } elseif ($row_paper['status'] == 3) {
                                                                 echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
-                                                            } ?>
-                                                            <?php if ($row_paper['status'] == 3) {
+                                                            } elseif ($row_paper['status'] == 0) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
+                                                            } elseif($row_paper['status'] == 2) {
+                                                                echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
                                                             } ?>
 
                                                             <td>
                                                                 <?php echo $row_paper['name'];  ?>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
+                                                                <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id']; ?>','show')">แสดง</button>
                                                             </td>
 
                                                         </tr>
@@ -167,8 +202,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" name = "group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -198,12 +232,11 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
-                                                            <label for="sub">ประเภทการสอบ</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <label for="type">ประเภทการสอบ</label>
+                                                            <select name="type" class="form-control select2">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="กลางภาค">กลางภาค</option>
                                                                 <option value="ปลายภาค">ปลายภาค</option>
@@ -211,12 +244,11 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขาดสอบ">
+                                                            <input type="text" name="note" class="form-control" placeholder="สาเหตุการขาดสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -245,22 +277,19 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">ปีการศึกษา</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกปีการศึกษา">
+                                                            <input type="text" class="form-control" name="year" placeholder="กรอกปีการศึกษา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
+                                                            <input type="text" class="form-control" name="note" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -290,12 +319,11 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="sub">ประเภทการสอบ</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <select name="type" class="form-control select2">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="กลางภาค">กลางภาค</option>
                                                                 <option value="ปลายภาค">ปลายภาค</option>
@@ -303,12 +331,11 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขอสอบ">
+                                                            <input name="note" type="text" class="form-control" placeholder="สาเหตุการขอสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">หลักฐานสาเหตุ</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -338,12 +365,11 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทการลา</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <select name="type" class="form-control select2">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="ลากิจ">ลากิจ</option>
                                                                 <option value="ลาป่วย">ลาป่วย</option>
@@ -351,22 +377,19 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการลา">
+                                                            <input name="note" type="text" class="form-control" placeholder="สาเหตุการลา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ตั้งแต่วันที่</label>
-                                                            <input type="date" name="eiei" id="ei" class="form-control"
-                                                                placeholder="ตั้งแต่วันที่">
+                                                            <input type="date" name="sdate" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ถึงวันที่</label>
-                                                            <input type="date" name="eiei" id="ei" class="form-control"
-                                                                placeholder="ตั้งแต่วันที่">
+                                                            <input type="date" name="edate" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                         </div>
                                                         <div class="col-8">
                                                             <label for="file">หลักฐานสาเหตุการลา</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -396,12 +419,11 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทเว็ปไซต์</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <select name="sub" class="form-control select2" name="type">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="เว็บไซต์รายวิชา">เว็บไซต์รายวิชา</option>
                                                                 <option value="ระบบตรวจสอบคะแนน">ระบบตรวจสอบคะแนน (TSS)</option>
@@ -409,8 +431,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขอรหัสผ่าน">
+                                                            <input type="text" id="group" name="note" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
                                                         </div>
 
                                                         <div class="col-12 text-center">
@@ -436,16 +457,15 @@ $re_paper = mysqli_query($con, $sql_paper);
 
                                                     <div class="row">
                                                         <div class="col-6">
-
+                                                            <?php echo $sub;  ?>
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" name="group" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="comment">ความประสงค์</label>
-                                                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                                                            <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
                                                         </div>
 
                                                         <div class="col-12 text-center">
@@ -497,19 +517,31 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <?php while($row_paper_user = mysqli_fetch_array($re_paper)){ ?>
+                                                            <?php 
+                                                            $re_paper = mysqli_query($con, $sql_paper);
+                                                            while ($row_paper_user = mysqli_fetch_array($re_paper)) { ?>
                                                             <tr>
-                                                                <td><span class="badge badge-success">อ่านแล้ว</span></td>
+                                                                <?php 
+                                                                if ($row_paper['status'] == 4) {
+                                                                    echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
+                                                                } elseif ($row_paper['status'] == 5) {
+                                                                    echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
+                                                                }  ?>
                                                                 <td><?php $row_paper_user['timestamp'] ?></td>
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
+                                                            <tr>
+
+                                                                <?php 
+                                                            } ?>
+                                                              
+                                                                
                                                             </tr>
 
-                                                        <?php }?>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -521,8 +553,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                             <!-- card 2.2 -->
                                             <div class="card-body">
                                                 <div class="container text-center">
-                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
                                                         <i class="fas fa-comment"></i></button>
                                                 </div>
                                             </div>
@@ -552,13 +583,12 @@ $re_paper = mysqli_query($con, $sql_paper);
     <!-- modal show -->
 
     <!-- modal message form admin -->
-    <div id="modalans"></div>
+    <div id="modalAns"></div>
     <!-- modal message form admin -->
 
 
     <!-- modal card 3.2 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -567,22 +597,23 @@ $re_paper = mysqli_query($con, $sql_paper);
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form action="main.php" method="POST">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">เรื่อง:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input name="topic" type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ข้อความ:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <textarea name="cont" class="form-control" id="message-text"></textarea>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" class="btn btn-primary">ส่งข้อความ</button>
-                </div>
+                    </div>
+                    <input type="hidden" name="number" value="8">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                        <button type="submit" name="senmessage" class="btn btn-primary">ส่งข้อความ</button>
+                    </div>
+                </form>
             </div>
         </div>
         <!--modal card 3.2 -->
@@ -594,14 +625,14 @@ $re_paper = mysqli_query($con, $sql_paper);
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         <script>
             //datatable
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#table1').DataTable();
                 $('#table2').DataTable();
 
             });
             //tap
-            $(document).ready(function () {
-                $(".nav-tabs a").click(function () {
+            $(document).ready(function() {
+                $(".nav-tabs a").click(function() {
                     $(this).tab('show');
                 });
                 //time news
@@ -609,18 +640,19 @@ $re_paper = mysqli_query($con, $sql_paper);
                     interval: 2000
                 });
                 //modal
-                $('#myModal').on('shown.bs.modal', function () {
+                $('#myModal').on('shown.bs.modal', function() {
                     $('#myInput').trigger('focus')
                 });
             });
-
+        </script>
+        <script>
             function modal_show(paperID, type) {
-
+                // alert("123456");
                 $.post("other/modal.php", {
                         id: paperID,
                         cate: type
                     },
-                    function (result) {
+                    function(result) {
                         $("#modalshow").html(result);
                         $("#route").modal('show');
                     }
@@ -632,7 +664,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                         id: paperID,
                         cate: type
                     },
-                    function (result) {
+                    function(result) {
                         $("#modalAns").html(result);
                         $("#confirm1").modal("show");
                     }
@@ -645,7 +677,8 @@ $re_paper = mysqli_query($con, $sql_paper);
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
+        <!-- alert all -->
+        <?php require '../../server/alert.php'; ?>
 </body>
 
-</html>
+</html> 
