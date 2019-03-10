@@ -542,6 +542,8 @@ if (isset($_POST['senmessage'])) {
                                                                     echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
                                                                 } elseif ($row_mes['status'] == 5) {
                                                                     echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
+                                                                }else{
+                                                                    echo '<td></td>';
                                                                 }  ?>
                                                                 <td><?php echo $row_paper_mes['timestamp'] ?></td>
                                                                 <td> <?php echo $row_paper_mes['name'];  ?></td>
