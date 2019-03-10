@@ -3,7 +3,7 @@ require '../../server/server.php';
 $id = $_SESSION['id'];
 // user
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
-$re_user = mysqli_query($con,$sql_user);
+$re_user = mysqli_query($con, $sql_user);
 $row_user = mysqli_fetch_array($re_user);
 
 /// subject
@@ -23,6 +23,11 @@ $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
 
+if(isset($_POST['senmessage'])){
+    $story = $_POST['story'];
+    $cont = $_POST['cont'];
+    $sql_pp ="INSERT INTO `paper`(`owner_id`, `paper_detail`, `step_now`) VALUES ('$_SESSION['id']','[value-2]','1')";
+}
 
 ?>
 <!DOCTYPE html>
@@ -83,8 +88,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs row">
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px"
-                                        data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
                                 </li>
                                 <li class="nav-item col-lg-6">
                                     <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
@@ -132,8 +136,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                                 <?php echo $row_paper['name'];  ?>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#route" onclick="modal_show(<?php echo $row_paper['paper_id']; ?>,'show')">แสดง</button>
                                                             </td>
 
                                                         </tr>
@@ -172,8 +175,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" name = "group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -203,8 +205,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="sub">ประเภทการสอบ</label>
@@ -216,8 +217,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขาดสอบ">
+                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขาดสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
@@ -250,18 +250,15 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">ปีการศึกษา</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกปีการศึกษา">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกปีการศึกษา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
+                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
@@ -295,8 +292,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="sub">ประเภทการสอบ</label>
@@ -308,8 +304,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขอสอบ">
+                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">หลักฐานสาเหตุ</label>
@@ -343,8 +338,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทการลา</label>
@@ -356,18 +350,15 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการลา">
+                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการลา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ตั้งแต่วันที่</label>
-                                                            <input type="date" name="eiei" id="ei" class="form-control"
-                                                                placeholder="ตั้งแต่วันที่">
+                                                            <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ถึงวันที่</label>
-                                                            <input type="date" name="eiei" id="ei" class="form-control"
-                                                                placeholder="ตั้งแต่วันที่">
+                                                            <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                         </div>
                                                         <div class="col-8">
                                                             <label for="file">หลักฐานสาเหตุการลา</label>
@@ -401,8 +392,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทเว็ปไซต์</label>
@@ -414,8 +404,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="สาเหตุการขอรหัสผ่าน">
+                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
                                                         </div>
 
                                                         <div class="col-12 text-center">
@@ -445,8 +434,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
-                                                                placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="comment">ความประสงค์</label>
@@ -502,7 +490,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <?php while($row_paper_user = mysqli_fetch_array($re_paper)){ ?>
+                                                            <?php while ($row_paper_user = mysqli_fetch_array($re_paper)) { ?>
                                                             <tr>
                                                                 <td><span class="badge badge-success">อ่านแล้ว</span></td>
                                                                 <td><?php $row_paper_user['timestamp'] ?></td>
@@ -514,7 +502,8 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                                 </td>
                                                             </tr>
 
-                                                        <?php }?>
+                                                            <?php 
+                                                        } ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -526,8 +515,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                             <!-- card 2.2 -->
                                             <div class="card-body">
                                                 <div class="container text-center">
-                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">ส่งข้อความ
                                                         <i class="fas fa-comment"></i></button>
                                                 </div>
                                             </div>
@@ -562,8 +550,7 @@ $re_paper = mysqli_query($con, $sql_paper);
 
 
     <!-- modal card 3.2 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -572,22 +559,22 @@ $re_paper = mysqli_query($con, $sql_paper);
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form action="main.php" method="POST">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">เรื่อง:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input name="story" type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ข้อความ:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <textarea name="cont" class="form-control" id="message-text"></textarea>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" class="btn btn-primary">ส่งข้อความ</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                        <button type="button" name="senmessage" class="btn btn-primary">ส่งข้อความ</button>
+                    </div>
+                </form>
             </div>
         </div>
         <!--modal card 3.2 -->
@@ -599,14 +586,14 @@ $re_paper = mysqli_query($con, $sql_paper);
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         <script>
             //datatable
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#table1').DataTable();
                 $('#table2').DataTable();
 
             });
             //tap
-            $(document).ready(function () {
-                $(".nav-tabs a").click(function () {
+            $(document).ready(function() {
+                $(".nav-tabs a").click(function() {
                     $(this).tab('show');
                 });
                 //time news
@@ -614,18 +601,19 @@ $re_paper = mysqli_query($con, $sql_paper);
                     interval: 2000
                 });
                 //modal
-                $('#myModal').on('shown.bs.modal', function () {
+                $('#myModal').on('shown.bs.modal', function() {
                     $('#myInput').trigger('focus')
                 });
             });
-
+        </script>
+        <script>
             function modal_show(paperID, type) {
 
                 $.post("other/modal.php", {
                         id: paperID,
                         cate: type
                     },
-                    function (result) {
+                    function(result) {
                         $("#modalshow").html(result);
                         $("#route").modal('show');
                     }
@@ -637,7 +625,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                         id: paperID,
                         cate: type
                     },
-                    function (result) {
+                    function(result) {
                         $("#modalAns").html(result);
                         $("#confirm1").modal("show");
                     }
@@ -654,4 +642,4 @@ $re_paper = mysqli_query($con, $sql_paper);
     <?php require '../../server/alert.php'; ?>-
 </body>
 
-</html>
+</html> 

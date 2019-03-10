@@ -304,10 +304,6 @@ if(isset($_POST['re_btn'])){
                                         <?php echo $fac ?>
                                     </select>
                                 </div>
-                                <div class="col-lg-4"></div>
-                            </div>
-                            <div id="eiei"></div>
-                            <div class="row">
                                 <div class="col-lg-8">
                                     <label for="major">สาขา :</label>
                                     <select class="form-control custom-select" name="mar" id="major" required disabled>
@@ -315,8 +311,8 @@ if(isset($_POST['re_btn'])){
 
                                     </select>
                                 </div>
-                                <div class="col-lg-4"></div>
                             </div>
+                            <div id="eiei"></div>
                         </div>
                     </div>
                     <div class="modal-footer">

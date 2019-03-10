@@ -3,18 +3,25 @@ require '../../server/server.php';
 $id = $_SESSION['id'];
 // user
 //check edit
-if(isset($_POST['btn_edit'])){
+if (isset($_POST['btn_edit'])) {
     $new_n = $_POST['new_name'];
     $new_tel = $_POST['new_num'];
     $new_pass = $_POST['new_pass'];
-    $new_email = $_POST['new_mail'];
-    mysqli_query($con,"UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',email='$new_email' WHERE `user_id`= '$id'") ;
-
+    $new_mar = $_POST['mar'];
+    
+    mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'");
 }
-$sql_user = "SELECT user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
+$sql_user = "SELECT user.user_id, user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname, fac.fac_id, user.major_id FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
 $re_user = mysqli_query($con, $sql_user);
 $row_user = mysqli_fetch_array($re_user);
 
+//fac
+$sql_fac = "SELECT * FROM `fac` ";
+$re_fac = mysqli_query($con, $sql_fac);
+$fac = '<option disabled selected value="'.$row_user['fac_id'].'">' . $row_user['facname'] . '</option>';
+while ($r_fac = mysqli_fetch_array($re_fac)) {
+    $fac .= '<option value="' . $r_fac['fac_id'] . '">' . $r_fac['name'] . '</option>';
+}
 
 
 ?>
@@ -62,7 +69,7 @@ $row_user = mysqli_fetch_array($re_user);
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#AECDF7">
-            <br><br><br>
+            <br><br>
 
             <?php require 'other/news.php'; ?>
 
@@ -82,6 +89,11 @@ $row_user = mysqli_fetch_array($re_user);
                                             <td id="name_edit"><?php echo $row_user['title'] . ' ' . $row_user['name']; ?></td>
                                         </tr>
                                         <tr>
+                                            <th scope="row">รหัสนักศึกษา</th>
+                                            <td id="num_edit"><?php echo $row_user['user_id']; ?></td>
+
+                                        </tr>
+                                        <tr>
                                             <th scope="row">Password</th>
                                             <td id="pass_edit"><?php echo $row_user['password']; ?></td>
 
@@ -92,8 +104,13 @@ $row_user = mysqli_fetch_array($re_user);
 
                                         </tr>
                                         <tr>
+                                            <th scope="row">อีเมล์</th>
+                                            <td id="num_edit"><?php echo $row_user['email']; ?></td>
+
+                                        </tr>
+                                        <tr>
                                             <th scope="row">คณะ/สาขา</th>
-                                            <td id="mail_edit"><?php echo $row_user['facname'].' '.$row_user['majorname']; ?></td>
+                                            <td id="mail_edit"><?php echo $row_user['facname'] . ' ' . $row_user['majorname']; ?></td>
 
                                         </tr>
                                         <tr>
@@ -142,20 +159,27 @@ $row_user = mysqli_fetch_array($re_user);
                         <div class="card-body">
                             <dl class="row">
                                 <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
-                                <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo $row_user['title'] . ' ' . $row_user['name']; ?>" require></dt>
-
-                                <dt class="col-lg-4"><label for="pass">Password</label></dt>
-                                <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" require></dt>
-
+                                <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo $row_user['name']; ?>" required><br></dt>
+                                
+                                <dt class="col-lg-4"><label for="pass">รหัสผ่าน</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" required><br></dt>
+                                
                                 <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
-                                <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" require></dt>
-
-                                <dt class="col-lg-4"><label for="mail"></label></dt>
-                                <dt class="col-lg-8"><input class="form-control" id="new_mail" name="new_mail" type="text" value="<?php echo $row_user['facname'].' '.$row_user['majorname']; ?>" require></dt>
-                                <div class="row">
-                                    <div class="col-lg-8"></div>
-                                    <div class="col-lg-8"></div>
-                                </div>
+                                <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" required><br></dt>
+                                <dt class="col-lg-4"><label for="faculty">คณะ/สาขา</label></dt>
+                                <dt class="col-lg-8">
+                                    <select class="form-control custom-select" name="fac" id="faculty" required>
+                                        <?php echo $fac ?>
+                                    </select>
+                                </dt>
+                                <dt class="col-lg-4"></dt>
+                                <dt class="col-lg-8">
+                                <br>
+                                    <select class="form-control custom-select" name="mar" id="major" required >
+                                        <option selected value="<?php echo $row_user['major_id']?>"><?php echo $row_user['majorname']?></option>
+                                    </select>
+                                
+                                </dt>
                             </dl>
                         </div>
                     </div>
@@ -242,6 +266,30 @@ $row_user = mysqli_fetch_array($re_user);
         // $(document).ready(function () {
         //     $('#table_id').DataTable();
         // });
+    </script>
+    <script>
+        $('#faculty').change(function(e) {
+            e.preventDefault();
+            fac = $('#faculty').val();
+            // namefac = $('#faculty').text();
+            // $('#eiei').append(fac);
+
+            // alert(namefac);
+            $.post("../../server/major.php", {
+                    data: fac
+                },
+                function(result) {
+                    if (fac != null) {
+                        $("#major").html(result);
+                        $('#major').prop("disabled", false);
+                    }
+
+
+                    // $("#del").modal("show");
+                }
+
+            );
+        });
     </script>
 
     <!-- bootstrap 4.2.1 -->
