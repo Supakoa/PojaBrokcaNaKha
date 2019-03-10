@@ -1,3 +1,9 @@
+<?php
+    require '../../server/server.php';
+    $sql = "SELECT * FROM news WHERE 1";
+    $re_news = mysqli_query($con,$sql);
+    $order = 0;
+?>
 <div class="w3-container-fluid w3-center" style="margin:20px;">
     <div class="w3-container-fluid" style="margin:20px;padding:20px;">
         <h1>ตั้งค่า : ข่าว</h1>
@@ -49,55 +55,28 @@
                     ลบ
                 </div>
             </div>
-            <div class="row" style="padding:20px;border:solid;">
-                <div class="col-1 ">
-                    <p>1).</p><br>
-                </div>
-                <div class="col">
-                    <a href="https://nuuneoi.com/blog" target="_blank"> https://nuuneoi.com/blog </a>
-                </div>
-                <div class="col">
-                    <img class="w3-red" src="..\image\news\1.jpg" width="200" height="100">
-                </div>
-                <div class="col-2">
-                    <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
-                </div>
-            </div>
             <!-- end add -->
 
-            <!-- Test 2 -->
+            <!-- start NEWS template -->
+            <?php
+                while($row_news = mysqli_fetch_array($re_news)){
+            ?>
             <div class="row" style="padding:20px;border:solid;">
                 <div class="col-1">
-                    <p>2).</p>
+                    <p><?php echo ++$order; ?>).</p>
                 </div>
                 <div class="col">
-                    <a href="#" target="_blank"> WWW.google.com </a>
+                    <a href="#" target="_blank"><?php echo $row_news['news_url']; ?></a>
                 </div>
                 <div class="col">
-                    <img class="w3-red" src="..\image\news\2.jpg" width="200" height="100">
+                    <img class="w3-red" src="..\image\news\<?php echo $row_news['news_img'];?>" width="200" height="100">
                 </div>
                 <div class="col-2">
                     <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
                 </div>
             </div>
-            <!-- end test 2 -->
-
-            <!-- Test 2 -->
-            <div class="row" style="padding:20px;border:solid;">
-                <div class="col-1">
-                    <p>2).</p>
-                </div>
-                <div class="col">
-                    <a href="#" target="_blank"> WWW.google.com </a>
-                </div>
-                <div class="col">
-                    <img class="w3-red" src="..\image\news\3.jpg" width="200" height="100">
-                </div>
-                <div class="col-2">
-                    <button class = "btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style = "color:red"></i></button>
-                </div>
-            </div>
-            <!-- end test 2 -->
+                <?php } ?>
+            <!-- end NEWS template -->
 
         </div>
         <!-- <div class="w3-container-fluid w3-center" style="margin:20px;">
