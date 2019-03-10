@@ -5,7 +5,7 @@ $id = $_POST['id'];
 $type = $_POST['cate'];
 
 //paper_user
-$sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name, form.detail, form_way.step FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
+$sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name,paper.paper_detail, form_way.step FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
 $re_paper_user = mysqli_query($con,$sql_paper_user);
 // $row_pu = mysqli_fetch_array($re_paper_user);
 //paper_user 
@@ -63,7 +63,10 @@ $re_paper_user = mysqli_query($con,$sql_paper_user);
 <!-- show state modal -->
 
 <?php 
-} else{ ?>
+} else{ 
+    $row_pu = mysqli_fetch_array($re_paper_user);
+    $keywords = preg_split("/๛/",$row_pu['paper_detail']);
+    ?>
 
 <!-- text modal -->
 <div id="confirm1" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -80,13 +83,16 @@ $re_paper_user = mysqli_query($con,$sql_paper_user);
                 <dl class="row">
                     <dt class="col-sm-3 text-truncate">เรื่อง : </dt>
                     <dd class="col-sm-9">
-                        <p>ผมต้องแนบเอกสารอะไรบ้างครับในการขอลา เนื่องจากไปธุระกับครบครับ</p>
-                        <p>แนบเอกสารลากิจ</p>
+                        <p><?php echo $keywords[0] ?></p>
+                        <p> <?php 
+                        print_r($keywords);
+                        ?></p>
+                       
                     </dd>
 
                     <dt class="col-sm-3 text-truncate">ข้อความ : </dt>
                     <dd class="col-sm-9">
-                        <p><?php echo $row_pu['detail']; ?></p>
+                    <p><?php echo $keywords[1] ?></p>
                     </dd>
                 </dl>
                 <!-- User -->
