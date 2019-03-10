@@ -518,8 +518,9 @@ if (isset($_POST['senmessage'])) {
                                                         </thead>
                                                         <tbody>
                                                             <?php 
-                                                            $re_paper = mysqli_query($con, $sql_paper);
-                                                            while ($row_paper_user = mysqli_fetch_array($re_paper)) { ?>
+                                                            $sql_mes = "SELECT paper.paper_detail, paper.timestamp, paper.status  FROM `user`, `paper`, `paper_user` WHERE user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8'";
+                                                            $re_mes = mysqli_query($con,$sql_mes);
+                                                            while ($row_paper_user = mysqli_fetch_array($re_mes)) { ?>
                                                             <tr>
                                                                 <?php 
                                                                 if ($row_paper['status'] == 4) {
