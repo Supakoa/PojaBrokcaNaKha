@@ -1,7 +1,6 @@
 <?php 
 require '../../server/server.php';
 $id = $_SESSION['id'];
-echo '<br>'.'<br>'.'<br>'.'<br>'.'<br>'.$id;
 // user
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
 $re_user = mysqli_query($con,$sql_user);

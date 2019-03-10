@@ -31,18 +31,18 @@
 
 </head>
 
-<body class="" style="background-color:#E8F5E9;">
+<body class="" style="background-color:#BECBD1;">
 
     <!-- start sidebar -->
-    <div class="w3-sidebar w3-bar-block " style="width:15%;background-color:#56cb8d;color:black;">
+    <div class="w3-sidebar w3-bar-block " style="width:15%;background-color:#5E7F70;color:black;">
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
-            <h1 class="w3-center" style="color: rgb(95, 95, 95);"><i class="fas fa-home"></i> หน้าแรก</h1>
+            <h1 class="w3-center" style="color: #FFFFFF;"><i class="fas fa-home"></i> หน้าแรก</h1>
         </a>
-        <div class="w3-container" style="margin-left:1%;">
+        <div class="w3-container" style="margin-left:1%;color: #FFFFFF;" >
             <hr>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
                     class="fas fa-bell"></i>
-                ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black">4</span></a>
+                ข้อความ<span class="w3-badge w3-right w3-white" style="text-shadow: 0 0 0 black;">4</span></a>
             <a class="w3-bar-item w3-button" onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');"><i
                     class="far fa-folder-open"></i>
                 เอกสาร</a>
@@ -64,7 +64,7 @@
     <div style="margin-left:15%;">
 
         <!-- start NavBar -->
-        <div class="nav " style="background-color:#2D935D;color:whitesmoke;">
+        <div class="nav " style="background-color:#84695E;color:whitesmoke;">
             <h2 class="nav-item text-center w3-text" style="width:68%" id="nav_title"></h2>
 
             <!-- set to right -->
@@ -94,7 +94,7 @@
                     <h1>Footer</h1>
                 </div> -->
                 <!-- footer -->
-                <div class="" style="border:solid;border-color:#2D935D;background-color:#2D935D" id="footer">
+                <div class="" style="border:solid;border-color:#84695E;background-color:#84695E" id="footer">
                     <p style="margin-top:1%;color:whitesmoke;">©Powered by CEFStyle</p>
                 </div>
             </div>
