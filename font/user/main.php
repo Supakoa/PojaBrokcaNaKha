@@ -24,12 +24,18 @@ $re_paper = mysqli_query($con, $sql_paper);
 /// paper_user
 
 if(isset($_POST['senmessage'])){
-    echo 'goooooooooooooo';
+    // echo 'goooooooooooooo';
     $mix= $_POST['topic']."๛".$_POST['cont'];
     $num = $_POST['number'];
     $sql_pp =" INSERT INTO `paper`(`owner_id`, `paper_detail`, `step_now`, `form_id`) VALUES ('$id','$mix','1','$num')";
     mysqli_query($con,$sql_pp);
 }
+$sql_form_way = "SELECT * FROM `form_way` WHERE `form_id` = '8' AND `step` = '1'";
+$re_form_way = mysqli_query($con, $sql_form_way);
+while($row_form_way = mysqli_fetch_array($re_form_way)){
+    mysqli_query($con,"INSERT INTO `paper_user`( `paper_id`, `user_id`,) VALUES ([value-1],[value-2])");
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -70,7 +76,7 @@ if(isset($_POST['senmessage'])){
     <!-- navbar -->
 
     <div class="container-fluid fixed-top" style="background-color:#3782EB;">
-        <?php //require 'other/navbars.php'; ?>
+        <?php require 'other/navbars.php'; ?>
     </div>
     <!-- navbar -->
 
@@ -123,7 +129,6 @@ if(isset($_POST['senmessage'])){
                                                                 <?php echo $i;  ?>
                                                             </td>
                                                             <?php 
-                                                           echo $row_paper['status'];
                                                             if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
                                                             }elseif ($row_paper['status'] == 3) {
