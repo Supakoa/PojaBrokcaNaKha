@@ -2,11 +2,15 @@
 require '../../../server/server.php';
 $id = $_SESSION['id'];
 if(isset($_POST['form_1'])){
-   $detail= $_POST['sub']."๛".$_POST[''];
-    $sql_paper = " INSERT INTO `paper`( `owner_id`, `form_id`, `paper_detail`, `step_now`, `status`, `note`) VALUES ('$id',1,[value-4],[value-5],[value-6],[value-7])";
-    $re_paper = mysqli_query($con,$sql_paper);
-    $row_paper = mysqli_fetch_array($re_paper);
-
+   $detail= $_POST['sub']."๛".$_POST['group'];
+    $sql_paper = "INSERT INTO `paper`( `owner_id`, `form_id`, `paper_detail`, `step_now`, `status`) VALUES ('$id','1','$detail','1','0') ";
+    if($re_paper = mysqli_query($con,$sql_paper)){
+                $_SESSION['alert'] = 3;
+    }else{
+        $_SESSION['alert'] = 4;
+    }
+   echo $detail;
+ 
 }elseif(isset($_POST['form_2'])){
     echo "2";
 
@@ -30,6 +34,6 @@ else{
     echo "8";
 
 }
-// header("Location: ../main.php");
-// exit;
+header("Location: ../main.php");
+exit;
 ?>

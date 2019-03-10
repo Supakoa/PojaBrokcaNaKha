@@ -17,8 +17,8 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 }
 $sub .= '</select>';
 
-/// paper_user & paper & form
-$sql_paper = "SELECT paper.status, form.name, paper.paper_id, paper_user.timestamp FROM `paper_user`,`paper`,`form` WHERE paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
+/// paper_user
+$sql_paper = "SELECT paper.status,form.name,paper.paper_id FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8' ";
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
@@ -51,7 +51,11 @@ if(isset($_POST['senmessage'])){
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    
+    <!-- sweet alert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
     <!-- datatable -->
@@ -118,14 +122,16 @@ if(isset($_POST['senmessage'])){
                                                             <td>
                                                                 <?php echo $i;  ?>
                                                             </td>
-                                                            <?php if ($row_paper['status'] == 1) {
+                                                            <?php 
+                                                           echo $row_paper['status'];
+                                                            if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
-                                                            } ?>
-                                                            <?php if ($row_paper['status'] == 2) {
+                                                            }elseif ($row_paper['status'] == 3) {
                                                                 echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
-                                                            } ?>
-                                                            <?php if ($row_paper['status'] == 3) {
+                                                            }elseif ($row_paper['status'] == 0) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
+                                                            }else{
+                                                                echo '<td><span class="badge badge-danger">8;p</span></td>';
                                                             } ?>
 
                                                             <td>
@@ -635,7 +641,8 @@ if(isset($_POST['senmessage'])){
         <!-- bootstrap 4.2.1 -->
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
+            <!-- alert all -->
+    <?php require '../../server/alert.php'; ?>-
 </body>
 
 </html> 
