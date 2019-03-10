@@ -72,9 +72,6 @@ if(isset($_POST['re_btn'])){
     }else{
         $_SESSION['alert'] = 4;
     }
-    
-
-    
 }
 
 
