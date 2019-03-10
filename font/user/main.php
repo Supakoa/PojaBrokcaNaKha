@@ -24,9 +24,11 @@ $re_paper = mysqli_query($con, $sql_paper);
 /// paper_user
 
 if(isset($_POST['senmessage'])){
-    $story = $_POST['story'];
-    $cont = $_POST['cont'];
-    $sql_pp ="INSERT INTO `paper`(`owner_id`, `paper_detail`, `step_now`) VALUES ('$_SESSION['id']','[value-2]','1')";
+    echo 'goooooooooooooo';
+    $mix= $_POST['topic']."๛".$_POST['cont'];
+    $num = $_POST['number'];
+    $sql_pp =" INSERT INTO `paper`(`owner_id`, `paper_detail`, `step_now`, `form_id`) VALUES ('$id','$mix','1','$num')";
+    mysqli_query($con,$sql_pp);
 }
 
 ?>
@@ -64,14 +66,14 @@ if(isset($_POST['senmessage'])){
     <!-- navbar -->
 
     <div class="container-fluid fixed-top" style="background-color:#3782EB;">
-        <?php require 'other/navbars.php'; ?>
+        <?php //require 'other/navbars.php'; ?>
     </div>
     <!-- navbar -->
 
     <!-- body -->
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#AECDF7">
-            <br><br><br>
+            <br><br>
 
             <?php require 'other/news.php'; ?>
 
@@ -557,16 +559,17 @@ if(isset($_POST['senmessage'])){
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">เรื่อง:</label>
-                            <input name="story" type="text" class="form-control" id="recipient-name">
+                            <input name="topic" type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ข้อความ:</label>
                             <textarea name="cont" class="form-control" id="message-text"></textarea>
                         </div>
                     </div>
+                    <input type="hidden" name="number" value="8">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                        <button type="button" name="senmessage" class="btn btn-primary">ส่งข้อความ</button>
+                        <button type="submit" name="senmessage" class="btn btn-primary">ส่งข้อความ</button>
                     </div>
                 </form>
             </div>
