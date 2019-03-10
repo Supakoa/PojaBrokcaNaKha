@@ -325,12 +325,13 @@ if(isset($_POST['hide_login'])){
         });
     </script>
     <script>
-        $('#faculty').click(function (e) {
+        $('#faculty').change(function (e) {
             e.preventDefault();
             fac = $('#faculty').val();
+            // namefac = $('#faculty').text();
             // $('#eiei').append(fac);
 
-            // alert(fac)sasd
+            // alert(namefac);
             $.post("server/major.php", {
                     data: fac
                 },
