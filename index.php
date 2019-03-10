@@ -55,7 +55,27 @@ if(isset($_POST['hide_login'])){
     }
 
 }
+if(isset($_POST['re_btn'])){
+    $user_id = $_POST['user_id'];
+    $tel = $_POST['tel'];
+    $pw = $_POST['pw'];
+    $tname = $_POST['tname'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $name = $fname.' '.$lname;
+    $tname = $_POST['tname'];
+    $mar = $_POST['mar'];
+    $email = 's'.$user_id.'@ssru.ac.th';
+    $sql_re = "INSERT INTO `user`(`user_id`, `password`, `title`, `name`, `tel`, `email`, `role`, `status`, `major_id`) VALUES ('$user_id','$pw','$tname','$name','$tel','$email',1,1,'$mar')";
+    if($re_re = mysqli_query($con,$sql_re)){
+        $_SESSION['alert'] = 3;
+    }else{
+        $_SESSION['alert'] = 4;
+    }
+    
 
+    
+}
 
 
 ?>
@@ -266,8 +286,8 @@ if(isset($_POST['hide_login'])){
                             </div>
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <label for="title_name">คำนำหน้าชื่อ</label>
-                                    <input id="title_name" name="title_name" type="text" class="form-control" required>
+                                    <label for="tname">คำนำหน้าชื่อ</label>
+                                    <input id="tname" name="tname" type="text" class="form-control" required>
 
                                 </div>
                                 <div class="col-lg-5">
@@ -304,7 +324,7 @@ if(isset($_POST['hide_login'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
+                        <button type="submit" name = "re_btn" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
                     </div>
                 </div>
             </form>
