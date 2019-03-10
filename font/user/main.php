@@ -43,7 +43,7 @@ if (isset($_POST['senmessage'])) {
     // echo 'goooooooooooooo';
     $mix = $_POST['topic'] . "๛" . $_POST['cont'];
     $num = $_POST['number'];
-    $sql_pp = " INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`) VALUES ('$paper_id','$id','$mix','1','$num')";
+    $sql_pp = " INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `paper.status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
     if (mysqli_query($con, $sql_pp)) {
         $_SESSION['alert'] = 3;
         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
@@ -168,7 +168,7 @@ if (isset($_POST['senmessage'])) {
                                                                 echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
                                                             } elseif ($row_paper['status'] == 0) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
-                                                            } else {
+                                                            } elseif($row_paper['status'] == 2) {
                                                                 echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
                                                             } ?>
 
@@ -215,7 +215,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -245,7 +245,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="type">ประเภทการสอบ</label>
@@ -257,7 +257,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" name = "note" class="form-control" placeholder="สาเหตุการขาดสอบ">
+                                                            <input type="text" name="note" class="form-control" placeholder="สาเหตุการขาดสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
@@ -290,7 +290,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">ปีการศึกษา</label>
@@ -332,7 +332,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="sub">ประเภทการสอบ</label>
@@ -378,7 +378,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทการลา</label>
@@ -470,7 +470,7 @@ if (isset($_POST['senmessage'])) {
 
                                                     <div class="row">
                                                         <div class="col-6">
-                                                        <?php echo $sub;  ?>
+                                                            <?php echo $sub;  ?>
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
@@ -534,7 +534,14 @@ if (isset($_POST['senmessage'])) {
                                                             $re_paper = mysqli_query($con, $sql_paper);
                                                             while ($row_paper_user = mysqli_fetch_array($re_paper)) { ?>
                                                             <tr>
-                                                                <td><span class="badge badge-success">อ่านแล้ว</span></td>
+                                                               
+                                                                
+                                                                <?php 
+                                                                if ($row_paper['status'] == 4) {
+                                                                    echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
+                                                                } elseif ($row_paper['status'] == 5) {
+                                                                    echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
+                                                                }  ?>
                                                                 <td><?php echo $row_paper_user['timestamp'] ?></td>
                                                                 <td> <?php echo $row_paper_user['name'];  ?></td>
                                                                 <td>
@@ -542,10 +549,14 @@ if (isset($_POST['senmessage'])) {
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
+                                                            <tr>
+
+                                                                <?php 
+                                                            } ?>
+                                                              
+                                                                
                                                             </tr>
 
-                                                            <?php 
-                                                        } ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
