@@ -17,12 +17,17 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 }
 $sub .= '</select>';
 
-/// paper_user
+/// paper_user & paper & form
 $sql_paper = "SELECT paper.status, form.name, paper.paper_id, paper_user.timestamp FROM `paper_user`,`paper`,`form` WHERE paper_user.paper_id = paper.paper_id AND paper.form_id = form.form_id AND paper.owner_id = '$id'";
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
 
+if(isset($_POST['senmessage'])){
+    $story = $_POST['story'];
+    $cont = $_POST['cont'];
+    $sql_pp ="INSERT INTO `paper`(`owner_id`, `paper_detail`, `step_now`) VALUES ('$_SESSION['id']','[value-2]','1')";
+}
 
 ?>
 <!DOCTYPE html>
@@ -548,22 +553,22 @@ $re_paper = mysqli_query($con, $sql_paper);
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form action="main.php" method="POST">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">เรื่อง:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input name="story" type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ข้อความ:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <textarea name="cont" class="form-control" id="message-text"></textarea>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" class="btn btn-primary">ส่งข้อความ</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                        <button type="button" name="senmessage" class="btn btn-primary">ส่งข้อความ</button>
+                    </div>
+                </form>
             </div>
         </div>
         <!--modal card 3.2 -->
