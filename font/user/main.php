@@ -144,8 +144,8 @@ if (isset($_POST['senmessage'])) {
                                                         <tr>
                                                             <td>
                                                                 <?php 
-                                                                // echo $row_paper['paper_id'];
-                                                                echo $i;
+                                                                echo $row_paper['paper_id'];
+                                                                // echo $i;
                                                                 ?>
                                                             </td>
                                                             <?php 
@@ -281,11 +281,11 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">ปีการศึกษา</label>
-                                                            <input type="text" class="form-control" placeholder="กรอกปีการศึกษา">
+                                                            <input type="text" class="form-control" name="year" placeholder="กรอกปีการศึกษา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" class="form-control" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
+                                                            <input type="text" class="form-control" name="note" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
@@ -323,7 +323,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="sub">ประเภทการสอบ</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <select name="type" class="form-control select2">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="กลางภาค">กลางภาค</option>
                                                                 <option value="ปลายภาค">ปลายภาค</option>
@@ -331,7 +331,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" class="form-control" placeholder="สาเหตุการขอสอบ">
+                                                            <input name="note" type="text" class="form-control" placeholder="สาเหตุการขอสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">หลักฐานสาเหตุ</label>
@@ -369,7 +369,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทการลา</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <select name="type" class="form-control select2">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="ลากิจ">ลากิจ</option>
                                                                 <option value="ลาป่วย">ลาป่วย</option>
@@ -377,15 +377,15 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" class="form-control" placeholder="สาเหตุการลา">
+                                                            <input name="note" type="text" class="form-control" placeholder="สาเหตุการลา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ตั้งแต่วันที่</label>
-                                                            <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
+                                                            <input type="date" name="sdate" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ถึงวันที่</label>
-                                                            <input type="date" name="eiei" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
+                                                            <input type="date" name="edate" id="ei" class="form-control" placeholder="ตั้งแต่วันที่">
                                                         </div>
                                                         <div class="col-8">
                                                             <label for="file">หลักฐานสาเหตุการลา</label>
