@@ -202,7 +202,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" name="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -232,11 +232,11 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group" class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
-                                                            <label for="sub">ประเภทการสอบ</label>
-                                                            <select name="sub" class="form-control select2">
+                                                            <label for="type">ประเภทการสอบ</label>
+                                                            <select name="type" class="form-control select2">
                                                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                                                 <option value="กลางภาค">กลางภาค</option>
                                                                 <option value="ปลายภาค">ปลายภาค</option>
@@ -244,11 +244,11 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขาดสอบ">
+                                                            <input type="text" name = "note" class="form-control" placeholder="สาเหตุการขาดสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -277,19 +277,19 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">ปีการศึกษา</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกปีการศึกษา">
+                                                            <input type="text" class="form-control" placeholder="กรอกปีการศึกษา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
+                                                            <input type="text" class="form-control" placeholder="สาเหตุการขอแก้ไขผลการเรียน  ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">สำเนาบัตรนักศึกษา</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -319,7 +319,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="sub">ประเภทการสอบ</label>
@@ -331,11 +331,11 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอสอบ">
+                                                            <input type="text" class="form-control" placeholder="สาเหตุการขอสอบ">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="file">หลักฐานสาเหตุ</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -365,7 +365,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทการลา</label>
@@ -377,7 +377,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการลา">
+                                                            <input type="text" class="form-control" placeholder="สาเหตุการลา">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="ei">ตั้งแต่วันที่</label>
@@ -389,7 +389,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-8">
                                                             <label for="file">หลักฐานสาเหตุการลา</label>
-                                                            <input type="file" name="file" id="file" class="form-control btn btn-light">
+                                                            <input type="file" name="uplode_file" id="file" class="form-control btn btn-light">
                                                         </div>
                                                         <div class="col-12 text-center">
                                                             <br>
@@ -419,7 +419,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="sub">ประเภทเว็ปไซต์</label>
@@ -431,7 +431,7 @@ if (isset($_POST['senmessage'])) {
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">สาเหตุ</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
+                                                            <input type="text" class="form-control" placeholder="สาเหตุการขอรหัสผ่าน">
                                                         </div>
 
                                                         <div class="col-12 text-center">
@@ -457,11 +457,11 @@ if (isset($_POST['senmessage'])) {
 
                                                     <div class="row">
                                                         <div class="col-6">
-
+                                                        <?php echo $sub;  ?>
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control" placeholder="กรอกกลุ่มเรียน">
+                                                            <input type="text" id="group"  name = "group"class="form-control" placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="comment">ความประสงค์</label>
