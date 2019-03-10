@@ -19,11 +19,18 @@ if(isset($_POST['form_1'])){
                 $_SESSION['alert'] = 3;
                 $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '1' AND `step` ='1' ";
                 $re_form = mysqli_query($con, $sql_form);
+                $row_form = mysqli_fetch_array($re_form);
+                $user_id = $row_form['user_id'];
+                $sum_q = '(\''.$paper_id.'\',\''.$user_id.'\' )';
                 while($row_form = mysqli_fetch_array($re_form)){
-                    
-                    echo  $user_id = $row_form['user_id'];
-                    $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES ('$paper_id','$user_id' )";
-                    $re_user = mysqli_query($con, $sql_user);
+                    $user_id = $row_form['user_id'];
+                    $sum_q .= ',(\''.$paper_id.'\',\''.$user_id.'\' )';
+                }
+                $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES ".$sum_q." ";
+                if($re_user = mysqli_query($con, $sql_user)){
+                    $_SESSION['alert'] = 3;
+                }else{
+                    $_SESSION['alert'] = 4;
                 }
     }else{
         $_SESSION['alert'] = 4;
