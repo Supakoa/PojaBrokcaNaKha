@@ -144,8 +144,8 @@ if (isset($_POST['senmessage'])) {
                                                         <tr>
                                                             <td>
                                                                 <?php 
-                                                                echo $row_paper['paper_id'];
-                                                                // echo $i;
+                                                                // echo $row_paper['paper_id'];
+                                                                echo $i;
                                                                 ?>
                                                             </td>
                                                             <?php 
