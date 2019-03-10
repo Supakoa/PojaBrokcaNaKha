@@ -167,7 +167,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                         </div>
                                                         <div class="col-6">
                                                             <label for="group">กลุ่มเรียน</label>
-                                                            <input type="text" id="group" class="form-control"
+                                                            <input type="text" id="group" name = "group" class="form-control"
                                                                 placeholder="กรอกกลุ่มเรียน">
                                                         </div>
                                                         <div class="col-12 text-center">
@@ -504,7 +504,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                                 <td>แนบเอกสารลากิจ</td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'Ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans(<?php $row_paper_user['paper_id'] ?>,'ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
                                                             </tr>
@@ -552,7 +552,7 @@ $re_paper = mysqli_query($con, $sql_paper);
     <!-- modal show -->
 
     <!-- modal message form admin -->
-    <div id="modalAns"></div>
+    <div id="modalans"></div>
     <!-- modal message form admin -->
 
 
@@ -622,11 +622,9 @@ $re_paper = mysqli_query($con, $sql_paper);
                     },
                     function (result) {
                         $("#modalshow").html(result);
-                        $("#route").modal("show");
+                        $("#route").modal('show');
                     }
                 );
-
-
             };
 
             function modal_ans(paperID, type) {

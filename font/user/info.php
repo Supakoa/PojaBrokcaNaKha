@@ -1,3 +1,26 @@
+<?php 
+require '../../server/server.php';
+$id = $_SESSION['id'];
+// user
+//check edit
+if(isset($_POST['btn_edit'])){
+    $new_n = $_POST['new_name'];
+    $new_tel = $_POST['new_num'];
+    $new_pass = $_POST['new_pass'];
+    $new_email = $_POST['new_mail'];
+    mysqli_query($con,"UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',email='$new_email' WHERE `user_id`= '$id'") ;
+
+}
+$sql_user = "SELECT user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
+$re_user = mysqli_query($con, $sql_user);
+$row_user = mysqli_fetch_array($re_user);
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -56,21 +79,21 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">ชื่อ - นามสกุล</th>
-                                            <td id="name_edit"> ศุภกิจ กิจนะบำรุงศํกดิ์</td>
+                                            <td id="name_edit"><?php echo $row_user['title'] . ' ' . $row_user['name']; ?></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Password</th>
-                                            <td id="pass_edit">16/01/2540</td>
+                                            <td id="pass_edit"><?php echo $row_user['password']; ?></td>
 
                                         </tr>
                                         <tr>
                                             <th scope="row">เบอร์โทรศัพท์</th>
-                                            <td id="num_edit">095-59xx-xxx</td>
+                                            <td id="num_edit"><?php echo $row_user['tel']; ?></td>
 
                                         </tr>
                                         <tr>
-                                            <th scope="row">E-mail</th>
-                                            <td id="mail_edit">supakoa@gmail.com</td>
+                                            <th scope="row">คณะ/สาขา</th>
+                                            <td id="mail_edit"><?php echo $row_user['facname'].' '.$row_user['majorname']; ?></td>
 
                                         </tr>
                                         <tr>
@@ -109,34 +132,39 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modaledit">Modal
-                        title</h5>
+                    <h5 class="modal-title" id="modaledit">แก้ไข</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="card-body">
-                        <dl class="row">
-                            <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
-                            <dt class="col-lg-8"><input id="new_name" type="text" placeholder="ศุภกิจ กิจนะบำรุงศักดิ์"></dt>
+                <form action="info.php" method="POST">
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo $row_user['title'] . ' ' . $row_user['name']; ?>" require></dt>
 
-                            <dt class="col-lg-4"><label for="pass">Password</label></dt>
-                            <dt class="col-lg-8"><input id="new_pass" type="text" placeholder="16/01/2540"></dt>
+                                <dt class="col-lg-4"><label for="pass">Password</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" require></dt>
 
-                            <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
-                            <dt class="col-lg-8"><input id="new_num" type="text" placeholder="095-59xx-xxx"></dt>
+                                <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" require></dt>
 
-                            <dt class="col-lg-4"><label for="mail">E-mail</label></dt>
-                            <dt class="col-lg-8"><input id="new_mail" type="text" placeholder="supakoa@gmail.com"></dt>
-                        </dl>
+                                <dt class="col-lg-4"><label for="mail"></label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_mail" name="new_mail" type="text" value="<?php echo $row_user['facname'].' '.$row_user['majorname']; ?>" require></dt>
+                                <div class="row">
+                                    <div class="col-lg-8"></div>
+                                    <div class="col-lg-8"></div>
+                                </div>
+                            </dl>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save
-                        changes</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="btn_edit" class="btn btn-primary">Save
+                            changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

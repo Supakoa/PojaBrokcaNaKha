@@ -55,6 +55,24 @@ if(isset($_POST['hide_login'])){
     }
 
 }
+if(isset($_POST['re_btn'])){
+    $user_id = $_POST['user_id'];
+    $tel = $_POST['tel'];
+    $pw = $_POST['pw'];
+    $tname = $_POST['tname'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $name = $fname.' '.$lname;
+    $tname = $_POST['tname'];
+    $mar = $_POST['mar'];
+    $email = 's'.$user_id.'@ssru.ac.th';
+    $sql_re = "INSERT INTO `user`(`user_id`, `password`, `title`, `name`, `tel`, `email`, `role`, `status`, `major_id`) VALUES ('$user_id','$pw','$tname','$name','$tel','$email',1,1,'$mar')";
+    if($re_re = mysqli_query($con,$sql_re)){
+        $_SESSION['alert'] = 3;
+    }else{
+        $_SESSION['alert'] = 4;
+    }
+}
 
 
 ?>
@@ -79,8 +97,8 @@ if(isset($_POST['hide_login'])){
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
 
-     <!-- sweet alert2 -->
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+    <!-- sweet alert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
     <style>
         /* Make the image fully responsive */
@@ -165,14 +183,15 @@ if(isset($_POST['hide_login'])){
                                                 <form action="index.php" method="post">
                                                     <div class="form-group">
                                                         <label for="user">รหัสนักศึกษา / รหัสอาจารย์</label>
-                                                        <input type="text" class="form-control" id="user" placeholder="ID" name = "user_name">
+                                                        <input type="text" class="form-control" id="user" placeholder="ID"
+                                                            name="user_name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Password1">วัน/เดือน/ปี</label>
-                                                        <input type="password" class="form-control" id="Password" name = "user_password"
+                                                        <input type="password" class="form-control" id="Password" name="user_password"
                                                             placeholder="Password">
                                                     </div>
-                                                    <input type="hidden" name="hide_login" value = "eiei">
+                                                    <input type="hidden" name="hide_login" value="eiei">
                                                     <!-- check bot -->
                                                     <div class="g-recaptcha" data-sitekey="6LfGSZIUAAAAAPX_Wv8XdRf8FnwaE4yht4Ee_5RP"></div>
                                                     <!-- check bot -->
@@ -241,40 +260,43 @@ if(isset($_POST['hide_login'])){
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="id">รหัสนักศึกษา</label>
-                                    <input id="id" name="user_id" type="text" class="form-control" required>
+                                    <input id="re_id" name="user_id" type="text" class="form-control" required>
                                 </div>
-                                <div class="col-lg-6">
-                                    <label for="pass">รหัสผ่าน</label>
-                                    <input id="pass" name="password" type="text" class="form-control" required>
-                                </div>
-                                <div class="col-lg-6"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="fname">ชื่อ</label>
-                                    <input id="fname" name="fname" type="text" class="form-control" required>
-
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="lname">นามสกุล</label>
-                                    <input id="lname" name="lname" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <label for="email">E-mail</label>
-                                    <input id="email" name="email" class="form-control" type="email" required>
-                                </div>
-                                <div class="col-lg-4"></div>
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-6">
                                     <label for="phone">เบอร์โทรศัพท์</label>
                                     <input id="phone" name="tel" class="form-control" type="text" required>
                                 </div>
-                                <div class="col-lg-6"></div>
+                                
                             </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="pass">รหัสผ่าน</label>
+                                    <input id="pass" name="pw" type="password" class="form-control" required>
+                                    <p id="pass_p"></p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="pass">ยืนยันรหัสผ่าน</label>
+                                    <input id="con_pass" name="con_pw" type="password" class="form-control" required>
+                                </div>
 
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label for="tname">คำนำหน้าชื่อ</label>
+                                    <input id="tname" name="tname" type="text" class="form-control" required>
+
+                                </div>
+                                <div class="col-lg-5">
+                                    <label for="fname">ชื่อ</label>
+                                    <input id="fname" name="fname" type="text" class="form-control" required>
+
+                                </div>
+                                <div class="col-lg-5">
+                                    <label for="lname">นามสกุล</label>
+                                    <input id="lname" name="lname" type="text" class="form-control" required>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-8">
                                     <label for="faculty">คณะ :</label>
@@ -299,7 +321,7 @@ if(isset($_POST['hide_login'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
+                        <button type="submit" name = "re_btn" class="btn btn-primary"><i class="far fa-save"></i> Save</button>
                     </div>
                 </div>
             </form>
@@ -320,21 +342,22 @@ if(isset($_POST['hide_login'])){
         });
     </script>
     <script>
-        $('#faculty').click(function (e) {
+        $('#faculty').change(function (e) {
             e.preventDefault();
             fac = $('#faculty').val();
+            // namefac = $('#faculty').text();
             // $('#eiei').append(fac);
 
-            // alert(fac)sasd
+            // alert(namefac);
             $.post("server/major.php", {
                     data: fac
                 },
                 function (result) {
-                    if(fac!=null){
+                    if (fac != null) {
                         $("#major").html(result);
                         $('#major').prop("disabled", false);
                     }
-                    
+
 
                     // $("#del").modal("show");
                 }
@@ -342,8 +365,32 @@ if(isset($_POST['hide_login'])){
             );
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#pass').keyup(function () {
+                check_con_pass();
+            });
+            $('#con_pass').keyup(function (e) {
+                check_con_pass();
+
+            });
+
+            function check_con_pass() {
+                a = $('#pass').val();
+                b = $('#con_pass').val();
+                $('#pass_p').text(a + " " + b);
+                conpass = $('#con_pass')[0];
+                if (a != b) {
+                    conpass.setCustomValidity("Passwords Don't Match");
+
+                } else {
+                    conpass.setCustomValidity('');
+                }
+            };
+        });
+    </script>
     <!-- alert all -->
-<?php require 'server/alert.php'; ?>-
+    <?php require 'server/alert.php'; ?>-
 </body>
 
 </html>
