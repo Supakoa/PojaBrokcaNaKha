@@ -2,17 +2,17 @@
 require '../../server/server.php';
 $id = $_SESSION['id'];
 //random
-function getToken($length)
-{
-    $token = "";
-    $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $codeAlphabet .= "0123456789";
-    $max = strlen($codeAlphabet); // edited
-    for ($i = 0; $i < $length; $i++) {
-        $token .= $codeAlphabet[random_int(0, $max - 1)];
-    }
-    return $token;
-}
+// function getToken($length)
+// {
+//     $token = "";
+//     $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//     $codeAlphabet .= "0123456789";
+//     $max = strlen($codeAlphabet); // edited
+//     for ($i = 0; $i < $length; $i++) {
+//         $token .= $codeAlphabet[random_int(0, $max - 1)];
+//     }
+//     return $token;
+// }
 
 
 // user
@@ -32,7 +32,7 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 $sub .= '</select>';
 
 /// paper_user
-$sql_paper = "SELECT paper.status,form.name,paper.paper_id,`paper`.`timestamp` FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id  ORDER BY `paper`.`timestamp` ASC ";
+$sql_paper = "SELECT paper.status,form.name,paper.paper_id,`paper`.`timestamp` FROM `paper`,form WHERE form.form_id != '8'  AND `owner_id` ='$id' AND paper.form_id = form.form_id  ORDER BY `paper`.`timestamp` ASC ";
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
@@ -94,8 +94,10 @@ if (isset($_POST['senmessage'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
-    <!-- datatable -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/> -->
+    
+
+    
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/> -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 
 
@@ -161,6 +163,7 @@ if (isset($_POST['senmessage'])) {
                                                                 echo $i;
                                                                 ?>
                                                             </td>
+                                                            
                                                             <?php 
                                                             if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
@@ -168,8 +171,10 @@ if (isset($_POST['senmessage'])) {
                                                                 echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
                                                             } elseif ($row_paper['status'] == 0) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
-                                                            } elseif($row_paper['status'] == 2) {
+                                                            } elseif ($row_paper['status'] == 2) {
                                                                 echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
+                                                            }else{
+echo '<td></td>';
                                                             } ?>
 
                                                             <td>
@@ -526,39 +531,33 @@ if (isset($_POST['senmessage'])) {
                                                                 <th>เวลาส่ง</th>
                                                                 <th>เรื่อง</th>
                                                                 <th>ข้อความ</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php 
                                                             $sql_mes = "SELECT  paper.timestamp, paper.status  FROM `user`, `paper`, `paper_user`, `form` WHERE paper.form_id = form.form_id AND user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8'";
-                                                            $re_mes = mysqli_query($con,$sql_mes);
+                                                            $re_mes = mysqli_query($con, $sql_mes);
                                                             while ($row_paper_mes = mysqli_fetch_array($re_mes)) { ?>
                                                             <tr>
-                                                               
-                                                                
                                                                 <?php 
                                                                 if ($row_mes['status'] == 4) {
                                                                     echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
                                                                 } elseif ($row_mes['status'] == 5) {
                                                                     echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
-                                                                }else{
+                                                                } else {
                                                                     echo '<td></td>';
                                                                 }  ?>
-                                                                <td><?php echo $row_paper_mes['timestamp'] ?></td>
+                                                                <td><?php echo $row_paper_mes['timestamp']; ?></td>
                                                                 <td> <?php echo $row_paper_mes['name'];  ?></td>
                                                                 <td>
                                                                     <!-- text modal -->
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id']; ?>','ans')">เจ้าหน้าที่</button>
 
                                                                 </td>
-                                                            <tr>
+                                                            </tr>
 
                                                                 <?php 
                                                             } ?>
-                                                              
-                                                                
-                                                            </tr>
 
                                                         </tbody>
                                                     </table>
@@ -638,9 +637,14 @@ if (isset($_POST['senmessage'])) {
 
 
         <!-- Jquery -->
-        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../node_modules/jquery/dist/jquery.js"></script>
+
+        <!-- datatable -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+        <!-- <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+        <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
         <script>
             //datatable
             $(document).ready(function() {

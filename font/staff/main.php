@@ -1,3 +1,17 @@
+<?php 
+require '../../server/server.php';
+
+
+$sql_paper = "SELECT paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, user.title, user.name AS username  
+            FROM `paper_user`, `paper`, `form`, `user` 
+            WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8'";
+$re_paper = mysqli_query($con, $sql_paper);
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -75,14 +89,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php while ($row_paper = mysqli_fetch_array($re_paper)) { ?>
                                             <tr>
-                                                <td>doc58874</td>
-                                                <td>ลากิจ/ลาป่วย</td>
-                                                <td>60122519112</td>
-                                                <td>นาย มานี มีปู</td>
-                                                <td>2019-02-16 12:45:47</td>
-                                                <td><button class="btn btn-outline-info"><i class="fas fa-file-alt"></i></button></td>
+                                                <td><?php echo $row_paper['paper_id']; ?></td>
+                                                <td><?php echo $row_paper['formname']; ?></td>
+                                                <td><?php echo $row_paper['owner_id']; ?></td>
+                                                <td><?php echo $row_paper['title'] . $row_paper['name']; ?></td>
+                                                <td><?php echo $row_paper['timestamp']; ?></td>
+                                                <td><button class="btn btn-outline-info" data-toggle="modal" data-target="#modal1"><i class="fas fa-file-alt"></i></button></td>
                                             </tr>
+                                            <?php 
+                                        } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -116,7 +133,7 @@
                                                 <td>60124879041</td>
                                                 <td>นาย สิงหา มาปูนี</td>
                                                 <td>2019-01-18 18:44:40</td>
-                                                <td><button class="btn btn-outline-info "><i class="fas fa-info-circle"></i></button></td>
+                                                <td><button class="btn btn-outline-info " data-toggle="modal" data-target="#modal2"><i class="fas fa-info-circle"></i></button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -262,10 +279,54 @@
         </div>
     </div>
 
+
+    <!-- Modal1 -->
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal2 -->
+    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Jquery -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <!-- datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script>
         //datatable
         $(document).ready(function() {
