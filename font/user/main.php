@@ -547,7 +547,7 @@ echo '<td></td>';
                                                             <tr>
                                                                 <?php 
                                                                 if ($row_paper_user['status'] == 4) {
-                                                                    echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
+                                                                    echo '<td><span class="badge badge-danger">ยังไม่อ่าน</span></td>';
                                                                 } elseif ($row_paper_user['status'] == 5) {
                                                                     echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
                                                                 } else {
