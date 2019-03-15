@@ -93,7 +93,6 @@ if (isset($_POST['form_1'])) {
 if($form!=0){
     $sql_paper = "INSERT INTO `paper`( `paper_id`,`owner_id`, `form_id`, `paper_detail`, `step_now`, `status`) VALUES ('$paper_id', '$id','$form','$detail','1','3') ";
     if ($re_paper = mysqli_query($con, $sql_paper)) {
-        $_SESSION['alert'] = 3;
         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form' AND `step` ='1' ";
         $re_form = mysqli_query($con, $sql_form);
         $row_form = mysqli_fetch_array($re_form);
