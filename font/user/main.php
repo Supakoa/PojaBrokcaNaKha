@@ -142,19 +142,18 @@ if (isset($_POST['senmessage'])) {
                             </ul>
                         </div>
                         <!-- Tab panes -->
-                        <div class="tab-content">
+                        <div class="tab-content ">
                             <!-- Tab panes 1-->
-                            <div id="home" class="container tab-pane active" style="background-color:#5796EE;"><br>
+                            <div id="home" class="container tab-pane active nowrap" style="background-color:#5796EE;"><br>
                                 <div class="container" style="background-color:#F7FAFE">
                                     <div class="row">
-                                        <div class="col-lg-12"><br>
+                                        <div class="col-lg-12 "><br>
                                             <div class="table-responsive-lg ">
-                                                <table id="table1" class="table table-hover overflow display responsive nowrap">
+                                                <table id="table1" class="table table-hover display responsive nowrap">
                                                     <thead>
                                                         <tr>
-                                                            <th data-priority="1" scope="col">#</th>
-                                                            <th>สถานะ</th>
                                                             <th>แบบคำร้อง</th>
+                                                            <th>สถานะ</th>
                                                             <th>สถานะการดำเนินการ</th>
                                                         </tr>
                                                     </thead>
@@ -164,10 +163,7 @@ if (isset($_POST['senmessage'])) {
                                                             $i++; ?>
                                                         <tr>
                                                             <td>
-                                                                <?php 
-                                                                // echo $row_paper['paper_id'];
-                                                                echo $i;
-                                                                ?>
+                                                                <?php echo $row_paper['name'];  ?>
                                                             </td>
 
                                                             <?php 
@@ -183,9 +179,7 @@ if (isset($_POST['senmessage'])) {
                                                                 echo '<td></td>';
                                                             } ?>
 
-                                                            <td>
-                                                                <?php echo $row_paper['name'];  ?>
-                                                            </td>
+
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id']; ?>','show')">แสดง</button>
                                                             </td>
@@ -205,7 +199,7 @@ if (isset($_POST['senmessage'])) {
                             <!-- Tab panes 1-->
 
                             <!-- Tab panes 2-->
-                            <div id="report" class="container tab-pane fade" style="background-color:#3782EB;"><br>
+                            <div id="report" class="container tab-pane fade nowrap" style="background-color:#3782EB;"><br>
                                 <div class="container accordion" id="formreport">
 
                                     <div class="card">
@@ -669,6 +663,7 @@ if (isset($_POST['senmessage'])) {
                         targets: -1
                     }
                 ]
+
             });
             $('#table2').DataTable({
                 responsive: true,
@@ -681,6 +676,7 @@ if (isset($_POST['senmessage'])) {
                         targets: -1
                     }
                 ]
+
             });
         });
         //tap

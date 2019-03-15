@@ -2,7 +2,7 @@
 require '../../server/server.php';
 
 
-$sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name, form.form_id AS formname, user.title, user.name AS username  
+$sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
             FROM `paper_user`, `paper`, `form`, `user` 
             WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8'";
 $re_paper = mysqli_query($con, $sql_paper);
@@ -83,8 +83,8 @@ $re_paper = mysqli_query($con, $sql_paper);
                                     <table class="table table-hover overflow display nowrap responsive" id="table1">
                                         <thead>
                                             <tr>
-                                                <th >รหัสเอกสาร</th>
                                                 <th>แบบคำร้อง</th>
+                                                <th>รหัสเอกสาร</th>
                                                 <th>รหัสนักศึกษา</th>
                                                 <th>ชื่อ-สกุล</th>
                                                 <th>วันที่-เวลา</th>
@@ -94,10 +94,10 @@ $re_paper = mysqli_query($con, $sql_paper);
                                         <tbody>
                                             <?php while ($row_paper = mysqli_fetch_array($re_paper)) { ?>
                                             <tr>
-                                                <td><?php echo $row_paper['paper_id']; ?></td>
                                                 <td><?php echo $row_paper['formname']; ?></td>
+                                                <td><?php echo $row_paper['paper_id']; ?></td>
                                                 <td><?php echo $row_paper['owner_id']; ?></td>
-                                                <td><?php echo $row_paper['title'] . $row_paper['name']; ?></td>
+                                                <td><?php echo $row_paper['title'] . $row_paper['username']; ?></td>
                                                 <td><?php echo $row_paper['timestamp']; ?></td>
                                                 <td><button class="btn btn-outline-info" onclick="form_paper0('<?php echo $row_paper['paper_id']; ?>','<?php echo $row_paper['form_id']; ?>')"><i class="fas fa-file-alt"></i></button></td>
                                             </tr>
