@@ -4,7 +4,7 @@ require '../../server/server.php';
 
 $sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
             FROM `paper_user`, `paper`, `form`, `user` 
-            WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8'";
+            WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper_user.user_id AND form.form_id != '8'";
 $re_paper = mysqli_query($con, $sql_paper);
 
 
@@ -209,6 +209,7 @@ $re_paper = mysqli_query($con, $sql_paper);
 
     <script>
         function form_paper0(id_paper, type) {
+            alert("eiei");
             $("#paper_1").html("");
             $.post("other/doc.php", {
                     id: id_paper,
