@@ -2,9 +2,9 @@
 require '../../server/server.php';
 
 
-$sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name, form.form_id AS formname, user.title, user.name AS username  
+$sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
             FROM `paper_user`, `paper`, `form`, `user` 
-            WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8'";
+            WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper_user.user_id AND form.form_id != '8'";
 $re_paper = mysqli_query($con, $sql_paper);
 
 
@@ -22,7 +22,9 @@ $re_paper = mysqli_query($con, $sql_paper);
     <title>อาจารย์</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
-
+    <!-- datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -77,12 +79,12 @@ $re_paper = mysqli_query($con, $sql_paper);
                                 <h3>Inbox</h3>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive text-nowrap">
-                                    <table class="table table-hover overflow display" id="table1">
+                                <div class="table-responsive">
+                                    <table class="table table-hover overflow display nowrap responsive" id="table1">
                                         <thead>
                                             <tr>
-                                                <th>รหัสเอกสาร</th>
                                                 <th>แบบคำร้อง</th>
+                                                <th>รหัสเอกสาร</th>
                                                 <th>รหัสนักศึกษา</th>
                                                 <th>ชื่อ-สกุล</th>
                                                 <th>วันที่-เวลา</th>
@@ -92,10 +94,10 @@ $re_paper = mysqli_query($con, $sql_paper);
                                         <tbody>
                                             <?php while ($row_paper = mysqli_fetch_array($re_paper)) { ?>
                                             <tr>
-                                                <td><?php echo $row_paper['paper_id']; ?></td>
                                                 <td><?php echo $row_paper['formname']; ?></td>
+                                                <td><?php echo $row_paper['paper_id']; ?></td>
                                                 <td><?php echo $row_paper['owner_id']; ?></td>
-                                                <td><?php echo $row_paper['title'] . $row_paper['name']; ?></td>
+                                                <td><?php echo $row_paper['title'] . $row_paper['username']; ?></td>
                                                 <td><?php echo $row_paper['timestamp']; ?></td>
                                                 <td><button class="btn btn-outline-info" onclick="form_paper0('<?php echo $row_paper['paper_id']; ?>','<?php echo $row_paper['form_id']; ?>')"><i class="fas fa-file-alt"></i></button></td>
                                             </tr>
@@ -115,8 +117,8 @@ $re_paper = mysqli_query($con, $sql_paper);
                                 <h3>Outbox</h3>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive text-nowrap">
-                                    <table class="table table-hover overflow display" id="table2">
+                                <div class="table-responsive ">
+                                    <table class="table table-hover overflow display nowrap responsive" id="table2">
                                         <thead>
                                             <tr>
                                                 <th>รหัสเอกสาร</th>
@@ -149,7 +151,7 @@ $re_paper = mysqli_query($con, $sql_paper);
 
             <!-- div 2 -->
             <div id="paper_form"></div>
-            
+
             <!-- div 2 -->
         </div><br>
     </div>
@@ -164,26 +166,50 @@ $re_paper = mysqli_query($con, $sql_paper);
     </div>
 
 
-  
-  
-   
+
+
+
 
     <!-- Jquery -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <!-- datatable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
     <script>
         //datatable
         $(document).ready(function() {
-            $('#table1').DataTable();
-            $('#table2').DataTable();
+            $('#table1').DataTable({
+                responsive: true,
+                columnDefs: [{
+                        responsivePriority: 1,
+                        targets: 0
+                    },
+                    {
+                        responsivePriority: 2,
+                        targets: -1
+                    }
+                ]
+            });
+            $('#table2').DataTable({
+                responsive: true,
+                columnDefs: [{
+                        responsivePriority: 1,
+                        targets: 0
+                    },
+                    {
+                        responsivePriority: 2,
+                        targets: -1
+                    }
+                ]
+            });
 
         });
     </script>
 
     <script>
         function form_paper0(id_paper, type) {
+            alert("eiei");
             $("#paper_1").html("");
             $.post("other/doc.php", {
                     id: id_paper,
@@ -206,7 +232,6 @@ $re_paper = mysqli_query($con, $sql_paper);
                 }
             );
         };
-
     </script>
 
     <!-- bootstrap 4.2.1 -->
