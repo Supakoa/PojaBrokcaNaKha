@@ -125,6 +125,7 @@
     //             });
 </script>
 <script>
+
     $(document).ready(function(){
         // $('.table_table').DataTable();
         
