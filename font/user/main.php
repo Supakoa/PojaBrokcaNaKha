@@ -32,7 +32,10 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 $sub .= '</select>';
 
 /// paper_user
-$sql_paper = "SELECT paper.status,form.name,paper.paper_id,`paper`.`timestamp` FROM `paper`,form WHERE `owner_id` ='$id' AND paper.form_id = form.form_id  ORDER BY `paper`.`timestamp` ASC ";
+$sql_paper = "SELECT paper.status,form.name,form.form_id,paper.paper_id,`paper`.`timestamp` 
+FROM `paper`,form 
+WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8'  ORDER BY `paper`.`timestamp` ASC  ";
+
 $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
@@ -40,12 +43,11 @@ $re_paper = mysqli_query($con, $sql_paper);
 if (isset($_POST['senmessage'])) {
     unset($_POST['senmessage']);
     $paper_id = getToken(10);
-    // echo 'goooooooooooooo';
+    echo '<br><br><br><br><br>goooooooooooooo';
     $mix = $_POST['topic'] . "๛" . $_POST['cont'];
     $num = $_POST['number'];
-    $sql_pp = " INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `paper.status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
+    $sql_pp = "INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
     if (mysqli_query($con, $sql_pp)) {
-        $_SESSION['alert'] = 3;
         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
         $re_form = mysqli_query($con, $sql_form);
         $row_form = mysqli_fetch_array($re_form);
@@ -531,22 +533,26 @@ if (isset($_POST['senmessage'])) {
                                                         </thead>
                                                         <tbody>
                                                             <?php 
-                                                            $sql_mes = "SELECT paper.paper_detail, paper.timestamp, paper.status  FROM `user`, `paper`, `paper_user` WHERE user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8'";
+                                                            $sql_mes = "SELECT  paper.paper_id,paper.paper_detail,paper.status, paper.timestamp, paper.status  
+                                                            FROM `user`, `paper`, `paper_user` 
+                                                            WHERE user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8' GROUP BY  paper_user.paper_id ORDER BY paper.timestamp ";
                                                             $re_mes = mysqli_query($con,$sql_mes);
-                                                            while ($row_paper_user = mysqli_fetch_array($re_mes)) { ?>
+                                                            while ($row_paper_user = mysqli_fetch_array($re_mes)) { 
+                                                                $keywords = preg_split("/๛/",$row_paper_user['paper_detail']);
+                                                                ?>
                                                             <tr>
                                                                
                                                                 
                                                                 <?php 
-                                                                if ($row_paper['status'] == 4) {
+                                                                if ($row_paper_user['status'] == 4) {
                                                                     echo '<td><span class="badge badge-success">ยังไม่อ่านแล้ว</span></td>';
-                                                                } elseif ($row_paper['status'] == 5) {
+                                                                } elseif ($row_paper_user['status'] == 5) {
                                                                     echo '<td><span class="badge badge-success">อ่านแล้ว</span></td>';
                                                                 }else{
                                                                     echo '<td></td>';
                                                                 }  ?>
                                                                 <td><?php echo $row_paper_user['timestamp'] ?></td>
-                                                                <td> <?php echo $row_paper_user['name'];  ?></td>
+                                                                <td> <?php echo $keywords[0];  ?></td>
                                                                 <td>
                                                                     <!-- text modal -->
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#confirm1" onclick="modal_ans('<?php echo $row_paper_user['paper_id'] ?>','ans')">เจ้าหน้าที่</button>
