@@ -82,6 +82,10 @@ if (isset($_POST['senmessage'])) {
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
 
 
+    <!-- datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
@@ -96,9 +100,9 @@ if (isset($_POST['senmessage'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
-    
 
-    
+
+
     <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/> -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 
@@ -144,11 +148,11 @@ if (isset($_POST['senmessage'])) {
                                 <div class="container" style="background-color:#F7FAFE">
                                     <div class="row">
                                         <div class="col-lg-12"><br>
-                                            <div class="table-responsive-lg text-nowrap">
-                                                <table id="table1" class="table table-hover overflow display">
+                                            <div class="table-responsive-lg ">
+                                                <table id="table1" class="table table-hover overflow display responsive nowrap">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col">#</th>
+                                                            <th data-priority="1" scope="col">#</th>
                                                             <th>สถานะ</th>
                                                             <th>แบบคำร้อง</th>
                                                             <th>สถานะการดำเนินการ</th>
@@ -165,7 +169,7 @@ if (isset($_POST['senmessage'])) {
                                                                 echo $i;
                                                                 ?>
                                                             </td>
-                                                            
+
                                                             <?php 
                                                             if ($row_paper['status'] == 1) {
                                                                 echo '<td><span class="badge badge-success">ผ่าน</span></td>';
@@ -175,8 +179,8 @@ if (isset($_POST['senmessage'])) {
                                                                 echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
                                                             } elseif ($row_paper['status'] == 2) {
                                                                 echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
-                                                            }else{
-echo '<td></td>';
+                                                            } else {
+                                                                echo '<td></td>';
                                                             } ?>
 
                                                             <td>
@@ -185,7 +189,6 @@ echo '<td></td>';
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id']; ?>','show')">แสดง</button>
                                                             </td>
-
                                                         </tr>
                                                         <?php 
                                                     } ?>
@@ -525,8 +528,8 @@ echo '<td></td>';
                                         <div class="card">
                                             <!-- card 2.1 -->
                                             <div class="card-body">
-                                                <div class="table-responsive-lg text-nowrap">
-                                                    <table id="table2" class="table table-striped table-hover display ">
+                                                <div class="table-responsive-lg ">
+                                                    <table id="table2" class="table table-striped table-hover display nowrap responsive">
                                                         <thead>
                                                             <tr>
                                                                 <th></th>
@@ -540,9 +543,9 @@ echo '<td></td>';
                                                             $sql_mes = "SELECT  paper.paper_id,paper.paper_detail,paper.status, paper.timestamp, paper.status  
                                                             FROM `user`, `paper`, `paper_user` 
                                                             WHERE user.user_id = paper.owner_id AND paper_user.paper_id = paper.paper_id AND user.user_id = '$id' AND paper.form_id = '8' GROUP BY  paper_user.paper_id ORDER BY paper.timestamp ";
-                                                            $re_mes = mysqli_query($con,$sql_mes);
-                                                            while ($row_paper_user = mysqli_fetch_array($re_mes)) { 
-                                                                $keywords = preg_split("/๛/",$row_paper_user['paper_detail']);
+                                                            $re_mes = mysqli_query($con, $sql_mes);
+                                                            while ($row_paper_user = mysqli_fetch_array($re_mes)) {
+                                                                $keywords = preg_split("/๛/", $row_paper_user['paper_detail']);
                                                                 ?>
                                                             <tr>
                                                                 <?php 
@@ -562,8 +565,8 @@ echo '<td></td>';
                                                                 </td>
                                                             </tr>
 
-                                                                <?php 
-                                                            } ?>
+                                                            <?php 
+                                                        } ?>
 
                                                         </tbody>
                                                     </table>
@@ -639,75 +642,97 @@ echo '<td></td>';
                 </form>
             </div>
         </div>
-        <!--modal card 3.2 -->
+    </div>
+    <!--modal card 3.2 -->
 
 
-        <!-- Jquery -->
-        <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <!-- Jquery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
 
-        <!-- datatable -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
-        <!-- <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
-        <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
-        <script>
-            //datatable
-            $(document).ready(function() {
-                $('#table1').DataTable();
-                $('#table2').DataTable();
-
-            });
-            //tap
-            $(document).ready(function() {
-                $(".nav-tabs a").click(function() {
-                    $(this).tab('show');
-                });
-                //time news
-                $('.carousel').carousel({
-                    interval: 2000
-                });
-                //modal
-                $('#myModal').on('shown.bs.modal', function() {
-                    $('#myInput').trigger('focus')
-                });
-            });
-        </script>
-        <script>
-            function modal_show(paperID, type) {
-                $("#modalshow").html("");
-                $.post("other/modal.php", {
-                        id: paperID,
-                        cate: type
+    <!-- <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
+    <script>
+        //datatable
+        $(document).ready(function() {
+            $('#table1').DataTable({
+                responsive: true,
+                columnDefs: [{
+                        responsivePriority: 1,
+                        targets: 0
                     },
-                    function(result) {
-                        $("#modalshow").html(result);
-                        $("#route").modal('show');
+                    {
+                        responsivePriority: 2,
+                        targets: -1
                     }
-                );
-            };
-
-            function modal_ans(paperID, type) {
-                $("#modalAns").html("");
-                $.post("other/modal.php", {
-                        id: paperID,
-                        cate: type
+                ]
+            });
+            $('#table2').DataTable({
+                responsive: true,
+                columnDefs: [{
+                        responsivePriority: 1,
+                        targets: 0
                     },
-                    function(result) {
-                        $("#modalAns").html(result);
-                        $("#confirm1").modal("show");
+                    {
+                        responsivePriority: 2,
+                        targets: -1
                     }
-                );
+                ]
+            });
+        });
+        //tap
+        $(document).ready(function() {
+            $(".nav-tabs a").click(function() {
+                $(this).tab('show');
+            });
+            //time news
+            $('.carousel').carousel({
+                interval: 2000
+            });
+            //modal
+            $('#myModal').on('shown.bs.modal', function() {
+                $('#myInput').trigger('focus')
+            });
+        });
+    </script>
+    <script>
+        function modal_show(paperID, type) {
+            $("#modalshow").html("");
+            $.post("other/modal.php", {
+                    id: paperID,
+                    cate: type
+                },
+                function(result) {
+                    $("#modalshow").html(result);
+                    $("#route").modal('show');
+                }
+            );
+        };
+
+        function modal_ans(paperID, type) {
+            $("#modalAns").html("");
+            $.post("other/modal.php", {
+                    id: paperID,
+                    cate: type
+                },
+                function(result) {
+                    $("#modalAns").html(result);
+                    $("#confirm1").modal("show");
+                }
+            );
 
 
-            };
-        </script>
+        };
+    </script>
 
-        <!-- bootstrap 4.2.1 -->
-        <script src="../node_modules/popper.js/dist/popper.min.js"></script>
-        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- alert all -->
-        <?php require '../../server/alert.php'; ?>
+    <!-- bootstrap 4.2.1 -->
+    <script src="../node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- alert all -->
+    <?php require '../../server/alert.php'; ?>
 </body>
 
 </html> 
