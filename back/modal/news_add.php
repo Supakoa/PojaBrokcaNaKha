@@ -23,6 +23,7 @@
 </div>
 
 <script>
+
     $('#uploadImage').change(function (e) {
         sub = $('#uploadImage').val();
         alert(sub);
@@ -55,12 +56,12 @@
                 processData: false, // tell jQuery not to process the data
                 contentType: false, // tell jQuery not to set contentType
                 success: function (data) {
-                    // alert(data);
-                    $("#in_body").load("../page/news.php");
-                    $("#add_modal").modal("hide");
+                    alert(data);
+                    // $("#in_body").load("../page/news.php");
+                    // $("#add_modal").modal("hide");
                 }
             });
-            $("#add_modal").modal("hide");
+            // $("#add_modal").modal("hide");
         }else{
             alert('Input Text please...');
         }
