@@ -7,9 +7,9 @@
             </div> <!-- modal-header -->
             <div class="modal-body">
                 <label>ไฟล์ภาพ :</label>
-                <div class="custom-file">
+                <div class="custom-file block">
                     <input type="file" class="custom-file-input" accept="image/*" id="uploadImage">
-                    <label class="custom-file-label" for="uploadImage">เลือกไฟล์</label>
+                    <label class="custom-file-label" for="uploadImage" id="name_file">เลือกไฟล์</label>
                 </div>
                 <label style="margin-top:20px;">ที่อยู่เว็บไซต์ :</label>
                 <input class="form-control form-control-lg" id="url" type="text">
@@ -23,6 +23,9 @@
 </div>
 
 <script>
+    $('#uploadImage').change(function (e) {
+        $('#name_file').html($('#uploadImage').val());
+    });
 
     // function ChkSubmit(result) {
     //     if (document.getElementById("url").value == "") {
