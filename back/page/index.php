@@ -59,6 +59,9 @@
             <a class="w3-bar-item w3-button" onclick="call_content('sender.php','หน้า : ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');"><i
                     class="fas fa-sort-amount-down"></i>
                 ขั้นตอนเอกสาร</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('groups.php','หน้า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');"><i
+                    class="fas fa-sort-amount-down"></i>
+                ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</a>
 
             <hr>
         </div>
