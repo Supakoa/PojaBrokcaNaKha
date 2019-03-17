@@ -26,10 +26,7 @@
 
     $('#uploadImage').change(function (e) {
         sub = $('#uploadImage').val();
-        alert(sub);
-
-         sub = sub.substr(12);
-        alert(sub);
+        sub = sub.substr(12);
         $('#name_file').html(sub);
     });
 
@@ -56,12 +53,15 @@
                 processData: false, // tell jQuery not to process the data
                 contentType: false, // tell jQuery not to set contentType
                 success: function (data) {
-                    alert(data);
+                    // alert(data);
                     // $("#in_body").load("../page/news.php");
                     // $("#add_modal").modal("hide");
                 }
             });
-            // $("#add_modal").modal("hide");
+            $("#add_modal").modal("hide");
+            $('#add_modal').on('hidden.bs.modal', function (e) {
+                $("#in_body").load("../page/news.php");  
+            });
         }else{
             alert('Input Text please...');
         }

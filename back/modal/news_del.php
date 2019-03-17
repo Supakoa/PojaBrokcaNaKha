@@ -27,10 +27,13 @@
             function(data,status){
                 // alert("Data: " + data + "\nStatus: " + status);
                 // $("#in_body").load("../page/main.php");
-                $("#in_body").load("../page/news.php");
-                $("#new_del").modal("hide");
+                // $("#in_body").load("../page/news.php");
+                // $("#new_del").modal("hide");
             }
         );
         $("#new_del").modal("hide");
+        $('#new_del').on('hidden.bs.modal', function (e) {
+            $("#in_body").load("../page/news.php");  
+        });
     }
 </script>
