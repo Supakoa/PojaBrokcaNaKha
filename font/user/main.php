@@ -1,18 +1,18 @@
 <?php 
 require '../../server/server.php';
 $id = $_SESSION['id'];
-//random
-// function getToken($length)
-// {
-//     $token = "";
-//     $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//     $codeAlphabet .= "0123456789";
-//     $max = strlen($codeAlphabet); // edited
-//     for ($i = 0; $i < $length; $i++) {
-//         $token .= $codeAlphabet[random_int(0, $max - 1)];
-//     }
-//     return $token;
-// }
+// random
+function getToken($length)
+{
+    $token = "";
+    $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $codeAlphabet .= "0123456789";
+    $max = strlen($codeAlphabet); // edited
+    for ($i = 0; $i < $length; $i++) {
+        $token .= $codeAlphabet[random_int(0, $max - 1)];
+    }
+    return $token;
+}
 
 
 // user
@@ -43,7 +43,6 @@ $re_paper = mysqli_query($con, $sql_paper);
 if (isset($_POST['senmessage'])) {
     unset($_POST['senmessage']);
     $paper_id = getToken(10);
-    echo '<br><br><br><br><br>goooooooooooooo';
     $mix = $_POST['topic'] . "๛" . $_POST['cont'];
     $num = $_POST['number'];
     $sql_pp = "INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
@@ -51,11 +50,11 @@ if (isset($_POST['senmessage'])) {
         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
         $re_form = mysqli_query($con, $sql_form);
         $row_form = mysqli_fetch_array($re_form);
-        if ($row_form['user_id'] != null) {
-            $user_id = $row_form['user_id'];
+        if ($row_form['group_id'] != null) {
+            $user_id = $row_form['group_id'];
             $sum_q = '(\'' . $paper_id . '\',\'' . $user_id . '\' )';
             while ($row_form = mysqli_fetch_array($re_form)) {
-                $user_id = $row_form['user_id'];
+                $user_id = $row_form['group_id'];
                 $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\' )';
             }
             $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES " . $sum_q . " ";
