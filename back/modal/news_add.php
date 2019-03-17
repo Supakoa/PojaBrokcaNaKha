@@ -23,8 +23,11 @@
 </div>
 
 <script>
+
     $('#uploadImage').change(function (e) {
-        $('#name_file').html($('#uploadImage').val());
+        $img_input_name = $('#uploadImage').val();
+        alert($img_input_name);
+        // $('#name_file').html($img_input_name);
     });
 
     // function ChkSubmit(result) {
@@ -50,12 +53,12 @@
                 processData: false, // tell jQuery not to process the data
                 contentType: false, // tell jQuery not to set contentType
                 success: function (data) {
-                    // alert(data);
-                    $("#in_body").load("../page/news.php");
-                    $("#add_modal").modal("hide");
+                    alert(data);
+                    // $("#in_body").load("../page/news.php");
+                    // $("#add_modal").modal("hide");
                 }
             });
-            $("#add_modal").modal("hide");
+            // $("#add_modal").modal("hide");
         }else{
             alert('Input Text please...');
         }
