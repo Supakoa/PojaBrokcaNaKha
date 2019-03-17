@@ -28,9 +28,12 @@
                     </tr>
                 </tbody>
             </table>
+            <div id="div_add_group"></div>
 
-
-
+            <div id="show_alert">
+                TEST
+            </div>
+            <input type="hidden" id="now_alert" value="">
 
         </div>
     </div>
@@ -43,9 +46,9 @@
                 <h1>เพิ่มกลุ่ม</h1>
             </div>
             <div class="modal-body">
-            <form action="" id = "form_add">
-                <div class="row">
-                  
+                <form action="" id="form_add">
+                    <div class="row">
+
                         <div class="col">
                             <label for="group_name">ชื่อกลุ่ม</label>
                             <input type="text" name="group_name" id="group_name" required>
@@ -59,10 +62,10 @@
 
                             </select>
                         </div>
-                </div>
-                <div class="row">
-                    <button type="submit" id='add_group'>Submit</button>
-                </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" id='add_group'>Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -72,18 +75,37 @@
     $(document).ready(function () {
         $('.table_table').DataTable();
     });
-    $("#form_add").submit(function (e) { 
+    $("#form_add").submit(function (e) {
         e.preventDefault();
-      
+
         a = $('#group_name').val();
         b = $('#group_type').val();
-        $.post("url", data,
-            function (data, textStatus, jqXHR) {
-                
+        $.post("../send_sql/add_group.php", {
+                name: a,
+                type: b
             },
-            "dataType"
+            function (data) {
+                
+                $("#div_add_group").html(data);
+                $("#new_group").modal("hide");
+                c = $("#alert").val();
+
+                $.post("../send_sql/alert.php", {
+                        alert: c
+                    },
+                    function (alert_data) {
+                        $("#show_alert").html(alert_data);
+                    }
+
+                );
+            }
         );
-        
+
+
+        $("#new_group").modal("hide");
+
+
+
+
     });
-   
 </script>
