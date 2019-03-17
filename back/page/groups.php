@@ -82,12 +82,15 @@
     </div>
 </div>
 <script>
+    $("#new_group").modal("hide");
     $(document).ready(function () {
         $('.table_table').DataTable();
+        
+
     });
     $("#form_add").submit(function (e) {
-        e.preventDefault();
 
+        e.preventDefault();
         a = $('#group_name').val();
         b = $('#group_type').val();
         $.post("../send_sql/add_group.php", {
@@ -96,9 +99,11 @@
             },
             function (data) {
                 
+                
+                
                 $("#div_add_group").html(data);
-                $("#new_group").modal("hide");
-                $("#in_body").load("group.php");
+                
+
                 c = $("#alert").val();
 
                 $.post("../send_sql/alert.php", {
@@ -107,17 +112,21 @@
                     function (alert_data) {
                         $("#show_alert").html(alert_data);
                     }
-
+                   
                 );
             }
 
         );
+        $("#new_group").modal("hide");
 
-
-        $("#in_body").load("group.php");
+        $('#new_group').on('hidden.bs.modal', function (e) {
+                    $("#in_body").load("groups.php");
+  
+        });
 
 
 
 
     });
+    
 </script>

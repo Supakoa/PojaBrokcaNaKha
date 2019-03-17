@@ -24,7 +24,12 @@
 
 <script>
     $('#uploadImage').change(function (e) {
-        $('#name_file').html($('#uploadImage').val());
+        sub = $('#uploadImage').val();
+        alert(sub);
+
+         sub = sub.substr(12);
+        alert(sub);
+        $('#name_file').html(sub);
     });
 
     // function ChkSubmit(result) {
