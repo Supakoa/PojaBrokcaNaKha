@@ -24,17 +24,23 @@
                     <th></th>
                 </thead>
                 <tbody>
-                <?php 
+                    <?php 
                 $sql = "SELECT * FROM `groups` WHERE 1";
                 $re_group = mysqli_query($con,$sql);
                 $sum = "";
                 $i = 1 ;
                 while($row_group =  mysqli_fetch_array($re_group)){
-                    $sum.= '<tr><td>'.$i.'</td>'.'<td>'.$row_group['name'].'</td>'.'<td>'.$row_group['type'].'</td>'.'<td>'."asd".'</td></tr>';
+                    $btn = ' <button type="button" class="btn btn-outline-warning btn-sm" onclick="modal_edit('.$row_group['group_id'].','.$row_group['type'].')">แก้ไข</button>';
+                    $sum.= '<tr>
+                                 <td>'.$i.'</td>'.
+                                '<td>'.$row_group['name'].'</td>'.
+                                '<td>'.$row_group['type']. '</td>'.
+                                '<td>'. $btn .'</td>
+                            </tr>';
                 }
                 echo $sum ;
                 ?>
-                  
+
                     </tr>
                 </tbody>
             </table>
@@ -85,7 +91,7 @@
     $("#new_group").modal("hide");
     $(document).ready(function () {
         $('.table_table').DataTable();
-        
+
 
     });
     $("#form_add").submit(function (e) {
@@ -98,11 +104,11 @@
                 type: b
             },
             function (data) {
-                
-                
-                
+
+
+
                 $("#div_add_group").html(data);
-                
+
 
                 c = $("#alert").val();
 
@@ -112,7 +118,7 @@
                     function (alert_data) {
                         $("#show_alert").html(alert_data);
                     }
-                   
+
                 );
             }
 
@@ -120,13 +126,12 @@
         $("#new_group").modal("hide");
 
         $('#new_group').on('hidden.bs.modal', function (e) {
-                    $("#in_body").load("groups.php");
-  
+            $("#in_body").load("groups.php");
+
         });
 
 
 
 
     });
-    
 </script>
