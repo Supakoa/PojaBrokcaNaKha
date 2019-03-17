@@ -5,7 +5,7 @@
       $name = $_POST['name'];
       $type = $_POST['type'];
       
-      $sql = "INSERT INTO `groups`(`name`, `type`) VALUES ([value-2],[value-3]) ";
+      $sql = "INSERT INTO `groups`(`name`, `type`) VALUES ('$name','$type') ";
      if( $re_add = mysqli_query($con,$sql)){
         $alert = 3;
      }

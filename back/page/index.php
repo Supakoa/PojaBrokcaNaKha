@@ -1,3 +1,7 @@
+<?php 
+ require '../../server/server.php';
+ 
+?>
 <!DOCTYPE html>
 <html>
 

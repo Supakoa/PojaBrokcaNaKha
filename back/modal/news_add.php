@@ -25,9 +25,12 @@
 <script>
 
     $('#uploadImage').change(function (e) {
-        $img_input_name = $('#uploadImage').val();
-        alert($img_input_name);
-        // $('#name_file').html($img_input_name);
+        sub = $('#uploadImage').val();
+        alert(sub);
+
+         sub = sub.substr(12);
+        alert(sub);
+        $('#name_file').html(sub);
     });
 
     // function ChkSubmit(result) {

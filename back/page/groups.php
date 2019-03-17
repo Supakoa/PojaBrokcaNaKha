@@ -1,3 +1,7 @@
+<?php 
+ require '../../server/server.php';
+
+?>
 <div class="w3-container-fluid w3-center" style="margin:20px;">
     <div class="w3-container-fluid" style="margin:20px;padding:20px;">
         <h1>ตั้งค่า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</h1>
@@ -20,11 +24,17 @@
                     <th></th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                <?php 
+                $sql = "SELECT * FROM `groups` WHERE 1";
+                $re_group = mysqli_query($con,$sql);
+                $sum = "";
+                $i = 1 ;
+                while($row_group =  mysqli_fetch_array($re_group)){
+                    $sum.= '<tr><td>'.$i.'</td>'.'<td>'.$row_group['name'].'</td>'.'<td>'.$row_group['type'].'</td>'.'<td>'."asd".'</td></tr>';
+                }
+                echo $sum ;
+                ?>
+                  
                     </tr>
                 </tbody>
             </table>
@@ -72,12 +82,15 @@
     </div>
 </div>
 <script>
+    $("#new_group").modal("hide");
     $(document).ready(function () {
         $('.table_table').DataTable();
+        
+
     });
     $("#form_add").submit(function (e) {
-        e.preventDefault();
 
+        e.preventDefault();
         a = $('#group_name').val();
         b = $('#group_type').val();
         $.post("../send_sql/add_group.php", {
@@ -86,8 +99,11 @@
             },
             function (data) {
                 
+                
+                
                 $("#div_add_group").html(data);
-                $("#new_group").modal("hide");
+                
+
                 c = $("#alert").val();
 
                 $.post("../send_sql/alert.php", {
@@ -96,16 +112,21 @@
                     function (alert_data) {
                         $("#show_alert").html(alert_data);
                     }
-
+                   
                 );
             }
+
         );
-
-
         $("#new_group").modal("hide");
+
+        $('#new_group').on('hidden.bs.modal', function (e) {
+                    $("#in_body").load("groups.php");
+  
+        });
 
 
 
 
     });
+    
 </script>
