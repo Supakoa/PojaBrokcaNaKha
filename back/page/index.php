@@ -16,13 +16,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- bootstrap 4.2.1 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+
 
     <!-- w3.css -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
     <!-- mycss -->
     <link rel="stylesheet" href="style.css">
@@ -30,7 +29,7 @@
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
-        
+
 
 
 </head>
@@ -42,7 +41,7 @@
         <a class="w3-bar-item w3-button" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
             <h1 class="w3-center" style="color: #FFFFFF;"><i class="fas fa-home"></i> หน้าแรก</h1>
         </a>
-        <div class="w3-container" style="margin-left:1%;color: #FFFFFF;" >
+        <div class="w3-container" style="margin-left:1%;color: #FFFFFF;">
             <hr>
             <a class="w3-bar-item w3-button" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');"><i
                     class="fas fa-bell"></i>
@@ -61,6 +60,12 @@
                 ขั้นตอนเอกสาร</a>
 
             <hr>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                </div>
+            </div>
         </div>
     </div>
     <!-- end sidebar -->
@@ -85,7 +90,7 @@
         <div class="w3-container-fluid w3-card-4 " style="max-height:100%; background-color:#ffffff ;" id="body">
 
             <!-- html here -->
-            <div id="in_body" ></div>
+            <div id="in_body"></div>
 
         </div>
         <!-- end body -->
@@ -125,20 +130,19 @@
     //             });
 </script>
 <script>
-
-    $(document).ready(function(){
+    $(document).ready(function () {
         // $('.table_table').DataTable();
-        
-        $("#btn_singha").click(function(){
-          
+
+        $("#btn_singha").click(function () {
+
             $('#btn_singha').text("กดแล้ว");
-            
+
 
         });
     });
     if (document.getElementById('in_body').innerHTML === '') {
-        
-        call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');
+
+        call_content('Inbox.php', 'หน้า : ข้อความ', 'BackDoor : ข้อความ');
         // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
@@ -156,13 +160,16 @@
         // };
         // xhttp.open("GET", content, true);
         // xhttp.send();
-      
+
     }
 </script>
 
 <!-- bootstrap 4.2.1 -->
-<script src="../node_modules/popper.js/dist/popper.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- <script src="../node_modules/popper.js/dist/popper.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 
 
 </html>
