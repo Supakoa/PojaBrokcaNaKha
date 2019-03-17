@@ -5,6 +5,8 @@
     // post url
     $url = $_POST['text'];
 
+    // echo md5(date('Y-m-d H:i:s:u'))."."."jpg";
+
     $target_dir = "../image/news/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
     $uploadOk = 1;
@@ -40,7 +42,10 @@
         echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+        $new_name = md5(date('Y-m-d H:i:s:u')).".".$imageFileType;
+        $new_path_name = $target_dir.$new_name;
+        
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $new_path_name)) {
             echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";
         } else {
             echo "Sorry, there was an error uploading your file.";
@@ -49,7 +54,7 @@
 
     // get image name
     $image_name = basename($_FILES["file"]["name"]);
-    $sql = "INSERT INTO `news`(`news_url`, `news_img`) VALUES ('$url','$image_name')";
+    $sql = "INSERT INTO `news`(`news_url`, `news_img`) VALUES ('$url','$new_name')";
     $result = mysqli_query($con,$sql);
 
 ?>
