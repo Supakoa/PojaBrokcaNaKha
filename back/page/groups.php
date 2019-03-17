@@ -32,7 +32,7 @@
                 while($row_group =  mysqli_fetch_array($re_group)){
                     $btn = ' <button type="button" class="btn btn-outline-warning btn-sm" onclick="modal_edit('.$row_group['group_id'].','.$row_group['type'].')">แก้ไข</button>';
                     $sum.= '<tr>
-                                 <td>'.$i.'</td>'.
+                                 <td>'.$i++.'</td>'.
                                 '<td>'.$row_group['name'].'</td>'.
                                 '<td>'.$row_group['type']. '</td>'.
                                 '<td>'. $btn .'</td>
