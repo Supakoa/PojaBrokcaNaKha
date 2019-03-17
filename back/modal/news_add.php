@@ -36,19 +36,28 @@
     // }
 
     function addNews() {
-        // window.alert( $('#uploadImage').val() );
-        var formData = new FormData();
-        formData.append('file', $('#uploadImage')[0].files[0]);
+        var a = $('#url').val();
+        var b = $('#uploadImage').val();
+        if(a != '' && b != ''){
+            var formData = new FormData();
+            formData.append('file', $('#uploadImage')[0].files[0]);
+            formData.append('text',a);
 
-        $.ajax({
-            url: '../send_sql/news_sql_add.php',
-            type: 'POST',
-            data: formData,
-            processData: false, // tell jQuery not to process the data
-            contentType: false, // tell jQuery not to set contentType
-            success: function (data) {
-                alert(data);
-            }
-        });
+            $.ajax({
+                url: '../send_sql/news_sql_add.php',
+                type: 'POST',
+                data: formData,
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                success: function (data) {
+                    // alert(data);
+                    $("#in_body").load("../page/news.php");
+                    $("#add_modal").modal("hide");
+                }
+            });
+            $("#add_modal").modal("hide");
+        }else{
+            alert('Input Text please...');
+        }
     }
 </script>
