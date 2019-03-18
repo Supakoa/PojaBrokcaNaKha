@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- mycss -->
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
@@ -61,8 +61,14 @@
                     class="fas fa-sort-amount-down"></i>
                 ขั้นตอนเอกสาร</a>
             <a class="w3-bar-item w3-button" onclick="call_content('groups.php','หน้า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');"><i
-                    class="fas fa-sort-amount-down"></i>
+                    class="far fa-edit"></i>
                 ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('subject.php','หน้า : ตั้งค่ารายชื่อวิชา','BackDoor : ตั้งค่ารายชื่อวิชา');"><i
+                    class="fas fa-book"></i>
+                ตั้งค่ารายชื่อวิชา</a>
+            <a class="w3-bar-item w3-button" onclick="call_content('faculty.php','หน้า : ตั้งค่ารายชื่อคณะ/สาขา','BackDoor : ตั้งค่ารายชื่อคณะ/สาขา');"><i
+                    class="fas fa-user-graduate"></i>
+                ตั้งค่ารายชื่อคณะ/สาขา</a>
 
             <hr>
         </div>
@@ -167,9 +173,11 @@
 <!-- <script src="../node_modules/popper.js/dist/popper.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
 
-    <script src="jquery-3.3.1.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
 </html>

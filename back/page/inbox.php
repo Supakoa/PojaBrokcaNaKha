@@ -107,7 +107,7 @@
     </div>
 </div>
 <script>
-$(document).ready(function () {
-            $('.table_table').DataTable();   
-});
+    $(document).ready(function () {
+        $('.table_table').DataTable();
+    });
 </script>
