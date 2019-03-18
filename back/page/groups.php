@@ -44,16 +44,14 @@
                     </tr>
                 </tbody>
             </table>
-            <div id="div_add_group"></div>
+            
 
-            <div id="show_alert">
-                TEST
-            </div>
             <input type="hidden" id="now_alert" value="">
 
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="new_group" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -87,6 +85,11 @@
         </div>
     </div>
 </div>
+<div id="div_add_group"></div>
+
+<div id="show_alert"></div>
+
+<div id="edit_group_div"></div>
 <script>
     $("#new_group").modal("hide");
     $(document).ready(function () {
@@ -94,6 +97,20 @@
 
 
     });
+    function modal_edit(group,type_group) { 
+        
+        $.post("../modal/edit_groups.php", {id : group,type : type_group},
+        function (data,status) {
+            // alert(status);
+            $("#edit_group_div").html(data);
+            $("#edit_group_modal").modal('show');
+
+            }
+        );
+
+     };
+  
+
     $("#form_add").submit(function (e) {
 
         e.preventDefault();
@@ -130,7 +147,7 @@
 
         });
 
-
+      
 
 
     });
