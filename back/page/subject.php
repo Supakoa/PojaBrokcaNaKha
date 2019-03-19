@@ -7,7 +7,7 @@
         </div><!-- head -->
 
         <div id="body">
-            <table class="table table-hover">
+            <table class="table table-hover table-sm table-bordered">
                 <thead>
                     <tr>
                         <th>รหัสวิชา</th>
