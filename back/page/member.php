@@ -1,7 +1,7 @@
 <div class="container-fluid text-center" >
-    <h1>ค้นหา : สมาชิก</h1>
+    <h3>ค้นหา : สมาชิก</h3>
     <hr>
-    <br>
+    
     <!-- <h1>เลือก : ค้นหา</h1>
     <hr>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">ทั้งหมด</button>
@@ -117,9 +117,9 @@
 
         </div>
 
-        <div class="container-fluid">
+        <div class="table-esponsive=lg">
             <!-- start tabel -->
-            <table class="table table-sm table-striped table-bordered table-hover table_table">
+            <table class="table display table-striped table-bordered table-hover responsive nowrap table_table">
                 <thead>
                     <tr>
                         <th>รหัสผู้ใช้งาน</th>

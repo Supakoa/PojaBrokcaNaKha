@@ -1,13 +1,13 @@
-<div class="container w3-center" style="margin:20px;">
-    <div class="container-fluid w3-center" style="margin:20px;padding:20px;">
+<div class="container text-center" style="margin:20px;">
+    <div class="container-fluid " style="margin:20px;padding:20px;">
 
         <div id="head">
-            <h1>ตั้งค่า : รายชื่อวิชา</h1>
+            <h3>ตั้งค่า : รายชื่อวิชา</h3>
             <hr>
         </div><!-- head -->
 
-        <div id="body">
-            <table class="table table-hover">
+        <div id="body" class="table-responsive-lg">
+            <table class="table table-hover display nowrap responsive">
                 <thead>
                     <tr>
                         <th>รหัสวิชา</th>

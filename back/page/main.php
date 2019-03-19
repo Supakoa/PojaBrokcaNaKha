@@ -1,5 +1,5 @@
 <div class="container text-center">
-    <h1 >เมนู</h1><hr>
+    <h3>เมนู</h3><hr>
     <div class="row " >
         <div class="col">
             <button onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');" class="w3-btn"

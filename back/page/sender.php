@@ -1,6 +1,6 @@
 <div class="container-fluid text-center" >
     <div class="container-fluid ">
-        <h1>ตั้งค่า : ขั้นตอนเอกสาร</h1>
+        <h3>ตั้งค่า : ขั้นตอนเอกสาร</h3>
         <hr>
 
         <!-- button delete select -->
@@ -27,8 +27,8 @@
         </div> -->
 
         <!-- start table -->
-        <div class="container-fluid" >
-            <table class="table table-bordered table-sm table-striped table_table">
+        <div class="table-responsive-lg" >
+            <table class="table table-bordered responsive display nowrap table-striped table_table">
                 <thead>
                     <tr>
                         <!-- <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks"></i></i></th> -->
@@ -71,7 +71,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1>ตั้งค่าเส้นทางเอกสาร</h1>
+                    <h3>ตั้งค่าเส้นทางเอกสาร</h3>
                 </div>
                 <div class="modal-body">
 

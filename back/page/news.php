@@ -6,12 +6,12 @@
 ?>
 <div class="container-fluid text-center">
     <div class="container" >
-        <h1>ตั้งค่า : ข่าว</h1>
+        <h3>ตั้งค่า : ข่าว</h3>
         <hr>
 
         <!-- button add -->
         <div class="container-fluid text-center">
-            <button onclick="openAddModal();" type="button" class="btn btn-outline-success btn-lg"><i class="fas fa-plus-circle"></i>
+            <button onclick="openAddModal();" type="button" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
                 เพิ่ม</button>
         </div><br>
 
