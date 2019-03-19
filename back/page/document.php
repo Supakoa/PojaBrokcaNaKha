@@ -1,4 +1,4 @@
-<div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
+<div class="container-fluid text-center" >
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">ค้นหา : เอกสาร</h1>
         <hr>
@@ -9,14 +9,14 @@
     </div>
 </div>
 
-<div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
+<div class="container-fluid text-center" >
     <div style="margin:20px;">
         <h1 style="padding-top:10px;">เอกสาร : ตาราง</h1>
         <hr>
 
         <!-- group of table -->
-        <div class="container display">
-            <table class="table w3-center table-bordered table-sm table_table" id="table3">
+        <div class="table-responsive-lg">
+            <table class="table table-bordered nowrap responsive display table_table" id="table3">
 
                 <!-- table header -->
                 <thead>
