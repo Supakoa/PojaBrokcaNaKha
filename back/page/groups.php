@@ -1,54 +1,51 @@
 <?php 
- require '../../server/server.php';
+require '../../server/server.php';
 
 ?>
-<div class="w3-container-fluid w3-center" style="margin:20px;">
-    <div class="w3-container-fluid" style="margin:20px;padding:20px;">
-        <h1>ตั้งค่า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</h1>
-        <hr>
+<div class="container-fluid text-center" style="margin:20px;">
+    <h3>ตั้งค่า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</h3>
+    <hr>
 
-        <!-- button add -->
-        <div class="w3-container-fluid w3-center" style="margin:20px;">
-            <button type="button" class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#new_group"><i
-                    class="fas fa-plus-circle"></i>
-                เพิ่ม</button>
-        </div>
+    <!-- button add -->
+    <div class="container-fluid">
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fa fa-plus-circle"></i>
+            เพิ่ม</button>
+    </div>
 
-        <div class="w3-container-fluid" style="padding:20px;">
+    <div class="table-responsive-lg">
 
-            <table class="table table-striped table-hover table-bordered table-sm table_table" id="table">
-                <thead>
-                    <th>ลำดับ</th>
-                    <th>ชื่อกลุ่ม</th>
-                    <th>ประเภท</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    <?php 
+        <table class="table table-striped table-hover table-bordered responsive display nowrap table_table" id="table">
+            <thead>
+                <th>ลำดับ</th>
+                <th>ชื่อกลุ่ม</th>
+                <th>ประเภท</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <?php 
                 $sql = "SELECT * FROM `groups` WHERE 1";
-                $re_group = mysqli_query($con,$sql);
+                $re_group = mysqli_query($con, $sql);
                 $sum = "";
-                $i = 1 ;
-                while($row_group =  mysqli_fetch_array($re_group)){
-                    $btn = ' <button type="button" class="btn btn-outline-warning btn-sm" onclick="modal_edit('.$row_group['group_id'].','.$row_group['type'].')">แก้ไข</button>';
-                    $sum.= '<tr>
-                                 <td>'.$i++.'</td>'.
-                                '<td>'.$row_group['name'].'</td>'.
-                                '<td>'.$row_group['type']. '</td>'.
-                                '<td>'. $btn .'</td>
+                $i = 1;
+                while ($row_group =  mysqli_fetch_array($re_group)) {
+                    $btn = ' <button type="button" class="btn btn-outline-warning btn-sm" onclick="modal_edit(' . $row_group['group_id'] . ',' . $row_group['type'] . ')">แก้ไข</button>';
+                    $sum .= '<tr>
+                                 <td>' . $i++ . '</td>' .
+                        '<td>' . $row_group['name'] . '</td>' .
+                        '<td>' . $row_group['type'] . '</td>' .
+                        '<td>' . $btn . '</td>
                             </tr>';
                 }
-                echo $sum ;
+                echo $sum;
                 ?>
 
-                    </tr>
-                </tbody>
-            </table>
-            
+                </tr>
+            </tbody>
+        </table>
 
-            <input type="hidden" id="now_alert" value="">
 
-        </div>
+        <input type="hidden" id="now_alert" value="">
+
     </div>
 </div>
 
@@ -92,26 +89,30 @@
 <div id="edit_group_div"></div>
 <script>
     $("#new_group").modal("hide");
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.table_table').DataTable();
 
 
     });
-    function modal_edit(group,type_group) { 
-        
-        $.post("../modal/edit_groups.php", {id : group,type : type_group},
-        function (data,status) {
-            // alert(status);
-            $("#edit_group_div").html(data);
-            $("#edit_group_modal").modal('show');
+
+    function modal_edit(group, type_group) {
+
+        $.post("../modal/edit_groups.php", {
+                id: group,
+                type: type_group
+            },
+            function(data, status) {
+                // alert(status);
+                $("#edit_group_div").html(data);
+                $("#edit_group_modal").modal('show');
 
             }
         );
 
-     };
-  
+    };
 
-    $("#form_add").submit(function (e) {
+
+    $("#form_add").submit(function(e) {
 
         e.preventDefault();
         a = $('#group_name').val();
@@ -120,7 +121,7 @@
                 name: a,
                 type: b
             },
-            function (data) {
+            function(data) {
 
 
 
@@ -132,7 +133,7 @@
                 $.post("../send_sql/alert.php", {
                         alert: c
                     },
-                    function (alert_data) {
+                    function(alert_data) {
                         $("#show_alert").html(alert_data);
                     }
 
@@ -142,13 +143,13 @@
         );
         $("#new_group").modal("hide");
 
-        $('#new_group').on('hidden.bs.modal', function (e) {
+        $('#new_group').on('hidden.bs.modal', function(e) {
             $("#in_body").load("groups.php");
 
         });
 
-      
+
 
 
     });
-</script>
+</script> 

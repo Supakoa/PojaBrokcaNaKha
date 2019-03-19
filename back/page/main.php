@@ -1,7 +1,7 @@
-<div class="w3-container w3-center">
-    <h1 style="margin:30px;padding: 25px" >เมนู</h1><hr>
-    <div class="w3-row w3-margin " style="">
-        <div class="w3-col">
+<div class="container text-center">
+    <h3>เมนู</h3><hr>
+    <div class="row " >
+        <div class="col">
             <button onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');" class="w3-btn"
                 style="height:200px;width:200px;margin:15px;background-color:#C5EDD8;">เอกสาร</button>
             <button onclick="call_content('member.php','หน้า : สมาชิก','BackDoor : สมาชิก');" class="  w3-btn "
