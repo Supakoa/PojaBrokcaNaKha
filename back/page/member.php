@@ -1,4 +1,4 @@
-<div class="w3-container-fluid w3-center" style="margin:20px;max-height:100%;padding:30px;">
+<div class="container-fluid text-center" >
     <h1>ค้นหา : สมาชิก</h1>
     <hr>
     <br>

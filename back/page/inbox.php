@@ -1,5 +1,5 @@
-<div class="w3-container-fluid w3-center" style="margin-top:20px;margin-left:50px;margin-right:50px;">
-    <div class="w3-centainer-fluid " style="margin:20px;padding:20px;">
+<div class="container-fluid text-center">
+    <div class="centainer " style="margin:20px;padding:20px;">
         <h1>ข้อความถึงผู้ดูแลระบบ</h1>
         <hr>
 

@@ -4,20 +4,20 @@
     $re_news = mysqli_query($con,$sql);
     $order = 0;
 ?>
-<div class="w3-container-fluid w3-center" style="margin:20px;">
-    <div class="w3-container-fluid" style="margin:20px;padding:20px;">
+<div class="container-fluid text-center">
+    <div class="container" >
         <h1>ตั้งค่า : ข่าว</h1>
         <hr>
 
         <!-- button add -->
-        <div class="w3-container-fluid w3-center" style="margin:20px;">
+        <div class="container-fluid text-center">
             <button onclick="openAddModal();" type="button" class="btn btn-outline-success btn-lg"><i class="fas fa-plus-circle"></i>
                 เพิ่ม</button>
-        </div>
+        </div><br>
 
-        <div class="w3-container-fluid" style="padding:20px;">
+        <div class="container-fluid" >
             <!-- start add -->
-            <div class="row" style="padding:20px;border:solid;background-color: #C5EDD8;">
+            <div class="row" style="border:solid;background-color: #C5EDD8;">
                 <div class="col-1 ">
                     <p>ลำดับ</p>
                 </div>
@@ -48,7 +48,7 @@
                     <img class="w3-red" src="..\image\news\<?php echo $row_news['news_img'];?>" width="200" height="100">
                 </div>
                 <div class="col-2">
-                    <button class = "btn w3-border w3-border-red w3-round-large w3-white " onclick="openDelModal(<?php echo $row_news['news_id'] ?>,'<?php echo $order; ?>');"><i class="fas fa-trash" style = "color:red"></i></button>
+                    <button class = "btn btn-lg btn-info" onclick="openDelModal(<?php echo $row_news['news_id'] ?>,'<?php echo $order; ?>');"><i class="fas fa-trash" style = "color:red"></i></button>
                 </div>
             </div>
                 <?php } ?>
