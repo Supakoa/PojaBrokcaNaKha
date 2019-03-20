@@ -63,22 +63,22 @@ $all_user .= '</select>';
           // footer: '<a href>Why do I have this issue?</a>'
         });
       } else {
-        //ใส่ sql เพิ่มตรงนี้
         now_id = '<?php echo $id ; ?>';
         sub = '<?php echo $sub_id ; ?>';
+        status_now = 'add';
         $.post("../send_sql/sql_add_user_sub.php", {
             id: user_id,
             sub_id: sub,
-            group_id : now_id
+            group_id : now_id,
+            status : status_now
           },
           function (data) {
-           
-
-
-
-
-          
-            now_type = '2';
+            if(sub==='temp'){
+              now_type = '1';
+            }else{
+              now_type = '2';
+            }
+            
             $('#add_sub_user').modal('hide');
             $('#add_sub_user').on('hidden.bs.modal', function (e) {
               $('#edit_group_modal').modal('hide');

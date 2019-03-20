@@ -8,11 +8,11 @@ require '../../server/server.php';
 
     <!-- button add -->
     <div class="container-fluid">
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fa fa-plus-circle"></i>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle"></i>
             เพิ่ม</button>
     </div>
 
-    <div class="table-responsive-lg">
+    <div class="table-responsive">
 
         <table class="table table-striped table-hover table-bordered responsive display nowrap table_table" id="table">
             <thead>
@@ -54,28 +54,26 @@ require '../../server/server.php';
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h1>เพิ่มกลุ่ม</h1>
+                <h3>เพิ่มกลุ่ม</h3>
             </div>
             <div class="modal-body">
-                <form action="" id="form_add">
+                <form action="" id="form_add" >
                     <div class="row">
-
                         <div class="col">
                             <label for="group_name">ชื่อกลุ่ม</label>
-                            <input type="text" name="group_name" id="group_name" required>
+                            <input class="form-control" type="text" name="group_name" id="group_name" required>
                         </div>
                         <div class="col">
-                            <label for="">เลือกประเภท</label>
-                            <select class="formcontrol" name="group_type" id="group_type" required>
+                            <label for="group_type">เลือกประเภท</label>
+                            <select class="form-control" name="group_type" id="group_type" required>
                                 <option hidden="" selected="" value="">เลือกประเภท</option>
                                 <option value="1">ทั่วไป</option>
                                 <option value="2">ตามวิชา</option>
-
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <button type="submit" id='add_group'>Submit</button>
+                    </div><br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-sm btn-success" id='add_group'>Submit</button>
                     </div>
                 </form>
             </div>
