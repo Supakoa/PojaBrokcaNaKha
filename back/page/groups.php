@@ -84,6 +84,8 @@ require '../../server/server.php';
 </div>
 <div id="div_add_group"></div>
 
+<div id="alert_error"></div>
+
 <div id="show_alert"></div>
 
 <div id="edit_group_div"></div>

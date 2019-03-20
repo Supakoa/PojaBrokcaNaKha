@@ -56,10 +56,14 @@ require '../../server/server.php';
         <a href="#" onclick="call_content('sender.php','Menu / ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');">
             <i class="fa fa-sort-amount-down"></i> ขั้นตอนเอกสาร
         </a>
-        <a href="#" onclick="call_content('groups.php','Menu / ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');">
-            <i class="fa fa-sort-amount-down"></i> ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม
-        </a>
-</nav >
+        <a href="#" onclick="call_content('groups.php','หน้า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');"><i class="far fa-edit"></i>
+            ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</a>
+        <a href="#" onclick="call_content('subject.php','หน้า : ตั้งค่ารายชื่อวิชา','BackDoor : ตั้งค่ารายชื่อวิชา');"><i class="fas fa-book"></i>
+            ตั้งค่ารายชื่อวิชา</a>
+        <a href="#" onclick="call_content('faculty.php','หน้า : ตั้งค่ารายชื่อคณะ/สาขา','BackDoor : ตั้งค่ารายชื่อคณะ/สาขา');"><i class="fas fa-user-graduate"></i>
+            ตั้งค่ารายชื่อคณะ/สาขา</a>
+        <hr>
+    </nav>
     <!-- rigth nav -->
     <div id="main">
         <!-- start NavBar -->
@@ -68,7 +72,7 @@ require '../../server/server.php';
             <!-- <span class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</span> -->
             <!-- <a href="#" class="nav-item " id="nav_title"></a> -->
 
-            <a id="nav_title" href="#" class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</a>
+            <a id="nav_title" href="#" class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,10 +80,12 @@ require '../../server/server.php';
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a href="#" class="nav-link" style="color:whitesmoke;"><i class="far fa-user-circle" style="color:whitesmoke;"></i> ข้อมูลส่วนตัว</a>
+                        <a href="#" class="nav-link" style="color:whitesmoke;"><i class="far fa-user-circle" style="color:whitesmoke;"></i>
+                            ข้อมูลส่วนตัว</a>
                     </li>
                     <li class="nav-item ">
-                        <a href="#" class="nav-link" style="color:whitesmoke;"><i class="fas fa-sign-out-alt" style="color:whitesmoke;"></i> ออกจากระบบ</a>
+                        <a href="#" class="nav-link" style="color:whitesmoke;"><i class="fas fa-sign-out-alt" style="color:whitesmoke;"></i>
+                            ออกจากระบบ</a>
                     </li>
                 </ul>
             </div>
@@ -155,7 +161,7 @@ require '../../server/server.php';
         // xhttp.send();
 
     }
-//  $('#mySidenav').tab('show');
+    //  $('#mySidenav').tab('show');
     function openNav() {
         document.getElementById('mySidenav').style.width = "250px";
         document.getElementById('main').style.marginLeft = "250px";
