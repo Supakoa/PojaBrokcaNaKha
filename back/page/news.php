@@ -11,7 +11,7 @@
 
         <!-- button add -->
         <div class="container-fluid text-center">
-            <button onclick="openAddModal();" type="button" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
+            <button onclick="openAddModal();" type="button" class="btn btn-success btn-sm"><i class="fas fa-plus-circle"></i>
                 เพิ่ม</button>
         </div><br>
 

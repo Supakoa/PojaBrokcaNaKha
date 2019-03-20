@@ -1,7 +1,7 @@
-<div class="container-fluid text-center" >
+<div class="container-fluid ">
     <h3>ค้นหา : สมาชิก</h3>
     <hr>
-    
+
     <!-- <h1>เลือก : ค้นหา</h1>
     <hr>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:450px;width:450px;font-size:50px; font-weight: 900;">ทั้งหมด</button>
@@ -40,7 +40,6 @@
                 <div class="input-group-prepend">
                     <button type="button" class="btn btn-outline-info"><i class="fas fa-search" style=""></i> ค้นหา</button>
                 </div>
-
             </div>
 
             <!-- start modal new user -->
@@ -115,112 +114,111 @@
             </div>
             <!-- end modal new user -->
 
+            <div class="table-responsive">
+                <!-- start tabel -->
+                <table class="table display table-striped table-bordered table-hover responsive nowrap table_table">
+                    <thead>
+                        <tr>
+                            <th>รหัสผู้ใช้งาน</th>
+                            <th>รหัสผ่าน</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>ประเภท</th>
+                            <th>ตำแหน่ง</th>
+                            <th>อีเมล</th>
+                            <th>เบอร์โทร</th>
+                            <th>คณะ</th>
+                            <th>สาขา</th>
+                            <th>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user" style="font-size: 2px">
+                                <i class="fas fa-plus"></i>
+                                </button>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>59122519032</td>
+                            <td>Somchainaja</td>
+                            <td>นาย สมชาย สุดกล้าหาญ</td>
+                            <td>นักศึกษา</td>
+                            <td>นักศึกษา</td>
+                            <td>somchai@gmail.com</td>
+                            <td>0859665422</td>
+                            <td>เทคโนโลยีอุตสาหกรรม</td>
+                            <td>วิศวกรรมคอมพิวเตอร์</td>
+                            <td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>59122519068</td>
+                            <td>zaza1234</td>
+                            <td>นางสาว สมหญิง ตั้งใจเรียน</td>
+                            <td>นักศึกษา</td>
+                            <td>นักศึกษา</td>
+                            <td>somyhing@gmail.com</td>
+                            <td>0889665412</td>
+                            <td>เทคโนโลยีอุตสาหกรรม</td>
+                            <td>ออกแบบกราฟิกและมัลติมีเดีย</td>
+                            <td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>59122519100</td>
+                            <td>123456</td>
+                            <td>นาย อัครเดช เดชะไชโย</td>
+                            <td>นักศึกษา</td>
+                            <td>นักศึกษา</td>
+                            <td>maowmaew@gmail.com</td>
+                            <td>0985641254</td>
+                            <td>เทคโนโลยีอุตสาหกรรม</td>
+                            <td>อุตสาหกรรมการพิมพ์</td>
+                            <td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>surasak.m</td>
+                            <td>ge_surasak</td>
+                            <td>นาย สุรศักดิ์ มงคล</td>
+                            <td>เจ้าหน้าที่</td>
+                            <td>พนักงาน</td>
+                            <td>surasak@gmail.com</td>
+                            <td>0965552147</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>adminnaja</td>
+                            <td>ge_adminmin</td>
+                            <td>นาย แอดมิน สูงสุด</td>
+                            <td>ผู้ดูแลระบบ</td>
+                            <td>แอดมิน</td>
+                            <td>ge_admin@gmail.com</td>
+                            <td>0888888888</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- end tabel -->
+            </div>
         </div>
-
-        <div class="table-esponsive=lg">
-            <!-- start tabel -->
-            <table class="table display table-striped table-bordered table-hover responsive nowrap table_table">
-                <thead>
-                    <tr>
-                        <th>รหัสผู้ใช้งาน</th>
-                        <th>รหัสผ่าน</th>
-                        <th>ชื่อ-นามสกุล</th>
-                        <th>ประเภท</th>
-                        <th>ตำแหน่ง</th>
-                        <th>อีเมล</th>
-                        <th>เบอร์โทร</th>
-                        <th>คณะ</th>
-                        <th>สาขา</th>
-                        <th><button type="button" class="btn w3-circle w3-tiny btn-outline-success btn-hover w3-white"
-                                data-toggle="modal" data-target="#add_user" style="font-size: 2px"><i class="fas fa-plus"
-                                    style="color:green;margin-top:5px"></i></button></th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>59122519032</td>
-                        <td>Somchainaja</td>
-                        <td>นาย สมชาย สุดกล้าหาญ</td>
-                        <td>นักศึกษา</td>
-                        <td>นักศึกษา</td>
-                        <td>somchai@gmail.com</td>
-                        <td>0859665422</td>
-                        <td>เทคโนโลยีอุตสาหกรรม</td>
-                        <td>วิศวกรรมคอมพิวเตอร์</td>
-                        <td><button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit"
-                                    style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i
-                                    class="fas fa-trash" style="color:red"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>59122519068</td>
-                        <td>zaza1234</td>
-                        <td>นางสาว สมหญิง ตั้งใจเรียน</td>
-                        <td>นักศึกษา</td>
-                        <td>นักศึกษา</td>
-                        <td>somyhing@gmail.com</td>
-                        <td>0889665412</td>
-                        <td>เทคโนโลยีอุตสาหกรรม</td>
-                        <td>ออกแบบกราฟิกและมัลติมีเดีย</td>
-                        <td><button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit"
-                                    style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i
-                                    class="fas fa-trash" style="color:red"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>59122519100</td>
-                        <td>123456</td>
-                        <td>นาย อัครเดช เดชะไชโย</td>
-                        <td>นักศึกษา</td>
-                        <td>นักศึกษา</td>
-                        <td>maowmaew@gmail.com</td>
-                        <td>0985641254</td>
-                        <td>เทคโนโลยีอุตสาหกรรม</td>
-                        <td>อุตสาหกรรมการพิมพ์</td>
-                        <td><button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit"
-                                    style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i
-                                    class="fas fa-trash" style="color:red"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>surasak.m</td>
-                        <td>ge_surasak</td>
-                        <td>นาย สุรศักดิ์ มงคล</td>
-                        <td>เจ้าหน้าที่</td>
-                        <td>พนักงาน</td>
-                        <td>surasak@gmail.com</td>
-                        <td>0965552147</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td><button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit"
-                                    style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i
-                                    class="fas fa-trash" style="color:red"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>adminnaja</td>
-                        <td>ge_adminmin</td>
-                        <td>นาย แอดมิน สูงสุด</td>
-                        <td>ผู้ดูแลระบบ</td>
-                        <td>แอดมิน</td>
-                        <td>ge_admin@gmail.com</td>
-                        <td>0888888888</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td><button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit"
-                                    style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i
-                                    class="fas fa-trash" style="color:red"></i></button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- end tabel -->
-        </div>
-
     </div>
 </div>
 <script>
-$(document).ready(function () {
-            $('.table_table').DataTable();   
-            
-});
+    $(document).ready(function() {
+        $('.table_table').DataTable();
 
+    });
 </script>
 <!-- <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
     <h1 style="color:gray;">เลือก : ชนิด</h1>
@@ -239,4 +237,4 @@ $(document).ready(function () {
             <button type="button" class="btn btn-info">ค้นหา</button>
         </div>
     </div>
-</div> -->
+</div> --> 

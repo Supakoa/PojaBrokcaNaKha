@@ -12,7 +12,7 @@ body{
      0 1px  rgb(255, 255, 255), 
      1px 0 rgb(255, 255, 255), 
      0 -1px rgb(255, 255, 255);  */
-     font-size: 20px
+     /* font-size: 20px */
 }
 
 th,td{
@@ -65,10 +65,19 @@ a:hover{
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 18px;
   color: #818181;
   display: block;
   transition: 0.3s;
+}
+.slidebrand{
+  display: inline-block;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
 }
 
 .sidenav a:hover {
@@ -79,7 +88,7 @@ a:hover{
   position: absolute;
   top: 0;
   right: 25px;
-  font-size: 36px;
+  font-size: 30px;
   margin-left: 50px;
 }
 
@@ -94,6 +103,6 @@ a:hover{
   }
 
   .sidenav a {
-      font-size: 18px;
+      font-size: 10px;
   }
 }
