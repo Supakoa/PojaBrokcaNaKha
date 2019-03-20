@@ -32,50 +32,71 @@ $all_user .= '</select>';
         </button>
       </div>
       <div class="modal-body">
-      
-      <?php 
+
+        <?php 
     echo $all_user ;
 ?>
-      </form>
-    
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id = "save"  >Save changes</button>
+        </form>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="save">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <script>
+    user_id = null;
+    $('#name').change(function (e) {
+      e.preventDefault();
+      user_id = $('#name').val();
 
-<script>
- user_id = null;
-    $('#name').change(function (e) { 
-        e.preventDefault();
-       user_id =  $('#name').val();
-        
     });
-    $('#save').click(function (e) { 
-        e.preventDefault();
-        if (user_id == null){
-            Swal({
-                            type: 'warning',
-                            title: 'กรุณาเลือกผู้ใช้งาน',
-                            // text: 'กรุณาใช้ชื่อใหม่.',
-                            // footer: '<a href>Why do I have this issue?</a>'
-           });        
-        }else{
-            //ใส่ sql เพิ่มตรงนี้
-        }
-    });
-
-    now_id = '<?php echo $id ; ?>';
-    now_type ='2';
-    $('#add_sub_user').on('hidden.bs.modal', function (e) {
-        $('#edit_group_modal').modal('hide');
-        $('#edit_group_modal').on('hidden.bs.modal', function (e) {
-            $("#edit_group_div").load("../modal/edit_groups.php",{id:now_id,type:now_type});
+    $('#save').click(function (e) {
+      e.preventDefault();
+      if (user_id == null) {
+        Swal({
+          type: 'warning',
+          title: 'กรุณาเลือกผู้ใช้งาน',
+          // text: 'กรุณาใช้ชื่อใหม่.',
+          // footer: '<a href>Why do I have this issue?</a>'
+        });
+      } else {
+        //ใส่ sql เพิ่มตรงนี้
+        now_id = '<?php echo $id ; ?>';
+        sub = '<?php echo $sub_id ; ?>';
+        $.post("../send_sql/sql_add_user_sub.php", {
+            id: user_id,
+            sub_id: sub,
+            group_id : now_id
+          },
+          function (data) {
            
-     });
+
+
+
+
+          
+            now_type = '2';
+            $('#add_sub_user').modal('hide');
+            $('#add_sub_user').on('hidden.bs.modal', function (e) {
+              $('#edit_group_modal').modal('hide');
+              $('#edit_group_modal').on('hidden.bs.modal', function (e) {
+                $("#edit_group_div").load("../modal/edit_groups.php", {
+                  id: now_id,
+                  type: now_type
+                });
+                $('#show_alert').html(data);
+                // alert(data);
+               
+                
+              });
+            });
+          }
+        );
+
+
+      }
     });
-        
-</script>
+  </script>

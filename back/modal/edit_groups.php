@@ -61,8 +61,13 @@ if(isset($_POST)){
                     $i = 1;
                     while($row_sub = mysqli_fetch_array($re_sub)){
                         echo '<tr><td>'. $i++.'</td><td>'.$row_sub['sub_name'].'</td><td>';
-                        
-                        
+                        $sub_id = $row_sub['sub_id'];
+                        $sql_sub_user = "SELECT user.name FROM `groups_user`,`user` WHERE groups_user.group_id = '$id' AND groups_user.user_id = user.user_id AND groups_user.sub_id = '$sub_id' ";
+                        $re_sub_user = mysqli_query($con,$sql_sub_user);
+                        while($row_sub_user = mysqli_fetch_array($re_sub_user)){
+
+                            echo ' |'.$row_sub_user['name'].'| ';
+                        }
                         
                         echo '<a href = "#" onclick = "add_user_sub(\''.$id.'\',\''.$row_sub['sub_id'].'\')" >
                         <i class="fas fa-plus-circle "></i>
