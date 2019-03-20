@@ -36,39 +36,39 @@ require '../../server/server.php';
 
 <body class="">
     <!-- rigth nav  -->
-    <div id="mySidenav" class="sidenav">
+    <nav id="mySidenav" class="sidenav ">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#" onclick="call_content('main.php','Page : Home','BackDoor : Main');">
+        <a href="#" onclick="call_content('main.php','Menu / Home','BackDoor : Main');">
             <i class="fas fa-home"></i> หน้าแรก
         </a>
-        <a href="#" onclick="call_content('Inbox.php','หน้า : ข้อความ','BackDoor : ข้อความ');">
+        <a href="#" onclick="call_content('Inbox.php','Menu / ข้อความ','BackDoor : ข้อความ');">
             <i class="fa fa-bell"></i> ข้อความ <span class="badge text-right badge-danger" style="text-shadow: 0 0 0 black;">4</span>
         </a>
-        <a href="#" onclick="call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');">
+        <a href="#" onclick="call_content('document.php','Menu / เอกสาร','BackDoor : เอกสาร');">
             <i class="fa fa-folder-open"></i> เอกสาร
         </a>
-        <a href="#" onclick="call_content('member.php','หน้า : สมาชิก','BackDoor : สมาชิก');">
+        <a href="#" onclick="call_content('member.php','Menu / สมาชิก','BackDoor : สมาชิก');">
             <i class="fa fa-user-edit"></i> สมาชิก
         </a>
-        <a href="#" onclick="call_content('news.php','หน้า : หน้าข่าว','BackDoor : หน้าข่าว');">
+        <a href="#" onclick="call_content('news.php','Menu / หน้าข่าว','BackDoor : หน้าข่าว');">
             <i class="fa fa-bullhorn"></i> หน้าข่าว
         </a>
-        <a href="#" onclick="call_content('sender.php','หน้า : ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');">
+        <a href="#" onclick="call_content('sender.php','Menu / ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');">
             <i class="fa fa-sort-amount-down"></i> ขั้นตอนเอกสาร
         </a>
-        <a href="#" onclick="call_content('groups.php','หน้า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');">
+        <a href="#" onclick="call_content('groups.php','Menu / ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');">
             <i class="fa fa-sort-amount-down"></i> ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม
         </a>
-    </div>
+</nav >
     <!-- rigth nav -->
     <div id="main">
         <!-- start NavBar -->
 
         <nav class="navbar navbar-light navbar-expand-lg t" style="background-color:#84695E;color:whitesmoke">
-            <span class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+            <!-- <span class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</span> -->
             <!-- <a href="#" class="nav-item " id="nav_title"></a> -->
 
-            <a id="nav_title" href="#" class="navbar-brand"></a>
+            <a id="nav_title" href="#" class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -135,7 +135,7 @@ require '../../server/server.php';
     });
     if (document.getElementById('in_body').innerHTML === '') {
 
-        call_content('Inbox.php', 'หน้า : ข้อความ', 'BackDoor : ข้อความ');
+        call_content('Inbox.php', 'Menu / ข้อความ', 'BackDoor : ข้อความ');
         // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
@@ -155,15 +155,15 @@ require '../../server/server.php';
         // xhttp.send();
 
     }
-
+//  $('#mySidenav').tab('show');
     function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
+        document.getElementById('mySidenav').style.width = "250px";
+        document.getElementById('main').style.marginLeft = "250px";
     }
 
     function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById('mySidenav').style.width = "0";
+        document.getElementById('main').style.marginLeft = "0";
     }
 </script>
 
