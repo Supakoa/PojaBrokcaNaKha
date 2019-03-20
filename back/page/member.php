@@ -129,7 +129,7 @@
                             <th>คณะ</th>
                             <th>สาขา</th>
                             <th>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user" style="font-size: 2px">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user" >
                                 <i class="fas fa-plus"></i>
                                 </button>
                             </th>
