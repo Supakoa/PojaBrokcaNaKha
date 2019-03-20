@@ -20,7 +20,19 @@ if(isset($_POST)){
 
             <!-- Modal body -->
             <div class="modal-body">
-                <?php print_r($_POST); ?>
+                <?php
+                //  print_r($_POST);
+                $sql_sub_user = "SELECT user.user_id,user.name FROM `groups_user`,`user` WHERE groups_user.group_id = '$id' AND groups_user.user_id = user.user_id  AND groups_user.sub_id = 'temp' ";
+                $re_sub_user = mysqli_query($con,$sql_sub_user);
+                while($row_sub_user = mysqli_fetch_array($re_sub_user)){
+
+                    echo  '<button type="button" class="btn btn-outline-info btn-xl btn-singha" style = "font-size: 14px;" 
+                    onclick = "del_user_sub(\''.$id.'\',\'temp\',\''.$row_sub_user['user_id'].'\',\''.$row_sub_user['name'].'\')">'.$row_sub_user['name'].'</button>';
+                }
+                 echo '<a href = "#" onclick = "add_user_sub(\''.$id.'\',\'temp\')" >
+                        <i class="fas fa-plus-circle "></i>
+                        </a>'
+                ?>
             </div>
 
             <!-- Modal footer -->
@@ -105,7 +117,7 @@ if(isset($_POST)){
     });
 
     function add_user_sub(group_id, sub) {
-        // alert(group_id+" : "+sub);
+        alert(group_id+" : "+sub);
         $.post("../modal/add_user_sub.php", {
                 id: group_id,
                 sub_id: sub
@@ -129,10 +141,14 @@ if(isset($_POST)){
     );
     function del_user_sub(group_id, sub, user_id, user_name) {
 
-
+        if(sub=='temp'){
+            sum = user_name;
+        }else{
+            sum = user_name + " ที่วิชา " + sub ;
+        }
         Swal.fire({
             title: 'ท่านต้องการลบ ?',
-            text: user_name + " ที่วิชา " + sub,
+            text: sum,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#28A745',

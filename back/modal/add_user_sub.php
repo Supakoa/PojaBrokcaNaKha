@@ -73,7 +73,12 @@ $all_user .= '</select>';
             status : status_now
           },
           function (data) {
-            now_type = '2';
+            if(sub==='temp'){
+              now_type = '1';
+            }else{
+              now_type = '2';
+            }
+            
             $('#add_sub_user').modal('hide');
             $('#add_sub_user').on('hidden.bs.modal', function (e) {
               $('#edit_group_modal').modal('hide');
