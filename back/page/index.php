@@ -37,36 +37,36 @@ require '../../server/server.php';
 <body class="">
     <!-- rigth nav  -->
     <nav id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    
 
         <ul>
-            <li class="slidebrand">
-                <a href="#" onclick="call_content('main.php');">
+            <li class="slidebrand navtap">
+                <a href="#" class = "" onclick="call_content('main.php');">
                     <i class="fa fa-home"></i> หน้าแรก
                 </a>
             </li>
         </ul>
 
-        <a href="#" onclick="call_content('Inbox.php');">
+        <a href="#" class = "navtap" onclick="call_content('Inbox.php');">
             <i class="fa fa-bell"></i> ข้อความ <span class="badge text-right badge-danger" style="text-shadow: 0 0 0 black;">4</span>
         </a>
-        <a href="#" onclick="call_content('document.php');">
+        <a href="#" class = "navtap" onclick="call_content('document.php');">
             <i class="fa fa-folder-open"></i> เอกสาร
         </a>
-        <a href="#" onclick="call_content('member.php');">
+        <a href="#" class = "navtap" onclick="call_content('member.php');">
             <i class="fa fa-user-edit"></i> สมาชิก
         </a>
-        <a href="#" onclick="call_content('news.php');">
+        <a href="#" class = "navtap" onclick="call_content('news.php');">
             <i class="fa fa-bullhorn"></i> หน้าข่าว
         </a>
-        <a href="#" onclick="call_content('sender.php');">
+        <a href="#" class = "navtap" onclick="call_content('sender.php');">
             <i class="fa fa-sort-amount-down"></i> ขั้นตอนเอกสาร
         </a>
-        <a href="#" onclick="call_content('groups.php');"><i class="far fa-edit"></i>
+        <a href="#" class = "navtap" onclick="call_content('groups.php');"><i class="far fa-edit"></i>
             ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</a>
-        <a href="#" onclick="call_content('subject.php');"><i class="fas fa-book"></i>
+        <a href="#" class = "navtap" onclick="call_content('subject.php');"><i class="fas fa-book"></i>
             ตั้งค่ารายชื่อวิชา</a>
-        <a href="#" onclick="call_content('faculty.php');"><i class="fas fa-user-graduate"></i>
+        <a href="#" class = "navtap" onclick="call_content('faculty.php');"><i class="fas fa-user-graduate"></i>
             ตั้งค่ารายชื่อคณะ/สาขา</a>
         <hr>
     </nav>
@@ -144,6 +144,11 @@ require '../../server/server.php';
 
         });
     });
+    $('.navtap').click(function (e) { 
+        e.preventDefault();
+        $('.navtap').css("background-color", "#252526");
+        $(this).css("background-color", "#0672BA");
+    });
     if (document.getElementById('in_body').innerHTML === '') {
 
         call_content('Inbox.php');
@@ -161,14 +166,16 @@ require '../../server/server.php';
     }
     //  $('#mySidenav').tab('show');
     function openNav() {
-        document.getElementById('mySidenav').style.width = "300px";
-        document.getElementById('main').style.marginLeft = "300px";
+        if($('#mySidenav').css("width")=="0px"){
+            document.getElementById('mySidenav').style.width = "300px";
+            document.getElementById('main').style.marginLeft = "300px";
+        }else{
+            document.getElementById('mySidenav').style.width = "0";
+            document.getElementById('main').style.marginLeft = "0";
+        }
     }
 
-    function closeNav() {
-        document.getElementById('mySidenav').style.width = "0";
-        document.getElementById('main').style.marginLeft = "0";
-    }
+ 
     
 </script>
 
