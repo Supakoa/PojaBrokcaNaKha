@@ -1,3 +1,11 @@
+<?php   
+    require '../../server/server.php';
+
+    $sql_form = "SELECT * FROM `form` ";
+    $re_form = mysqli_query($con,$sql_form);
+
+
+?>
 <div class="container-fluid text-center" >
     <div class="container-fluid ">
         <h3>ตั้งค่า : ขั้นตอนเอกสาร</h3>
@@ -34,32 +42,21 @@
                         <!-- <th><input class="w3-check" type="checkbox"><i class="fas fa-tasks"></i></i></th> -->
                         <th>Order</th>
                         <th>Name</th>
-                        <th>ID</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <!-- <td><input class="w3-check" type="checkbox"></td> -->
-                        <td>1).</td>
-                        <td>เอกสารขอขึ้นสอบ</td>
-                        <td>DE-2019</td>
-                        <td>
-                            <button type="button" class="btn  " data-toggle="modal" data-target="#edit_modal"><i
-                                    class="fas fa-edit " style="color:#FBBC05"></i> </button>
+                   
+                       <?php 
+                       $i = 1 ;
+                        while($row_form = mysqli_fetch_array($re_form)){
+                        $btn = ' <button type="button" class="btn btn-outline-warning btn-sm" onclick="modal_edit(' . $row_form['form_id'].')">แก้ไข</button>';
 
-                        </td>
-                    </tr>
-                    <!-- start tmp 2 -->
-                    <tr>
-                        <!-- <td><input class="w3-check" type="checkbox"></td> -->
-                        <td>2).</td>
-                        <td>แบบคำร้องขอลาป่วย</td>
-                        <td>RS-2019</td>
-                        <td><button type="button" class="btn " data-toggle="modal" data-target="#edit_modal"><i
-                                    class="fas fa-edit" style="color:#FBBC05"></i> </button></td>
-                    </tr>
-                    <!-- end tmp 2 -->
+                            echo '<tr><td>'.$i++.'</td><td>'.$row_form['name'].'</td><td>'.$btn.'</td></tr>';
+                        }
+                       ?>
+                   
+                  
                 </tbody>
             </table>
         </div>
