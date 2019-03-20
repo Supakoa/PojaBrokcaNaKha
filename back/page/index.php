@@ -71,7 +71,7 @@ require '../../server/server.php';
         <hr>
     </nav>
     <!-- rigth nav -->
-    <div id="main">
+    <div id="main" >
         <!-- start NavBar -->
         <nav class="navbar navbar-light navbar-expand-lg t" style="background-color:#84695E;color:whitesmoke">
             <!-- <span class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</span> -->
@@ -147,23 +147,16 @@ require '../../server/server.php';
     if (document.getElementById('in_body').innerHTML === '') {
 
         call_content('Inbox.php');
-        // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
+        
     }
 
     function call_content(content) {
 
-        // document.getElementById('nav_title').innerHTML = nav_title;
-        // document.getElementById('tab_title').innerHTML = title;
+
 
         $("#in_body").load(content);
-        // var xhttp = new XMLHttpRequest();
-        // xhttp.onreadystatechange = function () {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         document.getElementById("in_body").innerHTML = this.responseText;
-        //     }
-        // };
-        // xhttp.open("GET", content, true);
-        // xhttp.send();
+        
+        
 
     }
     //  $('#mySidenav').tab('show');
@@ -176,6 +169,7 @@ require '../../server/server.php';
         document.getElementById('mySidenav').style.width = "0";
         document.getElementById('main').style.marginLeft = "0";
     }
+    
 </script>
 
 <!-- bootstrap 4.2.1 -->

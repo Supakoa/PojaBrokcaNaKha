@@ -66,7 +66,7 @@ a:hover{
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 18px;
-  color: #818181;
+  color: #fff;
   display: block;
   transition: 0.3s;
 }
@@ -94,6 +94,7 @@ a:hover{
 
 #main {
   transition: margin-left .5s;
+  height: 100%;
   /* padding: 16px; */
 }
 
