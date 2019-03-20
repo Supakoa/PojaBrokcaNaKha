@@ -1,4 +1,4 @@
-<div class="container-fluid text-center">
+<div class="container-fluid ">
     <h3>ค้นหา : สมาชิก</h3>
     <hr>
 
@@ -114,7 +114,7 @@
             </div>
             <!-- end modal new user -->
 
-            <div class="table-esponsive-lg">
+            <div class="table-responsive">
                 <!-- start tabel -->
                 <table class="table display table-striped table-bordered table-hover responsive nowrap table_table">
                     <thead>
@@ -129,7 +129,10 @@
                             <th>คณะ</th>
                             <th>สาขา</th>
                             <th>
-                                <button type="button" class="btn btn-success btn-hover " data-toggle="modal" data-target="#add_user" style="font-size: 2px"><i class="fas fa-plus" style="color:green;margin-top:5px"></i></button></th>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user" style="font-size: 2px">
+                                <i class="fas fa-plus"></i>
+                                </button>
+                            </th>
 
                         </tr>
                     </thead>
@@ -145,7 +148,8 @@
                             <td>เทคโนโลยีอุตสาหกรรม</td>
                             <td>วิศวกรรมคอมพิวเตอร์</td>
                             <td>
-                                <button class="btn "><i class="fa fa-user-edit" style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style="color:red"></i></button></td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
                             <td>59122519068</td>
@@ -158,7 +162,8 @@
                             <td>เทคโนโลยีอุตสาหกรรม</td>
                             <td>ออกแบบกราฟิกและมัลติมีเดีย</td>
                             <td>
-                                <button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style="color:red"></i></button></td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
                             <td>59122519100</td>
@@ -171,7 +176,8 @@
                             <td>เทคโนโลยีอุตสาหกรรม</td>
                             <td>อุตสาหกรรมการพิมพ์</td>
                             <td>
-                                <button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style="color:red"></i></button></td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
                             <td>surasak.m</td>
@@ -184,7 +190,8 @@
                             <td>-</td>
                             <td>-</td>
                             <td>
-                                <button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style="color:red"></i></button></td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
                             <td>adminnaja</td>
@@ -197,7 +204,8 @@
                             <td>-</td>
                             <td>-</td>
                             <td>
-                                <button class="btn w3-border w3-border-yellow w3-round-large w3-white "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> <button class="btn w3-border w3-border-red w3-round-large w3-white "><i class="fas fa-trash" style="color:red"></i></button></td>
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

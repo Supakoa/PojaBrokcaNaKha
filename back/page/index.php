@@ -36,43 +36,48 @@ require '../../server/server.php';
 
 <body class="">
     <!-- rigth nav  -->
-    <nav id="mySidenav" class="sidenav ">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#" onclick="call_content('main.php','Menu / Home','BackDoor : Main');">
-            <i class="fas fa-home"></i> หน้าแรก
-        </a>
-        <a href="#" onclick="call_content('Inbox.php','Menu / ข้อความ','BackDoor : ข้อความ');">
+    <nav id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <ul>
+            <li class="slidebrand">
+                <a href="#" onclick="call_content('main.php');">
+                    <i class="fa fa-home"></i> หน้าแรก
+                </a>
+            </li>
+        </ul>
+
+        <a href="#" onclick="call_content('Inbox.php');">
             <i class="fa fa-bell"></i> ข้อความ <span class="badge text-right badge-danger" style="text-shadow: 0 0 0 black;">4</span>
         </a>
-        <a href="#" onclick="call_content('document.php','Menu / เอกสาร','BackDoor : เอกสาร');">
+        <a href="#" onclick="call_content('document.php');">
             <i class="fa fa-folder-open"></i> เอกสาร
         </a>
-        <a href="#" onclick="call_content('member.php','Menu / สมาชิก','BackDoor : สมาชิก');">
+        <a href="#" onclick="call_content('member.php');">
             <i class="fa fa-user-edit"></i> สมาชิก
         </a>
-        <a href="#" onclick="call_content('news.php','Menu / หน้าข่าว','BackDoor : หน้าข่าว');">
+        <a href="#" onclick="call_content('news.php');">
             <i class="fa fa-bullhorn"></i> หน้าข่าว
         </a>
-        <a href="#" onclick="call_content('sender.php','Menu / ขั้นตอนเอกสาร','BackDoor : ขั้นตอนเอกสาร');">
+        <a href="#" onclick="call_content('sender.php');">
             <i class="fa fa-sort-amount-down"></i> ขั้นตอนเอกสาร
         </a>
-        <a href="#" onclick="call_content('groups.php','หน้า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม','BackDoor : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม');"><i class="far fa-edit"></i>
+        <a href="#" onclick="call_content('groups.php');"><i class="far fa-edit"></i>
             ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</a>
-        <a href="#" onclick="call_content('subject.php','หน้า : ตั้งค่ารายชื่อวิชา','BackDoor : ตั้งค่ารายชื่อวิชา');"><i class="fas fa-book"></i>
+        <a href="#" onclick="call_content('subject.php');"><i class="fas fa-book"></i>
             ตั้งค่ารายชื่อวิชา</a>
-        <a href="#" onclick="call_content('faculty.php','หน้า : ตั้งค่ารายชื่อคณะ/สาขา','BackDoor : ตั้งค่ารายชื่อคณะ/สาขา');"><i class="fas fa-user-graduate"></i>
+        <a href="#" onclick="call_content('faculty.php');"><i class="fas fa-user-graduate"></i>
             ตั้งค่ารายชื่อคณะ/สาขา</a>
         <hr>
     </nav>
     <!-- rigth nav -->
     <div id="main">
         <!-- start NavBar -->
-
         <nav class="navbar navbar-light navbar-expand-lg t" style="background-color:#84695E;color:whitesmoke">
             <!-- <span class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()" >&#9776;</span> -->
             <!-- <a href="#" class="nav-item " id="nav_title"></a> -->
 
-            <a id="nav_title" href="#" class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</a>
+            <a href="#" class="navbar-brand" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -97,7 +102,7 @@ require '../../server/server.php';
         <div class="" style="background-color:#ffffff" id="body">
 
             <!-- html here -->
-            <div id="in_body" class="card-body"></div>
+            <div id="in_body" class="card-body" onclick="closeNav()"></div>
 
         </div>
         <!-- end body -->
@@ -141,14 +146,14 @@ require '../../server/server.php';
     });
     if (document.getElementById('in_body').innerHTML === '') {
 
-        call_content('Inbox.php', 'Menu / ข้อความ', 'BackDoor : ข้อความ');
+        call_content('Inbox.php');
         // call_content('document.php','หน้า : เอกสาร','BackDoor : เอกสาร');
     }
 
-    function call_content(content, nav_title, title) {
+    function call_content(content) {
 
-        document.getElementById('nav_title').innerHTML = nav_title;
-        document.getElementById('tab_title').innerHTML = title;
+        // document.getElementById('nav_title').innerHTML = nav_title;
+        // document.getElementById('tab_title').innerHTML = title;
 
         $("#in_body").load(content);
         // var xhttp = new XMLHttpRequest();
@@ -163,8 +168,8 @@ require '../../server/server.php';
     }
     //  $('#mySidenav').tab('show');
     function openNav() {
-        document.getElementById('mySidenav').style.width = "250px";
-        document.getElementById('main').style.marginLeft = "250px";
+        document.getElementById('mySidenav').style.width = "300px";
+        document.getElementById('main').style.marginLeft = "300px";
     }
 
     function closeNav() {

@@ -8,11 +8,11 @@ require '../../server/server.php';
 
     <!-- button add -->
     <div class="container-fluid">
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fa fa-plus-circle"></i>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle"></i>
             เพิ่ม</button>
     </div>
 
-    <div class="table-responsive-lg">
+    <div class="table-responsive">
 
         <table class="table table-striped table-hover table-bordered responsive display nowrap table_table" id="table">
             <thead>

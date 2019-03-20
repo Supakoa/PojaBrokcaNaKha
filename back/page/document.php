@@ -3,7 +3,7 @@
         <div class="col-md-4 offset-md-4">
             <label for="search_document">ค้นหา</label>
             <input class="form-control" type="search" id="search_document" style="" placeholder="รหัสเอกสาร">
-            <button type="button" class="btn btn-info btn-sm" style="margin-top:10px;margin-bottom:10px;"><i class="fa fa-search "></i>
+            <button type="button" class="btn btn-info btn-sm" style="margin-top:10px;margin-bottom:10px;"><i class="fas fa-search "></i>
             </button>
         </div>
 
