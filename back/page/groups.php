@@ -131,7 +131,7 @@ require '../../server/server.php';
                 c = $("#alert").val();
 
                 $.post("../send_sql/alert.php", {
-                        alert: c
+                        // alert: c
                     },
                     function(alert_data) {
                         $("#show_alert").html(alert_data);

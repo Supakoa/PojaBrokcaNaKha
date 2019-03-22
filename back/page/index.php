@@ -47,7 +47,7 @@ require '../../server/server.php';
             </li>
         </ul>
 
-        <a href="#" class = "navtap" onclick="call_content('Inbox.php');">
+        <a href="#" class = "navtap" onclick="call_content('inbox.php');">
             <i class="fa fa-bell"></i> ข้อความ <span class="badge text-right badge-danger" style="text-shadow: 0 0 0 black;">4</span>
         </a>
         <a href="#" class = "navtap" onclick="call_content('document.php');">
@@ -151,7 +151,7 @@ require '../../server/server.php';
     });
     if (document.getElementById('in_body').innerHTML === '') {
 
-        call_content('Inbox.php');
+        call_content('inbox.php');
         
     }
 
@@ -170,9 +170,13 @@ require '../../server/server.php';
             document.getElementById('mySidenav').style.width = "300px";
             document.getElementById('main').style.marginLeft = "300px";
         }else{
-            document.getElementById('mySidenav').style.width = "0";
+        document.getElementById('mySidenav').style.width = "0";
             document.getElementById('main').style.marginLeft = "0";
         }
+    }
+    function closeNav(){
+        document.getElementById('mySidenav').style.width = "0";
+            document.getElementById('main').style.marginLeft = "0";
     }
 
  
