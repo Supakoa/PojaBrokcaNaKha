@@ -12,14 +12,14 @@
         </div><!-- head -->
 
         <div id="body" class="table-responsive-lg" >
-            <table class="table table-bordered table-sm table-hover display nowrap responsive">
+            <table class="table table-bordered table-sm table-hover display text-center nowrap responsive">
 
                 <thead>
                     <tr>
                         <th>ลำดับ</th>
                         <th>รหัสวิชา</th>
                         <th>ชื่อวิชา</th>
-                        <th>แก้ไข</th>
+                        <th>ลบ</th>
                     </tr>
                 </thead><!-- table head -->
 
@@ -32,29 +32,30 @@
                     <tr>
                         <td>
                             <?php echo (++$i).').' ;$id = $row_sub_all[0];$name = $row_sub_all[1]; ?>
-                            <div class="collapse" id="containt_<?php echo $i; ?>">
+                            <!-- <div class="collapse" id="containt_<?php //echo $i; ?>">
                                 <hr>
-                                <div id="update_<?php echo $i; ?>" onclick="update_sub(<?php echo $i; ?>);" class="btn btn-sm btn-success"><i class="far fa-check-circle" style="color:white;"></i></div>
-                            </div><!-- collapse -->
+                                <div id="update_<?php echo $i; ?>" onclick="update_sub(<?php //echo $i; ?>);" class="btn btn-sm btn-success"><i class="far fa-check-circle" style="color:white;"></i></div>
+                            </div> --><!-- collapse -->
                         </td>
                         <td>
                             <?php echo $row_sub_all['sub_id']; ?>
-                            <div class="collapse" id="containt_<?php echo $i; ?>">
-                                <hr><input id="input_id_<?php echo $i; ?>" onchange="inputChange(<?php echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
-                                    placeholder="<?php echo $row_sub_all['sub_id']; ?>">
-                            </div><!-- collapse -->
+                            <!-- <div class="collapse" id="containt_<?php //echo $i; ?>">
+                                <hr><input id="input_id_<?php echo $i; ?>" onchange="inputChange(<?php //echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
+                                    placeholder="<?php //echo $row_sub_all['sub_id']; ?>">
+                            </div> --><!-- collapse -->
                         </td>
                         <td>
                             <?php echo $row_sub_all['sub_name']; ?>
 
-                            <div class="collapse" id="containt_<?php echo $i; ?>">
-                                <hr><input id="input_name_<?php echo $i; ?>" onchange="inputChange(<?php echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
-                                    placeholder="<?php echo $row_sub_all['sub_name']; ?>">
-                            </div><!-- collapse -->
+                            <!-- <div class="collapse" id="containt_<?php echo $i; ?>">
+                                <hr><input id="input_name_<?php //echo $i; ?>" onchange="inputChange(<?php //echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
+                                    placeholder="<?php //echo $row_sub_all['sub_name']; ?>">
+                            </div> --><!-- collapse -->
                         </td>
                         <td>
-                            <button type="button" onclick="changeIcon(<?php echo $i; ?>);" class="btn btn-sm btn-outline-dark" data-toggle="collapse" aria-expanded="false"
-                                aria-controls="collapseExample" data-target="#containt_<?php echo $i; ?>"><i id="icon_<?php echo $i; ?>" class="fas fa-angle-double-down"></i></button>
+                            <!-- <button type="button" onclick="changeIcon(<?php //echo $i; ?>);" class="btn btn-sm btn-outline-dark" data-toggle="collapse" aria-expanded="false"
+                                aria-controls="collapseExample" data-target="#containt_<?php //echo $i; ?>"><i id="icon_<?php //echo $i; ?>" class="fas fa-angle-double-down"></i></button> -->
+                            <button class="btn btn-sm btn-outline-dark" onclick="delete_sub();" ><i class="far fa-trash-alt"></i></button>
                         </td>
 
                     </tr>
@@ -68,52 +69,63 @@
 </div>
 
 <script>
-    function changeIcon(i){
-        if($("#icon_"+i).attr('class') == 'fas fa-angle-double-down'){
-            $("#icon_"+i).removeClass("fas fa-angle-double-down");
-            $("#icon_"+i).addClass("fas fa-angle-double-up");
-        }
-        else if($("#icon_"+i).attr('class') == 'fas fa-angle-double-up'){
-            $("#icon_"+i).removeClass("fas fa-angle-double-up");
-            $("#icon_"+i).addClass("fas fa-angle-double-down");
-        }
-    } // change icon
+    // function changeIcon(i){
+    //     if($("#icon_"+i).attr('class') == 'fas fa-angle-double-down'){
+    //         $("#icon_"+i).removeClass("fas fa-angle-double-down");
+    //         $("#icon_"+i).addClass("fas fa-angle-double-up");
+    //     }
+    //     else if($("#icon_"+i).attr('class') == 'fas fa-angle-double-up'){
+    //         $("#icon_"+i).removeClass("fas fa-angle-double-up");
+    //         $("#icon_"+i).addClass("fas fa-angle-double-down");
+    //     }
+    // } // change icon *ไม่ใช้แล้ว
 
-    function inputChange(i){
-        // alert($("#input_name_"+i).val()+" : "+$("#input_id_"+i).val());
-        if($("#input_name_"+i).val() === "" && $("#input_id_"+i).val() === ""){
-            // alert('a');
-            $("#update_"+i).removeClass("btn btn-sm btn-warning");
-            $("#update_"+i).addClass("btn btn-sm btn-success");
-        }else if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
-            // alert('b');
-            $("#update_"+i).removeClass("btn btn-sm btn-success");
-            $("#update_"+i).addClass("btn btn-sm btn-warning");
-        }
-    }
+    // function inputChange(i){
+    //     // alert($("#input_name_"+i).val()+" : "+$("#input_id_"+i).val());
+    //     if($("#input_name_"+i).val() === "" && $("#input_id_"+i).val() === ""){
+    //         // alert('a');
+    //         $("#update_"+i).removeClass("btn btn-sm btn-warning");
+    //         $("#update_"+i).addClass("btn btn-sm btn-success");
+    //     }else if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
+    //         // alert('b');
+    //         $("#update_"+i).removeClass("btn btn-sm btn-success");
+    //         $("#update_"+i).addClass("btn btn-sm btn-warning");
+    //     }
+    // }//  *ไม่ใช้แล้ว
 
-    function update_sub(i){
-        if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
-            let id = $("#input_id_"+i).val();
-            let name = $("#input_name_"+i).val(); 
-            if($("#input_name_"+i).val() === ""){
-                // $("#input_name_"+i).val() = $("#input_name_"+i).attr('placeholder');
-                name = $("#input_name_"+i).attr('placeholder');
+    // function update_sub(i){
+    //     if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
+    //         let id = $("#input_id_"+i).val();
+    //         let name = $("#input_name_"+i).val(); 
+    //         if($("#input_name_"+i).val() === ""){
+    //             // $("#input_name_"+i).val() = $("#input_name_"+i).attr('placeholder');
+    //             name = $("#input_name_"+i).attr('placeholder');
+    //         }
+    //         if($("#input_id_"+i).val() === ""){
+    //             // $("#input_id_"+i).val() = $("#input_id_"+i).attr('placeholder');
+    //             id = $("#input_id_"+i).attr('placeholder');
+    //         }
+    //         alert(id+" : "+name);
+    //         $.post("../send_sql/subject_sql_update.php",
+    //             {i:i,name:name,id:id},
+    //             function (data, textStatus, jqXHR) {
+    //                 // alert(data);
+    //             }
+    //         );
+    //     }else{
+    //         alert("blank");
+    //     }
+    // }//  *ไม่ใช้แล้ว
+
+    function delete_sub(){
+
+        Swal.fire({
+            title: 'Custom animation with Animate.css',
+            animation: false,
+            customClass: {
+                popup: 'animated tada'
             }
-            if($("#input_id_"+i).val() === ""){
-                // $("#input_id_"+i).val() = $("#input_id_"+i).attr('placeholder');
-                id = $("#input_id_"+i).attr('placeholder');
-            }
-            alert(id+" : "+name);
-            $.post("../send_sql/subject_sql_update.php",
-                {i:i,name:name,id:id},
-                function (data, textStatus, jqXHR) {
-                    // alert(data);
-                }
-            );
-        }else{
-            alert("blank");
-        }
+        });
     }
 
 </script>
