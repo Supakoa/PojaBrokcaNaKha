@@ -3,15 +3,15 @@
     require '../../server/server.php';
 ?>
 
-<div class="container mx-auto text-center" style="margin:20px;align:center;">
-    <div class="container-fluid " style="margin:20px;padding:20px;">
+<div class="container mx-auto" >
+    <div class="container-fluid " >
 
         <div id="head">
             <h3>ตั้งค่า : รายชื่อวิชา</h3>
             <hr>
         </div><!-- head -->
 
-        <div id="body" class="table-responsive-lg" style="margin:30px;">
+        <div id="body" class="table-responsive-lg" >
             <table class="table table-bordered table-sm table-hover display nowrap responsive">
 
                 <thead>

@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-4 offset-md-4 ">
             <label for="search_document">ค้นหา</label>
-            <input class="form-control" type="search" id="search_document" style="" placeholder="รหัสเอกสาร">
-            <button type="button" class="btn btn-info btn-sm" style="margin-top:10px;margin-bottom:10px;"><i class="fas fa-search "></i>
-            </button>
+            <input class="form-control" type="search" id="search_document" style="" >
+            <br>
+            <button type="button" class="btn btn-info btn-md" ><i class="fas fa-search "></i></button>
         </div>
 
     </div>
 </div>
 
-<div class="container-fluid text-center">
+<div class="container-fluid">
     <h3 style="padding-top:10px;">เอกสาร : ตาราง</h3>
     <hr>
 

@@ -6,7 +6,7 @@
 
 
 ?>
-<div class="container-fluid text-center" >
+<div class="container-fluid " >
     <div class="container-fluid ">
         <h3>ตั้งค่า : ขั้นตอนเอกสาร</h3>
         <hr>
