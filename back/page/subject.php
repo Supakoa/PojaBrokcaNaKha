@@ -92,9 +92,28 @@
         }
     }
 
-
     function update_sub(i){
-        
+        if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
+            let id = $("#input_id_"+i).val();
+            let name = $("#input_name_"+i).val(); 
+            if($("#input_name_"+i).val() === ""){
+                // $("#input_name_"+i).val() = $("#input_name_"+i).attr('placeholder');
+                name = $("#input_name_"+i).attr('placeholder');
+            }
+            if($("#input_id_"+i).val() === ""){
+                // $("#input_id_"+i).val() = $("#input_id_"+i).attr('placeholder');
+                id = $("#input_id_"+i).attr('placeholder');
+            }
+            alert(id+" : "+name);
+            $.post("../send_sql/subject_sql_update.php",
+                {i:i,name:name,id:id},
+                function (data, textStatus, jqXHR) {
+                    // alert(data);
+                }
+            );
+        }else{
+            alert("blank");
+        }
     }
 
 </script>
