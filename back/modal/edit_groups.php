@@ -117,7 +117,7 @@ if(isset($_POST)){
     });
 
     function add_user_sub(group_id, sub) {
-        alert(group_id+" : "+sub);
+        // alert(group_id+" : "+sub);
         $.post("../modal/add_user_sub.php", {
                 id: group_id,
                 sub_id: sub
