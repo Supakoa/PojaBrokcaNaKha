@@ -4,7 +4,7 @@
     $re_news = mysqli_query($con,$sql);
     $order = 0;
 ?>
-<div class="container-fluid text-center">
+<div class="container-fluid ">
     <div class="container" >
         <h3>ตั้งค่า : ข่าว</h3>
         <hr>

@@ -1,10 +1,10 @@
-<div class="container-fluid text-center">
+<div class="container-fluid ">
     <h3>ข้อความถึงผู้ดูแลระบบ</h3>
     <hr>
 
-    <div class="w3-container-fluid">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col table-responsive-lg">
+            <div class="col table-responsive-lg text-center">
                 <h3>Inbox</h3>
                 <hr>
                 <!-- start table inbox -->
@@ -64,7 +64,7 @@
                 </div>
                 <!-- end table inbox -->
             </div>
-            <div class="col table-responsive-lg">
+            <div class="col table-responsive-lg text-center">
                 <h3>Outbox</h3>
                 <hr>
                 <table class="table table-striped table-hover table-bordered display nowrap responsive table_table" id="table2">

@@ -2,7 +2,7 @@
 require '../../server/server.php';
 
 ?>
-<div class="container-fluid text-center" style="margin:20px;">
+<div class="container-fluid " >
     <h3>ตั้งค่า : ตั้งค่ากลุ่มผู้มีสิทธิ์ลงนาม</h3>
     <hr>
 
