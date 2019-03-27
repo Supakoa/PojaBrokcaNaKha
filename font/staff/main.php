@@ -93,13 +93,13 @@ $re_paper = mysqli_query($con, $sql_paper);
                                         </thead>
                                         <tbody>
                                             <?php while ($row_paper = mysqli_fetch_array($re_paper)) { ?>
-                                            <tr>
+                                            <tr class = "tr-pick" >
                                                 <td><?php echo $row_paper['formname']; ?></td>
                                                 <td><?php echo $row_paper['paper_id']; ?></td>
                                                 <td><?php echo $row_paper['owner_id']; ?></td>
                                                 <td><?php echo $row_paper['title'] . $row_paper['username']; ?></td>
                                                 <td><?php echo $row_paper['timestamp']; ?></td>
-                                                <td><button class="btn btn-outline-info" onclick="form_paper0('<?php echo $row_paper['paper_id']; ?>','<?php echo $row_paper['form_id']; ?>')"><i class="fas fa-file-alt"></i></button></td>
+                                                <td><button class="btn btn-outline-info" onclick="form_paper('<?php echo $row_paper['paper_id']; ?>','<?php echo $row_paper['form_id']; ?>')"><i class="fas fa-file-alt"></i></button></td>
                                             </tr>
                                             <?php 
                                         } ?>
@@ -205,11 +205,16 @@ $re_paper = mysqli_query($con, $sql_paper);
             });
 
         });
+        $('.tr-pick').click(function (e) { 
+            $('.tr-pick td').css("background-color", "");
+            e.preventDefault();
+            $(this).find('td').css("background-color", "#E4EEFC");
+        });
     </script>
 
     <script>
-        function form_paper0(id_paper, type) {
-            alert("eiei");
+        function form_paper(id_paper, type) {
+            // alert("eiei");
             $("#paper_1").html("");
             $.post("other/doc.php", {
                     id: id_paper,
