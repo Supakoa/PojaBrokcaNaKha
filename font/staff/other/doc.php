@@ -38,15 +38,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
             <div class="paper card-body">
                 <!-- head -->
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-4">
                         <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
 
-                 <!-- date -->
-                 <dl class="row container">
+                <!-- date -->
+                <dl class="row container">
                     <dd class="col-sm-12 text-right">
                     <?php echo DateThai($row_form['timestamp']) ?>
                     </dd>
@@ -55,28 +54,22 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
                         <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
-                            </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row"> 
-                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
                         </div>
                     </div>
@@ -85,9 +78,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>
@@ -159,8 +150,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
             <div class="paper card-body">
                 <!-- head -->
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-4">
                         <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
@@ -176,46 +166,36 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
                             <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
-                            </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row"> 
-                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-2 col-sm-10">
-                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-                                    </dd>
+                                <dd class="col-sm-11 offset-md-1 col-sm-10">
+                                <?php echo $keywords[3]; ?>
+                                </dd>
                             </dl>
                         </div>
                     </div>
-                    <div class="col-lg-2"></div>
                 </div>
                 <!-- body -->
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>
@@ -287,8 +267,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
             <div class="paper card-body">
                 <!-- head -->
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-4">
                         <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
@@ -304,34 +283,27 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
                         <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
-                            </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row"> 
-                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
                             <dl class="row container">
                                 <dd class="col-sm-2 col-sm-10">
-                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-                                    </dd>
+                                <?php echo $keywords[3]; ?>
+                                </dd>
                             </dl>
                         </div>
                     </div>
@@ -340,9 +312,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>
@@ -414,8 +384,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
             <div class="paper card-body">
                 <!-- head -->
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-4">
                         <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
@@ -431,34 +400,27 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
                         <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
-                            </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row"> 
-                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
                             <dl class="row container">
                                 <dd class="col-sm-2 col-sm-10">
-                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-                                    </dd>
+                                <?php echo $keywords[3]; ?>
+                                </dd>
                             </dl>
                         </div>
                     </div>
@@ -467,9 +429,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>
@@ -541,8 +501,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
             <div class="paper card-body">
                 <!-- head -->
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-4">
                         <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
@@ -558,47 +517,37 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
                     <div class="col-lg">
                         <div class="card-body">
                         <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
-                            </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row"> 
-                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
                             <dl class="row container">
                                 <dd class="col-sm-2 col-sm-10">
-                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-                                    </dd>
+                                <?php echo $keywords[3]; ?>
+                                </dd>
                             </dl>
 
                         </div>
                     </div>
-                    <div class="col-lg-2"></div>
                 </div>
                 <!-- body -->
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>
@@ -670,8 +619,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
             <div class="paper card-body">
                 <!-- head -->
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-4">
                         <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
@@ -687,28 +635,27 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
                         <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row"> 
-                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            <dl class="row container">
+                                <dd class="col-sm-2 col-sm-10">
+                                <?php echo $keywords[3]; ?>
+                                </dd>
                             </dl>
                         </div>
                     </div>
@@ -717,9 +664,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>
@@ -790,6 +735,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
         <div class="card-body">
             <div class="paper card-body">
 
+                <!-- head -->
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-4">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
+                    </div>
+                </div>
+                <!-- head -->
+
                 <!-- date -->
                 <dl class="row container">
                     <dd class="col-sm-12 text-right">
@@ -800,42 +753,36 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 
                 <!-- subject -->
                 <dl class="row container">
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
                     </dd>
-                    <dd class="col-sm-1 col-sm-11 text-left">
-                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    <dd class="col-sm-11 offset-sm-1 text-left">
+                        <p class="h5"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
                     </dd>
                 </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
-                    <div class="col-lg-2"></div>
                     <div class="col-lg">
                         <div class="card-body">
                         <dl class="row">
-                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            <dd class="col-md-6 offset-md-2 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                                <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
-                            <dl class="row">
-                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
-                            </dl>
-                            <dl class="row">
-                                <dd class="col-sm-12">
-                                    content
+                            <dl class="row container">
+                                <dd class="col-sm-2 col-sm-10">
+                                <?php echo $keywords[1]; ?>
                                 </dd>
                             </dl>
                         </div>
                     </div>
-                    <div class="col-lg-2"></div>
                 </div>
                 <!-- body -->
 
                 <!-- footer -->
                 <div class="row container" style="margin-top:250px">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 offset-lg-8">
                         <div class=" text-center">
                             <p>ลายเซ็น</p>
                             <br>

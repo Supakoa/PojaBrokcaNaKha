@@ -4,15 +4,15 @@ $id = $_SESSION['id'];
 // user
 //check edit
 if (isset($_POST['btn_edit'])) {
-    $_SESSION['alert'] = 3;
-
     $new_n = $_POST['new_name'];
     $new_tel = $_POST['new_num'];
     $new_pass = $_POST['new_pass'];
     $new_mar = $_POST['mar'];
-    mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'");
-}else{
-    $_SESSION['alert'] = 4;
+    if (mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'")) {
+        $_SESSION['alert'] = 3;
+    } else {
+        $_SESSION['alert'] = 4;
+    }
 }
 $sql_user = "SELECT user.user_id, user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname, fac.fac_id, user.major_id FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
 $re_user = mysqli_query($con, $sql_user);
@@ -21,7 +21,7 @@ $row_user = mysqli_fetch_array($re_user);
 //fac
 $sql_fac = "SELECT * FROM `fac` ";
 $re_fac = mysqli_query($con, $sql_fac);
-$fac = '<option disabled selected value="'.$row_user['fac_id'].'">' . $row_user['facname'] . '</option>';
+$fac = '<option disabled selected value="' . $row_user['fac_id'] . '">' . $row_user['facname'] . '</option>';
 while ($r_fac = mysqli_fetch_array($re_fac)) {
     $fac .= '<option value="' . $r_fac['fac_id'] . '">' . $r_fac['name'] . '</option>';
 }
@@ -165,10 +165,10 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                             <dl class="row">
                                 <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo $row_user['name']; ?>" required><br></dt>
-                                
+
                                 <dt class="col-lg-4"><label for="pass">รหัสผ่าน</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" required><br></dt>
-                                
+
                                 <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" required><br></dt>
                                 <dt class="col-lg-4"><label for="faculty">คณะ/สาขา</label></dt>
@@ -179,11 +179,11 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                                 </dt>
                                 <dt class="col-lg-4"></dt>
                                 <dt class="col-lg-8">
-                                <br>
-                                    <select class="form-control custom-select" name="mar" id="major" required >
-                                        <option selected value="<?php echo $row_user['major_id']?>"><?php echo $row_user['majorname']?></option>
+                                    <br>
+                                    <select class="form-control custom-select" name="mar" id="major" required>
+                                        <option selected value="<?php echo $row_user['major_id'] ?>"><?php echo $row_user['majorname'] ?></option>
                                     </select>
-                                
+
                                 </dt>
                             </dl>
                         </div>
