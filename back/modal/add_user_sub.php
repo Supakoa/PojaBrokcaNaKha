@@ -7,7 +7,7 @@ $id = $_POST['id'];
 $sub_id = $_POST['sub_id'];
 
 
-$sql_user = "SELECT `user_id`,`title`,`name` FROM `user`";
+$sql_user = "SELECT `user_id`,`title`,`name` FROM `user` WHERE role = '2' ";
 $re_user = mysqli_query($con,$sql_user);
 
 // subject

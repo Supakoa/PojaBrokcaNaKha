@@ -137,20 +137,10 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 <script>
-    //datatable
-    // $(document).ready(function () {
-    //                 $('#table1').click(function(){
-    //                     $(this).DataTable();
-    //                 });
-    //                 $('#table2').DataTable();
-    //                 $('#table3').DataTable();
 
-    //             });
 </script>
 <script>
     $(document).ready(function () {
-        // $('.table_table').DataTable();
-
         $("#btn_singha").click(function () {
 
             $('#btn_singha').text("กดแล้ว");
@@ -178,7 +168,6 @@
 
 
     }
-    //  $('#mySidenav').tab('show');
     function openNav() {
         if ($('#mySidenav').css("width") == "0px") {
             document.getElementById('mySidenav').style.width = "300px";
