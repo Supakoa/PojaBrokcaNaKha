@@ -1,6 +1,18 @@
 <?php 
 require '../../../server/server.php';
-
+if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
+    if($_SESSION['online']!=2){
+        $_SESSION['check_login'] = 1;
+        header("Location: ../../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+    }
+}else{
+    $_SESSION['check_login'] = 1;
+        header("Location: ../../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+}
 function DateThai($strDate)
 {
     $strYear = date("Y", strtotime($strDate)) + 543;

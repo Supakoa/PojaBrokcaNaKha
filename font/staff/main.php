@@ -1,13 +1,29 @@
 <?php 
 require '../../server/server.php';
-$id = $_SESSION['id'];
 
+if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
+    if($_SESSION['online']!=2){
+        $_SESSION['check_login'] = 1;
+        header("Location: ../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+    }
+}else{
+    $_SESSION['check_login'] = 1;
+        header("Location: ../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+}
+
+$id = $_SESSION['id'];
 $sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
 FROM `paper_user`, `paper`, `form`, `user` 
 WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' ";
 $re_paper = mysqli_query($con, $sql_paper);
 
-
+$sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
+$re_user = mysqli_query($con, $sql_user);
+$row_user = mysqli_fetch_array($re_user);
 
 
 ?>
@@ -58,8 +74,8 @@ $re_paper = mysqli_query($con, $sql_paper);
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i>
-                        Mr.RVkung</a>
-                    <a class="nav-link" href="#" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
+                    <?php echo ' '.$row_user['title'].$row_user['name'] ;?></a>
+                    <a class="nav-link" href="../../server/logout.php" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
                 </form>
             </div>
         </nav>
