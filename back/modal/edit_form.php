@@ -56,13 +56,13 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                     </div>
 
                     <?php
-                        $re_form_way = mysqli_query($con,"SELECT * FROM `form_way` WHERE form_id = '$form_id' ");
+                        $re_form_way = mysqli_query($con,"SELECT * FROM `form_way`,groups WHERE groups.group_id = form_way.group_id AND form_way.form_id = '$form_id' ");
                         while($row_form_way = mysqli_fetch_array($re_form_way)){ ?>
                     <div class="row text-center">
                         <div class="col">
                             <?php 
                                 echo '<button type="button" class="btn btn-outline-info btn-sm btn-singha" style = "font-size: 14px;" 
-                                onclick = "del_user_sub()" >'.$row_form_way['group_id'].'</button>';
+                                onclick = "del_user_sub()" >'.$row_form_way['name'].'</button>';
                             ?>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                     <!-- add row -->
                     <div class="row">
                         <div class="col-lg-4"></div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 text-center">
                             <button class="btn btn-light btn-sm" data-toggle="modal" data-target="#add_form_group"><i
                                     class="fas fa-plus"></i></button>
                         </div>

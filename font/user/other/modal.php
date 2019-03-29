@@ -1,5 +1,6 @@
 <?php 
 require '../../../server/server.php';
+require 'check_login.php';
 $iduser = $_SESSION['id'];
 $id = $_POST['id'];
 $type = $_POST['cate'];

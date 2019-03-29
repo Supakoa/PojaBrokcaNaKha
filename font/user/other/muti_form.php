@@ -1,5 +1,6 @@
 <?php 
 require '../../../server/server.php';
+require 'check_login.php';
 $id = $_SESSION['id'];
 function getToken($length)
 {

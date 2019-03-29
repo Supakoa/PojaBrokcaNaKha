@@ -38,6 +38,8 @@
                     while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tbody>
+                    <?php $i = 1;
+                    while ($row_fac = mysqli_fetch_array($re_fac)) { ?>
                     <tr>
                         <td><?php echo ++$i; ?></td>
                         <td><?php echo $row['name']; ?></td>
@@ -48,6 +50,9 @@
                         <td><button class="btn btn-danger"><i class="far fa-trash-alt"
                                     style="color:white;"></i></i></button></td>
                     </tr>
+                    <?php 
+                }
+                 ?>
                 </tbody>
                 <?php } ?>
             </table>

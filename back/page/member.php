@@ -201,8 +201,8 @@ while($r_fac = mysqli_fetch_array($re_fac)){
                         <td>'.$row_user['fac_name'].'</td>
                         <td>'.$row_user['major_name'].'</td>
                         <td>
-                            <button class="btn "><i class="fas fa-user-edit" onclick = "edit_user(\''.$row_user['user_id'].'\')" style="color:#FBBC05"></i></button>
-                            <button class="btn "><i class="fas fa-trash" onclick = "del_user(\''.$row_user['user_id'].'\')" style="color:red"></i></button></td>
+                            <button class="btn " onclick = "edit_user(\''.$row_user['user_id'].'\')"><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
+                            <button class="btn " onclick = "del_user(\''.$row_user['user_id'].'\')"><i class="fas fa-trash"  style="color:red"></i></button></td>
                     </tr>';
                     } 
                     $re_user = mysqli_query($con,"SELECT user.*,role_id.name as role_name
@@ -220,8 +220,8 @@ while($r_fac = mysqli_fetch_array($re_fac)){
                         <td> - </td>
                         <td> - </td>
                         <td>
-                            <button class="btn "><i class="fas fa-user-edit" onclick = "edit_user(\''.$row_user['user_id'].'\')" style="color:#FBBC05"></i></button>
-                            <button class="btn "><i class="fas fa-trash" onclick = "del_user(\''.$row_user['user_id'].'\')" style="color:red"></i></button></td>
+                            <button class="btn " onclick = "edit_user(\''.$row_user['user_id'].'\')"><i class="fas fa-user-edit"  style="color:#FBBC05"></i></button>
+                            <button class="btn " onclick = "del_user(\''.$row_user['user_id'].'\')" ><i class="fas fa-trash" style="color:red"></i></button></td>
                     </tr>';
                     }
 
@@ -233,6 +233,7 @@ while($r_fac = mysqli_fetch_array($re_fac)){
         </div>
     </div>
 </div>
+<div id="div_edit_user"></div>
 <div id="show_alert"></div>
 <script>
     $(document).ready(function () {
@@ -240,10 +241,42 @@ while($r_fac = mysqli_fetch_array($re_fac)){
     });
 
     function edit_user (id) {  
-        alert("edit "+id);
+        // alert("edit "+id);
+        $("#div_edit_user").load("../modal/edit_user.php", {
+            edit: id, odd_id : id
+        }, function (data) {
+
+            $('#edit_user').modal("show");
+            
+        });
     }
+   
+
     function del_user (id) {  
-        alert("del "+id);
+        Swal.fire({
+            title: 'ท่านต้องการลบ ?',
+            text: id,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#28A745',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่!',
+            cancelButtonText: 'ไม่'
+        }).then((result) => {
+            if (result.value) {
+                status_now = 'del';
+                $.post("../send_sql/sql_member.php", {
+                        del : id
+                    },
+                    function (data) {
+                        $("#show_alert").html(data);
+                        $("#in_body").load("member.php");
+                        // alert(data);
+                    }
+                );
+
+            }
+        })
     }
 
     //register
@@ -317,7 +350,7 @@ while($r_fac = mysqli_fetch_array($re_fac)){
     $('#form_regis').submit(function (e) {
         e.preventDefault();
         $("#show_alert").load("../send_sql/sql_member.php", {
-            data: $("#form_regis").serialize()
+            register: $("#form_regis").serialize()
         }, function (data) {
             $('#add_user').modal("hide");
             $('#add_user').on('hidden.bs.modal', function (e) {
@@ -330,6 +363,9 @@ while($r_fac = mysqli_fetch_array($re_fac)){
     });
 
     //register end
+
+    
+    
 </script>
 <!-- <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
     <h1 style="color:gray;">เลือก : ชนิด</h1>

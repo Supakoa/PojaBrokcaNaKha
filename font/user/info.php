@@ -1,18 +1,35 @@
 <?php 
 require '../../server/server.php';
+
+if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
+    if($_SESSION['online']!=1){
+        $_SESSION['check_login'] = 1;
+        header("Location: ../../index.php");
+        $_SESSION['alert'] = 1;
+        exit();
+    }
+}else{
+    $_SESSION['check_login'] = 1;
+        header("Location: ../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+}
+
 $id = $_SESSION['id'];
+
+
 // user
 //check edit
 if (isset($_POST['btn_edit'])) {
-    $_SESSION['alert'] = 3;
-
     $new_n = $_POST['new_name'];
     $new_tel = $_POST['new_num'];
     $new_pass = $_POST['new_pass'];
     $new_mar = $_POST['mar'];
-    mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'");
-}else{
-    $_SESSION['alert'] = 4;
+    if(mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'")){
+        $_SESSION['alert'] = 3;
+    }else{
+        $_SESSION['alert'] = 4;
+    }
 }
 $sql_user = "SELECT user.user_id, user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname, fac.fac_id, user.major_id FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
 $re_user = mysqli_query($con, $sql_user);

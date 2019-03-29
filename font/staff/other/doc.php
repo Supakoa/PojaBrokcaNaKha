@@ -1,11 +1,24 @@
 <?php 
 require '../../../server/server.php';
-
-function DateThai($strDate) {
+if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
+    if($_SESSION['online']!=2){
+        $_SESSION['check_login'] = 1;
+        header("Location: ../../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+    }
+}else{
+    $_SESSION['check_login'] = 1;
+        header("Location: ../../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+}
+function DateThai($strDate)
+{
     $strYear = date("Y", strtotime($strDate)) + 543;
     $strMonth = date("n", strtotime($strDate));
     $strDay = date("j", strtotime($strDate));
-    $strMonthCut = Array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
     $strMonthThai = $strMonthCut[$strMonth];
     return " วันที่ $strDay เดือน $strMonthThai พ.ศ. $strYear";
 }
@@ -17,21 +30,21 @@ $sql_form = " SELECT paper.paper_detail,paper.timestamp,user.title,user.user_id,
 FROM paper,paper_user,user,form,major,fac 
 WHERE paper.paper_id = '$id_paper' AND paper_user.paper_id = paper.paper_id AND paper_user.user_id = '$id' 
 AND paper.owner_id = user.user_id AND major.fac_id = fac.fac_id AND form.form_id = paper.form_id AND major.mar_id = user.major_id";
-$row_form = mysqli_fetch_array(mysqli_query($con,$sql_form));
-$keywords = preg_split("/๛/",$row_form['paper_detail']);
+$row_form = mysqli_fetch_array(mysqli_query($con, $sql_form));
+$keywords = preg_split("/๛/", $row_form['paper_detail']);
+$row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE sub_id = '$keywords[0]' "));
+
 ?>
 
 
 
-<?php if ($type == '1') {
-$row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE sub_id = '$keywords[0]' "));    
-?>
+<?php if ($type == '1') { ?>
 
 <div class="card-body" style="background-color:#F7FAFE">
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?> <i class="fas fa-angle-right"></i> </h5>
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -44,28 +57,23 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                 </div>
                 <!-- head -->
 
-                <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span><?php echo DateThai($row_form['timestamp']) ?></span>
-                    </div>
-                </div>
+                 <!-- date -->
+                 <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p><?php echo "เรื่อง ".$row_form['form_name'] ?></p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p><?php echo "วิชา  ".$row_sub['sub_id']." : ".$row_sub['sub_name'] ?></p> </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
@@ -73,14 +81,15 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                     <div class="col-lg-2"></div>
                     <div class="col-lg-9">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                            <?php 
-                            echo " ด้วยข้าพเจ้า ".$row_form['title']." ".$row_form['user_name']." รหัสนักศึกษา ".$row_form['user_id']." คณะ ".$row_form['fac_name']."<br>
-                            สาขาวิชา ".$row_form['fac_name']." กลุ่มเรียน ".$keywords[1]." หมายเลขโทรศัพท์ ".$row_form['tel']." มีความประสงค์ขอตรวจสอบผลการเรียน วิชา ".$row_sub['sub_id']." : ".$row_sub['sub_name']." ภาคเรียนที่ (ต้องเพิ่มตัวรับข้อมูล) " ;
-                            ?>
-                               
-
-                            </p>
+                        <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row"> 
+                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
@@ -147,7 +156,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } elseif ($type == '2') { ?>
@@ -156,7 +165,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
+            <h5>ประเภท :  <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -170,27 +179,22 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                 <!-- head -->
 
                 <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>เรื่อง ลากิจ/ลาป่วย</p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
@@ -198,14 +202,24 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                     <div class="col-lg-2"></div>
                     <div class="col-lg-9">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                                ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br>
-                                สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-
-                            </p>
+                            <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row"> 
+                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row container">
+                                <dd class="col-sm-2 col-sm-10">
+                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
+                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
+                                    </dd>
+                            </dl>
                         </div>
                     </div>
+                    <div class="col-lg-2"></div>
                 </div>
                 <!-- body -->
 
@@ -270,7 +284,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } elseif ($type == '3') { ?>
@@ -279,7 +293,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
+        <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -293,27 +307,22 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                 <!-- head -->
 
                 <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>เรื่อง ลากิจ/ลาป่วย</p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
@@ -321,12 +330,21 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                     <div class="col-lg-2"></div>
                     <div class="col-lg-9">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                                ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br>
-                                สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-
-                            </p>
+                        <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row"> 
+                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row container">
+                                <dd class="col-sm-2 col-sm-10">
+                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
+                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
+                                    </dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
@@ -393,7 +411,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } elseif ($type == '4') { ?>
@@ -402,7 +420,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
+        <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -416,27 +434,22 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                 <!-- head -->
 
                 <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>เรื่อง ลากิจ/ลาป่วย</p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
@@ -444,12 +457,21 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                     <div class="col-lg-2"></div>
                     <div class="col-lg-9">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                                ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br>
-                                สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-
-                            </p>
+                        <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row"> 
+                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row container">
+                                <dd class="col-sm-2 col-sm-10">
+                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
+                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
+                                    </dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
@@ -516,7 +538,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } elseif ($type == '5') { ?>
@@ -525,7 +547,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
+        <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -539,42 +561,48 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                 <!-- head -->
 
                 <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>เรื่อง ลากิจ/ลาป่วย</p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
                     <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                                ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br>
-                                สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
+                        <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row"> 
+                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row container">
+                                <dd class="col-sm-2 col-sm-10">
+                                เนื่องจากเป็น ป่วยไข้หวัดใหญ่
+                                    ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
+                                    </dd>
+                            </dl>
 
-                            </p>
                         </div>
                     </div>
+                    <div class="col-lg-2"></div>
                 </div>
                 <!-- body -->
 
@@ -639,7 +667,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } elseif ($type == '6') { ?>
@@ -648,7 +676,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
+        <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -662,27 +690,22 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                 <!-- head -->
 
                 <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>เรื่อง ลากิจ/ลาป่วย</p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
@@ -690,12 +713,15 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
                     <div class="col-lg-2"></div>
                     <div class="col-lg-9">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                                ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br>
-                                สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-
-                            </p>
+                        <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row"> 
+                            <dd class="col-sm-2 col-sm-10 text-left"><?php echo "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ; ?></dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
@@ -762,7 +788,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } elseif ($type == '7') { ?>
@@ -771,56 +797,49 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : ลาป่วย <i class="fas fa-angle-right"></i> doc58874</h5>
+        <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5>
         </div>
         <div class="card-body">
             <div class="paper card-body">
-                <!-- head -->
-                <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
-                    </div>
-                </div>
-                <!-- head -->
 
                 <!-- date -->
-                <div class="row container">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4 text-right">
-                        <span>วันที่ 16 เดือน กุมภาพันธ์ พ.ศ.2562</span>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-12 text-right">
+                    <?php echo DateThai($row_form['timestamp']) ?>
+                    </dd>
+                </dl>
                 <!-- date -->
 
                 <!-- subject -->
-                <div class="row container">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>เรื่อง ลากิจ/ลาป่วย</p>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <p>วิชา GEH0101 : สุนทรียภาพกับชีวิต </p>
-                    </div>
-                </div>
+                <dl class="row container">
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "เรื่อง " . $row_form['form_name'] ?></p>
+                    </dd>
+                    <dd class="col-sm-1 col-sm-11 text-left">
+                        <p class="h4"><?php echo "วิชา  " . $row_sub['sub_id'] . " : " . $row_sub['sub_name'] ?></p>
+                    </dd>
+                </dl>
                 <!-- subject -->
 
                 <!-- body -->
                 <div class="row">
                     <div class="col-lg-2"></div>
-                    <div class="col-lg-9">
+                    <div class="col-lg">
                         <div class="card-body">
-                            <p><span style="padding-left:6em"></span>
-                                ด้วยข้าพเจ้า นาย มานี มีปู รหัสนักศึกษา 60122519112 คณะ เทคโนโลยีอุตสาหกรรม <br>
-                                สาขาวิชา วิศวกรรมคอมพิวเตอร์ กลุ่มเรียน 004 ชั้นปีที่ 2 มีความประสงค์ขออนุญาตลาป่วย เนื่องจากเป็น ป่วยไข้หวัดใหญ่
-                                ตั้งแต่วันที่ 19 เดือน กุมภาพันธ์ พ.ศ.2562 ถึงวันที่ 22 เดือน กุมภาพันธ์ พ.ศ.2562 ในรายวิชา GEH0101 : สุนทรียภาพกับชีวิต
-
-                            </p>
+                        <dl class="row">
+                                <dd class="col-sm-4 col-sm-8 text-left"><?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?></dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-2 col-sm-10 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ " . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ." หมายเลขโทรศัพท์ " . $row_form['tel'] ; ?> </dd>
+                            </dl>
+                            <dl class="row">
+                                <dd class="col-sm-12">
+                                    content
+                                </dd>
+                            </dl>
                         </div>
                     </div>
+                    <div class="col-lg-2"></div>
                 </div>
                 <!-- body -->
 
@@ -885,7 +904,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `subject` WHERE s
         </div>
     </div>
     <!-- card 3 -->
-</div><br>
+</div>
 
 <?php 
 } else {

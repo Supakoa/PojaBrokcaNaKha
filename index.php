@@ -1,5 +1,9 @@
 <?php 
 require 'server/server.php';
+
+    if (isset($_SESSION['check_login'])) {
+        session_destroy();
+    }
 $sql_fac = "SELECT * FROM `fac` ";
 $re_fac = mysqli_query($con,$sql_fac);
 $fac = '<option disabled selected value="">กรุณาเลือกคณะ</option>';
@@ -34,10 +38,13 @@ if(isset($_POST['hide_login'])){
             $_SESSION['id'] = $login_id;
             if($r_a['role']=='1'){
                 header("Location: font/user/main.php");
+                $_SESSION['online'] = '1';
             }elseif($r_a['role']=='2'){
                 header("Location: font/staff/main.php");
+                $_SESSION['online'] = '2';
             }elseif($r_a['role']=='3'){
                 header("Location: back/page/index.php");
+                $_SESSION['online'] = '3';
             }
             else{
                 header("Location: index.php");
