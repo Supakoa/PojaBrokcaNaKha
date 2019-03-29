@@ -13,6 +13,10 @@
     <link rel="icon" type="image/ico" href="../image/icon/icon.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 
     <!-- bootstrap 4.2.1 -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -40,7 +44,7 @@
 <body class="">
 
     <nav id="mySidenav" class="sidenav"><!-- rigth nav  -->
-
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <ul>
             <li class="slidebrand navtap">
                 <a href="#" class="" onclick="call_content('main.php');">
@@ -134,8 +138,11 @@
 
 </body>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<!-- 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
 <script>
 
 </script>
@@ -171,10 +178,10 @@
     function openNav() {
         if ($('#mySidenav').css("width") == "0px") {
             document.getElementById('mySidenav').style.width = "300px";
-            document.getElementById('main').style.marginLeft = "300px";
+            // document.getElementById('main').style.marginLeft = "300px";
         } else {
             document.getElementById('mySidenav').style.width = "0";
-            document.getElementById('main').style.marginLeft = "0";
+            // document.getElementById('main').style.marginLeft = "0";
         }
     }
 
