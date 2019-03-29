@@ -64,7 +64,7 @@
                     <?php } ?>
                 </tbody>
             </table>
-            <button class="btn btn-block btn-success shadow" onclick="insert_sub();"><i class="fas fa-plus-circle" style="color:white;"></i></button>
+            <button class="btn btn-block btn-success shadow" onclick="insert_sub();"><i class="fas fa-plus" style="color:white;"></i></button>
         </div><!-- body -->
 
     </div>
@@ -151,14 +151,16 @@
                     });
                 }
             }
-        });
-        
-        // refresh page in index.php by jquery
-        $("#in_body").load("../page/subject.php");
+        }).then((result) => {
+            // refresh page in index.php by jquery
+            $("#in_body").load("../page/subject.php");
+        })
 
     }
 
+    // function add new subject
     function insert_sub(){
+        let id,name;
         Swal.mixin({
             input: 'text',
             confirmButtonText: 'Next &rarr;',
@@ -180,6 +182,8 @@
                     text: 'กรุณากรอกข้อมูลให้ครบตามที่กำหนด'
                 });
             }else{
+                id = result.value[0];
+                name = result.value[1];
                 Swal.fire({
                     title: 'ตรวจสอบก่อนส่ง',
                     html:
@@ -188,9 +192,41 @@
                             '(ชื่อวิชา/name): ' + result.value[1] + '<br>' +
                         '</p>',
                     confirmButtonText: 'ยืนยัน'
-                });
+                }).then(() => {
+                    // alert(id+" : "+name); // check data
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../send_sql/subject_add_sql.php",
+                        data: {id:id,name:name},
+                        success: function (data) {
+                            if(data == 'true'){
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton:false,
+                                    timer:3000,
+                                    type: 'success',
+                                    titleText: 'เพิ่มข้อมูลสำเร็จ',
+                                });
+                            }else{
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton:false,
+                                    timer:3000,
+                                    type: 'warning',
+                                    titleText: 'เพิ่มข้อมูลไม่สำเร็จ',
+                                });
+                            }
+                        }
+                    }).then((result) => {
+                        // refresh page in index.php by jquery
+                        $("#in_body").load("../page/subject.php");
+                    })
+                })
             }
-        })
+        });
     }
 
 </script>
