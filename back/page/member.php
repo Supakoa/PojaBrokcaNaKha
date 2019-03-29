@@ -187,76 +187,45 @@ while($r_fac = mysqli_fetch_array($re_fac)){
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>59122519032</td>
-                            <td>Somchainaja</td>
-                            <td>นาย สมชาย สุดกล้าหาญ</td>
-                            <td>นักศึกษา</td>
-                            <td>นักศึกษา</td>
-                            <td>somchai@gmail.com</td>
-                            <td>0859665422</td>
-                            <td>เทคโนโลยีอุตสาหกรรม</td>
-                            <td>วิศวกรรมคอมพิวเตอร์</td>
-                            <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
-                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>59122519068</td>
-                            <td>zaza1234</td>
-                            <td>นางสาว สมหญิง ตั้งใจเรียน</td>
-                            <td>นักศึกษา</td>
-                            <td>นักศึกษา</td>
-                            <td>somyhing@gmail.com</td>
-                            <td>0889665412</td>
-                            <td>เทคโนโลยีอุตสาหกรรม</td>
-                            <td>ออกแบบกราฟิกและมัลติมีเดีย</td>
-                            <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
-                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>59122519100</td>
-                            <td>123456</td>
-                            <td>นาย อัครเดช เดชะไชโย</td>
-                            <td>นักศึกษา</td>
-                            <td>นักศึกษา</td>
-                            <td>maowmaew@gmail.com</td>
-                            <td>0985641254</td>
-                            <td>เทคโนโลยีอุตสาหกรรม</td>
-                            <td>อุตสาหกรรมการพิมพ์</td>
-                            <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
-                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>surasak.m</td>
-                            <td>ge_surasak</td>
-                            <td>นาย สุรศักดิ์ มงคล</td>
-                            <td>เจ้าหน้าที่</td>
-                            <td>พนักงาน</td>
-                            <td>surasak@gmail.com</td>
-                            <td>0965552147</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
-                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>adminnaja</td>
-                            <td>ge_adminmin</td>
-                            <td>นาย แอดมิน สูงสุด</td>
-                            <td>ผู้ดูแลระบบ</td>
-                            <td>แอดมิน</td>
-                            <td>ge_admin@gmail.com</td>
-                            <td>0888888888</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
-                                <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
-                        </tr>
+                    <?php
+                    $re_user = mysqli_query($con,"SELECT user.*,role_id.name as role_name,fac.name AS fac_name ,major.name AS major_name FROM `user`,role_id,major,fac WHERE USER.role = role_id.id AND user.major_id =major.mar_id AND major.fac_id = fac.fac_id"); 
+                    while($row_user = mysqli_fetch_array($re_user)){
+                        echo '<tr>
+                        <td> '.$row_user['user_id'].' </td>
+                        <td>'.$row_user['password'].'</td>
+                        <td>'.$row_user['title'].' '.$row_user['name'].'</td>
+                        <td>'.$row_user['role_name'].'</td>
+                        <td>'.$row_user['status'].'</td>
+                        <td>'.$row_user['email'].'</td>
+                        <td>'.$row_user['tel'].'</td>
+                        <td>'.$row_user['fac_name'].'</td>
+                        <td>'.$row_user['major_name'].'</td>
+                        <td>
+                            <button class="btn "><i class="fas fa-user-edit" onclick = "edit_user(\''.$row_user['user_id'].'\')" style="color:#FBBC05"></i></button>
+                            <button class="btn "><i class="fas fa-trash" onclick = "del_user(\''.$row_user['user_id'].'\')" style="color:red"></i></button></td>
+                    </tr>';
+                    } 
+                    $re_user = mysqli_query($con,"SELECT user.*,role_id.name as role_name
+                    FROM `user`,role_id
+                    WHERE USER.role = role_id.id AND user.role != '1'"); 
+                    while($row_user = mysqli_fetch_array($re_user)){ 
+                        echo '<tr>
+                        <td> '.$row_user['user_id'].' </td>
+                        <td>'.$row_user['password'].'</td>
+                        <td>'.$row_user['title'].' '.$row_user['name'].'</td>
+                        <td>'.$row_user['role_name'].'</td>
+                        <td>'.$row_user['status'].'</td>
+                        <td>'.$row_user['email'].'</td>
+                        <td>'.$row_user['tel'].'</td>
+                        <td> - </td>
+                        <td> - </td>
+                        <td>
+                            <button class="btn "><i class="fas fa-user-edit" onclick = "edit_user(\''.$row_user['user_id'].'\')" style="color:#FBBC05"></i></button>
+                            <button class="btn "><i class="fas fa-trash" onclick = "del_user(\''.$row_user['user_id'].'\')" style="color:red"></i></button></td>
+                    </tr>';
+                    }
+
+                    ?>
                     </tbody>
                 </table>
                 <!-- end tabel -->
@@ -264,14 +233,23 @@ while($r_fac = mysqli_fetch_array($re_fac)){
         </div>
     </div>
 </div>
+<div id="show_alert"></div>
 <script>
     $(document).ready(function () {
         $('.table_table').DataTable();
     });
+
+    function edit_user (id) {  
+        alert("edit "+id);
+    }
+    function del_user (id) {  
+        alert("del "+id);
+    }
+
     //register
 
-    //เปิด MODEL REGISTER
-    $("#btn_model_regis").click(function (e) {
+    //เปิด modal REGISTER
+    $("#btn_modal_regis").click(function (e) {
         e.preventDefault();
         $("#div_rank").hide();
         $("#div_fac_major").hide();
@@ -338,7 +316,17 @@ while($r_fac = mysqli_fetch_array($re_fac)){
     //form summit
     $('#form_regis').submit(function (e) {
         e.preventDefault();
-        alert($("#form_regis").serialize());
+        $("#show_alert").load("../send_sql/sql_member.php", {
+            data: $("#form_regis").serialize()
+        }, function (data) {
+            $('#add_user').modal("hide");
+            $('#add_user').on('hidden.bs.modal', function (e) {
+                $("#in_body").load("member.php");
+
+            });
+        });
+
+
     });
 
     //register end
