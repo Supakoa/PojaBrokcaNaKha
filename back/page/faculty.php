@@ -11,7 +11,7 @@ $sql_major = "";
 ?>
 
 
-<div class="container-fluid">
+<div class="container-fluid mx-auto">
     <div class="container text-center">
         <!-- Large modal -->
         <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-plus"></i></button>
@@ -41,8 +41,8 @@ $sql_major = "";
 
 
     <div class="container">
-        <div class="table-responsive">
-            <table class="table table-hover table-striped display nowrap table-bordered" id="fac">
+        <div class="table-responsive-lg">
+            <table class="table table-bordered table-sm table-hover display text-center nowrap responsive" id="fac">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
