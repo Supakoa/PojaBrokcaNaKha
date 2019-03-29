@@ -1,6 +1,23 @@
 <?php 
 require '../../server/server.php';
+
+if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
+    if($_SESSION['online']!=1){
+        $_SESSION['check_login'] = 1;
+        header("Location: ../../index.php");
+        $_SESSION['alert'] = 1;
+        exit();
+    }
+}else{
+    $_SESSION['check_login'] = 1;
+        header("Location: ../../index.php");
+        $_SESSION['alert'] = 2;
+        exit();
+}
+
 $id = $_SESSION['id'];
+
+
 // user
 //check edit
 if (isset($_POST['btn_edit'])) {
@@ -8,9 +25,9 @@ if (isset($_POST['btn_edit'])) {
     $new_tel = $_POST['new_num'];
     $new_pass = $_POST['new_pass'];
     $new_mar = $_POST['mar'];
-    if (mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'")) {
+    if(mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'")){
         $_SESSION['alert'] = 3;
-    } else {
+    }else{
         $_SESSION['alert'] = 4;
     }
 }
