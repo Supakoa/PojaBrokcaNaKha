@@ -179,12 +179,6 @@ if(isset($_POST)){
                         });
                     }
                 );
-                // alert("eiei");
-                // Swal.fire(
-                //     'Deleted!',
-                //     'Your file has been deleted.',
-                //     'success'
-                // )
 
             }
         })
