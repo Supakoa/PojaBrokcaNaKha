@@ -71,89 +71,53 @@
 </div>
 
 <script>
-    // function changeIcon(i){
-    //     if($("#icon_"+i).attr('class') == 'fas fa-angle-double-down'){
-    //         $("#icon_"+i).removeClass("fas fa-angle-double-down");
-    //         $("#icon_"+i).addClass("fas fa-angle-double-up");
-    //     }
-    //     else if($("#icon_"+i).attr('class') == 'fas fa-angle-double-up'){
-    //         $("#icon_"+i).removeClass("fas fa-angle-double-up");
-    //         $("#icon_"+i).addClass("fas fa-angle-double-down");
-    //     }
-    // } // change icon *ไม่ใช้แล้ว
-
-    // function inputChange(i){
-    //     // alert($("#input_name_"+i).val()+" : "+$("#input_id_"+i).val());
-    //     if($("#input_name_"+i).val() === "" && $("#input_id_"+i).val() === ""){
-    //         // alert('a');
-    //         $("#update_"+i).removeClass("btn btn-sm btn-warning");
-    //         $("#update_"+i).addClass("btn btn-sm btn-success");
-    //     }else if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
-    //         // alert('b');
-    //         $("#update_"+i).removeClass("btn btn-sm btn-success");
-    //         $("#update_"+i).addClass("btn btn-sm btn-warning");
-    //     }
-    // }//  *ไม่ใช้แล้ว
-
-    // function update_sub(i){
-    //     if($("#input_name_"+i).val() !== "" || $("#input_id_"+i).val() !== ""){
-    //         let id = $("#input_id_"+i).val();
-    //         let name = $("#input_name_"+i).val(); 
-    //         if($("#input_name_"+i).val() === ""){
-    //             // $("#input_name_"+i).val() = $("#input_name_"+i).attr('placeholder');
-    //             name = $("#input_name_"+i).attr('placeholder');
-    //         }
-    //         if($("#input_id_"+i).val() === ""){
-    //             // $("#input_id_"+i).val() = $("#input_id_"+i).attr('placeholder');
-    //             id = $("#input_id_"+i).attr('placeholder');
-    //         }
-    //         alert(id+" : "+name);
-    //         $.post("../send_sql/subject_sql_update.php",
-    //             {i:i,name:name,id:id},
-    //             function (data, textStatus, jqXHR) {
-    //                 // alert(data);
-    //             }
-    //         );
-    //     }else{
-    //         alert("blank");
-    //     }
-    // }//  *ไม่ใช้แล้ว
 
     function delete_sub(elem){
 
         // get element id name to read and send to ajax
         let id = $(elem).attr('id');
 
-        //calling ajax 
-        $.ajax({
-            type: "POST",
-            url: "../send_sql/subject_del_sql.php",
-            data: {id:id},
-            success: function (data) {
-                // return result of sql
-                if(data == 'true'){
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton:false,
-                        timer:3000,
-                        type: 'success',
-                        titleText: 'ลบสำเร็จ',
-                    });
-                }else{
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton:false,
-                        timer:3000,
-                        type: 'warning',
-                        titleText: 'เกิดข้อผลิดพลาด',
-                    });
-                }
-            }
+        Swal.fire({
+            title: 'ยืนยันที่จะลบ?',
+            text: "Are you sure to delete?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ลบ',
+            cancelButtonText: 'ยกเลิก'
         }).then((result) => {
-            // refresh page in index.php by jquery
-            $("#in_body").load("../page/subject.php");
+            //calling ajax 
+            $.ajax({
+                type: "POST",
+                url: "../send_sql/subject_del_sql.php",
+                data: {id:id},
+                success: function (data) {
+                    // return result of sql
+                    if(data == 'true'){
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton:false,
+                            timer:3000,
+                            type: 'success',
+                            titleText: 'ลบสำเร็จ',
+                        });
+                    }else{
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton:false,
+                            timer:3000,
+                            type: 'warning',
+                            titleText: 'เกิดข้อผลิดพลาด',
+                        });
+                    }
+                }
+            }).then((result) => {
+                // refresh page in index.php by jquery
+                $("#in_body").load("../page/subject.php");
+            })
         })
 
     }
