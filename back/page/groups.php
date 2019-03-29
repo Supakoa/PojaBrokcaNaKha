@@ -7,7 +7,7 @@ require '../../server/server.php';
     <hr>
 
     <!-- button add -->
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle"></i>
             เพิ่ม</button>
     </div>

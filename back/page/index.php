@@ -44,7 +44,7 @@
 <body class="">
 
     <nav id="mySidenav" class="sidenav"><!-- rigth nav  -->
-
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <ul>
             <li class="slidebrand navtap">
                 <a href="#" class="" onclick="call_content('main.php');">
@@ -178,10 +178,10 @@
     function openNav() {
         if ($('#mySidenav').css("width") == "0px") {
             document.getElementById('mySidenav').style.width = "300px";
-            document.getElementById('main').style.marginLeft = "300px";
+            // document.getElementById('main').style.marginLeft = "300px";
         } else {
             document.getElementById('mySidenav').style.width = "0";
-            document.getElementById('main').style.marginLeft = "0";
+            // document.getElementById('main').style.marginLeft = "0";
         }
     }
 
