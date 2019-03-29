@@ -1,10 +1,10 @@
 <?php 
 require '../../server/server.php';
-
+$id = $_SESSION['id'];
 
 $sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
-            FROM `paper_user`, `paper`, `form`, `user` 
-            WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper_user.user_id AND form.form_id != '8'";
+FROM `paper_user`, `paper`, `form`, `user` 
+WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' ";
 $re_paper = mysqli_query($con, $sql_paper);
 
 
@@ -209,34 +209,24 @@ $re_paper = mysqli_query($con, $sql_paper);
             $('.tr-pick td').css("background-color", "");
             e.preventDefault();
             $(this).find('td').css("background-color", "#E4EEFC");
+            $('html, body').animate({ scrollTop: $('#paper_form').offset().top }, 'slow');
         });
     </script>
 
     <script>
         function form_paper(id_paper, type) {
             // alert("eiei");
-            $("#paper_1").html("");
+            $("#paper_form").html("");
             $.post("other/doc.php", {
                     id: id_paper,
                     cate: type
                 },
                 function(result) {
-                    $("#paper_1").html(result);
+                    $("#paper_form").html(result);
                 }
             );
         };
 
-        function form_paper1(id_paper, type) {
-            $("#paper_1").html("");
-            $.post("other/doc.php", {
-                    id: id_paper,
-                    cate: type
-                },
-                function(result) {
-                    $("#paper_1").html(result);
-                }
-            );
-        };
     </script>
 
     <!-- bootstrap 4.2.1 -->
