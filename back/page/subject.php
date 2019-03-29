@@ -162,7 +162,7 @@
         Swal.mixin({
             input: 'text',
             confirmButtonText: 'Next &rarr;',
-            progressSteps: ['1', '2', '3']
+            progressSteps: ['1', '2']
         }).queue([
             {
                 title: 'รหัสวิชา',
@@ -171,21 +171,24 @@
             {
                 title:'ชื่อวิชา',
                 text:'Subject Name.'
-            },
-            {
-
-                confirmButtonText:'ตกลง'
             }
         ]).then((result) => {
-            if (result.value) {
+            if( result.value[0] == "" || result.value[1] == "" ){
                 Swal.fire({
-                title: 'All done!',
-                html:
-                    'Your answers: <pre><code>' +
-                    JSON.stringify(result.value) +
-                    '</code></pre>',
-                confirmButtonText: 'Lovely!'
-                })
+                    type: 'error',
+                    title:'ผิดพลาด',
+                    text: 'กรุณากรอกข้อมูลให้ครบตามที่กำหนด'
+                });
+            }else{
+                Swal.fire({
+                    title: 'ตรวจสอบก่อนส่ง',
+                    html:
+                        'Your subject answers: <br><br><p>' +
+                            '(รหัสวิชา/ID): ' + result.value[0] + '<br>' +
+                            '(ชื่อวิชา/name): ' + result.value[1] + '<br>' +
+                        '</p>',
+                    confirmButtonText: 'ยืนยัน'
+                });
             }
         })
     }
