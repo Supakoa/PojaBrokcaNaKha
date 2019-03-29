@@ -87,37 +87,39 @@
             confirmButtonText: 'ลบ',
             cancelButtonText: 'ยกเลิก'
         }).then((result) => {
-            //calling ajax 
-            $.ajax({
-                type: "POST",
-                url: "../send_sql/subject_del_sql.php",
-                data: {id:id},
-                success: function (data) {
-                    // return result of sql
-                    if(data == 'true'){
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton:false,
-                            timer:3000,
-                            type: 'success',
-                            titleText: 'ลบสำเร็จ',
-                        });
-                    }else{
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton:false,
-                            timer:3000,
-                            type: 'warning',
-                            titleText: 'เกิดข้อผลิดพลาด',
-                        });
+            if(result.dismiss === Swal.DismissReason.confirm){
+               //calling ajax 
+                $.ajax({
+                    type: "POST",
+                    url: "../send_sql/subject_del_sql.php",
+                    data: {id:id},
+                    success: function (data) {
+                        // return result of sql
+                        if(data == 'true'){
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton:false,
+                                timer:3000,
+                                type: 'success',
+                                titleText: 'ลบสำเร็จ',
+                            });
+                        }else{
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton:false,
+                                timer:3000,
+                                type: 'warning',
+                                titleText: 'เกิดข้อผลิดพลาด',
+                            });
+                        }
                     }
-                }
-            }).then((result) => {
-                // refresh page in index.php by jquery
-                $("#in_body").load("../page/subject.php");
-            })
+                }).then((result) => {
+                    // refresh page in index.php by jquery
+                    $("#in_body").load("../page/subject.php");
+                }) 
+            }
         })
 
     }
