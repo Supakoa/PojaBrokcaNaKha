@@ -34,20 +34,20 @@
                             <?php echo (++$i).').' ;$id = $row_sub_all[0];$name = $row_sub_all[1]; ?>
                             <!-- <div class="collapse" id="containt_<?php //echo $i; ?>">
                                 <hr>
-                                <div id="update_<?php echo $i; ?>" onclick="update_sub(<?php //echo $i; ?>);" class="btn btn-sm btn-success"><i class="far fa-check-circle" style="color:white;"></i></div>
+                                <div id="update_<?php //echo $i; ?>" onclick="update_sub(<?php //echo $i; ?>);" class="btn btn-sm btn-success"><i class="far fa-check-circle" style="color:white;"></i></div>
                             </div> --><!-- collapse -->
                         </td>
                         <td>
                             <?php echo $row_sub_all['sub_id']; ?>
                             <!-- <div class="collapse" id="containt_<?php //echo $i; ?>">
-                                <hr><input id="input_id_<?php echo $i; ?>" onchange="inputChange(<?php //echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
+                                <hr><input id="input_id_<?php //echo $i; ?>" onchange="inputChange(<?php //echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
                                     placeholder="<?php //echo $row_sub_all['sub_id']; ?>">
                             </div> --><!-- collapse -->
                         </td>
                         <td>
                             <?php echo $row_sub_all['sub_name']; ?>
 
-                            <!-- <div class="collapse" id="containt_<?php echo $i; ?>">
+                            <!-- <div class="collapse" id="containt_<?php //echo $i; ?>">
                                 <hr><input id="input_name_<?php //echo $i; ?>" onchange="inputChange(<?php //echo $i; ?>)" class="form-control form-control-sm" type="text" style="text-align:center;"
                                     placeholder="<?php //echo $row_sub_all['sub_name']; ?>">
                             </div> --><!-- collapse -->
@@ -55,7 +55,8 @@
                         <td>
                             <!-- <button type="button" onclick="changeIcon(<?php //echo $i; ?>);" class="btn btn-sm btn-outline-dark" data-toggle="collapse" aria-expanded="false"
                                 aria-controls="collapseExample" data-target="#containt_<?php //echo $i; ?>"><i id="icon_<?php //echo $i; ?>" class="fas fa-angle-double-down"></i></button> -->
-                            <button class="btn btn-sm btn-outline-dark" onclick="delete_sub();" ><i class="far fa-trash-alt"></i></button>
+
+                            <button id="<?php echo $row_sub_all['sub_id']; ?>" class="btn btn-sm btn-outline-dark" onclick="delete_sub(this);" ><i class="far fa-trash-alt"></i></button>
                         </td>
 
                     </tr>
@@ -63,6 +64,7 @@
                     <?php } ?>
                 </tbody>
             </table>
+            <button class="btn btn-block btn-success shadow" onclick="insert_sub();"><i class="fas fa-plus-circle" style="color:white;"></i></button>
         </div><!-- body -->
 
     </div>
@@ -117,15 +119,75 @@
     //     }
     // }//  *ไม่ใช้แล้ว
 
-    function delete_sub(){
+    function delete_sub(elem){
 
-        Swal.fire({
-            title: 'Custom animation with Animate.css',
-            animation: false,
-            customClass: {
-                popup: 'animated tada'
+        // get element id name to read and send to ajax
+        let id = $(elem).attr('id');
+
+        //calling ajax 
+        $.ajax({
+            type: "POST",
+            url: "../send_sql/subject_del_sql.php",
+            data: {id:id},
+            success: function (data) {
+                // return result of sql
+                if(data == 'true'){
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton:false,
+                        timer:3000,
+                        type: 'success',
+                        titleText: 'ลบสำเร็จ',
+                    });
+                }else{
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton:false,
+                        timer:3000,
+                        type: 'warning',
+                        titleText: 'เกิดข้อผลิดพลาด',
+                    });
+                }
             }
         });
+        
+        // refresh page in index.php by jquery
+        $("#in_body").load("../page/subject.php");
+
+    }
+
+    function insert_sub(){
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            progressSteps: ['1', '2', '3']
+        }).queue([
+            {
+                title: 'รหัสวิชา',
+                text: 'Subject ID.'
+            },
+            {
+                title:'ชื่อวิชา',
+                text:'Subject Name.'
+            },
+            {
+
+                confirmButtonText:'ตกลง'
+            }
+        ]).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                title: 'All done!',
+                html:
+                    'Your answers: <pre><code>' +
+                    JSON.stringify(result.value) +
+                    '</code></pre>',
+                confirmButtonText: 'Lovely!'
+                })
+            }
+        })
     }
 
 </script>
