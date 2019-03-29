@@ -1,3 +1,12 @@
+<?php 
+require '../../server/server.php';
+$sql_fac = "SELECT * FROM `fac` ";
+$re_fac = mysqli_query($con,$sql_fac);
+$fac = '<option disabled selected value="">กรุณาเลือกคณะ</option>';
+while($r_fac = mysqli_fetch_array($re_fac)){
+    $fac.= '<option value="'.$r_fac['fac_id'].'">'.$r_fac['name'].'</option>';
+}
+?>
 <div class="container-fluid ">
     <h3>ค้นหา : สมาชิก</h3>
     <hr>
@@ -19,7 +28,7 @@
                 </div>
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="conformer">ผู้ตรวจ
+                        <input type="checkbox" class="form-check-input" value="conformer">ผู้มีอำนาจลงนามอนุมัติ
                     </label>
                 </div>
                 <div class="form-check-inline">
@@ -36,9 +45,11 @@
             <!-- end form filter radio -->
 
             <div class="input-group mx-auto input-group-lg" style="width:500px;">
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg">
                 <div class="input-group-prepend">
-                    <button type="button" class="btn btn-outline-info"><i class="fas fa-search" style=""></i> ค้นหา</button>
+                    <button type="button" class="btn btn-outline-info"><i class="fas fa-search" style=""></i>
+                        ค้นหา</button>
                 </div>
             </div>
 
@@ -47,68 +58,106 @@
                 <!-- setup modal size : xl -->
                 <div class="modal-dialog ">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <label>เพิ่มข้อมูล : </label>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">รหัสผู้ใช้งาน</label>
-                                <div class="col">
-                                    <input type="text" class=" form-control" placeholder="Username">
-                                </div>
+                        <form method="post" id="form_regis">
+                            <div class="modal-header">
+                                <label>เพิ่มข้อมูล : </label>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">รหัสผ่าน</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">ชื่อ-นามสกุล</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">ประเภทผู้ใช้</label>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option selected disabled>Choose : role</option>
-                                            <option>admin</option>
-                                            <option>sender</option>
-                                            <option>student</option>
-                                        </select>
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">รหัสผู้ใช้งาน</label>
+                                    <div class="col">
+                                        <input type="text" name="user_name" class=" form-control"
+                                            placeholder="Username">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">รหัสผ่าน</label>
+                                    <div class="col">
+                                        <input type="password" name="pass" id="pass" class="form-control"
+                                            placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">ยืนยันรหัสผ่าน</label>
+                                    <div class="col">
+                                        <input type="password" name="con_pass" id="con_pass" class="form-control"
+                                            placeholder="Con-Password">
+                                    </div>
+                                </div>
+                                <p id="pass_p"></p>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">คำนำหน้าชื่อ</label>
+                                    <div class="col">
+                                        <input type="text" name="title" class="form-control" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">ชื่อ-นามสกุล</label>
+                                    <div class="col">
+                                        <input type="text" name="name" class="form-control" placeholder="name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">อีเมล</label>
+                                    <div class="col">
+                                        <input type="text" name="email" class="form-control" placeholder="e-mail">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">เบอร์โทร</label>
+                                    <div class="col">
+                                        <input type="text" name="tel" class="form-control" placeholder="tel.">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">ประเภทผู้ใช้</label>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <select class="form-control" name="role" id="role" required>
+                                                <option selected disabled value="">Choose : role</option>
+                                                <option value="3">ผู้ดูแลระบบ</option>
+                                                <option value="2">ผู้มีอำนาจลงนามอนุมัติ</option>
+                                                <option value="1">นักศึกษา</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row " id="div_rank">
+                                    <label class="col-4 col-form-label">ตำแหน่ง</label>
+                                    <div class="col">
+                                        <input type="text" name="rank" id="rank" class="form-control"
+                                            placeholder="rank">
+                                    </div>
+                                </div>
+                                <div id="div_fac_major">
+                                    <div class="form-group row" id="">
+                                        <label class="col-4 col-form-label">คณะ</label>
+                                        <div class="col">
+                                            <select class="form-control custom-select" name="fac" id="faculty" required>
+                                                <?php echo $fac ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" id="">
+                                        <label class="col-4 col-form-label">สาขา</label>
+                                        <div class="col">
+                                            <select class="form-control custom-select" name="mar" id="major" disabled
+                                                required>
+                                                <option disabled selected value="">กรุณาเลือกจากคณะก่อน</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">ตำแหน่ง</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="rank">
+                            <div class="modal-footer">
+                                <div class=" text-right ">
+                                    <button type="submit" id="btn_regis">ยืนยัน</button>
+                                    <button type="button" data-dismiss="modal">ยกเลิก</button>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">อีเมล</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="e-mail">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">เบอร์โทร</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="tel.">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">สาขา</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="major">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -129,8 +178,9 @@
                             <th>คณะ</th>
                             <th>สาขา</th>
                             <th>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user" >
-                                <i class="fas fa-plus"></i>
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                    data-target="#add_user" id="btn_modal_regis">
+                                    <i class="fas fa-plus"></i>
                                 </button>
                             </th>
 
@@ -148,7 +198,7 @@
                             <td>เทคโนโลยีอุตสาหกรรม</td>
                             <td>วิศวกรรมคอมพิวเตอร์</td>
                             <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
                                 <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
@@ -162,7 +212,7 @@
                             <td>เทคโนโลยีอุตสาหกรรม</td>
                             <td>ออกแบบกราฟิกและมัลติมีเดีย</td>
                             <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
                                 <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
@@ -176,7 +226,7 @@
                             <td>เทคโนโลยีอุตสาหกรรม</td>
                             <td>อุตสาหกรรมการพิมพ์</td>
                             <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
                                 <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
@@ -190,7 +240,7 @@
                             <td>-</td>
                             <td>-</td>
                             <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
                                 <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                         <tr>
@@ -204,7 +254,7 @@
                             <td>-</td>
                             <td>-</td>
                             <td>
-                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button> 
+                                <button class="btn "><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
                                 <button class="btn "><i class="fas fa-trash" style="color:red"></i></button></td>
                         </tr>
                     </tbody>
@@ -215,16 +265,89 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.table_table').DataTable();
+    });
+    //register
+
+    //เปิด MODEL REGISTER
+    $("#btn_model_regis").click(function (e) {
+        e.preventDefault();
+        $("#div_rank").hide();
+        $("#div_fac_major").hide();
+        $('#rank').prop("disabled", true);
+        $('#faculty').prop('disabled', true);
+        $("#form_regis input").prop("required", true);
+    });
+
+    //เมื่อเลือก Role
+    $("#role").change(function (e) {
+        e.preventDefault();
+        $("#div_rank").hide();
+        $("#div_fac_major").hide();
+        if ($(this).val() == 1) {
+            $("#div_fac_major").show();
+            $('#rank').prop("disabled", true);
+            $('#faculty').prop('disabled', false);
+        } else {
+            $("#div_rank").show();
+            $('#rank').prop("disabled", false);
+            $('#faculty').prop('disabled', true);
+        }
+    });
+
+    //เช็ค PASS == CON_PASS
+    $('#pass').keyup(function () {
+        check_con_pass();
+    });
+    $('#con_pass').keyup(function (e) {
+        check_con_pass();
 
     });
+
+    function check_con_pass() {
+        a = $('#pass').val();
+        b = $('#con_pass').val();
+        $('#pass_p').text(a + " " + b);
+        conpass = $('#con_pass')[0];
+        if (a != b) {
+            conpass.setCustomValidity("Passwords Don't Match");
+
+        } else {
+            conpass.setCustomValidity('');
+        }
+    };
+    //คณะ สาขา
+    $('#faculty').change(function (e) {
+        e.preventDefault();
+        fac = $('#faculty').val();
+        $.post("../../server/major.php", {
+                data: fac
+            },
+            function (result) {
+                if (fac != null) {
+                    $("#major").html(result);
+                    $('#major').prop("disabled", false);
+                }
+            }
+
+        );
+    });
+
+
+    //form summit
+    $('#form_regis').submit(function (e) {
+        e.preventDefault();
+        alert($("#form_regis").serialize());
+    });
+
+    //register end
 </script>
 <!-- <div class="w3-container-fluid w3-center w3-pink" style="margin:20px;max-height:100%;padding:30px;">
     <h1 style="color:gray;">เลือก : ชนิด</h1>
     <hr>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">แอดมิน</button>
-    <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">ผู้ตรวจ</button>
+    <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">ผู้มีอำนาจลงนามอนุมัติ</button>
     <button type="button" class="btn btn-outline-dark" style="margin:15px;height:300px;width:300px;font-size:50px; font-weight: 900;">นักศึกษา</button>
 </div>
 
@@ -237,4 +360,4 @@
             <button type="button" class="btn btn-info">ค้นหา</button>
         </div>
     </div>
-</div> --> 
+</div> -->
