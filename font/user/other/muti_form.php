@@ -96,6 +96,10 @@ if (isset($_POST['form_1'])) {
     $form = 7;
     $detail = $_POST['comment'] . "๛" . $_POST['group'];
    
+} elseif (isset($_POST['form_8'])) {
+    $form = 8;
+    $detail = $_POST['topic'] . "๛" . $_POST['cont'];
+   
 }
 
 if($form!=0){
@@ -114,7 +118,7 @@ if($form!=0){
                 $row_group_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `groups` WHERE `group_id` ='$group_id' "));
                 if( $row_group_user['type']=="1"){ //เช็คว่ากลุ่มในขั้นที่หนึ่งเป็นประเภทไหน 1 คือ แบบทั่วไป 2 คือ แบบเฉพาะวิชา
                     $sub_id="temp";
-                    echo $sub_id;
+                    // echo $sub_id;
                 }
             }
             $re_group_user_sub = mysqli_query($con,"SELECT * FROM `groups_user` WHERE `group_id` ='$group_id' AND `sub_id`='$sub_id' ");// หาผู้ใช้ในกลุ่มนั้น ๆ เพื่อกระจายเอกสารออกไป

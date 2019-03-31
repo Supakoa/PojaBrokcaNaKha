@@ -136,7 +136,6 @@ require '../../server/server.php';
                     function(alert_data) {
                         $("#show_alert").html(alert_data);
                     }
-
                 );
             }
 

@@ -130,21 +130,21 @@ if(isset($_POST)){
         );
     }
     $('.btn-singha').hover(function () {
-            // over
-            $(this).css('background-color', 'red');
-            $(this).css('color', 'white');
-        }, function () {
-            // out
-            $(this).css('background-color', 'white');
-            $(this).css('color', '#17A2B8');
-        }
-    );
+        // over
+        $(this).css('background-color', 'red');
+        $(this).css('color', 'white');
+    }, function () {
+        // out
+        $(this).css('background-color', 'white');
+        $(this).css('color', '#17A2B8');
+    });
+
     function del_user_sub(group_id, sub, user_id, user_name) {
 
-        if(sub=='temp'){
+        if (sub == 'temp') {
             sum = user_name;
-        }else{
-            sum = user_name + " ที่วิชา " + sub ;
+        } else {
+            sum = user_name + " ที่วิชา " + sub;
         }
         Swal.fire({
             title: 'ท่านต้องการลบ ?',

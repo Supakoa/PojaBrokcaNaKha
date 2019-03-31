@@ -237,6 +237,10 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                 {
                     responsivePriority: 2,
                     targets: -1
+                },
+                {
+                    responsivePriority: 3,
+                    targets: 2
                 }
             ]
 

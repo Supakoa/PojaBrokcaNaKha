@@ -106,7 +106,7 @@
                             ข้อมูลส่วนตัว</a>
                     </li>
                     <li class="nav-item ">
-                        <a href="#" class="nav-link" style="color:whitesmoke;"><i class="fas fa-sign-out-alt"
+                        <a href="../../server/logout.php" class="nav-link" style="color:whitesmoke;"><i class="fas fa-sign-out-alt"
                                 style="color:whitesmoke;"></i>
                             ออกจากระบบ</a>
                     </li>

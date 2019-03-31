@@ -102,9 +102,9 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                 <div class="card-body" style="background-color:#F7FAFE">
                     <div class="row">
                         <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
-                            <div class="table-responsive text-nowrap">
-                                <table class="table table-hover overflow">
+                        <div class="col-lg-8 ">
+                            <div class="table-responsive">
+                                <table class="table table-hover overflow responsive nowrap display">
                                     <tbody>
                                         <tr>
                                             <th scope="row">ชื่อ - นามสกุล</th>
