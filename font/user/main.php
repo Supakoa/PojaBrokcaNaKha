@@ -55,34 +55,34 @@ $re_paper = mysqli_query($con, $sql_paper);
 // $row_paper = mysqli_fetch_array($re_paper);
 /// paper_user
 
-if (isset($_POST['senmessage'])) {
-    unset($_POST['senmessage']);
-    $paper_id = getToken(10);
-    $mix = $_POST['topic'] . "๛" . $_POST['cont'];
-    $num = $_POST['number'];
-    $sql_pp = "INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
-    if (mysqli_query($con, $sql_pp)) {
-        $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
-        $re_form = mysqli_query($con, $sql_form);
-        $row_form = mysqli_fetch_array($re_form);
-        if ($row_form['group_id'] != null) {
-            $user_id = $row_form['group_id'];
-            $sum_q = '(\'' . $paper_id . '\',\'' . $user_id . '\' )';
-            while ($row_form = mysqli_fetch_array($re_form)) {
-                $user_id = $row_form['group_id'];
-                $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\' )';
-            }
-            $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES " . $sum_q . " ";
-            if ($re_user = mysqli_query($con, $sql_user)) {
-                $_SESSION['alert'] = 3;
-            } else {
-                $_SESSION['alert'] = 4;
-            }
-        }
-    } else {
-        $_SESSION['alert'] = 4;
-    }
-}
+// if (isset($_POST['senmessage'])) {
+//     unset($_POST['senmessage']);
+//     $paper_id = getToken(10);
+//     $mix = $_POST['topic'] . "๛" . $_POST['cont'];
+//     $num = $_POST['number'];
+//     $sql_pp = "INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
+//     if (mysqli_query($con, $sql_pp)) {
+//         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
+//         $re_form = mysqli_query($con, $sql_form);
+//         $row_form = mysqli_fetch_array($re_form);
+//         if ($row_form['group_id'] != null) {
+//             $user_id = $row_form['group_id'];
+//             $sum_q = '(\'' . $paper_id . '\',\'' . $user_id . '\' )';
+//             while ($row_form = mysqli_fetch_array($re_form)) {
+//                 $user_id = $row_form['group_id'];
+//                 $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\' )';
+//             }
+//             $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES " . $sum_q . " ";
+//             if ($re_user = mysqli_query($con, $sql_user)) {
+//                 $_SESSION['alert'] = 3;
+//             } else {
+//                 $_SESSION['alert'] = 4;
+//             }
+//         }
+//     } else {
+//         $_SESSION['alert'] = 4;
+//     }
+// }
 
 ?>
 <!DOCTYPE html>
@@ -631,7 +631,8 @@ if (isset($_POST['senmessage'])) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="main.php" method="POST">
+                <form action="other/muti_form.php" method="post">
+                   <input type="hidden" name="form_8">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">เรื่อง:</label>

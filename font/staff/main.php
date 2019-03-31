@@ -225,7 +225,6 @@ $row_user = mysqli_fetch_array($re_user);
             $('.tr-pick td').css("background-color", "");
             e.preventDefault();
             $(this).find('td').css("background-color", "#E4EEFC");
-            $('html, body').animate({ scrollTop: $('#paper_form').offset().top }, 'slow');
         });
     </script>
 
@@ -239,6 +238,7 @@ $row_user = mysqli_fetch_array($re_user);
                 },
                 function(result) {
                     $("#paper_form").html(result);
+                    $('html, body').animate({ scrollTop: $('#paper_form').offset().top }, 'slow');
                 }
             );
         };
