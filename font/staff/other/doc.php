@@ -1,17 +1,17 @@
 <?php 
 require '../../../server/server.php';
-if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
-    if($_SESSION['online']!=2){
+if (isset($_SESSION['online']) && isset($_SESSION['id'])) {
+    if ($_SESSION['online'] != 2) {
         $_SESSION['check_login'] = 1;
         header("Location: ../../../index.php");
         $_SESSION['alert'] = 2;
         exit();
     }
-}else{
+} else {
     $_SESSION['check_login'] = 1;
-        header("Location: ../../../index.php");
-        $_SESSION['alert'] = 2;
-        exit();
+    header("Location: ../../../index.php");
+    $_SESSION['alert'] = 2;
+    exit();
 }
 function DateThai($strDate)
 {
@@ -52,8 +52,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -83,10 +82,10 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                         </div>
@@ -138,8 +137,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -169,14 +167,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-11 offset-md-1 col-sm-10">
+                                <dd class="col-sm-11 offset-md-1 ">
                                     <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
@@ -229,8 +227,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -260,14 +257,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-2 col-sm-10">
+                                <dd class="col-sm-11 offset-sm-1">
                                     <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
@@ -320,8 +317,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -351,14 +347,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-2 col-sm-10">
+                                <dd class="col-sm-11 offset-sm-1">
                                     <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
@@ -411,8 +407,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -442,14 +437,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-2 col-sm-10">
+                                <dd class="col-sm-11 offset-sm-1">
                                     <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
@@ -503,8 +498,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -534,14 +528,14 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-10 offset-sm-2">
+                                <dd class="col-sm-11 offset-sm-1">
                                     <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
@@ -595,8 +589,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                 <!-- head -->
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block"
-                            style="heigth:100px;width:100px">
+                        <img src="../picture/ssru.png" alt="" class="rounded mx-auto d-block" style="heigth:100px;width:100px">
                     </div>
                 </div>
                 <!-- head -->
@@ -626,15 +619,15 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                         <div class="card-body">
                             <dl class="row">
                                 <dd class="col-md-6 offset-md-2 text-left">
-                                    <?php echo "ด้วยข้าพเจ้า".$row_form['title'] . " " . $row_form['user_name'] ; ?>
+                                    <?php echo "ด้วยข้าพเจ้า" . $row_form['title'] . " " . $row_form['user_name']; ?>
                                 </dd>
                                 <dd class="col-sm-11 offset-md-1 text-left">
-                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?>
+                                    <?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] . "<br> หมายเลขโทรศัพท์ " . $row_form['tel'] . "วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']; ?>
                                 </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-2 col-sm-10">
-                                    <?php echo $keywords[1]; ?>
+                                <dd class="col-sm-11 offset-sm-1">
+                                    <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
                         </div>
@@ -674,4 +667,4 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
 <?php 
 } else {
     $_SESSION['alert'] = 4;
-} ?>
+} ?> 
