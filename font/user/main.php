@@ -536,7 +536,7 @@ if (isset($_POST['senmessage'])) {
                                         <div class="card">
                                             <!-- card 2.1 -->
                                             <div class="card-body">
-                                                <div class="table-responsive-lg ">
+                                                <div class="table-responsive">
                                                     <table id="table2" class="table table-striped table-hover display nowrap responsive">
                                                         <thead>
                                                             <tr>
