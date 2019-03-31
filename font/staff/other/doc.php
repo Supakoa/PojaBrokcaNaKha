@@ -44,7 +44,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -128,7 +129,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -217,7 +219,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -306,7 +309,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -395,7 +399,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -485,7 +490,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
@@ -574,7 +580,8 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
     <!-- card 3 -->
     <div class="card" id="showdata">
         <div class="card-header text-light" style="background-color:#78ABF2">
-            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id" form="form_up_ans" value=" <?php echo $id ?>">
+            <h5>ประเภท : <?php echo $row_form['form_name'] ?></h5> <input type="hidden" name="form_id"
+                form="form_up_ans" value="<?php echo $id_paper ?>">
         </div>
         <div class="card-body">
             <div class="paper card-body">
