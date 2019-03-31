@@ -100,6 +100,7 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
     </div>
 </div>
 <div id="edit_group_div"></div>
+
 <div style="margin-top:100px" class="modal fade" id="add_form_group" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -128,6 +129,39 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="save">Save changes</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" style="margin-top:120px" id="new_group" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>เพิ่มกลุ่ม</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="form_add" >
+                    <div class="row">
+                        <div class="col">
+                            <label for="group_name">ชื่อกลุ่ม</label>
+                            <input class="form-control" type="text" name="group_name" id="group_name" required>
+                        </div>
+                        <div class="col">
+                            <label for="group_type">เลือกประเภท</label>
+                            <select class="form-control" name="group_type" id="group_type" required>
+                                <option hidden="" selected="" value="">เลือกประเภท</option>
+                                <option value="1">ทั่วไป</option>
+                                <option value="2">ตามวิชา</option>
+                            </select>
+                        </div>
+                    </div><br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-sm btn-success" id='add_group'>Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -250,51 +284,43 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                 type: b
             },
             function (data) {
-
-
-
                 $("#div_add_group").html(data);
-
-
                 c = $("#alert").val();
-
                 $.post("../send_sql/alert.php", {
                         // alert: c
                     },
                     function (alert_data) {
                         $("#new_group").modal("hide");
-
                         $('#new_group').on('hidden.bs.modal', function (e) {
-           
-                        
-                        $('#edit_form_modal').modal('hide');
-                        $('#edit_form_modal').on('hidden.bs.modal', function (e) {
-                            $("#edit_form_div").load("../modal/edit_form.php", {
-                                    id: now_id
-                                },
-                                function (data2) {
-                                    $("#edit_form_div").html(data2);
-                                    $("#edit_form_modal").modal('show');
-
+                            $("#add_form_group").modal("hide");
+                            $('#add_form_group').on('hidden.bs.modal', function (e) {
+                                $('#edit_form_modal').modal('hide');
+                                $('#edit_form_modal').on('hidden.bs.modal', function (
+                                e) {
+                                    $("#in_body").load("sender.php",function () {
+                                        $("#edit_form_div").load(
+                                        "../modal/edit_form.php", {
+                                            id: now_id
+                                        },
+                                        function (data2) {
+                                            $("#edit_form_div").html(data2);
+                                            $("#edit_form_modal").modal('show');
+                                            // $("#add_form_group").modal("show");
+                                        });
+                                      });
+                                   
+                                    
                                 });
+                            });
                         });
-                        });
-                        $('#show_alert').html(alert_data);
-
+                        
                     }
 
                 );
+                $('#show_alert').html(data);
             }
 
         );
-        $("#new_group").modal("hide");
-
-        $('#new_group').on('hidden.bs.modal', function (e) {
-           
-        });
-
-
-
 
     });
 </script>

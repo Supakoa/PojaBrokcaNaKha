@@ -40,36 +40,6 @@
 </div>
 <div id="edit_form_div"></div>
 <div id="show_alert"></div>
-<div class="modal fade" id="new_group" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>เพิ่มกลุ่ม</h3>
-            </div>
-            <div class="modal-body">
-                <form action="" id="form_add" >
-                    <div class="row">
-                        <div class="col">
-                            <label for="group_name">ชื่อกลุ่ม</label>
-                            <input class="form-control" type="text" name="group_name" id="group_name" required>
-                        </div>
-                        <div class="col">
-                            <label for="group_type">เลือกประเภท</label>
-                            <select class="form-control" name="group_type" id="group_type" required>
-                                <option hidden="" selected="" value="">เลือกประเภท</option>
-                                <option value="1">ทั่วไป</option>
-                                <option value="2">ตามวิชา</option>
-                            </select>
-                        </div>
-                    </div><br>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-sm btn-success" id='add_group'>Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
 $(document).ready(function () {
             $('.table_table').DataTable();   

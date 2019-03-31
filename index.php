@@ -1,9 +1,19 @@
 <?php 
 require 'server/server.php';
-
+    if(isset($_SESSION['online'])){
+        if($_SESSION['online']=='1'){
+            header("Location: font/user/main.php");
+        }elseif($_SESSION['online']=='2'){
+            header("Location: font/staff/main.php");
+        }elseif($_SESSION['online']=='3'){
+            header("Location: back/page/index.php");
+        }
+        exit;
+    }
     if (isset($_SESSION['check_login'])) {
         session_destroy();
     }
+
 $sql_fac = "SELECT * FROM `fac` ";
 $re_fac = mysqli_query($con,$sql_fac);
 $fac = '<option disabled selected value="">กรุณาเลือกคณะ</option>';
