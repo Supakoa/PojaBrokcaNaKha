@@ -14,11 +14,63 @@ if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
         $_SESSION['alert'] = 2;
         exit();
 }
-
 $id = $_SESSION['id'];
+
+if(isset($_POST['submit_ans'])){
+    print_r($_POST);
+    // echo $_FILES['file']['name'];
+
+
+    $ext = pathinfo(basename($_FILES["uplode_file"]["name"]), PATHINFO_EXTENSION);
+    $new_taget_name = 'uplode_file' . uniqid() . "." . $ext;
+    $target_path = "../../uplode_file/";
+    $upload_path = $target_path . $new_taget_name;
+    $uploadOk = 1;
+
+    $imageFileType = strtolower(pathinfo($new_taget_name, PATHINFO_EXTENSION));
+
+    if ($_FILES["uplode_file"]["size"] > 60000000) {
+        echo "Sorry, your file is too large.";
+        $_SESSION['alert'] = 15;
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png") {
+        echo "Sorry, only JPG , PNG files are allowed.";
+        $_SESSION['alert'] = 17;
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+        $_SESSION['alert'] = 4;
+    } else {
+        if (move_uploaded_file($_FILES["uplode_file"]["tmp_name"], $upload_path)) {
+           $paper_status = $_POST['paper_status'];
+           $comment = $_POST['comment'];
+           $form_id = $_POST['form_id'];
+           echo $new_taget_name ;
+           if(mysqli_query($con,"UPDATE `paper_user` SET `status`= '$paper_status',`comment`='$comment',`last_edit`= CURRENT_TIMESTAMP,`return_file`= '$new_taget_name' WHERE `paper_id` = '$form_id' AND `user_id` = '$id' ")){
+            $_SESSION['alert'] = 3;
+           }else{
+            $_SESSION['alert'] = 18;
+           }
+        } else {
+            echo 'Move fail';
+            $_SESSION['alert'] = 4;
+            exit;
+        }
+    }
+    // header("Location: main.php");
+    // exit();
+
+}
+
 $sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
 FROM `paper_user`, `paper`, `form`, `user` 
-WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' ";
+WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' AND paper_user.status IS NULL ";
 $re_paper = mysqli_query($con, $sql_paper);
 
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
@@ -53,6 +105,9 @@ $row_user = mysqli_fetch_array($re_user);
     <!-- icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+     <!-- sweet alert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
 </head>
@@ -176,7 +231,7 @@ $row_user = mysqli_fetch_array($re_user);
             <!-- div 2 -->
             <div id="paper_form"></div>
             <div id = "up_ans" class="card-footer text-muted">
-                <form action="main.php" method="post" id = "form_up_ans">
+                <form action="main.php" method="post" id = "form_up_ans"  enctype="multipart/form-data">
                 <!-- option staff -->
                 <div class="row">
                     <div class="col-lg-6">
@@ -198,12 +253,12 @@ $row_user = mysqli_fetch_array($re_user);
                     <div class="col-lg-2">
                         <label for="signatue">แนบเอกสาร</label>
                         <div id="signature">
-                            <input type="file" name="file" id="">
+                            <input type="file" name="uplode_file" id="">
                         </div>
                     </div>
                     <div class="col-lg-2"></div>
                     <div class="col-lg-2 offset-lg-10">
-                        <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
+                        <button type="submit" name = "submit_ans" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                     </div>
                 </div>
                 <!-- option staff -->
@@ -292,6 +347,7 @@ $row_user = mysqli_fetch_array($re_user);
     <!-- bootstrap 4.2.1 -->
     <script src="../node_modules/popper.js/dist/popper.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <?php require '../../server/alert.php'; ?>
 </body>
 
 </html>
