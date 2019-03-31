@@ -54,6 +54,12 @@
                     });
                 }
             }
-        );
+        ).then((result) => {
+            $('#new_fac').modal('hide');
+            $('#new_fac').on('hidden.bs.modal', function () {
+                $("#in_body").load("../page/faculty.php");
+            });
+        });
+
     }
 </script>

@@ -11,8 +11,8 @@
     </div>
 
     <div class="container text-center">
-        <button type="button" onclick="facAddModal();" class="btn btn-info"><i class="fas fa-plus"
-                style="color:white;"> เพิ่มคณะ</i></button>
+        <button type="button" onclick="facAddModal();" class="btn shadow-lg btn-info"><i class="fas fa-plus" style="color:white;">
+                เพิ่มคณะ</i></button>
     </div><br>
 
     <!-- modal tempolary -->
@@ -21,7 +21,7 @@
     <div class="container">
 
         <div class="table-responsive-lg">
-            <table class="table table-bordered table-sm table-hover display text-center nowrap responsive">
+            <table class="table table-bordered shadow-lg table-sm table-hover display text-center nowrap responsive">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -38,21 +38,16 @@
                     while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tbody>
-                    <?php $i = 1;
-                    while ($row_fac = mysqli_fetch_array($re_fac)) { ?>
                     <tr>
                         <td><?php echo ++$i; ?></td>
                         <td><?php echo $row['name']; ?></td>
-                        <td><button class="btn btn-success"><i class="fas fa-search-plus"
+                        <td><button onclick="facOpenMaj(<?php echo $row['fac_id']; ?>);" class="btn btn-success"><i class="fas fa-search-plus"
                                     style="color:white;"></i></button></td>
-                        <td><button class="btn btn-warning"><i class="far fa-edit" style="color:white;"></i></button>
+                        <td><button onclick="facEditModal(<?php echo $row['fac_id']; ?>);" class="btn btn-warning"><i class="far fa-edit" style="color:white;"></i></button>
                         </td>
-                        <td><button class="btn btn-danger"><i class="far fa-trash-alt"
+                        <td><button onclick="facDelModal(<?php echo $row['fac_id']; ?>);" class="btn btn-danger"><i class="far fa-trash-alt"
                                     style="color:white;"></i></i></button></td>
                     </tr>
-                    <?php 
-                }
-                 ?>
                 </tbody>
                 <?php } ?>
             </table>
@@ -62,6 +57,7 @@
 </div>
 
 <script>
+
     function facAddModal() {
         $.post("../modal/faculty_add_modal.php",
             function (data, textStatus, jqXHR) {
@@ -70,4 +66,69 @@
             }
         )
     }
+
+    function facDelModal(id){
+        Swal.fire({
+            title: 'ยืนยันการลบ?',
+            text: "ลบรหัสคณะ: "+id,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ลบ',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "../send_sql/fac_del_sql.php",
+                    data: {id:id},
+                    success: function (data) {
+                        // return result of sql
+                        if(data == 'true'){
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton:false,
+                                timer:3000,
+                                type: 'success',
+                                titleText: 'ลบสำเร็จ',
+                            });
+                        }else{
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton:false,
+                                timer:3000,
+                                type: 'warning',
+                                titleText: 'เกิดข้อผลิดพลาด',
+                            });
+                        }
+                    }
+                }).then((result) => {
+                    // refresh page in index.php by jquery
+                    $("#in_body").load("../page/faculty.php");
+                });
+            }
+        });
+    }
+
+    function facEditModal(id){
+        $.post("../modal/faculty_edit_modal.php", {id:id} ,
+            function (data) {
+                $('#tmp_fac_modal').html(data);
+                $('#edit_fac').modal('show');
+            }
+        );
+    }
+
+    function facOpenMaj(id){
+        $.post("../modal/faculty_open_maj_modal.php", {id:id} ,
+            function (data) {
+                $('#tmp_fac_modal').html(data);
+                $('#openMaj').modal('show');
+            }
+        );
+    }
+
 </script>
