@@ -143,7 +143,7 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" id="form_add" >
+                <form action="" id="form_add">
                     <div class="row">
                         <div class="col">
                             <label for="group_name">ชื่อกลุ่ม</label>
@@ -297,23 +297,26 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                                 $('#edit_form_modal').modal('hide');
                                 $('#edit_form_modal').on('hidden.bs.modal', function (
                                 e) {
-                                    $("#in_body").load("sender.php",function () {
-                                        $("#edit_form_div").load(
-                                        "../modal/edit_form.php", {
-                                            id: now_id
-                                        },
-                                        function (data2) {
-                                            $("#edit_form_div").html(data2);
-                                            $("#edit_form_modal").modal('show');
-                                            // $("#add_form_group").modal("show");
+                                    $("#in_body").load("sender.php",
+                                        function () {
+                                            $("#edit_form_div").load(
+                                                "../modal/edit_form.php", {
+                                                    id: now_id
+                                                },
+                                                function (data2) {
+                                                    $("#edit_form_div")
+                                                        .html(data2);
+                                                    $("#edit_form_modal")
+                                                        .modal('show');
+                                                    // $("#add_form_group").modal("show");
+                                                });
                                         });
-                                      });
-                                   
-                                    
+
+
                                 });
                             });
                         });
-                        
+
                     }
 
                 );
