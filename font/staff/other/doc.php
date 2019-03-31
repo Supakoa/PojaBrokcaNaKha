@@ -138,8 +138,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>
@@ -255,8 +254,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>
@@ -372,8 +370,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>
@@ -489,8 +486,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>
@@ -607,8 +603,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>
@@ -665,7 +660,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                                 <dd class="col-sm-11 offset-md-1 text-left"><?php echo  " รหัสนักศึกษา " . $row_form['user_id'] . " คณะ" . $row_form['fac_name'] . "สาขาวิชา " . $row_form['fac_name'] . " กลุ่มเรียน " . $keywords[1] ."<br> หมายเลขโทรศัพท์ " . $row_form['tel']."วิชา " . $row_sub['sub_id'] . " : " . $row_sub['sub_name']  ; ?> </dd>
                             </dl>
                             <dl class="row container">
-                                <dd class="col-sm-2 col-sm-10">
+                                <dd class="col-sm-10 offset-sm-2">
                                 <?php echo $keywords[3]; ?>
                                 </dd>
                             </dl>
@@ -724,8 +719,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>
@@ -842,8 +836,7 @@ $row_sub = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM `subject` WHERE 
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-2 ">
+                <div class="col-lg-2 offset-lg-10">
                     <button type="submit" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                 </div>
             </div>

@@ -1,21 +1,21 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 offset-md-4 ">
-            <label for="search_document">ค้นหา</label>
-            <input class="form-control" type="search" id="search_document" style="" >
-            <br>
-            <button type="button" class="btn btn-info btn-md" ><i class="fas fa-search "></i></button>
+        <div class="col-md-4 offset-md-4 input-group mx-auto input-group-lg">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <div class="input-group-prepend">
+                <button type="button" class="btn btn-outline-info"><i class="fas fa-search" style=""></i>
+                    ค้นหา</button>
+            </div>
         </div>
-
     </div>
 </div>
 
 <div class="container-fluid">
-    <h3 style="padding-top:10px;">เอกสาร : ตาราง</h3>
+    <h3 style="padding-top:10px;">ตาราง : เอกสาร</h3>
     <hr>
 
     <!-- group of table -->
-    <div class="table-responsive-lg">
+    <div class="table-responsive">
         <table class="table table-bordered nowrap responsive display table_table" id="table3">
 
             <!-- table header -->
