@@ -77,7 +77,7 @@ if(isset($_POST['submit_ans'])){
                 }while(!$re_update);
             }
         }else{
-            if(mysqli_query($con,"UPDATE `paper` SET `status`='Done!!' WHERE `paper_id` = '$form_id' ")){
+            if(mysqli_query($con,"UPDATE `paper` SET `status`='1' WHERE `paper_id` = '$form_id' ")){
                 $_SESSION['alert'] = 3;
             }else{
                 $_SESSION['alert'] = 4;
