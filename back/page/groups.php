@@ -8,7 +8,7 @@ require '../../server/server.php';
 
     <!-- button add -->
     <div class="container-fluid text-center">
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle"></i>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle" style="color:white;"></i>
             เพิ่ม</button>
     </div>
 
