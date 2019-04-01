@@ -109,47 +109,54 @@ if($form!=0){
     $sql_paper = "INSERT INTO `paper`( `paper_id`,`owner_id`, `form_id`, `paper_detail`, `step_now`, `status`) VALUES ('$paper_id', '$id','$form','$detail','1','3') ";
     if ($re_paper = mysqli_query($con, $sql_paper)) { //ถ้าเพิ่มเปเปอร์สำเร็จ
         echo " /2";
-        $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form' AND `step` ='1' ";
+        $i_step = 1;
+        $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form'  AND `step` ='$i_step' ";
         $re_form = mysqli_query($con, $sql_form);
-        if($row_form = mysqli_fetch_array($re_form)){ //หา ฟรอมนั้น ๆ ในขั้นที่ 1
+        while($row_form = mysqli_fetch_array($re_form)){ //หา ฟรอมนั้น ๆ ในขั้นที่ นั้น ๆ
             echo " /3";
+            $_SESSION['code_error'] = $i_step;
             $group_id = $row_form['group_id'];
+            $now_step = $row_form['step'];
             if( $sub_id!="temp"){ //ถ้าวิชาที่มีมาจากข้างต้น
-                $row_group_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `groups` WHERE `group_id` ='$group_id' "));
+                $row_group_user = mysqli_fetch_array(mysqli_query($con,"SELECT `type` FROM `groups` WHERE `group_id` ='$group_id' "));
                 if( $row_group_user['type']=="1"){ //เช็คว่ากลุ่มในขั้นที่หนึ่งเป็นประเภทไหน 1 คือ แบบทั่วไป 2 คือ แบบเฉพาะวิชา
                     $sub_id="temp";
                     // echo $sub_id;
                 }
             }
             $re_group_user_sub = mysqli_query($con,"SELECT * FROM `groups_user` WHERE `group_id` ='$group_id' AND `sub_id`='$sub_id' ");// หาผู้ใช้ในกลุ่มนั้น ๆ เพื่อกระจายเอกสารออกไป
-            if($re_group_user_sub){ 
+            if(mysqli_num_rows($re_group_user_sub)!=0){ 
                 $sum_q =' ';
                     $i = 0;
                     while ($row_form = mysqli_fetch_array($re_group_user_sub)) {
                         $group_id = $row_form['group_id'];
                         $user_id =$row_form['user_id'];
-                        if($i == 0) $sum_q .= '(\'' . $paper_id . '\',\'' . $user_id . '\' )';//รอบแรกไม่มี , ข้างหน้า
-                        else $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\' )';//รวมคำเพื่อ Insert
+                        if($i == 0) $sum_q .= '(\'' . $paper_id . '\',\'' . $user_id . '\',\'' . $now_step . '\' )';//รอบแรกไม่มี , ข้างหน้า
+                        else $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\',\'' . $now_step . '\' )';//รวมคำเพื่อ Insert
                         $i++;
                     }
                     echo $sum_q;
-                    $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES " . $sum_q . " "; //Insert
+                    $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`,`step`) VALUES " . $sum_q . " "; //Insert
                     if ($re_user = mysqli_query($con, $sql_user)) { //Insert สำเร็จ
                         $_SESSION['alert'] = 3;
                     } else { //Insert ไม่าำเร็จ
+                        echo $sum_q;
                         $_SESSION['alert'] = 4;
                     }
             }else{ // ไม่มีผู่ใช้ในวิชานั้น
                 echo '<script> alert("ไม่มีคนในวิชานั้น ?") </script>';
-                $_SESSION['alert'] = 4;
+                $_SESSION['alert'] = 29;
             }
+            $i_step++;
+            $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form'  AND `step` ='$i_step' ";
+            $re_form = mysqli_query($con, $sql_form);
         }
-        else{//หา ฟรอมนั้น ๆ ในขั้นที่ 1 ไม่เจอ
-           echo '<script> alert("หาไม่เจอ") </script>';
-           $_SESSION['alert'] = 4;
-        }
-    if( $_SESSION['alert'] == 4){ //ถ้ามีปัญหาให้ลบเปเปอร์ที่เพิ่มมา
-        mysqli_query($con,"DELETE FROM `paper` WHERE `paper_id` = '$paper_id' ");
+        // else{//หา ฟรอมนั้น ๆ ในขั้นที่ 1 ไม่เจอ
+        //    echo '<script> alert("หาไม่เจอ") </script>';
+        //    $_SESSION['alert'] = 4;
+        // }
+    if( $_SESSION['alert'] != 3){ //ถ้ามีปัญหาให้ลบเปเปอร์ที่เพิ่มมา
+        mysqli_query($con,"DELETE  paper,paper_user FROM paper,paper_user WHERE paper.paper_id = paper_user.paper_id AND  paper.paper_id ='$paper_id' " );
         
     }    
         

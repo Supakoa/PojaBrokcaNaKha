@@ -17,61 +17,94 @@ if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
 $id = $_SESSION['id'];
 
 if(isset($_POST['submit_ans'])){
-    print_r($_POST);
-    // echo $_FILES['file']['name'];
-
-
-    $ext = pathinfo(basename($_FILES["uplode_file"]["name"]), PATHINFO_EXTENSION);
-    $new_taget_name = 'uplode_file' . uniqid() . "." . $ext;
-    $target_path = "../../uplode_file/";
-    $upload_path = $target_path . $new_taget_name;
-    $uploadOk = 1;
-
-    $imageFileType = strtolower(pathinfo($new_taget_name, PATHINFO_EXTENSION));
-
-    if ($_FILES["uplode_file"]["size"] > 60000000) {
-        echo "Sorry, your file is too large.";
-        $_SESSION['alert'] = 15;
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png") {
-        echo "Sorry, only JPG , PNG files are allowed.";
-        $_SESSION['alert'] = 17;
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-        $_SESSION['alert'] = 4;
-    } else {
-        if (move_uploaded_file($_FILES["uplode_file"]["tmp_name"], $upload_path)) {
-           $paper_status = $_POST['paper_status'];
-           $comment = $_POST['comment'];
-           $form_id = $_POST['form_id'];
-           echo $new_taget_name ;
-           if(mysqli_query($con,"UPDATE `paper_user` SET `status`= '$paper_status',`comment`='$comment',`last_edit`= CURRENT_TIMESTAMP,`return_file`= '$new_taget_name' WHERE `paper_id` = '$form_id' AND `user_id` = '$id' ")){
-            $_SESSION['alert'] = 3;
-           }else{
-            $_SESSION['alert'] = 18;
-           }
-        } else {
-            echo 'Move fail';
-            $_SESSION['alert'] = 4;
-            exit;
+    // print_r($_POST);
+    // echo $_FILES['uplode_file']['name'];
+    $insert_sql="temp";
+    $paper_status = $_POST['paper_status'];
+    $comment = $_POST['comment'];
+    $form_id = $_POST['form_id'];
+    $step = (int)$_POST['step_now'];
+    if($_FILES['uplode_file']['name']!=null){
+        $ext = pathinfo(basename($_FILES["uplode_file"]["name"]), PATHINFO_EXTENSION);
+        $new_taget_name = 'uplode_file' . uniqid() . "." . $ext;
+        $target_path = "../../uplode_file/";
+        $upload_path = $target_path . $new_taget_name;
+        $uploadOk = 1;
+    
+        $imageFileType = strtolower(pathinfo($new_taget_name, PATHINFO_EXTENSION));
+    
+        if ($_FILES["uplode_file"]["size"] > 60000000) {
+            echo "Sorry, your file is too large.";
+            $_SESSION['alert'] = 15;
+            $uploadOk = 0;
         }
+    
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png") {
+            echo "Sorry, only JPG , PNG files are allowed.";
+            $_SESSION['alert'] = 17;
+            $uploadOk = 0;
+        }
+    
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            $_SESSION['alert'] = 4;
+        } else {
+            if (move_uploaded_file($_FILES["uplode_file"]["tmp_name"], $upload_path)) {
+               echo $new_taget_name ;
+               $insert_sql = "UPDATE `paper_user` SET `status`= '$paper_status',`comment`='$comment',`last_edit`= CURRENT_TIMESTAMP,`return_file`= '$new_taget_name' WHERE `paper_id` = '$form_id' AND `user_id` = '$id'  AND `step` = '$step' ";
+              
+            } else {
+                echo 'Move fail';
+                $_SESSION['alert'] = 4;
+            }
+        }
+    }else{
+        $insert_sql = "UPDATE `paper_user` SET `status`= '$paper_status',`comment`='$comment',`last_edit`= CURRENT_TIMESTAMP WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ";
     }
-    // header("Location: main.php");
-    // exit();
+    // echo $insert_sql;
+   if($insert_sql!="temp"){
+    if(mysqli_query($con,$insert_sql)){
+        $re_step =  mysqli_query($con,"SELECT paper.step_now FROM `paper`,form WHERE  paper.paper_id = '$form_id' AND paper.form_id =form.form_id AND paper.step_now = form.step_all");
+        if (mysqli_num_rows($re_step)==0){
+            $step++;
+            if(mysqli_query($con,"UPDATE `paper` SET `step_now`='$step' WHERE `paper_id` = '$form_id' ")){
+                $_SESSION['alert'] = 3;
+            }else{
+                do{
+                    $re_update = mysqli_query($con,"UPDATE `paper_user` SET `status`= NULL,`comment`=NULL,`last_edit`=NULL WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ");
+                }while(!$re_update);
+            }
+        }else{
+            if(mysqli_query($con,"UPDATE `paper` SET `status`='Done!!' WHERE `paper_id` = '$form_id' ")){
+                $_SESSION['alert'] = 3;
+            }else{
+                $_SESSION['alert'] = 4;
+            }
+        }
+        
+    }else{
+        $_SESSION['alert'] = 18;
+    }
+   }else{
+
+   }
+   
+    header("Location: main.php");
+    exit();
 
 }
 
-$sql_paper = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  
+$sql_paper_in = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  ,paper_user.step 
 FROM `paper_user`, `paper`, `form`, `user` 
-WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' AND paper_user.status IS NULL ";
-$re_paper = mysqli_query($con, $sql_paper);
+WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' AND paper_user.status IS NULL AND paper.step_now = paper_user.step ";
+$re_paper_in = mysqli_query($con, $sql_paper_in);
+
+$sql_paper_out = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username,paper_user.last_edit 
+FROM `paper_user`, `paper`, `form`, `user` 
+WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' AND paper_user.status IS not NULL ORDER BY paper_user.last_edit  ";
+$re_paper_out = mysqli_query($con, $sql_paper_out);
 
 $sql_user = "SELECT `title`, `name` FROM `user` WHERE user.user_id = '$id' ";
 $re_user = mysqli_query($con, $sql_user);
@@ -106,7 +139,7 @@ $row_user = mysqli_fetch_array($re_user);
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-     <!-- sweet alert2 -->
+    <!-- sweet alert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
@@ -167,15 +200,16 @@ $row_user = mysqli_fetch_array($re_user);
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php while ($row_paper = mysqli_fetch_array($re_paper)) { ?>
+                                            <?php while ($row_paper_in = mysqli_fetch_array($re_paper_in)) { ?>
                                             <tr class="tr-pick">
-                                                <td><?php echo $row_paper['formname']; ?></td>
-                                                <td><?php echo $row_paper['paper_id']; ?></td>
-                                                <td><?php echo $row_paper['owner_id']; ?></td>
-                                                <td><?php echo $row_paper['title'] . $row_paper['username']; ?></td>
-                                                <td><?php echo $row_paper['timestamp']; ?></td>
+                                                <td><?php echo $row_paper_in['formname']; ?></td>
+                                                <td><?php echo $row_paper_in['paper_id']; ?></td>
+                                                <td><?php echo $row_paper_in['owner_id']; ?></td>
+                                                <td><?php echo $row_paper_in['title'] . $row_paper_in['username']; ?>
+                                                </td>
+                                                <td><?php echo $row_paper_in['timestamp']; ?></td>
                                                 <td><button class="btn btn-outline-info"
-                                                        onclick="form_paper('<?php echo $row_paper['paper_id']; ?>','<?php echo $row_paper['form_id']; ?>')"><i
+                                                        onclick="form_paper('<?php echo $row_paper_in['paper_id']; ?>','<?php echo $row_paper_in['form_id']; ?>','<?php echo $row_paper_in['step']; ?>')"><i
                                                             class="fas fa-file-alt"></i></button></td>
                                             </tr>
                                             <?php 
@@ -207,16 +241,20 @@ $row_user = mysqli_fetch_array($re_user);
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>doc57574</td>
-                                                <td>แบบคำร้องขอสอบภายหลัง</td>
-                                                <td>60124879041</td>
-                                                <td>นาย สิงหา มาปูนี</td>
-                                                <td>2019-01-18 18:44:40</td>
-                                                <td><button class="btn btn-outline-info " data-toggle="modal"
-                                                        data-target="#modal2"><i
-                                                            class="fas fa-info-circle"></i></button></td>
+                                            <?php while ($row_paper_out = mysqli_fetch_array($re_paper_out)) { ?>
+                                            <tr class="tr-pick">
+                                                <td><?php echo $row_paper_out['formname']; ?></td>
+                                                <td><?php echo $row_paper_out['paper_id']; ?></td>
+                                                <td><?php echo $row_paper_out['owner_id']; ?></td>
+                                                <td><?php echo $row_paper_out['title'] . $row_paper_out['username']; ?>
+                                                </td>
+                                                <td><?php echo $row_paper_out['last_edit']; ?></td>
+                                                <td><button class="btn btn-outline-info"
+                                                        onclick="form_paper2('<?php echo $row_paper_out['paper_id']; ?>','<?php echo $row_paper_out['form_id']; ?>')"><i
+                                                            class="fas fa-file-alt"></i></button></td>
                                             </tr>
+                                            <?php 
+                                        } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -230,38 +268,42 @@ $row_user = mysqli_fetch_array($re_user);
 
             <!-- div 2 -->
             <div id="paper_form"></div>
-            <div id = "up_ans" class="card-footer text-muted">
-                <form action="main.php" method="post" id = "form_up_ans"  enctype="multipart/form-data">
-                <!-- option staff -->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="comment">Comment</label>
-                            <textarea class="form-control" name="comment" rows="3"></textarea>
+            <div id="up_ans" class="card-footer text-muted">
+                <form action="main.php" method="post" id="form_up_ans" enctype="multipart/form-data">
+                    <!-- option staff -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="comment">Comment</label>
+                                <textarea class="form-control" name="comment" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="select">Status</label>
+                                <select class="form-control" id="select" name="paper_status">
+                                    <option disabled selected> เลือกสถานะ </option>
+                                    <option>ผ่าน</option>
+                                    <option>ไม่ผ่าน</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="signatue">แนบเอกสาร</label>
+                            <div id="signature">
+                                <input type="file" name="uplode_file" id="">
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-2 offset-lg-10">
+                            <button type="submit" name="submit_ans"
+                                class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="select">Status</label>
-                            <select class="form-control" id="select" name="paper_status">
-                                <option disabled selected> เลือกสถานะ </option>
-                                <option>ผ่าน</option>
-                                <option>ไม่ผ่าน</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label for="signatue">แนบเอกสาร</label>
-                        <div id="signature">
-                            <input type="file" name="uplode_file" id="">
-                        </div>
-                    </div>
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-2 offset-lg-10">
-                        <button type="submit" name = "submit_ans" class="btn btn-sm btn-info form-control">ส่งผลการตรวจสอบ</button>
-                    </div>
-                </div>
-                <!-- option staff -->
+                    <!-- option staff -->
+                    <input type="hidden" name="step_now" id="step_now" value="">
+                    <!-- <input type="text" name="step_now" id="step_now" value = ""> -->
+
                 </form>
             </div>
             <!-- div 2 -->
@@ -304,7 +346,10 @@ $row_user = mysqli_fetch_array($re_user);
                     }
                 ]
             });
+
             $('#table2').DataTable({
+                "order": [4, 'desc'],
+
                 responsive: true,
                 columnDefs: [{
                         responsivePriority: 1,
@@ -326,9 +371,28 @@ $row_user = mysqli_fetch_array($re_user);
     </script>
 
     <script>
-        function form_paper(id_paper, type) {
+        function form_paper(id_paper, type, step) {
             $("#up_ans").show();
-            
+
+            $("#paper_form").html("");
+
+            $.post("other/doc.php", {
+                    id: id_paper,
+                    cate: type
+                },
+                function (result) {
+                    $("#paper_form").html(result);
+                    $('html, body').animate({
+                        scrollTop: $('#paper_form').offset().top
+                    }, 'slow');
+                    $("#step_now").val(step);
+                }
+            );
+        };
+
+        function form_paper2(id_paper, type) {
+            $("#up_ans").show();
+
             $("#paper_form").html("");
             $.post("other/doc.php", {
                     id: id_paper,

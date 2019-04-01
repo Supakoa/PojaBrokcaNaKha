@@ -1,5 +1,6 @@
 <?php
     if (isset($_SESSION['alert'])) {
+        $error =  $_SESSION['code_error'];
         switch ($_SESSION['alert']) {
             // กรอกข้อมูลไม่ถูกต้อง
             case '1':
@@ -44,7 +45,7 @@
                             type: 'error',
                             title: 'เพิ่มข้อมูลไม่สำเร็จ',
                             text: 'เกิดข้อผิดพลาดในการนำเข้าข้อมูล.',
-                            // footer: '<a href>Why do I have this issue?</a>'
+                            footer: '<p>Code Error : ".$error."</p>'
                         });                    
                     </script>";
             break;
@@ -289,23 +290,7 @@
                     </script>";
             break;
 
-            case '25':
-            $err = "<br>";
-                for($i=0;$i<count($_SESSION['err_std']);$i++){
-                    $err .= $_SESSION['err_std'][$i];
-                }
-                $sum =  "
-                    <script>
-                        Swal({
-                            type: 'warning',
-                            title: 'การอัพโหลดเกิดปัญหา.',
-                            text: 'เกิดการทับซ้อนกันของข้อมูลแต่ข้อมูลเก่ายังอยู่ในฐานข้อมูล.',
-                            html: '<p>เกิดการทับซ้อนกันของข้อมูลแต่ข้อมูลเก่ายังอยู่ในฐานข้อมูล.</p><hr><p style=\"font-size:30px\">รายชื่อที่ซ้ำกัน</p>".$err."'
-                        });                    
-                    </script>";
-                    echo $sum;
-                    unset($_SESSION['err_std']);
-            break;
+           
             case '26':
                 echo "
                     <script>
@@ -339,6 +324,17 @@
                     });                    
                 </script>";
         break;
+        case '29':
+            echo "
+                <script>
+                    Swal({
+                        type: 'error',
+                        title: 'ไม่มีผู้รับผิดชอบในวิชาที่ท่านเลือก.',
+                        text: 'กรุณาติดต่อผู้ดูแลระบบ.',
+                        footer: '<p>Code Error : ".$error."</p>'
+                    });                    
+                </script>";
+        break;
 
             // $_SESSION['alert'] = 0 or null
             default:
@@ -347,6 +343,7 @@
         }
     }
     unset($_SESSION['alert']);
+    unset($_SESSION['code_error']);
 
     /** 
     * 0,null -> ไม่มีการทำงาน
