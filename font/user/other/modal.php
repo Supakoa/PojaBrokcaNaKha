@@ -5,12 +5,6 @@ $iduser = $_SESSION['id'];
 $id = $_POST['id'];
 $type = $_POST['cate'];
 
-//paper_user
-// $sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name,paper.paper_detail, form_way.step, paper_user.user_id FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
-// $re_paper_user = mysqli_query($con, $sql_paper_user);
-// $row_puser = mysqli_fetch_array($re_paper_user);
-//paper_user 
-
 
 ?>
 
@@ -26,7 +20,7 @@ $type = $_POST['cate'];
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ >> <?php echo $id; ?><<</h5> 
+                <h5 class="modal-title" id="exampleModalLabel">เส้นทางการดำเนินการ >> <?php echo $id; ?> <<</h5> 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
