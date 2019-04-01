@@ -6,7 +6,7 @@ $id = $_POST['id'];
 $type = $_POST['cate'];
 
 //paper_user
-$sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name,paper.paper_detail, form_way.step FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
+$sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name,paper.paper_detail, form_way.step, paper_user.user_id FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
 $re_paper_user = mysqli_query($con, $sql_paper_user);
 $row_puser = mysqli_fetch_array($re_paper_user);
 //paper_user 
@@ -41,7 +41,7 @@ $row_puser = mysqli_fetch_array($re_paper_user);
                                 while ($row_pu = mysqli_fetch_array($re_paper_user)) { ?>
                                 <?php if ($i == 0) { ?>
                                 <tr>
-                                    <td><?php echo $row_pu['name']; ?></td>
+                                    <td><?php echo $row_pu['user_id']; ?></td>
                                     <td class="text-center"><?php echo $row_pu['timestamp']; ?></td>
                                     <td class="text-center"><?php echo $row_pu['step']; ?> </td>
                                 </tr>
@@ -54,7 +54,7 @@ $row_puser = mysqli_fetch_array($re_paper_user);
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><?php echo $row_pu['name']; ?></td>
+                                    <td><?php echo $row_pu['user_id']; ?></td>
                                     <td class="text-center"><?php echo $row_pu['timestamp']; ?></td>
                                     <td class="text-center"><?php echo $row_pu['step']; ?> </td>
                                 </tr>
