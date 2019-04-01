@@ -1,18 +1,18 @@
 <?php 
 require '../../server/server.php';
 
-if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
-    if($_SESSION['online']!=2){
+if (isset($_SESSION['online']) && isset($_SESSION['id'])) {
+    if ($_SESSION['online'] != 2) {
         $_SESSION['check_login'] = 1;
         header("Location: ../../index.php");
         $_SESSION['alert'] = 2;
         exit();
     }
-}else{
+} else {
     $_SESSION['check_login'] = 1;
-        header("Location: ../../index.php");
-        $_SESSION['alert'] = 2;
-        exit();
+    header("Location: ../../index.php");
+    $_SESSION['alert'] = 2;
+    exit();
 }
 $id = $_SESSION['id'];
 
@@ -124,8 +124,7 @@ $row_user = mysqli_fetch_array($re_user);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/ico" href="../picture/icon.png" />
     <!-- datatable -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
     <!-- bootstrap 4.2.1 -->
@@ -136,8 +135,7 @@ $row_user = mysqli_fetch_array($re_user);
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <!-- icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- sweet alert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
@@ -150,10 +148,9 @@ $row_user = mysqli_fetch_array($re_user);
     <div class="container-fluid fix-top" style="background-color:#3782EB">
         <nav class="navbar navbar-expand-lg navbar-light  container" style="background-color:#3782EB">
             <a class="navbar-brand" href="#">
-                <img src="../picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="../picture/form/ce.png" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -162,12 +159,15 @@ $row_user = mysqli_fetch_array($re_user);
                         <a class="nav-link" href="main.php" style="color:#FFFFFF;"><i class="fas fa-home"></i>
                             หน้าแรก <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="info.php" style="color:#FFFFFF;">
+                            ข้อมูลส่วนตัว</a>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i>
-                        <?php echo ' '.$row_user['title'].$row_user['name'] ;?></a>
-                    <a class="nav-link" href="../../server/logout.php" style="color:#FFFFFF;">ออกจากระบบ <i
-                            class="fas fa-sign-out-alt"></i></a>
+                        <?php echo ' ' . $row_user['title'] . ' ' . $row_user['name']; ?></a>
+                    <a class="nav-link" href="../../server/logout.php" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
                 </form>
             </div>
         </nav>
@@ -327,12 +327,11 @@ $row_user = mysqli_fetch_array($re_user);
     <!-- datatable -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
     </script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script>
         //datatable
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#up_ans").hide();
             $('#table1').DataTable({
                 responsive: true,
@@ -363,7 +362,7 @@ $row_user = mysqli_fetch_array($re_user);
             });
 
         });
-        $('.tr-pick').click(function (e) {
+        $('.tr-pick').click(function(e) {
             $('.tr-pick td').css("background-color", "");
             e.preventDefault();
             $(this).find('td').css("background-color", "#E4EEFC");
@@ -398,7 +397,7 @@ $row_user = mysqli_fetch_array($re_user);
                     id: id_paper,
                     cate: type
                 },
-                function (result) {
+                function(result) {
                     $("#paper_form").html(result);
                     $('html, body').animate({
                         scrollTop: $('#paper_form').offset().top
@@ -414,4 +413,4 @@ $row_user = mysqli_fetch_array($re_user);
     <?php require '../../server/alert.php'; ?>
 </body>
 
-</html>
+</html> 

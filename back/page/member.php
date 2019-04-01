@@ -169,9 +169,9 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                     <th>เบอร์โทร</th>
                     <th>คณะ</th>
                     <th>สาขา</th>
-                    <th>
+                    <th class="text-center">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_user" id="btn_modal_regis">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus" style="color:white;"></i>
                         </button>
                     </th>
 
@@ -192,8 +192,8 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                         <td>' . $row_user['fac_name'] . '</td>
                         <td>' . $row_user['major_name'] . '</td>
                         <td>
-                            <button class="btn " onclick = "edit_user(\'' . $row_user['user_id'] . '\')"><i class="fas fa-user-edit" style="color:#FBBC05"></i></button>
-                            <button class="btn " onclick = "del_user(\'' . $row_user['user_id'] . '\')"><i class="fas fa-trash"  style="color:red"></i></button></td>
+                            <button class="btn btn-warning" onclick = "edit_user(\'' . $row_user['user_id'] . '\')"><i class="far fa-edit" style="color:white;"></i></button>
+                            <button class="btn btn-danger" onclick = "del_user(\'' . $row_user['user_id'] . '\')"><i class="far fa-trash-alt" style="color:white;"></i></button></td>
                     </tr>';
                 }
                 $re_user = mysqli_query($con, "SELECT user.*,role_id.name as role_name
@@ -211,8 +211,8 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                         <td> - </td>
                         <td> - </td>
                         <td>
-                            <button class="btn " onclick = "edit_user(\'' . $row_user['user_id'] . '\')"><i class="fas fa-user-edit"  style="color:#FBBC05"></i></button>
-                            <button class="btn " onclick = "del_user(\'' . $row_user['user_id'] . '\')" ><i class="fas fa-trash" style="color:red"></i></button></td>
+                            <button class="btn btn-warning" onclick = "edit_user(\'' . $row_user['user_id'] . '\')"><i class="far fa-edit" style="color:white;"></i></button>
+                            <button class="btn btn-danger" onclick = "del_user(\'' . $row_user['user_id'] . '\')" ><i class="far fa-trash-alt" style="color:white;"></i></button></td>
                     </tr>';
                 }
 

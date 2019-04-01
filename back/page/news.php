@@ -10,8 +10,8 @@ $order = 0;
 
         <!-- button add -->
         <div class="container-fluid text-center">
-            <button onclick="openAddModal();" type="button" class="btn btn-success btn-sm"><i class="fas fa-plus-circle"></i>
-                เพิ่ม</button>
+            <button onclick="openAddModal();" type="button" class="btn btn-sm shadow-lg btn-info"><i class="fas fa-plus" style="color:white;">
+                เพิ่มข่าว</i></button>
         </div><br>
 
         <div class="container-fluid table-responsive text-center ">
@@ -33,7 +33,8 @@ $order = 0;
                         <td> <a href="#" target="_blank"><?php echo $row_news['news_url']; ?></a></td>
                         <td> <img class="w3-red" src="..\image\news\<?php echo $row_news['news_img']; ?>" width="200" height="100"></td>
                         <td >
-                            <button class="btn btn-lg btn-white" onclick="openDelModal(<?php echo $row_news['news_id'] ?>,'<?php echo $order; ?>');"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-lg btn-danger" onclick="openDelModal(<?php echo $row_news['news_id'] ?>,'<?php echo $order; ?>');"><i class="far fa-trash-alt"
+                                    style="color:white;"></i></button>
                         </td>
                     </tr>
                     <?php 
