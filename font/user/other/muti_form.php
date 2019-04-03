@@ -105,7 +105,7 @@ if (isset($_POST['form_1'])) {
 if($form!=0){
     echo $form ;
     echo $sub_id;
-
+    $_SESSION['code_error'] = "";
     $sql_paper = "INSERT INTO `paper`( `paper_id`,`owner_id`, `form_id`, `paper_detail`, `step_now`, `status`) VALUES ('$paper_id', '$id','$form','$detail','1','3') ";
     if ($re_paper = mysqli_query($con, $sql_paper)) { //ถ้าเพิ่มเปเปอร์สำเร็จ
         echo " /2";
@@ -113,8 +113,7 @@ if($form!=0){
         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form'  AND `step` ='$i_step' ";
         $re_form = mysqli_query($con, $sql_form);
         while($row_form = mysqli_fetch_array($re_form)){ //หา ฟรอมนั้น ๆ ในขั้นที่ นั้น ๆ
-            echo " /3";
-            $_SESSION['code_error'] = $i_step;
+            echo " /3    ";
             $group_id = $row_form['group_id'];
             $now_step = $row_form['step'];
             if( $sub_id!="temp"){ //ถ้าวิชาที่มีมาจากข้างต้น
@@ -144,8 +143,13 @@ if($form!=0){
                         $_SESSION['alert'] = 4;
                     }
             }else{ // ไม่มีผู่ใช้ในวิชานั้น
-                echo '<script> alert("ไม่มีคนในวิชานั้น ?") </script>';
+                // echo '<script> alert("ไม่มีคนในวิชานั้น ?") </script>';
+                 $_SESSION['code_error'] = $i_step;
+                mysqli_query($con,"DELETE FROM paper WHERE paper_id = '$paper_id'" );
+                mysqli_query($con,"DELETE FROM paper_user WHERE paper_id ='$paper_id'" );
                 $_SESSION['alert'] = 29;
+                // header("Location: ../main.php");
+                exit;
             }
             $i_step++;
             $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$form'  AND `step` ='$i_step' ";
@@ -157,7 +161,6 @@ if($form!=0){
         // }
     if( $_SESSION['alert'] != 3){ //ถ้ามีปัญหาให้ลบเปเปอร์ที่เพิ่มมา
         mysqli_query($con,"DELETE  paper,paper_user FROM paper,paper_user WHERE paper.paper_id = paper_user.paper_id AND  paper.paper_id ='$paper_id' " );
-        
     }    
         
     } else {//ถ้าเพิ่มเปเปอร์ไม่สำเร็จ
@@ -165,6 +168,6 @@ if($form!=0){
     }
 }
 
-header("Location: ../main.php");
-exit;
+// header("Location: ../main.php");
+// exit;
  
