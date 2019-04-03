@@ -9,7 +9,7 @@ $type = $_POST['cate'];
 ?>
 
 <?php if ($type == 'show') { 
-    $sql_paper_user = "SELECT user.title,user.name,paper_user.last_edit,paper_user.status FROM `paper_user`,user WHERE user.user_id = paper_user.user_id AND paper_user.paper_id ='$id'";
+    $sql_paper_user = "SELECT user.title,user.name,paper_user.last_edit,paper_user.status,status_id.name as status_name FROM `paper_user`,user,status_id WHERE user.user_id = paper_user.user_id AND paper_user.paper_id ='$id' AND paper_user.status = status_id.id ORDER BY `paper_user`.`step` ASC";
     $re_paper_user = mysqli_query($con, $sql_paper_user);
     // $row_puser = mysqli_fetch_array($re_paper_user);
     ?>
@@ -56,7 +56,7 @@ $type = $_POST['cate'];
                                     } ?></td>
                                     <td class="text-center"><?php 
                                     if($row_pu['status']!=NULL){
-                                        echo $row_pu['status'];
+                                        echo $row_pu['status_name'];
                                     }else{
                                         echo "ยังไม่ได้ทำการตรวสอบ";
                                     }
