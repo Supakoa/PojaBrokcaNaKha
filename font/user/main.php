@@ -136,8 +136,8 @@ $re_paper = mysqli_query($con, $sql_paper);
     <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
         <div class="container" style="background-color:#AECDF7">
             <br><br>
-
-            <?php require 'other/news.php'; ?>
+            <div id="news_div" style = "margin-top:20px"></div>
+            <?php //require 'other/news.php'; ?>
 
 
             <!-- card 1 -->
@@ -667,6 +667,7 @@ $re_paper = mysqli_query($con, $sql_paper);
     <script>
         //datatable
         $(document).ready(function() {
+            $("#news_div").load("other/news.php", {url : "../../back/image/news/"});
             $('#table1').DataTable({
                 responsive: true,
                 columnDefs: [{

@@ -1,6 +1,9 @@
 <?php
     if (isset($_SESSION['alert'])) {
-        $error =  $_SESSION['code_error'];
+        if(isset($_SESSION['code_error'])){
+            $error =  $_SESSION['code_error'];
+        }
+     
         switch ($_SESSION['alert']) {
             // กรอกข้อมูลไม่ถูกต้อง
             case '1':
