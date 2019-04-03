@@ -148,7 +148,7 @@ if($form!=0){
                 mysqli_query($con,"DELETE FROM paper WHERE paper_id = '$paper_id'" );
                 mysqli_query($con,"DELETE FROM paper_user WHERE paper_id ='$paper_id'" );
                 $_SESSION['alert'] = 29;
-                // header("Location: ../main.php");
+                header("Location: ../main.php");
                 exit;
             }
             $i_step++;
@@ -168,6 +168,6 @@ if($form!=0){
     }
 }
 
-// header("Location: ../main.php");
-// exit;
+header("Location: ../main.php");
+exit;
  
