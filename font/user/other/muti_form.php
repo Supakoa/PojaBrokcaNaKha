@@ -104,8 +104,9 @@ if (isset($_POST['form_1'])) {
 
 if($form!=0){
     echo $form ;
-    echo $sub_id;
+    echo $detail;
     $_SESSION['code_error'] = "";
+    $_SESSION['alert'] = 4;
     $sql_paper = "INSERT INTO `paper`( `paper_id`,`owner_id`, `form_id`, `paper_detail`, `step_now`, `status`) VALUES ('$paper_id', '$id','$form','$detail','1','3') ";
     if ($re_paper = mysqli_query($con, $sql_paper)) { //ถ้าเพิ่มเปเปอร์สำเร็จ
         echo " /2";
@@ -148,7 +149,7 @@ if($form!=0){
                 mysqli_query($con,"DELETE FROM paper WHERE paper_id = '$paper_id'" );
                 mysqli_query($con,"DELETE FROM paper_user WHERE paper_id ='$paper_id'" );
                 $_SESSION['alert'] = 29;
-                header("Location: ../main.php");
+                // header("Location: ../main.php");
                 exit;
             }
             $i_step++;
@@ -160,7 +161,8 @@ if($form!=0){
         //    $_SESSION['alert'] = 4;
         // }
     if( $_SESSION['alert'] != 3){ //ถ้ามีปัญหาให้ลบเปเปอร์ที่เพิ่มมา
-        mysqli_query($con,"DELETE  paper,paper_user FROM paper,paper_user WHERE paper.paper_id = paper_user.paper_id AND  paper.paper_id ='$paper_id' " );
+        mysqli_query($con,"DELETE FROM paper WHERE paper_id = '$paper_id'" );
+        mysqli_query($con,"DELETE FROM paper_user WHERE paper_id ='$paper_id'" );
     }    
         
     } else {//ถ้าเพิ่มเปเปอร์ไม่สำเร็จ
@@ -168,6 +170,6 @@ if($form!=0){
     }
 }
 
-header("Location: ../main.php");
-exit;
+// header("Location: ../main.php");
+// exit;
  

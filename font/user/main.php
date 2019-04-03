@@ -47,42 +47,12 @@ while ($row_sub = mysqli_fetch_array($re_sub)) {
 $sub .= '</select>';
 
 /// paper_user
-$sql_paper = "SELECT paper.status,form.name,form.form_id,paper.paper_id,`paper`.`timestamp` 
-FROM `paper`,form 
-WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8'  ORDER BY `paper`.`timestamp` ASC  ";
+$sql_paper = "SELECT paper.status,form.name,form.form_id,paper.paper_id,`paper`.`timestamp`,status_id.name AS status_name
+FROM `paper`,form,status_id
+WHERE `owner_id` ='$id' AND paper.form_id = form.form_id AND form.form_id != '8' AND status_id.id = paper.status ORDER BY `paper`.`timestamp` ASC  ";
 
 $re_paper = mysqli_query($con, $sql_paper);
-// $row_paper = mysqli_fetch_array($re_paper);
-/// paper_user
 
-// if (isset($_POST['senmessage'])) {
-//     unset($_POST['senmessage']);
-//     $paper_id = getToken(10);
-//     $mix = $_POST['topic'] . "๛" . $_POST['cont'];
-//     $num = $_POST['number'];
-//     $sql_pp = "INSERT INTO `paper`(`paper_id`,`owner_id`, `paper_detail`, `step_now`, `form_id`, `status`) VALUES ('$paper_id','$id','$mix','1','$num','4')";
-//     if (mysqli_query($con, $sql_pp)) {
-//         $sql_form = "SELECT * FROM `form_way` WHERE `form_id` = '$num' AND `step` ='1' ";
-//         $re_form = mysqli_query($con, $sql_form);
-//         $row_form = mysqli_fetch_array($re_form);
-//         if ($row_form['group_id'] != null) {
-//             $user_id = $row_form['group_id'];
-//             $sum_q = '(\'' . $paper_id . '\',\'' . $user_id . '\' )';
-//             while ($row_form = mysqli_fetch_array($re_form)) {
-//                 $user_id = $row_form['group_id'];
-//                 $sum_q .= ',(\'' . $paper_id . '\',\'' . $user_id . '\' )';
-//             }
-//             $sql_user = "INSERT INTO `paper_user`( `paper_id`, `user_id`) VALUES " . $sum_q . " ";
-//             if ($re_user = mysqli_query($con, $sql_user)) {
-//                 $_SESSION['alert'] = 3;
-//             } else {
-//                 $_SESSION['alert'] = 4;
-//             }
-//         }
-//     } else {
-//         $_SESSION['alert'] = 4;
-//     }
-// }
 
 ?>
 <!DOCTYPE html>
@@ -179,20 +149,24 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                             <td>
                                                                 <?php echo $row_paper['name'];  ?>
                                                             </td>
-
+                                                            <td>
                                                             <?php 
-                                                            if ($row_paper['status'] == 1) {
-                                                                echo '<td><span class="badge badge-success">ผ่าน</span></td>';
+                                                            $status_name = $row_paper['status_name'];
+                                                             if ($row_paper['status'] == 4) {
+                                                                echo '<span class="badge badge-success">'.$status_name.'</span>';
                                                             } elseif ($row_paper['status'] == 3) {
-                                                                echo '<td><span class="badge badge-warning">กำลังดำเนินการ</span></td>';
-                                                            } elseif ($row_paper['status'] == 0) {
-                                                                echo '<td><span class="badge badge-danger">ไม่ผ่าน</span></td>';
+                                                                echo '<span class="badge badge-warning">'.$status_name.'</span>';
+                                                            } elseif ($row_paper['status'] == 5) {
+                                                                echo '<span class="badge badge-danger">'.$status_name.'</span>';
                                                             } elseif ($row_paper['status'] == 2) {
-                                                                echo '<td><span class="badge badge-warning">แก้ไข</span></td>';
+                                                                echo '<span class="badge badge-warning">'.$status_name.'</span>';
                                                             } else {
-                                                                echo '<td></td>';
-                                                            } ?>
+                                                                echo $status_name;
+                                                            }
 
+                                                          
+                                                            ?>
+                                                            </td>
 
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" onclick="modal_show('<?php echo $row_paper['paper_id']; ?>','show')">แสดง</button>
