@@ -15,7 +15,6 @@ if (isset($_SESSION['online']) && isset($_SESSION['id'])) {
     exit();
 }
 $id = $_SESSION['id'];
-
 //ส่งคำตอบ
 if(isset($_POST['submit_ans'])){
     // รับค่าต่างๆ
