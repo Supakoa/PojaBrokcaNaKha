@@ -63,49 +63,60 @@ if(isset($_POST['submit_ans'])){
     }else{ //ไม่มีไฟล์ให้ใช้ SQL นี้
         $insert_sql = "UPDATE `paper_user` SET `status`= '$paper_status',`comment`='$comment',`last_edit`= CURRENT_TIMESTAMP WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ";
     }
-   if($insert_sql!="temp"){//มีการเปลี่ยนค่า
-    if(mysqli_query($con,$insert_sql)){ //อัพเดทคำตอบสำเร็จ
-        $re_step =  mysqli_query($con,"SELECT paper.step_now FROM `paper`,form WHERE  paper.paper_id = '$form_id' AND paper.form_id =form.form_id AND paper.step_now = form.step_all");
-        if (mysqli_num_rows($re_step)==0){//เช็ตว่าสเตปนี้ไม่ใช่เป็นการอัพครั้งสุดท้ายใช่ไหม
-            $step++;
-            if(mysqli_query($con,"UPDATE `paper` SET `step_now`='$step' WHERE `paper_id` = '$form_id' ")){ //อัพเดทตามนั้น
-                $_SESSION['alert'] = 3;
-            }else{ //อัพเดทตามนั้นไม่สำเสร็จก็เลยต้องยกเลิกคำตอบ
-                do{
-                    $re_update = mysqli_query($con,"UPDATE `paper_user` SET `status`= NULL,`comment`=NULL,`last_edit`=NULL WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ");
-                }while(!$re_update);
-                $_SESSION['alert'] = 4;
-            }
-        }else{//สเตปสุดท้าย
-            if($paper_status=='0'){ //ถ้าคำตอบเป็นไม่ผ่าน
-                $sql_up_paper = "UPDATE `paper` SET `status`='5' WHERE `paper_id` = '$form_id' ";
-            }else{//ถ้าคำตอบเป็นผ่าน
-                $sql_up_paper = "UPDATE `paper` SET `status`='4' WHERE `paper_id` = '$form_id' ";
-            }
+    if($insert_sql!="temp"){//มีการเปลี่ยนค่า
+        if(mysqli_query($con,$insert_sql)){ //อัพเดทคำตอบสำเร็จ
+            $re_step =  mysqli_query($con,"SELECT paper.step_now FROM `paper`,form WHERE  paper.paper_id = '$form_id' AND paper.form_id =form.form_id AND paper.step_now = form.step_all"); //ต้องเปลี่ยนเช็คสุดท้าย เป็น เช็คว่ามีสเตปถัดไปไหท
+            if (mysqli_num_rows($re_step)==0){//เช็ตว่าสเตปนี้ไม่ใช่เป็นการอัพครั้งสุดท้ายใช่ไหม
+                if($paper_status==0){ //ถ้าคำตอบเป็นไม่ผ่าน
+                    if(mysqli_query($con,"UPDATE `paper` SET `status`='0' WHERE `paper_id` = '$form_id' ")){ //อัพเดทสถานะหลักเป็นไม่ผ่าน
+                        $_SESSION['alert'] = 3;
+                    }else{ //อัพเดทตามนั้นไม่สำเสร็จก็เลยต้องยกเลิกคำตอบ
+                        do{
+                            $re_update = mysqli_query($con,"UPDATE `paper_user` SET `status`= NULL,`comment`=NULL,`last_edit`=NULL WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ");
+                        }while(!$re_update);
+                        $_SESSION['alert'] = 4;
+                    }
+                }else{
+                    $step++;
+                    if(mysqli_query($con,"UPDATE `paper` SET `step_now`='$step' WHERE `paper_id` = '$form_id' ")){ //อัพเดทตามนั้น
+                        $_SESSION['alert'] = 3;
+                    }else{ //อัพเดทตามนั้นไม่สำเสร็จก็เลยต้องยกเลิกคำตอบ
+                        do{
+                            $re_update = mysqli_query($con,"UPDATE `paper_user` SET `status`= NULL,`comment`=NULL,`last_edit`=NULL WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ");
+                        }while(!$re_update);
+                        $_SESSION['alert'] = 4;
+                    }
+                }   
+            }else{//สเตปสุดท้าย
+                if($paper_status=='0'){ //ถ้าคำตอบเป็นไม่ผ่าน
+                    $sql_up_paper = "UPDATE `paper` SET `status`='5' WHERE `paper_id` = '$form_id' ";
+                }else{//ถ้าคำตอบเป็นผ่าน
+                    $sql_up_paper = "UPDATE `paper` SET `status`='4' WHERE `paper_id` = '$form_id' ";
+                }
 
-            if(mysqli_query($con,$sql_up_paper)){//อัพเดทตามนั้น
-                $_SESSION['alert'] = 3;
-            }else{ //อัพเดทตามนั้นไม่สำเสร็จก็เลยต้องยกเลิกคำตอบ
-                do{
-                    $re_update = mysqli_query($con,"UPDATE `paper_user` SET `status`= NULL,`comment`=NULL,`last_edit`=NULL WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ");
-                }while(!$re_update);
-                $_SESSION['alert'] = 4;
+                if(mysqli_query($con,$sql_up_paper)){//อัพเดทตามนั้น
+                    $_SESSION['alert'] = 3;
+                }else{ //อัพเดทตามนั้นไม่สำเสร็จก็เลยต้องยกเลิกคำตอบ
+                    do{
+                        $re_update = mysqli_query($con,"UPDATE `paper_user` SET `status`= NULL,`comment`=NULL,`last_edit`=NULL WHERE `paper_id` = '$form_id' AND `user_id` = '$id' AND `step` = '$step' ");
+                    }while(!$re_update);
+                    $_SESSION['alert'] = 4;
+                }
             }
+            
+        }else{ //อัพเดทคำตอบไม่สำเร็จ
+            $_SESSION['alert'] = 18;
         }
-        
-    }else{ //อัพเดทคำตอบไม่สำเร็จ
-        $_SESSION['alert'] = 18;
+    }else{
+            //เกิดการผิดพลาดร้ายแรง555555
     }
-   }else{
-        //เกิดการผิดพลาดร้ายแรง555555
-   }
    
     header("Location: main.php");
     exit();
 
 }
 
-$sql_paper_in = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username  ,paper_user.step 
+$sql_paper_in = "SELECT paper.paper_id, paper.paper_detail, paper.timestamp, paper.owner_id, form.name AS formname, form.form_id, user.title, user.name AS username ,paper_user.step 
 FROM `paper_user`, `paper`, `form`, `user` 
 WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND user.user_id = paper.owner_id AND form.form_id != '8' AND paper_user.user_id = '$id' AND paper_user.status ='6' AND paper.step_now = paper_user.step ";
 $re_paper_in = mysqli_query($con, $sql_paper_in);

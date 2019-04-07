@@ -80,6 +80,9 @@ $type = $_POST['cate'];
 
 <?php 
 } else {
+    $sql_paper_user = "SELECT paper_user.comment, paper_user.timestamp, form.name,paper.paper_detail, form_way.step, paper_user.user_id FROM `paper`, `paper_user`, `form`, `form_way` WHERE paper.form_id = form.form_id AND paper.paper_id = paper_user.paper_id AND form.form_id = form_way.form_id AND paper.paper_id = '$id' AND paper.owner_id = '$iduser' ";
+    $re_paper_user = mysqli_query($con, $sql_paper_user);
+    // $row_puser = mysqli_fetch_array($re_paper_user);
     $row_pu = mysqli_fetch_array($re_paper_user);
     $keywords = preg_split("/๛/", $row_pu['paper_detail']);
     ?>
@@ -102,7 +105,7 @@ $type = $_POST['cate'];
                     <dd class="col-sm-9">
                         <p><?php echo $keywords[0] ?></p>
                         <p> <?php 
-                            print_r($keywords);
+                            // print_r($keywords);
                             ?></p>
 
                     </dd>

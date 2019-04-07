@@ -117,6 +117,8 @@ if(isset($_POST['re_btn'])){
     <!-- sweet alert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
+    <link rel="stylesheet" href="back\node_modules\animate.css\animate.min.css">
+
     <style>
         /* Make the image fully responsive */
     .carousel-inner img {
@@ -153,7 +155,7 @@ if(isset($_POST['re_btn'])){
 
 </head>
 
-<body class="Gfonts" style="background-color:#E4EEFC">
+<body class="Gfonts" style="background-color:#E4EEFC" id = "login" >
     <!-- navbar -->
     <div class="container-fluid fixed-top" style="background-color:#3782EB;">
         <nav class="navbar navbar-expand-lg navbar-light  container" style="background-color:#3782EB;">
@@ -190,7 +192,7 @@ if(isset($_POST['re_btn'])){
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-8">
-                                    <div class="card " style="margin-top:100px;margin-bottom:70px">
+                                    <div class="card " id = "login2" style="margin-top:100px;margin-bottom:70px">
                                         <div class="card-header text-center" style="background-color:#3782EB;color:#FFFFFF">
                                             <h4>เข้าสู่ระบบ</h4>
                                         </div>
@@ -220,9 +222,13 @@ if(isset($_POST['re_btn'])){
                                                             <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
 
                                                         </div>
+                                                        <div class="col-lg-4">
+                                                            <button type="button" id = "go" class="btn btn-primary btn-sm">ไปปปป</button>
+
+                                                        </div>
 
                                                         <!-- register modal -->
-                                                        <div class="col-lg-8 text-right">
+                                                        <div class="col-lg-4 text-right">
                                                             <button type="button" class="btn btn-link" data-toggle="modal"
                                                                 data-target="#modalregis"><i class="fas fa-registered"></i>
                                                                 สมัครเข้าใช้แบบคำร้อง
@@ -261,7 +267,7 @@ if(isset($_POST['re_btn'])){
     <!-- body -->
 
     <!-- Modal register-->
-    <div class="modal fade" id="modalregis" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade animated flip" id="modalregis" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <form action="index.php" method="post">
@@ -400,6 +406,17 @@ if(isset($_POST['re_btn'])){
                     conpass.setCustomValidity('');
                 }
             };
+        });
+        $("#go").click(function (e) { 
+            e.preventDefault();
+           
+            $("#login2").addClass("animated flip faster");
+            setTimeout(function(){
+                $("#login2").removeClass("animated flip faster");
+
+            }, 500); 
+           
+
         });
     </script>
     <!-- alert all -->

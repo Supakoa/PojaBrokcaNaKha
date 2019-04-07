@@ -121,7 +121,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                                     <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
                                 </li>
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#3782EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
+                                    <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#85C8EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
                                 </li>
                             </ul>
                         </div>
@@ -187,7 +187,7 @@ $re_paper = mysqli_query($con, $sql_paper);
                             <!-- Tab panes 1-->
 
                             <!-- Tab panes 2-->
-                            <div id="report" class="container tab-pane fade nowrap" style="background-color:#3782EB;"><br>
+                            <div id="report" class="container tab-pane fade nowrap" style="background-color:#85C8EB;"><br>
                                 <div class="container accordion" id="formreport">
 
                                     <div class="card">
