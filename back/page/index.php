@@ -127,7 +127,7 @@
 
         <!-- set to bottom -->
         <footer id="footer">
-            <div class=" text-center" style="border:solid;border-color:#84695E;background-color:#84695E">
+            <div class="text-center" style="border:solid;border-color:#84695E;background-color:#84695E">
 
                 <p style="margin-top:1%;color:whitesmoke;">©Powered by CEFStyle</p>
 

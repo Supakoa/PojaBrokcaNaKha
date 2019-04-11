@@ -10,8 +10,8 @@ $order = 0;
 
         <!-- button add -->
         <div class="container-fluid text-center">
-            <button onclick="openAddModal();" type="button" class="btn btn-success btn-sm"><i class="fas fa-plus-circle"></i>
-                เพิ่ม</button>
+            <button onclick="openAddModal();" type="button" class="btn btn-success btn-sm"><i style="color:white;" class="fas fa-plus-circle"></i>
+                </button>
         </div><br>
 
         <div class="container-fluid table-responsive text-center ">
