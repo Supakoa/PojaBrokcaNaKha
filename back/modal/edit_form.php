@@ -115,7 +115,7 @@ $row_form = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `form` WHERE for
                 <div class="row text-right">
                     <div class="col-3 offset-9 ">
                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                            data-target="#new_group"><i class="fas fa-plus-circle"></i>
+                            data-target="#new_group"><i class="fas fa-plus-circle" style="color:white;"></i>
                             เพิ่ม</button>
                     </div>
                 </div>

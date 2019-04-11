@@ -1,29 +1,35 @@
 <!-- News -->
+<?php
+require '../../../server/server.php';
+$url = $_POST['url'];
+$sql = "SELECT * FROM `news`";
+?>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
     <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <?php
+     $act = "active";
+     $i = 0;
+     $re = mysqli_query($con,$sql);
+     while($row_news = mysqli_fetch_array($re)){
+         echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$i++.'" class="'.$act.'"></li>';
+     }
+    ?>
     </ol>
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <a href="#" target="_blank">
-                <img src="../picture/news/37869166_2315748691981362_1261623428901765120_n.jpg" class="d-block w-100"
-                    alt="...">
-            </a>
-        </div>
-        <div class="carousel-item ">
-            <a href="#" target="_blank">
-                <img src="../picture/news/37888947_2315748711981360_6369071917374111744_n.jpg" class="d-block w-100"
-                    alt="...">
-            </a>
-        </div>
-        <div class="carousel-item">
-            <a href="#" target="_blank">
-                <img src="../picture/news/38292707_2324643144425250_3892870529308164096_n.jpg" class="d-block w-100"
-                    alt="...">
-            </a>
-        </div>
+    
+    <?php 
+    $act = "active";
+    $re = mysqli_query($con,$sql);
+    while($row_news = mysqli_fetch_array($re)){
+        echo '<div class="carousel-item '.$act.'">
+        <a href="'.$row_news['news_url'].'" target="_blank">
+            <img src="'.$url.$row_news['news_img'].'" style = "height:420px" class="d-block w-100"
+                alt="...">
+        </a>
+        </div>';
+        $act = '';
+    } ?>
+
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

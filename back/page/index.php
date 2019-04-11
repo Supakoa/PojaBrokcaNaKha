@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- title -->
-    <title id="tab_title"></title>
+    <title >Admin-Webpage</title>
     <link rel="icon" type="image/ico" href="../image/icon/icon.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,13 +45,12 @@
 
     <nav id="mySidenav" class="sidenav"><!-- rigth nav  -->
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <ul>
-            <li class="slidebrand navtap">
-                <a href="#" class="" onclick="call_content('main.php');">
-                    <i class="fa fa-home"></i> หน้าแรก
+        <div class="text-center ">
+          
+                <a href="#" class=" navtap" onclick="call_content('main.php');">
+                    <i class="fa fa-home"> Home</i>
                 </a>
-            </li>
-        </ul>
+        </div>
 
         <a href="#" class="navtap" onclick="call_content('inbox.php');">
             <i class="fa fa-bell"></i> ข้อความ <span class="badge text-right badge-danger"

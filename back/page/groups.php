@@ -8,7 +8,7 @@ require '../../server/server.php';
 
     <!-- button add -->
     <div class="container-fluid text-center">
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle"></i>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#new_group"><i class="fas fa-plus-circle" style="color:white;"></i>
             เพิ่ม</button>
     </div>
 
@@ -16,7 +16,7 @@ require '../../server/server.php';
 
         <table class="table table-striped table-hover table-bordered responsive display nowrap table_table" id="table">
             <thead>
-                <th>ลำดับ</th>
+                <th>รหัสกลุ่ม</th>
                 <th>ชื่อกลุ่ม</th>
                 <th>ประเภท</th>
                 <th></th>
@@ -30,7 +30,7 @@ require '../../server/server.php';
                 while ($row_group =  mysqli_fetch_array($re_group)) {
                     $btn = ' <button type="button" class="btn btn-outline-warning btn-sm" onclick="modal_edit(' . $row_group['group_id'] . ',' . $row_group['type'] . ')">แก้ไข</button>';
                     $sum .= '<tr>
-                                 <td>' . $i++ . '</td>' .
+                                 <td>' . $row_group['group_id'] . '</td>' .
                         '<td>' . $row_group['name'] . '</td>' .
                         '<td>' . $row_group['type'] . '</td>' .
                         '<td>' . $btn . '</td>

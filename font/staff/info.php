@@ -1,18 +1,18 @@
 <?php 
 require '../../server/server.php';
 
-if(isset($_SESSION['online'])&&isset($_SESSION['id'])){
-    if($_SESSION['online']!=1){
+if (isset($_SESSION['online']) && isset($_SESSION['id'])) {
+    if ($_SESSION['online'] != 2) {
         $_SESSION['check_login'] = 1;
-        header("Location: ../../index.php");
-        $_SESSION['alert'] = 1;
-        exit();
-    }
-}else{
-    $_SESSION['check_login'] = 1;
         header("Location: ../../index.php");
         $_SESSION['alert'] = 2;
         exit();
+    }
+} else {
+    $_SESSION['check_login'] = 1;
+    header("Location: ../../index.php");
+    $_SESSION['alert'] = 2;
+    exit();
 }
 
 $id = $_SESSION['id'];
@@ -24,24 +24,16 @@ if (isset($_POST['btn_edit'])) {
     $new_n = $_POST['new_name'];
     $new_tel = $_POST['new_num'];
     $new_pass = $_POST['new_pass'];
-    $new_mar = $_POST['mar'];
-    if(mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',major_id='$new_mar' WHERE `user_id`= '$id'")){
+    $new_tit = $_POST['new_tit'];
+    if (mysqli_query($con, "UPDATE `user` SET `password`='$new_pass',`name`='$new_n',`tel`='$new_tel',`title`='$new_tit' WHERE `user_id`= '$id'")) {
         $_SESSION['alert'] = 3;
-    }else{
+    } else {
         $_SESSION['alert'] = 4;
     }
 }
-$sql_user = "SELECT user.user_id, user.title, user.name, user.password, user.tel, user.email, major.name AS majorname, fac.name AS facname, fac.fac_id, user.major_id FROM `user`, `major`, `fac` WHERE user.major_id = major.mar_id AND major.fac_id = fac.fac_id AND user.user_id = '$id'";
+$sql_user = "SELECT user.user_id, user.title, user.name, user.password, user.tel, user.email  FROM `user` WHERE  user.user_id = '$id'";
 $re_user = mysqli_query($con, $sql_user);
 $row_user = mysqli_fetch_array($re_user);
-
-//fac
-$sql_fac = "SELECT * FROM `fac` ";
-$re_fac = mysqli_query($con, $sql_fac);
-$fac = '<option disabled selected value="' . $row_user['fac_id'] . '">' . $row_user['facname'] . '</option>';
-while ($r_fac = mysqli_fetch_array($re_fac)) {
-    $fac .= '<option value="' . $r_fac['fac_id'] . '">' . $r_fac['name'] . '</option>';
-}
 
 
 ?>
@@ -80,29 +72,47 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
 </head>
 
 <body>
-
     <!-- navbar -->
-
-    <div class="container-fluid fixed-top" style="background-color:#3782EB;">
-        <?php require 'other/navbars.php'; ?>
+    <div class="container-fluid fix-top" style="background-color:#3782EB">
+        <nav class="navbar navbar-expand-lg navbar-light  container" style="background-color:#3782EB">
+            <a class="navbar-brand" href="#">
+                <img src="../picture/form/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto ">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="main.php" style="color:#FFFFFF;"><i class="fas fa-home"></i>
+                            หน้าแรก <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="info.php" style="color:#FFFFFF;">
+                            ข้อมูลส่วนตัว</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a class="nav-link disabled" href="#" style="color:#FFFFFF;"><i class="fas fa-user"></i>
+                        <?php echo ' ' . $row_user['title'] . ' ' . $row_user['name']; ?></a>
+                    <a class="nav-link" href="../../server/logout.php" style="color:#FFFFFF;">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></a>
+                </form>
+            </div>
+        </nav>
     </div>
     <!-- navbar -->
 
     <!-- body -->
-    <section class="container-fluid Gfonts" style="background-color:#E4EEFC">
-        <div class="container" style="background-color:#AECDF7">
-            <br><br>
-
-            <?php //require 'other/news.php'; ?>
-
+    <section class="container-fluid Gfonts" style="background-color:#E4EEFC;"><br><br>
+        <div class="container" style="background-color:#AECDF7;">
+            <br>
             <div class="card">
                 <div class="card-header text-center" style="background-color:#3782EB">
                     <h3>ประวัติส่วนตัว</h3>
                 </div>
                 <div class="card-body" style="background-color:#F7FAFE">
                     <div class="row">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8 ">
+                        <div class="col-lg-8 offset-lg-2">
                             <div class="table-responsive">
                                 <table class="table table-hover overflow responsive nowrap display">
                                     <tbody>
@@ -111,7 +121,7 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                                             <td id="name_edit"><?php echo $row_user['title'] . ' ' . $row_user['name']; ?></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">รหัสนักศึกษา</th>
+                                            <th scope="row">รหัสประจำตัว</th>
                                             <td id="num_edit"><?php echo $row_user['user_id']; ?></td>
 
                                         </tr>
@@ -130,11 +140,7 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                                             <td id="num_edit"><?php echo $row_user['email']; ?></td>
 
                                         </tr>
-                                        <tr>
-                                            <th scope="row">คณะ/สาขา</th>
-                                            <td id="mail_edit"><?php echo $row_user['facname'] . ' ' . $row_user['majorname']; ?></td>
 
-                                        </tr>
                                         <tr>
                                             <th scope="row">แก้ไข</th>
 
@@ -149,16 +155,15 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                                 </table>
                             </div>
                         </div>
-                        <div class="col-lg-2"></div>
                     </div>
                 </div>
             </div><br>
-        </div><br>
+        </div><br><br><br><br><br><br><br><br><br>
     </section><!-- body -->
 
-    <div class="container-fluid" style="background-color:#87B4F3">
+    <div class="container-fluid fixed-bottom" style="background-color:#87B4F3">
         <div class="container">
-            <footer class="text-center" style="background-color:#87B4F3">
+            <footer class="text-center " style="background-color:#87B4F3">
                 <label>Create by: CEFStyle</label><br>
                 <label>Contact Location: <a href="#">สำนักงานวิชาการทั่วไปฯ</a>.</label>
             </footer>
@@ -180,28 +185,18 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                     <div class="modal-body">
                         <div class="card-body">
                             <dl class="row">
+                                <dt class="col-lg-4"><label for="name">คำนำหน้า</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_tit" name="new_tit" type="text" value="<?php echo $row_user['title']; ?>" required><br></dt>
+
                                 <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
-                                <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo $row_user['name']; ?>" required><br></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo  $row_user['name']; ?>" required><br></dt>
 
                                 <dt class="col-lg-4"><label for="pass">รหัสผ่าน</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" required><br></dt>
 
                                 <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" required><br></dt>
-                                <dt class="col-lg-4"><label for="faculty">คณะ/สาขา</label></dt>
-                                <dt class="col-lg-8">
-                                    <select class="form-control custom-select" name="fac" id="faculty" required>
-                                        <?php echo $fac ?>
-                                    </select>
-                                </dt>
-                                <dt class="col-lg-4"></dt>
-                                <dt class="col-lg-8">
-                                    <br>
-                                    <select class="form-control custom-select" name="mar" id="major" required>
-                                        <option selected value="<?php echo $row_user['major_id'] ?>"><?php echo $row_user['majorname'] ?></option>
-                                    </select>
 
-                                </dt>
                             </dl>
                         </div>
                     </div>
