@@ -374,6 +374,7 @@ if(isset($_POST['re_btn'])){
                 function (result) {
                     if (fac != null) {
                         $("#major").html(result);
+                        $(selector).html(htmlString);
                         $('#major').prop("disabled", false);
                     }
 

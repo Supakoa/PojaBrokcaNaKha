@@ -118,10 +118,10 @@ $re_paper = mysqli_query($con, $sql_paper);
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs row">
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home">ประวัติคำร้อง</a>
+                                    <a class="nav-link active" style="background-color:#5796EE;color:#ffffff;margin-right:-15px;margin-left:-15px" data-toggle="tab" href="#home"><span class = "th-lang">ประวัติคำร้อง</span><span class = "eng-lang">History</span></a>
                                 </li>
                                 <li class="nav-item col-lg-6">
-                                    <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#85C8EB;color:#ffffff;margin-right:-15px;margin-left:-15px">แบบคำร้อง</a>
+                                    <a class="nav-link" data-toggle="tab" href="#report" style="background-color:#85C8EB;color:#ffffff;margin-right:-15px;margin-left:-15px"><span class = "th-lang">แบบคำร้อง</span><span class = "eng-lang">Send</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -278,7 +278,6 @@ $re_paper = mysqli_query($con, $sql_paper);
                                                     <div class="row">
                                                         <div class="col-4">
                                                             <?php echo $sub;  ?>
-
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="group">กลุ่มเรียน</label>
@@ -668,6 +667,21 @@ $re_paper = mysqli_query($con, $sql_paper);
                 ]
 
             });
+            $('.eng-lang').hide();
+
+            $("#flag").click(function(){
+             if($(".th-lang").is(":visible")){
+                $(".th-lang").hide();
+                $(".eng-lang").show();    
+                $("#flag").attr("src","../picture/icon/th_flag.png");
+
+                } else{
+                    $(".th-lang").show();  
+                $(".eng-lang").hide();
+                $("#flag").attr("src","../picture/icon/eng_flag.png");        
+
+                }
+            }); 
         });
         //tap
         $(document).ready(function() {

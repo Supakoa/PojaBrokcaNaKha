@@ -49,7 +49,8 @@
        
 
     </table>
-
+    <button type="button">Toggle Paragraph Display</button>
+    <p style="display: none;">Lorem ipsum dolor sit amet adipi elit...</p>
     <script>
         $(document).ready(function () {
             $('#example').DataTable( {
@@ -59,7 +60,23 @@
     } );
         });
     </script>
-
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("button").click(function(){
+            // show hide paragraph on button click
+            $("p").toggle("slow", function(){
+                // check paragraph once toggle effect is completed
+                if($("p").is(":visible")){
+                    alert("The paragraph  is visible.");
+                } else{
+                    alert("The paragraph  is hidden.");
+                }
+            });
+        });
+    });
+    
+</script>
 
 </body>
 

@@ -93,7 +93,7 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
         <div class="container" style="background-color:#AECDF7">
             <br><br>
 
-            <?php require 'other/news.php'; ?>
+            <?php //require 'other/news.php'; ?>
 
             <div class="card">
                 <div class="card-header text-center" style="background-color:#3782EB">

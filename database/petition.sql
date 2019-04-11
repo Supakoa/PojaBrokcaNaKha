@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2019 at 07:12 PM
+-- Generation Time: Apr 11, 2019 at 10:32 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -59,7 +59,7 @@ INSERT INTO `fac` (`fac_id`, `name`) VALUES
 --
 
 CREATE TABLE `form` (
-  `form_id` int(11) NOT NULL,
+  `form_id` int(5) NOT NULL,
   `name` text NOT NULL,
   `step_all` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -76,7 +76,7 @@ INSERT INTO `form` (`form_id`, `name`, `step_all`) VALUES
 (5, 'แบบใบลาป่วย ลากิจ', 1),
 (6, 'ใบคำร้องขอรหัสผ่านเข้าระบบ', 2),
 (7, 'แบบคำร้องทั่วไป', 0),
-(8, 'ติดต่อเจ้าหน้าที่', 4);
+(8, 'ติดต่อเจ้าหน้าที่', 1);
 
 -- --------------------------------------------------------
 
@@ -86,8 +86,8 @@ INSERT INTO `form` (`form_id`, `name`, `step_all`) VALUES
 
 CREATE TABLE `form_way` (
   `form_way_id` int(11) NOT NULL,
-  `form_id` text NOT NULL,
-  `group_id` text NOT NULL,
+  `form_id` int(5) NOT NULL,
+  `group_id` int(5) NOT NULL,
   `step` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -96,8 +96,9 @@ CREATE TABLE `form_way` (
 --
 
 INSERT INTO `form_way` (`form_way_id`, `form_id`, `group_id`, `step`) VALUES
-(10054, '1', '72', '1'),
-(10055, '1', '73', '2');
+(10054, 1, 72, '1'),
+(10055, 1, 73, '2'),
+(10056, 8, 74, '1');
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,9 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`group_id`, `name`, `type`) VALUES
 (72, 'ผู้ช่วยประจำวิชา', '2'),
-(73, 'อาจารย์ประจำวิชา', '2');
+(73, 'อาจารย์ประจำวิชา', '2'),
+(74, 'ผู้ตอบคำถามถึงผู้ดูแลระบบ', '1'),
+(75, 'asd', '1');
 
 -- --------------------------------------------------------
 
@@ -128,7 +131,7 @@ INSERT INTO `groups` (`group_id`, `name`, `type`) VALUES
 CREATE TABLE `groups_user` (
   `groups_user_id` int(5) NOT NULL,
   `group_id` int(5) NOT NULL,
-  `user_id` text NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `sub_id` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -139,7 +142,12 @@ CREATE TABLE `groups_user` (
 INSERT INTO `groups_user` (`groups_user_id`, `group_id`, `user_id`, `sub_id`) VALUES
 (88, 72, 'AJ01', 'GEH0201'),
 (89, 73, 'AJ01', 'GEH0102'),
-(90, 72, 'AJ01', 'GEH0102');
+(91, 72, 'AJ02', 'GEH0102'),
+(92, 73, 'AJ02', 'GEH0201'),
+(94, 72, 'AJ01', 'GEH0202'),
+(95, 72, 'AJ02', 'GEH0204'),
+(96, 74, 'AJ01', 'temp'),
+(97, 74, 'AJ02', 'temp');
 
 -- --------------------------------------------------------
 
@@ -283,23 +291,14 @@ INSERT INTO `news` (`news_id`, `news_url`, `news_img`) VALUES
 
 CREATE TABLE `paper` (
   `paper_id` varchar(10) NOT NULL,
-  `owner_id` text NOT NULL,
+  `owner_id` varchar(20) NOT NULL,
   `form_id` text NOT NULL,
   `paper_detail` text NOT NULL,
   `step_now` text NOT NULL,
-  `status` text NOT NULL,
+  `status` int(2) NOT NULL,
   `note` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `paper`
---
-
-INSERT INTO `paper` (`paper_id`, `owner_id`, `form_id`, `paper_detail`, `step_now`, `status`, `note`, `timestamp`) VALUES
-('5KEZGQM792', '59122519012', '1', 'GEH0102๛001', '1', '3', '', '2019-04-01 16:56:41'),
-('8RZPN0A165', '59122519012', '1', 'GEH0102๛001', '2', '1', '', '2019-04-01 16:34:07'),
-('J0PZJQ9F0P', '59122519012', '1', 'GEH0102๛001', '2', 'Done!!', '', '2019-04-01 16:30:40');
 
 -- --------------------------------------------------------
 
@@ -309,27 +308,15 @@ INSERT INTO `paper` (`paper_id`, `owner_id`, `form_id`, `paper_detail`, `step_no
 
 CREATE TABLE `paper_user` (
   `paper_user_id` int(11) NOT NULL,
-  `paper_id` text,
-  `user_id` text,
-  `status` text,
+  `paper_id` varchar(10) DEFAULT NULL,
+  `user_id` varchar(20) DEFAULT NULL,
+  `status` int(2) DEFAULT '6',
   `comment` text,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_edit` timestamp NULL DEFAULT NULL,
   `return_file` text,
   `step` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `paper_user`
---
-
-INSERT INTO `paper_user` (`paper_user_id`, `paper_id`, `user_id`, `status`, `comment`, `timestamp`, `last_edit`, `return_file`, `step`) VALUES
-(6, 'J0PZJQ9F0P', 'AJ01', 'ผ่าน', 'gpjp', '2019-04-01 16:30:40', '2019-04-01 17:01:49', NULL, '1'),
-(7, 'J0PZJQ9F0P', 'AJ01', 'ผ่าน', '', '2019-04-01 16:30:40', '2019-04-01 17:04:47', NULL, '2'),
-(11, '8RZPN0A165', 'AJ01', 'ผ่าน', '', '2019-04-01 16:34:07', '2019-04-01 17:06:38', NULL, '1'),
-(12, '8RZPN0A165', 'AJ01', 'ผ่าน', '', '2019-04-01 16:34:07', '2019-04-01 17:06:43', NULL, '2'),
-(13, '5KEZGQM792', 'AJ01', NULL, NULL, '2019-04-01 16:56:41', NULL, NULL, '1'),
-(14, '5KEZGQM792', 'AJ01', NULL, NULL, '2019-04-01 16:56:41', NULL, NULL, '2');
 
 -- --------------------------------------------------------
 
@@ -359,7 +346,7 @@ INSERT INTO `role_id` (`id`, `name`) VALUES
 
 CREATE TABLE `signature` (
   `sig_id` int(10) NOT NULL,
-  `user_id` text NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `file_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -382,7 +369,10 @@ INSERT INTO `status_id` (`id`, `name`) VALUES
 (0, 'ไม่ผ่าน'),
 (1, 'ผ่าน'),
 (2, 'แก้ไข'),
-(3, 'กำลังดำเนินการ');
+(3, 'กำลังดำเนินการ'),
+(4, 'อนุมัติ'),
+(5, 'ไม่อนุมัติ'),
+(6, 'ยังไม่ได้ทำการตรวจสอบ');
 
 -- --------------------------------------------------------
 
@@ -392,29 +382,28 @@ INSERT INTO `status_id` (`id`, `name`) VALUES
 
 CREATE TABLE `subject` (
   `sub_id` varchar(7) NOT NULL,
-  `sub_name` text NOT NULL,
-  `main_pro` text NOT NULL
+  `sub_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`sub_id`, `sub_name`, `main_pro`) VALUES
-('GEH0102', 'สังคมไทยในบริบทโลก', ''),
-('GEH0201', 'การพัฒนาตน', ''),
-('GEH0202', 'ความจริงของชีวิต', ''),
-('GEH0204', 'ความเป็นพลเมือง', ''),
-('GEH0205', 'ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์', ''),
-('GEL0101', 'การใช้ภาษาไทย', ''),
-('GEL0102', 'ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น', ''),
-('GEL0103', 'ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน', ''),
-('GEL0201', 'ภาษาไทยเชิงวิชาการ', ''),
-('GEL0203', 'ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)', ''),
-('GES0101', 'เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้', ''),
-('GES0102', 'วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต', ''),
-('GES0203', 'ความรู้เท่าทันสารสนเทศ', ''),
-('GES0206', 'ชีวิตและสุขภาพ', '');
+INSERT INTO `subject` (`sub_id`, `sub_name`) VALUES
+('GEH0102', 'สังคมไทยในบริบทโลก'),
+('GEH0201', 'การพัฒนาตน'),
+('GEH0202', 'ความจริงของชีวิต'),
+('GEH0204', 'ความเป็นพลเมือง'),
+('GEH0205', 'ทักษะชีวิตเพื่อความเป็นมนุษย์ที่สมบูรณ์'),
+('GEL0101', 'การใช้ภาษาไทย'),
+('GEL0102', 'ภาษาอังกฤษเพื่อการสื่อสารและการสืบค้น'),
+('GEL0103', 'ภาษาอังกฤษเพื่อการสื่อสารและทักษะการเรียน'),
+('GEL0201', 'ภาษาไทยเชิงวิชาการ'),
+('GEL0203', 'ภาษาในกลุ่มประชาคมอาเซียน (ภาษาลาว)'),
+('GES0101', 'เทคโนโลยีสารสนเทศเพื่อการสื่อสารและการเรียนรู้'),
+('GES0102', 'วิทยาศาสตร์และเทคโนโลยีกับคุณภาพชีวิต'),
+('GES0203', 'ความรู้เท่าทันสารสนเทศ'),
+('GES0206', 'ชีวิตและสุขภาพ');
 
 -- --------------------------------------------------------
 
@@ -429,7 +418,7 @@ CREATE TABLE `user` (
   `name` text,
   `tel` text,
   `email` text,
-  `role` text,
+  `role` int(1) DEFAULT NULL,
   `status` text,
   `major_id` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -439,11 +428,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `password`, `title`, `name`, `tel`, `email`, `role`, `status`, `major_id`) VALUES
-('321654', 'ppzx00', 'นาย', 'แอด มิน', '0898795847', 'admin@eiei.com', '3', 'สูงสุด', NULL),
-('59122519010', '123456', 'นาย', 'พีพี แช่ลี้', '085414541', 'pp@hotmail.com', '1', NULL, 1020),
-('59122519012', '123456', 'นาย', 'ตะวัน เข็มทอง', '0859575958', 'singcomnet@hotmail.com', '1', NULL, 1008),
-('AJ01', '123456', 'อาจารย์', 'ตรวจ ละเอียดนะ', '0856252414', 'aj01@eiei.com', '2', 'รองผู้อำนวยการ', NULL),
-('AJ02', '123456', 'อาจารย์', 'ตรวจ ประจำ', '052414254', 'jj@eiei.com', '2', 'อาจารย์', NULL);
+('321654', 'ppzx00', 'นาย', 'แอด มิน', '0898795847', 'admin@eiei.com', 3, 'สูงสุด', NULL),
+('59122519010', '123456', 'นาย', 'พีพี แช่ลี้', '085414541', 'pp@hotmail.com', 1, NULL, 1020),
+('59122519012', '123456', 'นาย', 'ตะวัน เข็มทอง', '0859575958', 'singcomnet@hotmail.com', 1, NULL, 1008),
+('AJ01', '123456', 'อาจารย์', 'ตรวจ ละเอียดนะ', '0856252414', 'aj01@eiei.com', 2, 'รองผู้อำนวยการ', NULL),
+('AJ02', '123456', 'อาจารย์', 'ตรวจ ประจำ', '052414254', 'jj@eiei.com', 2, 'อาจารย์', NULL);
 
 --
 -- Indexes for dumped tables
@@ -465,7 +454,9 @@ ALTER TABLE `form`
 -- Indexes for table `form_way`
 --
 ALTER TABLE `form_way`
-  ADD PRIMARY KEY (`form_way_id`);
+  ADD PRIMARY KEY (`form_way_id`),
+  ADD KEY `form_id` (`form_id`),
+  ADD KEY `group_id` (`group_id`);
 
 --
 -- Indexes for table `groups`
@@ -477,13 +468,16 @@ ALTER TABLE `groups`
 -- Indexes for table `groups_user`
 --
 ALTER TABLE `groups_user`
-  ADD PRIMARY KEY (`groups_user_id`);
+  ADD PRIMARY KEY (`groups_user_id`),
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `major`
 --
 ALTER TABLE `major`
-  ADD PRIMARY KEY (`mar_id`);
+  ADD PRIMARY KEY (`mar_id`),
+  ADD KEY `fac_id` (`fac_id`);
 
 --
 -- Indexes for table `news`
@@ -495,19 +489,37 @@ ALTER TABLE `news`
 -- Indexes for table `paper`
 --
 ALTER TABLE `paper`
-  ADD PRIMARY KEY (`paper_id`);
+  ADD PRIMARY KEY (`paper_id`),
+  ADD KEY `owner_id` (`owner_id`),
+  ADD KEY `status` (`status`);
 
 --
 -- Indexes for table `paper_user`
 --
 ALTER TABLE `paper_user`
-  ADD PRIMARY KEY (`paper_user_id`);
+  ADD PRIMARY KEY (`paper_user_id`),
+  ADD KEY `paper_id` (`paper_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `role_id`
+--
+ALTER TABLE `role_id`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `signature`
 --
 ALTER TABLE `signature`
-  ADD PRIMARY KEY (`sig_id`);
+  ADD PRIMARY KEY (`sig_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `status_id`
+--
+ALTER TABLE `status_id`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `subject`
@@ -519,7 +531,8 @@ ALTER TABLE `subject`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `role` (`role`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -535,31 +548,31 @@ ALTER TABLE `fac`
 -- AUTO_INCREMENT for table `form`
 --
 ALTER TABLE `form`
-  MODIFY `form_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `form_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `form_way`
 --
 ALTER TABLE `form_way`
-  MODIFY `form_way_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10056;
+  MODIFY `form_way_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10057;
 
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `group_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `groups_user`
 --
 ALTER TABLE `groups_user`
-  MODIFY `groups_user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `groups_user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `major`
 --
 ALTER TABLE `major`
-  MODIFY `mar_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10246;
+  MODIFY `mar_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1096;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -571,13 +584,64 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `paper_user`
 --
 ALTER TABLE `paper_user`
-  MODIFY `paper_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `paper_user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `signature`
 --
 ALTER TABLE `signature`
   MODIFY `sig_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `form_way`
+--
+ALTER TABLE `form_way`
+  ADD CONSTRAINT `form_way_ibfk_1` FOREIGN KEY (`form_id`) REFERENCES `form` (`form_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `form_way_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `groups_user`
+--
+ALTER TABLE `groups_user`
+  ADD CONSTRAINT `groups_user_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `groups_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `major`
+--
+ALTER TABLE `major`
+  ADD CONSTRAINT `major_ibfk_1` FOREIGN KEY (`fac_id`) REFERENCES `fac` (`fac_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `paper`
+--
+ALTER TABLE `paper`
+  ADD CONSTRAINT `paper_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `paper_ibfk_2` FOREIGN KEY (`status`) REFERENCES `status_id` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `paper_user`
+--
+ALTER TABLE `paper_user`
+  ADD CONSTRAINT `paper_user_ibfk_1` FOREIGN KEY (`paper_id`) REFERENCES `paper` (`paper_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `paper_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `paper_user_ibfk_3` FOREIGN KEY (`status`) REFERENCES `status_id` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `signature`
+--
+ALTER TABLE `signature`
+  ADD CONSTRAINT `signature_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role`) REFERENCES `role_id` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
