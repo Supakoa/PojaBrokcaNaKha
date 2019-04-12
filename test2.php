@@ -15,19 +15,25 @@
 
     <input type="number" id="input">
     <h1 id="ans"></h1>
+    <iframe style="width: 100%;height:500px;"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+    </iframe>
+    <!-- <div id ="eiei">
+        <P id="SINGHA">123456</P>
+    </div> -->
     <script>
-        $("#input").keyup(function (e) {
-            // alert("123");
-
+            $("#ans").text($("#eiei").html());
+      
+        $("#input").on('keyup click mouseenter',function (e) {
             num = $(this).val();
-            console.log(num);
+            // console.log(num);
             if (num != '') {
-                console.log("65asda");
                 if (num >= 0 && num <= 100) {
                     if (num < 50) {
                         $("#ans").html('F');
                     } else if (num < 60) {
                         $("#ans").html('D');
+
 
                     } else if (num < 70) {
                         $("#ans").html('C');
