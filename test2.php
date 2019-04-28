@@ -3,61 +3,55 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>bootstrap4</title>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 </head>
 
 <body>
-    <link rel="stylesheet" href="back\node_modules\animate.css\animate.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-    <input type="number" id="input">
-    <h1 id="ans"></h1>
-    <iframe style="width: 100%;height:500px;"
-    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-    </iframe>
-    <!-- <div id ="eiei">
-        <P id="SINGHA">123456</P>
-    </div> -->
+    <div id="summernote"></div>
+    <p id="show">test</p>
     <script>
-            $("#ans").text($("#eiei").html());
-      
-        $("#input").on('keyup click mouseenter',function (e) {
-            num = $(this).val();
-            // console.log(num);
-            if (num != '') {
-                if (num >= 0 && num <= 100) {
-                    if (num < 50) {
-                        $("#ans").html('F');
-                    } else if (num < 60) {
-                        $("#ans").html('D');
+        //   $('#summernote').summernote({
+        //     placeholder: 'Hello bootstrap 4',
+        //     tabsize: 2,
+        //     height: 100
+        //   });
 
+          // summernote.keyup
+            $('#summernote').on('summernote.change', function(we, e) {
+                var markupStr = $('#summernote').summernote('code');
+            $('#show').text(markupStr);
+            // console.log('Key is released:', e.keyCode);
+            });
 
-                    } else if (num < 70) {
-                        $("#ans").html('C');
-
-                    } else if (num < 80) {
-                        $("#ans").html('B');
-
-                    } else {
-                        $("#ans").html('A');
-                    }
-
-                } else {
-                    $("#ans").html('ควย');
-
+        $('#summernote').summernote({
+            height: 200,
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
                 }
-            } else {
-                $("#ans").html('กรุณาใส่คะแนน');
-
             }
-
-
         });
-    </script>
 
+        function sendFile(file, editor, welEditable) {
+            data2 = new FormData();
+            data2.append("file", file);
+            $.ajax({
+                data: data2,
+                type: 'post',
+                url: 'test_up_img.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (url) {
+                    $('#summernote').summernote('insertImage', url);
+                    // editor.insertImage(welEditable, url);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
