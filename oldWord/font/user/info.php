@@ -305,8 +305,6 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                         $("#major").html(result);
                         $('#major').prop("disabled", false);
                     }
-
-
                     // $("#del").modal("show");
                 }
 
