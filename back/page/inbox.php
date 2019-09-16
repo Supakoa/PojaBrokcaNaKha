@@ -73,6 +73,7 @@ require '../../server/server.php';
     </div>
     <br>
     <div class="table-responsive text-center">
+        <hr>
         <h3>Outbox</h3>
         <hr>
         <table class="table table-striped table-hover table-bordered display nowrap responsive table_table" id="table2">

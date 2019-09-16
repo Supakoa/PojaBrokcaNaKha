@@ -9,12 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- title -->
-    <title >Admin-Webpage</title>
+    <title>Admin-Webpage</title>
     <link rel="icon" type="image/ico" href="../image/icon/icon.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- datatable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
 
@@ -27,7 +29,7 @@
     <!-- w3.css -->
     <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
-    <!-- mycss -->
+    <!-- my-css -->
     <link rel="stylesheet" href="style.css">
 
     <!-- fontawesome -->
@@ -37,19 +39,19 @@
     <!-- animate.css -->
     <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
 
-
-
 </head>
 
 <body class="">
 
-    <nav id="mySidenav" class="sidenav"><!-- rigth nav  -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <nav id="mySidenav" class="sidenav">
+
+        <!-- rigth nav  -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="text-center ">
-          
-                <a href="#" class=" navtap" onclick="call_content('main.php');">
-                    <i class="fa fa-home"> Home</i>
-                </a>
+
+            <a href="#" class=" navtap" onclick="call_content('main.php');">
+                <i class="fa fa-home"> Home</i>
+            </a>
         </div>
 
         <a href="#" class="navtap" onclick="call_content('inbox.php');">
@@ -105,8 +107,8 @@
                             ข้อมูลส่วนตัว</a>
                     </li>
                     <li class="nav-item ">
-                        <a href="../../server/logout.php" class="nav-link" style="color:whitesmoke;"><i class="fas fa-sign-out-alt"
-                                style="color:whitesmoke;"></i>
+                        <a href="../../server/logout.php" class="nav-link" style="color:whitesmoke;"><i
+                                class="fas fa-sign-out-alt" style="color:whitesmoke;"></i>
                             ออกจากระบบ</a>
                     </li>
                 </ul>
@@ -127,53 +129,49 @@
         <!-- set to bottom -->
         <footer id="footer">
             <div class="text-center" style="border:solid;border-color:#84695E;background-color:#84695E">
-
                 <p style="margin-top:1%;color:whitesmoke;">©Powered by CEFStyle</p>
-
             </div>
         </footer>
+        
     </div>
 
 
 </body>
+
+<!--  
+    script
+-->
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+</script>
+<script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
 <!-- 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
-<script>
 
-</script>
 <script>
     $(document).ready(function () {
         $("#btn_singha").click(function () {
-
             $('#btn_singha').text("กดแล้ว");
-
-
         });
     });
+
     $('.navtap').click(function (e) {
         e.preventDefault();
         $('.navtap').css("background-color", "#252526");
         $(this).css("background-color", "#0672BA");
     });
+
     if (document.getElementById('in_body').innerHTML === '') {
-
         call_content('inbox.php');
-
     }
 
     function call_content(content) {
-
-
-
         $("#in_body").load(content);
-
-
-
     }
+
     function openNav() {
         if ($('#mySidenav').css("width") == "0px") {
             document.getElementById('mySidenav').style.width = "300px";
