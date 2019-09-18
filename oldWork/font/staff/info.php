@@ -125,7 +125,11 @@ $row_user = mysqli_fetch_array($re_user);
                                             <td id="num_edit"><?php echo $row_user['user_id']; ?></td>
 
                                         </tr>
-                                 
+                                        <tr>
+                                            <th scope="row">Password</th>
+                                            <td id="pass_edit"><?php echo $row_user['password']; ?></td>
+
+                                        </tr>
                                         <tr>
                                             <th scope="row">เบอร์โทรศัพท์</th>
                                             <td id="num_edit"><?php echo $row_user['tel']; ?></td>
@@ -187,7 +191,8 @@ $row_user = mysqli_fetch_array($re_user);
                                 <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo  $row_user['name']; ?>" required><br></dt>
 
-                               
+                                <dt class="col-lg-4"><label for="pass">รหัสผ่าน</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" required><br></dt>
 
                                 <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" required><br></dt>

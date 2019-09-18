@@ -97,7 +97,7 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
 
             <div class="card">
                 <div class="card-header text-center" style="background-color:#3782EB">
-                    <h3><span class = "th-lang">ประวัติส่วนตัว</span><span class = "eng-lang">info</span></h3>
+                    <h3>ประวัติส่วนตัว</h3>
                 </div>
                 <div class="card-body" style="background-color:#F7FAFE">
                     <div class="row">
@@ -115,11 +115,11 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                                             <td id="num_edit"><?php echo $row_user['user_id']; ?></td>
 
                                         </tr>
-                                        <!-- <tr>
+                                        <tr>
                                             <th scope="row">Password</th>
                                             <td id="pass_edit"><?php echo $row_user['password']; ?></td>
 
-                                        </tr> -->
+                                        </tr>
                                         <tr>
                                             <th scope="row">เบอร์โทรศัพท์</th>
                                             <td id="num_edit"><?php echo $row_user['tel']; ?></td>
@@ -183,8 +183,8 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                                 <dt class="col-lg-4"><label for="name">ชื่อ - นามสกุล</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_name" name="new_name" type="text" value="<?php echo $row_user['name']; ?>" required><br></dt>
 
-                                <!-- <dt class="col-lg-4"><label for="pass">รหัสผ่าน</label></dt>
-                                <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" required><br></dt> -->
+                                <dt class="col-lg-4"><label for="pass">รหัสผ่าน</label></dt>
+                                <dt class="col-lg-8"><input class="form-control" id="new_pass" name="new_pass" type="text" value="<?php echo $row_user['password']; ?>" required><br></dt>
 
                                 <dt class="col-lg-4"><label for="num">เบอร์โทรศัพท์</label></dt>
                                 <dt class="col-lg-8"><input class="form-control" id="new_num" name="new_num" type="text" value="<?php echo $row_user['tel']; ?>" required><br></dt>
@@ -277,21 +277,6 @@ while ($r_fac = mysqli_fetch_array($re_fac)) {
                     $('#mail_edit').text(mail);
                 }
             });
-            $('.eng-lang').hide();
-
-            $("#flag").click(function(){
-             if($(".th-lang").is(":visible")){
-                $(".th-lang").hide();
-                $(".eng-lang").show();    
-                $("#flag").attr("src","../picture/icon/th_flag.png");
-
-                } else{
-                    $(".th-lang").show();  
-                $(".eng-lang").hide();
-                $("#flag").attr("src","../picture/icon/eng_flag.png");        
-
-                }
-            }); 
         });
 
         //time news
