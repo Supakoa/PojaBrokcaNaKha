@@ -222,16 +222,12 @@ if(isset($_POST['re_btn'])){
                                                             <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
 
                                                         </div>
-                                                        <div class="col-lg-4">
-                                                            <button type="button" id = "go" class="btn btn-primary btn-sm">ไปปปป</button>
-
-                                                        </div>
-
+                                                      
                                                         <!-- register modal -->
-                                                        <div class="col-lg-4 text-right">
+                                                        <div class="col-lg-8 text-right">
                                                             <button type="button" class="btn btn-link" data-toggle="modal"
                                                                 data-target="#modalregis"><i class="fas fa-registered"></i>
-                                                                สมัครเข้าใช้แบบคำร้อง
+                                                                สมัครสมาชิก
                                                             </button>
                                                         </div>
                                                         <!-- register modal -->
@@ -267,7 +263,7 @@ if(isset($_POST['re_btn'])){
     <!-- body -->
 
     <!-- Modal register-->
-    <div class="modal fade animated flip" id="modalregis" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="modalregis" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <form action="index.php" method="post">
@@ -295,7 +291,7 @@ if(isset($_POST['re_btn'])){
                                 <div class="col-lg-6">
                                     <label for="pass">รหัสผ่าน</label>
                                     <input id="pass" name="pw" type="password" class="form-control" required>
-                                    <p id="pass_p"></p>
+                                    <!-- <p id="pass_p"></p> -->
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="pass">ยืนยันรหัสผ่าน</label>
@@ -374,7 +370,7 @@ if(isset($_POST['re_btn'])){
                 function (result) {
                     if (fac != null) {
                         $("#major").html(result);
-                        $(selector).html(htmlString);
+                        // $(selector).html(htmlString);
                         $('#major').prop("disabled", false);
                     }
 
