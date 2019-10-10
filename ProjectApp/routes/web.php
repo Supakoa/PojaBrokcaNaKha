@@ -11,6 +11,18 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('login.index');
 });
+
+Route::get('/register', function () {
+    return view('login.element.reGister');
+});
+
+
+Route::get('/admin/index', function () {
+    return view('adminElement.Index');
+});
+

@@ -1,7 +1,7 @@
 @extends('layouts.userTemplate')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('node_modules/CEstyle/Login.css')}}">
+<link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/Login.css')}}">
 @endpush
 
 @section('login')
@@ -14,7 +14,7 @@
             <p class="p-3">GE PETTITION</p>
         </div>
         <div class="body-login">
-            <form class="container" action="">
+            <form class="container h-100" action="">
                 <h3>เข้าสู่ระบบ</h3>
                 <div class="form-group p-5">
                     <label for="userId">รหัสนักศึกษา/รหัสอาจารย์</label>
@@ -27,7 +27,7 @@
                     <h1>reCAPTCHA</h1>
                 </div>
                 <div class="text-center">
-                    <button class="btn-sub text-center" type="submit">เข้าสู่ระบบ</button>
+                    <a href="{{ url('/admin/index')}}" class="btn btn-sub text-center" >เข้าสู่ระบบ</a>
                 </div>
             </form>
         </div>
@@ -43,7 +43,7 @@
                 </dd>
             </dl>
             <div class="text-center m-0 p-0">
-                <a href="#" class="btn">สมัครเข้าใช้งาน</a>
+                <a href="{{ url('/register')}}" class="btn">สมัครเข้าใช้งาน</a>
             </div>
         </div>
     </div>
