@@ -21,6 +21,8 @@ Route::get('/register', function () {
     return view('login.element.reGister');
 });
 
+Route::resource('admin/posts', 'PostsController');
+
 
 Route::get('/admin/index', function () {
     return view('adminElement.Index');
