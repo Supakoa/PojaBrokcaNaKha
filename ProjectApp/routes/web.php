@@ -26,3 +26,6 @@ Route::get('/admin/index', function () {
     return view('adminElement.Index');
 });
 
+Route::get('/admin/index', function () {
+    return view('adminElement.Index');
+});
