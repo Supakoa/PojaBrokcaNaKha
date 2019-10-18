@@ -8,29 +8,26 @@
     @stack('css')
     <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEindex.css')}}">
+    <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
+    <!-- fontawesom -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>Admin Template</title>
 </head>
 
 <body>
-    <div class="navLeft">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-        </ul>
+    <div id="mySidenav" class="sidenav">
+        <span window.location.href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</span>
+        <a href="{{url('/admin/index')}}"><i class="fa fa-home" aria-hidden="true"></i> หน้าแรก</a>
+        <a href="{{url('/admin/mails')}}"><i class="fas fa-envelope-open"></i> ข้อความ</a>
+        <a href="{{url('/document')}}"><i class="fas fa-folder"></i> เอกสาร</a>
+        <a href="{{url('/news')}}"><i class="fas fa-newspaper"></i> หน้าข่าว</a>
+        <a href="{{url('/document/step')}}"><i class="fas fa-stream"></i> ขั้นตอนเอกสาร</a>
     </div>
-    <div class="body">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-            <a class="navbar-brand" href="#">
+
+    <div class="body" id="main">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+            <a class="navbar-brand" href="#" onclick="openNav()">
                 <img src="{{url('images/logo.png')}}" width="70" height="70" class="d-inline-block align-top" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -39,17 +36,14 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><img src="" alt=""> <span>ผู้ดูแลระบบ</span></a>
+                    <li class="nav-item active align-middle">
+                    <a class="nav-link" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSElEB7aM36PB-C-AJW6Z308tsVc5LJTydI-Ab86qqAVtsyrRVl" alt="" width="30" height="30" ><span> ผู้ดูแลระบบ</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">ออกจากระบบ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">ENG/TH</a>
-                    </li>
-                    <li class="nav-item dropdown">
-
                     </li>
                 </ul>
             </div>
@@ -58,7 +52,7 @@
         <div class="main">
             @yield('main')
         </div>
-        <footer>
+        <footer class="footer">
             CE devoleper Team
         </footer>
     </div>
@@ -66,6 +60,20 @@
     <script src="{{ url('https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js')}}"></script>
     <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     @stack('js')
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "20%";
+            document.getElementById("main").style.width = "80%";
+            document.getElementById('main').style.float = "right";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.width = "100%";
+        }
+
+    </script>
 </body>
 
 </html>
