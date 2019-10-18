@@ -43,19 +43,20 @@
                         <a class="nav-link" href="#">ออกจากระบบ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ENG/TH</a>
+                        <a class="nav-link" href="#" id="lang"><span id="eng">ENG</span>/<span class="m-1 p-1 text-light bg-dark rounded" id="th">TH</span></a>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <div class="main">
+        <div class="container ">
             @yield('main')
         </div>
         <footer class="footer">
             CE devoleper Team
         </footer>
     </div>
+    @yield('modal')
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{ url('https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js')}}"></script>
     <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
@@ -72,6 +73,19 @@
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.width = "100%";
         }
+
+        var coute =0;
+            $('#lang').on('click', function (e) {
+                if(coute == 0){
+                    $('#eng').addClass('m-1 p-1 text-light bg-dark rounded');
+                    $('#th').removeClass('m-1 p-1 text-light bg-dark rounded');
+                    coute++;
+                }else{
+                    --coute;
+                    $('#eng').removeClass('m-1 p-1 text-light bg-dark rounded');
+                    $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
+                }
+            });
 
     </script>
 </body>
