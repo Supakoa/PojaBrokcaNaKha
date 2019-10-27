@@ -1,23 +1,27 @@
 @extends('layouts.adminTemplate')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
+
+@endpush
+
  @section('main')
-    <div class="container">
+    <div class="container p-2" id="mainIndex">
         <div class="row">
             {{-- @include('admin.sidebar') --}}
-
-            <div class="col-md-9">
+            <div class="col-md-9 m-auto">
                 <div class="card">
-                    <div class="card-header">Papers</div>
+                    <div class="card-header text-center h4 text-light bg-header">ค้นหาเอกสาร</div>
                     <div class="card-body">
                         <a href="{{ url('/admin/papers/create') }}" class="btn btn-success btn-sm" title="Add New paper">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            <i class="fa fa-plus" aria-hidden="true"></i> เพิ่มเอกสาร
                         </a>
 
                         <form method="GET" action="{{ url('/admin/papers') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-append">
-                                    <button class="btn btn-secondary" type="submit">
+                                <input type="text"  class="form-control boder-greenBlue" name="search" placeholder="Search..." value="{{ request('search') }}">
+                                <span class="input-group-append border-greenBlue">
+                                    <button class="btn border-greenBlue" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>

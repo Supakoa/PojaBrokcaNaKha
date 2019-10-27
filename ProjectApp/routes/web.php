@@ -25,9 +25,11 @@ Route::resource('admin/papers', 'PapersController');
 
 
 Route::get('/admin/index', function () {
-    return view('adminElement.Index');
+    return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
 
-Route::get('/admin/index', function () {
-    return view('adminElement.Index');
+Route::get('/admin/news', function () {
+    return view('adminElement.news.index');
 });
+
+

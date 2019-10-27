@@ -1,11 +1,15 @@
 @extends('layouts.adminTemplate')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
+@endpush
+
  @section('main')
-    <div class="container">
+    <div class="container p-2" id="mainIndex">
         <div class="row">
             {{-- @include('admin.sidebar') --}}
 
-            <div class="col-md-9">
+            <div class="col-md-9 m-auto">
                 <div class="card">
                     <div class="card-header">paper {{ $paper->id }}</div>
                     <div class="card-body">
