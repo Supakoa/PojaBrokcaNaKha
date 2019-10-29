@@ -32,4 +32,8 @@ Route::get('/admin/news', function () {
     return view('adminElement.news.index');
 });
 
+Route::get('/admin/steps',function (){
+    return view('adminElement.steps.index');
+});
+
 

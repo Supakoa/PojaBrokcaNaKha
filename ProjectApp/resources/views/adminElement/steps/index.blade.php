@@ -6,10 +6,11 @@
 
 @section('main')
 <div class="container p-2" id="mainIndex">
-    @include('adminElement.news.content-news.content')
+    @include('adminElement.steps.content.stepsContent')
 </div>
 @endsection
 
 @push('js')
 
 @endpush
+
