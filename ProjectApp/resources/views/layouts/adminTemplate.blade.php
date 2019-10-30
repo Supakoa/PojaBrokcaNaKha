@@ -22,6 +22,7 @@
         <a href="{{url('/admin/index')}}"><i class="fa fa-home" aria-hidden="true"></i> หน้าแรก</a>
         <a href="{{url('/admin/mail')}}"><i class="fas fa-envelope-open"></i> ข้อความ</a>
         <a href="{{url('/admin/document')}}"><i class="fas fa-folder"></i> เอกสาร</a>
+        <a href="{{url('/admin/member')}}"><i class="fa fa-users" aria-hidden="true"></i> สมาชิก</a>
         <a href="{{url('/admin/news')}}"><i class="fas fa-newspaper"></i> หน้าข่าว</a>
         <a href="{{url('/admin/steps')}}"><i class="fas fa-stream"></i> ขั้นตอนเอกสาร</a>
     </div>
@@ -50,7 +51,7 @@
             </div>
         </nav>
 
-        <div class="container h-100">
+        <div class="container-fluid h-100">
             @yield('main')
         </div>
         <footer class="footer">

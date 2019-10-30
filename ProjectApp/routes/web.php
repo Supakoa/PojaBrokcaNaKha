@@ -36,4 +36,12 @@ Route::get('/admin/steps',function (){
     return view('adminElement.steps.index');
 });
 
+Route::get('/admin/member',function (){
+    return view('adminElement.member.index');
+});
+
+Route::get('/admin/document',function (){
+    return view('adminElement.document.index');
+});
+
 

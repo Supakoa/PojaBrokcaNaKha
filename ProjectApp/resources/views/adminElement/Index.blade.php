@@ -6,7 +6,7 @@
 @endpush
 
 @section('main')
-<div class="container p-2 h-100" id="mainIdex">
+<div class="container-fluid p-2 h-100" id="mainIdex">
     @yield('main-content')
 </div>
 @endsection
