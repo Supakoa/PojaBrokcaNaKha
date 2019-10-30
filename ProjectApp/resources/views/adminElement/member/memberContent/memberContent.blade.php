@@ -44,6 +44,7 @@
                         <th>สาขา</th>
                         <th>
                             <button class="btn shadow btn-info rounded-circle" type="button" data-toggle="modal"
+                                data-target="#exampleModalScrollable">
                                 <i class="fas fa-plus    "></i>
                             </button>
                         </th>

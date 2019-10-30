@@ -6,14 +6,29 @@
 @endpush
 
 @section('main')
-    <div class="container-fluid" id="mainIndex">
-        @include('staffElement.inBoxoutBox.index')
-        @include('staffElement.paper.index')
-    </div>
+<div class="container-fluid" id="mainIndex">
+    @include('staffElement.inBoxoutBox.index')
+    @include('staffElement.paper.index')
+</div>
 @endsection
 
 
 @push('js')
+<script>
+    $(document).ready(function () {
+        $('#showPapers').click(function (e) {
+            $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+        });
+    });
 
+    $('#sended').hover(function () {
+            $('#sended').removeClass('shadow');
+        }, function () {
+            $('#sended').addClass('shadow');
+            // out
+        }
+    );
+
+
+</script>
 @endpush
-
