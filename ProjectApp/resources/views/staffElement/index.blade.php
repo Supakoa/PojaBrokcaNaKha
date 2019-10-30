@@ -1,4 +1,4 @@
-@extends('layouts.adminTemplate')
+@extends('layouts.staffTemplate')
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
@@ -6,10 +6,12 @@
 @endpush
 
 @section('main')
-<div class="container-fluid p-2 h-100" id="mainIndex">
-    @yield('main-content')
-</div>
+    <div class="container-fluid" id="mainIndex">
+        @include('staffElement.inBoxoutBox.index')
+        @include('staffElement.paper.index')
+    </div>
 @endsection
+
 
 @push('js')
 

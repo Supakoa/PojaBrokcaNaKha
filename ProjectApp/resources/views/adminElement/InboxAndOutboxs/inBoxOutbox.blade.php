@@ -1,14 +1,14 @@
 @extends('adminElement.Index')
 
 @section('main-content')
-<h3 id="header" class="text-center w-100 ">
+<h3 id="header" class="text-center w-100 mb-4">
         ข้อความถึงผู้ดูแลระบบ
     </h3>
-    <div id="inBox" class="table-responsive">
-        <h3 id="header" class="text-center w-100">
+    <div id="inBox" class="table-responsive ">
+        <h3 id="header" class="text-center w-100 p-0 m-0">
             Inbox
         </h3>
-        <table id="table_ans" class="table display table-hover p-5 table-striped bg-light">
+        <table id="table_ans" class="table display table-hover table-striped bg-light">
             <thead class="thead-dark">
                 <tr>
                     <th>วันที่</th>
@@ -35,13 +35,13 @@
             </tbody>
         </table>
     </div>
+<br>
 
-
-<div id="outBox" class="table-responsive">
-        <h3 id="header" class="text-center w-100">
+<div id="outBox" class="table-responsive ">
+        <h3 id="header" class="text-center w-100 p-0 m-0">
             Outbox
         </h3>
-        <table id="table_detail" class="table display table-hover table-striped p-5 bg-light">
+        <table id="table_detail" class="table display table-hover table-striped bg-light">
             <thead class="thead-dark">
                 <tr>
                     <th>วันที่</th>

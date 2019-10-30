@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table txt-greenblue" style="border:2px solid #639cb4">
-                <thead style="border-bottom-color:#639cb4">
+                <thead class="table-info" style="border-bottom-color:#639cb4">
                     <tr class="text-center">
                         <th class="border-left">ลำดับ</th>
                         <th>รูปแบบเอกสาร</th>

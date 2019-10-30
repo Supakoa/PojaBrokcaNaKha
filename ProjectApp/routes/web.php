@@ -13,6 +13,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+// Login
 Route::get('/', function () {
     return view('login.index');
 });
@@ -21,10 +23,14 @@ Route::get('/register', function () {
     return view('login.element.reGister');
 });
 
-Route::resource('admin/papers', 'PapersController');
 
-
+//Admin
+// Route::resource('admin/papers', 'PapersController');
 Route::get('/admin/index', function () {
+    return view('adminElement.InboxAndOutboxs.inBoxOutbox');
+});
+
+Route::get('/admin/mail', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
 
@@ -44,4 +50,8 @@ Route::get('/admin/document',function (){
     return view('adminElement.document.index');
 });
 
+//Staff
 
+Route::get('/staff/index',function (){
+    return view('staffElement.index');
+});
