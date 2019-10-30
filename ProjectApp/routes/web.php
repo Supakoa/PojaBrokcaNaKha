@@ -55,3 +55,9 @@ Route::get('/admin/document',function (){
 Route::get('/staff/index',function (){
     return view('staffElement.index');
 });
+
+//User
+
+Route::get('/user/index', function (){
+    return view('userElement.index');
+});
