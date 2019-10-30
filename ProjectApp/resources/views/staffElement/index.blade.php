@@ -28,7 +28,5 @@
             // out
         }
     );
-
-
 </script>
 @endpush
