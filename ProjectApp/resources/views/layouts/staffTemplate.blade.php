@@ -59,6 +59,22 @@
 
     @stack('js')
 
+    <script>
+    var coute =0;
+            $('#lang').on('click', function (e) {
+                if(coute == 0){
+                    $('#eng').addClass('m-1 p-1 text-light bg-dark rounded');
+                    $('#th').removeClass('m-1 p-1 text-light bg-dark rounded');
+                    coute++;
+                }else{
+                    --coute;
+                    $('#eng').removeClass('m-1 p-1 text-light bg-dark rounded');
+                    $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
+                }
+            });
+
+    </script>
+
 </body>
 
 </html>

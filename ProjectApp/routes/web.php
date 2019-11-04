@@ -51,13 +51,20 @@ Route::get('/admin/document',function (){
 });
 
 //Staff
-
 Route::get('/staff/index',function (){
     return view('staffElement.index');
 });
 
 //User
-
 Route::get('/user/index', function (){
     return view('userElement.index');
 });
+
+Route::get('/user/index', function (){
+    return view('userElement.bBody.index');
+});
+
+Route::get('/user/profile', function (){
+    return view('userElement.bBody.proFile');
+});
+
