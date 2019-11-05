@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<link rel="icon" href="{{url('/images/logo.png')}}" type="image/gif" sizes="36x36">
+    <link rel="icon" href="{{url('/images/logo.png')}}" type="image/gif" sizes="36x36">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,9 +19,10 @@
 
 <body>
     <div class="body" id="main">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand" href="#" onclick="openNav()">
-                <img src="{{url('images/logo.png')}}" width="70" height="70" class="d-inline-block align-top border-left-0 border-right-0 border-bottom border-info p-0" alt="">
+                <img src="{{url('images/logo.png')}}" width="70" height="70"
+                    class="ml-5 d-inline-block align-top border-left-0 border-right-0 border-bottom border-info p-0" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +46,7 @@
             </div>
         </nav>
 
-        <div class="container h-100 ">
+        <div class="container h-100 mt-5 p-5">
             @yield('main')
         </div>
         <footer class="footer">
@@ -60,18 +61,18 @@
     @stack('js')
 
     <script>
-    var coute =0;
-            $('#lang').on('click', function (e) {
-                if(coute == 0){
-                    $('#eng').addClass('m-1 p-1 text-light bg-dark rounded');
-                    $('#th').removeClass('m-1 p-1 text-light bg-dark rounded');
-                    coute++;
-                }else{
-                    --coute;
-                    $('#eng').removeClass('m-1 p-1 text-light bg-dark rounded');
-                    $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
-                }
-            });
+        var coute = 0;
+        $('#lang').on('click', function (e) {
+            if (coute == 0) {
+                $('#eng').addClass('m-1 p-1 text-light bg-dark rounded');
+                $('#th').removeClass('m-1 p-1 text-light bg-dark rounded');
+                coute++;
+            } else {
+                --coute;
+                $('#eng').removeClass('m-1 p-1 text-light bg-dark rounded');
+                $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
+            }
+        });
 
     </script>
 

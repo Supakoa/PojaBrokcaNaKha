@@ -12,7 +12,6 @@
     </li>
 </ul>
 
-
 <div class="tab-content p-3 bg-info" id="pills-tabContent">
     <div class="card p-3 rounded tab-pane fade show active" id="pills-home" role="tabpanel"
         aria-labelledby="pills-home-tab">
@@ -116,31 +115,32 @@
         </div>
     </div>
 </div>
+
+
+
+    @include('userElement.cFooter.index')
 @endsection
 
 @section('modal')
 {{-- modal status papers --}}
-
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content container">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <h5 class="modal-title txt-greenblue" id="exampleModalLongTitle">สถานะการดำเนินการ</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+              wait for build
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">ปิด</button>
             </div>
           </div>
         </div>
       </div>
-
 @endsection
 
 @push('js')

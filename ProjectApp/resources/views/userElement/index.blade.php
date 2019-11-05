@@ -14,9 +14,6 @@
         <div class="container p-3">
             @yield('middle')
         </div>
-        <div class="container p-3">
-            @include('userElement.cFooter.index')
-        </div>
     </div>
 </div>
 @yield('modal')
