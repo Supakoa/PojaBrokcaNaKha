@@ -21,7 +21,7 @@
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand" href="#" onclick="openNav()">
-                <img src="{{url('images/logo.png')}}" width="70" height="70"
+                <img src="{{url('images/logo.png')}}" width="50" height="50"
                     class="ml-5 d-inline-block align-top border-left-0 border-right-0 border-bottom border-info p-0" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -46,7 +46,7 @@
             </div>
         </nav>
 
-        <div class="container h-100 mt-5 p-5">
+        <div class="container h-100 mt-4 p-5">
             @yield('main')
         </div>
         <footer class="footer">

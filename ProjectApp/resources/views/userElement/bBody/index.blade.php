@@ -57,7 +57,8 @@
                         </td>
                         <td>ลากิจ / ลาป่วย</td>
                         <td>
-                            <button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#exampleModalLong">
+                            <button class="btn btn-info btn-sm" type="button" data-toggle="modal"
+                                data-target="#showSteps">
                                 แสดง
                             </button>
                         </td>
@@ -70,7 +71,7 @@
                         </td>
                         <td>ขอสอบย้อนหลัง</td>
                         <td>
-                            <button class="btn btn-info btn-sm" >
+                            <button class="btn btn-info btn-sm">
                                 แสดง
                             </button>
                         </td>
@@ -118,29 +119,83 @@
 
 
 
-    @include('userElement.cFooter.index')
+@include('userElement.cFooter.index')
 @endsection
 
 @section('modal')
 {{-- modal status papers --}}
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content container">
+<div class="modal fade bd-example-modal-lg" id="showSteps" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content container">
             <div class="modal-header">
-              <h5 class="modal-title txt-greenblue" id="exampleModalLongTitle">สถานะการดำเนินการ</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                <h4 class="modal-title" id="myLargeModalLabel">nameForms -> idForms</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
             <div class="modal-body">
-              wait for build
+                <div class="d-flex container p-3 text-center justify-content-center" id="statusBar">
+                    <div class="circle rounded-circle border-success">
+                        <i class="fas fa-paper-plane m-auto text-success"></i>
+                    </div>
+                    <div class="line border-success"></div>
+
+                    <div class="circle rounded-circle border-success">
+                        <i class="fas fa-clock m-auto text-success"></i>
+                    </div>
+                    <div class="line border-success"></div>
+
+                    <div class="circle rounded-circle border-warning">
+                        <i class="fas fa-edit m-auto text-warning"></i>
+                    </div>
+                    <div class="line"></div>
+
+                    <div class="circle rounded-circle">
+                        <i class="fas fa-check-circle m-auto"></i>
+                    </div>
+                </div>
+                <hr>
+                <div class="row p-2">
+                    <div class="col-md-4 border border-top-0 border-left-0 border-bottom-0 p-3">
+                        <dd>2019/11/04 (11 : 02 : 32s)</dd>
+                    </div>
+                    <div class="col-md-8 border border-top-0 border-right-0 border-bottom-0 p-3 d-flex" id="stateMent">
+                        <div class="row w-100 6`">
+                            <div class="col-md-8">
+                                <dd>
+                                    <li class="p-0">กลับมาแก้ไข</li>
+                                </dd>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-warning float-right btn-sm" >แก้ไข</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 border border-top-0 border-left-0 border-bottom-0 p-3">
+                        <dd>2019/11/04 (15 : 26 : 33s)</dd>
+                    </div>
+                    <div class="col-md-8 border border-top-0 border-right-0 border-bottom-0 p-3" id="stateMent">
+                        <dd>
+                            <li class="p-0">กำลังดำเนินการ</li>
+                        </dd>
+                    </div>
+
+                    <div class="col-md-4 border border-top-0 border-left-0 border-bottom-0 p-3">
+                        <dd>2019/11/04 (20 : 03 : 33s)</dd>
+                    </div>
+                    <div class="col-md-8 border border-top-0 border-right-0 border-bottom-0 p-3" id="stateMent">
+                        <dd>
+                            <li class="p-0">ส่งแล้ว</li>
+                        </dd>
+                    </div>
+                </div>
+
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">ปิด</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 @endsection
 
 @push('js')
