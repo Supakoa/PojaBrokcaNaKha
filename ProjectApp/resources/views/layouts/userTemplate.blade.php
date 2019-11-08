@@ -17,10 +17,11 @@
 </head>
 
 <body>
-    @guest
-        @yield('login')
-    @endguest
 
+    @guest
+    @yield('login')
+    @endguest
+    {{-- @auth --}}
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -68,6 +69,9 @@
             CE devoleper Team
         </footer>
     </div>
+
+    {{-- @endauth --}}
+
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{ url('https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js')}}"></script>

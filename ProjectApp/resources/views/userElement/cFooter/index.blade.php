@@ -74,7 +74,7 @@
                                     เลือกแบบคำร้องไม่ถูกครับ
                                 </td>
                                 <td>
-                                    <button class="btn btn-info" type="button" data-toggle="modal"
+                                    <button class="btn btn-info btn-sm" type="button" data-toggle="modal"
                                     data-target="#modalRead">
                                         เจ้าหน้าที่
                                     </button>
@@ -97,7 +97,7 @@
                                     แนบเอกสารลากิจ
                                 </td>
                                 <td>
-                                    <button class="btn btn-info" type="button" data-toggle="modal">
+                                    <button class="btn btn-info btn-sm" type="button" data-toggle="modal">
                                         เจ้าหน้าที่
                                     </button>
                                 </td>
@@ -143,7 +143,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content container">
-            <div class="modal-header">
+            <div class="modal-header" style="border-bottom-color:#639CB4">
                 <h5 class="modal-title txt-greenblue" id="modalCreateTitle">ติดต่อเจ้าหน้าที่</h5>
                 <button type="button" class="close txt-greenblue" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -152,13 +152,12 @@
             <div class="modal-body">
                 <form action="">
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                            placeholder="name@example.com">
+                        <label for="title" class="text-info">เรื่อง</label>
+                        <input type="text" class="form-control rounded border-0 bg-greenblue" id="title">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="typeText" class="text-info">ข้อความ</label>
+                        <textarea class="form-control rounded border-0 bg-greenblue" id="typeText" rows="3"></textarea>
                     </div>
                 </form>
             </div>
@@ -183,7 +182,37 @@
                 </button>
             </div>
             <div class="modal-body">
+                <dl class="row">
+                    <dd class="col-md-4">
+                        <span class=" txt-greenblue">เรื่อง</span>
+                    </dd>
+                    <dd class="col-md-8">
+                        <span class="txt-greenblue">: แนบเอกสารลากิจ</span>
+                    </dd>
+                </dl>
 
+                <dl class="row">
+                        <dd class="col-md-4">
+                            <span class=" txt-greenblue">ข้อความ</span>
+                        </dd>
+                        <dd class="col-md-8">
+                            <span class="txt-greenblue">
+                                : ผมต้องแนบเอกสารอะไรบ้างครับเนื่องจากต้องไปธุระกับครบครัว
+                            </span>
+                        </dd>
+                    </dl>
+                <hr class="boder-greenBlue">
+
+                <dl class="row">
+                        <dd class="col-md-4">
+                            <span class=" txt-greenblue">เจ้าหน้าที่</span>
+                        </dd>
+                        <dd class="col-md-8">
+                            <span class="txt-greenblue">
+                                : พอจะมีเอกสาร หรือภาพถ่ายพอเป็นหลักฐานไหมคะ
+                            </span>
+                        </dd>
+                    </dl>
             </div>
         </div>
     </div>
