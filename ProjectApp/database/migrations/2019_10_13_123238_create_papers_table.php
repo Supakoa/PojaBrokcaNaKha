@@ -14,11 +14,11 @@ class CreatePapersTable extends Migration
     {
         Schema::create('papers', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->integer('form_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('status')->references('id')->on('statuses');
             $table->text('detail');
             $table->integer('step_now');
-            $table->integer('status');
             $table->text('note');
             $table->timestamps();
             });
