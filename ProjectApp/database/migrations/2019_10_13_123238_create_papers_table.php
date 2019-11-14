@@ -14,9 +14,9 @@ class CreatePapersTable extends Migration
     {
         Schema::create('papers', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('form_id')->references('id')->on('forms');
-            $table->foreign('status')->references('id')->on('statuses');
+            $table->unsignedInteger('user_id')->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('form_id')->foreign('form_id')->references('id')->on('forms');
+            $table->unsignedInteger('status')->foreign('status')->references('id')->on('statuses');
             $table->text('detail');
             $table->integer('step_now');
             $table->text('note');

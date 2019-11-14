@@ -15,8 +15,8 @@ class CreateDirectionFormsTable extends Migration
     {
         Schema::create('direction__forms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('form_id')->references('id')->on('froms');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->unsignedInteger('form_id')->foreign('form_id')->references('id')->on('froms');
+            $table->unsignedInteger('group_id')->foreign('group_id')->references('id')->on('groups');
             $table->integer('step');
             $table->timestamps();
         });

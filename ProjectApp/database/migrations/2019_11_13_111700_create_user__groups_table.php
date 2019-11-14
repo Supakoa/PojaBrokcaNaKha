@@ -15,9 +15,9 @@ class CreateUserGroupsTable extends Migration
     {
         Schema::create('user__groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->foreign('subjejct_id')->references('id')->on('subjects');
+            $table->unsignedInteger('user_id')->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('group_id')->foreign('group_id')->references('id')->on('groups');
+            $table->unsignedInteger('subject_id')->foreign('subjejct_id')->references('id')->on('subjects');
             $table->timestamps();
         });
     }
