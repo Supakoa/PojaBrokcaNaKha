@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormsTable extends Migration
+class CreateMajorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('majors', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('faculty_id');
             $table->text('name');
-            $table->integer('all_steps');
             $table->timestamps();
+
+            $table->foreign('faculty_id')->references('id')->on('faculties');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forms');
+        Schema::dropIfExists('majors');
     }
 }

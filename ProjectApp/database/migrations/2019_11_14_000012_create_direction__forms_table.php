@@ -14,11 +14,14 @@ class CreateDirectionFormsTable extends Migration
     public function up()
     {
         Schema::create('direction__forms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('form_id')->foreign('form_id')->references('id')->on('froms');
-            $table->unsignedInteger('group_id')->foreign('group_id')->references('id')->on('groups');
+            $table->increments('id');
+            $table->unsignedInteger('form_id');
+            $table->unsignedInteger('group_id');
             $table->integer('step');
             $table->timestamps();
+
+            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 

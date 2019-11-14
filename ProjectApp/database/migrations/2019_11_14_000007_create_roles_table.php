@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLicensesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateLicensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('licenses', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->text('file');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateLicensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('licenses');
+        Schema::dropIfExists('roles');
     }
 }

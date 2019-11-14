@@ -14,14 +14,18 @@ class CreateUserApprovesTable extends Migration
     public function up()
     {
         Schema::create('user__approves', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->unsignedInteger('status_id')->foreign('status_id')->references('id')->on('statuses');
-            $table->unsignedInteger('paper_id')->foreign('paper_id')->references('id')->on('papers');
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('paper_id');
             $table->text('comment');
             $table->text('return_file');
             $table->integer('step');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('paper_id')->references('id')->on('papers');
         });
     }
 
