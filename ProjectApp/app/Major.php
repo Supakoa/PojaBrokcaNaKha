@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Major extends Model
 {
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('app/User');
     }
+
+    public function faculty()
+    {
+        return $this->belongsTo('app/Faculty');
+    }
+
 }
