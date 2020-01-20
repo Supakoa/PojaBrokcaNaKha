@@ -27,5 +27,19 @@ class Paper extends Model
      */
     protected $fillable = ['form_id','detail', 'step_now','note','status'];
 
+    // relation
+    public function status()
+    {
+        return $this->belongsTo('app/Status');
+    }
 
+    public function user()
+    {
+        return $this->belongsTo('app/User');
+    }
+
+    public function form()
+    {
+        return $this->belongsTo('app/Form');
+    }
 }
