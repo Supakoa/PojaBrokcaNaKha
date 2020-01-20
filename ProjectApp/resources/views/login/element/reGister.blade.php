@@ -77,11 +77,10 @@
                         <div class="form-group">
                             <label for="branch">สาขา</label>
                             <select class="form-control" id="branch">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option disabled selected>เลือกคณะ</option>
+                                @foreach ($fact as $row)
+                                        <option>{{$row['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

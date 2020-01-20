@@ -1,12 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Faculty;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
 class FacultyController extends Controller
 {
+    public function register(){
+        $facts = DB::table('faculties')->get();
+
+        return view('login.element.reGister')->with('fact' ,$facts);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\FacultyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,9 +20,11 @@ Route::get('/', function () {
     return view('login.index');
 });
 
-Route::get('/register', function () {
-    return view('login.element.reGister');
-});
+Route::get('/register', 'FacultyController@register'
+// function () {
+//     return view('login.element.reGister');
+// }
+);
 
 
 //Admin

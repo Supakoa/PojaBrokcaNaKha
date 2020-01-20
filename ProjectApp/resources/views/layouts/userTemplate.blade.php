@@ -19,9 +19,9 @@
 <body>
 
     @guest
-    @yield('login')
+        @yield('login')
     @endguest
-    {{-- @auth --}}
+    @auth
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -70,7 +70,7 @@
         </footer>
     </div>
 
-    {{-- @endauth --}}
+    @endauth
 
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
