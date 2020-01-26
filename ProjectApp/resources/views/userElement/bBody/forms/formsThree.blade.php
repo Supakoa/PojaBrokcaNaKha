@@ -3,7 +3,7 @@
         <h2 class="mb-0">
             <button class="btn txt-greenblue collapsed" type="button" data-toggle="collapse" data-target="#paperThree"
                 aria-expanded="false" aria-controls="paperThree">
-                <span><img src="{{url('images/Untitled_Artwork.png')}}" width="20" height="20" alt=""></span>
+                <span><img src="{{url('images/Artboard.png')}}" width="40" height="40" alt=""></span>
                 แบบคำร้องข้อแก้ไขผลการเรียน
             </button>
         </h2>

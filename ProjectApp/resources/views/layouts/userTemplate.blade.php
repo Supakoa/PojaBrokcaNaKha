@@ -18,10 +18,10 @@
 
 <body>
 
-    @guest
+    {{-- @guest
         @yield('login')
     @endguest
-    @auth
+    @auth --}}
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -64,13 +64,14 @@
 
         <div class="container-fluid h-100 mt-4 p-5">
             @yield('main')
+
         </div>
         <footer class="footer">
             CE devoleper Team
         </footer>
     </div>
 
-    @endauth
+    {{-- @endauth --}}
 
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
