@@ -13,7 +13,7 @@ class CreateDirectionFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('direction__forms', function (Blueprint $table) {
+        Schema::create('direction_forms', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('form_id');
             $table->unsignedInteger('group_id');

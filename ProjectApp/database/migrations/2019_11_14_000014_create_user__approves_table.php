@@ -13,7 +13,7 @@ class CreateUserApprovesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user__approves', function (Blueprint $table) {
+        Schema::create('user_approves', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('status_id');
