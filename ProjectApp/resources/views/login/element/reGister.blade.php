@@ -73,29 +73,30 @@
                             <input type="text" class="form-control" name="num" id="num" placeholder="">
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="branch">สาขา</label>
-                            <select class="form-control" id="branch">
+                            <label for="fac">คณะ</label>
+                            <select class="form-control" id="fac">
                                 <option disabled selected>เลือกคณะ</option>
-                                @foreach ($fact as $row)
-                                        <option>{{$row['name']}}</option>
+                                @foreach ($arrays[0] as $fac)
+                            <option value="{{$fac->id}}" >{{$fac->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="fac">คณะ</label>
-                            <select class="form-control" id="fac">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <label for="branch">สาขา</label>
+                            <select class="form-control" id="branch" disabled>
+                                <option disabled selected>เลือกสาขา</option>
+                                @foreach ($arrays[1] as $maj)
+                                    <option value="{{$maj->faculty_id}}">{{$maj->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="text-center">
@@ -105,4 +106,17 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+$('selector').removeClass(className);
+
+function ShowdataSelect() {
+    $.ajax({
+
+    });
+}
+
+</script>
 @endsection

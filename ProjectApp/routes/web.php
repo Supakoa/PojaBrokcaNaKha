@@ -20,15 +20,12 @@ Route::get('/', function () {
     return view('login.index');
 });
 
-Route::get('/register', 'FacultyController@register'
-// function () {
-//     return view('login.element.reGister');
-// }
-);
+Route::resource('/register', 'Auth\RegisterController');
 
 
 //Admin
 // Route::resource('admin/papers', 'PapersController');
+Route::resource('user', 'UserController');
 Route::get('/admin/index', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
@@ -53,6 +50,9 @@ Route::get('/admin/document',function (){
     return view('adminElement.document.index');
 });
 
+
+
+
 //Staff
 Route::get('/staff/index',function (){
     return view('staffElement.index');
@@ -70,4 +70,6 @@ Route::get('/user/index', function (){
 Route::get('/user/profile', function (){
     return view('userElement.bBody.proFile');
 });
+
+
 

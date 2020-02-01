@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Faculty as fac;
+use App\Major as maj;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +24,16 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+
+    public function index(){
+        $fac = fac::all();
+        $maj = maj::all();
+        $array = [$fac,$maj];
+        return view('login.element.reGister')->with('arrays',$array);
+    }
+
+
 
     /**
      * Where to redirect users after registration.
