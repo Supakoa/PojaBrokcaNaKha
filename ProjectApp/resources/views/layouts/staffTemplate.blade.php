@@ -47,7 +47,11 @@
         </nav>
 
         <div class="container h-100 mt-4 p-5">
-            @yield('main')
+            {{-- @yield('main') --}}
+            <div class="container-fluid" id="mainIndex">
+                @include('staffElement.inBoxoutBox.index')
+                @include('staffElement.paper.index')
+            </div>
         </div>
         <footer class="footer">
             CE devoleper Team

@@ -1,5 +1,4 @@
-@extends('adminElement.Index')
-
+@extends('layouts.adminTemplate')
 
 @section('main-content')
 <div class="container p-2" >

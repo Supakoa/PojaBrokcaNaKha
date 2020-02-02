@@ -62,16 +62,19 @@ Route::get('/staff/index',function (){
 });
 
 //User
-Route::get('/user/index', function (){
-    return view('userElement.index');
-});
+
+// Route::resource('user', 'UserController');
 
 Route::get('/user/index', function (){
-    return view('userElement.bBody.index');
+    return view('Students.index');
 });
+
+// Route::get('/user/index', function (){
+//     return view('userElement.bBody.index');
+// });
 
 Route::get('/user/profile', function (){
-    return view('userElement.bBody.proFile');
+    return view('Students.proFile');
 });
 
 

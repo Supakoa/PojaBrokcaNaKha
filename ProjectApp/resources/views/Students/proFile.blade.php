@@ -1,5 +1,4 @@
-@extends('userElement.index')
-
+@extends('layouts.userTemplate')
 
 @section('middle')
 <div class="card border-0 ">

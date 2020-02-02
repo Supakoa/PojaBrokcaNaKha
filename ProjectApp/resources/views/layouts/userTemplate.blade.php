@@ -12,6 +12,8 @@
     <!-- fontawesom -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     @stack('css')
     <title>User Template</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -20,10 +22,10 @@
 
 <body>
 
-    @guest
+    {{-- @guest
         @yield('login')
     @endguest
-    @auth
+    @auth --}}
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -63,17 +65,15 @@
                 </ul>
             </div>
         </nav>
-
         <div class="container-fluid h-100 mt-4 p-5">
             @yield('main')
-
         </div>
         <footer class="footer">
             CE devoleper Team
         </footer>
     </div>
-
-    @endauth
+    @yield('modal')
+    {{-- @endauth --}}
 
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
@@ -83,6 +83,19 @@
     @stack('js')
 
     <script>
+    $(document).ready(function () {
+        $('#showPapers').click(function (e) {
+            $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+        });
+    });
+
+    $('#sended').hover(function () {
+            $('#sended').removeClass('shadow');
+        }, function () {
+            $('#sended').addClass('shadow');
+            // out
+        }
+    );
         var coute = 0;
         $('#lang').on('click', function (e) {
             if (coute == 0) {

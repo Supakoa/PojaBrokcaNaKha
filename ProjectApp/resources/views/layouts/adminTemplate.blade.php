@@ -9,6 +9,8 @@
     @stack('css')
     <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEindex.css')}}">
+    <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <!-- fontawesom -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -55,7 +57,10 @@
         </nav>
 
         <div class="container-fluid h-100">
-            @yield('main')
+            {{-- @yield('main') --}}
+            <div class="container-fluid p-2 h-100" id="mainIndex">
+                @yield('main-content')
+            </div>
         </div>
         <footer class="footer">
             CE devoleper Team
@@ -70,8 +75,8 @@
     <script>
 
         function openNav() {
-            document.getElementById("mySidenav").style.width = "20%";
-            document.getElementById("main").style.width = "80%";
+            document.getElementById("mySidenav").style.width = "15%";
+            document.getElementById("main").style.width = "85%";
             document.getElementById('main').style.float = "right";
         }
 
