@@ -108,15 +108,31 @@
 </div>
 @endsection
 
-@section('js')
+@push('js')
 <script>
-$('selector').removeClass(className);
+    $.ajaxSetup({
 
-function ShowdataSelect() {
-    $.ajax({
+headers: {
 
-    });
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
 }
 
-</script>
-@endsection
+});
+    $("#fac").change(function (e) {
+        e.preventDefault();
+        // alert($(this).val())
+        $.ajax({
+            type: "post",
+            url: "{{url('/getMajorByFacultyId')}}/"+$(this).val(),
+            data: {"id":$(this).val()},
+            dataType: "json",
+            success: function (response) {
+
+            }
+        });
+
+    });
+
+    </script>
+@endpush

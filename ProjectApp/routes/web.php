@@ -50,7 +50,9 @@ Route::get('/admin/document',function (){
     return view('adminElement.document.index');
 });
 
+Route::post('/getMajorByFacultyId/{faculty}',"FacultyController@getMajorByFacultyId");
 
+Route::resource('/faculty', 'FacultyController');
 
 
 //Staff

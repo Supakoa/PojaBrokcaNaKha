@@ -8,6 +8,6 @@ class Form extends Model
 {
     public function papers()
     {
-        return $this->hasMany('app/Paper');
+        return $this->hasMany('app\Paper');
     }
 }

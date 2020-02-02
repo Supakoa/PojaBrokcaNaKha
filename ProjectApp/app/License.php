@@ -8,6 +8,6 @@ class License extends Model
 {
     public function user()
     {
-        return $this->hasOne('app/User');
+        return $this->hasOne('app\User');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Faculty as fac;
-use App\Major as maj;
+use App\Faculty ;
+use App\Major ;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -50,6 +50,7 @@ class FacultyController extends Controller
     public function show(Faculty $faculty)
     {
         //
+        return $faculty->majors;
     }
 
     /**
@@ -84,5 +85,9 @@ class FacultyController extends Controller
     public function destroy(Faculty $faculty)
     {
         //
+    }
+    public function getMajorByFacultyId(Faculty $faculty){
+
+        return $faculty->majors;
     }
 }

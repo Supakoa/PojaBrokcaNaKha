@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Major;
+use App\Faculty ;
 use Illuminate\Http\Request;
 
 class MajorController extends Controller

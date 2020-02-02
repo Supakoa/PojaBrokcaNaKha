@@ -3,18 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Faculty;
 class Major extends Model
 {
 
     public function users()
     {
-        return $this->hasMany('app/User');
+        return $this->hasMany('app\User');
     }
 
     public function faculty()
     {
-        return $this->belongsTo('app/Faculty');
+        return $this->belongsTo('app\Faculty');
     }
 
 }
