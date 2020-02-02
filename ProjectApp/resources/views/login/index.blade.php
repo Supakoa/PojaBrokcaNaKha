@@ -13,6 +13,8 @@
             </div>
             <p class="p-3">GE PETTITION</p>
         </div>
+
+        
         <div class="body-login">
             <form class="container h-100" action="{{url('/login')}}" method="POST">
                 @csrf
