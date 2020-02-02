@@ -26,7 +26,7 @@
         <a href="{{url('/admin/steps')}}"><i class="fas fa-stream"></i> ขั้นตอนเอกสาร</a>
     </div>
 
-    <div class="body" id="main">
+    <div class="body main-admin" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
             <a class="navbar-brand" href="#" onclick="openNav()">
                 <img src="{{url('images/logo.png')}}" width="50" height="50" class="ml-5 d-inline-block align-top border-left-0 border-right-0 border-bottom border-info p-0" alt="">
@@ -65,8 +65,8 @@
 
     <script>
         function openNav() {
-            document.getElementById("mySidenav").style.width = "20%";
-            document.getElementById("main").style.width = "80%";
+            document.getElementById("mySidenav").style.width = "15%";
+            document.getElementById("main").style.width = "85%";
             document.getElementById('main').style.float = "right";
         }
 
