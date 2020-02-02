@@ -26,6 +26,7 @@ Auth::routes();
 //Admin
 // Route::resource('admin/papers', 'PapersController');
 Route::resource('user', 'UserController');
+Route::resource('/home', 'HomeController');
 Route::get('/admin/index', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });

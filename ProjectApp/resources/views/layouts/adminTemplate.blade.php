@@ -41,7 +41,11 @@
                     <a class="nav-link" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSElEB7aM36PB-C-AJW6Z308tsVc5LJTydI-Ab86qqAVtsyrRVl" alt="" width="30" height="30" ><span> ผู้ดูแลระบบ</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ออกจากระบบ</a>
+                    <form action="{{url('/logout')}}" id="logout" method="post">
+                        @csrf
+                        <a class="nav-link" href="#" onclick="$('#logout').submit()" >ออกจากระบบ</a>
+                    </form>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" id="lang"><span id="eng">ENG</span>/<span class="m-1 p-1 text-light bg-dark rounded" id="th">TH</span></a>
