@@ -15,6 +15,14 @@ use App\Http\Controllers\FacultyController;
 use Illuminate\Support\Facades\Route;
 
 
+
+
+
+
+
+
+
+
 // Login
 // Route::get('/', function () {
 //     return view('login.index');
