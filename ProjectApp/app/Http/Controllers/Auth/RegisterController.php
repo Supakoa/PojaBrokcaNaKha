@@ -28,9 +28,7 @@ class RegisterController extends Controller
 
     public function index(){
         $fac = fac::all();
-        $maj = maj::all();
-        $array = [$fac,$maj];
-        return view('login.element.reGister')->with('arrays',$array);
+        return view('login.element.reGister')->with('faculties',$fac);
     }
 
 
