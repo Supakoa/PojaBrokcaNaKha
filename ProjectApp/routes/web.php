@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/register', 'Auth\RegisterController');
-
+Auth::routes();
 
 //Admin
 // Route::resource('admin/papers', 'PapersController');
