@@ -9,6 +9,7 @@
         <div class="container p-3">
             @include('Students.include.body.index')
             @include('Students.include.footer.index')
+            @include('Students.proFile')
         </div>
     </div>
 </div>

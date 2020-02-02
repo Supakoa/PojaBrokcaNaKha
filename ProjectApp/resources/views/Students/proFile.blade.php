@@ -1,6 +1,6 @@
-@extends('layouts.userTemplate')
+{{-- @extends('layouts.userTemplate')
 
-@section('middle')
+@section('middle') --}}
 <div class="card border-0 ">
 
         <div class="card-header text-center text-light bg-greenblue">
@@ -65,9 +65,9 @@
         </div>
     </div>
 </div>
-@endsection
+{{-- @endsection --}}
 
-@section('modal')
+{{-- @section('modal') --}}
     <!-- Modal -->
 <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -102,4 +102,4 @@
           </div>
         </div>
       </div>
-@endsection
+{{-- @endsection --}}
