@@ -6,8 +6,6 @@
 @endpush
 
 @section('main')
-
-
 <div class="container" id="mainIndex">
     <div class="card p-1">
         <div class="container p-3">
@@ -19,7 +17,6 @@
     </div>
 </div>
 @yield('modal')
-
 @endsection
 
 

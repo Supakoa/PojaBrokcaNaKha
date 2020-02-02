@@ -12,6 +12,8 @@
     <!-- fontawesom -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     @stack('css')
     <title>User Template</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -63,10 +65,18 @@
                 </ul>
             </div>
         </nav>
-
         <div class="container-fluid h-100 mt-4 p-5">
-            @yield('main')
-
+            {{-- @yield('main') --}}
+            <div class="container" id="mainIndex">
+                <div class="card p-1">
+                    <div class="container p-3">
+                        @include('userElement.aHead.index')
+                    </div>
+                    <div class="container p-3">
+                        @yield('middle')
+                    </div>
+                </div>
+            </div>
         </div>
         <footer class="footer">
             CE devoleper Team

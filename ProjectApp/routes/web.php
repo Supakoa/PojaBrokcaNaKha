@@ -25,7 +25,6 @@ Auth::routes();
 
 //Admin
 // Route::resource('admin/papers', 'PapersController');
-Route::resource('user', 'UserController');
 Route::get('/admin/index', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
@@ -61,17 +60,20 @@ Route::get('/staff/index',function (){
 });
 
 //User
-Route::get('/user/index', function (){
-    return view('userElement.index');
-});
 
-Route::get('/user/index', function (){
-    return view('userElement.bBody.index');
-});
+Route::resource('user', 'UserController');
 
-Route::get('/user/profile', function (){
-    return view('userElement.bBody.proFile');
-});
+// Route::get('/user/index', function (){
+//     return view('userElement.index');
+// });
+
+// Route::get('/user/index', function (){
+//     return view('userElement.bBody.index');
+// });
+
+// Route::get('/user/profile', function (){
+//     return view('userElement.bBody.proFile');
+// });
 
 
 
