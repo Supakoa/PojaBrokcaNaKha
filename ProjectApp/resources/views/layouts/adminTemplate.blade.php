@@ -23,7 +23,7 @@
         <a href="{{url('/admin/document')}}"><i class="fas fa-folder"></i> เอกสาร</a>
         <a href="{{url('/admin/member')}}"><i class="fa fa-users" aria-hidden="true"></i> สมาชิก</a>
         <a href="{{url('/admin/news')}}"><i class="fas fa-newspaper"></i> หน้าข่าว</a>
-        <a href="{{url('/admin/steps')}}"><i class="fas fa-stream"></i> ขั้นตอนเอกสาร</a>   
+        <a href="{{url('/admin/steps')}}"><i class="fas fa-stream"></i> ขั้นตอนเอกสาร</a>
     </div>
 
     <div class="body main-admin" id="main">
