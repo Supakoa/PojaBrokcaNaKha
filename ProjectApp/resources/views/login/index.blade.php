@@ -1,4 +1,4 @@
-@extends('layouts.userTemplate')
+@extends('layouts.loginTemplate')
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/Login.css')}}">
