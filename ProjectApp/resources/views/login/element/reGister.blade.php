@@ -79,7 +79,7 @@
                             <label for="fac">คณะ</label>
                             <select class="form-control" id="fac">
                                 <option disabled selected>เลือกคณะ</option>
-                                @foreach ($arrays[0] as $fac)
+                                @foreach ($faculties as $fac)
                             <option value="{{$fac->id}}" >{{$fac->name}}</option>
                                 @endforeach
                             </select>
