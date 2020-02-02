@@ -73,6 +73,7 @@
                         @include('userElement.aHead.index')
                     </div>
                     <div class="container p-3">
+                        <h1>HEllo</h1>
                         @yield('middle')
                     </div>
                 </div>
@@ -82,7 +83,7 @@
             CE devoleper Team
         </footer>
     </div>
-
+    @yield('modal')
     @endauth
 
 
@@ -93,6 +94,19 @@
     @stack('js')
 
     <script>
+    $(document).ready(function () {
+        $('#showPapers').click(function (e) {
+            $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+        });
+    });
+
+    $('#sended').hover(function () {
+            $('#sended').removeClass('shadow');
+        }, function () {
+            $('#sended').addClass('shadow');
+            // out
+        }
+    );
         var coute = 0;
         $('#lang').on('click', function (e) {
             if (coute == 0) {

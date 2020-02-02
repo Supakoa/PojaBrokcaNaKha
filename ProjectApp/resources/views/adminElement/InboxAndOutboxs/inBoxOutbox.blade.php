@@ -1,4 +1,4 @@
-@extends('adminElement.Index')
+@extends('layouts.adminTemplate')
 
 @section('main-content')
 <h3 id="header" class="text-center w-100 mb-4">

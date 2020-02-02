@@ -1,4 +1,4 @@
-@extends('layouts.userTemplate')
+@extends('userElement.index')
 
 @section('middle')
 <ul class="nav nav-pills d-flex" id="pills-tab" role="tablist">

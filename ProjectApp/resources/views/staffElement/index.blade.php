@@ -14,19 +14,5 @@
 
 
 @push('js')
-<script>
-    $(document).ready(function () {
-        $('#showPapers').click(function (e) {
-            $('html, body').animate({scrollTop:$(document).height()}, 'slow');
-        });
-    });
 
-    $('#sended').hover(function () {
-            $('#sended').removeClass('shadow');
-        }, function () {
-            $('#sended').addClass('shadow');
-            // out
-        }
-    );
-</script>
 @endpush
