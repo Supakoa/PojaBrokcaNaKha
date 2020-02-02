@@ -34,13 +34,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">ชื่อ</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="">
+                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="lname">นามสกุล</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="">
+                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-12">
