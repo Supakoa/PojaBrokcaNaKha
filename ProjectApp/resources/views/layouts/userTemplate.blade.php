@@ -22,10 +22,10 @@
 
 <body>
 
-    @guest
+    {{-- @guest
         @yield('login')
     @endguest
-    @auth
+    @auth --}}
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -66,25 +66,14 @@
             </div>
         </nav>
         <div class="container-fluid h-100 mt-4 p-5">
-            {{-- @yield('main') --}}
-            <div class="container" id="mainIndex">
-                <div class="card p-1">
-                    <div class="container p-3">
-                        @include('userElement.aHead.index')
-                    </div>
-                    <div class="container p-3">
-                        <h1>HEllo</h1>
-                        @yield('middle')
-                    </div>
-                </div>
-            </div>
+            @yield('main')
         </div>
         <footer class="footer">
             CE devoleper Team
         </footer>
     </div>
     @yield('modal')
-    @endauth
+    {{-- @endauth --}}
 
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
