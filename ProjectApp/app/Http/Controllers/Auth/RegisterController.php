@@ -26,11 +26,11 @@ class RegisterController extends Controller
     use RegistersUsers;
 
 
-    public function index(){
+    public function showRegistrationForm()
+    {
         $fac = fac::all();
         return view('login.element.reGister')->with('faculties',$fac);
     }
-
 
 
     /**
@@ -79,8 +79,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    public function showRegistrationForm()
-    {
-        return view('login.element.reGister');
-    }
+
 }
