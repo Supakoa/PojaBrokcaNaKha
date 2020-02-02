@@ -88,11 +88,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="branch">สาขา</label>
-                            <select class="form-control" id="branch" disabled>
+                            <select class="form-control" id="maj" disabled>
                                 <option disabled selected>เลือกสาขา</option>
-                                @foreach ($arrays[1] as $maj)
-                                    <option value="{{$maj->faculty_id}}">{{$maj->name}}</option>
-                                @endforeach
+
                             </select>
                         </div>
                     </div>
@@ -128,7 +126,11 @@ headers: {
             data: {"id":$(this).val()},
             dataType: "json",
             success: function (response) {
-
+                $("#maj").html("<option disabled selected>เลือกสาขา</option>");
+                response.forEach(major => {
+                    $("#maj").append("<option value = '"+major.id+"' >"+major.name+"</option>");
+                });
+                $("#maj").removeAttr("disabled");
             }
         });
 
