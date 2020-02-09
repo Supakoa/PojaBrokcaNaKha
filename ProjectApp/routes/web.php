@@ -15,14 +15,6 @@ use App\Http\Controllers\FacultyController;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
-
-
-
-
-
 // Login
 // Route::get('/', function () {
 //     return view('login.index');
@@ -47,25 +39,25 @@ Route::get('/admin/news', function () {
     return view('adminElement.news.index');
 });
 
-Route::get('/admin/steps',function (){
+Route::get('/admin/steps', function () {
     return view('adminElement.steps.index');
 });
 
-Route::get('/admin/member',function (){
+Route::get('/admin/member', function () {
     return view('adminElement.member.index');
 });
 
-Route::get('/admin/document',function (){
+Route::get('/admin/document', function () {
     return view('adminElement.document.index');
 });
 
-Route::post('/getMajorByFacultyId/{faculty}',"FacultyController@getMajorByFacultyId");
+Route::post('/getMajorByFacultyId/{faculty}', "FacultyController@getMajorByFacultyId");
 
 Route::resource('/faculty', 'FacultyController');
 
 
 //Staff
-Route::get('/staff/index',function (){
+Route::get('/staff/index', function () {
     return view('staffElement.index');
 });
 
@@ -73,7 +65,7 @@ Route::get('/staff/index',function (){
 
 // Route::resource('user', 'UserController');
 
-Route::get('/user/index', function (){
+Route::get('/user/index', function () {
     return view('Students.index');
 });
 
@@ -81,7 +73,7 @@ Route::get('/user/index', function (){
 //     return view('userElement.bBody.index');
 // });
 
-Route::get('/user/profile', function (){
+Route::get('/user/profile', function () {
     return view('Students.proFile');
 });
 

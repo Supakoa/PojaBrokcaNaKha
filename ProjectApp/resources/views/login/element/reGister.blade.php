@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="cPass">ยืนยันรหัสผ่าน</label>
                             <input type="password" class="form-control" name="cPass" id="cPass" placeholder="">
-                        </div> 
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -135,6 +135,7 @@ headers: {
         });
 
     });
+
 
     </script>
 @endpush
