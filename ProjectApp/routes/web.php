@@ -73,7 +73,7 @@ Route::get('/staff/index',function (){
 
 // Route::resource('user', 'UserController');
 
-Route::get('/user/index', function (){
+Route::get('student/index', function (){
     return view('Students.index');
 });
 
@@ -81,7 +81,7 @@ Route::get('/user/index', function (){
 //     return view('userElement.bBody.index');
 // });
 
-Route::get('/user/profile', function (){
+Route::get('/student/profile', function (){
     return view('Students.proFile');
 });
 

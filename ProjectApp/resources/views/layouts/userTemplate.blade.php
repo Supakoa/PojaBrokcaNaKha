@@ -14,15 +14,13 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    @stack('css')
-    <title>User Template</title>
+    {{-- @stack('css') --}}
+    <title>student Template</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 
 <body>
-
-
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -37,15 +35,14 @@
             <div class="justify-content-start collapse navbar-collapse ml-4" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="/user/index" class="nav-link txt-greenblue txt-hover">หน้าแรก</a>
+                        <a href="/student/index" class="nav-link txt-greenblue txt-hover">หน้าแรก</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/user/profile" class="nav-link txt-greenblue txt-hover">ข้อมูลส่วนตัว</a>
+                        <a href="/student/profile" class="nav-link txt-greenblue txt-hover">ข้อมูลส่วนตัว</a>
                     </li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-
                 <ul class="navbar-nav">
                     <li class="nav-item active align-middle">
                         <a class="nav-link txt-greenblue" href="#"><img
@@ -62,7 +59,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="container-fluid h-100 mt-4 p-5">
+        <div class="container-fluid h-100 mt-4 p-5" id="main-content">
             @yield('main')
         </div>
         <footer class="footer">
@@ -80,6 +77,13 @@
 
     <script>
     $(document).ready(function () {
+        if (screen.width < 770) {
+            $('#statusBar').addClass('mobile');
+            $('#hrLine').addClass('mobile');
+            $('.text-time').css('fontSize', '9px');
+            $('.text-time').addClass('mb-0');
+            $('.text-time').addClass('mt-2');
+        }
         $('#showPapers').click(function (e) {
             $('html, body').animate({scrollTop:$(document).height()}, 'slow');
         });

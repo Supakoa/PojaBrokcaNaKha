@@ -1,13 +1,13 @@
-{{-- @extends('layouts.userTemplate')
+@extends('layouts.userTemplate')
 
-@section('middle') --}}
-<div class="card border-0 ">
+@section('main')
+<div class="card border-0 mt-4" >
 
         <div class="card-header text-center text-light bg-greenblue">
             <h5>ประวัติส่วนตัว</h5>
         </div>
 
-    <div class="card-body bg-info p-3 ">
+    <div class="card-body bg-info p-3 " >
         <div class="d-flex container bg-light p-5">
             <div class="w-50 h-100 border-right border-info ">
                 <dl class="row pl-5 txt-greenblue">
@@ -65,9 +65,9 @@
         </div>
     </div>
 </div>
-{{-- @endsection --}}
+@endsection
 
-{{-- @section('modal') --}}
+@section('modal')
     <!-- Modal -->
 <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -102,4 +102,4 @@
           </div>
         </div>
       </div>
-{{-- @endsection --}}
+@endsection
