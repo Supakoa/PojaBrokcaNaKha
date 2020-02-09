@@ -22,10 +22,7 @@
 
 <body>
 
-    {{-- @guest
-        @yield('login')
-    @endguest
-    @auth --}}
+
     <div class="body" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <a class="navbar-brand " href="#" onclick="openNav()">
@@ -66,6 +63,7 @@
             </div>
         </nav>
         <div class="container-fluid h-100 mt-4 p-5">
+            <h1>Hello</h1>
             @yield('main')
         </div>
         <footer class="footer">
@@ -73,7 +71,6 @@
         </footer>
     </div>
     @yield('modal')
-    {{-- @endauth --}}
 
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
