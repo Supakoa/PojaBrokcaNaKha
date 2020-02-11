@@ -5,7 +5,7 @@
 @endpush
 
 @section('login')
-<div class="body-login">
+<div class="body-login h-auto">
     <div class="form-register">
         <div class="box-text container">
             <dl class="row container p-5">
@@ -17,7 +17,7 @@
                 </dd>
             </dl>
             <div class="text-center m-0 p-0">
-                <a href="{{ url('/')}}" class="btn">เข้าสู่ระบบ</a>
+                <a href="{{ url('/login')}}" class="btn">เข้าสู่ระบบ</a>
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="sID">รหัสนักศึกษา</label>
-                            <input type="input" class="form-control" name="sID" id="sID" placeholder="">
+                            <label for="studid">รหัสนักศึกษา</label>
+                            <input type="input" class="form-control" name="studid" id="studid" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -57,9 +57,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="cPass">ยืนยันรหัสผ่าน</label>
-                            <input type="password" class="form-control" name="cPass" id="cPass" placeholder="">
-                        </div> 
+                            <label for="confirm">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" name="confirm" id="confirm" placeholder="">
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -69,15 +69,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="num">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" name="num" id="num" placeholder="">
+                            <label for="numphone">เบอร์โทรศัพท์</label>
+                            <input type="text" class="form-control" name="numphone" id="numphone" placeholder="">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="fac">คณะ</label>
-                            <select class="form-control" id="fac">
+                            <label for="faculties">คณะ</label>
+                            <select class="form-control" id="faculties">
                                 <option disabled selected>เลือกคณะ</option>
                                 @foreach ($faculties as $fac)
                             <option value="{{$fac->id}}" >{{$fac->name}}</option>
@@ -87,8 +87,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="branch">สาขา</label>
-                            <select class="form-control" id="maj" disabled>
+                            <label for="major">สาขา</label>
+                            <select class="form-control" id="major" disabled>
                                 <option disabled selected>เลือกสาขา</option>
 
                             </select>
