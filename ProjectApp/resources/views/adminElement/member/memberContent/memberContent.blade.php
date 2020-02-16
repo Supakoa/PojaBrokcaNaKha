@@ -29,7 +29,25 @@
                 </div>
             </div>
         </div>
+ <div  name=“body” style="display:flex">
+        <div name=“menuLeft” style="width:20%;">
 
+            <a href ="www.google.co.th" > HTML HOME</a>
+            <p name=“item2” > HTML Introduction</p>
+            <p name=“item3” > HTML Editors</p>
+            <p name=“item4” > HTML Basic</p>
+            <p name=“item5” > HTML Elements</p>
+            <p name=“item6” >HTML Attributes </p>
+
+        </div>
+
+        <div name=“content” style="width:80%;margin:auto">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTOaUknt27tmuFnQaGOd7w4YpNC1BrYKbKa2zRkor4YjgDiDm5n" />
+
+            <h1> Web Browsers </h1>
+            <p>The purpose of a web browser (Chrome, Edge, Firefox, Safari) is to read HTML documents and display them. </p>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSo6R1jlklE1Ae1FZ-59lTrW1uzvLmxTSRzMxxmG7dB2vn_j9_y" />
+        </div>
         <div class="table-responsive">
             <table class="table txt-greenblue table-hover">
                 <thead class="table-info">
