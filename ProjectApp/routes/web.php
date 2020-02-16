@@ -27,6 +27,10 @@ Auth::routes();
 // Route::resource('admin/papers', 'PapersController');
 Route::resource('user', 'UserController');
 Route::resource('/home', 'HomeController');
+
+//Route::resource('/admin/users','UserController');
+Route::resource('/admin/users','Admin\Admin_UsersController');
+
 Route::get('/admin/index', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
@@ -43,9 +47,7 @@ Route::get('/admin/steps', function () {
     return view('adminElement.steps.index');
 });
 
-Route::get('/admin/member', function () {
-    return view('adminElement.member.index');
-});
+
 
 Route::get('/admin/document', function () {
     return view('adminElement.document.index');

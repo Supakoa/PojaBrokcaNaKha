@@ -52,36 +52,3 @@
 </div>
 @endsection
 
-@push('js')
-<script>
-    $.ajaxSetup({
-
-headers: {
-
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-}
-
-});
-    $("#fac").change(function (e) {
-        e.preventDefault();
-        // alert($(this).val())
-        $.ajax({
-            type: "post",
-            url: "{{url('/getMajorByFacultyId')}}/"+$(this).val(),
-            data: {"id":$(this).val()},
-            dataType: "json",
-            success: function (response) {
-                $("#maj").html("<option disabled selected>เลือกสาขา</option>");
-                response.forEach(major => {
-                    $("#maj").append("<option value = '"+major.id+"' >"+major.name+"</option>");
-                });
-                $("#maj").removeAttr("disabled");
-            }
-        });
-
-    });
-
-
-    </script>
-@endpush

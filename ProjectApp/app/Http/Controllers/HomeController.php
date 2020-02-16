@@ -30,9 +30,13 @@ class HomeController extends Controller
         // dd(auth()->user());
         if(auth()->user()->role == 1){
             // return view('std_viewer.std_home.index');
-            return redirect('/admin/index');;
+            return redirect('/admin/index');
         }else{
+           if(isset($validator))
              return redirect()->back()->withErrors($validator)->withInput();
+            else{
+               return redirect('/admin/users');
+            }
         }
 
     }

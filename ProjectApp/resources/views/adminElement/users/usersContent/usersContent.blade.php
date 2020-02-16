@@ -89,62 +89,14 @@
                 </button>
             </div>
             <div class="modal-body txt-greenblue">
-                <form action="">
-                    <div class="form-group">
-                        <label for="username">รหัสผู้ใช้</label>
-                        <input type="text" class="form-control" id="username"
-                            placeholder="USERNAME">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">รหัสผ่าน</label>
-                        <input type="text" class="form-control" id="password"
-                            placeholder="PASSWORD">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">ชื่อ - นามสกุล</label>
-                        <input type="text" class="form-control" id="name"
-                            placeholder="Your name...">
-                    </div>
-                    <div class="form-group">
-                        <label for="type">ประเภทผู้ใช้</label>
-                        <select class="form-control" id="type">
-                            <option class=" disabled" >ประเภทผู้ใช้...</option>
-                            <option>แอดมิน</option>
-                            <option>ผู้ตรวจ</option>
-                            <option>พนักงาน</option>
-                            <option>นักศึกษา</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="eMail">อีเมล</label>
-                        <input type="email" class="form-control" id="eMail"
-                            placeholder="name@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">เบอร์โทร</label>
-                        <input type="text" class="form-control" id="phone"
-                            placeholder="+66">
-                    </div>
-                    <div class="form-group">
-                        <label for="facuty">คณะ</label>
-                        <select class="form-control" id="facuty">
-                            <option class=" disabled" >คณะ...</option>
-                            <option>ครุศาสตร์</option>
-                            <option>การจัดการ</option>
-                            <option>เทคโนโลยีอุสาหกรรม</option>
-                            <option>วิทยาศาสตร์</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="barnch">สาขา</label>
-                        <select class="form-control" id="barnch">
-                            <option class="disabled">สาขา...</option>
-                        </select>
-                    </div>
+                <form action="{{url('/admin/users')}}" method="post" id ="regis">
+                    @method('POST')
+                    @csrf
+                    @include('Incudes.registerFormInc')
                 </form>
             </div>
             <div class="modal-footer" style="border-top-color:#639CB4">
-                <button type="button" class="btn btn-info m-auto">เพิ่ม</button>
+                <button  type="submit" form="regis" class="btn btn-info m-auto">เพิ่ม</button>
             </div>
         </div>
     </div>
