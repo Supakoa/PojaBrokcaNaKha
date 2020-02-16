@@ -87,12 +87,48 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="branch">สาขา</label>
-            <select class="form-control" id="maj" disabled>
+            <label for="major">สาขา</label>
+            <select class="form-control" id="major" name="major" disabled>
                 <option disabled selected>เลือกสาขา</option>
-
             </select>
         </div>
     </div>
 
 </div>
+@push('css')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+@endpush
+
+@push('js')
+    <script>
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
+        });
+        $("#fac").change(function (e) {
+            e.preventDefault();
+            // alert($(this).val())
+            $.ajax({
+                type: "post",
+                url: "{{url('/getMajorByFacultyId')}}/"+$(this).val(),
+                data: {"id":$(this).val()},
+                dataType: "json",
+                success: function (response) {
+                    $("#maj").html("<option disabled selected>เลือกสาขา</option>");
+                    response.forEach(major => {
+                        $("#maj").append("<option value = '"+major.id+"' >"+major.name+"</option>");
+                    });
+                    $("#maj").removeAttr("disabled");
+                }
+            });
+
+        });
+
+
+    </script>
+@endpush

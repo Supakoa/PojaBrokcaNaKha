@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Faculty AS Faculty ;
 class UserController extends Controller
 {
     /**
@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        return view('adminElement.users.index')->with("faculties",Faculty::all());
     }
 
     /**
