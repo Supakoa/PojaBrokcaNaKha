@@ -29,50 +29,84 @@
             <p class="p-3">GE PETTITION</p>
         </div>
         <div class="body-login">
-            <form class="container h-100" action="">
+            <form class="container h-100" action="{{url('/register')}}" method="post">
+                @method('POST')
+                @csrf
                 <div class="row container">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name">ชื่อ</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="">
+                            <label for="email">อีเมล</label>
+                            <input type="email" class="form-control  @error('email') is-invalid @enderror" value="{{ old('email') }}"  name="email" id="email" placeholder="">
+                            @error('email')
+                            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                                 <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="tel">เบอร์โทรศัพท์</label>
+                            <input type="tel" class="form-control @error('tel') is-invalid @enderror" value="{{ old('tel') }}" name="tel" id="tel" placeholder="">
+                            @error('tel')
+                            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                                 <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="password">รหัสผ่าน</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" id="password" placeholder="">
+                            @error('password')
+                            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                                 <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="password_confirmation">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="student_id">รหัสนักศึกษา</label>
+                            <input type="number" class="form-control @error('student_id') is-invalid @enderror" value="{{ old('student_id') }}" name="student_id" id="student_id" placeholder="">
+                            @error('student_id')
+                            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fname">ชื่อ</label>
+                            <input type="text" class="form-control @error('fname') is-invalid @enderror" value="{{ old('fname') }}" name="fname" id="fname" placeholder="">
+                            @error('fname')
+                            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                            @enderror
+
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="lname">นามสกุล</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="">
+                            <input type="text" class="form-control  @error('lname') is-invalid @enderror" value="{{ old('lname') }}" name="lname" id="lastname" placeholder="">
+                            @error('lname')
+                            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                            @enderror
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="sID">รหัสนักศึกษา</label>
-                            <input type="input" class="form-control" name="sID" id="sID" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="pass">รหัสผ่าน</label>
-                            <input type="password" class="form-control" name="pass" id="pass" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="cPass">ยืนยันรหัสผ่าน</label>
-                            <input type="password" class="form-control" name="cPass" id="cPass" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="mail">อีเมล</label>
-                            <input type="email" class="form-control" name="mail" id="mail" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="num">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" name="num" id="num" placeholder="">
-                        </div>
-                    </div>
+
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -96,7 +130,15 @@
                     </div>
 
                 </div>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="text-center">
                         <button class="btn-sub text-center m-4" type="submit">ลงทะเบียน</button>
                 </div>
