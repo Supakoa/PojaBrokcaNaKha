@@ -78,9 +78,9 @@
 
 
 {{--Modal Add --}}
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+<div class="modal fade" id="exampleModalScrollable" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content container">
             <div class="modal-header" style="border-bottom-color:#639CB4">
                 <h5 class="modal-title txt-greenblue" id="exampleModalScrollableTitle">เพิ่มข้อมูล</h5>
