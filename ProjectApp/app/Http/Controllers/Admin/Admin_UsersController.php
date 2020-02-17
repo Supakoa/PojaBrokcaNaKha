@@ -64,7 +64,7 @@ class Admin_UsersController extends Controller
        $user = User::create([
             'firstname' => $request['fname'],
             'lastname' => $request['lname'],
-            'role' => $request['type'],
+            'role_id' => $request['type'],
             'major_id' => $request['major'],
             'email' => $request['email'],
             'telephone' => $request['tel'],
