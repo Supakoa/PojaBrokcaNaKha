@@ -69,7 +69,7 @@
                             <button class="btn btn-outline-secondary m-1">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-                            <button class="btn btn-outline-danger m-1">
+                            <button type="button" onclick="deleteUser({{$user->id}})" class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
