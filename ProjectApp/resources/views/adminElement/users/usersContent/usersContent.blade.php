@@ -50,17 +50,11 @@
                 </tr>
                 </thead>
                 <tbody class="nowrap">
-                {{-- {{
-                    dd($Users)
-                }} --}}
                 @foreach ($Users as $user)
                     <tr>
                         <td>{{$user->student_id ==null ? $user->id : $user->student_id}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->firstname}} {{$user->lastname}}</td>
-                        {{--                        {{--}}
-                        {{--                            dd($user->role()->get())--}}
-                        {{--                        }}--}}
                         <td>{{$user->role->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->telephone}}</td>
@@ -75,7 +69,7 @@
                             <button class="btn btn-outline-secondary m-1">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-                            <button class="btn btn-outline-danger m-1">
+                            <button type="button" onclick="deleteUser({{$user->id}})" class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
