@@ -1,6 +1,6 @@
 <div class="card p-0 m-0">
     <div class="card-header text-center bg-header">
-        <h4 class="text-light" >ค้นหาสมาชิก</h4>
+        <h4 class="text-light">ค้นหาสมาชิก</h4>
     </div>
     <div class="card-body">
         <div class="row justify-content-end">
@@ -69,7 +69,8 @@
                             <button class="btn btn-outline-secondary m-1">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-                            <button type="button" onclick="deleteUser({{$user->id}})" class="btn btn-outline-danger m-1">
+                            <button type="button" onclick="deleteUser({{$user->id}})"
+                                    class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -108,13 +109,18 @@
                     <div class=" form-group col-lg-4">
                         <label for="type">ประเภทผู้ใช้</label>
                         <select class="form-control" name="type" id="type">
-                            <option class=" disabled">ประเภทผู้ใช้...</option>
+                            <option selected  disabled>ประเภทผู้ใช้...</option>
                             <option value="1">แอดมิน</option>
                             <option value="2">ผู้ตรวจ</option>
                             <option value="3">นักศึกษา</option>
                         </select>
                     </div>
                 </form>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
             <div class="modal-footer" style="border-top-color:#639CB4">
                 <button type="submit" form="regis" class="btn btn-info m-auto">เพิ่ม</button>
@@ -127,30 +133,30 @@
 
 @push('js')
     <script>
-     $(document).ready(function () {
-    @if($errors->any())
-        $('#CreateUserModal').modal('show');
-    @endif
 
-     });
-
+        $(document).ready(function () {
+            @error('InsertError')
+            $('#CreateUserModal').modal('show');
+            @enderror
+        });
+        jq
         const deleteUser = (id) => {
-                $('#deleteForm').attr("action", '{{ url("/admin/users") }}/' + id);
-                Swal.fire({
-                    title: 'ยืนยันการลบ?',
-                    text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'ลบ',
-                    cancelButtonText: 'ยกเลิก',
-                }).then((result) => {
-                    if (result.value) {
-                        $('#deleteForm').submit();
-                    }
-                });
-            };
+            $('#deleteForm').attr("action", '{{ url("/admin/users") }}/' + id);
+            Swal.fire({
+                title: 'ยืนยันการลบ?',
+                text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ลบ',
+                cancelButtonText: 'ยกเลิก',
+            }).then((result) => {
+                if (result.value) {
+                    $('#deleteForm').submit();
+                }
+            });
+        };
     </script>
 @endpush
 

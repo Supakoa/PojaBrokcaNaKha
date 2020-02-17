@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Faculty;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\Environment\Console;
@@ -40,27 +41,35 @@ class Admin_UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $validator = Validator::make($request->all(), [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'student_id' => ['required', 'numeric', 'unique:users'],
-            'tel' => ['required', 'numeric'],
+            'student_id' => ['required', 'numeric','digits:11', 'unique:users'],
+            'tel' => ['required', 'numeric','digits:10'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'type' => ['required'],
             'major' => ['required'],
+
         ], [
             'fname.required' => 'กรุณากรอกชื่อ',
             'lname.required' => 'กรุณากรอกนามสกุล',
+            'email.unique' => 'อีเมลล์นี้ไม่สามารถใช้ได้',
+            'password.confirmed' => 'ยืนยันรหัสผ่านไม่ถูกต้อง',
             'student_id.required' => 'กรุณากรอกรหัสนักศึกษา',
             'student_id.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
             'student_id.size' => 'กรุณากรอกไม่เกิน 11 ตัว',
-            'tel.required' => 'กรุณากรอกเบอร์โทรศัพษ์',
+            'tel.required' => 'กรุณากรอกเบอร์โทรศัพท์',
             'tel.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
             'tel.size' => 'กรุณากรอกไม่เกิน 10 ตัว',
             'type.required' => 'กรุณาเลือกตำแหน่ง',
-            'major.required' => 'กรุณาระบุสาขา'
+            'major.required' => 'กรุณาระบุสาขา',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->add("InsertError","error"))->withInput();
+        }
        $user = User::create([
             'firstname' => $request['fname'],
             'lastname' => $request['lname'],
@@ -73,7 +82,7 @@ class Admin_UsersController extends Controller
         ]);
 
 
-        return redirect()->back();
+        return redirect()->back()->with("success","เพิ่มผู้ใช้สำเร็จ");
 
     }
 
