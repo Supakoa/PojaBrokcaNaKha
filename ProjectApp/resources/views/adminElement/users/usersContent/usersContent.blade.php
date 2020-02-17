@@ -50,15 +50,22 @@
                     </tr>
                 </thead>
                 <tbody class="nowrap">
+                    {{-- {{
+                        dd($Users)
+                    }} --}}
+                    {{-- @foreach ($Users as $user)
                     <tr>
-                        <td>59122519032</td>
-                        <td>Somsainaja</td>
-                        <td>นายสมชาย สุดกล้าหาญ</td>
-                        <td>นักศึกษา</td>
-                        <td>somsai@gmail.com</td>
-                        <td>0922359402</td>
-                        <td>เทคโนโลยีอุสาหกรรม</td>
-                        <td>วิศวะกรรมคอมพิวเตอร์</td>
+                        <td>{{$user->student_id}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->firstname}} {{$user->lastname}}</td>
+                        {{
+                            dd($user->role)
+                        }}
+                        <td>{{$uesr->role}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->telephone}}</td>
+                        <td>{{$user->major->faculty_id->name}}</td>
+                        <td>{{$user->major->name}}</td>
                         <td class="d-flex">
                             <button class="btn btn-outline-secondary m-1">
                                 <i class="fas fa-pencil-alt"></i>
@@ -69,6 +76,7 @@
                             </button>
                         </td>
                     </tr>
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -92,6 +100,15 @@
                     @method('POST')
                     @csrf
                     @include('Incudes.registerFormInc')
+                    <div class=" form-group col-lg-4">
+                        <label for="type">ประเภทผู้ใช้</label>
+                        <select class="form-control" name="type" id="type">
+                            <option class=" disabled" >ประเภทผู้ใช้...</option>
+                            <option value="1">แอดมิน</option>
+                            <option value="2">ผู้ตรวจ</option>
+                            <option value="3">นักศึกษา</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer" style="border-top-color:#639CB4">

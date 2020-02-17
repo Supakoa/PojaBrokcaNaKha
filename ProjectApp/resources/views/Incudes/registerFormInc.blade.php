@@ -119,11 +119,11 @@
                 data: {"id":$(this).val()},
                 dataType: "json",
                 success: function (response) {
-                    $("#maj").html("<option disabled selected>เลือกสาขา</option>");
+                    $("#major").html("<option disabled selected>เลือกสาขา</option>");
                     response.forEach(major => {
-                        $("#maj").append("<option value = '"+major.id+"' >"+major.name+"</option>");
+                        $("#major").append("<option value = '"+major.id+"' >"+major.name+"</option>");
                     });
-                    $("#maj").removeAttr("disabled");
+                    $("#major").removeAttr("disabled");
                 }
             });
 

@@ -8,6 +8,6 @@ class Role extends Model
 {
     public function user()
     {
-        return $this->hasOne('app/User');
+        return $this->belongsTo('app/User');
     }
 }

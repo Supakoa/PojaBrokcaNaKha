@@ -22,7 +22,7 @@ class admin extends Seeder
             'title' => 'Mr.',
             'email' => 'admin@ssru.ac.th',
             'telephone' => 'admin telephone',
-            'role' => 1,
+            'role_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

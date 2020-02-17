@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Faculty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use SebastianBergmann\Environment\Console;
 
 class Admin_UsersController extends Controller
 {
@@ -15,7 +17,8 @@ class Admin_UsersController extends Controller
      */
     public function index()
     {
-        return view('adminElement.users.index')->with("faculties",Faculty::all());
+        dd(User::all()->role);
+        return view('adminElement.users.index')->with("faculties",Faculty::all())->with("Users", User::all());
 
     }
 
@@ -40,10 +43,12 @@ class Admin_UsersController extends Controller
         $this->validate($request, [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'student_id' => ['required', 'numeric', 'size :11', 'unique:users'],
-            'tel' => ['required', 'numeric', 'size :10'],
+            'student_id' => ['required', 'numeric', 'unique:users'],
+            'tel' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'type' => ['required'],
+            'major' => ['required'],
         ], [
             'fname.required' => 'กรุณากรอกชื่อ',
             'lname.required' => 'กรุณากรอกนามสกุล',
@@ -53,8 +58,22 @@ class Admin_UsersController extends Controller
             'tel.required' => 'กรุณากรอกเบอร์โทรศัพษ์',
             'tel.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
             'tel.size' => 'กรุณากรอกไม่เกิน 10 ตัว',
+            'type.required' => 'กรุณาเลือกตำแหน่ง',
+            'major.required' => 'กรุณาระบุสาขา'
+        ]);
+       $user = User::create([
+            'firstname' => $request['fname'],
+            'lastname' => $request['lname'],
+            'role' => $request['type'],
+            'major_id' => $request['major'],
+            'email' => $request['email'],
+            'telephone' => $request['tel'],
+            'password' => Hash::make($request['password']),
+            'student_id' => $request['student_id'],
         ]);
 
+
+        return redirect()->back();
 
     }
 
