@@ -96,7 +96,7 @@ class Admin_UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return $user;
     }
 
     /**
@@ -117,8 +117,9 @@ class Admin_UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, $id)
+    public function destroy(User $user)
     {
-        return $result = DB::table('users')->where('id', '=', $id)->delete();
+        $user->delete();
+        return  redirect()->back()->with('success', 'เยี่ยมจริงๆ ๆ ๆ') ;
     }
 }

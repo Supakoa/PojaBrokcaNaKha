@@ -40,12 +40,12 @@ class User extends Authenticatable
 
     public function license()
     {
-        return $this->hasOne('app/License');
+        return $this->hasOne('app\License');
     }
 
     public function papers()
     {
-        return $this->hasMany('app/Paper');
+        return $this->hasMany('app\Paper');
     }
 
     public function major()
@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne('App\Role','id');
+        return $this->hasOne('App\Role', 'id', 'role_id');
     }
 
 }

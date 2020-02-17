@@ -32,7 +32,7 @@
             <form class="container h-100" action="{{url('/register')}}" method="post">
                 @method('POST')
                 @csrf
-                @include('Incudes.registerFormInc')
+                @include('Includes.registerFormInc')
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
