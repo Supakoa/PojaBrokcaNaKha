@@ -63,7 +63,6 @@
             </div>
         </nav>
         <div class="container-fluid h-100 mt-4 p-5">
-            <h1>Hello</h1>
             @yield('main')
         </div>
         <footer class="footer">

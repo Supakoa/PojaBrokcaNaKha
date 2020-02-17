@@ -16,10 +16,6 @@
 </div>
 @endsection
 
-{{-- @section('modal')
-modal status papers
-
-@endsection --}}
 
 @push('js')
 <script>
