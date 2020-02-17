@@ -1,6 +1,6 @@
 <div class="card p-0 m-0">
     <div class="card-header text-center bg-header">
-        <h4 class="text-light">ค้นหาสมาชิก</h4>
+        <h4 class="text-light" >ค้นหาสมาชิก</h4>
     </div>
     <div class="card-body">
         <div class="row justify-content-end">
@@ -43,7 +43,7 @@
                     <th>สาขา</th>
                     <th>
                         <button class="btn shadow btn-info rounded-circle" type="button" data-toggle="modal"
-                                data-target="#exampleModalScrollable">
+                                data-target="#CreateUserModal" id="btnCreateUser">
                             <i class="fas fa-plus    "></i>
                         </button>
                     </th>
@@ -82,10 +82,10 @@
 </div>
 
 @if (isset($Users))
-<form id="deleteForm" method="post">
-    @csrf
-    @method('DELETE')
-</form>
+    <form id="deleteForm" method="post">
+        @csrf
+        @method('DELETE')
+    </form>
 @endif
 
 {{-- Modal Edit --}}
@@ -93,12 +93,12 @@
 
 
 {{--Modal Add --}}
-<div class="modal fade" id="exampleModalScrollable" data-backdrop="static" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal fade" id="CreateUserModal" data-backdrop="static" tabindex="-1" role="dialog"
+     aria-labelledby="CreateUserModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content container">
             <div class="modal-header" style="border-bottom-color:#639CB4">
-                <h5 class="modal-title txt-greenblue" id="exampleModalScrollableTitle">เพิ่มข้อมูล</h5>
+                <h5 class="modal-title txt-greenblue" id="CreateUserModalTitle">เพิ่มข้อมูล</h5>
                 <button type="button" class="close txt-greenblue" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -129,24 +129,31 @@
 {{--Modal Edit --}}
 
 @push('js')
-<script src="">
-    const deleteUser = (id) => {
-        $('#deleteForm').attr("action", '{{ url("/admin/users") }}/'+id);
-        Swal.fire({
-            title: 'ยืนยันการลบ?',
-            text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ลบ',
-            cancelButtonText: 'ยกเลิก',
-        }).then((result) => {
-            if (result.value) {
-                $('#deleteForm').submit();
-            }
-        });
-    };
-</script>
+    <script>
+     $(document).ready(function () {
+    @if($errors->any())
+        $('#CreateUserModal').modal('show');
+    @endif
+
+     });
+
+        const deleteUser = (id) => {
+                $('#deleteForm').attr("action", '{{ url("/admin/users") }}/' + id);
+                Swal.fire({
+                    title: 'ยืนยันการลบ?',
+                    text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ลบ',
+                    cancelButtonText: 'ยกเลิก',
+                }).then((result) => {
+                    if (result.value) {
+                        $('#deleteForm').submit();
+                    }
+                });
+            };
+    </script>
 @endpush
 
