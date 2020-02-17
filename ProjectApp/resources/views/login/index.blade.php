@@ -6,7 +6,7 @@
 
 @section('login')
 <div class="body-login">
-    <div class="form-login container">
+    <div class="form-login">
         <div class="head-login text-center">
             <div class="logo-head">
                 <img class="p-0" src="{{url('images/logo.png')}}" alt="" width="150px" height="150px">
@@ -14,10 +14,10 @@
             <p class="p-3">GE PETTITION</p>
         </div>
         <div class="body-login">
-            <form class="container h-100" action="{{url('/login')}}" method="POST">
+            <form class="h-100" action="{{url('/login')}}" method="POST">
                 @csrf
                 @method("POST")
-                <h3>เข้าสู่ระบบ</h3>
+                <h3 id="login">เข้าสู่ระบบ</h3>
                 <div class="form-group p-5">
                     <label for="email">อีเมลล์</label>
                     <input id="email" class="form-control @error('email') is-invalid @enderror" name="email"

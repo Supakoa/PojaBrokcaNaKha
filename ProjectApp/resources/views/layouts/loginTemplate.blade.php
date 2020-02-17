@@ -37,7 +37,7 @@
 
     @stack('js')
 
-    {{-- <script>
+    <script>
     $(document).ready(function () {
         $('#showPapers').click(function (e) {
             $('html, body').animate({scrollTop:$(document).height()}, 'slow');
@@ -63,7 +63,7 @@
                 $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
             }
     });
-    </script> --}}
+    </script>
 </body>
 
 </html>
