@@ -5,7 +5,7 @@
 @endpush
 
 @section('login')
-<div class="body-login">
+<div class="body-login h-auto">
     <div class="form-register">
         <div class="box-text container">
             <dl class="row container p-5">
@@ -17,7 +17,7 @@
                 </dd>
             </dl>
             <div class="text-center m-0 p-0">
-                <a href="{{ url('/')}}" class="btn">เข้าสู่ระบบ</a>
+                <a href="{{ url('/login')}}" class="btn">เข้าสู่ระบบ</a>
             </div>
         </div>
     </div>
