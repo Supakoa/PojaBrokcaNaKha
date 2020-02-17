@@ -17,7 +17,7 @@ class Admin_UsersController extends Controller
      */
     public function index()
     {
-        dd(User::all()->role);
+//        dd(User::all()->role);
         return view('adminElement.users.index')->with("faculties",Faculty::all())->with("Users", User::all());
 
     }
