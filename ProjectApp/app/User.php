@@ -50,12 +50,12 @@ class User extends Authenticatable
 
     public function major()
     {
-        return $this->belongsTo('app/Major');
+        return $this->belongsTo('App\Major');
     }
 
     public function role()
     {
-        return $this->hasOne('app/Role');
+        return $this->hasOne('App\Role','id');
     }
 
 }

@@ -7,7 +7,7 @@
             <div class="col-md-5">
                 <div class="input-group mb-3 w-75 float-right">
                     <input type="text" class="form-control border-right-0 boder-greenBlue txt-greenblue"
-                        placeholder="SEARCH" aria-label="SEARCH" aria-describedby="button-addon2">
+                           placeholder="SEARCH" aria-label="SEARCH" aria-describedby="button-addon2">
                     <div class="input-group-append ">
                         <button class="btn btn-outline-info border-left-0" type="button" id="button-addon2"><i
                                 class="fas fa-search"></i></button>
@@ -32,51 +32,55 @@
         <div class="table-responsive">
             <table class="table txt-greenblue table-hover">
                 <thead class="table-info">
-                    <tr class="text-center">
-                        <th>รหัสผู้ใช้</th>
-                        <th>รหัสผ่าน</th>
-                        <th>ชื่อ - นามสกุล</th>
-                        <th>ตำแหน่ง</th>
-                        <th>อีเมล</th>
-                        <th>เบอร์โทร</th>
-                        <th>คณะ</th>
-                        <th>สาขา</th>
-                        <th>
-                            <button class="btn shadow btn-info rounded-circle" type="button" data-toggle="modal"
+                <tr class="text-center">
+                    <th>รหัสผู้ใช้</th>
+                    <th>รหัสผ่าน</th>
+                    <th>ชื่อ - นามสกุล</th>
+                    <th>ตำแหน่ง</th>
+                    <th>อีเมล</th>
+                    <th>เบอร์โทร</th>
+                    <th>คณะ</th>
+                    <th>สาขา</th>
+                    <th>
+                        <button class="btn shadow btn-info rounded-circle" type="button" data-toggle="modal"
                                 data-target="#exampleModalScrollable">
-                                <i class="fas fa-plus    "></i>
-                            </button>
-                        </th>
-                    </tr>
+                            <i class="fas fa-plus    "></i>
+                        </button>
+                    </th>
+                </tr>
                 </thead>
                 <tbody class="nowrap">
-                    {{-- {{
-                        dd($Users)
-                    }} --}}
-                    @foreach ($Users as $user)
+                {{-- {{
+                    dd($Users)
+                }} --}}
+                @foreach ($Users as $user)
                     <tr>
-                        <td>{{$user->student_id}}</td>
+                        <td>{{$user->student_id ==null ? $user->id : $user->student_id}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->firstname}} {{$user->lastname}}</td>
-                        {{-- {{
-                            dd($user->role)
-                        }} --}}
-                        {{-- <td>{{$uesr->role}}</td> --}}
+                        {{--                        {{--}}
+                        {{--                            dd($user->role()->get())--}}
+                        {{--                        }}--}}
+                        <td>{{$user->role->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->telephone}}</td>
-                        {{-- <td>{{$user->major->faculty_id->name}}</td>
-                        <td>{{$user->major->name}}</td> --}}
+                        @if($user->major !=null)
+                            <td>{{$user->major->faculty->name}}</td>
+                            <td>{{$user->major->name}}</td>
+                        @else
+                            <td>ไม่ระบุ</td>
+                            <td>ไม่ระบุ</td>
+                        @endif
                         <td class="d-flex">
                             <button class="btn btn-outline-secondary m-1">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-
-                            <button onclick="deleteUser({{$user->id}})" class="btn btn-outline-danger m-1">
+                            <button class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -93,7 +97,7 @@
 
 {{--Modal Add --}}
 <div class="modal fade" id="exampleModalScrollable" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content container">
             <div class="modal-header" style="border-bottom-color:#639CB4">
@@ -103,14 +107,14 @@
                 </button>
             </div>
             <div class="modal-body txt-greenblue">
-                <form action="{{url('/admin/users')}}" method="post" id ="regis">
+                <form action="{{url('/admin/users')}}" method="post" id="regis">
                     @method('POST')
                     @csrf
                     @include('Incudes.registerFormInc')
                     <div class=" form-group col-lg-4">
                         <label for="type">ประเภทผู้ใช้</label>
                         <select class="form-control" name="type" id="type">
-                            <option class=" disabled" >ประเภทผู้ใช้...</option>
+                            <option class=" disabled">ประเภทผู้ใช้...</option>
                             <option value="1">แอดมิน</option>
                             <option value="2">ผู้ตรวจ</option>
                             <option value="3">นักศึกษา</option>
@@ -119,7 +123,7 @@
                 </form>
             </div>
             <div class="modal-footer" style="border-top-color:#639CB4">
-                <button  type="submit" form="regis" class="btn btn-info m-auto">เพิ่ม</button>
+                <button type="submit" form="regis" class="btn btn-info m-auto">เพิ่ม</button>
             </div>
         </div>
     </div>
