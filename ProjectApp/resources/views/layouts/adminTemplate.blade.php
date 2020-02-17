@@ -7,13 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @stack('css')
-    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEindex.css')}}">
-    <link rel="stylesheet" href="{{ asset('node_modules/CEstyle/dist/css/CEadmin.css')}}">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <!-- fontawesom -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    @include('Includes.css')
     <title>Admin Template</title>
 </head>
 
@@ -67,9 +61,8 @@
         </footer>
     </div>
     @yield('modal')
-    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
-    <script src="{{ url('https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js')}}"></script>
-    <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    @include('Includes.js')
+
     @stack('js')
 
     <script>

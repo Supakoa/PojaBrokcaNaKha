@@ -30,16 +30,16 @@ class Paper extends Model
     // relation
     public function status()
     {
-        return $this->belongsTo('app/Status');
+        return $this->belongsTo('app\Status');
     }
 
     public function user()
     {
-        return $this->belongsTo('app/User');
+        return $this->belongsTo('app\User');
     }
 
     public function form()
     {
-        return $this->belongsTo('app/Form');
+        return $this->belongsTo('app\Form');
     }
 }

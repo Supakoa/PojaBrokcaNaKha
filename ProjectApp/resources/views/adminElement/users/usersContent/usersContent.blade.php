@@ -3,34 +3,8 @@
         <h4 class="text-light">ค้นหาสมาชิก</h4>
     </div>
     <div class="card-body">
-        <div class="row justify-content-end">
-            <div class="col-md-5">
-                <div class="input-group mb-3 w-75 float-right">
-                    <input type="text" class="form-control border-right-0 boder-greenBlue txt-greenblue"
-                           placeholder="SEARCH" aria-label="SEARCH" aria-describedby="button-addon2">
-                    <div class="input-group-append ">
-                        <button class="btn btn-outline-info border-left-0" type="button" id="button-addon2"><i
-                                class="fas fa-search"></i></button>
-                    </div>
-                </div>
-
-                <div class="input-group mb-3 w-50 float-right">
-                    <select class="custom-select boder-greenBlue txt-greenblue" id="inputGroupSelect02">
-                        <option selected>กรองสถานะ</option>
-                        <option value="1">รหัสผู้ใช้</option>
-                        <option value="2">รหัสผ่าน</option>
-                        <option value="3">ชื่อ - นามสกุล</option>
-                        <option value="4">ตำแหน่ง</option>
-                        <option value="5">อีเมล</option>
-                        <option value="6">เบอร์โทร</option>
-                        <option value="7">คณะ</option>
-                        <option value="8">สาขา</option>
-                    </select>
-                </div>
-            </div>
-        </div>
         <div class="table-responsive">
-            <table class="table txt-greenblue table-hover">
+            <table class="table txt-greenblue table-hover display" id="userTable">
                 <thead class="table-info">
                 <tr class="text-center">
                     <th>รหัสผู้ใช้</th>
@@ -66,7 +40,7 @@
                             <td>ไม่ระบุ</td>
                         @endif
                         <td class="d-flex">
-                            <button class="btn btn-outline-secondary m-1">
+                            <button onclick="editUser({{$user->id}})" class="btn btn-outline-secondary m-1" data-toggle="modal" data-target=".bd-example-modal-lg">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                             <button type="button" onclick="deleteUser({{$user->id}})"
@@ -82,6 +56,9 @@
     </div>
 </div>
 
+@include('adminElement.users.usersContent.modal.addModal')
+@include('adminElement.users.usersContent.modal.editModal')
+
 @if (isset($Users))
     <form id="deleteForm" method="post">
         @csrf
@@ -93,73 +70,53 @@
 {{-- Modal Edit --}}
 
 
-{{--Modal Add --}}
-<div class="modal fade" id="CreateUserModal" data-backdrop="static" tabindex="-1" role="dialog"
-     aria-labelledby="CreateUserModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content container">
-            <div class="modal-header" style="border-bottom-color:#639CB4">
-                <h5 class="modal-title txt-greenblue" id="CreateUserModalTitle">เพิ่มข้อมูล</h5>
-                <button type="button" class="close txt-greenblue" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body txt-greenblue">
-                <form action="{{url('/admin/users')}}" method="post" id="regis">
-                    @method('POST')
-                    @csrf
-                    @include('Incudes.registerFormInc')
-                    <div class=" form-group col-lg-4">
-                        <label for="type">ประเภทผู้ใช้</label>
-                        <select class="form-control" name="type" id="type">
-                            <option selected  disabled>ประเภทผู้ใช้...</option>
-                            <option value="1">แอดมิน</option>
-                            <option value="2">ผู้ตรวจ</option>
-                            <option value="3">นักศึกษา</option>
-                        </select>
-                    </div>
-                </form>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="modal-footer" style="border-top-color:#639CB4">
-                <button type="submit" form="regis" class="btn btn-info m-auto">เพิ่ม</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-{{--Modal Edit --}}
+
 
 @push('js')
     <script>
 
-        $(document).ready(function () {
-            @error('InsertError')
+     $(document).ready(function () {
+    $('#userTable').DataTable();
+
+    @error('InsertError')
             $('#CreateUserModal').modal('show');
             @enderror
-        });
-        jq
-        const deleteUser = (id) => {
-            $('#deleteForm').attr("action", '{{ url("/admin/users") }}/' + id);
-            Swal.fire({
-                title: 'ยืนยันการลบ?',
-                text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ลบ',
-                cancelButtonText: 'ยกเลิก',
-            }).then((result) => {
-                if (result.value) {
-                    $('#deleteForm').submit();
+
+     });
+
+        function deleteUser(id){
+                $('#deleteForm').attr("action", '{{ url("/admin/users") }}/' + id);
+                Swal.fire({
+                    title: 'ยืนยันการลบ?',
+                    text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ลบ',
+                    cancelButtonText: 'ยกเลิก',
+                }).then((result) => {
+                    if (result.value) {
+                        $('#deleteForm').submit();
+                    }
+                });
+            }
+        function editUser(id){
+            $.getJSON("{{url("/admin/users/")}}/" + id + "/edit",
+                function (user, textStatus, jqXHR) {
+                    $('#edit_email').val(user.email);
+                    $('#edit_student_id').val(user.student_id);
+                    $('#edit_tel').val(user.telephone);
+                    $('#edit_fname').val(user.firstname);
+                    $('#edit_lname').val(user.lastname);
+                    // $('#edit_student_id').val(user.student_id);
+
+                    console.log(user);
+
                 }
-            });
-        };
+            );
+        }
     </script>
 @endpush
 
