@@ -17,7 +17,7 @@ class Admin_UsersController extends Controller
      */
     public function index()
     {
-        dd(User::all()->role);
+        // dd(User::all()->role);
         return view('adminElement.users.index')->with("faculties",Faculty::all())->with("Users", User::all());
 
     }
@@ -117,8 +117,8 @@ class Admin_UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, $id)
     {
-        //
+        return $result = DB::table('users')->where('id', '=', $id)->delete();
     }
 }

@@ -6,6 +6,4 @@
 </div>
 @endsection
 
-@push('js')
 
-@endpush

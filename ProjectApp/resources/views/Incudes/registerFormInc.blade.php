@@ -1,20 +1,9 @@
 <div class="row container">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             <label for="email">อีเมล</label>
             <input type="email" class="form-control  @error('email') is-invalid @enderror" value="{{ old('email') }}"  name="email" id="email" placeholder="">
             @error('email')
-            <span class="invalid-feedback" style="border-radius:15px" role="alert">
-                                 <strong>{{ $message }}</strong>
-                            </span>
-            @enderror
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="tel">เบอร์โทรศัพท์</label>
-            <input type="tel" class="form-control @error('tel') is-invalid @enderror" value="{{ old('tel') }}" name="tel" id="tel" placeholder="">
-            @error('tel')
             <span class="invalid-feedback" style="border-radius:15px" role="alert">
                                  <strong>{{ $message }}</strong>
                             </span>
@@ -38,7 +27,7 @@
             <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="">
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="form-group">
             <label for="student_id">รหัสนักศึกษา</label>
             <input type="number" class="form-control @error('student_id') is-invalid @enderror" value="{{ old('student_id') }}" name="student_id" id="student_id" placeholder="">
@@ -46,6 +35,17 @@
             <span class="invalid-feedback" style="border-radius:15px" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="tel">เบอร์โทรศัพท์</label>
+            <input type="tel" class="form-control @error('tel') is-invalid @enderror" value="{{ old('tel') }}" name="tel" id="tel" placeholder="">
+            @error('tel')
+            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                                 <strong>{{ $message }}</strong>
+                            </span>
             @enderror
         </div>
     </div>

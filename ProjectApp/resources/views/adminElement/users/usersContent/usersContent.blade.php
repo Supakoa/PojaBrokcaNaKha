@@ -53,35 +53,42 @@
                     {{-- {{
                         dd($Users)
                     }} --}}
-                    {{-- @foreach ($Users as $user)
+                    @foreach ($Users as $user)
                     <tr>
                         <td>{{$user->student_id}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->firstname}} {{$user->lastname}}</td>
-                        {{
+                        {{-- {{
                             dd($user->role)
-                        }}
-                        <td>{{$uesr->role}}</td>
+                        }} --}}
+                        {{-- <td>{{$uesr->role}}</td> --}}
                         <td>{{$user->email}}</td>
                         <td>{{$user->telephone}}</td>
-                        <td>{{$user->major->faculty_id->name}}</td>
-                        <td>{{$user->major->name}}</td>
+                        {{-- <td>{{$user->major->faculty_id->name}}</td>
+                        <td>{{$user->major->name}}</td> --}}
                         <td class="d-flex">
                             <button class="btn btn-outline-secondary m-1">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
 
-                            <button class="btn btn-outline-danger m-1">
+                            <button onclick="deleteUser({{$user->id}})" class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@if (isset($Users))
+<form id="deleteForm" method="post">
+    @csrf
+    @method('DELETE')
+</form>
+@endif
 
 
 {{--Modal Add --}}
@@ -120,4 +127,25 @@
 
 {{--Modal Edit --}}
 
+@push('js')
+<script src="">
+    const deleteUser = (id) => {
+        $('#deleteForm').attr("action", '{{ url("/admin/users") }}/'+id);
+        Swal.fire({
+            title: 'ยืนยันการลบ?',
+            text: "ข้อมูลจะถูกลบออกจากฐานข้อมูล",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ลบ',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+            if (result.value) {
+                $('#deleteForm').submit();
+            }
+        });
+    };
+</script>
+@endpush
 
