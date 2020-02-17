@@ -37,10 +37,10 @@
             <div class="justify-content-start collapse navbar-collapse ml-4" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="/user/index" class="nav-link txt-greenblue txt-hover">หน้าแรก</a>
+                        <a href="/student/index" class="nav-link txt-greenblue txt-hover">หน้าแรก</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/user/profile" class="nav-link txt-greenblue txt-hover">ข้อมูลส่วนตัว</a>
+                        <a href="/student/profile" class="nav-link txt-greenblue txt-hover">ข้อมูลส่วนตัว</a>
                     </li>
                 </ul>
             </div>
