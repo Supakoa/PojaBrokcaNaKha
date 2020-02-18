@@ -14,8 +14,7 @@
                 <form action="{{url('/admin/users')}}" method="post" id="regis">
                     @method('POST')
                     @csrf
-                    @include('Includes.registerFormInc')
-                    <div class=" form-group col-lg-4">
+                    <div class=" form-group col-lg-6">
                         <label for="type">ประเภทผู้ใช้</label>
                         <select class="form-control" name="type" id="type">
                             <option class=" disabled">ประเภทผู้ใช้...</option>
@@ -24,6 +23,8 @@
                             <option value="3">นักศึกษา</option>
                         </select>
                     </div>
+                    <div id="formAdd" class=""> @include('Includes.registerFormInc')</div>
+
                 </form>
             </div>
             <div class="modal-footer" style="border-top-color:#639CB4">
