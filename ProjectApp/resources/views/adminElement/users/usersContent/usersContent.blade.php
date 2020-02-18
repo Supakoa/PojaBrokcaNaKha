@@ -2,9 +2,9 @@
     <div class="card-header text-center bg-header">
         <h4 class="text-light">ค้นหาสมาชิก</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body overflow-auto">
         <div class="table-responsive">
-            <table class="table txt-greenblue table-hover display" id="userTable">
+            <table class="table txt-greenblue table-hover display w-100" id="userTable">
                 <thead class="table-info">
                 <tr class="text-center">
                     <th>รหัสผู้ใช้</th>
@@ -111,7 +111,6 @@
                     }
                 });
             }
-
         function editUser(id){
             $.getJSON("{{url("/admin/users/")}}/" + id + "/edit",
                 function (data, textStatus, jqXHR) {
@@ -132,6 +131,10 @@
                         $('#edit_fac').html("<option selected>"+ data.major.name +"</option>");
                         // $('#edit_fac').val(data.user.major_id.faculties.name);
                         // $('#edit_major').val(data.user.major_id.name);
+                    }else{
+                        $('#edit_fac').val('');
+                        $('#group_fac').attr('hidden', 'hidden');
+                        $('#group_major').attr('hidden', 'hidden');
                     }
                     $('#edit_type').html("<option selected>"+ data.role.name +"</option>");
 

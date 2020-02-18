@@ -126,7 +126,25 @@ class Admin_UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = request()->validate([
+            'edit_fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'student_id' => ['required', 'numeric','digits:11', 'unique:users'],
+            'tel' => ['required', 'numeric','digits:10'],
+            'title' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'type' => ['required'],
+            'major' => ['required'],
+        ]);
+
+        $user->name = $data['edit_fname'];
+
+        $user->save();
+        // $user->
+        return redirect()->back()->with('success', 'แก้ไขสำเร็จ');
+
+
     }
 
     /**
