@@ -109,11 +109,11 @@ class Admin_UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $major = $user->major()->get();
 
         return  Response::json(array(
             "user" => $user,
-            "major" => $major
+            "major" => $user->major,
+            "role" => $user->role
         ));
     }
 
