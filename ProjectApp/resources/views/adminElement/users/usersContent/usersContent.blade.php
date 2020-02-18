@@ -133,9 +133,7 @@
                         // $('#edit_fac').val(data.user.major_id.faculties.name);
                         // $('#edit_major').val(data.user.major_id.name);
                     }
-                    $('#edit_type').html("<option selected>"+ data.user.role_id.name +"</option>");
-
-                    console.log(data.major.name);
+                    $('#edit_type').html("<option selected>"+ data.role.name +"</option>");
 
                 }
             );
