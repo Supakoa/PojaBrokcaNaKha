@@ -135,7 +135,7 @@
                     }
                     $('#edit_type').html("<option selected>"+ data.user.role_id.name +"</option>");
 
-                    console.log(data.user);
+                    console.log(data.major.name);
 
                 }
             );
