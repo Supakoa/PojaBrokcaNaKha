@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{$user->student_id ==null ? $user->id : $user->student_id}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->firstname}} {{$user->lastname}}</td>
+                        <td>{{$user->title}} {{$user->firstname}} {{$user->lastname}}</td>
                         <td>{{$user->role->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->telephone}}</td>
@@ -56,8 +56,15 @@
     </div>
 </div>
 
+
+{{-- Modal add --}}
 @include('adminElement.users.usersContent.modal.addModal')
+{{-- Modal add --}}
+
+{{-- Modal Edit --}}
 @include('adminElement.users.usersContent.modal.editModal')
+{{-- Modal Edit --}}
+
 
 @if (isset($Users))
     <form id="deleteForm" method="post">
@@ -67,11 +74,13 @@
 @endif
 
 {{-- Modal Edit --}}
-{{-- Modal Edit --}}
 
 
 
+@push('css')
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+@endpush
 
 @push('js')
     <script>
@@ -102,15 +111,29 @@
                     }
                 });
             }
+
         function editUser(id){
             $.getJSON("{{url("/admin/users/")}}/" + id + "/edit",
                 function (user, textStatus, jqXHR) {
                     $('#edit_email').val(user.email);
                     $('#edit_student_id').val(user.student_id);
+                    $('#edit_password').val('');
+                    $('#edit_password_confirm').val('');
                     $('#edit_tel').val(user.telephone);
                     $('#edit_fname').val(user.firstname);
                     $('#edit_lname').val(user.lastname);
-                    // $('#edit_student_id').val(user.student_id);
+                    $('#edit_title').val(user.title);
+                    if (user.major_id != null) {
+                        console.log('hello');
+
+                        $("#edit_major").removeAttr("disabled");
+                        $("#group_fac").removeAttr("hidden");
+                        $("#group_major").removeAttr("hidden");
+                        $('#edit_fac').html("<option selected>"+ user.major_id +"</option>");
+                        // $('#edit_fac').val(user.major_id.faculties.name);
+                        // $('#edit_major').val(user.major_id.name);
+                    }
+                    $('#edit_type').html("<option selected>"+ user.role_id +"</option>");
 
                     console.log(user);
 

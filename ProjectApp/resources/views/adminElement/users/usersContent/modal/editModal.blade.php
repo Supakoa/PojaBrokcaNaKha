@@ -43,7 +43,13 @@
                         <input type="tel" class="form-control " name="edit_tel" id="edit_tel" placeholder="">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="edit_title">คำนำหน้า</label>
+                        <input type="text" class="form-control" name="edit_title" id="edit_title">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="edit_fname">ชื่อ</label>
                         <input type="text" class="form-control " name="edit_fname" id="edit_fname" placeholder="">
@@ -61,16 +67,16 @@
 
 
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" id="group_fac" hidden>
                         <label for="edit_fac">คณะ</label>
-                        <select class="form-control" id="edit_fac">
+                        <select class="form-control" id="edit_fac" >
                             <option disabled selected>เลือกคณะ</option>
 
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" id="group_major" hidden>
                         <label for="edit_major">สาขา</label>
                         <select class="form-control" id="edit_major" name="edit_major" disabled>
                             <option disabled selected>เลือกสาขา</option>
@@ -97,38 +103,3 @@
   </div>
 {{-- Modal Edit --}}
 
-@push('css')
-                <meta name="csrf-token" content="{{ csrf_token() }}" />
-            @endpush
-
-            @push('js')
-                <script>
-                    // $.ajaxSetup({
-
-                    //     headers: {
-
-                    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-                    //     }
-
-                    // });
-                    // $("#fac").change(function (e) {
-                    //     e.preventDefault();
-                    //     // alert($(this).val())
-                    //     $.ajax({
-                    //         type: "post",
-                    //         url: "{{url('/getMajorByFacultyId')}}/"+$(this).val(),
-                    //         data: {"id":$(this).val()},
-                    //         dataType: "json",
-                    //         success: function (response) {
-                    //             $("#major").html("<option disabled selected>เลือกสาขา</option>");
-                    //             response.forEach(major => {
-                    //                 $("#major").append("<option value = '"+major.id+"' >"+major.name+"</option>");
-                    //             });
-                    //             $("#major").removeAttr("disabled");
-                    //         }
-                    //     });
-
-                    // });
-                </script>
-            @endpush

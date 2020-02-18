@@ -47,12 +47,14 @@ class Admin_UsersController extends Controller
             'lname' => ['required', 'string', 'max:255'],
             'student_id' => ['required', 'numeric','digits:11', 'unique:users'],
             'tel' => ['required', 'numeric','digits:10'],
+            'title' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'type' => ['required'],
             'major' => ['required'],
 
         ], [
+            'title.required' => 'กรุณาใส่คำนำหน้าชื่อ',
             'fname.required' => 'กรุณากรอกชื่อ',
             'lname.required' => 'กรุณากรอกนามสกุล',
             'email.unique' => 'อีเมลล์นี้ไม่สามารถใช้ได้',
@@ -71,6 +73,7 @@ class Admin_UsersController extends Controller
             return redirect()->back()->withErrors($validator->errors()->add("InsertError","error"))->withInput();
         }
        $user = User::create([
+            'title' => $request['title'],
             'firstname' => $request['fname'],
             'lastname' => $request['lname'],
             'role_id' => $request['type'],

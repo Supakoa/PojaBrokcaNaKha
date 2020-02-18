@@ -49,7 +49,18 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="title">คำนำหน้า</label>
+            <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" name="title" id="title">
+            @error('title')
+            <span class="invalid-feedback" style="border-radius:15px" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-4">
         <div class="form-group">
             <label for="fname">ชื่อ</label>
             <input type="text" class="form-control @error('fname') is-invalid @enderror" value="{{ old('fname') }}" name="fname" id="fname" placeholder="">
