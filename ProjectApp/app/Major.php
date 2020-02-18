@@ -14,7 +14,7 @@ class Major extends Model
 
     public function faculty()
     {
-        return $this->belongsTo('app\Faculty');
+        return $this->belongsTo('App\Faculty');
     }
 
 }

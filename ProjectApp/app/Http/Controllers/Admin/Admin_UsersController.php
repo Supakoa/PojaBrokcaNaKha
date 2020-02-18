@@ -113,6 +113,7 @@ class Admin_UsersController extends Controller
         return  Response::json(array(
             "user" => $user,
             "major" => $user->major,
+            "faculty" =>$user->major->faculty,
             "role" => $user->role
         ));
     }
@@ -122,25 +123,40 @@ class Admin_UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, User $user)
     {
-        $data = request()->validate([
+        $validator = Validator::make($request->all(), [
             'edit_fname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
-            'student_id' => ['required', 'numeric','digits:11', 'unique:users'],
-            'tel' => ['required', 'numeric','digits:10'],
-            'title' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'type' => ['required'],
-            'major' => ['required'],
+            'edit_lname' => ['required', 'string', 'max:255'],
+            'edit_student_id' => ['required', 'numeric','digits:11', 'unique:users'],
+            'edit_tel' => ['required', 'numeric','digits:10'],
+            'edit_title' => ['required'],
+            'edit_email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'edit_password' => ['required', 'string', 'min:8', 'confirmed'],
+            'edit_type' => ['required'],
+            'edit_major' => ['required'],
+
+        ], [
+            'edit_title.required' => 'กรุณาใส่คำนำหน้าชื่อ',
+            'edit_fname.required' => 'กรุณากรอกชื่อ',
+            'edit_lname.required' => 'กรุณากรอกนามสกุล',
+            'edit_email.unique' => 'อีเมลล์นี้ไม่สามารถใช้ได้',
+            'edit_password.confirmed' => 'ยืนยันรหัสผ่านไม่ถูกต้อง',
+            'edit_student_id.required' => 'กรุณากรอกรหัสนักศึกษา',
+            'edit_student_id.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
+            'edit_student_id.size' => 'กรุณากรอกไม่เกิน 11 ตัว',
+            'edit_tel.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'edit_tel.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
+            'edit_tel.size' => 'กรุณากรอกไม่เกิน 10 ตัว',
+            'edit_type.required' => 'กรุณาเลือกตำแหน่ง',
+            'edit_major.required' => 'กรุณาระบุสาขา',
         ]);
-
-        $user->name = $data['edit_fname'];
-
-        $user->save();
+//
+        $user->firstname = $request->get('edit_fname');
+//
+//        $user->save();
         // $user->
         return redirect()->back()->with('success', 'แก้ไขสำเร็จ');
 

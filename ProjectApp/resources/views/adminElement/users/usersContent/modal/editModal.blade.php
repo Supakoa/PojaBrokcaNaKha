@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="modal-body txt-greenblue">
-            <form action="{{ url('/admin/users')."/".$user->id }}" method="POST" enctype="multipart/form-data" id="editForm" >
+            <form action="" method="POST" enctype="multipart/form-data" id="editForm" >
                 @csrf
                     @method('PATCH')
                     <div class="row container">
@@ -73,8 +73,10 @@
                             <div class="form-group" id="group_fac" hidden>
                                 <label for="edit_fac">คณะ</label>
                                 <select class="form-control" id="edit_fac" >
-                                    <option disabled selected>เลือกคณะ</option>
-
+{{--                                    <option disabled selected>เลือกคณะ</option>--}}
+                                    @foreach ($faculties as $fac)
+                                        <option value="{{$fac->id}}" >{{$fac->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -106,4 +108,36 @@
     </div>
   </div>
 {{-- Modal Edit --}}
+@push('js')
+    <script>
+        $.ajaxSetup({
 
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
+        });
+        $("#edit_fac").change(function (e) {
+            e.preventDefault();
+            // alert($(this).val())
+            $.ajax({
+                type: "post",
+                url: "{{url('/getMajorByFacultyId')}}/"+$(this).val(),
+                data: {"id":$(this).val()},
+                dataType: "json",
+                success: function (response) {
+                    $("#edit_major").html("<option disabled selected>เลือกสาขา</option>");
+                    response.forEach(major => {
+                        $("#edit_major").append("<option value = '"+major.id+"' >"+major.name+"</option>");
+                    });
+                    $("#edit_major").removeAttr("disabled");
+                }
+            });
+
+        });
+
+
+    </script>
+@endpush

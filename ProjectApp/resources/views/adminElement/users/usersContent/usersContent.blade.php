@@ -114,6 +114,7 @@
         function editUser(id){
             $.getJSON("{{url("/admin/users/")}}/" + id + "/edit",
                 function (data, textStatus, jqXHR) {
+                    console.log(data);
                     $('#edit_email').val(data.user.email);
                     $('#edit_student_id').val(data.user.student_id);
                     $('#edit_password').val('');
@@ -123,20 +124,20 @@
                     $('#edit_lname').val(data.user.lastname);
                     $('#edit_title').val(data.user.title);
                     if (data.user.major_id != null) {
-                        console.log('hello');
-
                         $("#edit_major").removeAttr("disabled");
                         $("#group_fac").removeAttr("hidden");
                         $("#group_major").removeAttr("hidden");
-                        $('#edit_fac').html("<option selected>"+ data.major.name +"</option>");
-                        // $('#edit_fac').val(data.user.major_id.faculties.name);
-                        // $('#edit_major').val(data.user.major_id.name);
+                        // $("#edit_fac option[ value = '"+data.faculty.id+"' ] ").attr('selected','')
+                        $(`#edit_fac option[ value = ${data.faculty.id} ] `).attr('selected','')
+                        $('#edit_major option[ selected ]').text(data.user.major.name);
+                        $('#edit_major option[ selected ]').val(data.user.major.id);
                     }else{
                         $('#edit_fac').val('');
                         $('#group_fac').attr('hidden', 'hidden');
                         $('#group_major').attr('hidden', 'hidden');
                     }
                     $('#edit_type').html("<option selected>"+ data.role.name +"</option>");
+                    $('#editForm').attr('action',`{{url('/admin/users/')}}/${data.user.id}`)
 
                 }
             );
