@@ -38,7 +38,6 @@
                 </ul>
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-
                 <ul class="navbar-nav">
                     <li class="nav-item active align-middle">
                         <a class="nav-link txt-greenblue" href="#"><img
@@ -55,7 +54,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="container-fluid h-100 mt-4 p-5">
+        <div class="container-fluid h-100 mt-4 p-5" id="main-content">
             @yield('main')
         </div>
         <footer class="footer">
@@ -70,6 +69,13 @@
 
     <script>
     $(document).ready(function () {
+        if (screen.width < 770) {
+            $('#statusBar').addClass('mobile');
+            $('#hrLine').addClass('mobile');
+            $('.text-time').css('fontSize', '9px');
+            $('.text-time').addClass('mb-0');
+            $('.text-time').addClass('mt-2');
+        }
         $('#showPapers').click(function (e) {
             $('html, body').animate({scrollTop:$(document).height()}, 'slow');
         });
