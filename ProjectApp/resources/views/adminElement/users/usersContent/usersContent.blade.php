@@ -114,28 +114,28 @@
 
         function editUser(id){
             $.getJSON("{{url("/admin/users/")}}/" + id + "/edit",
-                function (user, textStatus, jqXHR) {
-                    $('#edit_email').val(user.email);
-                    $('#edit_student_id').val(user.student_id);
+                function (data, textStatus, jqXHR) {
+                    $('#edit_email').val(data.user.email);
+                    $('#edit_student_id').val(data.user.student_id);
                     $('#edit_password').val('');
                     $('#edit_password_confirm').val('');
-                    $('#edit_tel').val(user.telephone);
-                    $('#edit_fname').val(user.firstname);
-                    $('#edit_lname').val(user.lastname);
-                    $('#edit_title').val(user.title);
-                    if (user.major_id != null) {
+                    $('#edit_tel').val(data.user.telephone);
+                    $('#edit_fname').val(data.user.firstname);
+                    $('#edit_lname').val(data.user.lastname);
+                    $('#edit_title').val(data.user.title);
+                    if (data.user.major_id != null) {
                         console.log('hello');
 
                         $("#edit_major").removeAttr("disabled");
                         $("#group_fac").removeAttr("hidden");
                         $("#group_major").removeAttr("hidden");
-                        $('#edit_fac').html("<option selected>"+ user.major_id +"</option>");
-                        // $('#edit_fac').val(user.major_id.faculties.name);
-                        // $('#edit_major').val(user.major_id.name);
+                        $('#edit_fac').html("<option selected>"+ data.major.name +"</option>");
+                        // $('#edit_fac').val(data.user.major_id.faculties.name);
+                        // $('#edit_major').val(data.user.major_id.name);
                     }
-                    $('#edit_type').html("<option selected>"+ user.role_id +"</option>");
+                    $('#edit_type').html("<option selected>"+ data.user.role_id.name +"</option>");
 
-                    console.log(user);
+                    console.log(data.user);
 
                 }
             );
