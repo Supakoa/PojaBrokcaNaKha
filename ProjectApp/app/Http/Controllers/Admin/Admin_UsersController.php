@@ -172,12 +172,21 @@ class Admin_UsersController extends Controller
     public function edit(User $user)
     {
 
-        return  Response::json(array(
-            "user" => $user,
-            "major" => $user->major,
-            "faculty" =>$user->major->faculty,
-            "role" => $user->role
-        ));
+       if($user->major != null){
+           return  Response::json(array(
+               "user" => $user,
+               "major" => $user->major,
+               "faculty" =>$user->major->faculty,
+               "role" => $user->role
+           ));
+       } else{
+           return  Response::json(array(
+               "user" => $user,
+               "role" => $user->role
+           ));
+       }
+
+
     }
 
     /**
@@ -216,8 +225,14 @@ class Admin_UsersController extends Controller
             'edit_major.required' => 'กรุณาระบุสาขา',
         ]);
 //
+        $user->title = $request->get('edit_fname');
         $user->firstname = $request->get('edit_fname');
-
+        $user->firstname = $request->get('edit_fname');
+        $user->firstname = $request->get('edit_fname');
+        $user->firstname = $request->get('edit_fname');
+        $user->firstname = $request->get('edit_fname');
+        $user->firstname = $request->get('edit_fname');
+        $user->firstname = $request->get('edit_fname');
         return redirect()->back()->with('success', 'แก้ไขสำเร็จ');
 
 
