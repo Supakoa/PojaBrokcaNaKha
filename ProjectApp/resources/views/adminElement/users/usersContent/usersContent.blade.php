@@ -128,7 +128,8 @@
                         $("#group_fac").removeAttr("hidden");
                         $("#group_major").removeAttr("hidden");
                         // $("#edit_fac option[ value = '"+data.faculty.id+"' ] ").attr('selected','')
-                        $(`#edit_fac option[ value = ${data.faculty.id} ] `).attr('selected','')
+                        $('#edit_fac option[ selected ]').removeAttr('selected');
+                        $(`#edit_fac option[ value = ${data.faculty.id} ] `).attr('selected','selected')
                         $('#edit_major option[ selected ]').text(data.user.major.name);
                         $('#edit_major option[ selected ]').val(data.user.major.id);
                     }else{
