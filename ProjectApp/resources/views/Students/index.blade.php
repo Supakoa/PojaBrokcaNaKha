@@ -7,7 +7,6 @@
             @include('Students.include.head.index')
         </div>
         <div class="container p-3">
-            <h1>Hello</h1>
             @include('Students.include.body.index')
             @include('Students.include.footer.index')
         </div>

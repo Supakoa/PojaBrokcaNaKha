@@ -34,7 +34,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active align-middle">
-                    <a class="nav-link" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSElEB7aM36PB-C-AJW6Z308tsVc5LJTydI-Ab86qqAVtsyrRVl" alt="" width="30" height="30" ><span> ผู้ดูแลระบบ</span></a>
+                    <a class="nav-link" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSElEB7aM36PB-C-AJW6Z308tsVc5LJTydI-Ab86qqAVtsyrRVl" alt="" width="30" height="30" ><span> {{ auth()->user()->firstname." ".auth()->user()->lastname}}</span></a>
                     </li>
                     <li class="nav-item">
                     <form action="{{url('/logout')}}" id="logout" method="post">
@@ -44,7 +44,8 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="lang"><span id="eng">ENG</span>/<span class="m-1 p-1 text-light bg-dark rounded" id="th">TH</span></a>
+                        <a class="nav-link txt-greenblue" href="#" id="lang"><span id="eng">ENG</span>/<span
+                                class="m-1 p-1 text-light bg-dark rounded" id="th">TH</span></a>
                     </li>
                 </ul>
             </div>
@@ -78,18 +79,18 @@
             document.getElementById("main").style.width = "100%";
         }
 
-        var coute =0;
-            $('#lang').on('click', function (e) {
-                if(coute == 0){
-                    $('#eng').addClass('m-1 p-1 text-light bg-dark rounded');
-                    $('#th').removeClass('m-1 p-1 text-light bg-dark rounded');
-                    coute++;
-                }else{
-                    --coute;
-                    $('#eng').removeClass('m-1 p-1 text-light bg-dark rounded');
-                    $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
-                }
-            });
+        // var coute =0;
+        //     $('#lang').on('click', function (e) {
+        //         if(coute == 0){
+        //             $('#eng').addClass('m-1 p-1 text-light bg-dark rounded');
+        //             $('#th').removeClass('m-1 p-1 text-light bg-dark rounded');
+        //             coute++;
+        //         }else{
+        //             --coute;
+        //             $('#eng').removeClass('m-1 p-1 text-light bg-dark rounded');
+        //             $('#th').addClass('m-1 p-1 text-light bg-dark rounded');
+        //         }
+        //     });
 
     </script>
 </body>

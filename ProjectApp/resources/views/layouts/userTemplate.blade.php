@@ -42,7 +42,7 @@
                     <li class="nav-item active align-middle">
                         <a class="nav-link txt-greenblue" href="#"><img
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSElEB7aM36PB-C-AJW6Z308tsVc5LJTydI-Ab86qqAVtsyrRVl"
-                                alt="" width="30" height="30"><span> นายตะวัน เข็มทอง</span></a>
+                                alt="" width="30" height="30"><span> {{ auth()->user()->firstname." ".auth()->user()->lastname}}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link txt-greenblue" href="#">ออกจากระบบ</a>

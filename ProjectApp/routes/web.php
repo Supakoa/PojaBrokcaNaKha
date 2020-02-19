@@ -22,12 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
-//Admin
-// Route::resource('admin/papers', 'PapersController');
 Route::resource('user', 'UserController');
 Route::resource('/home', 'HomeController');
-
+//Admin
+// Route::resource('admin/papers', 'PapersController');
 //Route::resource('/admin/users','UserController');
 Route::resource('/admin/users','Admin\Admin_UsersController');
 
@@ -39,24 +37,10 @@ Route::get('/admin/mail', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
 
- Route::resource('/admin/news', 'Admin\ImagesController');
-// Route::get('/admin/news', function () {
-//     return view('adminElement.news.index');
-// });
-
+Route::resource('/admin/news', 'Admin\ImagesController');
 Route::resource('/admin/steps', 'Admin\StepsController');
-// Route::get('/admin/steps', function () {
-//     return view('adminElement.steps.index');
-// });
-
-
 Route::resource('/admin/document', 'Admin\DocumentsController');
-// Route::get('/admin/document', function () {
-//     return view('adminElement.document.index');
-// });
-
 Route::post('/getMajorByFacultyId/{faculty}', "FacultyController@getMajorByFacultyId");
-
 Route::resource('/faculty', 'FacultyController');
 
 
@@ -76,18 +60,9 @@ Route::get('/staff/index', function () {
 ////////////////////User
 
 // Route::resource('user', 'UserController');
+Route::resource('/student', 'Student\StudentsController');
+Route::resource('/student/profile', 'Student\StudentsController@profile');
 
-Route::get('/student/index', function () {
-    return view('Students.index');
-});
-
-// Route::get('/user/index', function (){
-//     return view('userElement.bBody.index');
-// });
-
-Route::get('/student/profile', function () {
-    return view('Students.proFile');
-});
 
 
 
