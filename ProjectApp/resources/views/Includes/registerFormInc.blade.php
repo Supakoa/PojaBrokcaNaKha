@@ -113,13 +113,9 @@
 @push('js')
     <script>
         $.ajaxSetup({
-
             headers: {
-
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
             }
-
         });
         $("#fac").change(function (e) {
             e.preventDefault();

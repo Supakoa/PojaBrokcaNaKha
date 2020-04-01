@@ -13,7 +13,10 @@
 
 <body>
     <div id="mySidenav" class="sidenav">
-        <span window.location.href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</span>
+        <div class="w-100 text-center">
+            <img src="{{url('images/logo.png')}}" width="50" height="50" class="m-auto d-inline-block border-left-0 border-right-0 border-bottom border-info p-0" alt="">
+        </div>
+        {{-- <span window.location.href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</span> --}}
         <a href="{{url('/admin/index')}}"><i class="fa fa-home" aria-hidden="true"></i> หน้าแรก</a>
         <a href="{{url('/admin/mail')}}"><i class="fas fa-envelope-open"></i> ข้อความ</a>
         <a href="{{url('/admin/document')}}"><i class="fas fa-folder"></i> เอกสาร</a>
@@ -24,9 +27,6 @@
 
     <div class="body main-admin" id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-            <a class="navbar-brand" href="#" onclick="openNav()">
-                <img src="{{url('images/logo.png')}}" width="50" height="50" class="ml-5 d-inline-block align-top border-left-0 border-right-0 border-bottom border-info p-0" alt="">
-            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,16 +68,16 @@
 
     <script>
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "15%";
-            document.getElementById("main").style.width = "85%";
-            document.getElementById('main').style.float = "right";
-        }
+        // function openNav() {
+        //     document.getElementById("mySidenav").style.width = "15%";
+        //     document.getElementById("main").style.width = "85%";
+        //     document.getElementById('main').style.float = "right";
+        // }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.width = "100%";
-        }
+        // function closeNav() {
+        //     document.getElementById("mySidenav").style.width = "0";
+        //     document.getElementById("main").style.width = "100%";
+        // }
 
         // var coute =0;
         //     $('#lang').on('click', function (e) {

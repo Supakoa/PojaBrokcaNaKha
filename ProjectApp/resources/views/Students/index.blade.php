@@ -15,14 +15,14 @@
 @endsection
 
 
-{{-- @push('js')
+@push('js')
 <script>
     $(document).ready(function () {
-
+        $('#tableStatus').DataTable();
+        $('#tableStatused').DataTable();
     });
-
 </script>
-@endpush --}}
+@endpush
 
 
 

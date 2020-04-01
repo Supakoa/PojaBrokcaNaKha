@@ -14,7 +14,6 @@
 
 <body>
     @yield('login')
-
     @include('Includes.js')
     @stack('js')
 </body>
