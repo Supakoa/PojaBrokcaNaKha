@@ -21,10 +21,13 @@ class StudentsController extends Controller
 
 
         return view('Students.index');
+
     }
 
-    public function profile(){
-        return view('Students.proFile');
+    public function UserProfile()
+    {
+
+        return view('Students.profile');
     }
 
     /**

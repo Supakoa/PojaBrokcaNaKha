@@ -2,7 +2,6 @@
 
 @section('main')
 <div class="card border-0 mt-4" >
-
         <div class="card-header text-center text-light bg-greenblue">
             <h5>ประวัติส่วนตัว</h5>
         </div>

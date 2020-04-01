@@ -61,8 +61,7 @@ Route::get('/staff/index', function () {
 
 // Route::resource('user', 'UserController');
 Route::resource('/student', 'Student\StudentsController');
-Route::resource('/student/profile', 'Student\StudentsController@profile');
-
+Route::get('/student/profile', 'Student\StudentsController@UserProfile');
 
 
 
