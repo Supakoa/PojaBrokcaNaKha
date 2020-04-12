@@ -14,6 +14,9 @@
 use App\Http\Controllers\FacultyController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/react', function () {
+    return view("app");
+});
 
 // Login
  Route::get('/', function () {
