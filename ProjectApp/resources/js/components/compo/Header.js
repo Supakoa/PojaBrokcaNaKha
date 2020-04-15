@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <nav className='navbar navbar-expand-md navbar-light navbar-laravel'>
     <div className='container'>
-      <Link className='navbar-brand' to='/react/cont'>Tasksman</Link>
+        <Link className='navbar-brand' to='/react/cont'>Tasksman</Link>
     </div>
   </nav>
 )

@@ -69656,8 +69656,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
-/* harmony import */ var _Content__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Content */ "./resources/js/components/Content.js");
+/* harmony import */ var _compo_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./compo/Header */ "./resources/js/components/compo/Header.js");
+/* harmony import */ var _compo_Content__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./compo/Content */ "./resources/js/components/compo/Content.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69702,14 +69702,14 @@ function (_Component) {
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null,
         /*#__PURE__*/
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_compo_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null),
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null,
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
           exact: true,
           path: "/react",
-          component: _Content__WEBPACK_IMPORTED_MODULE_4__["default"]
+          component: _compo_Content__WEBPACK_IMPORTED_MODULE_4__["default"]
         }))))
       );
     }
@@ -69724,10 +69724,10 @@ react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.
 
 /***/ }),
 
-/***/ "./resources/js/components/Content.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Content.js ***!
-  \********************************************/
+/***/ "./resources/js/components/compo/Content.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/compo/Content.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69786,10 +69786,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Header.js":
-/*!*******************************************!*\
-  !*** ./resources/js/components/Header.js ***!
-  \*******************************************/
+/***/ "./resources/js/components/compo/Header.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/compo/Header.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69841,8 +69841,8 @@ var Header = function Header() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\PojaBrokcaNaKha\ProjectApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Project\PojaBrokcaNaKha\ProjectApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/spinkk/Documents/GitHub/Project/PojaBrokcaNaKha/ProjectApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/spinkk/Documents/GitHub/Project/PojaBrokcaNaKha/ProjectApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
