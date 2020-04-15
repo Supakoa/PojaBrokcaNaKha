@@ -1,0 +1,17 @@
+.navManu{
+    /*min-height: 90vh;*/
+    border-radius: 10px;
+    border: 5px solid black;
+    width: 30%;
+    padding: 5px;
+    align-content: center;
+}
+
+.navManu ul {
+    height: 100%;
+}
+
+.navManu li{
+    list-style: none;
+    margin: 5px;
+}
