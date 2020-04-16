@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Step(){
+export default function News(){
     return(
         <div>
-            This is Step page
+            This is News page
         </div>
     );
 }

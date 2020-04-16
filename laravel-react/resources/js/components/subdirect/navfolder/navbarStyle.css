@@ -1,14 +1,15 @@
 .navManu{
-    /*min-height: 90vh;*/
-    border-radius: 10px;
-    border: 5px solid black;
-    width: 30%;
+    border-radius: 2px;
+    width: 20%;
     padding: 5px;
+    justify-content: center;
     align-content: center;
+    background-color: lightgray;
 }
 
 .navManu ul {
     height: 100%;
+    margin-top: 5vh;
 }
 
 .navManu li{

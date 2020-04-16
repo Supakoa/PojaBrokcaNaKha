@@ -1,18 +1,11 @@
 import React from 'react';
+import './footerStyle.css';
 
 export default function Footer(){
-    const styleFooter = {
-        textAlign: 'center',
-        fontSize: '20px',
-        width: '100%',
-        backgroundColor: 'red',
-        bottom: '0',
-        padding: '4px',
-        height: '5vh'
-    }
+
 
     return(
-        <footer style={styleFooter}>
+        <footer>
             <p>
                 this is Footer React.
             </p>
