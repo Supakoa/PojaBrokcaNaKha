@@ -10,7 +10,9 @@ export default function User(){
     return(
         <Card>
             <Card.Header className="text-center">
-                สมาชิก
+                <Card.Title className="p-2">
+                    สมาชิก
+                </Card.Title>
             </Card.Header>
             <Card.Body>
                 <Table striped bordered hover responsive>
@@ -24,37 +26,35 @@ export default function User(){
                         <th>คณะ</th>
                         <th>สาขา</th>
                         <th className="text-center">
-                            <Button variant="success" size="sm" onClick={() => setAddModal(true)} >
+                            <Button variant="info" size="sm" onClick={() => {setAddModal(true)}} >
                                 เพิ่ม
                             </Button>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Supakit Kitjanabumrungsak</td>
-                            <td>Addmin</td>
-                            <td>Koa@gmail.com</td>
-                            <td>0922595281</td>
-                            <td>เทคโนโยลีอุสาหกรรม </td>
-                            <td>วิศวกรรมคอมพิวเตอร์ </td>
-                            <td className="text-center">
-                                <Button className="m-auto" variant="warning" size="sm" onClick={() => setEditModal(true)}>
+                        <tr className="text-center">
+                            <td className="align-middle">1</td>
+                            <td className="align-middle">Supakit Kitjanabumrungsak</td>
+                            <td className="align-middle">Addmin</td>
+                            <td className="align-middle">Koa@gmail.com</td>
+                            <td className="align-middle">0922595281</td>
+                            <td className="align-middle">เทคโนโยลีอุสาหกรรม </td>
+                            <td className="align-middle">วิศวกรรมคอมพิวเตอร์ </td>
+                            <td className="align-middle">
+                                <Button className="m-auto" variant="warning" size="sm" onClick={() => {setEditModal(true)}}>
                                     แก้ไข
                                 </Button>{' '}
-                                <Button className="m-auto" variant="danger" size="sm" onClick={() => setDeleteModal(true)}>
+                                <Button className="m-auto" variant="danger" size="sm" onClick={() => {setDeleteModal(true)}}>
                                     ลบ
                                 </Button>
                             </td>
                         </tr>
                     </tbody>
                 </Table>
-                <Userdelete show={deleteModal} onHide={() => setDeleteModal(false)} />
-                <Useredit show={editModal} onHide={() => setEditModal(false)} />
-                <Useradd show={addModal} onHide={() => setAddModal(false)} />
-
-
+                <Userdelete show={deleteModal} onHide={() => {setDeleteModal(false)}} />
+                <Useredit show={editModal} onHide={() => {setEditModal(false)}} />
+                <Useradd show={addModal} onHide={() => {setAddModal(false)}} />
             </Card.Body>
         </Card>
     );

@@ -10,7 +10,7 @@ export default function Header() {
 
     return(
         <Navbar bg="light" expand="sm">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="#home" className="text-info">
                 <img src={Logo}
                      width="30"
                      height="30"

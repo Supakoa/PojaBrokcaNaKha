@@ -1,6 +1,6 @@
 .navManu{
     border-radius: 2px;
-    width: 20%;
+    width: 15%;
     padding: 5px;
     justify-content: center;
     align-content: center;
@@ -9,11 +9,11 @@
 
 .navManu ul {
     height: 100%;
-    margin-top: 5vh;
+    margin-top: 8vh;
 }
 
 .navManu li{
-    font-size: 15px;
+    font-size: 18px;
     list-style: none;
     margin-bottom: 10px;
     color: black;
