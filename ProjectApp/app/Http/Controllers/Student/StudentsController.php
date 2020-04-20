@@ -19,12 +19,10 @@ class StudentsController extends Controller
     public function index()
     {
 
-
         return view('Students.index');
-
     }
 
-    public function UserProfile()
+    public function userProfile()
     {
 
         return view('Students.profile');

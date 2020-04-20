@@ -14,6 +14,9 @@
 use App\Http\Controllers\FacultyController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/react', function () {
+    return view("app");
+});
 
 // Login
  Route::get('/', function () {
@@ -60,8 +63,8 @@ Route::get('/staff/index', function () {
 ////////////////////User
 
 // Route::resource('user', 'UserController');
+Route::get('/student/profile', 'Student\StudentsController@userProfile');
 Route::resource('/student', 'Student\StudentsController');
-Route::get('/student/profile', 'Student\StudentsController@UserProfile');
 
 
 
