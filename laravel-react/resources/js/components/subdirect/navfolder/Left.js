@@ -2,10 +2,9 @@ import React from 'react';
 import './navbarStyle.css';
 import {Link} from 'react-router-dom';
 
-export default function Manubar(){
+export default function Left(){
     return(
         <div className="navManu">
-
             <ul>
                 <Link to="/" >
                     <li>หน้าแรก</li>

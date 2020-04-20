@@ -13,6 +13,19 @@
 }
 
 .navManu li{
+    font-size: 15px;
     list-style: none;
-    margin: 5px;
+    margin-bottom: 10px;
+    color: black;
+    padding-left: 15px;
+    justify-content: space-around;
+}
+.navManu li:hover{
+    text-decoration: black;
+    font-size: 20px;
+    transition: ease-in 2.2s ease-out 1s;
+}
+
+.navManu a:hover{/*the tag is Link tag */
+    text-decoration: none;
 }
