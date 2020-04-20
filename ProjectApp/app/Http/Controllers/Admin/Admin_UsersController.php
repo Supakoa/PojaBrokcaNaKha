@@ -43,33 +43,41 @@ class Admin_UsersController extends Controller
     public function store(Request $request)
     {
 
-        if ($request['type'] == 3) {
-            $validator = Validator::make($request->all(), [
-                'fname' => ['required', 'string', 'max:255'],
-                'lname' => ['required', 'string', 'max:255'],
-                'student_id' => ['required', 'numeric','digits:11', 'unique:users'],
-                'tel' => ['required', 'numeric','digits:10'],
-                'title' => ['required'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'type' => ['required'],
-                'major' => ['required'],
+        $validator = Validator::make($request->all(), [
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'tel' => ['required', 'numeric','digits:10'],
+            'title' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'type' => ['required'],
+            'student_id' => ['numeric','digits:11', 'unique:users']
+        ], [
+            'title.required' => 'กรุณาใส่คำนำหน้าชื่อ',
+            'fname.required' => 'กรุณากรอกชื่อ',
+            'lname.required' => 'กรุณากรอกนามสกุล',
+            'email.unique' => 'อีเมลล์นี้ไม่สามารถใช้ได้',
+            'password.confirmed' => 'ยืนยันรหัสผ่านไม่ถูกต้อง',
+            'student_id.required' => 'กรุณากรอกรหัสนักศึกษา',
+            'student_id.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
+            'student_id.size' => 'กรุณากรอกไม่เกิน 11 ตัว',
+            'tel.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'tel.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
+            'tel.size' => 'กรุณากรอกไม่เกิน 10 ตัว',
+            'type.required' => 'กรุณาเลือกตำแหน่ง',
+            'major.required' => 'กรุณาระบุสาขา',
+        ]);
+        if ($request['type'] == 3){
+            $validator->sometimes('major','required');
+            dd($validator);
+            if($request->has('major')){
 
-            ], [
-                'title.required' => 'กรุณาใส่คำนำหน้าชื่อ',
-                'fname.required' => 'กรุณากรอกชื่อ',
-                'lname.required' => 'กรุณากรอกนามสกุล',
-                'email.unique' => 'อีเมลล์นี้ไม่สามารถใช้ได้',
-                'password.confirmed' => 'ยืนยันรหัสผ่านไม่ถูกต้อง',
-                'student_id.required' => 'กรุณากรอกรหัสนักศึกษา',
-                'student_id.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
-                'student_id.size' => 'กรุณากรอกไม่เกิน 11 ตัว',
-                'tel.required' => 'กรุณากรอกเบอร์โทรศัพท์',
-                'tel.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
-                'tel.size' => 'กรุณากรอกไม่เกิน 10 ตัว',
-                'type.required' => 'กรุณาเลือกตำแหน่ง',
-                'major.required' => 'กรุณาระบุสาขา',
-            ]);
+            }else{
+
+            }
+        }
+
+            if ($request['type'] == 3) {
 
             # code...
         }elseif ($request['type'] == 2) {

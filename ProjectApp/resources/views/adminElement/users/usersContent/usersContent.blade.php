@@ -137,7 +137,8 @@
                         $('#group_fac').attr('hidden', 'hidden');
                         $('#group_major').attr('hidden', 'hidden');
                     }
-                    $('#edit_type').html("<option selected>"+ data.role.name +"</option>");
+                    $('#edit_type option[ selected ]').removeAttr('selected');
+                    $(`#edit_type option[ value = ${data.role.id} ] `).attr('selected','selected');
                     $('#editForm').attr('action',`{{url('/admin/users/')}}/${data.user.id}`)
 
                 }

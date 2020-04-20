@@ -24,7 +24,11 @@
                         </select>
                     </div>
                     <div id="formAdd" class=""> @include('Includes.registerFormInc')</div>
-
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </form>
             </div>
             <div class="modal-footer" style="border-top-color:#639CB4">
