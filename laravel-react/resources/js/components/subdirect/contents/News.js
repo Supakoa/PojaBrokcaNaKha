@@ -1,36 +1,38 @@
-import React,{useState, useRef} from 'react';
+import React, {useState, useRef, Component} from 'react';
 import {Card, Table, Button, Image, Overlay, Popover} from "react-bootstrap";
 import {Newsadd, Newsdelete, Newsedit} from './modalCRUD/Newscrud';
 
-export default function News(){
-    const [newsAdd, setNewsAdd] = useState(false);
-    const [newsEdit, setNewsEdit] = useState(false);
-    const [newsDelete, setNewsDelete] = useState(false);
-
-    const [show, setShow] = useState(false);
-    const [target, setTarget] = useState(null);
-    const ref = useRef(null);
-
-    const handleClick = (event) => {
-        setShow(!show);
-        setTarget(event.target);
-        setTimeout(() => {
-            setShow(false);
-        }, 5000);
-    };
+export default class News extends Component{
 
 
+    render() {
 
-    return(
-        <Card>
-            <Card.Header className="text-center">
-                <Card.Title className="p-2">
-                    ตั้งค่าข่าวประชาสัมพันธ์
-                </Card.Title>
-            </Card.Header>
-            <Card.Body>
-                <Table striped hover responsive bordered>
-                    <thead className="text-center">
+        const [newsAdd, setNewsAdd] = useState(false);
+        const [newsEdit, setNewsEdit] = useState(false);
+        const [newsDelete, setNewsDelete] = useState(false);
+
+        const [show, setShow] = useState(false);
+        const [target, setTarget] = useState(null);
+        const ref = useRef(null);
+
+        const handleClick = (event) => {
+            setShow(!show);
+            setTarget(event.target);
+            setTimeout(() => {
+                setShow(false);
+            }, 5000);
+        };
+
+        return(
+            <Card>
+                <Card.Header className="text-center">
+                    <Card.Title className="p-2">
+                        ตั้งค่าข่าวประชาสัมพันธ์
+                    </Card.Title>
+                </Card.Header>
+                <Card.Body>
+                    <Table striped hover responsive bordered>
+                        <thead className="text-center">
                         <tr>
                             <th>#</th>
                             <th>URL</th>
@@ -41,8 +43,8 @@ export default function News(){
                                 </Button>
                             </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr className=" text-center">
                             <td className="align-middle">1</td>
                             <td className="align-middle">https://ssru.ac.th/</td>
@@ -57,35 +59,37 @@ export default function News(){
                                 <Button variant="danger" size="sm" onClick={() => {setNewsDelete(true)}}>ลบ</Button>
                             </td>
                         </tr>
-                    </tbody>
-                </Table>
-            </Card.Body>
-            <Newsadd show={newsAdd} onHide={() => {setNewsAdd(false)}} />
-            <Newsedit show={newsEdit} onHide={() => {setNewsEdit(false)}} />
-            <Newsdelete show={newsDelete} onHide={() => {setNewsDelete(false)}} />
-        </Card>
-    );
+                        </tbody>
+                    </Table>
+                </Card.Body>
+                <Newsadd show={newsAdd} onHide={() => {setNewsAdd(false)}} />
+                <Newsedit show={newsEdit} onHide={() => {setNewsEdit(false)}} />
+                <Newsdelete show={newsDelete} onHide={() => {setNewsDelete(false)}} />
+            </Card>
+        );
+    }
 
+     PopoverImage(props) {
+        return(
+            <Overlay
+                show={props.show}
+                target={props.target}
+                placement={props.placement}
+                container={props.ref}
+            >
+                <Popover id="popover-contained">
+                    <Popover.Title as="h4">รูป</Popover.Title>
+                    <Popover.Content>
+                        <Image src={props.imgsrc}
+                               rounded
+                               fluid
+                        />
+                    </Popover.Content>
+                </Popover>
+            </Overlay>
+        );
+    }
 }
 
 
-function PopoverImage(props) {
-    return(
-        <Overlay
-            show={props.show}
-            target={props.target}
-            placement={props.placement}
-            container={props.ref}
-        >
-            <Popover id="popover-contained">
-                <Popover.Title as="h4">รูป</Popover.Title>
-                <Popover.Content>
-                    <Image src={props.imgsrc}
-                           rounded
-                           fluid
-                    />
-                </Popover.Content>
-            </Popover>
-        </Overlay>
-    );
-}
+

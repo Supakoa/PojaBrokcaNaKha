@@ -1,29 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {Button, Card, Table} from "react-bootstrap";
 import {StepEdit, StepDelete} from "./modalCRUD/StepreportCRUD";
 
-export default function StepReport(){
-    const [stepEdit, setStepEdit] = useState(false);
-    const [stepDelete, setStepDelete] = useState(false);
+export default class StepReport extends Component{
 
-    return(
-        <Card>
-            <Card.Header className="text-center">
-                <Card.Title className="p-2">
-                    ตั้งค่า ขั้นตอนเอกสาร
-                </Card.Title>
-            </Card.Header>
-            <Card.Body>
-                <Table striped hover responsive bordered>
-                    <thead>
+
+    render(){
+        const [stepEdit, setStepEdit] = useState(false);
+        const [stepDelete, setStepDelete] = useState(false);
+        return(
+            <Card>
+                <Card.Header className="text-center">
+                    <Card.Title className="p-2">
+                        ตั้งค่า ขั้นตอนเอกสาร
+                    </Card.Title>
+                </Card.Header>
+                <Card.Body>
+                    <Table striped hover responsive bordered>
+                        <thead>
                         <tr className="text-center">
                             <th>#</th>
                             <th>รูปแบบเอกสาร</th>
                             <th>ID</th>
                             <th></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr className="text-center">
                             <td className="align-middle">1</td>
                             <td className="align-middle">เอกสารขอขึ้นสอบ</td>
@@ -37,12 +39,15 @@ export default function StepReport(){
                                 </Button>
                             </td>
                         </tr>
-                    </tbody>
-                </Table>
+                        </tbody>
+                    </Table>
 
-                <StepEdit show={stepEdit} onHide={() => {setStepEdit(false)}} />
-                <StepDelete show={stepDelete} onHide={() => {setStepDelete(false)}} />
-            </Card.Body>
-        </Card>
-    );
+                    <StepEdit show={stepEdit} onHide={() => {setStepEdit(false)}} />
+                    <StepDelete show={stepDelete} onHide={() => {setStepDelete(false)}} />
+                </Card.Body>
+            </Card>
+        );
+    }
+
+
 }

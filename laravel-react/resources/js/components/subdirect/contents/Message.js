@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default function Message(){
-    return(
-        <div>
-            This is Message page
-        </div>
-    );
+export default class Message extends Component{
+    render() {
+        return(
+            <div>
+                This is Message page
+            </div>
+        );
+    }
+
+
 }

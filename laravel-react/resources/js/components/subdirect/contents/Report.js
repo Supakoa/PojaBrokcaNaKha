@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default function Report(){
-    return(
-        <div>
-            This is Report page
-        </div>
-    );
+export default class Report extends Component{
+
+    render() {
+        return(
+            <div>
+                This is Report page
+            </div>
+        );
+    }
+
 }
