@@ -24,7 +24,7 @@ export default class StepReport extends Component{
 
     render(){
         // const [stepEdit, setStepEdit] = useState(false);
-        // const [stepDelete, setStepDelete] = useState(false);
+        // var [stepDelete, setStepDelete] = useState(false);
         return(
             <Card>
                 <Card.Header className="text-center">

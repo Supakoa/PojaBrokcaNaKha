@@ -19,7 +19,7 @@ export default class User extends Component{
                 <Card.Body>
                     <Table striped bordered hover responsive>
                         <thead>
-                        <tr>
+                        <tr className="text-center">
                             <th>#</th>
                             <th>ชื่อ-สกลุ</th>
                             <th>ประเภท</th>

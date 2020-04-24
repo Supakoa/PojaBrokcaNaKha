@@ -20,7 +20,7 @@ export default function Header() {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="petition-nav" />
             <Navbar.Collapse id="petition-nav">
-                <Nav className="ml-auto">
+                <Nav className="ml-auto pr-2">
                     <Nav.Link>
                         <img src="https://img.icons8.com/plasticine/2x/user.png"
                              className="d-inline-block align-top"
