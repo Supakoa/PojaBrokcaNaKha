@@ -3,11 +3,11 @@ import {Button, Card, Table} from "react-bootstrap";
 import {StepEdit, StepDelete} from "./modalCRUD/StepreportCRUD";
 
 export default class StepReport extends Component{
-
+    // const [stepEdit, setStepEdit] = useState(false);
+    // const [stepDelete, setStepDelete] = useState(false);
 
     render(){
-        const [stepEdit, setStepEdit] = useState(false);
-        const [stepDelete, setStepDelete] = useState(false);
+
         return(
             <Card>
                 <Card.Header className="text-center">
@@ -48,6 +48,5 @@ export default class StepReport extends Component{
             </Card>
         );
     }
-
 
 }
