@@ -1,4 +1,7 @@
-.text-dark a:hover{
+a.text-dark:hover{
     text-decoration: none;
     font-size: 22px;
 }
+ a.text-dark:focus{
+     font-size: 22px;
+ }
