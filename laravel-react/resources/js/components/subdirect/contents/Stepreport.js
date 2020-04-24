@@ -7,23 +7,39 @@ export default class StepReport extends Component{
         super(props);
         this.state = {
             show: false ,
-            eiei : "eiei"
+            modal: '',
+            display: null
         };
 
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-
+        this.modalDisplay = this.modalDisplay.bind(this);
         }
 
 
 
-    showModal(){
-        alert("show");
+    showModal(event){
         this.setState({
-           eiei : "kuy",
-            show : true
-        })
+            show : true,
+            modal: event.target.name
+        });
+        this.modalDisplay(event.target.name);
+
     }
+
+    modalDisplay(e){
+        if (e === 'edit'){
+            this.setState({
+                display: true
+            })
+        }else if (e === 'delete'){
+            this.setState({
+                display: false
+            })
+        }
+    }
+
+
 
     closeModal(){
         this.setState({show : false})
@@ -32,8 +48,6 @@ export default class StepReport extends Component{
 
 
     render(){
-        // const [stepEdit, setStepEdit] = useState(false);
-        // var [stepDelete, setStepDelete] = useState(false);
         return(
             <Card>
                 <Card.Header className="text-center">
@@ -54,23 +68,27 @@ export default class StepReport extends Component{
                         <tbody>
                         <tr className="text-center">
                             <td className="align-middle">1</td>
-                            <td className="align-middle">เอกสารขอขึ้นสอบ {this.state.show}</td>
-                            <td className="align-middle">DE - 2019 {this.state.eiei} </td>
+                            <td className="align-middle">เอกสารขอขึ้นสอบ</td>
+                            <td className="align-middle">DE - 2019 </td>
                             <td className="align-middle">
-                                <Button variant="warning" size="sm" className="text-light" onClick = {this.showModal} >
+                                <Button variant="warning" name="edit" size="sm" className="text-light" onClick = {this.showModal} >
                                     แก้ไข
                                 </Button>{' '}
-                                <Button size="sm" variant="danger" >
+                                <Button size="sm" name="delete" variant="danger" onClick = {this.showModal} >
                                     ลบ
                                 </Button>
                             </td>
                         </tr>
                         </tbody>
                     </Table>
-                    <StepEdit show={this.state.show} onHide={this.closeModal}  />
-                    {/*<StepEdit show={this.state.modalShow} onHide={this.handleCloseModal()} />*/}
-                    {/*<StepDelete name="modalDelete" show={this.state.modalShow} onHide={this.HandleClickModal(false)} />*/}
                 </Card.Body>
+                {
+                    (this.state.display)
+                    ? <StepEdit show={this.state.show} onHide={this.closeModal} />
+                    : <StepDelete show={this.state.show} onHide={this.closeModal} />
+                }
+
+
             </Card>
         );
     }

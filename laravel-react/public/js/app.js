@@ -9816,7 +9816,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*{\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow-x: hidden;\r\n}\r\n.app{\r\n    display: flex;\r\n    min-height: 95vh;\r\n}\r\n\r\n.content-body{\r\n    width:100%;\r\n}\r\n", ""]);
+exports.push([module.i, "*{\n    margin: 0;\n    padding: 0;\n    overflow-x: hidden;\n}\n.app{\n    display: flex;\n    min-height: 95vh;\n}\n\n.content-body{\n    width:100%;\n}\n", ""]);
 
 // exports
 
@@ -9835,7 +9835,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "footer{\r\n    text-align: center;\r\n    font-size: 20px;\r\n    width: 100%;\r\n    background-color: grey;\r\n    bottom: 0;\r\n    padding: 4px;\r\n    height: 5vh;\r\n}\r\n", ""]);
+exports.push([module.i, "footer{\n    text-align: center;\n    font-size: 20px;\n    width: 100%;\n    background-color: grey;\n    bottom: 0;\n    padding: 4px;\n    height: 5vh;\n}\n", ""]);
 
 // exports
 
@@ -9854,7 +9854,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "a:hover{\r\n    text-decoration: none;\r\n    font-size: 22px;\r\n}\r\n", ""]);
+exports.push([module.i, "a:hover{\n    text-decoration: none;\n    font-size: 22px;\n}\n", ""]);
 
 // exports
 
@@ -85967,21 +85967,36 @@ var StepReport = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       show: false,
-      eiei: "eiei"
+      modal: '',
+      display: null
     };
     _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
     _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
+    _this.modalDisplay = _this.modalDisplay.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(StepReport, [{
     key: "showModal",
-    value: function showModal() {
-      alert("show");
+    value: function showModal(event) {
       this.setState({
-        eiei: "kuy",
-        show: true
+        show: true,
+        modal: event.target.name
       });
+      this.modalDisplay(event.target.name);
+    }
+  }, {
+    key: "modalDisplay",
+    value: function modalDisplay(e) {
+      if (e === 'edit') {
+        this.setState({
+          display: true
+        });
+      } else if (e === 'delete') {
+        this.setState({
+          display: false
+        });
+      }
     }
   }, {
     key: "closeModal",
@@ -85993,8 +86008,6 @@ var StepReport = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      // const [stepEdit, setStepEdit] = useState(false);
-      // var [stepDelete, setStepDelete] = useState(false);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Header, {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Title, {
@@ -86012,22 +86025,28 @@ var StepReport = /*#__PURE__*/function (_Component) {
         className: "align-middle"
       }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "align-middle"
-      }, "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E02\u0E2D\u0E02\u0E36\u0E49\u0E19\u0E2A\u0E2D\u0E1A ", this.state.show), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E02\u0E2D\u0E02\u0E36\u0E49\u0E19\u0E2A\u0E2D\u0E1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "align-middle"
-      }, "DE - 2019 ", this.state.eiei, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, "DE - 2019 "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "align-middle"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "warning",
+        name: "edit",
         size: "sm",
         className: "text-light",
         onClick: this.showModal
       }, "\u0E41\u0E01\u0E49\u0E44\u0E02"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         size: "sm",
-        variant: "danger"
-      }, "\u0E25\u0E1A"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_StepreportCRUD__WEBPACK_IMPORTED_MODULE_2__["StepEdit"], {
+        name: "delete",
+        variant: "danger",
+        onClick: this.showModal
+      }, "\u0E25\u0E1A")))))), this.state.display ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_StepreportCRUD__WEBPACK_IMPORTED_MODULE_2__["StepEdit"], {
         show: this.state.show,
         onHide: this.closeModal
-      })));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_StepreportCRUD__WEBPACK_IMPORTED_MODULE_2__["StepDelete"], {
+        show: this.state.show,
+        onHide: this.closeModal
+      }));
     }
   }]);
 
@@ -86757,8 +86776,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\singc\Desktop\GitHub_Works\PojaBrokcaNaKha\laravel-react\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\singc\Desktop\GitHub_Works\PojaBrokcaNaKha\laravel-react\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/spinkk/Documents/GitHub/Project/PojaBrokcaNaKha/laravel-react/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/spinkk/Documents/GitHub/Project/PojaBrokcaNaKha/laravel-react/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
