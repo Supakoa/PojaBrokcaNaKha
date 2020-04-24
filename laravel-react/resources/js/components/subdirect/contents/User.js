@@ -3,12 +3,27 @@ import {Button, Card, Table} from 'react-bootstrap';
 import {Useradd, Userdelete, Useredit} from "./modalCRUD/Usercrud";
 
 export default class User extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal:{
+                name:'',
+                show: false,
+            }
+        }
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    showModal(event){
+        this.setState({modal:{name:event.target.name, show:true}})
+    }
+
+    closeModal(){
+        this.setState({modal:{name:'', show:false}})
+    }
 
     render() {
-        // const [addModal, setAddModal] = useState(false);
-        // const [editModal, setEditModal] = useState(false);
-        // const [deleteModal, setDeleteModal] = useState(false);
-
         return(
             <Card>
                 <Card.Header className="text-center">
@@ -28,7 +43,7 @@ export default class User extends Component{
                             <th>คณะ</th>
                             <th>สาขา</th>
                             <th className="text-center">
-                                <Button variant="info" size="sm"  >
+                                <Button name="modalAdd" variant="info" size="sm" onClick={this.showModal}  >
                                     เพิ่ม
                                 </Button>
                             </th>
@@ -44,19 +59,20 @@ export default class User extends Component{
                             <td className="align-middle">เทคโนโยลีอุสาหกรรม </td>
                             <td className="align-middle">วิศวกรรมคอมพิวเตอร์ </td>
                             <td className="align-middle">
-                                <Button className="m-auto" variant="warning" size="sm" >
+                                <Button className="m-auto" name="modalEdit" variant="warning" size="sm" onClick={this.showModal} >
                                     แก้ไข
                                 </Button>{' '}
-                                <Button className="m-auto" variant="danger" size="sm" >
+                                <Button className="m-auto" name="modalDelete" variant="danger" size="sm" onClick={this.showModal} >
                                     ลบ
                                 </Button>
                             </td>
                         </tr>
                         </tbody>
                     </Table>
-                    {/*<Userdelete show={deleteModal} onHide={() => {setDeleteModal(false)}} />*/}
-                    {/*<Useredit show={editModal} onHide={() => {setEditModal(false)}} />*/}
-                    {/*<Useradd show={addModal} onHide={() => {setAddModal(false)}} />*/}
+                    {(this.state.modal.name === 'modalAdd') ? <Useradd show={this.state.modal.show} onHide={this.closeModal} /> : null}
+                    {(this.state.modal.name === 'modalEdit') ? <Useredit show={this.state.modal.show} onHide={this.closeModal} />: null}
+                    {(this.state.modal.name === 'modalDelete') ? <Userdelete show={this.state.modal.show} onHide={this.closeModal} /> : null }
+
                 </Card.Body>
             </Card>
 

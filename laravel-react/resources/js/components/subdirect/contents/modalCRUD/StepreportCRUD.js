@@ -21,7 +21,9 @@ export function StepAdd(props){
 
 export function StepEdit(props){
     const stepColors = ['info','success','danger'];
-
+    const modalStyle = {
+        overflowY: 'hidden'
+    };
     return(
         <Modal
             show={props.show}
@@ -33,7 +35,7 @@ export function StepEdit(props){
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title>
+                <Modal.Title >
                     ตั้งค่าเส้นทางเอกสาร
                 </Modal.Title>
             </Modal.Header>
@@ -49,9 +51,11 @@ export function StepEdit(props){
                     </Row>
                 </Container><hr/>
                 <Card className="p-2">
-                    <Card.Title className="text-left">
-                        เส้นทางเอกสาร
-                    </Card.Title>
+                    <Card.Header>
+                        <Card.Title style={modalStyle}>
+                            เส้นทางเอกสาร
+                        </Card.Title>
+                    </Card.Header>
                     <Card.Body>
                             {
                                 stepColors.map( (variant,id) => (
