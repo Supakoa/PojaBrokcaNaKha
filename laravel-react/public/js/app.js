@@ -9816,7 +9816,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*{\n    margin: 0;\n    padding: 0;\n    overflow-x: hidden;\n}\n.app{\n    display: flex;\n    min-height: 100vh;\n}\n\n.content-body{\n    width:100%;\n}\n", ""]);
+exports.push([module.i, "*{\n    margin: 0;\n    padding: 0;\n    overflow-x: hidden;\n}\n.app{\n    display: flex;\n    min-height: 95vh;\n}\n\n.content-body{\n    width:100%;\n}\n", ""]);
 
 // exports
 
@@ -9854,7 +9854,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".navManu{\n    border-radius: 2px;\n    width: 15%;\n    padding: 5px;\n    justify-content: center;\n    align-content: center;\n    background-color: lightgray;\n    /*overflow-y: hidden;*/\n}\n\n.navManu ul {\n    margin-top: 8vh;\n}\n\n.navManu li{\n    font-size: 18px;\n    list-style: none;\n    margin-bottom: 10px;\n    color: black;\n    padding-left: 15px;\n    justify-content: space-around;\n}\n.navManu li:hover{\n    -webkit-text-decoration: black;\n            text-decoration: black;\n    font-size: 20px;\n    transition: ease-in 2.2s ease-out 1s;\n}\n\n.navManu a:hover{/*the tag is Link tag */\n    text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "a:hover{\n    text-decoration: none;\n    font-size: 22px;\n}\n", ""]);
 
 // exports
 
@@ -85384,6 +85384,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Appstyle_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Appstyle_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _subdirect_Main__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./subdirect/Main */ "./resources/js/components/subdirect/Main.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
@@ -85394,11 +85415,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Row"], {
-    className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Col, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subdirect_navfolder_Left__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Col, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subdirect_Main__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subdirect_footer_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
-}
+
+var App = /*#__PURE__*/function (_Component) {
+  _inherits(App, _Component);
+
+  var _super = _createSuper(App);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(App, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Row"], {
+        className: "app"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Col"], {
+        xs: 12,
+        sm: 12,
+        md: 2,
+        lg: 2,
+        className: "pt-5 pr-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subdirect_navfolder_Left__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Col"], {
+        xs: 12,
+        sm: 12,
+        md: 10,
+        lg: 10,
+        className: "p-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subdirect_Main__WEBPACK_IMPORTED_MODULE_7__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subdirect_footer_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+    }
+  }]);
+
+  return App;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
@@ -85676,18 +85727,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modalCRUD_Newscrud__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modalCRUD/Newscrud */ "./resources/js/components/subdirect/contents/modalCRUD/Newscrud.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -85717,50 +85756,41 @@ var News = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(News);
 
-  function News() {
+  function News(props) {
+    var _this;
+
     _classCallCheck(this, News);
 
-    return _super.apply(this, arguments);
-  }
+    _this = _super.call(this, props);
+    _this.state = {
+      show: false,
+      target: null
+    };
+    return _this;
+  } //
+  // handleClick = (event) => {
+  //     this.setState({
+  //         show: true
+  //     })
+  //         setShow(!this.show);
+  //         setTarget(event.target);
+  //         setTimeout(() => {
+  //             setShow(false);
+  //         }, 5000);
+  //     };
+
 
   _createClass(News, [{
     key: "render",
     value: function render() {
-      var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState2 = _slicedToArray(_useState, 2),
-          newsAdd = _useState2[0],
-          setNewsAdd = _useState2[1];
-
-      var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState4 = _slicedToArray(_useState3, 2),
-          newsEdit = _useState4[0],
-          setNewsEdit = _useState4[1];
-
-      var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState6 = _slicedToArray(_useState5, 2),
-          newsDelete = _useState6[0],
-          setNewsDelete = _useState6[1];
-
-      var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState8 = _slicedToArray(_useState7, 2),
-          show = _useState8[0],
-          setShow = _useState8[1];
-
-      var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-          _useState10 = _slicedToArray(_useState9, 2),
-          target = _useState10[0],
-          setTarget = _useState10[1];
-
-      var ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-
-      var handleClick = function handleClick(event) {
-        setShow(!show);
-        setTarget(event.target);
-        setTimeout(function () {
-          setShow(false);
-        }, 5000);
-      };
-
+      // const [newsAdd, setNewsAdd] = useState(false);
+      // const [newsEdit, setNewsEdit] = useState(false);
+      // const [newsDelete, setNewsDelete] = useState(false);
+      //
+      // const [show, setShow] = useState(false);
+      // const [target, setTarget] = useState(null);
+      // const ref = useRef(null);
+      //
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Header, {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Title, {
@@ -85774,10 +85804,7 @@ var News = /*#__PURE__*/function (_Component) {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "URL"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "\u0E23\u0E39\u0E1B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "info",
-        size: "sm",
-        onClick: function onClick() {
-          setNewsAdd(true);
-        }
+        size: "sm"
       }, "\u0E40\u0E1E\u0E34\u0E48\u0E21")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         className: " text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -85788,44 +85815,16 @@ var News = /*#__PURE__*/function (_Component) {
         className: "align-middle pl-0 pr-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         size: "md",
-        variant: "outline-dark",
-        onClick: handleClick
-      }, "\u0E14\u0E39\u0E20\u0E32\u0E1E"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PopoverImage, {
-        show: show,
-        target: target,
-        ref: ref.current,
-        placement: "bottom",
-        imgsrc: "https://sisa.ssru.ac.th/useruploads/images/20191004/2019100415701812578706.jpg"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        variant: "outline-dark"
+      }, "\u0E14\u0E39\u0E20\u0E32\u0E1E")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "align-middle p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "warning",
-        size: "sm",
-        onClick: function onClick() {
-          setNewsEdit(true);
-        }
+        size: "sm"
       }, " \u0E41\u0E01\u0E49\u0E44\u0E02"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "danger",
-        size: "sm",
-        onClick: function onClick() {
-          setNewsDelete(true);
-        }
-      }, "\u0E25\u0E1A")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_Newscrud__WEBPACK_IMPORTED_MODULE_2__["Newsadd"], {
-        show: newsAdd,
-        onHide: function onHide() {
-          setNewsAdd(false);
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_Newscrud__WEBPACK_IMPORTED_MODULE_2__["Newsedit"], {
-        show: newsEdit,
-        onHide: function onHide() {
-          setNewsEdit(false);
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_Newscrud__WEBPACK_IMPORTED_MODULE_2__["Newsdelete"], {
-        show: newsDelete,
-        onHide: function onHide() {
-          setNewsDelete(false);
-        }
-      }));
+        size: "sm"
+      }, "\u0E25\u0E1A")))))));
     }
   }, {
     key: "PopoverImage",
@@ -85960,17 +85959,28 @@ var StepReport = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(StepReport);
 
-  function StepReport() {
+  function StepReport(props) {
     _classCallCheck(this, StepReport);
 
-    return _super.apply(this, arguments);
-  }
+    return _super.call(this, props);
+  } // state = {
+  //     show: false
+  // }
+  //
+  // showModal = () =>{
+  //     this.setState({show: true})
+  // }
+  //
+  // closeModal = () => {
+  //     this.setState({show: false})
+  // }
+
 
   _createClass(StepReport, [{
     key: "render",
-    // const [stepEdit, setStepEdit] = useState(false);
-    // const [stepDelete, setStepDelete] = useState(false);
     value: function render() {
+      // const [stepEdit, setStepEdit] = useState(false);
+      // const [stepDelete, setStepDelete] = useState(false);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Header, {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Title, {
@@ -85995,27 +86005,11 @@ var StepReport = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "warning",
         size: "sm",
-        className: "text-light",
-        onClick: function onClick() {
-          setStepEdit(true);
-        }
+        className: "text-light"
       }, "\u0E41\u0E01\u0E49\u0E44\u0E02"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         size: "sm",
-        variant: "danger",
-        onClick: function onClick() {
-          setStepDelete(true);
-        }
-      }, "\u0E25\u0E1A"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_StepreportCRUD__WEBPACK_IMPORTED_MODULE_2__["StepEdit"], {
-        show: stepEdit,
-        onHide: function onHide() {
-          setStepEdit(false);
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_StepreportCRUD__WEBPACK_IMPORTED_MODULE_2__["StepDelete"], {
-        show: stepDelete,
-        onHide: function onHide() {
-          setStepDelete(false);
-        }
-      })));
+        variant: "danger"
+      }, "\u0E25\u0E1A")))))));
     }
   }]);
 
@@ -86041,18 +86035,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 /* harmony import */ var _modalCRUD_Usercrud__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modalCRUD/Usercrud */ "./resources/js/components/subdirect/contents/modalCRUD/Usercrud.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -86092,21 +86074,9 @@ var User = /*#__PURE__*/function (_Component) {
   _createClass(User, [{
     key: "render",
     value: function render() {
-      var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState2 = _slicedToArray(_useState, 2),
-          addModal = _useState2[0],
-          setAddModal = _useState2[1];
-
-      var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState4 = _slicedToArray(_useState3, 2),
-          editModal = _useState4[0],
-          setEditModal = _useState4[1];
-
-      var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-          _useState6 = _slicedToArray(_useState5, 2),
-          deleteModal = _useState6[0],
-          setDeleteModal = _useState6[1];
-
+      // const [addModal, setAddModal] = useState(false);
+      // const [editModal, setEditModal] = useState(false);
+      // const [deleteModal, setDeleteModal] = useState(false);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Header, {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Card"].Title, {
@@ -86120,10 +86090,7 @@ var User = /*#__PURE__*/function (_Component) {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "info",
-        size: "sm",
-        onClick: function onClick() {
-          setAddModal(true);
-        }
+        size: "sm"
       }, "\u0E40\u0E1E\u0E34\u0E48\u0E21")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -86145,33 +86112,12 @@ var User = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         className: "m-auto",
         variant: "warning",
-        size: "sm",
-        onClick: function onClick() {
-          setEditModal(true);
-        }
+        size: "sm"
       }, "\u0E41\u0E01\u0E49\u0E44\u0E02"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         className: "m-auto",
         variant: "danger",
-        size: "sm",
-        onClick: function onClick() {
-          setDeleteModal(true);
-        }
-      }, "\u0E25\u0E1A"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_Usercrud__WEBPACK_IMPORTED_MODULE_2__["Userdelete"], {
-        show: deleteModal,
-        onHide: function onHide() {
-          setDeleteModal(false);
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_Usercrud__WEBPACK_IMPORTED_MODULE_2__["Useredit"], {
-        show: editModal,
-        onHide: function onHide() {
-          setEditModal(false);
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modalCRUD_Usercrud__WEBPACK_IMPORTED_MODULE_2__["Useradd"], {
-        show: addModal,
-        onHide: function onHide() {
-          setAddModal(false);
-        }
-      })));
+        size: "sm"
+      }, "\u0E25\u0E1A")))))));
     }
   }]);
 
@@ -86322,7 +86268,6 @@ function StepAdd(props) {
 }
 function StepEdit(props) {
   var stepColors = ['info', 'success', 'danger'];
-  console.log(stepColors.length);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
     show: props.show,
     onHide: props.onHide,
@@ -86702,25 +86647,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navbarStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbarStyle.css */ "./resources/js/components/subdirect/navfolder/navbarStyle.css");
 /* harmony import */ var _navbarStyle_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_navbarStyle_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
 
 
 
 function Left() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "navManu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"], {
+    variant: "flush"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "text-dark",
     to: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u0E2B\u0E19\u0E49\u0E32\u0E41\u0E23\u0E01")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "\u0E2B\u0E19\u0E49\u0E32\u0E41\u0E23\u0E01")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "text-dark",
     to: "/message"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u0E02\u0E49\u0E2D\u0E04\u0E27\u0E32\u0E21")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "\u0E02\u0E49\u0E2D\u0E04\u0E27\u0E32\u0E21")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "text-dark",
     to: "/report"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "text-dark",
     to: "/user"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "text-dark",
     to: "/news"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u0E02\u0E48\u0E32\u0E27")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "\u0E02\u0E48\u0E32\u0E27")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["ListGroup"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "text-dark",
     to: "/stepreport"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u0E02\u0E31\u0E49\u0E19\u0E15\u0E2D\u0E19\u0E2D\u0E01\u0E2A\u0E32\u0E23"))));
+  }, "\u0E02\u0E31\u0E49\u0E19\u0E15\u0E2D\u0E19\u0E2D\u0E01\u0E2A\u0E32\u0E23")));
 }
 
 /***/ }),

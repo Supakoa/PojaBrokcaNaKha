@@ -1,31 +1,4 @@
-.navManu{
-    border-radius: 2px;
-    width: 15%;
-    padding: 5px;
-    justify-content: center;
-    align-content: center;
-    background-color: lightgray;
-    /*overflow-y: hidden;*/
-}
-
-.navManu ul {
-    margin-top: 8vh;
-}
-
-.navManu li{
-    font-size: 18px;
-    list-style: none;
-    margin-bottom: 10px;
-    color: black;
-    padding-left: 15px;
-    justify-content: space-around;
-}
-.navManu li:hover{
-    text-decoration: black;
-    font-size: 20px;
-    transition: ease-in 2.2s ease-out 1s;
-}
-
-.navManu a:hover{/*the tag is Link tag */
+a:hover{
     text-decoration: none;
+    font-size: 22px;
 }

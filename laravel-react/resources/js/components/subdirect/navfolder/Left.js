@@ -1,30 +1,41 @@
 import React from 'react';
 import './navbarStyle.css';
 import {Link} from 'react-router-dom';
+import {ListGroup} from "react-bootstrap";
 
 export default function Left(){
     return(
-        <div className="navManu">
-            <ul>
-                <Link to="/" >
-                    <li>หน้าแรก</li>
+        <ListGroup variant="flush">
+            <ListGroup.Item>
+                <Link className="text-dark" to="/" >
+                    หน้าแรก
                 </Link>
-                <Link to="/message" >
-                    <li>ข้อความ</li>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Link className="text-dark" to="/message" >
+                    ข้อความ
                 </Link>
-                <Link to="/report" >
-                    <li>เอกสาร</li>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Link className="text-dark" to="/report" >
+                    เอกสาร
                 </Link>
-                <Link to="/user" >
-                    <li>สมาชิก</li>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Link className="text-dark" to="/user" >
+                    สมาชิก
                 </Link>
-                <Link to="/news" >
-                    <li>ข่าว</li>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Link className="text-dark" to="/news" >
+                    ข่าว
                 </Link>
-                <Link to="/stepreport" >
-                    <li>ขั้นตอนอกสาร</li>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Link className="text-dark" to="/stepreport" >
+                    ขั้นตอนอกสาร
                 </Link>
-            </ul>
-        </div>
+            </ListGroup.Item>
+        </ListGroup>
     );
 }

@@ -5,9 +5,9 @@ import {Useradd, Userdelete, Useredit} from "./modalCRUD/Usercrud";
 export default class User extends Component{
 
     render() {
-        const [addModal, setAddModal] = useState(false);
-        const [editModal, setEditModal] = useState(false);
-        const [deleteModal, setDeleteModal] = useState(false);
+        // const [addModal, setAddModal] = useState(false);
+        // const [editModal, setEditModal] = useState(false);
+        // const [deleteModal, setDeleteModal] = useState(false);
 
         return(
             <Card>
@@ -28,7 +28,7 @@ export default class User extends Component{
                             <th>คณะ</th>
                             <th>สาขา</th>
                             <th className="text-center">
-                                <Button variant="info" size="sm" onClick={() => {setAddModal(true)}} >
+                                <Button variant="info" size="sm"  >
                                     เพิ่ม
                                 </Button>
                             </th>
@@ -44,19 +44,19 @@ export default class User extends Component{
                             <td className="align-middle">เทคโนโยลีอุสาหกรรม </td>
                             <td className="align-middle">วิศวกรรมคอมพิวเตอร์ </td>
                             <td className="align-middle">
-                                <Button className="m-auto" variant="warning" size="sm" onClick={() => {setEditModal(true)}}>
+                                <Button className="m-auto" variant="warning" size="sm" >
                                     แก้ไข
                                 </Button>{' '}
-                                <Button className="m-auto" variant="danger" size="sm" onClick={() => {setDeleteModal(true)}}>
+                                <Button className="m-auto" variant="danger" size="sm" >
                                     ลบ
                                 </Button>
                             </td>
                         </tr>
                         </tbody>
                     </Table>
-                    <Userdelete show={deleteModal} onHide={() => {setDeleteModal(false)}} />
-                    <Useredit show={editModal} onHide={() => {setEditModal(false)}} />
-                    <Useradd show={addModal} onHide={() => {setAddModal(false)}} />
+                    {/*<Userdelete show={deleteModal} onHide={() => {setDeleteModal(false)}} />*/}
+                    {/*<Useredit show={editModal} onHide={() => {setEditModal(false)}} />*/}
+                    {/*<Useradd show={addModal} onHide={() => {setAddModal(false)}} />*/}
                 </Card.Body>
             </Card>
 

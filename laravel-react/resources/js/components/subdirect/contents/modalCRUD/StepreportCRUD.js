@@ -22,7 +22,6 @@ export function StepAdd(props){
 export function StepEdit(props){
     const stepColors = ['info','success','danger'];
 
-    console.log(stepColors.length);
     return(
         <Modal
             show={props.show}

@@ -3,11 +3,28 @@ import {Button, Card, Table} from "react-bootstrap";
 import {StepEdit, StepDelete} from "./modalCRUD/StepreportCRUD";
 
 export default class StepReport extends Component{
-    // const [stepEdit, setStepEdit] = useState(false);
-    // const [stepDelete, setStepDelete] = useState(false);
+    constructor(props) {
+        super(props);
+
+    }
+
+    // state = {
+    //     show: false
+    // }
+    //
+    // showModal = () =>{
+    //     this.setState({show: true})
+    // }
+    //
+    // closeModal = () => {
+    //     this.setState({show: false})
+    // }
+
+
 
     render(){
-
+        // const [stepEdit, setStepEdit] = useState(false);
+        // const [stepDelete, setStepDelete] = useState(false);
         return(
             <Card>
                 <Card.Header className="text-center">
@@ -31,19 +48,19 @@ export default class StepReport extends Component{
                             <td className="align-middle">เอกสารขอขึ้นสอบ</td>
                             <td className="align-middle">DE - 2019</td>
                             <td className="align-middle">
-                                <Button variant="warning" size="sm" className="text-light" onClick={() => {setStepEdit(true)}}>
+                                <Button variant="warning" size="sm" className="text-light"  >
                                     แก้ไข
                                 </Button>{' '}
-                                <Button size="sm" variant="danger" onClick={() => {setStepDelete(true)}}>
+                                <Button size="sm" variant="danger" >
                                     ลบ
                                 </Button>
                             </td>
                         </tr>
                         </tbody>
                     </Table>
-
-                    <StepEdit show={stepEdit} onHide={() => {setStepEdit(false)}} />
-                    <StepDelete show={stepDelete} onHide={() => {setStepDelete(false)}} />
+                    {/*<StepEdit show={this.state.show} onHide={this.closeModal}  />*/}
+                    {/*<StepEdit show={this.state.modalShow} onHide={this.handleCloseModal()} />*/}
+                    {/*<StepDelete name="modalDelete" show={this.state.modalShow} onHide={this.HandleClickModal(false)} />*/}
                 </Card.Body>
             </Card>
         );
