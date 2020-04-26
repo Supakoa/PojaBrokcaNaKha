@@ -20,6 +20,7 @@ export default class StepReport extends Component{
 
     showModal(event){
         this.setState({
+            ...this.state,
             show : true,
             modal: event.target.name
         });

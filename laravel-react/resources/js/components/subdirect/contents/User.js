@@ -16,7 +16,10 @@ export default class User extends Component{
     }
 
     showModal(event){
-        this.setState({modal:{name:event.target.name, show:true}})
+        this.setState({
+            ...this.state.modal,
+            modal:{name:event.target.name, show:true}
+        })
     }
 
     closeModal(){

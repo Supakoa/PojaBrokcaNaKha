@@ -4,25 +4,34 @@ import {Link} from 'react-router-dom';
 import {ListGroup} from "react-bootstrap";
 
 export default function Left(){
+
+    const datas = [
+        {path:"/", name:"หน้าแรก"},
+        {path:"/message",name:"ข้อความ"},
+        {path:"/report",name:"เอกสาร"},
+        {path:"/user",name:"สมาชิก"},
+        {path:"/news",name:"ข่าว"},
+        {path:"/stepreport",name:"ขั้นตอนอกสาร"}]
+
     return(
-        <ListGroup variant="flush">
-            <Link className="text-dark" to="/" >
-                <ListGroup.Item action variant="light">หน้าแรก</ListGroup.Item>
+        <ListGroup variant="flush" className="bg-menu">
+            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/" >
+                หน้าแรก
             </Link>
-            <Link className="text-dark" to="/message" >
-                <ListGroup.Item action variant="light">ข้อความ</ListGroup.Item>
+            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/message" >
+                ข้อความ
             </Link>
-            <Link className="text-dark" to="/report" >
-                <ListGroup.Item action variant="light">เอกสาร</ListGroup.Item>
+            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/report" >
+                เอกสาร
             </Link>
-            <Link className="text-dark" to="/user" >
-                <ListGroup.Item action variant="light">สมาชิก</ListGroup.Item>
+            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/user" >
+                สมาชิก
             </Link>
-            <Link className="text-dark" to="/news" >
-                <ListGroup.Item action variant="light">ข่าว</ListGroup.Item>
+            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/news" >
+                ข่าว
             </Link>
-            <Link className="text-dark" to="/stepreport" >
-                <ListGroup.Item action variant="light">ขั้นตอนอกสาร</ListGroup.Item>
+            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/stepreport" >
+                ขั้นตอนอกสาร
             </Link>
         </ListGroup>
     );

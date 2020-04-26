@@ -26,13 +26,11 @@ export default function Header() {
                              className="d-inline-block align-top"
                              width="30"
                              height="30"
-                             rounded
+                             rounded="true"
                         />
                         {userName}
                     </Nav.Link>
-                    <Nav.Link>
-                        <Link>Log-Out</Link>
-                    </Nav.Link>
+                    <Link className="nav-link" to="/">Log-Out</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

@@ -14,7 +14,7 @@ class App extends Component {
         return (
             <Router>
                 <Row className="app">
-                    <Col xs={12} sm={12} md={2} lg={2} className="pt-5 pr-0">
+                    <Col xs={12} sm={12} md={2} lg={2} className="pt-5 pr-0 bg-secondary">
                         <Left/>
                     </Col>
                     <Col xs={12} sm={12} md={10} lg={10} className="p-0">

@@ -14,7 +14,7 @@ export default class News extends Component{
            images:{
                show:false,
                target:null,
-               placement:"auto",
+               placement:"top",
                ref: null,
                imageSRC: 'https://sisa.ssru.ac.th/useruploads/images/20191004/2019100415701812578706.jpg'
            }
@@ -25,8 +25,8 @@ export default class News extends Component{
     }
 
     showModal(event){
-        console.log(event.target.name)
-        this.setState({modal:{name: event.target.name, show:true,}})
+
+        this.setState({...this.state.modal,modal:{name: event.target.name, show:true,}})
     }
 
     closeModal(){
@@ -34,9 +34,8 @@ export default class News extends Component{
     }
 
     showImages(event){
-        this.setState({images:{show: !this.state.images.show, target:event.target,}})
+        this.setState({...this.state.images,images:{show: !this.state.images.show, target:event.target,}})
         this.state.images.ref.current.focus()
-        console.log(this.state.images.imageSRC)
     }
     render() {
         const overLayStyle = {
@@ -80,7 +79,7 @@ export default class News extends Component{
                                 >
                                     <Popover style={overLayStyle} id="popover-contained">
                                         <Popover.Title as="h4" className="text-center">Image</Popover.Title>
-                                        <Image src="https://sisa.ssru.ac.th/useruploads/images/20191004/2019100415701812578706.jpg" fluid rounded />
+                                        <Image src={this.state.images.imageSRC} fluid rounded="true" />
                                     </Popover>
                                 </Overlay>
                             </td>
