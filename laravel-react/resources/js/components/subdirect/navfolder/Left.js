@@ -4,33 +4,28 @@ import {Link} from 'react-router-dom';
 import {ListGroup} from "react-bootstrap";
 
 export default function Left(){
-
-    const datas = [
-        {path:"/", name:"หน้าแรก"},
-        {path:"/message",name:"ข้อความ"},
-        {path:"/report",name:"เอกสาร"},
-        {path:"/user",name:"สมาชิก"},
-        {path:"/news",name:"ข่าว"},
-        {path:"/stepreport",name:"ขั้นตอนอกสาร"}]
+    const routPath = ['/', '/message', '/report', '/user', '/news', '/stepreport' ]
+    const linkClass = "text-dark list-group-item list-group-item-secondary list-group-item-action";
 
     return(
         <ListGroup variant="flush" className="bg-menu">
-            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/" >
+
+            <Link className={linkClass} to={routPath[0]} >
                 หน้าแรก
             </Link>
-            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/message" >
+            <Link className={linkClass} to={routPath[1]} >
                 ข้อความ
             </Link>
-            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/report" >
+            <Link className={linkClass} to={routPath[2]} >
                 เอกสาร
             </Link>
-            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/user" >
+            <Link className={linkClass} to={routPath[3]} >
                 สมาชิก
             </Link>
-            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/news" >
+            <Link className={linkClass} to={routPath[4]} >
                 ข่าว
             </Link>
-            <Link className="text-dark list-group-item list-group-item-secondary list-group-item-action" to="/stepreport" >
+            <Link className={linkClass} to={routPath[5]} >
                 ขั้นตอนอกสาร
             </Link>
         </ListGroup>
