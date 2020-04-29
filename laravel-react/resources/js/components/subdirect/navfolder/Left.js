@@ -1,7 +1,6 @@
 import React from 'react';
 import './navbarStyle.css';
 import {Link} from 'react-router-dom';
-import {ListGroup} from "react-bootstrap";
 import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -14,36 +13,12 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-
-export default function Left(){
-    const routPath = ['/', '/message', '/report', '/user', '/news', '/stepreport' ]
-    const linkClass = "text-dark list-group-item list-group-item-secondary list-group-item-action";
-
-    return(
-        <ListGroup variant="flush" className="bg-menu">
-
-            <Link className={linkClass} to={routPath[0]} >
-                หน้าแรก
-            </Link>
-            <Link className={linkClass} to={routPath[1]} >
-                ข้อความ
-            </Link>
-            <Link className={linkClass} to={routPath[2]} >
-                เอกสาร
-            </Link>
-            <Link className={linkClass} to={routPath[3]} >
-                สมาชิก
-            </Link>
-            <Link className={linkClass} to={routPath[4]} >
-                ข่าว
-            </Link>
-            <Link className={linkClass} to={routPath[5]} >
-                ขั้นตอนอกสาร
-            </Link>
-        </ListGroup>
-    );
-}
+import PeopleIcon from '@material-ui/icons/People';
+import LinkIcon from '@material-ui/icons/Link';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ForumIcon from '@material-ui/icons/Forum';
+import HomeIcon from '@material-ui/icons/Home';
+import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,54 +32,115 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export function NestedList() {
+export default function Left(){
+
+    const routPath = ['/', '/message', '/report', '/user', '/news', '/stepreport' ]
+    const linkClass = "text-dark";
+
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const handleClick = () => {
         setOpen(!open);
     };
 
-    return (
+    return(
         <List
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
                 <ListSubheader component="div" id="nested-list-subheader">
-                    Nested List Items
+                    เมนู
                 </ListSubheader>
             }
             className={classes.root}
         >
-            <ListItem button>
-                <ListItemIcon>
-                    <SendIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sent mail" />
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Drafts" />
-            </ListItem>
-            <ListItem button onClick={handleClick}>
-                <ListItemIcon>
-                    <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    <ListItem button className={classes.nested}>
-                        <ListItemIcon>
-                            <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText primary="Starred" />
-                    </ListItem>
-                </List>
-            </Collapse>
+            <Link className={linkClass} to={routPath[0]} >
+                <ListItem button>
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="หน้าแรก" />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={routPath[1]} >
+                <ListItem button onClick={handleClick}>
+                    <ListItemIcon>
+                        <ForumIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="ข้อความ" />
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItem button className={classes.nested}>
+                            <ListItemIcon>
+                                <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Inbox" />
+                        </ListItem>
+                        <ListItem button className={classes.nested}>
+                            <ListItemIcon>
+                                <SendIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Outbox" />
+                        </ListItem>
+                    </List>
+                </Collapse>
+            </Link>
+            <Link className={linkClass} to={routPath[2]} >
+                <ListItem button>
+                    <ListItemIcon>
+                        <DescriptionIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="เอกสาร" />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={routPath[3]} >
+                <ListItem button>
+                    <ListItemIcon>
+                        <PeopleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="สมาชิก" />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={routPath[4]} >
+                <ListItem button>
+                    <ListItemIcon>
+                        <LinkIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="ข่าว" />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={routPath[5]} >
+                <ListItem button>
+                    <ListItemIcon>
+                        <LibraryAddCheckIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="ขั้นตอนเอกสาร" />
+                </ListItem>
+            </Link>
         </List>
+        // <ListGroup variant="flush" className="bg-menu">
+        //     <Link className={linkClass} to={routPath[0]} >
+        //         หน้าแรก
+        //     </Link>
+        //     <Link className={linkClass} to={routPath[1]} >
+        //         ข้อความ
+        //     </Link>
+        //     <Link className={linkClass} to={routPath[2]} >
+        //         เอกสาร
+        //     </Link>
+        //     <Link className={linkClass} to={routPath[3]} >
+        //         สมาชิก
+        //     </Link>
+        //     <Link className={linkClass} to={routPath[4]} >
+        //         ข่าว
+        //     </Link>
+        //     <Link className={linkClass} to={routPath[5]} >
+        //         ขั้นตอนอกสาร
+        //     </Link>
+        // </ListGroup>
     );
 }
+

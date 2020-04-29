@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import {Badge, Card, Table} from "react-bootstrap";
+import TableReport from "./tableData/TableReport";
 
 export default class Report extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            stauts: true
+            stauts: true,
+
         }
     }
+
     render() {
         return(
             <Card>
@@ -17,6 +20,7 @@ export default class Report extends Component{
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
+                    <TableReport />
                     <Table striped bordered hover responsive>
                         <thead>
                             <tr className="text-center">
