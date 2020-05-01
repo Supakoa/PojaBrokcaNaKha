@@ -9,7 +9,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -121,26 +120,6 @@ export default function Left(){
                 </ListItem>
             </Link>
         </List>
-        // <ListGroup variant="flush" className="bg-menu">
-        //     <Link className={linkClass} to={routPath[0]} >
-        //         หน้าแรก
-        //     </Link>
-        //     <Link className={linkClass} to={routPath[1]} >
-        //         ข้อความ
-        //     </Link>
-        //     <Link className={linkClass} to={routPath[2]} >
-        //         เอกสาร
-        //     </Link>
-        //     <Link className={linkClass} to={routPath[3]} >
-        //         สมาชิก
-        //     </Link>
-        //     <Link className={linkClass} to={routPath[4]} >
-        //         ข่าว
-        //     </Link>
-        //     <Link className={linkClass} to={routPath[5]} >
-        //         ขั้นตอนอกสาร
-        //     </Link>
-        // </ListGroup>
     );
 }
 

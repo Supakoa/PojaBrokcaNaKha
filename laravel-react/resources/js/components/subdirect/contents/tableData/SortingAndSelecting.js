@@ -23,6 +23,15 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add'
 
+//Table Header
+const headCells = [
+    { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+    { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+    { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+    { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+    { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+];
+
 //Function Create data
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -44,6 +53,7 @@ const rows = [
     createData('Oreo', 437, 18.0, 63, 4.0),
 ];
 
+// Sort head
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -69,14 +79,6 @@ function stableSort(array, comparator) {
     });
     return stabilizedThis.map((el) => el[0]);
 }
-//Table Header
-const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-    { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-    { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-    { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-    { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
-];
 
 function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
@@ -110,8 +112,8 @@ function EnhancedTableHead(props) {
                             {headCell.label}
                             {orderBy === headCell.id ? (
                                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
+                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                </span>
                             ) : null}
                         </TableSortLabel>
                     </TableCell>
@@ -131,6 +133,7 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
+// Tools Bar
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
@@ -254,7 +257,6 @@ export default function EnhancedTable() {
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
-
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, name);
         } else if (selectedIndex === 0) {
@@ -267,7 +269,6 @@ export default function EnhancedTable() {
                 selected.slice(selectedIndex + 1),
             );
         }
-
         setSelected(newSelected);
     };
 

@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, {Component} from 'react';
 import {Button, Card, Table} from "react-bootstrap";
 import {StepEdit, StepDelete} from "./modalCRUD/StepreportCRUD";
 
@@ -39,8 +39,6 @@ export default class StepReport extends Component{
             })
         }
     }
-
-
 
     closeModal(){
         this.setState({show : false})

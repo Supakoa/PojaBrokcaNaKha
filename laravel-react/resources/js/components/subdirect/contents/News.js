@@ -25,7 +25,6 @@ export default class News extends Component{
     }
 
     showModal(event){
-
         this.setState({...this.state.modal,modal:{name: event.target.name, show:true,}})
     }
 
@@ -34,7 +33,7 @@ export default class News extends Component{
     }
 
     showImages(event){
-        this.setState({...this.state.images,images:{show: !this.state.images.show, target:event.target,}})
+        this.setState({images:{...this.state.images,show: !this.state.images.show, target:event.target,}})
         this.state.images.ref.current.focus()
     }
     render() {
