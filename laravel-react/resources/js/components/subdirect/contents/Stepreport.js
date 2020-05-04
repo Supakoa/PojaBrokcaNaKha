@@ -25,11 +25,6 @@ export default class StepReport extends Component{
             tableOption:{
                 page: 0,
                 rowsPerPage: 10,
-            } ,
-            modal:{
-                show: false,
-                name: ['edit', 'delete'],
-                display: null
             },
         };
 
@@ -80,8 +75,6 @@ export default class StepReport extends Component{
                             </TableHead>
                             <TableBody>
                                 {this.state.rows.slice(this.state.tableOption.page * this.state.tableOption.rowsPerPage, this.state.tableOption.page * this.state.tableOption.rowsPerPage + this.state.tableOption.rowsPerPage).map((row) => {
-                                    const actionCRUD = this.state.rows[0].actions
-
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                             {this.state.columns.map((column, index) => {

@@ -1,16 +1,31 @@
 import React, {useState, useRef, Component} from 'react';
 import {Card, Table, Button, Image, Overlay, Popover} from "react-bootstrap";
 import {Newsadd, Newsdelete, Newsedit} from './modalCRUD/Newscrud';
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import TablePagination from "@material-ui/core/TablePagination";
 
 
 export default class News extends Component{
     constructor(props) {
         super(props);
         this.state = {
-           modal:{
-               name:'',
-               show:false,
-           },
+            columns:[
+                {id: 'id', label: '#', minWidth: 100, align:'left'},
+                {id: 'url', label: 'URL', minWidth: 170, align: 'center'},
+                {id: 'image', label: 'รูป', minWidth: 100, align: 'center'},
+                {id: 'actions', label: <Newsadd/>, minWidth: 80, align:'center'},
+            ],
+            rows: [
+                {id: 1, url:'www.ssru.ac.th', image:'', actions: ['edit', 'delete']}
+            ],
+            tableOption:{
+                page: 0,
+                rowsPerPage: 10,
+            },
            images:{
                show:false,
                target:null,
@@ -19,29 +34,69 @@ export default class News extends Component{
                imageSRC: 'https://sisa.ssru.ac.th/useruploads/images/20191004/2019100415701812578706.jpg'
            }
         }
-        this.showModal =  this.showModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.checkValueInCellTable = this.checkValueInCellTable.bind(this);
+        this.imageOverlay = this.imageOverlay.bind(this);
+        this.handleChangePage = this.handleChangePage.bind(this);
+        this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
         this.showImages = this.showImages.bind(this);
     }
 
-    showModal(event){
-        this.setState({...this.state.modal,modal:{name: event.target.name, show:true,}})
-    }
+    handleChangePage(event, newPage) {
+        this.setState({tableOption:{
+                ...this.state.tableOption,
+                page:newPage,
+            }})
+    };
 
-    closeModal(){
-        this.setState({modal:{name:'', show:false}})
-    }
+    handleChangeRowsPerPage(event){
+        this.setState({tableOption:{
+                ...this.state.tableOption,
+                page:0,
+                RowsPerPage:+event.target.value
+            }})
+    };
 
     showImages(event){
         this.setState({images:{...this.state.images,show: !this.state.images.show, target:event.target,}})
         this.state.images.ref.current.focus()
     }
-    render() {
+
+    imageOverlay(obj, overLayStyle, onclick) {
+        return(
+            <div>
+                <Button size="sm" variant="outline-info" onClick={onclick}>view</Button>
+                <Overlay
+                    show={obj.show}
+                    target={obj.target}
+                    placement={obj.placement}
+                    container={obj.ref}
+                    containerPadding={1}
+                >
+                    <Popover style={overLayStyle} id="popover-contained">
+                        <Popover.Title as="h4" className="text-center">Image</Popover.Title>
+                        <Image src={obj.imageSRC} fluid rounded="true" />
+                    </Popover>
+                </Overlay>
+            </div>
+        );
+    }
+
+    checkValueInCellTable(value, columnId, classInCell, index, objImage){
         const overLayStyle = {
             width: '300px',
             height: '150px',
             overflow: 'hidden'
         }
+        if(columnId === 'image'){
+           return this.imageOverlay(objImage, overLayStyle, this.showImages)
+        }else if(columnId === 'actions'){
+            return <div key={index.toString()} className={classInCell}><Newsedit id={value[0]} /><Newsdelete id={value[0]} /></div>
+        }
+        return value;
+    }
+
+    render() {
+
         return(
             <Card>
                 <Card.Header className="text-center">
@@ -50,53 +105,53 @@ export default class News extends Component{
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <Table striped hover responsive bordered>
-                        <thead className="text-center">
-                        <tr>
-                            <th>#</th>
-                            <th>URL</th>
-                            <th>รูป</th>
-                            <th>
-                                <Button name="modalAdd" variant="info" size="sm" onClick={this.showModal} >
-                                    เพิ่ม
-                                </Button>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr className=" text-center">
-                            <td className="align-middle">1</td>
-                            <td className="align-middle">https://ssru.ac.th/</td>
-                            <td className="align-middle pl-0 pr-0">
-                                <Button size="sm" variant="outline-info" onClick={this.showImages}>view</Button>
-                                <Overlay
-                                    show={this.state.images.show}
-                                    target={this.state.images.target}
-                                    placement={this.state.images.placement}
-                                    container={this.state.images.ref}
-                                    containerPadding={1}
-                                >
-                                    <Popover style={overLayStyle} id="popover-contained">
-                                        <Popover.Title as="h4" className="text-center">Image</Popover.Title>
-                                        <Image src={this.state.images.imageSRC} fluid rounded="true" />
-                                    </Popover>
-                                </Overlay>
-                            </td>
-                            <td className="align-middle p-0">
-                                <Button name="modalEdit" variant="warning" size="sm" onClick={this.showModal} > แก้ไข</Button>{' '}
-                                <Button name="modalDelete" variant="danger" size="sm" onClick={this.showModal} >ลบ</Button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </Table>
+                    <TableContainer>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {this.state.columns.map((column) => (
+                                        <TableCell
+                                            key={column.id}
+                                            align={column.align}
+                                            style={{ minWidth: column.minWidth }}
+                                        >
+                                            {column.label}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.state.rows.slice(this.state.tableOption.page * this.state.tableOption.rowsPerPage, this.state.tableOption.page * this.state.tableOption.rowsPerPage + this.state.tableOption.rowsPerPage).map((row) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                            {this.state.columns.map((column, index) => {
+                                                const value = row[column.id];
+                                                const classInCell = "d-flex m-auto align-middle justify-content-center";
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {this.checkValueInCellTable(value, column.id, classInCell, index, this.state.images)}
+                                                    </TableCell>
+                                                );
+                                            })}
+                                        </TableRow>
+                                    );
+                                })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[10, 25, 100]}
+                        component="div"
+                        count={this.state.rows.length}
+                        rowsPerPage={this.state.tableOption.rowsPerPage}
+                        page={this.state.tableOption.page}
+                        onChangePage={this.handleChangePage}
+                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    />
+
                 </Card.Body>
-                { (this.state.modal.name === 'modalAdd') ? <Newsadd show={this.state.modal.show} onHide={this.closeModal} /> : null}
-                { (this.state.modal.name === 'modalEdit') ? <Newsedit show={this.state.modal.show} onHide={this.closeModal} /> : null}
-                { (this.state.modal.name === 'modalDelete') ? <Newsdelete show={this.state.modal.show} onHide={this.closeModal} /> : null}
             </Card>
         );
     }
 }
-
-
 
