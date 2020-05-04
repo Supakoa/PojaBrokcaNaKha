@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {StepEdit, StepDelete} from "./modalCRUD/StepreportCRUD";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -17,11 +17,10 @@ export default class StepReport extends Component{
                 {id: 'id', label: '#', minWidth: 100, align:'left'},
                 {id: 'nameForm', label: 'รูปแบบเอกสาร', minWidth: 150, align: 'center'},
                 {id: 'code', label: 'ID', minWidth: 170, align: 'center'},
-                {id: 'action', label: 'Action', minWidth: 80, align:'center'},
+                {id: 'actions', label: 'Action', minWidth: 80, align:'center'},
             ],
             rows: [
-                {id: 1, nameForm:'เอกสารขอขึ้นสอบ', code: 'DE - 2019',
-                    action: <div className="d-flex m-auto align-middle justify-content-center"><StepEdit/><StepDelete/></div>}
+                {id: 1, nameForm:'เอกสารขอขึ้นสอบ', code: 'DE - 2019', actions: ['edit', 'delete']}
             ],
             tableOption:{
                 page: 0,
@@ -29,53 +28,17 @@ export default class StepReport extends Component{
             } ,
             modal:{
                 show: false,
-                name: '',
+                name: ['edit', 'delete'],
                 display: null
             },
         };
 
-        this.showModal = this.showModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.modalDisplay = this.modalDisplay.bind(this);
         this.handleChangePage = this.handleChangePage.bind(this);
         this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
         }
 
-    showModal(event){
-        this.setState({
-            modal: {
-                ...this.state.modal,
-                show:true,
-                name: event.target.value
-            }
-        });
-        this.modalDisplay(event.target.name);
 
-    }
-
-    modalDisplay(e){
-        if (e === 'edit'){
-            this.setState({
-                modal:{
-                    ...this.state.modal,
-                    display: true
-                }
-            })
-        }else if (e === 'delete'){
-            this.setState({
-                modal:{
-                    ...this.state.modal,
-                    display: false
-                }
-            })
-        }
-    }
-
-    closeModal(){
-        this.setState({modal:{...this.state.modal,show : false}})
-    }
-
-     handleChangePage(event, newPage) {
+    handleChangePage(event, newPage) {
          this.setState({tableOption:{
                  ...this.state.tableOption,
                  page:newPage,
@@ -117,13 +80,22 @@ export default class StepReport extends Component{
                             </TableHead>
                             <TableBody>
                                 {this.state.rows.slice(this.state.tableOption.page * this.state.tableOption.rowsPerPage, this.state.tableOption.page * this.state.tableOption.rowsPerPage + this.state.tableOption.rowsPerPage).map((row) => {
+                                    const actionCRUD = this.state.rows[0].actions
+
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                            {this.state.columns.map((column) => {
+                                            {this.state.columns.map((column, index) => {
                                                 const value = row[column.id];
+                                                const classInCell = "d-flex m-auto align-middle justify-content-center";
                                                 return (
                                                     <TableCell key={column.id} align={column.align}>
-                                                        {value}
+                                                        {column.id === 'actions'
+                                                            ?   <div key={index.toString()} className={classInCell}>
+                                                                    <StepEdit id={value[0]} />
+                                                                    <StepDelete id={value[0]} />
+                                                                </div>
+                                                            : value
+                                                        }
                                                     </TableCell>
                                                 );
                                             })}

@@ -22,12 +22,10 @@ export function StepAdd(props){
 export function StepEdit(props){
     const [modalShow, setModalShow] = React.useState(false);
     const stepColors = ['info','success','danger'];
-    const modalStyle = {
-        overflowY: 'hidden'
-    };
+    const modalStyle = {overflowY: 'hidden'};
     return(
-        <div className="mr-1">
-            <Button variant="warning" name="edit" size="sm" className="text-light" onClick={() => setModalShow(true)}   >
+        <div key={props.id} className="mr-1" >
+            <Button variant="warning" name="btnEdit" size="sm" className="text-light" onClick={() => setModalShow(true)}   >
                 แก้ไข
             </Button>{' || '}
             <Modal
@@ -65,10 +63,10 @@ export function StepEdit(props){
                             {
                                 stepColors.map( (variant,id) => (
                                     id === (stepColors.length - 1)
-                                        ? <Container>
+                                        ? <Container key={id.toString()}>
                                             <Row className="mb-2">
                                                 <Col xs={12} md={8}>
-                                                    <Alert key={id.toString()} variant={variant} className="p-2 mb-0">
+                                                    <Alert  variant={variant} className="p-2 mb-0">
                                                         <Alert.Link href="#">an example link</Alert.Link>
                                                     </Alert>
                                                 </Col>
@@ -77,10 +75,10 @@ export function StepEdit(props){
                                                 </Col>
                                             </Row>
                                         </Container>
-                                        : <Container>
+                                        : <Container key={id.toString()} >
                                             <Row className="mb-2">
                                                 <Col xs={12} md={8}>
-                                                    <Alert key={id.toString()} variant={variant} className="p-2 mb-0">
+                                                    <Alert variant={variant} className="p-2 mb-0">
                                                         <Alert.Link href="#">an example link</Alert.Link>
                                                     </Alert>
                                                 </Col>
@@ -110,7 +108,7 @@ export function StepEdit(props){
 export function StepDelete(props){
     const [modalShow, setModalShow] = React.useState(false);
     return(
-        <div>
+        <div key={props.id}>
             <Button size="sm" name="delete" variant="danger" onClick = {() => setModalShow(true)} >
                 ลบ
             </Button>
