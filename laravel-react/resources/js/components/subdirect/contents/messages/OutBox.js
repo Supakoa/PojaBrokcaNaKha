@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import VerticalTabs from "./component/Tabs";
 import {Card} from "react-bootstrap";
 
 export default class OutBox extends Component {
@@ -12,7 +12,7 @@ export default class OutBox extends Component {
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-
+                    <VerticalTabs/>
                 </Card.Body>
             </Card>
         );

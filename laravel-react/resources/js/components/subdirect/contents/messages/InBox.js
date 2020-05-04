@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Card} from "react-bootstrap";
+import VerticalTabs from "./component/Tabs";
+
 
 export default class InBox extends Component {
     render() {
@@ -11,7 +13,7 @@ export default class InBox extends Component {
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    
+                    <VerticalTabs/>
                 </Card.Body>
             </Card>
         );
