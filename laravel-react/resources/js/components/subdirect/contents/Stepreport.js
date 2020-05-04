@@ -57,10 +57,9 @@ export default class StepReport extends Component{
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-
                     <TableContainer>
                         <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
+                            <TableHead className="bg-info">
                                 <TableRow>
                                     {this.state.columns.map((column) => (
                                         <TableCell

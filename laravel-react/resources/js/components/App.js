@@ -12,7 +12,9 @@ class App extends Component {
     render() {
         return (
             <section>
-                <Main />
+                <Router>
+                    <Main />
+                </Router>
             </section>
         );
     }

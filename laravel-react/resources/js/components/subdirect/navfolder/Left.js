@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Left(){
 
-    const routPath = ['/', '/report', '/user', '/news', '/stepreport', '/message/inbox', '/message/outbox' ]
+    const routPath = ['/', '/message', '/report', '/user', '/news', '/stepreport', '/message/inbox', '/message/outbox' ]
     const linkClass = "text-dark";
 
     const classes = useStyles();
@@ -62,16 +62,17 @@ export default function Left(){
                     <ListItemText primary="หน้าแรก" />
                 </ListItem>
             </Link>
-                <ListItem button onClick={handleClick}>
+            {/*<Link className={linkClass} to={routPath[1]}>*/}
+                <ListItem button onClick={handleClick} href={routPath[1]}>
                     <ListItemIcon>
                         <ForumIcon />
                     </ListItemIcon>
                     <ListItemText primary="ข้อความ" />
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Collapse in={open} timeout="auto" >
                     <List component="div" disablePadding>
-                        <Link className={linkClass} to={routPath[5]} >
+                        <Link className={linkClass} to={routPath[6]} >
                             <ListItem button className={classes.nested}>
                                 <ListItemIcon>
                                     <InboxIcon />
@@ -79,7 +80,7 @@ export default function Left(){
                                 <ListItemText primary="Inbox" />
                             </ListItem>
                         </Link>
-                        <Link className={linkClass} to={routPath[6]} >
+                        <Link className={linkClass} to={routPath[7]} >
                             <ListItem button className={classes.nested}>
                                 <ListItemIcon>
                                     <SendIcon />
@@ -89,7 +90,8 @@ export default function Left(){
                         </Link>
                     </List>
                 </Collapse>
-            <Link className={linkClass} to={routPath[1]} >
+            {/*</Link>*/}
+            <Link className={linkClass} to={routPath[2]} >
                 <ListItem button>
                     <ListItemIcon>
                         <DescriptionIcon />
@@ -97,7 +99,7 @@ export default function Left(){
                     <ListItemText primary="เอกสาร" />
                 </ListItem>
             </Link>
-            <Link className={linkClass} to={routPath[2]} >
+            <Link className={linkClass} to={routPath[3]} >
                 <ListItem button>
                     <ListItemIcon>
                         <PeopleIcon />
@@ -105,7 +107,7 @@ export default function Left(){
                     <ListItemText primary="สมาชิก" />
                 </ListItem>
             </Link>
-            <Link className={linkClass} to={routPath[3]} >
+            <Link className={linkClass} to={routPath[4]} >
                 <ListItem button>
                     <ListItemIcon>
                         <LinkIcon />
@@ -113,7 +115,7 @@ export default function Left(){
                     <ListItemText primary="ข่าว" />
                 </ListItem>
             </Link>
-            <Link className={linkClass} to={routPath[4]} >
+            <Link className={linkClass} to={routPath[5]} >
                 <ListItem button>
                     <ListItemIcon>
                         <LibraryAddCheckIcon />

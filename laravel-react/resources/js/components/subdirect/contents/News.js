@@ -1,5 +1,5 @@
-import React, {useState, useRef, Component} from 'react';
-import {Card, Table, Button, Image, Overlay, Popover} from "react-bootstrap";
+import React, {Component} from 'react';
+import {Card, Button, Image, Overlay, Popover} from "react-bootstrap";
 import {Newsadd, Newsdelete, Newsedit} from './modalCRUD/Newscrud';
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TablePagination from "@material-ui/core/TablePagination";
+import Table from "@material-ui/core/Table";
 
 
 export default class News extends Component{
@@ -106,8 +107,8 @@ export default class News extends Component{
                 </Card.Header>
                 <Card.Body>
                     <TableContainer>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
+                        <Table stickyHeader  aria-label="sticky table">
+                            <TableHead className="bg-info" >
                                 <TableRow>
                                     {this.state.columns.map((column) => (
                                         <TableCell

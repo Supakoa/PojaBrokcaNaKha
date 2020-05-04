@@ -1,11 +1,29 @@
-import React, {Component, useState} from 'react';
-import {Button, Card, Table} from 'react-bootstrap';
-import {Useradd, Userdelete, Useredit} from "./modalCRUD/Usercrud";
+import React, {Component} from 'react';
+import {Card} from 'react-bootstrap';
+import MaterialTable from "material-table";
 
 export default class User extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            columns: [
+                { title: 'ชื่อ - นามสกุล', field: 'name'},
+                { title: 'ประเภท', field: 'type' },
+                { title: 'อีเมล', field: 'email'},
+                { title: 'เบอร์โทรศัพท์', field: 'phone' },
+                { title: 'คณะ', field: 'faculty', lookup:{0:'เทคโนโยลีอุสาหกรรม', 1: 'พยาบาล'}},
+                { title: 'สาขา', field: 'major', lookup: {0:'วิศวกรรมคอมพิวเตอร์'}},
+            ],
+            data: [
+                {
+                    id: 1,
+                    name: 'Supakit Kitjanabumrungsak',
+                    type: 'Addmin', email: 'Koa@gmail.com',
+                    phone: '0922595281',
+                    faculty: 0,
+                    major: 0,
+                },
+            ],
             modal:{
                 name:'',
                 show: false,
@@ -35,46 +53,49 @@ export default class User extends Component{
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <Table striped bordered hover responsive>
-                        <thead>
-                        <tr className="text-center">
-                            <th>#</th>
-                            <th>ชื่อ-สกลุ</th>
-                            <th>ประเภท</th>
-                            <th>อีเมล</th>
-                            <th>เบอร์โทรศัพท์</th>
-                            <th>คณะ</th>
-                            <th>สาขา</th>
-                            <th className="text-center">
-                                <Button name="modalAdd" variant="info" size="sm" onClick={this.showModal}  >
-                                    เพิ่ม
-                                </Button>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr className="text-center">
-                            <td className="align-middle">1</td>
-                            <td className="align-middle">Supakit Kitjanabumrungsak</td>
-                            <td className="align-middle">Addmin</td>
-                            <td className="align-middle">Koa@gmail.com</td>
-                            <td className="align-middle">0922595281</td>
-                            <td className="align-middle">เทคโนโยลีอุสาหกรรม </td>
-                            <td className="align-middle">วิศวกรรมคอมพิวเตอร์ </td>
-                            <td className="align-middle">
-                                <Button className="m-auto" name="modalEdit" variant="warning" size="sm" onClick={this.showModal} >
-                                    แก้ไข
-                                </Button>{' '}
-                                <Button className="m-auto" name="modalDelete" variant="danger" size="sm" onClick={this.showModal} >
-                                    ลบ
-                                </Button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </Table>
-                    {(this.state.modal.name === 'modalAdd') ? <Useradd show={this.state.modal.show} onHide={this.closeModal} /> : null}
-                    {(this.state.modal.name === 'modalEdit') ? <Useredit show={this.state.modal.show} onHide={this.closeModal} />: null}
-                    {(this.state.modal.name === 'modalDelete') ? <Userdelete show={this.state.modal.show} onHide={this.closeModal} /> : null }
+                    <MaterialTable
+                        stickyHeader
+                        title="ตารางสมาชิค"
+                        columns={this.state.columns}
+                        data={this.state.data}
+                        editable={{
+                            onRowAdd: (newData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                        resolve();
+                                        this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data.push(newData);
+                                            return { ...prevState, data };
+                                        });
+                                    }, 600);
+                                }),
+                            onRowUpdate: (newData, oldData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                        resolve();
+                                        if (oldData) {
+                                            this.setState((prevState) => {
+                                                const data = [...prevState.data];
+                                                data[data.indexOf(oldData)] = newData;
+                                                return { ...prevState, data };
+                                            });
+                                        }
+                                    }, 600);
+                                }),
+                            onRowDelete: (oldData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                        resolve();
+                                        this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data.splice(data.indexOf(oldData), 1);
+                                            return {...prevState, data };
+                                        });
+                                    }, 600);
+                                }),
+                        }}
+                    />
 
                 </Card.Body>
             </Card>

@@ -25,17 +25,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import EjectIcon from '@material-ui/icons/Eject';
 
-function checkStatus(status){
-    if(status === 'apply'){
-        return 'fuck'
-    }else if(status === 'edit') {
-        return (<h4 ><Badge pill variant="warning">แก้ไข</Badge></h4>);
-    }else if(status === 'eject'){
-        return (<h4 ><Badge pill variant="danger">ไม่ผ่าน</Badge></h4>);
-    }
-    return null;
-}
-
 function createData(id, code, name, startDate, endDate, status) {
     return { id, code, name, startDate, endDate, status };
 }
