@@ -26,31 +26,28 @@ export default class Home extends Component{
         }
     }
 
-    componentDidMount() {
+    async getPersons() {
+        const persons = () =>{
+            axios.get(`https://reqres.in/api/users?page=2`)
+                .then(res => {
+                    console.log(res)
 
-    }
-
-    getPersons = async () => {
-        await axios.get(`https://reqres.in/api/users?page=2`)
-            .then(res => {
-                // this.setState({persons: res.data})
-                return res
-            })
+                    return res
+                })
+        }
+        this.setState({
+            persons:  await persons
+        })
     }
 
     checkItem(){
         if(this.state.persons === null){
             return <p> empty </p>
         }else{
-            console.log(this.state.persons.data)
             return (
                 <ul>
                     {this.state.persons.data.map( person =>
                         <Image key={person.id} src={person.avatar}/>
-                        // <li key={person.id}>
-                        //
-                        //     {person.email}
-                        // </li>
                     )}
                 </ul>
             )
@@ -106,10 +103,7 @@ export default class Home extends Component{
                 {/*            }),*/}
                 {/*    }}*/}
                 {/*/>*/}
-                {/*<hr/>*/}
-                {/*<StickyHaedTable/>*/}
-                {/*<hr/>*/}
-                {/*<SortingAndSelecting/>*/}
+
             </div>
         );
     };
