@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import MaterialTable from 'material-table';
 import StickyHaedTable from "./tableData/StickyHaedTable";
 import SortingAndSelecting from "./tableData/SortingAndSelecting";
+import axios from 'axios';
 
 
 export default class Home extends Component{
@@ -21,10 +22,26 @@ export default class Home extends Component{
                 { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34,}
             ],
         }
+        this.persons = []
+
     }
+
+    componentDidMount() {
+        axios.get(`https://jsonplaceholder.typicode.com/users`)
+            .then(res => {
+                const persons = res.data;
+                this.setState(this.persons);
+            })
+    }
+
     render(){
         return(
             <div>
+                <ul>
+                    { this.persons.map(person => <li>{person.name}</li>)}
+                </ul>
+
+
                 <MaterialTable
                     stickyHeader
                     title="Editable Example"

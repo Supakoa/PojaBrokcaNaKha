@@ -8,7 +8,6 @@ class LogIn extends Component {
         return (
             <div>
                 <Button >click</Button>
-
             </div>
         );
     }

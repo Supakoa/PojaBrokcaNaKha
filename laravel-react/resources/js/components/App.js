@@ -15,16 +15,21 @@ class App extends Component {
     }
 
     checkRoleUser(role){
-        if (role === 'admin'){
-            return  <Main />
-        }else if(role === 'staff'){
-            console.log('staff')
-        }else if(role === 'student'){
-            console.log('student')
-        }else {
-            return <LogIn/>
+        switch(role){
+            case 'admin':
+                return <Main />
+                break;
+            case 'staff':
+                console.log('staff')
+                break;
+            case 'student':
+                console.log('student')
+                break;
+            default:
+                return <LogIn/>
         }
     }
+
     render() {
         return (
             <section>
