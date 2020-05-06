@@ -14,15 +14,6 @@ export default class News extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            columns:[
-                {id: 'id', label: '#', minWidth: 100, align:'left'},
-                {id: 'url', label: 'URL', minWidth: 170, align: 'center'},
-                {id: 'image', label: 'รูป', minWidth: 100, align: 'center'},
-                {id: 'actions', label: <Newsadd/>, minWidth: 80, align:'center'},
-            ],
-            rows: [
-                {id: 1, url:'www.ssru.ac.th', image:'', actions: ['edit', 'delete']}
-            ],
             tableOption:{
                 page: 0,
                 rowsPerPage: 10,
@@ -35,6 +26,16 @@ export default class News extends Component{
                imageSRC: 'https://sisa.ssru.ac.th/useruploads/images/20191004/2019100415701812578706.jpg'
            }
         }
+        this.rows = [
+            {id: 1, url:'www.ssru.ac.th', image:'', actions: ['edit', 'delete']}
+        ]
+        this.columns = [
+            {id: 'id', label: '#', minWidth: 100, align:'left'},
+            {id: 'url', label: 'URL', minWidth: 170, align: 'center'},
+            {id: 'image', label: 'รูป', minWidth: 100, align: 'center'},
+            {id: 'actions', label: <Newsadd/>, minWidth: 80, align:'center'},
+        ]
+
         this.checkValueInCellTable = this.checkValueInCellTable.bind(this);
         this.imageOverlay = this.imageOverlay.bind(this);
         this.handleChangePage = this.handleChangePage.bind(this);
@@ -110,7 +111,7 @@ export default class News extends Component{
                         <Table stickyHeader  aria-label="sticky table">
                             <TableHead className="bg-info" >
                                 <TableRow>
-                                    {this.state.columns.map((column) => (
+                                    {this.columns.map((column) => (
                                         <TableCell
                                             key={column.id}
                                             align={column.align}
@@ -122,10 +123,10 @@ export default class News extends Component{
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.state.rows.slice(this.state.tableOption.page * this.state.tableOption.rowsPerPage, this.state.tableOption.page * this.state.tableOption.rowsPerPage + this.state.tableOption.rowsPerPage).map((row) => {
+                                {this.rows.slice(this.state.tableOption.page * this.state.tableOption.rowsPerPage, this.state.tableOption.page * this.state.tableOption.rowsPerPage + this.state.tableOption.rowsPerPage).map((row) => {
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                            {this.state.columns.map((column, index) => {
+                                            {this.columns.map((column, index) => {
                                                 const value = row[column.id];
                                                 const classInCell = "d-flex m-auto align-middle justify-content-center";
                                                 return (
@@ -143,7 +144,7 @@ export default class News extends Component{
                     <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
-                        count={this.state.rows.length}
+                        count={this.rows.length}
                         rowsPerPage={this.state.tableOption.rowsPerPage}
                         page={this.state.tableOption.page}
                         onChangePage={this.handleChangePage}
