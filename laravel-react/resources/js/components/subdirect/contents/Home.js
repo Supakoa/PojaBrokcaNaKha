@@ -6,50 +6,48 @@ import axios from 'axios';
 import {Image} from "react-bootstrap";
 
 
-export default class Home extends Component {
+export default class Home extends Component{
     constructor(props) {
         super(props);
         this.state = {
             persons: null,
             columns: [
-                {title: 'Name', field: 'name'},
-                {title: 'Surname', field: 'surname'},
-                {title: 'Birth Year', field: 'birthYear', type: 'numeric'},
-                {
-                    title: 'Birth Place', field: 'birthCity',
-                    lookup: {34: 'İstanbul', 63: 'Şanlıurfa'},
+                { title: 'Name', field: 'name' },
+                { title: 'Surname', field: 'surname' },
+                { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+                { title: 'Birth Place', field: 'birthCity',
+                    lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
                 },
             ],
             data: [
-                {name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63},
-                {name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34,}
+                { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+                { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34,}
             ],
         }
     }
 
-    componentDidMount() {
-        axios.get(`https://reqres.in/api/users?page=2`)
-            .then(res => {
-                this.setState({
-                    persons: res.data
-                })
-            })
+    async getPersons() {
+        const persons = () =>{
+            axios.get(`https://reqres.in/api/users?page=2`)
+                .then(res => {
+                    console.log(res)
 
+                    return res
+                })
+        }
+        this.setState({
+            persons:  await persons
+        })
     }
 
-    checkItem() {
-        console.log(this.state.persons)
-        if (this.state.persons === null) {
+    checkItem(){
+        if(this.state.persons === null){
             return <p> empty </p>
-        } else {
+        }else{
             return (
                 <ul>
-                    {this.state.persons.data.map(person =>
-                        <li key={person.id}>
-                            <Image  src={person.avatar}/>
-                            <p>{`${person.first_name} ${person.last_name}`}</p>
-                            <p>{person.email}</p>
-                        </li>
+                    {this.state.persons.data.map( person =>
+                        <Image key={person.id} src={person.avatar}/>
                     )}
                 </ul>
             )
@@ -57,9 +55,9 @@ export default class Home extends Component {
         }
     }
 
-    render() {
-        return (
-            <div className="text-center">
+    render(){
+        return(
+            <div>
                 {this.checkItem()}
 
                 {/*<MaterialTable*/}
