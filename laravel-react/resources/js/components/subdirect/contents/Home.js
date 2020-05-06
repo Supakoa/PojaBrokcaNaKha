@@ -26,16 +26,18 @@ export default class Home extends Component{
         }
     }
 
-    componentDidMount() {
-
+    async componentDidMount() {
+        this.setState({
+            persons = await this.getPersons()
+        })
     }
 
-    getPersons = async () => {
+    getPersons = () => {
         await axios.get(`https://reqres.in/api/users?page=2`)
             .then(res => {
                 // this.setState({persons: res.data})
                 return res
-            })
+        })
     }
 
     checkItem(){
