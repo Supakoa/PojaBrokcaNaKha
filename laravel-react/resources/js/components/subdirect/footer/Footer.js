@@ -5,7 +5,7 @@ export default function Footer(){
 
 
     return(
-        <footer className="bg-secondary">
+        <footer>
             <p>
                 this is Footer React.
             </p>
