@@ -125,7 +125,7 @@ export default class News extends Component{
                             <TableBody>
                                 {this.rows.slice(this.state.tableOption.page * this.state.tableOption.rowsPerPage, this.state.tableOption.page * this.state.tableOption.rowsPerPage + this.state.tableOption.rowsPerPage).map((row) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id.toString()}>
                                             {this.columns.map((column, index) => {
                                                 const value = row[column.id];
                                                 const classInCell = "d-flex m-auto align-middle justify-content-center";
