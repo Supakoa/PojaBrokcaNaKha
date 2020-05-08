@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './subdirect/Main';
 import LogIn from "../log-in/LogIn";
@@ -32,9 +33,14 @@ class App extends Component {
 
     render() {
         return (
-            <section>
-                {this.checkRoleUser(this.state.role[0])}
-            </section>
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={Main}/>
+                    {/*<Route/>*/}
+                    {/*<Route/>*/}
+                    <Route path="/log-in" component={LogIn}/>
+                </Switch>
+            </Router>
         );
     }
 }
