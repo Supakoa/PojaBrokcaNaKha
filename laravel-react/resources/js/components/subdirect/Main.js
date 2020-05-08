@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./contents/Home";
-import Message from "./contents/Message";
 import Report from "./contents/Report";
 import User from "./contents/User";
 import News from "./contents/News";
@@ -29,7 +28,6 @@ export default class Main extends Component{
                             <div className="container-fluid p-4">
                                 <Switch >
                                     <Route exact path="/" component={Home} />
-                                    {/*<Route path="/message" component={Message} />*/}
                                     <Route path="/message/inbox" component={InBox} />
                                     <Route path="/message/outbox" component={OutBox} />
                                     <Route path="/report" component={Report} />

@@ -111,5 +111,4 @@ export default class StepReport extends Component{
             </Card>
         );
     }
-
 }
