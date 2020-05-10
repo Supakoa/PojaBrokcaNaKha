@@ -56,15 +56,15 @@ export default class LogIn extends Component {
     handleClickLogIn(event) {
         event.preventDefault();
         const user = {
-            username: this.state.login.username,
+            email: this.state.login.username,
             password: this.state.login.password
         };
 
         console.log(user);
 
-        // axios.post(`localhost:8000/api/login`).then(res => {
-        //     console.log(res);
-        // });
+        axios.post(`http://localhost:8000/api/login`).then(res => {
+            console.log(res);
+        });
     }
 
     render() {
