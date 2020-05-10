@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Left(){
 
-    const routPath = ['/', '/message', '/report', '/user', '/news', '/stepReport', '/message/inbox', '/message/outbox' ]
+    const routPath = ['/admin', '/admin/message', '/admin/report', '/admin/user', '/admin/news', '/admin/stepReport', '/admin/message/inbox', '/admin/message/outbox' ]
     const linkClass = "text-dark";
 
     const classes = useStyles();

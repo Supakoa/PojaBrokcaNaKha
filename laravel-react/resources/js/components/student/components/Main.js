@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
+import {Card} from 'react-bootstrap';
 
 class Main extends Component {
     render() {
         return (
-            <div>
-                main
-            </div>
+            <Card>
+                <Card.Body>
+                    main
+                </Card.Body>
+            </Card>
         );
     }
 }
