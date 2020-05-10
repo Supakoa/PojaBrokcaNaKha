@@ -16,12 +16,8 @@ export default class Student extends Component {
                     <Container>
                         <Router>
                             <Switch>
-                                <Route path="/student/index" >
-                                    <Main/>
-                                </Route>
-                                <Route path="/student/profile">
-                                    <Profile/>
-                                </Route>
+                                <Route exact path="/student" component={Main} />
+                                <Route path="/student/profile" component={Profile}/>
                             </Switch>
                         </Router>
                     </Container>

@@ -26,7 +26,7 @@ class Header extends Component {
     render() {
         return (
             <Navbar bg="light" expand="sm">
-                <Navbar.Brand href="/student/index" className="text-info">
+                <Navbar.Brand href="/student" className="text-info">
                     <img src={this.state.infoWeb.logo.imgSrc}
                          width={this.state.infoWeb.logo.width}
                          height={this.state.infoWeb.logo.height}
@@ -37,7 +37,7 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="petition-nav" />
                 <Navbar.Collapse id="petition-nav">
                     <Nav>
-                        <Link className="nav-link" to="/student/index" >หน้าแรก</Link>
+                        <Link className="nav-link" to="/student" >หน้าแรก</Link>
                         <Link className="nav-link" to="/student/profile">ข้อมูลส่วนตัว</Link>
                     </Nav>
                     <Nav className="ml-auto pr-2">

@@ -27,13 +27,13 @@ export default class Main extends Component{
                             <Header />
                             <div className="container-fluid p-4">
                                 <Switch >
-                                    <Route path="/" component={Home} />
-                                    <Route path="/message/inbox" component={InBox} />
-                                    <Route path="/message/outbox" component={OutBox} />
-                                    <Route path="/report" component={Report} />
-                                    <Route path="/user" component={User} />
-                                    <Route path="/news" component={News} />
-                                    <Route path="/stepReport" component={StepReport} />
+                                    <Route exact path="/admin" component={Home} />
+                                    <Route path="/admin/message/inbox" component={InBox} />
+                                    <Route path="/admin/message/outbox" component={OutBox} />
+                                    <Route path="/admin/report" component={Report} />
+                                    <Route path="/admin/user" component={User} />
+                                    <Route path="/admin/news" component={News} />
+                                    <Route path="/admin/stepReport" component={StepReport} />
                                 </Switch>
                             </div>
                         </Col>
