@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './subdirect/Main';
 import LogIn from "../log-in/LogIn";
+import Student from "./student/Student";
 
 
 class App extends Component {
@@ -36,7 +37,7 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Main}/>
-                    {/*<Route/>*/}
+                    <Route path="/student" component={Student}/>
                     {/*<Route/>*/}
                     <Route path="/log-in" component={LogIn}/>
                 </Switch>
