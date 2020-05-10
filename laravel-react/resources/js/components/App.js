@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './subdirect/Main';
 import LogIn from "../log-in/LogIn";
 import Student from "./student/Student";
-
 
 class App extends Component {
     constructor(props) {
@@ -48,6 +46,6 @@ class App extends Component {
 
 export default App;
 
-if (document.getElementById('root')) {
-    ReactDOM.render(<App />, document.getElementById('root'));
-}
+// if (document.getElementById('root')) {
+//     ReactDOM.render(<App />, document.getElementById('root'));
+// }
