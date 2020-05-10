@@ -27,7 +27,7 @@ export default class Main extends Component{
                             <Header />
                             <div className="container-fluid p-4">
                                 <Switch >
-                                    <Route exact path="/" component={Home} />
+                                    <Route path="/" component={Home} />
                                     <Route path="/message/inbox" component={InBox} />
                                     <Route path="/message/outbox" component={OutBox} />
                                     <Route path="/report" component={Report} />
