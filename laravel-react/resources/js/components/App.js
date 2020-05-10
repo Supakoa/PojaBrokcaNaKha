@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './subdirect/Main';
 import LogIn from "../log-in/LogIn";
 import Student from "./student/Student";
+import Temp from "./subdirect/contents/Temp";
 
 class App extends Component {
     constructor(props) {
@@ -33,11 +34,12 @@ class App extends Component {
     render() {
         return (
             <Router>
+                <Temp />
                 <Switch>
                     <Route exact path="/" component={Main}/>
-                    <Route path="/student" component={Student}/>
+                    <Route exact path="/student" component={Student}/>
                     {/*<Route/>*/}
-                    <Route path="/log-in" component={LogIn}/>
+                    <Route exact path="/log-in" component={LogIn}/>
                 </Switch>
             </Router>
         );

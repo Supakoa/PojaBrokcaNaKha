@@ -5,7 +5,7 @@
 }
 .app{
     display: flex;
-    min-height: 95vh;
+    min-height: 90vh;
 }
 
 .content-body{

@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->text('password');
             $table->unsignedBigInteger('student_id')->nullable()->unique();
             $table->text('title')->nullable();
-            $table->text('firstname');
-            $table->text('lastname');
+            $table->text('first_name');
+            $table->text('last_name');
             $table->timestamp('email_verified_at')->nullable();
             $table->text('telephone');
             $table->rememberToken();

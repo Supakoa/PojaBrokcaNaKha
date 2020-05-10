@@ -16,8 +16,8 @@ class admin extends Seeder
     {
         $data = [
             // 'major_id' => 1,
-            'firstname' => 'admin',
-            'lastname' => 'SSRU',
+            'first_name' => 'admin',
+            'last_name' => 'SSRU',
             'password' => Hash::make('adminge@petition'),
             'title' => 'Mr.',
             'email' => 'admin@ssru.ac.th',

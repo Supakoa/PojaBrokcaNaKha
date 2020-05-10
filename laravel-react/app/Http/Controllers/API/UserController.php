@@ -36,9 +36,11 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+            'telephone' => 'required',
             'c_password' => 'required|same:password',
         ]);
 
@@ -47,6 +49,7 @@ class UserController extends Controller
         }
 
         $input = $request->all();
+        $input['role_id'] = "1";
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
@@ -60,9 +63,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function details()
+    public function user()
     {
         $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
+    }
+
+    /**
+     * Logout user (Revoke the token)
+     *
+     * @return [string] message
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->token()->revoke();
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
     }
 }

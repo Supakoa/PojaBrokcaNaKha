@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, Form} from "react-bootstrap";
+import {Navbar, Nav} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import Logo from "./logo.png";
 
@@ -46,7 +46,7 @@ export default class Header extends Component{
                             />{' '}
                             {this.state.users.firstName}{' '}{this.state.users.lastName}
                         </Nav.Link>
-                        <Link className="nav-link" to="/">Log-Out</Link>
+                        <Link className="nav-link" to="/log-in">Log-Out</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
