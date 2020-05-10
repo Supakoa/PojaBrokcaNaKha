@@ -35,9 +35,9 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Main}/>
-                    <Route path="/student" component={Student}/>
+                    <Route exact path="/student" component={Student}/>
                     {/*<Route/>*/}
-                    <Route path="/log-in" component={LogIn}/>
+                    <Route exact path="/log-in" component={LogIn}/>
                 </Switch>
             </Router>
         );
