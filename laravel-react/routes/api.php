@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 // TODO: passsport-js create route
 Route::post('login', 'API\UserController@login')->name("login");
 Route::post('register', 'API\UserController@register');
+Route::get('faculty/findMajorById/{faculty}', 'CRUD\FacultyController@getMajorByFacultyId');
 
 Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('user', 'API\UserController@user');
+    Route::post('user', 'API\UserController@user');
+    Route::post('logout', 'API\UserController@logout');
 });
