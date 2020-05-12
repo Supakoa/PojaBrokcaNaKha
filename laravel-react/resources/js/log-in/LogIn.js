@@ -53,16 +53,15 @@ export default class LogIn extends Component {
         });
     }
 
-    handleClickLogIn(event) {
-        event.preventDefault();
+   async handleClickLogIn(event) {
+        await event.preventDefault();
         const user = {
             email: this.state.login.username,
             password: this.state.login.password
         };
 
         console.log(user);
-
-        axios.post(`http://localhost:8000/api/login`).then(res => {
+        axios.post(`http://localhost:8000/api/login`, user).then(res => {
             console.log(res);
         });
     }
@@ -185,7 +184,7 @@ function FromLogIn(props) {
             <Form.Group controlId="formBasicEmail">
                 <Form.Label className="text-info">Username</Form.Label>
                 <Form.Control
-                    type="text"
+                    type="email"
                     placeholder="อีเมล"
                     onChange={props.username}
                 />
