@@ -20,8 +20,7 @@ export default class LogIn extends Component {
                 forget: false
             }
         };
-        this.handleChangeUsername = this.handleChangeUsername.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleClickLogIn = this.handleClickLogIn.bind(this);
         this.handleForget = this.handleForget.bind(this);
     }
@@ -35,35 +34,51 @@ export default class LogIn extends Component {
         });
     }
 
-    handleChangeUsername(event) {
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
         this.setState({
             login: {
                 ...this.state.login,
-                username: event.target.value
+                [name]: value
             }
         });
     }
 
-    handleChangePassword(event) {
-        this.setState({
-            login: {
-                ...this.state.login,
-                password: event.target.value
-            }
-        });
-    }
-
-   async handleClickLogIn(event) {
+    async handleClickLogIn(event) {
         await event.preventDefault();
         const user = {
             email: this.state.login.username,
             password: this.state.login.password
         };
 
-        console.log(user);
-        axios.post(`http://localhost:8000/api/login`, user).then(res => {
-            console.log(res);
-        });
+        const apiLogIn = await axios
+            .post(`http://localhost:8000/api/login`, { user })
+            .then(res => {
+                if (res.status === 200) {
+                    this.setState({
+                        login: {
+                            ...this.state.login,
+                            token: res.data.success.token
+                        }
+                    });
+
+                    // const apiUser = axios.post(
+                    //     `http://localhost:8000/api/user`,
+                    //     {
+                    //         headers: {
+                    //             Authorization: `login ${this.state.login.token}`
+                    //         }
+                    //     }
+                    // );
+                }
+            })
+            .catch(error => {
+                const result = confirm("ลองอีกครั้ง.");
+                if (result) {
+                    window.location = "/login";
+                }
+            });
     }
 
     render() {
@@ -112,13 +127,8 @@ export default class LogIn extends Component {
                                                     clickLogin={
                                                         this.handleClickLogIn
                                                     }
-                                                    username={
-                                                        this
-                                                            .handleChangeUsername
-                                                    }
-                                                    password={
-                                                        this
-                                                            .handleChangePassword
+                                                    inputValue={
+                                                        this.handleChange
                                                     }
                                                 />
                                             ) : (
@@ -157,7 +167,7 @@ function ComponentRegister() {
             <p>เว็บไซต์ส่งแบบคำร้องของมหาวิทยาลัยราชภัฎสวนสุนันทา</p>
             <hr />
             <p>คุณต้องการส่งแบบคำร้องแต่ยังไม่ได้ลงทะเบียนใช่หรือไม่ ?</p>
-            <Link className="m-auto btn btn-light" to="/log-in/register">
+            <Link className="m-auto btn btn-light" to="/login/register">
                 ลงทะเบียน
             </Link>
         </section>
@@ -184,23 +194,25 @@ function FromLogIn(props) {
             <Form.Group controlId="formBasicEmail">
                 <Form.Label className="text-info">Username</Form.Label>
                 <Form.Control
+                    name="username"
                     type="email"
                     placeholder="อีเมล"
-                    onChange={props.username}
+                    onChange={props.inputValue}
                 />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
                 <Form.Label className="text-info">Password</Form.Label>
                 <Form.Control
+                    name="password"
                     type="password"
                     placeholder="Password"
-                    onChange={props.password}
+                    onChange={props.inputValue}
                 />
             </Form.Group>
             <Container>
                 <Form.Group as={Row}>
-                    <Link to="/log-in" onClick={() => props.showForget(true)}>
+                    <Link to="/login" onClick={() => props.showForget(true)}>
                         ลืมรหัสผ่าน ?
                     </Link>
                 </Form.Group>
