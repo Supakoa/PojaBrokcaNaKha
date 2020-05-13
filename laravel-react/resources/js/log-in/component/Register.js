@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./../../components/images/logo.png";
 import { Col, Container, Row, Form, Button, Image } from "react-bootstrap";
+import axios from 'axios';
 
 export default class Register extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ export default class Register extends Component {
     }
 
     handleOnClick() {
+
         console.log(this.state.user);
 
     }

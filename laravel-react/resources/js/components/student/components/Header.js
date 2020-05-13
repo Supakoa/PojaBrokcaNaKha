@@ -19,14 +19,15 @@ class Header extends Component {
                 id: 1,
                 firstName: 'Supakit',
                 lastName: 'Kitjanabumrunsak'
-            }
+            },
+            url: props.url
         }
     }
 
     render() {
         return (
             <Navbar bg="light" expand="sm">
-                <Navbar.Brand href="/student" className="text-info">
+                <Navbar.Brand href={`${this.state.url}`} className="text-info">
                     <img src={this.state.infoWeb.logo.imgSrc}
                          width={this.state.infoWeb.logo.width}
                          height={this.state.infoWeb.logo.height}
@@ -37,8 +38,8 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="petition-nav" />
                 <Navbar.Collapse id="petition-nav">
                     <Nav>
-                        <Link className="nav-link" to="/student" >หน้าแรก</Link>
-                        <Link className="nav-link" to="/student/profile">ข้อมูลส่วนตัว</Link>
+                        <Link className="nav-link" to={`${this.state.url}`} >หน้าแรก</Link>
+                        <Link className="nav-link" to={`${this.state.url}/profile`}>ข้อมูลส่วนตัว</Link>
                     </Nav>
                     <Nav className="ml-auto pr-2">
                         <Nav.Link>
@@ -50,7 +51,7 @@ class Header extends Component {
                             />{' '}
                             {this.state.users.firstName}{' '}{this.state.users.lastName}
                         </Nav.Link>
-                        <Link className="nav-link" to="/log-in">ออกจากระบบ</Link>
+                        <Link className="nav-link" to="/login">ออกจากระบบ</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

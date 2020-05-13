@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Link,
+    Redirect
+} from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import Register from "./component/Register";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
@@ -84,7 +89,6 @@ export default class LogIn extends Component {
     render() {
         return (
             <section className="overflow-hidden">
-                <Router>
                     <Switch>
                         <Route exact path="/login">
                             <Container fluid>
@@ -154,7 +158,6 @@ export default class LogIn extends Component {
                         </Route>
                         <Route path="/login/register" component={Register} />
                     </Switch>
-                </Router>
             </section>
         );
     }
