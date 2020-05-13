@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./../../components/images/logo.png";
 import { Col, Container, Row, Form, Button, Image } from "react-bootstrap";
-import axios from 'axios';
+import axios from "axios";
 
 export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            majors: ["computer", "art", "electric"],
+            faculties: ["industies", "medie", "sci", "teach"],
             user: {
                 firstName: "",
                 lastName: "",
@@ -22,23 +24,31 @@ export default class Register extends Component {
         };
         this.handleOnClick = this.handleOnClick.bind(this);
         this.hadleChanges = this.hadleChanges.bind(this);
+        this.validateInput = this.validateInput.bind(this);
     }
 
     hadleChanges(event) {
         const name = event.target.name;
         const value = event.target.value;
         this.setState({
-            user:{
+            user: {
                 ...this.state.user,
                 [name]: value
             }
         });
     }
 
+    validateInput(){
+
+    }
+
     handleOnClick() {
+        const user = this.state.user;
+        if (user) {
 
-        console.log(this.state.user);
+        } else {
 
+        }
     }
     render() {
         return (
@@ -61,6 +71,8 @@ export default class Register extends Component {
                         className="bg-light d-flex align-item-center"
                     >
                         <FormRegister
+                            major={this.state.majors}
+                            faculties={this.state.faculties}
                             inputValue={this.hadleChanges}
                             handleClick={this.handleOnClick}
                         />
@@ -86,8 +98,8 @@ function ComponentLogIn() {
 }
 
 function FormRegister(props) {
-    const majors = ["computer", "art", "electric"];
-    const facs = ["industies", "medie", "sci", "teach"];
+    const majors = props.major;
+    const facs = props.faculties;
     return (
         <Form className="p-4 w-75 m-auto">
             <section className="d-table text-center m-auto">
@@ -188,12 +200,7 @@ function FormRegister(props) {
                     >
                         <option>คณะ</option>
                         {facs.map((fac, index) => {
-                            <option
-                                value={index.toString()}
-                                key={index.toString()}
-                            >
-                                {fac}
-                            </option>;
+                           return <option key={index.toString()} value={fac}>{fac}</option>;
                         })}
                     </Form.Control>
                 </Form.Group>
@@ -208,12 +215,7 @@ function FormRegister(props) {
                     >
                         <option>สาขา</option>
                         {majors.map((major, index) => {
-                            <option
-                                value={index.toString()}
-                                key={index.toString()}
-                            >
-                                {major}
-                            </option>;
+                           return <option key={index.toString()} value={major}>{major}</option>;
                         })}
                     </Form.Control>
                 </Form.Group>
