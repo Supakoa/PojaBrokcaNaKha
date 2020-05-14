@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
+import Student from "../components/student/Student";
+import Main from "../components/subdirect/Main";
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -109,14 +111,17 @@ export default class LogIn extends Component {
                     )
                     .then(res => {
                         const role = res.data.success.role_id;
+                        const user = res.data.success;
                         switch (role) {
                             case 1:
+                                <Main user={user} />;
                                 window.location = "/admin";
                                 break;
                             case 2:
                                 window.location = "/staff";
                                 break;
                             case 3:
+                                <Student user={user} />;
                                 window.location = "/student";
                                 break;
                             default:

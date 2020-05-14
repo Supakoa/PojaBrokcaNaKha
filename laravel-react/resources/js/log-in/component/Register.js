@@ -11,6 +11,8 @@ import {
     Alert
 } from "react-bootstrap";
 import axios from "axios";
+import Student from "./../../components/student/Student";
+import Main from "./../../components/subdirect/Main";
 
 export default class Register extends Component {
     constructor(props) {
@@ -283,14 +285,18 @@ export default class Register extends Component {
                 )
                 .then(res => {
                     const role = res.data.success.role_id;
+                    const user = res.data.success
                     switch (role) {
                         case 1:
+                            <Main user={user} />
                             window.location = "/admin";
                             break;
                         case 2:
+
                             window.location = "/staff";
                             break;
                         case 3:
+                            <Student user={user} />
                             window.location = "/student";
                             break;
                         default:

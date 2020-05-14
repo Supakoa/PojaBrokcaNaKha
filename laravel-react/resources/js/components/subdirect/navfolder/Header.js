@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
+import axios from "axios";
 
 export default class Header extends Component {
     constructor(props) {
@@ -17,12 +18,22 @@ export default class Header extends Component {
             },
             users: {
                 id: 1,
-                firstName: "Supakit",
-                lastName: "Kitjanabumrunsak"
+                firstName: props.user.first_name,
+                lastName: props.user.last_name
+                // token: props.user.first_name
             },
             url: props.path
         };
+        this.handleLogOut = this.handleLogOut.bind(this);
     }
+
+    handleLogOut() {
+        axios.post(`http://127.0.0.1:8000/api/logout`).then(res => {
+            console.log(res.status);
+
+        })
+    }
+
     render() {
         return (
             <Navbar bg="light" expand="sm">
@@ -49,7 +60,11 @@ export default class Header extends Component {
                             {this.state.users.firstName}{" "}
                             {this.state.users.lastName}
                         </Nav.Link>
-                        <Link className="nav-link" to="/login">
+                        <Link
+                            className="nav-link"
+                            to="/login"
+                            onClick={this.handleLogOut}
+                        >
                             Log-Out
                         </Link>
                     </Nav>

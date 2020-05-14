@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./subdirect/Main";
 import LogIn from "./../log-in/LogIn";
@@ -13,7 +13,7 @@ class App extends Component {
         this.state = {
             role: ["admin", "staff", "student", "log-in"]
         };
-        
+
     }
     render() {
         return (
@@ -31,6 +31,7 @@ class App extends Component {
                         <LogIn />
                     </Route>
                     <Route path="/register" component={Register} />
+                    <Redirect component={LogIn}/>
                 </Switch>
             </Router>
         );

@@ -14,7 +14,7 @@ import "./Appstyle.css";
 import InBox from "./contents/messages/InBox";
 import OutBox from "./contents/messages/OutBox";
 
-export default function Main() {
+export default function Main(props) {
     let { path , url} = useRouteMatch()
     return (
         <section className="content-body">
@@ -23,7 +23,7 @@ export default function Main() {
                     <Left path={url} />
                 </Col>
                 <Col xs={12} sm={12} md={10} lg={10} className="p-0">
-                    <Header path={url} />
+                    <Header path={url} user={props.user} />
                     <div className="container-fluid p-4">
                         <Switch>
                             <Route exact path={`${path}`} component={Home} />
