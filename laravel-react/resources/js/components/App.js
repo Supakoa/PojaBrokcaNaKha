@@ -13,25 +13,8 @@ class App extends Component {
         this.state = {
             role: ["admin", "staff", "student", "log-in"]
         };
-        this.checkRoleUser = this.checkRoleUser.bind(this);
+        
     }
-
-    checkRoleUser(role) {
-        switch (role) {
-            case "admin":
-                return <Main />;
-                break;
-            case "staff":
-                console.log("staff");
-                break;
-            case "student":
-                console.log("student");
-                break;
-            default:
-                return <LogIn />;
-        }
-    }
-
     render() {
         return (
             <Router>
