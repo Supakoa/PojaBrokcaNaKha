@@ -48,6 +48,29 @@ export default class Register extends Component {
         const name = event.target.name;
         const value = event.target.value;
 
+        if(name === 'studentId'){
+            const id = Number(value);
+            if (isNaN(id)) {
+                const message = "รหัสนักศึกษาต้องเป็นตัวเลข";
+                this.validateConfirm(false, "studentId", message);
+            } else {
+                this.validateConfirm(true, "", "");
+            }
+        }else if (name === 'conPassword'){
+            if (user.conPassword === user.password) {
+                this.validateConfirm(true, "", "");
+            } else if (user.conPassword !== user.password) {
+                if (user.conPassword !== ""){
+                    const message = "กรุณาตรวจสอบพาสเวิร์ดอีกครั้ง";
+                    this.validateConfirm(false, "conPassword", message);
+                }else{
+                    this.validateInput('conPassword')
+                }
+
+            }
+        }
+
+
         this.setState({
             user: {
                 ...this.state.user,
@@ -78,12 +101,16 @@ export default class Register extends Component {
             });
             return false;
         };
-        if (name.firstName === "") {
+        if (name.firstName == "") {
             erName("firstName");
         } else if (name.lastName === "") {
             erName("lastName");
-        } else if (name.password === "") {
+        }else if (name.studentId === "") {
+            erName("studentId");
+        }  else if (name.password === "") {
             erName("password");
+        } else if (name.conPassword === "") {
+            erName("conPassword");
         } else if (name.email === "") {
             erName("email");
         } else if (name.phone === "") {
@@ -92,22 +119,7 @@ export default class Register extends Component {
             erName("faculty");
         } else if (name.major === "") {
             erName("major");
-        } else if (name.studentId === "" || name.studentId !== "") {
-            const id = Number(name.studentId);
-            if (isNaN(id)) {
-                const message = "รหัสนักศึกษาต้องเป็นตัวเลข";
-                this.validatePassword(false, "studentId", message);
-            } else {
-                this.validatePassword(true, "", "");
-            }
-        } else if (name.conPassword === "" || name.conPassword !== "") {
-            if (name.conPassword === name.password) {
-                this.validatePassword(true, "", "");
-            } else if (name.conPassword !== name.password) {
-                const message = "กรุณาตรวจสอบพาสเวิร์ดอีกครั้ง";
-                this.validatePassword(false, "conPassword", message);
-            }
-        }else{
+        } else{
             erName("");
         }
     }
