@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'API\UserController@login')->name("login");
 Route::post('register', 'API\UserController@register');
 Route::get('faculties', 'CRUD\FacultyController@index');
-Route::get('faculty/{faculty}', 'CRUD\FacultyController@show');
-Route::get('faculty/{faculty}/majors', 'CRUD\FacultyController@getMajorByFacultyId');
+Route::get('faculties/{faculty}', 'CRUD\FacultyController@show');
+Route::get('faculties/{faculty}/majors', 'CRUD\FacultyController@getMajorByFacultyId');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user', 'API\UserController@user');
