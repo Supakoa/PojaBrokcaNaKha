@@ -5,7 +5,6 @@ import {
     Route,
     Switch,
     Link,
-    Redirect
 } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import Register from "./component/Register";

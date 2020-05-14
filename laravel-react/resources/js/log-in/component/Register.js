@@ -17,6 +17,7 @@ export default class Register extends Component {
         super(props);
         this.state = {
             classes: "",
+            select: true,
             majors: ["computer", "art", "electric"],
             faculties: ["industies", "medie", "sci", "teach"],
             user: {
@@ -41,6 +42,7 @@ export default class Register extends Component {
         this.hadleChanges = this.hadleChanges.bind(this);
         this.validateInput = this.validateInput.bind(this);
         this.validateConfirm = this.validateConfirm.bind(this);
+        this.facultiesApi = this.facultiesApi.bind(this);
     }
 
     hadleChanges(event) {
@@ -48,34 +50,81 @@ export default class Register extends Component {
         const name = event.target.name;
         const value = event.target.value;
 
-        if(name === 'studentId'){
+        if (name === "studentId" || name === "phone") {
             const id = Number(value);
+            var message;
             if (isNaN(id)) {
-                const message = "รหัสนักศึกษาต้องเป็นตัวเลข";
-                this.validateConfirm(false, "studentId", message);
+                if (name === "studentId") {
+                    message = "รหัสนักศึกษาต้องเป็นตัวเลข";
+                } else {
+                    message = "เบอร์โทรศัพท์ควรเป็นตัวเลข";
+                }
+                this.validateConfirm(false, name, message);
             } else {
-                this.validateConfirm(true, "", "");
+                if (name === "studentId" && value.length !== 11) {
+                    message = "รหัสนักศึกษาต้อง 11 หลัก";
+                    this.validateConfirm(false, name, message);
+                } else if (name === "phone" && value.length !== 10) {
+                    message = "เบอร์โทรศัพท์ต้อง 10 หลัก";
+                    this.validateConfirm(false, name, message);
+                } else {
+                    this.setState({
+                        user: {
+                            ...this.state.user,
+                            [name]: value
+                        }
+                    });
+                    this.validateConfirm(true, "", "");
+                }
             }
-        }else if (name === 'conPassword'){
-            if (user.conPassword === user.password) {
+        } else if (name === "conPassword") {
+            if (user.password == value) {
                 this.validateConfirm(true, "", "");
-            } else if (user.conPassword !== user.password) {
-                if (user.conPassword !== ""){
+                this.setState({
+                    user: {
+                        ...this.state.user,
+                        [name]: value
+                    }
+                });
+            } else if (user.password !== value) {
+                if (value !== "") {
                     const message = "กรุณาตรวจสอบพาสเวิร์ดอีกครั้ง";
                     this.validateConfirm(false, "conPassword", message);
-                }else{
-                    this.validateInput('conPassword')
+                } else {
+                    this.validateInput("conPassword");
                 }
-
             }
+        } else if (name === "faculty") {
+            if (value !== "") {
+                this.setState({
+                    select: false,
+                    user: {
+                        ...this.state.user,
+                        [name]: value
+                    }
+                });
+            } else {
+                this.setState({
+                    select: true,
+                    user: {
+                        ...this.state.user,
+                        [name]: value
+                    }
+                });
+            }
+        } else {
+            this.setState({
+                user: {
+                    ...this.state.user,
+                    [name]: value
+                }
+            });
         }
+    }
 
-
-        this.setState({
-            user: {
-                ...this.state.user,
-                [name]: value
-            }
+    facultiesApi() {
+        axios.get(`http://127.0.0.1:8000/api/faculty`).then(res => {
+            console.log(res);
         });
     }
 
@@ -105,9 +154,9 @@ export default class Register extends Component {
             erName("firstName");
         } else if (name.lastName === "") {
             erName("lastName");
-        }else if (name.studentId === "") {
+        } else if (name.studentId === "") {
             erName("studentId");
-        }  else if (name.password === "") {
+        } else if (name.password === "") {
             erName("password");
         } else if (name.conPassword === "") {
             erName("conPassword");
@@ -119,15 +168,18 @@ export default class Register extends Component {
             erName("faculty");
         } else if (name.major === "") {
             erName("major");
-        } else{
+        } else {
             erName("");
         }
     }
 
     handleOnClick(event) {
         event.preventDefault();
-        const user = this.state.user;
-        this.validateInput(user);
+        // const user = this.state.user;
+        // this.validateInput(user);
+        axios.get(`http://127.0.0.1:8000/api/faculty`).then(res => {
+            console.log(res);
+        });
     }
     render() {
         return (
@@ -150,6 +202,7 @@ export default class Register extends Component {
                         className="bg-light d-flex align-item-center"
                     >
                         <FormRegister
+                            selected={this.state.select}
                             error={this.state.error}
                             major={this.state.majors}
                             faculties={this.state.faculties}
@@ -322,7 +375,7 @@ function FormRegister(props) {
                         name="faculty"
                         onChange={props.inputValue}
                     >
-                        <option>คณะ</option>
+                        <option value="">คณะ</option>
                         {facs.map((fac, index) => {
                             return (
                                 <option key={index.toString()} value={fac}>
@@ -345,6 +398,7 @@ function FormRegister(props) {
                         custom
                         name="major"
                         onChange={props.inputValue}
+                        disabled={props.selected}
                     >
                         <option>สาขา</option>
                         {majors.map((major, index) => {
