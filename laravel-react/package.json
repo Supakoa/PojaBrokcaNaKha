@@ -31,6 +31,7 @@
     "dependencies": {
         "@material-ui/core": "^4.9.12",
         "material-table": "^1.57.2",
+        "mdbreact": "^4.26.0",
         "react-bootstrap": "^1.0.0",
         "react-redux": "^7.2.0",
         "react-router-dom": "^5.1.2",

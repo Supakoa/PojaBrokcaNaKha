@@ -5,10 +5,10 @@ import SortingAndSelecting from "./tableData/SortingAndSelecting";
 import axios from 'axios';
 import {Image} from "react-bootstrap";
 
-
 export default class Home extends Component {
+
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             persons: null,
             columns: [
@@ -38,7 +38,7 @@ export default class Home extends Component {
     }
 
     checkItem() {
-        console.log(this.state.persons)
+        // console.log(this.state.persons)
         if (this.state.persons === null) {
             return <p> empty </p>
         } else {
