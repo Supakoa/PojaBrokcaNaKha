@@ -17,7 +17,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-
+        return  response()->json(['success' => Faculty::all()]);
     }
 
     /**
@@ -45,12 +45,12 @@ class FacultyController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Faculty  $faculty
-     * @return \Illuminate\Http\Response
+     * @return Faculty|\Illuminate\Http\Response
      */
     public function show(Faculty $faculty)
     {
         //
-        return $faculty->majors;
+        return  response()->json(['success' => $faculty]);
     }
 
     /**
