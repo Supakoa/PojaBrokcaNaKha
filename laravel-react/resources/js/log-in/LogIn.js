@@ -16,10 +16,14 @@ export default class LogIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: {
+                name: "",
+                className: "border-danger"
+            },
             login: {
                 username: "",
                 password: "",
-                token: ""
+                token: null
             },
             forgetPassword: {
                 forget: false
@@ -28,6 +32,7 @@ export default class LogIn extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClickLogIn = this.handleClickLogIn.bind(this);
         this.handleForget = this.handleForget.bind(this);
+        this.validateInput = this.validateInput.bind(this);
     }
 
     handleForget(value) {
@@ -50,114 +55,148 @@ export default class LogIn extends Component {
         });
     }
 
+    validateInput(email, password) {
+        const errorName = this.state.error.name;
+        const setName = errorName =>
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    name: errorName
+                }
+            });
+        if (email === "") {
+            setName("username");
+            return false;
+        } else if (password === "") {
+            setName("password");
+            return false;
+        }
+        return true;
+    }
+
     async handleClickLogIn(event) {
         await event.preventDefault();
         const user = {
             email: this.state.login.username,
             password: this.state.login.password
         };
+        const validate = this.validateInput(user.email, user.password);
+        if (validate) {
+            const apiLogIn = await axios
+                .post(`http://localhost:8000/api/login`, user)
+                .then(res => {
+                    console.log(res);
 
-        const apiLogIn = await axios
-            .post(`http://localhost:8000/api/login`, { user })
-            .then(res => {
-                if (res.status === 200) {
-                    this.setState({
-                        login: {
-                            ...this.state.login,
-                            token: res.data.success.token
+                    if (res.status === 200) {
+                        this.setState({
+                            login: {
+                                ...this.state.login,
+                                token: res.data.success.token
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    const result = confirm("ลองอีกครั้ง.");
+                    if (result) {
+                        window.location = "/login";
+                    }
+                });
+
+            const tokenUser = this.state.login.token;
+
+            if (tokenUser !== null) {
+                console.log(tokenUser);
+
+                axios
+                    .post(
+                        `http://localhost:8000/api/user`,
+                        {},
+                        {
+                            headers: {
+                                Authorization: `Bearer ${tokenUser}`
+                            }
+                        }
+                    )
+                    .then(res => {
+                        console.log(res.data.success);
+                    })
+                    .catch(error => {
+                        const result = confirm("ลองอีกครั้ง.");
+                        if (result) {
+                            window.location = "/login";
                         }
                     });
-
-                    // const apiUser = axios.post(
-                    //     `http://localhost:8000/api/user`,
-                    //     {
-                    //         headers: {
-                    //             Authorization: `login ${this.state.login.token}`
-                    //         }
-                    //     }
-                    // );
-                }
-            })
-            .catch(error => {
-                const result = confirm("ลองอีกครั้ง.");
-                if (result) {
-                    window.location = "/login";
-                }
-            });
+            }
+        }
     }
 
     render() {
         return (
             <section className="overflow-hidden">
-                    <Switch>
-                        <Route exact path="/login">
-                            <Container fluid>
-                                <Row className="section-log-in">
-                                    <Col
-                                        xs={12}
-                                        sm={12}
-                                        md={6}
-                                        lg={6}
-                                        className="bg-light d-flex align-item-center"
-                                    >
-                                        <section className="d-table p-4 w-50 m-auto">
-                                            <section className="d-table text-center m-auto">
-                                                <Image
-                                                    className="border-bottom border-info"
-                                                    src={Logo}
-                                                    width="80"
-                                                    height="80"
-                                                />
-                                                <p className="text-info">
-                                                    GE Petition
-                                                </p>
-                                                {!this.state.forgetPassword
-                                                    .forget ? (
-                                                    <h3 className="p-1 effectSection">
-                                                        เข้าสู่ระบบ
-                                                    </h3>
-                                                ) : (
-                                                    <h3 className="p-1 effectSection">
-                                                        ลืมรหัสผ่าน
-                                                    </h3>
-                                                )}
-                                            </section>
+                <Switch>
+                    <Route exact path="/login">
+                        <Container fluid>
+                            <Row className="section-log-in">
+                                <Col
+                                    xs={12}
+                                    sm={12}
+                                    md={6}
+                                    lg={6}
+                                    className="bg-light d-flex align-item-center"
+                                >
+                                    <section className="d-table p-4 w-50 m-auto">
+                                        <section className="d-table text-center m-auto">
+                                            <Image
+                                                className="border-bottom border-info"
+                                                src={Logo}
+                                                width="80"
+                                                height="80"
+                                            />
+                                            <p className="text-info">
+                                                GE Petition
+                                            </p>
                                             {!this.state.forgetPassword
                                                 .forget ? (
-                                                <FromLogIn
-                                                    showForget={
-                                                        this.handleForget
-                                                    }
-                                                    clickLogin={
-                                                        this.handleClickLogIn
-                                                    }
-                                                    inputValue={
-                                                        this.handleChange
-                                                    }
-                                                />
+                                                <h3 className="p-1 effectSection">
+                                                    เข้าสู่ระบบ
+                                                </h3>
                                             ) : (
-                                                <ComponentForgetPassword
-                                                    closeForget={
-                                                        this.handleForget
-                                                    }
-                                                />
+                                                <h3 className="p-1 effectSection">
+                                                    ลืมรหัสผ่าน
+                                                </h3>
                                             )}
                                         </section>
-                                    </Col>
-                                    <Col
-                                        xs={12}
-                                        sm={12}
-                                        md={6}
-                                        lg={6}
-                                        className="bg-info text-light d-flex align-item-center"
-                                    >
-                                        <ComponentRegister />
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </Route>
-                        <Route path="/login/register" component={Register} />
-                    </Switch>
+                                        {!this.state.forgetPassword.forget ? (
+                                            <FromLogIn
+                                                error={this.state.error}
+                                                showForget={this.handleForget}
+                                                clickLogin={
+                                                    this.handleClickLogIn
+                                                }
+                                                inputValue={this.handleChange}
+                                            />
+                                        ) : (
+                                            <ComponentForgetPassword
+                                                closeForget={this.handleForget}
+                                            />
+                                        )}
+                                    </section>
+                                </Col>
+                                <Col
+                                    xs={12}
+                                    sm={12}
+                                    md={6}
+                                    lg={6}
+                                    className="bg-info text-light d-flex align-item-center"
+                                >
+                                    <ComponentRegister />
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Route>
+                    <Route path="/login/register" component={Register} />
+                </Switch>
             </section>
         );
     }
@@ -197,6 +236,11 @@ function FromLogIn(props) {
             <Form.Group controlId="formBasicEmail">
                 <Form.Label className="text-info">Username</Form.Label>
                 <Form.Control
+                    className={
+                        props.error.name === "username"
+                            ? props.error.className
+                            : ""
+                    }
                     name="username"
                     type="email"
                     placeholder="อีเมล"
@@ -207,8 +251,13 @@ function FromLogIn(props) {
             <Form.Group controlId="formBasicPassword">
                 <Form.Label className="text-info">Password</Form.Label>
                 <Form.Control
+                    className={
+                        props.error.name === "password"
+                            ? props.error.className
+                            : ""
+                    }
                     name="password"
-                    type="password"
+                    type="text"
                     placeholder="Password"
                     onChange={props.inputValue}
                 />
