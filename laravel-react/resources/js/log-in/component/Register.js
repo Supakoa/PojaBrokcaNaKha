@@ -133,9 +133,9 @@ export default class Register extends Component {
         }
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         const facId = this.state.select.id;
-
+        const id = Number(facId);
         await axios.get(`http://127.0.0.1:8000/api/faculties`).then(res => {
             this.setState({
                 ...this.state,
@@ -143,11 +143,11 @@ export default class Register extends Component {
             });
         });
 
-        if (facId !== 0) {
-            console.log(facId);
+        if (id !== 0) {
+            console.log(id);
 
             await axios
-                .get(`http://127.0.0.1:8000/api/faculties/${facId}/majors`)
+                .get(`http://127.0.0.1:8000/api/faculties/${id}/majors`)
                 .then(res => {
                     console.log(res.data);
 
