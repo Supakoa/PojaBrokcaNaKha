@@ -17,7 +17,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-
+        return  response()->json(['success' => Faculty::all()]);
     }
 
     /**
@@ -50,7 +50,7 @@ class FacultyController extends Controller
     public function show(Faculty $faculty)
     {
         //
-        return $faculty;
+        return  response()->json(['success' => $faculty]);
     }
 
     /**
