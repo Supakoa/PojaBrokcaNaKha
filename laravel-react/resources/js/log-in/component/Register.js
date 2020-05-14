@@ -17,9 +17,12 @@ export default class Register extends Component {
         super(props);
         this.state = {
             classes: "",
-            select: true,
-            majors: ["computer", "art", "electric"],
-            faculties: ["industies", "medie", "sci", "teach"],
+            select: {
+                id: 0,
+                disable: true
+            },
+            majors: [],
+            faculties: [],
             user: {
                 firstName: "",
                 lastName: "",
@@ -42,7 +45,6 @@ export default class Register extends Component {
         this.hadleChanges = this.hadleChanges.bind(this);
         this.validateInput = this.validateInput.bind(this);
         this.validateConfirm = this.validateConfirm.bind(this);
-        this.facultiesApi = this.facultiesApi.bind(this);
     }
 
     hadleChanges(event) {
@@ -95,20 +97,29 @@ export default class Register extends Component {
                 }
             }
         } else if (name === "faculty") {
-            if (value !== "") {
+            const facId = Number(value);
+            if (value !== 0) {
                 this.setState({
-                    select: false,
+                    select: {
+                        ...this.state.select,
+                        id: facId,
+                        disable: false
+                    },
                     user: {
                         ...this.state.user,
-                        [name]: value
+                        [name]: facId
                     }
                 });
             } else {
                 this.setState({
-                    select: true,
+                    select: {
+                        ...this.state.select,
+                        id: 0,
+                        disable: true
+                    },
                     user: {
                         ...this.state.user,
-                        [name]: value
+                        [name]: facId
                     }
                 });
             }
@@ -122,10 +133,30 @@ export default class Register extends Component {
         }
     }
 
-    facultiesApi() {
-        axios.get(`http://127.0.0.1:8000/api/faculty`).then(res => {
-            console.log(res);
+    async componentWillMount() {
+        const facId = this.state.select.id;
+
+        await axios.get(`http://127.0.0.1:8000/api/faculties`).then(res => {
+            this.setState({
+                ...this.state,
+                faculties: res.data.success
+            });
         });
+
+        if (facId !== 0) {
+            console.log(facId);
+
+            await axios
+                .get(`http://127.0.0.1:8000/api/faculties/${facId}/majors`)
+                .then(res => {
+                    console.log(res.data);
+
+                    this.setState({
+                        ...this.state,
+                        moajors: res.data.success
+                    });
+                });
+        }
     }
 
     validateConfirm(value, targetName, targetMessage) {
@@ -175,11 +206,8 @@ export default class Register extends Component {
 
     handleOnClick(event) {
         event.preventDefault();
-        // const user = this.state.user;
-        // this.validateInput(user);
-        axios.get(`http://127.0.0.1:8000/api/faculty`).then(res => {
-            console.log(res);
-        });
+        const user = this.state.user;
+        this.validateInput(user);
     }
     render() {
         return (
@@ -202,7 +230,7 @@ export default class Register extends Component {
                         className="bg-light d-flex align-item-center"
                     >
                         <FormRegister
-                            selected={this.state.select}
+                            selected={this.state.select.disable}
                             error={this.state.error}
                             major={this.state.majors}
                             faculties={this.state.faculties}
@@ -234,6 +262,7 @@ function FormRegister(props) {
     const majors = props.major;
     const facs = props.faculties;
 
+    console.log(majors);
     return (
         <Form className="p-4 w-75 m-auto">
             <section className="d-table text-center m-auto">
@@ -376,10 +405,12 @@ function FormRegister(props) {
                         onChange={props.inputValue}
                     >
                         <option value="">คณะ</option>
-                        {facs.map((fac, index) => {
+                        {$.map(facs, (fac, indexOrKey) => {
+                            const facName = fac.name;
+                            const facId = fac.id;
                             return (
-                                <option key={index.toString()} value={fac}>
-                                    {fac}
+                                <option key={indexOrKey} value={facId}>
+                                    {facName}
                                 </option>
                             );
                         })}
@@ -401,10 +432,11 @@ function FormRegister(props) {
                         disabled={props.selected}
                     >
                         <option>สาขา</option>
-                        {majors.map((major, index) => {
+                        {$.map(majors, (major, indexOrKey) => {
+                            const majorName = major.name;
                             return (
-                                <option key={index.toString()} value={major}>
-                                    {major}
+                                <option key={indexOrKey} value={majorName}>
+                                    {majorName}
                                 </option>
                             );
                         })}
