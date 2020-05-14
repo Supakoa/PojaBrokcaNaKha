@@ -75,7 +75,7 @@ export default class LogIn extends Component {
     }
 
     async handleClickLogIn(event) {
-        await event.preventDefault();
+        event.preventDefault();
         const user = {
             email: this.state.login.username,
             password: this.state.login.password
@@ -106,9 +106,7 @@ export default class LogIn extends Component {
             const tokenUser = this.state.login.token;
 
             if (tokenUser !== null) {
-                console.log(tokenUser);
-
-                axios
+                const userApi = await axios
                     .post(
                         `http://localhost:8000/api/user`,
                         {},

@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./../../components/images/logo.png";
-import { Col, Container, Row, Form, Button, Image } from "react-bootstrap";
+import {
+    Col,
+    Container,
+    Row,
+    Form,
+    Button,
+    Image,
+    Alert
+} from "react-bootstrap";
 import axios from "axios";
 
 export default class Register extends Component {
@@ -21,11 +29,18 @@ export default class Register extends Component {
                 phone: "",
                 faculty: "",
                 major: ""
+            },
+            error: {
+                notMatch: true,
+                name: "",
+                className: "border-danger",
+                message: ""
             }
         };
         this.handleOnClick = this.handleOnClick.bind(this);
         this.hadleChanges = this.hadleChanges.bind(this);
         this.validateInput = this.validateInput.bind(this);
+        this.validateConfirm = this.validateConfirm.bind(this);
     }
 
     hadleChanges(event) {
@@ -41,15 +56,67 @@ export default class Register extends Component {
         });
     }
 
-    validateInput(name) {
+    validateConfirm(value, targetName, targetMessage) {
         const user = this.state.user;
-        if (user.firstName === "") {
-            return "border-danger";
-        } else {
+        this.setState({
+            error: {
+                ...this.state.error,
+                name: targetName,
+                notMatch: value,
+                message: targetMessage
+            }
+        });
+    }
+
+    validateInput(name) {
+        const erName = name => {
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    name: name
+                }
+            });
+            return false;
+        };
+        if (name.firstName === "") {
+            erName("firstName");
+        } else if (name.lastName === "") {
+            erName("lastName");
+        } else if (name.password === "") {
+            erName("password");
+        } else if (name.email === "") {
+            erName("email");
+        } else if (name.phone === "") {
+            erName("phone");
+        } else if (name.faculty === "") {
+            erName("faculty");
+        } else if (name.major === "") {
+            erName("major");
+        } else if (name.studentId === "" || name.studentId !== "") {
+            const id = Number(name.studentId);
+            if (isNaN(id)) {
+                const message = "รหัสนักศึกษาต้องเป็นตัวเลข";
+                this.validatePassword(false, "studentId", message);
+            } else {
+                this.validatePassword(true, "", "");
+            }
+        } else if (name.conPassword === "" || name.conPassword !== "") {
+            if (name.conPassword === name.password) {
+                this.validatePassword(true, "", "");
+            } else if (name.conPassword !== name.password) {
+                const message = "กรุณาตรวจสอบพาสเวิร์ดอีกครั้ง";
+                this.validatePassword(false, "conPassword", message);
+            }
+        }else{
+            erName("");
         }
     }
 
-    handleOnClick() {}
+    handleOnClick(event) {
+        event.preventDefault();
+        const user = this.state.user;
+        this.validateInput(user);
+    }
     render() {
         return (
             <Container fluid className="effectSection">
@@ -71,7 +138,7 @@ export default class Register extends Component {
                         className="bg-light d-flex align-item-center"
                     >
                         <FormRegister
-                            classValidate={this.validateInput}
+                            error={this.state.error}
                             major={this.state.majors}
                             faculties={this.state.faculties}
                             inputValue={this.hadleChanges}
@@ -101,6 +168,7 @@ function ComponentLogIn() {
 function FormRegister(props) {
     const majors = props.major;
     const facs = props.faculties;
+
     return (
         <Form className="p-4 w-75 m-auto">
             <section className="d-table text-center m-auto">
@@ -112,11 +180,18 @@ function FormRegister(props) {
                 />
                 <p className="text-info">GE Petition</p>
             </section>
+            {props.error.notMatch ? null : (
+                <Alert variant="danger">{props.error.message}</Alert>
+            )}
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="formRowFirstName">
                     <Form.Label className="text-info">ชื่อ</Form.Label>
                     <Form.Control
-                        className={props.classValidate("firstName")}
+                        className={
+                            props.error.name === "firstName"
+                                ? props.error.className
+                                : ""
+                        }
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
@@ -127,7 +202,11 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRowLastName">
                     <Form.Label className="text-info">นามสกุล</Form.Label>
                     <Form.Control
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "lastName"
+                                ? props.error.className
+                                : ""
+                        }
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
@@ -143,7 +222,11 @@ function FormRegister(props) {
                         type="text"
                         placeholder="รหัสนักศึกษา"
                         name="studentId"
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "studentId"
+                                ? props.error.className
+                                : ""
+                        }
                         onChange={props.inputValue}
                     />
                 </Form.Group>
@@ -154,7 +237,11 @@ function FormRegister(props) {
                         type="text"
                         placeholder="รหัสผ่าน"
                         name="password"
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "password"
+                                ? props.error.className
+                                : ""
+                        }
                         onChange={props.inputValue}
                     />
                 </Form.Group>
@@ -167,7 +254,11 @@ function FormRegister(props) {
                         type="text"
                         placeholder="ยืนยัน รหัสผ่าน"
                         name="conPassword"
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "conPassword"
+                                ? props.error.className
+                                : ""
+                        }
                         onChange={props.inputValue}
                     />
                 </Form.Group>
@@ -177,7 +268,11 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRoweMail">
                     <Form.Label className="text-info">อีเมล</Form.Label>
                     <Form.Control
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "email"
+                                ? props.error.className
+                                : ""
+                        }
                         type="email"
                         placeholder="example@ssru.ac.th.com"
                         name="email"
@@ -188,7 +283,11 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRowPhone">
                     <Form.Label className="text-info">เบอร์โทรศัพท์</Form.Label>
                     <Form.Control
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "phone"
+                                ? props.error.className
+                                : ""
+                        }
                         type="text"
                         placeholder="เบอร์โทรศัพท์"
                         name="phone"
@@ -201,7 +300,11 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formGridFaculty">
                     <Form.Label className="text-info">คณะ</Form.Label>
                     <Form.Control
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "faculty"
+                                ? props.error.className
+                                : ""
+                        }
                         as="select"
                         custom
                         name="faculty"
@@ -221,7 +324,11 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formGridMajor">
                     <Form.Label className="text-info">สาขา</Form.Label>
                     <Form.Control
-                        className={props.classValidate}
+                        className={
+                            props.error.name === "major"
+                                ? props.error.className
+                                : ""
+                        }
                         as="select"
                         custom
                         name="major"
