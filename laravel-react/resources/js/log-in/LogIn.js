@@ -7,7 +7,6 @@ import {
     Link,
 } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
-import Register from "./component/Register";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
 
@@ -132,7 +131,7 @@ export default class LogIn extends Component {
         return (
             <section className="overflow-hidden">
                 <Switch>
-                    <Route exact path="/login">
+                    <Route path="/login">
                         <Container fluid>
                             <Row className="section-log-in">
                                 <Col
@@ -192,7 +191,7 @@ export default class LogIn extends Component {
                             </Row>
                         </Container>
                     </Route>
-                    <Route path="/login/register" component={Register} />
+
                 </Switch>
             </section>
         );
@@ -206,7 +205,7 @@ function ComponentRegister() {
             <p>เว็บไซต์ส่งแบบคำร้องของมหาวิทยาลัยราชภัฎสวนสุนันทา</p>
             <hr />
             <p>คุณต้องการส่งแบบคำร้องแต่ยังไม่ได้ลงทะเบียนใช่หรือไม่ ?</p>
-            <Link className="m-auto btn btn-light" to="/login/register">
+            <Link className="m-auto btn btn-light" to="/register">
                 ลงทะเบียน
             </Link>
         </section>

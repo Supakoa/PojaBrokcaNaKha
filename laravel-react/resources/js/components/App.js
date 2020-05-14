@@ -5,6 +5,7 @@ import Main from "./subdirect/Main";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student/Student";
 import Temp from "./subdirect/contents/Temp";
+import Register from "./../log-in/component/Register";
 
 class App extends Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class App extends Component {
                     <Route path="/login">
                         <LogIn />
                     </Route>
+                    <Route path="/register" component={Register} />
                 </Switch>
             </Router>
         );
