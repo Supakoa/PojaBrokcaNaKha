@@ -8,6 +8,7 @@ export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            classes: "",
             majors: ["computer", "art", "electric"],
             faculties: ["industies", "medie", "sci", "teach"],
             user: {
@@ -28,8 +29,10 @@ export default class Register extends Component {
     }
 
     hadleChanges(event) {
+        const user = this.state.user;
         const name = event.target.name;
         const value = event.target.value;
+
         this.setState({
             user: {
                 ...this.state.user,
@@ -38,18 +41,15 @@ export default class Register extends Component {
         });
     }
 
-    validateInput(){
-
-    }
-
-    handleOnClick() {
+    validateInput(name) {
         const user = this.state.user;
-        if (user) {
-
+        if (user.firstName === "") {
+            return "border-danger";
         } else {
-
         }
     }
+
+    handleOnClick() {}
     render() {
         return (
             <Container fluid className="effectSection">
@@ -71,6 +71,7 @@ export default class Register extends Component {
                         className="bg-light d-flex align-item-center"
                     >
                         <FormRegister
+                            classValidate={this.validateInput}
                             major={this.state.majors}
                             faculties={this.state.faculties}
                             inputValue={this.hadleChanges}
@@ -115,6 +116,7 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRowFirstName">
                     <Form.Label className="text-info">ชื่อ</Form.Label>
                     <Form.Control
+                        className={props.classValidate("firstName")}
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
@@ -125,6 +127,7 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRowLastName">
                     <Form.Label className="text-info">นามสกุล</Form.Label>
                     <Form.Control
+                        className={props.classValidate}
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
@@ -140,6 +143,7 @@ function FormRegister(props) {
                         type="text"
                         placeholder="รหัสนักศึกษา"
                         name="studentId"
+                        className={props.classValidate}
                         onChange={props.inputValue}
                     />
                 </Form.Group>
@@ -150,6 +154,7 @@ function FormRegister(props) {
                         type="text"
                         placeholder="รหัสผ่าน"
                         name="password"
+                        className={props.classValidate}
                         onChange={props.inputValue}
                     />
                 </Form.Group>
@@ -162,6 +167,7 @@ function FormRegister(props) {
                         type="text"
                         placeholder="ยืนยัน รหัสผ่าน"
                         name="conPassword"
+                        className={props.classValidate}
                         onChange={props.inputValue}
                     />
                 </Form.Group>
@@ -171,6 +177,7 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRoweMail">
                     <Form.Label className="text-info">อีเมล</Form.Label>
                     <Form.Control
+                        className={props.classValidate}
                         type="email"
                         placeholder="example@ssru.ac.th.com"
                         name="email"
@@ -181,6 +188,7 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formRowPhone">
                     <Form.Label className="text-info">เบอร์โทรศัพท์</Form.Label>
                     <Form.Control
+                        className={props.classValidate}
                         type="text"
                         placeholder="เบอร์โทรศัพท์"
                         name="phone"
@@ -193,6 +201,7 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formGridFaculty">
                     <Form.Label className="text-info">คณะ</Form.Label>
                     <Form.Control
+                        className={props.classValidate}
                         as="select"
                         custom
                         name="faculty"
@@ -200,7 +209,11 @@ function FormRegister(props) {
                     >
                         <option>คณะ</option>
                         {facs.map((fac, index) => {
-                           return <option key={index.toString()} value={fac}>{fac}</option>;
+                            return (
+                                <option key={index.toString()} value={fac}>
+                                    {fac}
+                                </option>
+                            );
                         })}
                     </Form.Control>
                 </Form.Group>
@@ -208,6 +221,7 @@ function FormRegister(props) {
                 <Form.Group as={Col} controlId="formGridMajor">
                     <Form.Label className="text-info">สาขา</Form.Label>
                     <Form.Control
+                        className={props.classValidate}
                         as="select"
                         custom
                         name="major"
@@ -215,7 +229,11 @@ function FormRegister(props) {
                     >
                         <option>สาขา</option>
                         {majors.map((major, index) => {
-                           return <option key={index.toString()} value={major}>{major}</option>;
+                            return (
+                                <option key={index.toString()} value={major}>
+                                    {major}
+                                </option>
+                            );
                         })}
                     </Form.Control>
                 </Form.Group>
