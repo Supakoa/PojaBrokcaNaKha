@@ -11,6 +11,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: null,
             role: ["admin", "staff", "student", "log-in"]
         };
 
@@ -28,10 +29,9 @@ class App extends Component {
                     </Route>
                     {/*<Route/>*/}
                     <Route path="/login">
-                        <LogIn />
+                        <LogIn user={this.state.user} />
                     </Route>
                     <Route path="/register" component={Register} />
-                    <Redirect component={LogIn}/>
                 </Switch>
             </Router>
         );

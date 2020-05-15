@@ -18,8 +18,8 @@ export default class Header extends Component {
             },
             users: {
                 id: 1,
-                firstName: props.user.first_name,
-                lastName: props.user.last_name
+                firstName: 'props.user.first_name',
+                lastName: 'props.user.last_name'
                 // token: props.user.first_name
             },
             url: props.path

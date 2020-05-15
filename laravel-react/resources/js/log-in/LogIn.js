@@ -22,7 +22,8 @@ export default class LogIn extends Component {
             },
             forgetPassword: {
                 forget: false
-            }
+            },
+            user: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClickLogIn = this.handleClickLogIn.bind(this);
@@ -111,11 +112,26 @@ export default class LogIn extends Component {
                     )
                     .then(res => {
                         const role = res.data.success.role_id;
-                        const user = res.data.success;
+                        const data = res.data.success;
+
+                        this.setState({
+                            ...this.state,
+                            user: data
+                        });
+                        const user = this.state.user;
+                        console.log(user);
                         switch (role) {
                             case 1:
-                                <Main user={user} />;
-                                window.location = "/admin";
+
+                                    <Route path="/admin">
+                                        <Main />
+                                    </Route>
+
+                                // localStorage.setItem(
+                                //     "_user",
+                                //     JASON.stringify(user)
+                                // );
+                                // window.location.href = "/admin";
                                 break;
                             case 2:
                                 window.location = "/staff";
