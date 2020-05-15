@@ -11,47 +11,39 @@ import {
     Alert
 } from "react-bootstrap";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { user } from "../redux/actions";
 import Student from "./../../components/student/Student";
 import Main from "./../../components/subdirect/Main";
 
-export default class Register extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            classes: "",
-            select: {
-                disable: true
-            },
-            majors: [],
-            faculties: [],
-            user: {
-                firstName: "",
-                lastName: "",
-                studentId: "",
-                password: "",
-                conPassword: "",
-                email: "",
-                phone: "",
-                faculty: "",
-                major: "",
-                token: ""
-            },
-            error: {
-                notMatch: true,
-                name: "",
-                className: "border-danger",
-                message: ""
-            }
-        };
-        this.handleOnClick = this.handleOnClick.bind(this);
-        this.hadleChanges = this.hadleChanges.bind(this);
-        this.validateInput = this.validateInput.bind(this);
-        this.validateConfirm = this.validateConfirm.bind(this);
-        this.selectedFac = this.selectedFac.bind(this);
-    }
+export default function Register() {
+    const disPatchRegis = useDispatch();
+    const getPostRegis = useSelector(state => state.userState);
+    const [_classes, setClasses] = React.useState("");
+    const [_select, setSelect] = React.useState(true);
+    const [_majors, setMajors] = React.useState([]);
+    const [_faculties, setFaculties] = React.useState([]);
+    const [_user, setUser] = React.useState({
+        firstName: "",
+        lastName: "",
+        studentId: "",
+        password: "",
+        conPassword: "",
+        email: "",
+        phone: "",
+        faculty: "",
+        major: "",
+        token: ""
+    });
+    const [_error, setError] = React.useState({
+        notMatch: true,
+        name: "",
+        className: "border-danger",
+        message: ""
+    });
 
-    hadleChanges(event) {
-        const user = this.state.user;
+    const hadleChanges = event => {
+        const user = _user;
         const name = event.target.name;
         const value = event.target.value;
 
@@ -64,100 +56,77 @@ export default class Register extends Component {
                 } else {
                     message = "เบอร์โทรศัพท์ควรเป็นตัวเลข";
                 }
-                this.validateConfirm(false, name, message);
+                validateConfirm(false, name, message);
             } else {
                 if (name === "studentId" && value.length !== 11) {
                     message = "รหัสนักศึกษาต้อง 11 หลัก";
-                    this.validateConfirm(false, name, message);
+                    validateConfirm(false, name, message);
                 } else if (name === "phone" && value.length !== 10) {
                     message = "เบอร์โทรศัพท์ต้อง 10 หลัก";
-                    this.validateConfirm(false, name, message);
+                    validateConfirm(false, name, message);
                 } else {
-                    this.setState({
-                        user: {
-                            ...this.state.user,
-                            [name]: value
-                        }
+                    setUser({
+                        ..._user,
+                        [name]: value
                     });
-                    this.validateConfirm(true, "", "");
+                    validateConfirm(true, "", "");
                 }
             }
         } else if (name === "conPassword") {
             if (user.password == value) {
-                this.validateConfirm(true, "", "");
-                this.setState({
-                    user: {
-                        ...this.state.user,
-                        [name]: value
-                    }
+                validateConfirm(true, "", "");
+                setUser({
+                    ..._user,
+                    [name]: value
                 });
             } else if (user.password !== value) {
                 if (value !== "") {
                     const message = "กรุณาตรวจสอบพาสเวิร์ดอีกครั้ง";
-                    this.validateConfirm(false, "conPassword", message);
+                    validateConfirm(false, "conPassword", message);
                 } else {
-                    this.validateInput("conPassword");
+                    validateInput("conPassword");
                 }
             }
         } else if (name === "faculty") {
             if (value !== "") {
-                this.setState({
-                    select: {
-                        ...this.state.select,
-                        disable: false
-                    },
-                    user: {
-                        ...this.state.user,
-                        [name]: value
-                    }
+                setUser({
+                    ..._user,
+                    [name]: value
                 });
-                this.selectedFac(value === "" ? 0 : value);
+                setSelect(false);
+                selectedFac(value === "" ? 0 : value);
             } else {
-                this.setState({
-                    select: {
-                        ...this.state.select,
-                        disable: true
-                    },
-                    user: {
-                        ...this.state.user,
-                        [name]: value
-                    }
+                setUser({
+                    ..._user,
+                    [name]: value
                 });
+                setSelect(false);
             }
         } else if (name === "major") {
             if (value !== "") {
-                this.setState({
-                    user: {
-                        ...this.state.user,
-                        [name]: value
-                    }
+                setUser({
+                    ..._user,
+                    [name]: value
                 });
             } else {
-                this.setState({
-                    user: {
-                        ...this.state.user,
-                        [name]: value
-                    }
+                setUser({
+                    ..._user,
+                    [name]: value
                 });
             }
         } else {
-            this.setState({
-                user: {
-                    ...this.state.user,
-                    [name]: value
-                }
+            setUser({
+                ..._user,
+                [name]: value
             });
         }
-    }
+    };
 
-    async componentDidMount() {
-        await axios
+    const componentDidMount = async () => {
+        const getFac = await axios
             .get(`http://127.0.0.1:8000/api/faculties`)
             .then(res => {
-                this.setState({
-                    ...this.state,
-                    faculties: res.data.success
-                });
+                return res.data.success;
             })
             .catch(error => {
                 const result = confirm(error);
@@ -165,42 +134,37 @@ export default class Register extends Component {
                     window.location = "/register";
                 }
             });
-    }
+        setFaculties(getFac);
+    };
 
-    selectedFac(value) {
+    const selectedFac = value => {
         const facId = Number(value);
 
         if (facId !== 0) {
-            axios
+            const getMajors = axios
                 .get(`http://127.0.0.1:8000/api/faculties/${facId}/majors`)
                 .then(res => {
-                    this.setState({
-                        ...this.state,
-                        majors: res.data
-                    });
+                    return res.data;
                 });
+            setMajors(getMajors);
         }
-    }
+    };
 
-    validateConfirm(value, targetName, targetMessage) {
-        const user = this.state.user;
-        this.setState({
-            error: {
-                ...this.state.error,
-                name: targetName,
-                notMatch: value,
-                message: targetMessage
-            }
+    const validateConfirm = (value, targetName, targetMessage) => {
+        // const user = _user;
+        setError({
+            ..._error,
+            name: targetName,
+            notMatch: value,
+            message: targetMessage
         });
-    }
+    };
 
-    validateInput(name) {
+    const validateInput = name => {
         const erName = name => {
-            this.setState({
-                error: {
-                    ...this.state.error,
-                    name: name
-                }
+            setError({
+                ..._error,
+                name: name
             });
         };
         if (name.firstName == "") {
@@ -232,12 +196,12 @@ export default class Register extends Component {
             return false;
         }
         return true;
-    }
+    };
 
-    async handleOnClick(event) {
+    const handleOnClick = async event => {
         event.preventDefault();
-        const user = this.state.user;
-        const validate = this.validateInput(user);
+        const user = _user;
+        const validate = validateInput(user);
         const data = {
             first_name: user.firstName,
             last_name: user.lastName,
@@ -252,16 +216,11 @@ export default class Register extends Component {
 
         if (validate) {
             console.log("success isTrue");
-            const register = await axios
+            const tokenRegister = await axios
                 .post(`http://127.0.0.1:8000/api/register`, data)
                 .then(res => {
                     const token = res.data.success.token;
-                    this.setState({
-                        user: {
-                            ...this.state.user,
-                            token: token
-                        }
-                    });
+                    return token;
                 })
                 .catch(error => {
                     const result = confirm(error);
@@ -269,9 +228,13 @@ export default class Register extends Component {
                         window.location = "/register";
                     }
                 });
+            setUser({
+                ..._user,
+                token: tokenRegister
+            });
         }
 
-        const tokenRegis = this.state.user.token;
+        const tokenRegis = _user.token;
         if (tokenRegis !== "") {
             const userApi = await axios
                 .post(
@@ -285,23 +248,8 @@ export default class Register extends Component {
                 )
                 .then(res => {
                     const role = res.data.success.role_id;
-                    const user = res.data.success
-                    switch (role) {
-                        case 1:
-                            <Main user={user} />
-                            window.location = "/admin";
-                            break;
-                        case 2:
-
-                            window.location = "/staff";
-                            break;
-                        case 3:
-                            <Student user={user} />
-                            window.location = "/student";
-                            break;
-                        default:
-                            window.location = "/login";
-                    }
+                    const user = res.data.success;
+                    return user
                 })
                 .catch(error => {
                     const result = confirm("ลองอีกครั้ง.");
@@ -309,41 +257,41 @@ export default class Register extends Component {
                         window.location = "/login";
                     }
                 });
+                disPatchRegis(user(userApi));
         }
-    }
-    render() {
-        return (
-            <Container fluid className="effectSection">
-                <Row className="section-log-in">
-                    <Col
-                        xs={12}
-                        sm={12}
-                        md={6}
-                        lg={6}
-                        className="bg-info text-light d-flex align-item-center"
-                    >
-                        <ComponentLogIn />
-                    </Col>
-                    <Col
-                        xs={12}
-                        sm={12}
-                        md={6}
-                        lg={6}
-                        className="bg-light d-flex align-item-center"
-                    >
-                        <FormRegister
-                            selected={this.state.select.disable}
-                            error={this.state.error}
-                            majors={this.state.majors}
-                            faculties={this.state.faculties}
-                            inputValue={this.hadleChanges}
-                            handleClick={this.handleOnClick}
-                        />
-                    </Col>
-                </Row>
-            </Container>
-        );
-    }
+        console.log(getPostRegis);
+    };
+    return (
+        <Container fluid className="effectSection">
+            <Row className="section-log-in">
+                <Col
+                    xs={12}
+                    sm={12}
+                    md={6}
+                    lg={6}
+                    className="bg-info text-light d-flex align-item-center"
+                >
+                    <ComponentLogIn />
+                </Col>
+                <Col
+                    xs={12}
+                    sm={12}
+                    md={6}
+                    lg={6}
+                    className="bg-light d-flex align-item-center"
+                >
+                    <FormRegister
+                        selected={_select}
+                        error={_error}
+                        majors={_majors}
+                        faculties={_faculties}
+                        inputValue={hadleChanges}
+                        handleClick={andleOnClick}
+                    />
+                </Col>
+            </Row>
+        </Container>
+    );
 }
 
 function ComponentLogIn() {

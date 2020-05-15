@@ -17,14 +17,7 @@ export const decrement = number => {
 export const user = obj => {
     return {
         type: "USER",
-        user: {
-            firstName: obj.firstName,
-            lastName: obj.lastName,
-            studentId: obj.studentId,
-            email: obj.mail,
-            faculty: obj.facId,
-            major: obj.majorId
-        }
+        user: obj
     };
 };
 

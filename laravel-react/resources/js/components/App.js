@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect
+} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./subdirect/Main";
 import LogIn from "./../log-in/LogIn";
@@ -14,23 +19,19 @@ class App extends Component {
             user: null,
             role: ["admin", "staff", "student", "log-in"]
         };
-
     }
     render() {
         return (
             <Router>
-                <Temp />
+                {/* <Temp /> */}
                 <Switch>
-                    <Route path="/admin">
-                        <Main />
-                    </Route>
-                    <Route path="/student">
-                        <Student />
-                    </Route>
+                    <Route path="/admin" component={Main} />
+
+                    <Route path="/student" component={Student} />
+
                     {/*<Route/>*/}
-                    <Route path="/login">
-                        <LogIn user={this.state.user} />
-                    </Route>
+                    <Route path="/login" component={LogIn} />
+
                     <Route path="/register" component={Register} />
                 </Switch>
             </Router>

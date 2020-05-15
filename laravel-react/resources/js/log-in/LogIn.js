@@ -1,26 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import "./login.css";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
-import Student from "../components/student/Student";
-import Main from "../components/subdirect/Main";
 import { useDispatch, useSelector } from "react-redux";
-import { postLogin } from "../redux/actions";
+import { user } from "../redux/actions";
 
 export default function LogIn() {
+    const disPatchLogin = useDispatch();
+    const getPostLogin = useSelector(state => state.userState);
     const [forgetPass, setForgetPass] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
-        password: "",
-        token: ""
+        password: ""
     });
     const [_error, setError] = React.useState({
         name: "",
         className: "border-danger"
     });
-    const [_user, setUser] = React.useState([]);
 
     const handleForget = value => {
         setForgetPass(value);
@@ -36,7 +34,6 @@ export default function LogIn() {
     };
 
     const validateInput = (email, password) => {
-        // const errorName = _error.name;
         const setName = errorName =>
             setError({
                 ..._error,
@@ -54,26 +51,17 @@ export default function LogIn() {
 
     const handleClickLogIn = async event => {
         event.preventDefault();
-        const user = {
+        const _user = {
             email: _login.username,
             password: _login.password
         };
         const validate = validateInput(user.email, user.password);
         if (validate) {
-            // const disPatchLogin = useDispatch();
-            // const getPostLogin = useSelector(state => state.postLogin);
-            // disPatchLogin(postLogin(user));
-
-             await axios
-                .post(`http://localhost:8000/api/login`, user)
+            const postToken = await axios
+                .post(`http://localhost:8000/api/login`, _user)
                 .then(res => {
-                    console.log(res);
                     if (res.status === 200) {
-                        console.log(res.data.success.token);
-                        setLogin({
-                            ..._login,
-                            token: res.data.success.token
-                        });
+                        return res.data.success.token;
                     }
                 })
                 .catch(error => {
@@ -82,14 +70,10 @@ export default function LogIn() {
                         window.location = "/login";
                     }
                 });
-            console.log(_login);
 
-            const tokenUser = _login.token;
-            // const tokenUser = getPostLogin;
-            // console.log(tokenUser);
-
+            const tokenUser = postToken;
             if (tokenUser !== null) {
-                const userApi = await axios
+                const tokenGetUser = await axios
                     .post(
                         `http://localhost:8000/api/user`,
                         {},
@@ -100,44 +84,27 @@ export default function LogIn() {
                         }
                     )
                     .then(res => {
-                        const role = res.data.success.role_id;
                         const data = res.data.success;
-
-                        setUser(data);
-
-                        const user = _user;
-                        console.log(user);
-                        // switch (role) {
-                        //     case 1:
-                        // localStorage.setItem(
-                        //     "_user",
-                        //     JASON.stringify(user)
-                        // );
-                        // window.location.href = "/admin";
-                        //         break;
-                        //     case 2:
-                        //         window.location = "/staff";
-                        //         break;
-                        //     case 3:
-                        //         <Student user={user} />;
-                        //         window.location = "/student";
-                        //         break;
-                        //     default:
-                        //         window.location = "/login";
-                        // }
+                        return data;
                     })
                     .catch(error => {
-                        const result = confirm("ลองอีกครั้ง.");
+                        const result = confirm(
+                            "Post Token มีปัญหาลองอีกครั้ง."
+                        );
                         if (result) {
                             window.location = "/login";
                         }
                     });
+                disPatchLogin(user(tokenGetUser));
             }
         }
     };
 
+    console.log(getPostLogin);
+
     return (
         <section className="overflow-hidden">
+            {getPostLogin.keys}
             <Switch>
                 <Route path="/login">
                     <Container fluid>
