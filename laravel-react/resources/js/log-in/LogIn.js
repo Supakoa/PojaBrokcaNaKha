@@ -6,59 +6,41 @@ import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
 import Student from "../components/student/Student";
 import Main from "../components/subdirect/Main";
+import { useDispatch, useSelector } from "react-redux";
+import { postLogin } from "../redux/actions";
 
-export default class LogIn extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: {
-                name: "",
-                className: "border-danger"
-            },
-            login: {
-                username: "",
-                password: "",
-                token: null
-            },
-            forgetPassword: {
-                forget: false
-            },
-            user: []
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClickLogIn = this.handleClickLogIn.bind(this);
-        this.handleForget = this.handleForget.bind(this);
-        this.validateInput = this.validateInput.bind(this);
-    }
+export default function LogIn() {
+    const [forgetPass, setForgetPass] = React.useState(false);
+    const [_login, setLogin] = React.useState({
+        username: "",
+        password: "",
+        token: ""
+    });
+    const [_error, setError] = React.useState({
+        name: "",
+        className: "border-danger"
+    });
+    const [_user, setUser] = React.useState([]);
 
-    handleForget(value) {
-        this.setState({
-            forgetPassword: {
-                ...this.state.forgetPassword,
-                forget: value
-            }
-        });
-    }
+    const handleForget = value => {
+        setForgetPass(value);
+    };
 
-    handleChange(event) {
+    const handleChange = event => {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({
-            login: {
-                ...this.state.login,
-                [name]: value
-            }
+        setLogin({
+            ..._login,
+            [name]: value
         });
-    }
+    };
 
-    validateInput(email, password) {
-        const errorName = this.state.error.name;
+    const validateInput = (email, password) => {
+        // const errorName = _error.name;
         const setName = errorName =>
-            this.setState({
-                error: {
-                    ...this.state.error,
-                    name: errorName
-                }
+            setError({
+                ..._error,
+                name: errorName
             });
         if (email === "") {
             setName("username");
@@ -68,25 +50,29 @@ export default class LogIn extends Component {
             return false;
         }
         return true;
-    }
+    };
 
-    async handleClickLogIn(event) {
+    const handleClickLogIn = async event => {
         event.preventDefault();
         const user = {
-            email: this.state.login.username,
-            password: this.state.login.password
+            email: _login.username,
+            password: _login.password
         };
-        const validate = this.validateInput(user.email, user.password);
+        const validate = validateInput(user.email, user.password);
         if (validate) {
-            const apiLogIn = await axios
+            // const disPatchLogin = useDispatch();
+            // const getPostLogin = useSelector(state => state.postLogin);
+            // disPatchLogin(postLogin(user));
+
+             await axios
                 .post(`http://localhost:8000/api/login`, user)
                 .then(res => {
+                    console.log(res);
                     if (res.status === 200) {
-                        this.setState({
-                            login: {
-                                ...this.state.login,
-                                token: res.data.success.token
-                            }
+                        console.log(res.data.success.token);
+                        setLogin({
+                            ..._login,
+                            token: res.data.success.token
                         });
                     }
                 })
@@ -96,8 +82,11 @@ export default class LogIn extends Component {
                         window.location = "/login";
                     }
                 });
+            console.log(_login);
 
-            const tokenUser = this.state.login.token;
+            const tokenUser = _login.token;
+            // const tokenUser = getPostLogin;
+            // console.log(tokenUser);
 
             if (tokenUser !== null) {
                 const userApi = await axios
@@ -114,35 +103,28 @@ export default class LogIn extends Component {
                         const role = res.data.success.role_id;
                         const data = res.data.success;
 
-                        this.setState({
-                            ...this.state,
-                            user: data
-                        });
-                        const user = this.state.user;
+                        setUser(data);
+
+                        const user = _user;
                         console.log(user);
-                        switch (role) {
-                            case 1:
-
-                                    <Route path="/admin">
-                                        <Main />
-                                    </Route>
-
-                                // localStorage.setItem(
-                                //     "_user",
-                                //     JASON.stringify(user)
-                                // );
-                                // window.location.href = "/admin";
-                                break;
-                            case 2:
-                                window.location = "/staff";
-                                break;
-                            case 3:
-                                <Student user={user} />;
-                                window.location = "/student";
-                                break;
-                            default:
-                                window.location = "/login";
-                        }
+                        // switch (role) {
+                        //     case 1:
+                        // localStorage.setItem(
+                        //     "_user",
+                        //     JASON.stringify(user)
+                        // );
+                        // window.location.href = "/admin";
+                        //         break;
+                        //     case 2:
+                        //         window.location = "/staff";
+                        //         break;
+                        //     case 3:
+                        //         <Student user={user} />;
+                        //         window.location = "/student";
+                        //         break;
+                        //     default:
+                        //         window.location = "/login";
+                        // }
                     })
                     .catch(error => {
                         const result = confirm("ลองอีกครั้ง.");
@@ -152,76 +134,69 @@ export default class LogIn extends Component {
                     });
             }
         }
-    }
+    };
 
-    render() {
-        return (
-            <section className="overflow-hidden">
-                <Switch>
-                    <Route path="/login">
-                        <Container fluid>
-                            <Row className="section-log-in">
-                                <Col
-                                    xs={12}
-                                    sm={12}
-                                    md={6}
-                                    lg={6}
-                                    className="bg-light d-flex align-item-center"
-                                >
-                                    <section className="d-table p-4 w-50 m-auto">
-                                        <section className="d-table text-center m-auto">
-                                            <Image
-                                                className="border-bottom border-info"
-                                                src={Logo}
-                                                width="80"
-                                                height="80"
-                                            />
-                                            <p className="text-info">
-                                                GE Petition
-                                            </p>
-                                            {!this.state.forgetPassword
-                                                .forget ? (
-                                                <h3 className="p-1 effectSection">
-                                                    เข้าสู่ระบบ
-                                                </h3>
-                                            ) : (
-                                                <h3 className="p-1 effectSection">
-                                                    ลืมรหัสผ่าน
-                                                </h3>
-                                            )}
-                                        </section>
-                                        {!this.state.forgetPassword.forget ? (
-                                            <FromLogIn
-                                                error={this.state.error}
-                                                showForget={this.handleForget}
-                                                clickLogin={
-                                                    this.handleClickLogIn
-                                                }
-                                                inputValue={this.handleChange}
-                                            />
+    return (
+        <section className="overflow-hidden">
+            <Switch>
+                <Route path="/login">
+                    <Container fluid>
+                        <Row className="section-log-in">
+                            <Col
+                                xs={12}
+                                sm={12}
+                                md={6}
+                                lg={6}
+                                className="bg-light d-flex align-item-center"
+                            >
+                                <section className="d-table p-4 w-50 m-auto">
+                                    <section className="d-table text-center m-auto">
+                                        <Image
+                                            className="border-bottom border-info"
+                                            src={Logo}
+                                            width="80"
+                                            height="80"
+                                        />
+                                        <p className="text-info">GE Petition</p>
+                                        {!forgetPass ? (
+                                            <h3 className="p-1 effectSection">
+                                                เข้าสู่ระบบ
+                                            </h3>
                                         ) : (
-                                            <ComponentForgetPassword
-                                                closeForget={this.handleForget}
-                                            />
+                                            <h3 className="p-1 effectSection">
+                                                ลืมรหัสผ่าน
+                                            </h3>
                                         )}
                                     </section>
-                                </Col>
-                                <Col
-                                    xs={12}
-                                    sm={12}
-                                    md={6}
-                                    lg={6}
-                                    className="bg-info text-light d-flex align-item-center"
-                                >
-                                    <ComponentRegister />
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Route>
-                </Switch>
-            </section>
-        );
-    }
+                                    {!forgetPass ? (
+                                        <FromLogIn
+                                            error={_error}
+                                            showForget={handleForget}
+                                            clickLogin={handleClickLogIn}
+                                            inputValue={handleChange}
+                                        />
+                                    ) : (
+                                        <ComponentForgetPassword
+                                            closeForget={handleForget}
+                                        />
+                                    )}
+                                </section>
+                            </Col>
+                            <Col
+                                xs={12}
+                                sm={12}
+                                md={6}
+                                lg={6}
+                                className="bg-info text-light d-flex align-item-center"
+                            >
+                                <ComponentRegister />
+                            </Col>
+                        </Row>
+                    </Container>
+                </Route>
+            </Switch>
+        </section>
+    );
 }
 
 function ComponentRegister() {
