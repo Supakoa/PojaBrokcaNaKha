@@ -11,6 +11,8 @@ import {
     Alert
 } from "react-bootstrap";
 import axios from "axios";
+import Student from "./../../components/student/Student";
+import Main from "./../../components/subdirect/Main";
 
 export default class Register extends Component {
     constructor(props) {
@@ -18,7 +20,6 @@ export default class Register extends Component {
         this.state = {
             classes: "",
             select: {
-                id: 0,
                 disable: true
             },
             majors: [],
@@ -32,7 +33,8 @@ export default class Register extends Component {
                 email: "",
                 phone: "",
                 faculty: "",
-                major: ""
+                major: "",
+                token: ""
             },
             error: {
                 notMatch: true,
@@ -45,6 +47,7 @@ export default class Register extends Component {
         this.hadleChanges = this.hadleChanges.bind(this);
         this.validateInput = this.validateInput.bind(this);
         this.validateConfirm = this.validateConfirm.bind(this);
+        this.selectedFac = this.selectedFac.bind(this);
     }
 
     hadleChanges(event) {
@@ -97,29 +100,43 @@ export default class Register extends Component {
                 }
             }
         } else if (name === "faculty") {
-            const facId = Number(value);
-            if (value !== 0) {
+            if (value !== "") {
                 this.setState({
                     select: {
                         ...this.state.select,
-                        id: facId,
                         disable: false
                     },
                     user: {
                         ...this.state.user,
-                        [name]: facId
+                        [name]: value
                     }
                 });
+                this.selectedFac(value === "" ? 0 : value);
             } else {
                 this.setState({
                     select: {
                         ...this.state.select,
-                        id: 0,
                         disable: true
                     },
                     user: {
                         ...this.state.user,
-                        [name]: facId
+                        [name]: value
+                    }
+                });
+            }
+        } else if (name === "major") {
+            if (value !== "") {
+                this.setState({
+                    user: {
+                        ...this.state.user,
+                        [name]: value
+                    }
+                });
+            } else {
+                this.setState({
+                    user: {
+                        ...this.state.user,
+                        [name]: value
                     }
                 });
             }
@@ -134,26 +151,32 @@ export default class Register extends Component {
     }
 
     async componentDidMount() {
-        const facId = this.state.select.id;
-        const id = Number(facId);
-        await axios.get(`http://127.0.0.1:8000/api/faculties`).then(res => {
-            this.setState({
-                ...this.state,
-                faculties: res.data.success
+        await axios
+            .get(`http://127.0.0.1:8000/api/faculties`)
+            .then(res => {
+                this.setState({
+                    ...this.state,
+                    faculties: res.data.success
+                });
+            })
+            .catch(error => {
+                const result = confirm(error);
+                if (result) {
+                    window.location = "/register";
+                }
             });
-        });
+    }
 
-        if (id !== 0) {
-            console.log(id);
+    selectedFac(value) {
+        const facId = Number(value);
 
-            await axios
-                .get(`http://127.0.0.1:8000/api/faculties/${id}/majors`)
+        if (facId !== 0) {
+            axios
+                .get(`http://127.0.0.1:8000/api/faculties/${facId}/majors`)
                 .then(res => {
-                    console.log(res.data);
-
                     this.setState({
                         ...this.state,
-                        moajors: res.data.success
+                        majors: res.data
                     });
                 });
         }
@@ -179,35 +202,114 @@ export default class Register extends Component {
                     name: name
                 }
             });
-            return false;
         };
         if (name.firstName == "") {
             erName("firstName");
+            return false;
         } else if (name.lastName === "") {
             erName("lastName");
+            return false;
         } else if (name.studentId === "") {
             erName("studentId");
+            return false;
         } else if (name.password === "") {
             erName("password");
+            return false;
         } else if (name.conPassword === "") {
             erName("conPassword");
+            return false;
         } else if (name.email === "") {
             erName("email");
+            return false;
         } else if (name.phone === "") {
             erName("phone");
+            return false;
         } else if (name.faculty === "") {
             erName("faculty");
+            return false;
         } else if (name.major === "") {
             erName("major");
-        } else {
-            erName("");
+            return false;
         }
+        return true;
     }
 
-    handleOnClick(event) {
+    async handleOnClick(event) {
         event.preventDefault();
         const user = this.state.user;
-        this.validateInput(user);
+        const validate = this.validateInput(user);
+        const data = {
+            first_name: user.firstName,
+            last_name: user.lastName,
+            email: user.email,
+            password: user.password,
+            telephone: user.phone,
+            c_password: user.conPassword,
+            student_id: user.studentId,
+            major_id: user.major
+        };
+        console.log(validate);
+
+        if (validate) {
+            console.log("success isTrue");
+            const register = await axios
+                .post(`http://127.0.0.1:8000/api/register`, data)
+                .then(res => {
+                    const token = res.data.success.token;
+                    this.setState({
+                        user: {
+                            ...this.state.user,
+                            token: token
+                        }
+                    });
+                })
+                .catch(error => {
+                    const result = confirm(error);
+                    if (result) {
+                        window.location = "/register";
+                    }
+                });
+        }
+
+        const tokenRegis = this.state.user.token;
+        if (tokenRegis !== "") {
+            const userApi = await axios
+                .post(
+                    `http://localhost:8000/api/user`,
+                    {},
+                    {
+                        headers: {
+                            Authorization: `Bearer ${tokenRegis}`
+                        }
+                    }
+                )
+                .then(res => {
+                    const role = res.data.success.role_id;
+                    const user = res.data.success
+                    switch (role) {
+                        case 1:
+                            <Main user={user} />
+                            window.location = "/admin";
+                            break;
+                        case 2:
+
+                            window.location = "/staff";
+                            break;
+                        case 3:
+                            <Student user={user} />
+                            window.location = "/student";
+                            break;
+                        default:
+                            window.location = "/login";
+                    }
+                })
+                .catch(error => {
+                    const result = confirm("ลองอีกครั้ง.");
+                    if (result) {
+                        window.location = "/login";
+                    }
+                });
+        }
     }
     render() {
         return (
@@ -232,7 +334,7 @@ export default class Register extends Component {
                         <FormRegister
                             selected={this.state.select.disable}
                             error={this.state.error}
-                            major={this.state.majors}
+                            majors={this.state.majors}
                             faculties={this.state.faculties}
                             inputValue={this.hadleChanges}
                             handleClick={this.handleOnClick}
@@ -259,10 +361,9 @@ function ComponentLogIn() {
 }
 
 function FormRegister(props) {
-    const majors = props.major;
+    const majors = props.majors;
     const facs = props.faculties;
 
-    console.log(majors);
     return (
         <Form className="p-4 w-75 m-auto">
             <section className="d-table text-center m-auto">
@@ -431,11 +532,12 @@ function FormRegister(props) {
                         onChange={props.inputValue}
                         disabled={props.selected}
                     >
-                        <option>สาขา</option>
+                        <option value="">สาขา</option>
                         {$.map(majors, (major, indexOrKey) => {
                             const majorName = major.name;
+                            const majorId = major.id;
                             return (
-                                <option key={indexOrKey} value={majorName}>
+                                <option key={indexOrKey} value={majorId}>
                                     {majorName}
                                 </option>
                             );

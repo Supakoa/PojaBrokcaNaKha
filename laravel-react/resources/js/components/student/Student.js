@@ -10,11 +10,11 @@ import Footer from "./components/Footer";
 import Main from "./components/Main";
 import Profile from "./components/Profile";
 
-export default function Student() {
+export default function Student(props) {
     let { path, url } = useRouteMatch();
     return (
         <section>
-            <Header url={url} />
+            <Header url={url} user={props.user} />
             <section className="app">
                 <Container>
                     <Switch>

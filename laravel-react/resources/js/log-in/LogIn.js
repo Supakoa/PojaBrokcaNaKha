@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import "./login.css";
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Link,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
+import Student from "../components/student/Student";
+import Main from "../components/subdirect/Main";
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -83,8 +80,6 @@ export default class LogIn extends Component {
             const apiLogIn = await axios
                 .post(`http://localhost:8000/api/login`, user)
                 .then(res => {
-                    console.log(res);
-
                     if (res.status === 200) {
                         this.setState({
                             login: {
@@ -115,7 +110,23 @@ export default class LogIn extends Component {
                         }
                     )
                     .then(res => {
-                        console.log(res.data.success);
+                        const role = res.data.success.role_id;
+                        const user = res.data.success;
+                        switch (role) {
+                            case 1:
+                                <Main user={user} />;
+                                window.location = "/admin";
+                                break;
+                            case 2:
+                                window.location = "/staff";
+                                break;
+                            case 3:
+                                <Student user={user} />;
+                                window.location = "/student";
+                                break;
+                            default:
+                                window.location = "/login";
+                        }
                     })
                     .catch(error => {
                         const result = confirm("ลองอีกครั้ง.");
@@ -191,7 +202,6 @@ export default class LogIn extends Component {
                             </Row>
                         </Container>
                     </Route>
-
                 </Switch>
             </section>
         );
