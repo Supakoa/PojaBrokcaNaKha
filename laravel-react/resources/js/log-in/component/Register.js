@@ -12,14 +12,12 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { user } from "../redux/actions";
-import Student from "./../../components/student/Student";
-import Main from "./../../components/subdirect/Main";
+import { user } from "../../redux/actions";
 
 export default function Register() {
     const disPatchRegis = useDispatch();
     const getPostRegis = useSelector(state => state.userState);
-    const [_classes, setClasses] = React.useState("");
+    // const [_classes, setClasses] = React.useState("");
     const [_select, setSelect] = React.useState(true);
     const [_majors, setMajors] = React.useState([]);
     const [_faculties, setFaculties] = React.useState([]);
@@ -200,17 +198,17 @@ export default function Register() {
 
     const handleOnClick = async event => {
         event.preventDefault();
-        const user = _user;
-        const validate = validateInput(user);
+        const dataUser = _user;
+        const validate = validateInput(dataUser);
         const data = {
-            first_name: user.firstName,
-            last_name: user.lastName,
-            email: user.email,
-            password: user.password,
-            telephone: user.phone,
-            c_password: user.conPassword,
-            student_id: user.studentId,
-            major_id: user.major
+            first_name: dataUser.firstName,
+            last_name: dataUser.lastName,
+            email: dataUser.email,
+            password: dataUser.password,
+            telephone: dataUser.phone,
+            c_password: dataUser.conPassword,
+            student_id: dataUser.studentId,
+            major_id: dataUser.major
         };
         console.log(validate);
 
@@ -248,8 +246,8 @@ export default function Register() {
                 )
                 .then(res => {
                     const role = res.data.success.role_id;
-                    const user = res.data.success;
-                    return user
+                    const data = res.data.success;
+                    return data;
                 })
                 .catch(error => {
                     const result = confirm("ลองอีกครั้ง.");
@@ -257,10 +255,11 @@ export default function Register() {
                         window.location = "/login";
                     }
                 });
-                disPatchRegis(user(userApi));
+            disPatchRegis(user(userApi));
         }
         console.log(getPostRegis);
     };
+
     return (
         <Container fluid className="effectSection">
             <Row className="section-log-in">
@@ -286,7 +285,7 @@ export default function Register() {
                         majors={_majors}
                         faculties={_faculties}
                         inputValue={hadleChanges}
-                        handleClick={andleOnClick}
+                        handleClick={handleOnClick}
                     />
                 </Col>
             </Row>
