@@ -31,17 +31,22 @@ class UserController extends Controller
     /**
      * Register api
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'role_id' => 'required',
+            'major_id' => 'required',
+            'student_td' => 'required|unique:users',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'telephone' => 'required',
             'c_password' => 'required|same:password',
+
         ]);
 
         if ($validator->fails()) {
@@ -49,7 +54,6 @@ class UserController extends Controller
         }
 
         $input = $request->all();
-        $input['role_id'] = "1";
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
