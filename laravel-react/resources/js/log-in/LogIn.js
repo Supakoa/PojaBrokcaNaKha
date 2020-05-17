@@ -1,6 +1,11 @@
 import React from "react";
 import "./login.css";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import {
+    Link,
+    Redirect,
+    useHistory,
+    useLocation,
+} from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
@@ -109,33 +114,33 @@ export default function LogIn(props) {
     };
 
     const redirectOfRole = roleId => {
+        var role_name = "";
         switch (roleId) {
             case 1:
                 //addmin
-                _history.push("/admin");
+                role_name = "/admin";
+                // _history.push(role_name);
                 break;
             case 2:
                 //staff
-                _history.push("/staff");
+                role_name = "/staff";
+                // _history.replace(from);
 
                 break;
             case 3:
                 //student
-                _history.push("/student");
+                role_name = "/student";
+                // _history.replace(from);
                 break;
         }
         disPatchLogin(redirect(true));
-        let { from } = location.state || { from: { pathname: "/login" } };
-
-        _history.replace(from);
 
         // return (
         //     <Redirect
-        //         to={{
-        //             pathname: "/login",
-        //             state: { from: location }
-        //         }}
         //         exact
+        //         to={{
+        //             pathname: role_name,
+        //         }}
         //     />
         // );
     };

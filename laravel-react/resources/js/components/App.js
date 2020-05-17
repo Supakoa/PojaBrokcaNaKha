@@ -19,14 +19,14 @@ function App() {
         return (
             <Route
                 {...rest}
-                render={({ location }) =>
+                render={({ _location }) =>
                     isAuthenticated ? (
                         children
                     ) : (
                         <Redirect
                             to={{
                                 pathname: "/login",
-                                state: { from: location }
+                                state: { from: _location }
                             }}
                         />
                     )
@@ -34,6 +34,8 @@ function App() {
             />
         );
     };
+    console.log(location);
+    console.log(isAuthenticated);
 
     return (
         <Router>
