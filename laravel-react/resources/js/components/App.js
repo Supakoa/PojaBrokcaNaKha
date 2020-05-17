@@ -17,22 +17,28 @@ class App extends Component {
         super(props);
         this.state = {
             user: null,
-            role: ["admin", "staff", "student", "log-in"]
+            role: ["admin", "staff", "student", "log-in"],
         };
+
     }
+
+
     render() {
         return (
             <Router>
                 {/* <Temp /> */}
                 <Switch>
+                    <Redirect exact from="/" to="/login" />
                     <Route path="/admin" component={Main} />
-
                     <Route path="/student" component={Student} />
-
                     {/*<Route/>*/}
-                    <Route path="/login" component={LogIn} />
 
-                    <Route path="/register" component={Register} />
+                    <Route path="/login">
+                        <LogIn  />
+                    </Route>
+                    <Route path="/register">
+                        <Register  />
+                    </Route>
                 </Switch>
             </Router>
         );

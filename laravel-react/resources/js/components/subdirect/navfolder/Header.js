@@ -17,10 +17,9 @@ export default class Header extends Component {
                 name: "Petition Web"
             },
             users: {
-                id: 1,
-                firstName: 'props.user.first_name',
-                lastName: 'props.user.last_name'
-                // token: props.user.first_name
+                title:props.user.title,
+                firstName: props.user.firstName,
+                lastName: props.user.lastName
             },
             url: props.path
         };

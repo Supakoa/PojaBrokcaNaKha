@@ -1,16 +1,19 @@
 import React from "react";
 import "./login.css";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { user } from "../redux/actions";
 
-export default function LogIn() {
+export default function LogIn(props) {
     const disPatchLogin = useDispatch();
     const getPostLogin = useSelector(state => state.userState);
     const [forgetPass, setForgetPass] = React.useState(false);
+    const [_roleId, set_roleId] = React.useState(0);
+    const [role, setRole] = React.useState("");
+    const [_auth, setAuth] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
         password: ""
@@ -100,68 +103,97 @@ export default function LogIn() {
         }
     };
 
+    const redirectOfRole = roleId => {
+        if (roleId === 1) {
+            //addmin
+            setAuth(true);
+            setRole("admin");
+        } else if (roleId === 2) {
+            //staff
+            setRole("staff");
+            setAuth(true);
+        } else if (roleId === 3) {
+            //studebt
+            setRole("student");
+            setAuth(true);
+        } else if (roleId === 0) {
+            console.log("Role 0");
+        } else {
+            const result = confirm("Role ไม่ถูกต้อง");
+            if (result) {
+                window.location = "/login";
+            }
+        }
+    };
     console.log(getPostLogin);
 
     return (
         <section className="overflow-hidden">
-            {getPostLogin.keys}
-            <Switch>
-                <Route path="/login">
-                    <Container fluid>
-                        <Row className="section-log-in">
-                            <Col
-                                xs={12}
-                                sm={12}
-                                md={6}
-                                lg={6}
-                                className="bg-light d-flex align-item-center"
-                            >
-                                <section className="d-table p-4 w-50 m-auto">
-                                    <section className="d-table text-center m-auto">
-                                        <Image
-                                            className="border-bottom border-info"
-                                            src={Logo}
-                                            width="80"
-                                            height="80"
-                                        />
-                                        <p className="text-info">GE Petition</p>
-                                        {!forgetPass ? (
-                                            <h3 className="p-1 effectSection">
-                                                เข้าสู่ระบบ
-                                            </h3>
-                                        ) : (
-                                            <h3 className="p-1 effectSection">
-                                                ลืมรหัสผ่าน
-                                            </h3>
-                                        )}
-                                    </section>
+            {/* {$.map(getPostLogin, function(item, index) {
+                return <li key={index}>{item !== null ? item : "null"}</li>;
+            })} */}
+            {_roleId !== 0 ? redirectOfRole(_roleId) : null}
+            {!_auth ? (
+                <Container fluid>
+                    <Row className="section-log-in">
+                        <Col
+                            xs={12}
+                            sm={12}
+                            md={6}
+                            lg={6}
+                            className="bg-light d-flex align-item-center"
+                        >
+                            <section className="d-table p-4 w-50 m-auto">
+                                <section className="d-table text-center m-auto">
+                                    <Image
+                                        className="border-bottom border-info"
+                                        src={Logo}
+                                        width="80"
+                                        height="80"
+                                    />
+                                    <p className="text-info">GE Petition</p>
                                     {!forgetPass ? (
-                                        <FromLogIn
-                                            error={_error}
-                                            showForget={handleForget}
-                                            clickLogin={handleClickLogIn}
-                                            inputValue={handleChange}
-                                        />
+                                        <h3 className="p-1 effectSection">
+                                            เข้าสู่ระบบ
+                                        </h3>
                                     ) : (
-                                        <ComponentForgetPassword
-                                            closeForget={handleForget}
-                                        />
+                                        <h3 className="p-1 effectSection">
+                                            ลืมรหัสผ่าน
+                                        </h3>
                                     )}
                                 </section>
-                            </Col>
-                            <Col
-                                xs={12}
-                                sm={12}
-                                md={6}
-                                lg={6}
-                                className="bg-info text-light d-flex align-item-center"
-                            >
-                                <ComponentRegister />
-                            </Col>
-                        </Row>
-                    </Container>
-                </Route>
-            </Switch>
+                                {!forgetPass ? (
+                                    <FromLogIn
+                                        error={_error}
+                                        showForget={handleForget}
+                                        clickLogin={handleClickLogIn}
+                                        inputValue={handleChange}
+                                    />
+                                ) : (
+                                    <ComponentForgetPassword
+                                        closeForget={handleForget}
+                                    />
+                                )}
+                            </section>
+                        </Col>
+                        <Col
+                            xs={12}
+                            sm={12}
+                            md={6}
+                            lg={6}
+                            className="bg-info text-light d-flex align-item-center"
+                        >
+                            <ComponentRegister />
+                        </Col>
+                    </Row>
+                </Container>
+            ) : (
+                <Redirect
+                    exact
+                    from="/login"
+                    to={role !== "" ? role : "login"}
+                />
+            )}
         </section>
     );
 }

@@ -17,9 +17,7 @@ class Header extends Component {
                 name: "Petition Web"
             },
             users: {
-                id: 1,
-                firstName: props.user.first_name,
-                lastName: props.user.last_name
+                
             },
             url: props.url
         };

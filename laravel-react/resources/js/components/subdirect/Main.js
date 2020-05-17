@@ -14,25 +14,32 @@ import "./Appstyle.css";
 import InBox from "./contents/messages/InBox";
 import OutBox from "./contents/messages/OutBox";
 import { Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { user } from "../../redux/actions";
 
 export default function Main(props) {
-    // const data = JASON.parse(localStorage.getItem("_user"));
+    const dispatchUser = useDispatch();
+    const getUser = useSelector(state => state.userState);
 
-    // const [_user, _setUser] = React.useState(data);
+    dispatchUser(user(getUser));
+    console.log(getUser);
+
+    const showHeader = {
+        title: getUser.title,
+        firstName: getUser.first_name,
+        lastName: getUser.last_name
+    };
+
     let { path, url } = useRouteMatch();
-    // console.log(_user);
-    // const _btn = () => {
-    //     console.log(_user);
-    // };
+
     return (
         <section className="content-body">
-            <Button onClick={_btn}>click</Button>
             <Row className="app">
                 <Col xs={12} sm={12} md={2} lg={2} className=" pr-0 bg-info">
                     <Left path={url} />
                 </Col>
                 <Col xs={12} sm={12} md={10} lg={10} className="p-0">
-                    <Header path={url} user={props.user} />
+                    <Header path={url} user={showHeader} />
                     <div className="container-fluid p-4">
                         <Switch>
                             <Route exact path={`${path}`} component={Home} />
