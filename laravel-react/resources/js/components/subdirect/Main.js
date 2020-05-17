@@ -18,11 +18,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { user } from "../../redux/actions";
 
 export default function Main(props) {
-    const dispatchUser = useDispatch();
     const getUser = useSelector(state => state.userState);
 
-    dispatchUser(user(getUser));
-    console.log(getUser);
+    // console.log('Main admin '+getUser);
 
     const showHeader = {
         title: getUser.title,

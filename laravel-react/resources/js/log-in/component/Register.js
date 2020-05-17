@@ -132,6 +132,8 @@ export default function Register() {
                     window.location = "/register";
                 }
             });
+            console.log(getFac);
+
         setFaculties(getFac);
     };
 

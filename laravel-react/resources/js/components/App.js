@@ -10,37 +10,52 @@ import Main from "./subdirect/Main";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student/Student";
 import Register from "./../log-in/component/Register";
+import { useSelector } from "react-redux";
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: null,
-            role: ["admin", "staff", "student", "log-in"],
-        };
+function App() {
+    const isAuthenticated = useSelector(state => state.redirect);
 
-    }
-
-
-    render() {
+    const PrivateRoute = ({ children, ...rest }) => {
         return (
-            <Router>
-                <Switch>
-                    <Redirect exact from="/" to="/login" />
-                    <Route path="/admin" component={Main} />
-                    <Route path="/student" component={Student} />
-                    {/*<Route/>*/}
-
-                    <Route path="/login">
-                        <LogIn  />
-                    </Route>
-                    <Route path="/register">
-                        <Register  />
-                    </Route>
-                </Switch>
-            </Router>
+            <Route
+                {...rest}
+                render={({ location }) =>
+                    isAuthenticated ? (
+                        children
+                    ) : (
+                        <Redirect
+                            to={{
+                                pathname: "/login",
+                                state: { from: location }
+                            }}
+                        />
+                    )
+                }
+            />
         );
-    }
+    };
+
+    return (
+        <Router>
+            <Switch>
+                <Redirect exact from="/" to="/login" />
+
+                <Route path="/login">
+                    <LogIn />
+                </Route>
+                <Route path="/register">
+                    <Register />
+                </Route>
+
+                <PrivateRoute path="/admin">
+                    <Main />
+                </PrivateRoute>
+                <PrivateRoute path="/student">
+                    <Student />
+                </PrivateRoute>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;

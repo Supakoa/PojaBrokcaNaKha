@@ -21,12 +21,9 @@ export const user = obj => {
     };
 };
 
-export const postLogin = user => {
-    return {
-        type: "postLogin",
-        login:{
-            email: user.email,
-            password: user.password,
-        }
-    };
-};
+export const redirect = boolean => {
+    return{
+        type: "REDIRECT",
+        boolean: boolean
+    }
+}

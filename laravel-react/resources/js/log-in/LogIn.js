@@ -1,18 +1,18 @@
 import React from "react";
 import "./login.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { user } from "../redux/actions";
+import { user, redirect } from "../redux/actions";
 
 export default function LogIn(props) {
+    let _history = useHistory();
+    let _location = useLocation();
     const disPatchLogin = useDispatch();
     const getPostLogin = useSelector(state => state.userState);
     const [forgetPass, setForgetPass] = React.useState(false);
-    const [_roleId, set_roleId] = React.useState(0);
-    const [role, setRole] = React.useState("");
     const [_auth, setAuth] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
@@ -30,6 +30,7 @@ export default function LogIn(props) {
     const handleChange = event => {
         const name = event.target.name;
         const value = event.target.value;
+
         setLogin({
             ..._login,
             [name]: value
@@ -37,11 +38,12 @@ export default function LogIn(props) {
     };
 
     const validateInput = (email, password) => {
-        const setName = errorName =>
+        const setName = errorName => {
             setError({
                 ..._error,
                 name: errorName
             });
+        };
         if (email === "") {
             setName("username");
             return false;
@@ -58,7 +60,9 @@ export default function LogIn(props) {
             email: _login.username,
             password: _login.password
         };
-        const validate = validateInput(user.email, user.password);
+
+        const validate = validateInput(_user.email, _user.password);
+
         if (validate) {
             const postToken = await axios
                 .post(`http://localhost:8000/api/login`, _user)
@@ -68,10 +72,11 @@ export default function LogIn(props) {
                     }
                 })
                 .catch(error => {
-                    const result = confirm("ลองอีกครั้ง.");
+                    const result = confirm("get Token ลองอีกครั้ง.");
                     if (result) {
                         window.location = "/login";
                     }
+                    return null;
                 });
 
             const tokenUser = postToken;
@@ -87,8 +92,9 @@ export default function LogIn(props) {
                         }
                     )
                     .then(res => {
+                        setAuth(true);
                         const data = res.data.success;
-                        return data;
+                        disPatchLogin(user(data));
                     })
                     .catch(error => {
                         const result = confirm(
@@ -98,42 +104,48 @@ export default function LogIn(props) {
                             window.location = "/login";
                         }
                     });
-                disPatchLogin(user(tokenGetUser));
             }
         }
     };
 
     const redirectOfRole = roleId => {
-        if (roleId === 1) {
-            //addmin
-            setAuth(true);
-            setRole("admin");
-        } else if (roleId === 2) {
-            //staff
-            setRole("staff");
-            setAuth(true);
-        } else if (roleId === 3) {
-            //studebt
-            setRole("student");
-            setAuth(true);
-        } else if (roleId === 0) {
-            console.log("Role 0");
-        } else {
-            const result = confirm("Role ไม่ถูกต้อง");
-            if (result) {
-                window.location = "/login";
-            }
+        switch (roleId) {
+            case 1:
+                //addmin
+                _history.push("/admin");
+                break;
+            case 2:
+                //staff
+                _history.push("/staff");
+
+                break;
+            case 3:
+                //student
+                _history.push("/student");
+                break;
         }
+        disPatchLogin(redirect(true));
+        let { from } = location.state || { from: { pathname: "/login" } };
+
+        _history.replace(from);
+
+        // return (
+        //     <Redirect
+        //         to={{
+        //             pathname: "/login",
+        //             state: { from: location }
+        //         }}
+        //         exact
+        //     />
+        // );
     };
     // console.log(getPostLogin);
 
     return (
         <section className="overflow-hidden">
-            {/* {$.map(getPostLogin, function(item, index) {
-                return <li key={index}>{item !== null ? item : "null"}</li>;
-            })} */}
-            {_roleId !== 0 ? redirectOfRole(_roleId) : null}
-            {!_auth ? (
+            {!!_auth ? (
+                redirectOfRole(getPostLogin.role_id)
+            ) : (
                 <Container fluid>
                     <Row className="section-log-in">
                         <Col
@@ -187,12 +199,6 @@ export default function LogIn(props) {
                         </Col>
                     </Row>
                 </Container>
-            ) : (
-                <Redirect
-                    exact
-                    from="/login"
-                    to={role !== "" ? role : "login"}
-                />
             )}
         </section>
     );

@@ -1,14 +1,14 @@
 import counterReducer from "./counter";
 import loggerReducer from "./isLogged";
 import userReducer from "./user";
-import postLoginReducer from './postLogin';
+import redirectReducer from './isRedirect';
 import { combineReducers } from "redux";
 
 const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggerReducer,
     userState: userReducer,
-    postLogin: postLoginReducer
+    redirect: redirectReducer
 });
 
 export default allReducers;
