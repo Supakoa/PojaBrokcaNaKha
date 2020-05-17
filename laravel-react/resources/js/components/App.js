@@ -34,7 +34,7 @@ function App() {
             />
         );
     };
-    console.log(location);
+    // console.log(location);
     console.log(isAuthenticated);
 
     return (

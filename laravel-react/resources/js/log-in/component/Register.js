@@ -132,7 +132,7 @@ export default function Register() {
                     window.location = "/register";
                 }
             });
-            console.log(getFac);
+            console.log('regist getFac '+getFac);
 
         setFaculties(getFac);
     };
@@ -212,7 +212,7 @@ export default function Register() {
             student_id: dataUser.studentId,
             major_id: dataUser.major
         };
-        console.log(validate);
+        // console.log(validate);
 
         if (validate) {
             console.log("success isTrue");
@@ -259,7 +259,7 @@ export default function Register() {
                 });
             disPatchRegis(user(userApi));
         }
-        console.log(getPostRegis);
+        // console.log(getPostRegis);
     };
 
     return (

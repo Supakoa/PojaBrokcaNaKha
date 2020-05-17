@@ -2,7 +2,7 @@ import React from "react";
 import "./login.css";
 import {
     Link,
-    Redirect,
+    // Redirect,
     useHistory,
     useLocation,
 } from "react-router-dom";
@@ -70,23 +70,23 @@ export default function LogIn(props) {
 
         if (validate) {
             const postToken = await axios
-                .post(`http://localhost:8000/api/login`, _user)
+                .post(`http://localhost:8000/api/login`, { _user })
                 .then(res => {
                     if (res.status === 200) {
                         return res.data.success.token;
                     }
                 })
                 .catch(error => {
-                    const result = confirm("get Token ลองอีกครั้ง.");
+                    const result = confirm(error + " get Token ลองอีกครั้ง.");
                     if (result) {
-                        window.location = "/login";
+                        _history.push('/login');
                     }
                     return null;
                 });
 
             const tokenUser = postToken;
             if (tokenUser !== null) {
-                const tokenGetUser = await axios
+                await axios
                     .post(
                         `http://localhost:8000/api/user`,
                         {},
@@ -103,10 +103,11 @@ export default function LogIn(props) {
                     })
                     .catch(error => {
                         const result = confirm(
-                            "Post Token มีปัญหาลองอีกครั้ง."
+                            error +
+                            " Post Token มีปัญหาลองอีกครั้ง."
                         );
                         if (result) {
-                            window.location = "/login";
+                            _history.push('/login');
                         }
                     });
             }
@@ -119,7 +120,7 @@ export default function LogIn(props) {
             case 1:
                 //addmin
                 role_name = "/admin";
-                // _history.push(role_name);
+                _history.push(role_name);
                 break;
             case 2:
                 //staff
@@ -133,6 +134,8 @@ export default function LogIn(props) {
                 // _history.replace(from);
                 break;
         }
+        let { from } = _location.state || {from:{pathname: '/login'}};
+        _history.replace(from);
         disPatchLogin(redirect(true));
 
         // return (
