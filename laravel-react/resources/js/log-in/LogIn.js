@@ -125,7 +125,7 @@ export default function LogIn(props) {
             }
         }
     };
-    console.log(getPostLogin);
+    // console.log(getPostLogin);
 
     return (
         <section className="overflow-hidden">

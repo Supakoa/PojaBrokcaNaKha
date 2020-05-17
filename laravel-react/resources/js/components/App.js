@@ -9,7 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./subdirect/Main";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student/Student";
-import Temp from "./subdirect/contents/Temp";
 import Register from "./../log-in/component/Register";
 
 class App extends Component {
@@ -26,7 +25,6 @@ class App extends Component {
     render() {
         return (
             <Router>
-                {/* <Temp /> */}
                 <Switch>
                     <Redirect exact from="/" to="/login" />
                     <Route path="/admin" component={Main} />
