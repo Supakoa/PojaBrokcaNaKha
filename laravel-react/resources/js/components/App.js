@@ -4,7 +4,6 @@ import {
     Route,
     Switch,
     Redirect,
-    useHistory,
     useLocation,
     Link
 } from "react-router-dom";
