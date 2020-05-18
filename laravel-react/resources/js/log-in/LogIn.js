@@ -77,7 +77,7 @@ export default function LogIn(props) {
                     }
                 })
                 .catch(error => {
-                    const result = confirm(error + " get Token ลองอีกครั้ง.");
+                    const result = confirm(error + " get Token.");
                     if (result) {
                         _history.push('/login');
                     }
@@ -104,7 +104,7 @@ export default function LogIn(props) {
                     .catch(error => {
                         const result = confirm(
                             error +
-                            " Post Token มีปัญหาลองอีกครั้ง."
+                            " Post Token."
                         );
                         if (result) {
                             _history.push('/login');
