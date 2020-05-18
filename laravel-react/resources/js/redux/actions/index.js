@@ -21,9 +21,9 @@ export const user = obj => {
     };
 };
 
-export const redirect = boolean => {
-    return{
+export const isAuththen = boolean => {
+    return {
         type: "REDIRECT",
         boolean: boolean
-    }
-}
+    };
+};

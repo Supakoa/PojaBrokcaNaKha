@@ -9,15 +9,14 @@ import {
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { user, redirect } from "../redux/actions";
+import { useDispatch } from "react-redux";
+import { user, isAuththen } from "../redux/actions";
 
 export default function LogIn(props) {
     let _history = useHistory();
-    let _location = useLocation();
     const disPatch = useDispatch();
-    const getPostLogin = useSelector(state => state.userState);
-    const getRedirect = useSelector(state => state.redirectState);
+    // const getPostLogin = useSelector(state => state.userState);
+    // const getRedirect = useSelector(state => state.redirectState);
     const [forgetPass, setForgetPass] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
@@ -77,7 +76,7 @@ export default function LogIn(props) {
                     }
                 })
                 .catch(error => {
-                    const result = confirm(error + " get Token.");
+                    const result = confirm(error);
                     if (result) {
                         _history.push("/login");
                     }
@@ -96,11 +95,11 @@ export default function LogIn(props) {
                     .then(res => {
                         const data = res.data.success;
                         const role_id = data.role_id;
-                        redirectOfRole(role_id);
+                        redirectPage(role_id);
                         disPatch(user(data));
                     })
                     .catch(error => {
-                        const result = confirm(error + " Post Token.");
+                        const result = confirm(error);
                         if (result) {
                             _history.push("/login");
                         }
@@ -109,59 +108,29 @@ export default function LogIn(props) {
         }
     };
 
-    React.useEffect(() => {});
-
-    const addPathname = () => {
-        // console.log(newPath);
-
-        let { from } = _location.state || { from: { pathname: "/login" } };
-        // console.log(JSON.stringify(from));
-        
-        _history.replace(from);
-        disPatch(redirect(true));
-        // console.log("location addpath " + JSON.stringify(_location.state.from));
-
-        // console.log("function redirect from value " + JSON.stringify(from));
-    };
-
-    const redirectOfRole = roleId => {
-        // console.log("resdirect User " + JSON.stringify(getPostLogin));
-        // console.log("in _auth " + getPostLogin.role_id);
-        // console.log("redirect roleId " + roleId);
-
-        var role_name = "";
+    const redirectPage = roleId => {
+        disPatch(isAuththen(true));
+        // let { from } = location.state || { from: { pathname: "/" } };
+        let role_name = "";
         switch (roleId) {
             case 1:
                 //addmin
                 role_name = "/admin";
-                _location.href = role_name;
-
-                addPathname();
-                // console.log(role_name);
+                _history.push(role_name);
                 break;
             case 2:
                 //staff
                 role_name = "/staff";
-                // _history.replace(from);
-
+                _history.push(role_name);
                 break;
             case 3:
                 //student
                 role_name = "/student";
-                // _history.replace(from);
+                _history.push(role_name);
                 break;
+            default:
+                return false;
         }
-
-        // console.log(role_name);
-
-        // return (
-        //     <Redirect
-        //         exact
-        //         to={{
-        //             pathname: role_name,
-        //         }}
-        //     />
-        // );
     };
 
     // console.log("getRedirect " + getRedirect);
