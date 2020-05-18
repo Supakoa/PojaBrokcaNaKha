@@ -4,7 +4,7 @@ import {
     Link,
     // Redirect,
     useHistory,
-    useLocation,
+    useLocation
 } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
@@ -15,10 +15,10 @@ import { user, redirect } from "../redux/actions";
 export default function LogIn(props) {
     let _history = useHistory();
     let _location = useLocation();
-    const disPatchLogin = useDispatch();
+    const disPatch = useDispatch();
     const getPostLogin = useSelector(state => state.userState);
+    const getRedirect = useSelector(state => state.redirectState);
     const [forgetPass, setForgetPass] = React.useState(false);
-    const [_auth, setAuth] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
         password: ""
@@ -70,7 +70,7 @@ export default function LogIn(props) {
 
         if (validate) {
             const postToken = await axios
-                .post(`http://localhost:8000/api/login`, { _user })
+                .post(`http://localhost:8000/api/login`, _user)
                 .then(res => {
                     if (res.status === 200) {
                         return res.data.success.token;
@@ -79,7 +79,7 @@ export default function LogIn(props) {
                 .catch(error => {
                     const result = confirm(error + " get Token.");
                     if (result) {
-                        _history.push('/login');
+                        _history.push("/login");
                     }
                     return null;
                 });
@@ -87,40 +87,57 @@ export default function LogIn(props) {
             const tokenUser = postToken;
             if (tokenUser !== null) {
                 await axios
-                    .post(
-                        `http://localhost:8000/api/user`,
-                        {},
-                        {
-                            headers: {
-                                Authorization: `Bearer ${tokenUser}`
-                            }
+                    .post(`http://localhost:8000/api/user`, tokenUser, {
+                        headers: {
+                            Authorization: `Bearer ${tokenUser}`,
+                            "Content-Type": "application/json"
                         }
-                    )
+                    })
                     .then(res => {
-                        setAuth(true);
                         const data = res.data.success;
-                        disPatchLogin(user(data));
+                        const role_id = data.role_id;
+                        redirectOfRole(role_id);
+                        disPatch(user(data));
                     })
                     .catch(error => {
-                        const result = confirm(
-                            error +
-                            " Post Token."
-                        );
+                        const result = confirm(error + " Post Token.");
                         if (result) {
-                            _history.push('/login');
+                            _history.push("/login");
                         }
                     });
             }
         }
     };
 
+    React.useEffect(() => {});
+
+    const addPathname = () => {
+        // console.log(newPath);
+
+        let { from } = _location.state || { from: { pathname: "/login" } };
+        // console.log(JSON.stringify(from));
+        
+        _history.replace(from);
+        disPatch(redirect(true));
+        // console.log("location addpath " + JSON.stringify(_location.state.from));
+
+        // console.log("function redirect from value " + JSON.stringify(from));
+    };
+
     const redirectOfRole = roleId => {
+        // console.log("resdirect User " + JSON.stringify(getPostLogin));
+        // console.log("in _auth " + getPostLogin.role_id);
+        // console.log("redirect roleId " + roleId);
+
         var role_name = "";
         switch (roleId) {
             case 1:
                 //addmin
                 role_name = "/admin";
-                _history.push(role_name);
+                _location.href = role_name;
+
+                addPathname();
+                // console.log(role_name);
                 break;
             case 2:
                 //staff
@@ -134,9 +151,8 @@ export default function LogIn(props) {
                 // _history.replace(from);
                 break;
         }
-        let { from } = _location.state || {from:{pathname: '/login'}};
-        _history.replace(from);
-        disPatchLogin(redirect(true));
+
+        // console.log(role_name);
 
         // return (
         //     <Redirect
@@ -147,67 +163,66 @@ export default function LogIn(props) {
         //     />
         // );
     };
+
+    // console.log("getRedirect " + getRedirect);
+
     // console.log(getPostLogin);
 
     return (
         <section className="overflow-hidden">
-            {!!_auth ? (
-                redirectOfRole(getPostLogin.role_id)
-            ) : (
-                <Container fluid>
-                    <Row className="section-log-in">
-                        <Col
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={6}
-                            className="bg-light d-flex align-item-center"
-                        >
-                            <section className="d-table p-4 w-50 m-auto">
-                                <section className="d-table text-center m-auto">
-                                    <Image
-                                        className="border-bottom border-info"
-                                        src={Logo}
-                                        width="80"
-                                        height="80"
-                                    />
-                                    <p className="text-info">GE Petition</p>
-                                    {!forgetPass ? (
-                                        <h3 className="p-1 effectSection">
-                                            เข้าสู่ระบบ
-                                        </h3>
-                                    ) : (
-                                        <h3 className="p-1 effectSection">
-                                            ลืมรหัสผ่าน
-                                        </h3>
-                                    )}
-                                </section>
+            <Container fluid>
+                <Row className="section-log-in">
+                    <Col
+                        xs={12}
+                        sm={12}
+                        md={6}
+                        lg={6}
+                        className="bg-light d-flex align-item-center"
+                    >
+                        <section className="d-table p-4 w-50 m-auto">
+                            <section className="d-table text-center m-auto">
+                                <Image
+                                    className="border-bottom border-info"
+                                    src={Logo}
+                                    width="80"
+                                    height="80"
+                                />
+                                <p className="text-info">GE Petition</p>
                                 {!forgetPass ? (
-                                    <FromLogIn
-                                        error={_error}
-                                        showForget={handleForget}
-                                        clickLogin={handleClickLogIn}
-                                        inputValue={handleChange}
-                                    />
+                                    <h3 className="p-1 effectSection">
+                                        เข้าสู่ระบบ
+                                    </h3>
                                 ) : (
-                                    <ComponentForgetPassword
-                                        closeForget={handleForget}
-                                    />
+                                    <h3 className="p-1 effectSection">
+                                        ลืมรหัสผ่าน
+                                    </h3>
                                 )}
                             </section>
-                        </Col>
-                        <Col
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={6}
-                            className="bg-info text-light d-flex align-item-center"
-                        >
-                            <ComponentRegister />
-                        </Col>
-                    </Row>
-                </Container>
-            )}
+                            {!forgetPass ? (
+                                <FromLogIn
+                                    error={_error}
+                                    showForget={handleForget}
+                                    clickLogin={handleClickLogIn}
+                                    inputValue={handleChange}
+                                />
+                            ) : (
+                                <ComponentForgetPassword
+                                    closeForget={handleForget}
+                                />
+                            )}
+                        </section>
+                    </Col>
+                    <Col
+                        xs={12}
+                        sm={12}
+                        md={6}
+                        lg={6}
+                        className="bg-info text-light d-flex align-item-center"
+                    >
+                        <ComponentRegister />
+                    </Col>
+                </Row>
+            </Container>
         </section>
     );
 }

@@ -8,7 +8,7 @@ const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggerReducer,
     userState: userReducer,
-    redirect: redirectReducer
+    redirectState: redirectReducer
 });
 
 export default allReducers;
