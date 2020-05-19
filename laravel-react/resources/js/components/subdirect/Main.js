@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Home from "./contents/Home";
 import Report from "./contents/Report";
@@ -13,14 +13,18 @@ import Footer from "./footer/Footer";
 import "./Appstyle.css";
 import InBox from "./contents/messages/InBox";
 import OutBox from "./contents/messages/OutBox";
-import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { user } from "../../redux/actions";
 
-export default function Main(props) {
+// Create Context User Authentication
+// export const userAuthContext = React.createContext({});
+
+export default function Main() {
     const getUser = useSelector(state => state.userState);
+    const dispatch = useDispatch();
 
-    // console.log('Main admin '+getUser);
+    React.useEffect(() => {
+        // dispatch()
+    });
 
     const showHeader = {
         title: getUser.title,

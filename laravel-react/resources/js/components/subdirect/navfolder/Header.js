@@ -17,7 +17,7 @@ export default class Header extends Component {
                 name: "Petition Web"
             },
             users: {
-                title:props.user.title,
+                title: props.user.title,
                 firstName: props.user.firstName,
                 lastName: props.user.lastName
             },
@@ -29,8 +29,7 @@ export default class Header extends Component {
     handleLogOut() {
         axios.post(`http://127.0.0.1:8000/api/logout`).then(res => {
             console.log(res.status);
-
-        })
+        });
     }
 
     render() {

@@ -39,7 +39,7 @@ class UserController extends Controller
             'title' => 'required',
             'role_id' => 'required',
             'major_id' => 'required',
-            'student_td' => 'required|unique:users',
+            'student_id' => 'required|unique:users',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',

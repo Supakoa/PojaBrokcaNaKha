@@ -19,8 +19,8 @@ function App() {
     // const getRoleId = useSelector(state => state.userState);
     const isAuthenticated = useSelector(state => state.redirectState);
 
-    console.log("isAuth " + isAuthenticated);
-    console.log(location);
+    // console.log("isAuth " + isAuthenticated);
+    // console.log(location);
 
     return (
         <Router>

@@ -3,11 +3,18 @@ import "./login.css";
 import {
     Link,
     // Redirect,
-    useHistory,
-    useLocation
+    useHistory
 } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button,
+    Image,
+    Spinner
+} from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../redux/actions";
@@ -15,6 +22,8 @@ import { user, isAuththen } from "../redux/actions";
 export default function LogIn(props) {
     let _history = useHistory();
     const disPatch = useDispatch();
+    const [_load, setLoading] = React.useState(true);
+
     // const getPostLogin = useSelector(state => state.userState);
     // const getRedirect = useSelector(state => state.redirectState);
     const [forgetPass, setForgetPass] = React.useState(false);
@@ -68,6 +77,7 @@ export default function LogIn(props) {
         const validate = validateInput(_user.email, _user.password);
 
         if (validate) {
+            setLoading(false);
             const postToken = await axios
                 .post(`http://localhost:8000/api/login`, _user)
                 .then(res => {
@@ -104,6 +114,8 @@ export default function LogIn(props) {
                             _history.push("/login");
                         }
                     });
+            } else {
+                setLoading(true);
             }
         }
     };
@@ -157,16 +169,29 @@ export default function LogIn(props) {
                                     height="80"
                                 />
                                 <p className="text-info">GE Petition</p>
-                                {!forgetPass ? (
-                                    <h3 className="p-1 effectSection">
-                                        เข้าสู่ระบบ
-                                    </h3>
+
+                                {_load ? (
+                                    <>
+                                        {!forgetPass ? (
+                                            <h3 className="p-1 effectSection">
+                                                เข้าสู่ระบบ
+                                            </h3>
+                                        ) : (
+                                            <h3 className="p-1 effectSection">
+                                                ลืมรหัสผ่าน
+                                            </h3>
+                                        )}
+                                    </>
                                 ) : (
-                                    <h3 className="p-1 effectSection">
-                                        ลืมรหัสผ่าน
-                                    </h3>
+                                    <div className="d-flex text-center w-100">
+                                        <Spinner
+                                            className="m-auto"
+                                            animation="border"
+                                        />
+                                    </div>
                                 )}
                             </section>
+
                             {!forgetPass ? (
                                 <FromLogIn
                                     error={_error}
@@ -256,16 +281,20 @@ function FromLogIn(props) {
                     onChange={props.inputValue}
                 />
             </Form.Group>
-            <Container>
-                <Form.Group as={Row}>
-                    <Link to="/login" onClick={() => props.showForget(true)}>
-                        ลืมรหัสผ่าน ?
-                    </Link>
-                </Form.Group>
+            <Container className="d-flex justify-content-between align-items-end">
                 <Form.Group as={Row}>
                     <Button variant="primary" onClick={props.clickLogin}>
                         ยืนยัน
                     </Button>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Link
+                        to="/login"
+                        className="text-secondary"
+                        onClick={() => props.showForget(true)}
+                    >
+                        ลืมรหัสผ่าน ?
+                    </Link>
                 </Form.Group>
             </Container>
         </Form>
