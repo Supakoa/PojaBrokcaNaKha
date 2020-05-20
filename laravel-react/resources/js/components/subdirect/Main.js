@@ -27,16 +27,16 @@ import { isAuththen } from "../../redux/actions/index";
 
 export default function Main() {
     let history = useHistory();
-    // const getUser = useSelector(state => state.userState);
+    const getUser = useSelector(state => state.userState);
     const isDirect = useSelector(state => state.redirectState);
+    const [_user, set_user] = React.useState({});
     const dispatch = useDispatch();
 
     React.useEffect(() => {
+        // set_user(getUser);
         // dispatch(isAuththen(true));
         // history.push("/admin");
     });
-
-    // console.log(showHeader);
 
     let { path, url } = useRouteMatch();
 
@@ -47,7 +47,7 @@ export default function Main() {
                     <Left path={url} />
                 </Col>
                 <Col xs={12} sm={12} md={10} lg={10} className="p-0">
-                    <Header path={url} />
+                    <Header path={url} user={_user} />
                     <div className="container-fluid p-4">
                         <Switch>
                             <Route exact path={`${path}`} component={Home} />

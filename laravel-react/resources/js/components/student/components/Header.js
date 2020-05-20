@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./../../images/logo.png";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 class Header extends Component {
     constructor(props) {
@@ -16,18 +17,26 @@ class Header extends Component {
                 },
                 name: "Petition Web"
             },
-            users: {
-                
-            },
+            users: {},
             url: props.url
         };
         this.handleLogOut = this.handleLogOut.bind(this);
     }
 
     handleLogOut() {
-        axios.post(`http://127.0.0.1:8000/api/logout`).then(res => {
-            console.log(res.status);
-        });
+        const getUser = useSelector(state => state.userState);
+
+        const token = getUser.token;
+        axios
+            .post(`http://localhost:8000/api/logout`, token, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(() => {
+                location.href = "/login";
+            });
     }
 
     render() {

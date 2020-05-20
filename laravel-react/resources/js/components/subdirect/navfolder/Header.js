@@ -1,79 +1,74 @@
-import React, { Component } from "react";
+import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Logo from "./logo.png";
 import axios from "axios";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            infoWeb: {
-                logo: {
-                    imgSrc: Logo,
-                    width: "30",
-                    height: "30"
-                },
-                name: "Petition Web"
-            },
-            users: {
-                title: "",
-                firstName: "",
-                lastName: ""
-            },
-            url: props.path
-        };
-        this.handleLogOut = this.handleLogOut.bind(this);
-        // const getUser = useSelector(state => state.userState);
-    }
+export default function Header(props) {
+    let history = useHistory();
+    const getUser = useSelector(state => state.userState);
+    const [_header, setHeader] = React.useState({
+        title: "",
+        firstName: "",
+        lastName: ""
+    });
+    const [_url, setURL] = React.useState(props.url);
 
-    componentDidMount() {
-        console.log(this.user);
-    }
+    React.useEffect(() => {
+        console.log(localStorage);
 
-    handleLogOut() {
-        axios.post(`http://127.0.0.1:8000/api/logout`).then(res => {
-            console.log(res.status);
-        });
-    }
+        console.log(getUser.data);
+    }, []);
 
-    render() {
-        return (
-            <Navbar bg="light" expand="sm">
-                <Navbar.Brand href={`${this.state.url}`} className="text-info">
-                    <img
-                        src={this.state.infoWeb.logo.imgSrc}
-                        width={this.state.infoWeb.logo.width}
-                        height={this.state.infoWeb.logo.height}
-                        className="d-inline-block align-top"
-                    />{" "}
-                    {this.state.infoWeb.name}
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="petition-nav" />
-                <Navbar.Collapse id="petition-nav">
-                    <Nav className="ml-auto pr-2">
-                        <Nav.Link>
-                            <img
-                                src="https://img.icons8.com/plasticine/2x/user.png"
-                                className="d-inline-block align-top"
-                                width="30"
-                                height="30"
-                                rounded="true"
-                            />{" "}
-                            {this.state.users.firstName}{" "}
-                            {this.state.users.lastName}
-                        </Nav.Link>
-                        <Link
-                            className="nav-link"
-                            to="/login"
-                            onClick={this.handleLogOut}
-                        >
-                            Log-Out
-                        </Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        );
-    }
+    const handleLogOut = () => {
+        const token = getUser.token;
+        axios
+            .post(`http://localhost:8000/api/logout`, token, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(res => {
+                console.log(res.status);
+                history.push("/login");
+            });
+    };
+
+    return (
+        <Navbar bg="light" expand="sm">
+            <Navbar.Brand href={_url} className="text-info">
+                <img
+                    src={Logo}
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                />{" "}
+                Petition Web
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="petition-nav" />
+            <Navbar.Collapse id="petition-nav">
+                <Nav className="ml-auto pr-2">
+                    <Nav.Link>
+                        <img
+                            src="https://img.icons8.com/plasticine/2x/user.png"
+                            className="d-inline-block align-top"
+                            width="30"
+                            height="30"
+                            rounded="true"
+                        />{" "}
+                        {_header.firstName} {_header.lastName}
+                    </Nav.Link>
+                    <Link
+                        className="nav-link"
+                        to="/login"
+                        onClick={handleLogOut}
+                    >
+                        Log-Out
+                    </Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    );
 }

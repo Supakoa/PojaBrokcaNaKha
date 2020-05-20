@@ -1,10 +1,6 @@
 import React from "react";
 import "./login.css";
-import {
-    Link,
-    // Redirect,
-    useHistory
-} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
 import {
     Container,
@@ -23,9 +19,6 @@ export default function LogIn(props) {
     let _history = useHistory();
     const disPatch = useDispatch();
     const [_load, setLoading] = React.useState(true);
-
-    // const getPostLogin = useSelector(state => state.userState);
-    // const getRedirect = useSelector(state => state.redirectState);
     const [forgetPass, setForgetPass] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
@@ -34,6 +27,10 @@ export default function LogIn(props) {
     const [_error, setError] = React.useState({
         name: "",
         className: "border-danger"
+    });
+
+    React.useEffect(() => {
+        console.log(localStorage);
     });
 
     const handleForget = value => {
@@ -79,7 +76,7 @@ export default function LogIn(props) {
         if (validate) {
             setLoading(false);
             const postToken = await axios
-                .post(`http://localhost:8000/api/login`, _user)
+                .post(`http://localhost:8000/api/login`, { _user })
                 .then(res => {
                     if (res.status === 200) {
                         return res.data.success.token;
@@ -103,10 +100,14 @@ export default function LogIn(props) {
                         }
                     })
                     .then(res => {
-                        const data = res.data.success;
-                        const role_id = data.role_id;
+                        const _data = res.data.success;
+                        const _authUser = {
+                            data: _data,
+                            token: tokenUser
+                        };
+                        const role_id = _data.role_id;
                         redirectPage(role_id);
-                        disPatch(user(data));
+                        disPatch(user(_authUser));
                     })
                     .catch(error => {
                         const result = confirm(error);
@@ -122,7 +123,6 @@ export default function LogIn(props) {
 
     const redirectPage = roleId => {
         disPatch(isAuththen(true));
-        // let { from } = location.state || { from: { pathname: "/" } };
         let role_name = "";
         switch (roleId) {
             case 1:
@@ -144,10 +144,6 @@ export default function LogIn(props) {
                 return false;
         }
     };
-
-    // console.log("getRedirect " + getRedirect);
-
-    // console.log(getPostLogin);
 
     return (
         <section className="overflow-hidden">
@@ -276,7 +272,7 @@ function FromLogIn(props) {
                             : ""
                     }
                     name="password"
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     onChange={props.inputValue}
                 />
