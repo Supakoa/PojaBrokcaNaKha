@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
 import axios from "axios";
+// import { useSelector } from "react-redux";
 
 export default class Header extends Component {
     constructor(props) {
@@ -17,13 +18,18 @@ export default class Header extends Component {
                 name: "Petition Web"
             },
             users: {
-                title: props.user.title,
-                firstName: props.user.firstName,
-                lastName: props.user.lastName
+                title: "",
+                firstName: "",
+                lastName: ""
             },
             url: props.path
         };
         this.handleLogOut = this.handleLogOut.bind(this);
+        // const getUser = useSelector(state => state.userState);
+    }
+
+    componentDidMount() {
+        console.log(this.user);
     }
 
     handleLogOut() {
