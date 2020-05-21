@@ -4,7 +4,13 @@ import { Button, Container, Modal, Form, Image } from "react-bootstrap";
 export function Newsadd(props) {
     const [addModal, setAddModal] = React.useState(false);
 
-    const handleChange = event => {};
+    const handleChange = event => {
+        const _name = event.target.name;
+        const _value = event.target.value;
+
+        console.log(_name);
+        console.log(_value);
+    };
 
     return (
         <div>
@@ -32,7 +38,10 @@ export function Newsadd(props) {
                     <Form>
                         <div className="mb-3">
                             <Form.File id="formcheck-api-custom" custom>
-                                <Form.File.Input />
+                                <Form.File.Input
+                                    name="imageFile"
+                                    onChange={handleChange}
+                                />
                                 <Form.File.Label data-browse="เลือกรูป">
                                     อัพรูปข่าว
                                 </Form.File.Label>
