@@ -5,6 +5,7 @@ import { Col, Form, Button, Image, Alert, Spinner } from "react-bootstrap";
 import Logo from "./../../../components/images/logo.png";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../../../redux/actions";
+import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
 export default function FormRegister(props) {
     let history = useHistory();
@@ -216,6 +217,7 @@ export default function FormRegister(props) {
             const tokenRegis = await axios
                 .post(`http://127.0.0.1:8000/api/register`, item)
                 .then(res => {
+                    console.log(res);
                     const token = res.data.success.token;
                     // console.log(token);
                     setUser({
@@ -225,16 +227,35 @@ export default function FormRegister(props) {
                     return token;
                 })
                 .catch(error => {
-                    const result = confirm(error);
-                    if (result) {
-                        setUser({
-                            ..._user,
-                            token: null
-                        });
-                        setLoading(true);
-
-                        return null;
+                    if (error.response) {
+                        // Request made and server responded
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        console.log(error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
                     }
+                    let errors = error.response.data.error;
+                    errors.map(data => {
+                        console.log(Object.keys(data));
+                    });
+                    console.log(errors)
+
+                    // const result = confirm(error);
+                    //
+                    // if (result) {
+                    //     setUser({
+                    //         ..._user,
+                    //         token: null
+                    //     });
+                    //     setLoading(true);
+                    //
+                    //     return null;
+                    // }
                 });
 
             // const tokenRegis = _user.token;
@@ -284,7 +305,7 @@ export default function FormRegister(props) {
                 <Alert variant="danger">{_error.message}</Alert>
             )}
             <Form.Row className="mt-4">
-                <Form.Group as={Col} controlId="formRowFirstName">
+                <Form.Group as={Col} controlId="firstName">
                     <Form.Label className="text-info">ชื่อ</Form.Label>
                     <Form.Control
                         className={
@@ -297,7 +318,7 @@ export default function FormRegister(props) {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formRowLastName">
+                <Form.Group as={Col} controlId="lastName">
                     <Form.Label className="text-info">นามสกุล</Form.Label>
                     <Form.Control
                         className={
@@ -312,7 +333,7 @@ export default function FormRegister(props) {
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} md={8} controlId="formRowStudentID">
+                <Form.Group as={Col} md={8} controlId="studentId">
                     <Form.Label className="text-info">รหัสนักศึกษา</Form.Label>
                     <Form.Control
                         type="text"
@@ -325,7 +346,7 @@ export default function FormRegister(props) {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} md={6} controlId="formRowPassword">
+                <Form.Group as={Col} md={6} controlId="password">
                     <Form.Label className="text-info">รหัสผ่าน</Form.Label>
                     <Form.Control
                         type="text"
@@ -338,7 +359,7 @@ export default function FormRegister(props) {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} md={6} controlId="formRowConFirmPassword">
+                <Form.Group as={Col} md={6} controlId="conPassword">
                     <Form.Label className="text-info">
                         ยืนยันรหัสผ่าน
                     </Form.Label>
@@ -357,7 +378,7 @@ export default function FormRegister(props) {
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} controlId="formRoweMail">
+                <Form.Group as={Col} controlId="email">
                     <Form.Label className="text-info">อีเมล</Form.Label>
                     <Form.Control
                         className={
@@ -370,7 +391,7 @@ export default function FormRegister(props) {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formRowPhone">
+                <Form.Group as={Col} controlId="phone">
                     <Form.Label className="text-info">เบอร์โทรศัพท์</Form.Label>
                     <Form.Control
                         className={
@@ -385,7 +406,7 @@ export default function FormRegister(props) {
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} controlId="formGridFaculty">
+                <Form.Group as={Col} controlId="faculty">
                     <Form.Label className="text-info">คณะ</Form.Label>
                     <Form.Control
                         className={
@@ -411,7 +432,7 @@ export default function FormRegister(props) {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formGridMajor">
+                <Form.Group as={Col} controlId="major">
                     <Form.Label className="text-info">สาขา</Form.Label>
                     <Form.Control
                         className={
