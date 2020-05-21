@@ -40,8 +40,6 @@ export default function Main() {
             });
     }, []);
 
-    console.log(_info);
-
     return (
         <section className="content-body">
             <Row className="app">
