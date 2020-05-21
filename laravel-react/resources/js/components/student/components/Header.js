@@ -35,6 +35,7 @@ class Header extends Component {
                 }
             })
             .then(() => {
+                localStorage.clear;
                 location.href = "/login";
             });
     }

@@ -3,26 +3,12 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "./logo.png";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 export default function Header(props) {
     let history = useHistory();
-    const getUser = useSelector(state => state.userState);
-    const [_header, setHeader] = React.useState({
-        title: "",
-        firstName: "",
-        lastName: ""
-    });
-    const [_url, setURL] = React.useState(props.url);
-
-    React.useEffect(() => {
-        console.log(localStorage);
-
-        console.log(getUser.data);
-    }, []);
 
     const handleLogOut = () => {
-        const token = getUser.token;
+        const token = localStorage._authLocal;
         axios
             .post(`http://localhost:8000/api/logout`, token, {
                 headers: {
@@ -31,14 +17,22 @@ export default function Header(props) {
                 }
             })
             .then(res => {
-                console.log(res.status);
-                history.push("/login");
+                if (res.status === 401) {
+                    console.log("Token false");
+                } else {
+                    localStorage.removeItem("_authLocal");
+                    history.push("/login");
+                }
+            })
+            .catch(error => {
+                alert(error);
+                localStorage.removeItem("_authLocal");
             });
     };
 
     return (
         <Navbar bg="light" expand="sm">
-            <Navbar.Brand href={_url} className="text-info">
+            <Navbar.Brand href={props.path} className="text-info">
                 <img
                     src={Logo}
                     width="30"
@@ -58,7 +52,7 @@ export default function Header(props) {
                             height="30"
                             rounded="true"
                         />{" "}
-                        {_header.firstName} {_header.lastName}
+                        {props.info.first} {props.info.last}
                     </Nav.Link>
                     <Link
                         className="nav-link"

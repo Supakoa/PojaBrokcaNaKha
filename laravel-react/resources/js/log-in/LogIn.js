@@ -29,9 +29,7 @@ export default function LogIn(props) {
         className: "border-danger"
     });
 
-    React.useEffect(() => {
-        console.log(localStorage);
-    });
+    React.useEffect(() => {});
 
     const handleForget = value => {
         setForgetPass(value);
@@ -76,7 +74,7 @@ export default function LogIn(props) {
         if (validate) {
             setLoading(false);
             const postToken = await axios
-                .post(`http://localhost:8000/api/login`, { _user })
+                .post(`http://localhost:8000/api/login`, _user)
                 .then(res => {
                     if (res.status === 200) {
                         return res.data.success.token;
@@ -101,13 +99,11 @@ export default function LogIn(props) {
                     })
                     .then(res => {
                         const _data = res.data.success;
-                        const _authUser = {
-                            data: _data,
-                            token: tokenUser
-                        };
+
                         const role_id = _data.role_id;
                         redirectPage(role_id);
-                        disPatch(user(_authUser));
+                        localStorage.setItem("_authLocal", tokenUser);
+                        disPatch(user(_data));
                     })
                     .catch(error => {
                         const result = confirm(error);
@@ -272,7 +268,7 @@ function FromLogIn(props) {
                             : ""
                     }
                     name="password"
-                    type="password"
+                    type="text"
                     placeholder="Password"
                     onChange={props.inputValue}
                 />

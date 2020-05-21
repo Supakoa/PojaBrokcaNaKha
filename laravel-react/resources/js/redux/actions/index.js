@@ -17,10 +17,7 @@ export const decrement = number => {
 export const user = obj => {
     return {
         type: "USER",
-        user: {
-            data: obj.data,
-            token: obj.token
-        }
+        user: obj
     };
 };
 
