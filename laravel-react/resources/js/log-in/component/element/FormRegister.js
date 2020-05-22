@@ -6,74 +6,109 @@ import Logo from "./../../../components/images/logo.png";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../../../redux/actions";
 import redirectPage from "../../RedirectPage";
+import selectedFac from "./getMajor";
+import fetchFaculties from "./getFaculties";
+import postToken from "./postToken";
+import validateConfirmPassword from "./validatePassword";
+import validateStudentId from "./validateStudent-id";
 
 export default function FormRegister(props) {
     let history = useHistory();
-    const dispatchRegis = useDispatch();
+    const dispatch = useDispatch();
     const [validated, setValidated] = React.useState(false);
     const [_select, setSelect] = React.useState(true);
     const [_majors, setMajors] = React.useState([]);
     const [_faculties, setFaculties] = React.useState([]);
     const [_load, setLoading] = React.useState(true);
-
+    const [_isMount, _setIsMount] = React.useState(true);
+    // let _isMount = true;
     const [_user, setUser] = React.useState({
-        firstName: "",
-        lastName: "",
-        studentId: "",
-        password: "",
-        conPassword: "",
-        email: "",
-        phone: "",
-        faculty: "",
-        major: "",
         token: null
     });
-
     const [_error, setError] = React.useState({
-        notMatch: true,
-        name: "",
-        className: "border-danger",
-        message: ""
+        error: {
+            message: []
+        }
     });
 
-    const selectedFac = async value => {
-        // const facId = Number(value);
-        if (!isNaN(value)) {
-            await axios
-                .get(`http://127.0.0.1:8000/api/faculties/${value}/majors`)
-                .then(res => {
-                    setMajors(res.data);
-                    // return res.data;
-                });
-        }
-    };
-
     React.useEffect(() => {
-        async function fetchData() {
-            await axios
-                .get(`http://127.0.0.1:8000/api/faculties`, {})
-                .then(res => {
-                    const data = res.data.success;
-                    setFaculties(data);
-                })
-                .catch(error => {
-                    const result = confirm(error);
-                    if (result) {
-                        return null;
+        if (_isMount) {
+            fetchFaculties(setFaculties, _isMount);
+        }
+        return () => _setIsMount(false);
+    }, [_isMount]);
+
+    const hadleChanges = event => {
+        // const user = _user;
+        const name = event.target.name;
+        const value = event.target.value;
+        const oldPass = _user.password;
+        const _length = value.length;
+
+        if (name === "studentId") {
+            const _max = value.slice(0, event.target.maxLength);
+            const _validateId = validateStudentId(value);
+            if (_validateId.status) {
+                if (_length < 11) {
+                    setError({
+                        error: {
+                            ..._error.error,
+                            message: [
+                                ..._error.error.message,
+                                { [name]: "รหัสยังไม่ครบ 11 ตัว" }
+                            ]
+                        }
+                    });
+                } else {
+                    setUser({
+                        ..._user,
+                        [name]: _max
+                    });
+                }
+            } else {
+                setError({
+                    error: {
+                        ..._error.error,
+                        message: [
+                            ..._error.error.message,
+                            { [name]: _validateId.messages }
+                        ]
                     }
                 });
+            }
+        } else if (name === "conPassword") {
+            const _validatePass = validateConfirmPassword(name, value, oldPass);
+            if (_validatePass.status) {
+                setUser({
+                    ..._user,
+                    [name]: value
+                });
+            } else {
+                setError({
+                    error: {
+                        ..._error.error,
+                        message: [
+                            ..._error.error.message,
+                            { [name]: _validatePass.messages }
+                        ]
+                    }
+                });
+            }
+        } else if (name === "phone") {
+        } else if (name === "faculty") {
+            _setIsMount(false);
+            setUser({
+                ..._user,
+                [name]: value
+            });
+            setSelect(false);
+            selectedFac(value === "" ? 0 : value, setMajors);
+        } else {
+            setUser({
+                ..._user,
+                [name]: value
+            });
         }
-        fetchData();
-    }, []);
-
-    const validateConfirm = (value, targetName, targetMessage) => {
-        // const user = _user;
-        setError({
-            ..._error,
-            name: targetName,
-            notMatch: value,
-            message: targetMessage
-        });
     };
 
     const validateInput = name => {
@@ -114,76 +149,9 @@ export default function FormRegister(props) {
         return false;
     };
 
-    const hadleChanges = event => {
-        const user = _user;
-        const name = event.target.name;
-        const value = event.target.value;
-
-        if (name === "studentId" || name === "phone") {
-            const id = Number(value);
-            var message;
-            if (isNaN(id)) {
-                if (name === "studentId") {
-                    message = "รหัสนักศึกษาต้องเป็นตัวเลข";
-                } else {
-                    message = "เบอร์โทรศัพท์ควรเป็นตัวเลข";
-                }
-                validateConfirm(false, name, message);
-            } else {
-                if (name === "studentId" && value.length !== 11) {
-                    message = "รหัสนักศึกษาต้อง 11 หลัก";
-                    validateConfirm(false, name, message);
-                } else if (name === "phone" && value.length !== 10) {
-                    message = "เบอร์โทรศัพท์ต้อง 10 หลัก";
-                    validateConfirm(false, name, message);
-                } else {
-                    setUser({
-                        ..._user,
-                        [name]: value
-                    });
-                    validateConfirm(true, "", "");
-                }
-            }
-        } else if (name === "conPassword") {
-            if (user.password == value) {
-                validateConfirm(true, "", "");
-                setUser({
-                    ..._user,
-                    [name]: value
-                });
-            } else if (user.password !== value) {
-                if (value !== "") {
-                    const message = "กรุณาตรวจสอบพาสเวิร์ดอีกครั้ง";
-                    validateConfirm(false, "conPassword", message);
-                } else {
-                    validateInput("conPassword");
-                }
-            }
-        } else if (name === "faculty") {
-            if (value !== "") {
-                setUser({
-                    ..._user,
-                    [name]: value
-                });
-                setSelect(false);
-                selectedFac(value === "" ? 0 : value);
-            } else {
-                setUser({
-                    ..._user,
-                    [name]: value
-                });
-                setSelect(false);
-            }
-        } else {
-            setUser({
-                ..._user,
-                [name]: value
-            });
-        }
-    };
-
     const handleOnClick = async event => {
         event.preventDefault();
+
         const dataUser = _user;
         const _validate = validateInput(dataUser);
         const item = {
@@ -203,51 +171,12 @@ export default function FormRegister(props) {
         if (!_validate) {
             // console.log("success isTrue");
             setLoading(false);
-            const tokenRegis = await axios
-                .post(`http://127.0.0.1:8000/api/register`, item)
-                .then(res => {
-                    console.log(res);
-                    const token = res.data.success.token;
-                    // console.log(token);
-                    setUser({
-                        ..._user,
-                        token: token
-                    });
-                    return token;
-                })
-                .catch(error => {
-                    if (error.response) {
-                        // Request made and server responded
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        // The request was made but no response was received
-                        console.log(error.request);
-                    } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log("Error", error.message);
-                    }
-                    let errors = error.response.data.error;
-                    errors.map(data => {
-                        console.log(Object.keys(data));
-                    });
-                    console.log(errors);
+            const tokenRegis = await postToken(item);
+            setUser({
+                ..._user,
+                token: tokenRegis
+            });
 
-                    // const result = confirm(error);
-                    //
-                    // if (result) {
-                    //     setUser({
-                    //         ..._user,
-                    //         token: null
-                    //     });
-                    //     setLoading(true);
-                    //
-                    //     return null;
-                    // }
-                });
-
-            // const tokenRegis = _user.token;
             if (tokenRegis !== null) {
                 await axios
                     .post(`http://localhost:8000/api/user`, tokenRegis, {
@@ -261,11 +190,12 @@ export default function FormRegister(props) {
                         const data = res.data.success;
                         // console.log(data);
                         if (role === 3) {
-                            const _path = redirectPage(role_id);
-                            localStorage.setItem("_authLocal", tokenUser);
-                            _history.push(_path);
+                            const _path = redirectPage(role);
+                            localStorage.setItem("_authLocal", tokenRegis);
+                            history.push(_path);
                             dispatch(isAuththen(true));
-                            dispatchRegis(user(data));
+                            dispatch(user(data));
+                            setLoading(true);
                         }
                     })
                     .catch(error => {
@@ -275,6 +205,12 @@ export default function FormRegister(props) {
                         }
                         setLoading(true);
                     });
+            } else {
+                setUser({
+                    ..._user,
+                    token: null
+                });
+                setLoading(true);
             }
         } else {
             history.push("/register");
@@ -346,6 +282,7 @@ export default function FormRegister(props) {
                         รหัสนักศึกษา
                     </Form.Label>
                     <Form.Control
+                        maxLength={11}
                         required
                         type="text"
                         placeholder="รหัสนักศึกษา"
@@ -353,7 +290,7 @@ export default function FormRegister(props) {
                         onChange={hadleChanges}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {_error.notMatch ? "eiei" : _error.message}
+                        รหัสนักศึกษา
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -444,7 +381,6 @@ export default function FormRegister(props) {
                         as="select"
                         custom
                         name="faculty"
-                        onClick={() => {}}
                         onChange={hadleChanges}
                     >
                         {}
