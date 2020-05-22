@@ -5,7 +5,7 @@ import { Col, Form, Button, Image, Alert, Spinner } from "react-bootstrap";
 import Logo from "./../../../components/images/logo.png";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../../../redux/actions";
-import { redirectPage } from "../../RedirectPage";
+import redirectPage from "../../RedirectPage";
 
 export default function FormRegister(props) {
     let history = useHistory();
