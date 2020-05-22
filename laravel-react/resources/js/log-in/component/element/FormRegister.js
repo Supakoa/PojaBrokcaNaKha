@@ -5,11 +5,12 @@ import { Col, Form, Button, Image, Alert, Spinner } from "react-bootstrap";
 import Logo from "./../../../components/images/logo.png";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../../../redux/actions";
-import {forEach} from "react-bootstrap/cjs/ElementChildren";
+import { redirectPage } from "../../RedirectPage";
 
 export default function FormRegister(props) {
     let history = useHistory();
     const dispatchRegis = useDispatch();
+    const [validated, setValidated] = React.useState(false);
     const [_select, setSelect] = React.useState(true);
     const [_majors, setMajors] = React.useState([]);
     const [_faculties, setFaculties] = React.useState([]);
@@ -84,33 +85,33 @@ export default function FormRegister(props) {
         };
         if (name.firstName == "") {
             erName("firstName");
-            return false;
+            return true;
         } else if (name.lastName === "") {
             erName("lastName");
-            return false;
+            return true;
         } else if (name.studentId === "") {
             erName("studentId");
-            return false;
+            return true;
         } else if (name.password === "") {
             erName("password");
-            return false;
+            return true;
         } else if (name.conPassword === "") {
             erName("conPassword");
-            return false;
+            return true;
         } else if (name.email === "") {
             erName("email");
-            return false;
+            return true;
         } else if (name.phone === "") {
             erName("phone");
-            return false;
+            return true;
         } else if (name.faculty === "") {
             erName("faculty");
-            return false;
+            return true;
         } else if (name.major === "") {
             erName("major");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     };
 
     const hadleChanges = event => {
@@ -173,18 +174,6 @@ export default function FormRegister(props) {
                 });
                 setSelect(false);
             }
-        } else if (name === "major") {
-            if (value !== "") {
-                setUser({
-                    ..._user,
-                    [name]: value
-                });
-            } else {
-                setUser({
-                    ..._user,
-                    [name]: value
-                });
-            }
         } else {
             setUser({
                 ..._user,
@@ -196,7 +185,7 @@ export default function FormRegister(props) {
     const handleOnClick = async event => {
         event.preventDefault();
         const dataUser = _user;
-        const validate = validateInput(dataUser);
+        const _validate = validateInput(dataUser);
         const item = {
             title: "eiei",
             role_id: 3,
@@ -210,8 +199,8 @@ export default function FormRegister(props) {
             c_password: dataUser.conPassword
         };
         // console.log(validate);
-
-        if (validate) {
+        setValidated(_validate);
+        if (!_validate) {
             // console.log("success isTrue");
             setLoading(false);
             const tokenRegis = await axios
@@ -237,13 +226,13 @@ export default function FormRegister(props) {
                         console.log(error.request);
                     } else {
                         // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
+                        console.log("Error", error.message);
                     }
                     let errors = error.response.data.error;
                     errors.map(data => {
                         console.log(Object.keys(data));
                     });
-                    console.log(errors)
+                    console.log(errors);
 
                     // const result = confirm(error);
                     //
@@ -272,10 +261,12 @@ export default function FormRegister(props) {
                         const data = res.data.success;
                         // console.log(data);
                         if (role === 3) {
-                            dispatchRegis(isAuththen(true));
-                            history.push("/student");
+                            const _path = redirectPage(role_id);
+                            localStorage.setItem("_authLocal", tokenUser);
+                            _history.push(_path);
+                            dispatch(isAuththen(true));
+                            dispatchRegis(user(data));
                         }
-                        dispatchRegis(user(data));
                     })
                     .catch(error => {
                         const result = confirm(error);
@@ -291,7 +282,12 @@ export default function FormRegister(props) {
     };
 
     return (
-        <Form className="p-4 w-75 m-auto">
+        <Form
+            noValidate
+            validated={validated}
+            onSubmit={handleOnClick}
+            className="p-4 w-75 m-auto"
+        >
             <section className="d-table text-center m-auto">
                 <Image
                     className="border-bottom border-info"
@@ -301,117 +297,150 @@ export default function FormRegister(props) {
                 />
                 <p className="text-info">GE Petition</p>
             </section>
-            {_error.notMatch ? null : (
-                <Alert variant="danger">{_error.message}</Alert>
-            )}
+
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="firstName">
-                    <Form.Label className="text-info">ชื่อ</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        ชื่อ
+                    </Form.Label>
                     <Form.Control
-                        className={
-                            _error.name === "firstName" ? _error.className : ""
-                        }
+                        required
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
                         onChange={hadleChanges}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        firstName
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="lastName">
-                    <Form.Label className="text-info">นามสกุล</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        นามสกุล
+                    </Form.Label>
                     <Form.Control
-                        className={
-                            _error.name === "lastName" ? _error.className : ""
-                        }
+                        required
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
                         onChange={hadleChanges}
                     />
+
+                    <Form.Control.Feedback type="invalid">
+                        lastName
+                    </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
 
             <Form.Row>
                 <Form.Group as={Col} md={8} controlId="studentId">
-                    <Form.Label className="text-info">รหัสนักศึกษา</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        รหัสนักศึกษา
+                    </Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="รหัสนักศึกษา"
                         name="studentId"
-                        className={
-                            _error.name === "studentId" ? _error.className : ""
-                        }
                         onChange={hadleChanges}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        {_error.notMatch ? "eiei" : _error.message}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} md={6} controlId="password">
-                    <Form.Label className="text-info">รหัสผ่าน</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        รหัสผ่าน
+                    </Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="รหัสผ่าน"
                         name="password"
-                        className={
-                            _error.name === "password" ? _error.className : ""
-                        }
                         onChange={hadleChanges}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        password
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} md={6} controlId="conPassword">
-                    <Form.Label className="text-info">
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
                         ยืนยันรหัสผ่าน
                     </Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="ยืนยัน รหัสผ่าน"
                         name="conPassword"
-                        className={
-                            _error.name === "conPassword"
-                                ? _error.className
-                                : ""
-                        }
                         onChange={hadleChanges}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        conPassword
+                    </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
 
             <Form.Row>
                 <Form.Group as={Col} controlId="email">
-                    <Form.Label className="text-info">อีเมล</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        อีเมล
+                    </Form.Label>
                     <Form.Control
-                        className={
-                            _error.name === "email" ? _error.className : ""
-                        }
+                        required
                         type="email"
                         placeholder="example@ssru.ac.th.com"
                         name="email"
                         onChange={hadleChanges}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        email
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="phone">
-                    <Form.Label className="text-info">เบอร์โทรศัพท์</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        เบอร์โทรศัพท์
+                    </Form.Label>
                     <Form.Control
-                        className={
-                            _error.name === "phone" ? _error.className : ""
-                        }
+                        required
                         type="text"
                         placeholder="เบอร์โทรศัพท์"
                         name="phone"
                         onChange={hadleChanges}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        phone number
+                    </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
 
             <Form.Row>
                 <Form.Group as={Col} controlId="faculty">
-                    <Form.Label className="text-info">คณะ</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        คณะ
+                    </Form.Label>
                     <Form.Control
-                        className={
-                            _error.name === "faculty" ? _error.className : ""
-                        }
+                        required
                         as="select"
                         custom
                         name="faculty"
@@ -430,14 +459,19 @@ export default function FormRegister(props) {
                             );
                         })}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                        faculty
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="major">
-                    <Form.Label className="text-info">สาขา</Form.Label>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        สาขา
+                    </Form.Label>
                     <Form.Control
-                        className={
-                            _error.name === "major" ? _error.className : ""
-                        }
+                        required
                         as="select"
                         custom
                         name="major"
@@ -455,10 +489,13 @@ export default function FormRegister(props) {
                             );
                         })}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                        mojor
+                    </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
 
-            <Button variant="primary" onClick={handleOnClick}>
+            <Button variant="primary" type="submit">
                 {_load ? "ยืนยัน" : <Spinner animation="border" />}
             </Button>
         </Form>

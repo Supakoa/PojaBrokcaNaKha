@@ -14,10 +14,11 @@ import {
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../redux/actions";
+import redirectPage from "./RedirectPage";
 
 export default function LogIn(props) {
     let _history = useHistory();
-    const disPatch = useDispatch();
+    const dispatch = useDispatch();
     const [_load, setLoading] = React.useState(true);
     const [forgetPass, setForgetPass] = React.useState(false);
     const [_login, setLogin] = React.useState({
@@ -101,9 +102,11 @@ export default function LogIn(props) {
                         const _data = res.data.success;
 
                         const role_id = _data.role_id;
-                        redirectPage(role_id);
+                        const _path = redirectPage(role_id);
                         localStorage.setItem("_authLocal", tokenUser);
-                        disPatch(user(_data));
+                        _history.push(_path);
+                        dispatch(isAuththen(true));
+                        dispatch(user(_data));
                     })
                     .catch(error => {
                         const result = confirm(error);
@@ -114,30 +117,6 @@ export default function LogIn(props) {
             } else {
                 setLoading(true);
             }
-        }
-    };
-
-    const redirectPage = roleId => {
-        disPatch(isAuththen(true));
-        let role_name = "";
-        switch (roleId) {
-            case 1:
-                //addmin
-                role_name = "/admin";
-                _history.push(role_name);
-                break;
-            case 2:
-                //staff
-                role_name = "/staff";
-                _history.push(role_name);
-                break;
-            case 3:
-                //student
-                role_name = "/student";
-                _history.push(role_name);
-                break;
-            default:
-                return false;
         }
     };
 
@@ -245,7 +224,15 @@ function FromLogIn(props) {
     return (
         <Form className="effectSection">
             <Form.Group controlId="formBasicEmail">
-                <Form.Label className="text-info">Username</Form.Label>
+                <Form.Label
+                    className={
+                        props.error.name === "username"
+                            ? "text-danger"
+                            : "text-info"
+                    }
+                >
+                    Username
+                </Form.Label>
                 <Form.Control
                     className={
                         props.error.name === "username"
@@ -260,7 +247,15 @@ function FromLogIn(props) {
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label className="text-info">Password</Form.Label>
+                <Form.Label
+                    className={
+                        props.error.name === "password"
+                            ? "text-danger"
+                            : "text-info"
+                    }
+                >
+                    Password
+                </Form.Label>
                 <Form.Control
                     className={
                         props.error.name === "password"
