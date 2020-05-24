@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Left(props) {
     const url = props.path;
-    console.log(url);
+    // console.log(url);
 
     const linkClass = "text-dark";
 
@@ -72,7 +72,7 @@ export default function Left(props) {
             </ListItem>
             <Collapse in={open} timeout="auto">
                 <List component="div" disablePadding>
-                    <Link className={linkClass} to={`${url}/message-inbox`}>
+                    <Link className={linkClass} to={`${url}/inbox`}>
                         <ListItem button className={classes.nested}>
                             <ListItemIcon>
                                 <InboxIcon />
@@ -80,7 +80,7 @@ export default function Left(props) {
                             <ListItemText primary="Inbox" />
                         </ListItem>
                     </Link>
-                    <Link className={linkClass} to={`${url}/message-outbox`}>
+                    <Link className={linkClass} to={`${url}/outbox`}>
                         <ListItem button className={classes.nested}>
                             <ListItemIcon>
                                 <SendIcon />

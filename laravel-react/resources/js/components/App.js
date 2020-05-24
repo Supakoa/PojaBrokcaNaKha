@@ -18,9 +18,8 @@ function App() {
     // const dispatch = useDispatch();
     // const getRoleId = useSelector(state => state.userState);
     const isAuthenticated = useSelector(state => state.redirectState);
-
-    console.log("isAuth " + isAuthenticated);
-    console.log(location);
+    // console.log("isAuth " + isAuthenticated);
+    // console.log(location);
 
     return (
         <Router>
@@ -57,13 +56,15 @@ function App() {
 
 function PrivateRoute({ children, ...rest }) {
     const isAuthenticated = useSelector(state => state.redirectState);
+    let _isAuthLocal = localStorage.getItem("_authLocal");
+    // console.log(_isAuthLocal);
 
     // console.log(rest);
     return (
         <Route
             {...rest}
             render={({ location }) =>
-                isAuthenticated ? (
+                isAuthenticated || _isAuthLocal ? (
                     children
                 ) : (
                     <Redirect
@@ -80,9 +81,7 @@ function PrivateRoute({ children, ...rest }) {
 
 function NoMatch() {
     let location = useLocation();
-    // let history = useHistory();
-    // let { from } = location.state || { from: { pathname: "/" } };
-    // history.replace(from)
+
     return (
         <div
             className="container d-flex align-items-center justify-content-center"

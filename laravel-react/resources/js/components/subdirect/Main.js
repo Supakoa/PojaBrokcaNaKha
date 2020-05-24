@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Home from "./contents/Home";
 import Report from "./contents/Report";
@@ -13,22 +13,32 @@ import Footer from "./footer/Footer";
 import "./Appstyle.css";
 import InBox from "./contents/messages/InBox";
 import OutBox from "./contents/messages/OutBox";
-import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { user } from "../../redux/actions";
 
-export default function Main(props) {
+export default function Main() {
+    const dispatch = useDispatch();
     const getUser = useSelector(state => state.userState);
-
-    // console.log('Main admin '+getUser);
-
-    const showHeader = {
-        title: getUser.title,
-        firstName: getUser.first_name,
-        lastName: getUser.last_name
-    };
-
+    const [_info, setInfo] = React.useState({});
     let { path, url } = useRouteMatch();
+    React.useEffect(() => {
+        axios
+            .post(`http://localhost:8000/api/user`, localStorage._authLocal, {
+                headers: {
+                    Authorization: `Bearer ${localStorage._authLocal}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(res => {
+                const item = res.data.success;
+                dispatch(user(item));
+                setInfo({
+                    ..._info,
+                    first: item.first_name,
+                    last: item.last_name
+                });
+            });
+    }, []);
 
     return (
         <section className="content-body">
@@ -37,18 +47,12 @@ export default function Main(props) {
                     <Left path={url} />
                 </Col>
                 <Col xs={12} sm={12} md={10} lg={10} className="p-0">
-                    <Header path={url} user={showHeader} />
+                    <Header path={url} info={_info} />
                     <div className="container-fluid p-4">
                         <Switch>
                             <Route exact path={`${path}`} component={Home} />
-                            <Route
-                                path={`${path}/message-inbox`}
-                                component={InBox}
-                            />
-                            <Route
-                                path={`${path}/message-outbox`}
-                                component={OutBox}
-                            />
+                            <Route path={`${path}/inbox`} component={InBox} />
+                            <Route path={`${path}/outbox`} component={OutBox} />
                             <Route path={`${path}/report`} component={Report} />
                             <Route path={`${path}/user`} component={User} />
                             <Route path={`${path}/news`} component={News} />

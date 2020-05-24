@@ -1,22 +1,25 @@
 import React from "react";
 import "./login.css";
-import {
-    Link,
-    // Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button,
+    Image,
+    Spinner
+} from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../redux/actions";
+import redirectPage from "./RedirectPage";
 
 export default function LogIn(props) {
     let _history = useHistory();
-    const disPatch = useDispatch();
-    // const getPostLogin = useSelector(state => state.userState);
-    // const getRedirect = useSelector(state => state.redirectState);
+    const dispatch = useDispatch();
+    const [_load, setLoading] = React.useState(true);
     const [forgetPass, setForgetPass] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
@@ -26,6 +29,8 @@ export default function LogIn(props) {
         name: "",
         className: "border-danger"
     });
+
+    React.useEffect(() => {});
 
     const handleForget = value => {
         setForgetPass(value);
@@ -68,6 +73,7 @@ export default function LogIn(props) {
         const validate = validateInput(_user.email, _user.password);
 
         if (validate) {
+            setLoading(false);
             const postToken = await axios
                 .post(`http://localhost:8000/api/login`, _user)
                 .then(res => {
@@ -93,10 +99,14 @@ export default function LogIn(props) {
                         }
                     })
                     .then(res => {
-                        const data = res.data.success;
-                        const role_id = data.role_id;
-                        redirectPage(role_id);
-                        disPatch(user(data));
+                        const _data = res.data.success;
+
+                        const role_id = _data.role_id;
+                        const _path = redirectPage(role_id);
+                        localStorage.setItem("_authLocal", tokenUser);
+                        _history.push(_path);
+                        dispatch(isAuththen(true));
+                        dispatch(user(_data));
                     })
                     .catch(error => {
                         const result = confirm(error);
@@ -104,38 +114,11 @@ export default function LogIn(props) {
                             _history.push("/login");
                         }
                     });
+            } else {
+                setLoading(true);
             }
         }
     };
-
-    const redirectPage = roleId => {
-        disPatch(isAuththen(true));
-        // let { from } = location.state || { from: { pathname: "/" } };
-        let role_name = "";
-        switch (roleId) {
-            case 1:
-                //addmin
-                role_name = "/admin";
-                _history.push(role_name);
-                break;
-            case 2:
-                //staff
-                role_name = "/staff";
-                _history.push(role_name);
-                break;
-            case 3:
-                //student
-                role_name = "/student";
-                _history.push(role_name);
-                break;
-            default:
-                return false;
-        }
-    };
-
-    // console.log("getRedirect " + getRedirect);
-
-    // console.log(getPostLogin);
 
     return (
         <section className="overflow-hidden">
@@ -157,16 +140,29 @@ export default function LogIn(props) {
                                     height="80"
                                 />
                                 <p className="text-info">GE Petition</p>
-                                {!forgetPass ? (
-                                    <h3 className="p-1 effectSection">
-                                        เข้าสู่ระบบ
-                                    </h3>
+
+                                {_load ? (
+                                    <>
+                                        {!forgetPass ? (
+                                            <h3 className="p-1 effectSection">
+                                                เข้าสู่ระบบ
+                                            </h3>
+                                        ) : (
+                                            <h3 className="p-1 effectSection">
+                                                ลืมรหัสผ่าน
+                                            </h3>
+                                        )}
+                                    </>
                                 ) : (
-                                    <h3 className="p-1 effectSection">
-                                        ลืมรหัสผ่าน
-                                    </h3>
+                                    <div className="d-flex text-center w-100">
+                                        <Spinner
+                                            className="m-auto"
+                                            animation="border"
+                                        />
+                                    </div>
                                 )}
                             </section>
+
                             {!forgetPass ? (
                                 <FromLogIn
                                     error={_error}
@@ -228,7 +224,15 @@ function FromLogIn(props) {
     return (
         <Form className="effectSection">
             <Form.Group controlId="formBasicEmail">
-                <Form.Label className="text-info">Username</Form.Label>
+                <Form.Label
+                    className={
+                        props.error.name === "username"
+                            ? "text-danger"
+                            : "text-info"
+                    }
+                >
+                    Username
+                </Form.Label>
                 <Form.Control
                     className={
                         props.error.name === "username"
@@ -243,7 +247,15 @@ function FromLogIn(props) {
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label className="text-info">Password</Form.Label>
+                <Form.Label
+                    className={
+                        props.error.name === "password"
+                            ? "text-danger"
+                            : "text-info"
+                    }
+                >
+                    Password
+                </Form.Label>
                 <Form.Control
                     className={
                         props.error.name === "password"
@@ -256,16 +268,20 @@ function FromLogIn(props) {
                     onChange={props.inputValue}
                 />
             </Form.Group>
-            <Container>
-                <Form.Group as={Row}>
-                    <Link to="/login" onClick={() => props.showForget(true)}>
-                        ลืมรหัสผ่าน ?
-                    </Link>
-                </Form.Group>
+            <Container className="d-flex justify-content-between align-items-end">
                 <Form.Group as={Row}>
                     <Button variant="primary" onClick={props.clickLogin}>
                         ยืนยัน
                     </Button>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Link
+                        to="/login"
+                        className="text-secondary"
+                        onClick={() => props.showForget(true)}
+                    >
+                        ลืมรหัสผ่าน ?
+                    </Link>
                 </Form.Group>
             </Container>
         </Form>
