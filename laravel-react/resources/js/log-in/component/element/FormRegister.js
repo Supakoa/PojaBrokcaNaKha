@@ -11,7 +11,7 @@ import fetchFaculties from "./getFaculties";
 import postToken from "./postToken";
 import postUser from "./postUser";
 import validateConfirmPassword from "./validatePassword";
-import validateStudentId from "./validateStudent-id";
+import validateId from "./validateStudent-id";
 
 export default function FormRegister(props) {
     let history = useHistory();
@@ -23,6 +23,8 @@ export default function FormRegister(props) {
     const [_load, setLoading] = React.useState(true);
     const [_isMount, _setIsMount] = React.useState(true);
     const [_isValidStudentId, _setIsValidStudentId] = React.useState(false);
+    const [_isValidPhone, _setIsValidPhone] = React.useState(false);
+    const [_isValidConPass, _setIsValidConPass] = React.useState(false)
     // let _isMount = true;
     const [_user, setUser] = React.useState({
         token: null
@@ -50,14 +52,14 @@ export default function FormRegister(props) {
 
         if (name === "studentId") {
             const _max = value.slice(0, event.target.maxLength);
-            const _validateId = validateStudentId(value);
+            const _validateId = validateId(value, name);
             if (_validateId.status) {
                 setUser({
                     ..._user,
                     [name]: _max
                 });
             } else {
-                _setIsValidStudentId(true);
+                _setIsValidStudentId(!_validateId.status);
                 setError({
                     error: {
                         ..._error.error,
@@ -76,6 +78,7 @@ export default function FormRegister(props) {
                     [name]: value
                 });
             } else {
+                _setIsValidConPass(true)
                 setError({
                     error: {
                         ..._error.error,
@@ -88,11 +91,24 @@ export default function FormRegister(props) {
             }
         } else if (name === "phone") {
             const _max = value.slice(0, event.target.maxLength);
-
-            setUser({
-                ..._user,
-                [name]: _max
-            });
+            const _validateId = validateId(value, name);
+            if (_validateId.status) {
+                setUser({
+                    ..._user,
+                    [name]: _max
+                });
+            } else {
+                _setIsValidPhone(!_validateId.status);
+                setError({
+                    error: {
+                        ..._error.error,
+                        message: [
+                            ..._error.error.message,
+                            { [name]: _validateId.message }
+                        ]
+                    }
+                });
+            }
         } else if (name === "faculty") {
             _setIsMount(false);
             setUser({
@@ -143,20 +159,16 @@ export default function FormRegister(props) {
                     });
                     setLoading(true);
                 } else {
-
-                        if (_postUser._role === 3) {
-                            const _path = redirectPage(_postUser._role);
-                            localStorage.setItem(
-                                "_authLocal",
-                                tokenRegis.token
-                            );
-                            history.push(_path);
-                            dispatch(isAuththen(true));
-                            dispatch(user(_postUser._data));
-                            setLoading(true);
-                        } else {
-                            console.log("role_id fail");
-                        }
+                    if (_postUser._role === 3) {
+                        const _path = redirectPage(_postUser._role);
+                        localStorage.setItem("_authLocal", tokenRegis.token);
+                        history.push(_path);
+                        dispatch(isAuththen(true));
+                        dispatch(user(_postUser._data));
+                        setLoading(true);
+                    } else {
+                        console.log("role_id fail");
+                    }
                 }
             } else {
                 setResponError({
@@ -209,7 +221,9 @@ export default function FormRegister(props) {
                     />
 
                     <Form.Control.Feedback type="invalid">
-                        firstName
+                        {_responError.message
+                            ? "กรุณากรอก ชื่อ"
+                            : _responError.message.first_name}
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -228,7 +242,9 @@ export default function FormRegister(props) {
                     />
 
                     <Form.Control.Feedback type="invalid">
-                        lastName
+                        {_responError.message
+                            ? "กรุณากรอก นามสกุล"
+                            : _responError.message.last_name}
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
@@ -252,7 +268,6 @@ export default function FormRegister(props) {
 
                     {_isValidStudentId ? (
                         _error.error.message.map((message, index) => {
-                            console.log(message.studentId);
                             if (index === 0) {
                                 return (
                                     <Form.Control.Feedback
@@ -266,7 +281,9 @@ export default function FormRegister(props) {
                         })
                     ) : (
                         <Form.Control.Feedback type="invalid">
-                            {_responError.message.student_id}
+                            {_responError.message
+                                ? "กรุณากรอก รหัสนักศึกษา"
+                                : _responError.message.studebt_id}
                         </Form.Control.Feedback>
                     )}
                 </Form.Group>
@@ -285,7 +302,9 @@ export default function FormRegister(props) {
                         onChange={hadleChanges}
                     />
                     <Form.Control.Feedback type="invalid">
-                        password
+                        {_responError.message
+                            ? "กรุณากรอก รหัสผ่าน"
+                            : _responError.message.password}
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -298,13 +317,31 @@ export default function FormRegister(props) {
                     <Form.Control
                         required
                         type="text"
+                        isInvalid={_isValidConPass}
                         placeholder="ยืนยัน รหัสผ่าน"
                         name="conPassword"
                         onChange={hadleChanges}
                     />
-                    <Form.Control.Feedback type="invalid">
-                        conPassword
-                    </Form.Control.Feedback>
+                    {_isValidConPass ? (
+                        _error.error.message.map((message, index) => {
+                            if (index === 0) {
+                                return (
+                                    <Form.Control.Feedback
+                                        key={index}
+                                        type="invalid"
+                                    >
+                                        {message.conPassword}
+                                    </Form.Control.Feedback>
+                                );
+                            }
+                        })
+                    ) : (
+                        <Form.Control.Feedback type="invalid">
+                            {_responError.message
+                            ? "กรุณากรอก ยืนยันรหัสผ่าน"
+                            : _responError.message.c_password}
+                        </Form.Control.Feedback>
+                    )}
                 </Form.Group>
             </Form.Row>
 
@@ -323,7 +360,9 @@ export default function FormRegister(props) {
                         onChange={hadleChanges}
                     />
                     <Form.Control.Feedback type="invalid">
-                        email
+                        {_responError.message
+                            ? "กรุณากรอก อีเมล"
+                            : _responError.message.email}
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -339,11 +378,29 @@ export default function FormRegister(props) {
                         type="text"
                         placeholder="เบอร์โทรศัพท์"
                         name="phone"
+                        isInvalid={_isValidPhone}
                         onChange={hadleChanges}
                     />
-                    <Form.Control.Feedback type="invalid">
-                        phone number
-                    </Form.Control.Feedback>
+                    {_isValidPhone ? (
+                        _error.error.message.map((message, index) => {
+                            if (index === 0) {
+                                return (
+                                    <Form.Control.Feedback
+                                        key={index}
+                                        type="invalid"
+                                    >
+                                        {message.phone}
+                                    </Form.Control.Feedback>
+                                );
+                            }
+                        })
+                    ) : (
+                        <Form.Control.Feedback type="invalid">
+                            {_responError.message
+                                ? "กรุณากรอก เบอร์โทรศัพท์"
+                                : _responError.message.telephone}
+                        </Form.Control.Feedback>
+                    )}
                 </Form.Group>
             </Form.Row>
 
@@ -374,7 +431,7 @@ export default function FormRegister(props) {
                         })}
                     </Form.Control>
                     <Form.Control.Feedback type="invalid">
-                        faculty
+                        กรุณาเลือก คณะ
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -404,7 +461,9 @@ export default function FormRegister(props) {
                         })}
                     </Form.Control>
                     <Form.Control.Feedback type="invalid">
-                        mojor
+                        {_responError.message
+                            ? "กรุณากรอกเลือก สาขา"
+                            : _responError.message.major_id}
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
