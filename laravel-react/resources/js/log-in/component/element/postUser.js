@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 // import { user, isAuththen } from "../../../redux/actions";
 
 const postUser = async tokenRegis => {
@@ -12,6 +13,7 @@ const postUser = async tokenRegis => {
         .then(res => {
             const role = res.data.success.role_id;
             const data = res.data.success;
+            Swal.fire("Good job!", "You clicked the button!", "success");
             return { status: true, _role: role, _data: data };
         })
         .catch(error => {

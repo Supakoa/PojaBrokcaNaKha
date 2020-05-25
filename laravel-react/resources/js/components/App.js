@@ -8,6 +8,7 @@ import {
     Link
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "sweetalert2/src/sweetalert2.scss";
 import Main from "./subdirect/Main";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student/Student";

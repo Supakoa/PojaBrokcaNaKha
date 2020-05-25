@@ -37,11 +37,17 @@ export default function FormRegister(props) {
     const [_responError, setResponError] = React.useState({ message: [] });
 
     React.useEffect(() => {
+        const abortController = new AbortController();
         if (_isMount) {
-            fetchFaculties(setFaculties, _isMount);
+            fetchFaculties(setFaculties, _isMount, {
+                signal: abortController.signal
+            });
         }
-        return () => _setIsMount(false);
-    }, [_isMount]);
+        return () => {
+            abortController.abort();
+            _setIsMount(false);
+        };
+    }, [_faculties]);
 
     const hadleChanges = event => {
         // const user = _user;
@@ -184,7 +190,6 @@ export default function FormRegister(props) {
             setLoading(true);
             event.preventDefault();
             event.stopPropagation();
-            history.push("/register");
         }
     };
 
