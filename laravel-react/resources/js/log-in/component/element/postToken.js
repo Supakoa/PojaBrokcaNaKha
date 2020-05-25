@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const postToken = async item => {
+    console.log(item);
+
     const authToken = await axios
         .post(`http://localhost:8000/api/register`, item)
         .then(res => {

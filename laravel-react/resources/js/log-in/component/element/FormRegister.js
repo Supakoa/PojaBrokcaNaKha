@@ -147,6 +147,7 @@ export default function FormRegister(props) {
             telephone: _user.phone,
             c_password: _user.conPassword
         };
+        setLoading(false);
         setValidated(!form);
         if (form) {
             setLoading(false);
