@@ -153,7 +153,6 @@ export default function FormRegister(props) {
         event.preventDefault();
 
         const dataUser = _user;
-        const _validate = validateInput(dataUser);
         const item = {
             title: "eiei",
             role_id: 3,
@@ -166,6 +165,8 @@ export default function FormRegister(props) {
             telephone: dataUser.phone,
             c_password: dataUser.conPassword
         };
+        const _validate = validateInput(dataUser);
+
         // console.log(validate);
         setValidated(_validate);
         if (!_validate) {
