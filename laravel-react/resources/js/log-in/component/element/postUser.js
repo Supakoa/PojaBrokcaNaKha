@@ -1,37 +1,34 @@
-// import axios from "axios";
+import axios from "axios";
 // import { user, isAuththen } from "../../../redux/actions";
 
-// const postUser = async (tokenRegis, funcs) => {
-//     await axios
-//         .post(`http://localhost:8000/api/user`, tokenRegis, {
-//             headers: {
-//                 Authorization: `Bearer ${tokenRegis}`,
-//                 "Content-Type": "application/json"
-//             }
-//         })
-//         .then(res => {
-//             const role = res.data.success.role_id;
-//             const data = res.data.success;
-//             console.log(data);
+const postUser = async tokenRegis => {
+    const userAuth = await axios
+        .post(`http://localhost:8000/api/user`, tokenRegis, {
+            headers: {
+                Authorization: `Bearer ${tokenRegis}`,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => {
+            const role = res.data.success.role_id;
+            const data = res.data.success;
+            return { status: true, _role: role, _data: data };
+        })
+        .catch(error => {
+            if (error.response) {
+                // Request made and server responded
+                return { status: false, error: error.response.data };
+            } else if (error.request) {
+                // The request was made but no response was received
+                // console.log(error.request);
+                return { status: false, error: error.request };
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
+                return { status: false, error: error.message };
+            }
+        });
+    return userAuth;
+};
 
-//             // console.log(data);
-//             // if (role === 3) {
-//             //     const _path = funcs._redirect(role_id);
-//             //     localStorage.setItem("_authLocal", tokenUser);
-//             //     funcs._history.push(_path);
-//             //     funcs._dispatch(isAuththen(true));
-//             //     funcs._dispatch(user(data));
-//             //     // dispatch(isAuththen(true));
-//             //     // dispatch(user(data));
-//             // }
-//         })
-//         .catch(error => {
-//             const result = confirm(error);
-//             if (result) {
-//                 return null;
-//             }
-//             funcs._setLoad(true);
-//         });
-// };
-
-// export default postUser;
+export default postUser;
