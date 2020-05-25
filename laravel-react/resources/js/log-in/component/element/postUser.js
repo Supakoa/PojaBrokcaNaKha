@@ -8,7 +8,8 @@ const postUser = async tokenRegis => {
         .post(`http://localhost:8000/api/user`, tokenRegis, {
             headers: {
                 Authorization: `Bearer ${tokenRegis}`,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Retry-After": 3600
             }
         })
         .then(res => {

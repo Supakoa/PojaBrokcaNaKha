@@ -5,7 +5,8 @@ const AuthUser = async _token => {
         .post(`http://localhost:8000/api/user`, localStorage._authLocal, {
             headers: {
                 Authorization: `Bearer ${localStorage._authLocal}`,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Retry-After": 3600
             }
         })
         .then(res => {

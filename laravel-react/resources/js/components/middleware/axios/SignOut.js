@@ -6,7 +6,8 @@ const SignOut = _token => {
             .post(`http://localhost:8000/api/logout`, _token, {
                 headers: {
                     Authorization: `Bearer ${_token}`,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Retry-After": 3600
                 }
             })
             .then(res => {
