@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ComponentLogIn() {
     return (
-        <section className="w-75 m-auto">
+        <section className="w-75 m-auto p-sm-5 p-xs-4">
             <p>Petition คือ ?</p>
             <p>เว็บไซต์ส่งแบบคำร้องของมหาวิทยาลัยราชภัฎสวนสุนันทา</p>
             <hr />

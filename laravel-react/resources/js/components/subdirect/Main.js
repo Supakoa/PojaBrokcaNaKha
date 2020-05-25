@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
+import AuthUser from "../middleware/axios/User";
 import Home from "./contents/Home";
 import Report from "./contents/Report";
 import User from "./contents/User";
@@ -13,32 +14,30 @@ import Footer from "./footer/Footer";
 import "./Appstyle.css";
 import InBox from "./contents/messages/InBox";
 import OutBox from "./contents/messages/OutBox";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { user } from "../../redux/actions";
 
 export default function Main() {
     const dispatch = useDispatch();
-    const getUser = useSelector(state => state.userState);
     const [_info, setInfo] = React.useState({});
     let { path, url } = useRouteMatch();
+    const fetchUser = async _token => {
+        const item = await AuthUser(_token);
+        dispatch(user({ item }));
+        setInfo({
+            ..._info,
+            first: item.first_name,
+            last: item.last_name
+        });
+    };
     React.useEffect(() => {
-        axios
-            .post(`http://localhost:8000/api/user`, localStorage._authLocal, {
-                headers: {
-                    Authorization: `Bearer ${localStorage._authLocal}`,
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(res => {
-                const item = res.data.success;
-                dispatch(user(item));
-                setInfo({
-                    ..._info,
-                    first: item.first_name,
-                    last: item.last_name
-                });
-            });
-    }, []);
+        const _authToken = localStorage._authLocal;
+        const myAbortController = new AbortController();
+        fetchUser(_authToken, { signal: myAbortController.signal });
+        return () => {
+            myAbortController.abort();
+        };
+    }, [_info]);
 
     return (
         <section className="content-body">

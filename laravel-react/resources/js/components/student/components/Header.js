@@ -1,35 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "./../../images/logo.png";
-import axios from "axios";
-// import { useSelector } from "react-redux";
+import SignOut from "../../middleware/axios/SignOut";
 
 function Header(props) {
-    let history = useHistory();
-
-    const handleLogOut = () => {
-        const token = localStorage._authLocal;
-        axios
-            .post(`http://localhost:8000/api/logout`, token, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(res => {
-                if (res.status === 401) {
-                    console.log("Token false");
-                } else {
-                    localStorage.removeItem("_authLocal");
-                    history.push("/login");
-                }
-            })
-            .catch(error => {
-                alert(error);
-                localStorage.removeItem("_authLocal");
-            });
-    };
+    const token = localStorage._authLocal;
 
     return (
         <Navbar bg="light" expand="sm">
@@ -67,7 +43,7 @@ function Header(props) {
                     <Link
                         className="nav-link"
                         to="/login"
-                        onClick={handleLogOut}
+                        onClick={() => SignOut(token)}
                     >
                         ออกจากระบบ
                     </Link>

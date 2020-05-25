@@ -24,7 +24,7 @@ export default function FormRegister() {
     const [_isValidStudentId, _setIsValidStudentId] = React.useState(false);
     const [_isValidPhone, _setIsValidPhone] = React.useState(false);
     const [_isValidConPass, _setIsValidConPass] = React.useState(false);
-    // let _isMount = true;
+
     const [_user, setUser] = React.useState({
         token: null
     });
@@ -49,11 +49,9 @@ export default function FormRegister() {
     }, [_faculties]);
 
     const hadleChanges = event => {
-        // const user = _user;
         const name = event.target.name;
         const value = event.target.value;
         const oldPass = _user.password;
-        const _length = value.length;
 
         if (name === "studentId") {
             const _max = value.slice(0, event.target.maxLength);
@@ -128,12 +126,10 @@ export default function FormRegister() {
                 [name]: value
             });
         }
-        // console.log(_error.error.message);
     };
 
     const handleOnClick = async event => {
         const form = event.currentTarget.checkValidity();
-        // console.log(form);
         const item = {
             title: "eiei",
             role_id: 3,
@@ -196,7 +192,6 @@ export default function FormRegister() {
             event.stopPropagation();
         }
     };
-    console.log(location);
 
     return (
         <Form

@@ -16,11 +16,7 @@ import Register from "./../log-in/component/Register";
 import { useSelector } from "react-redux";
 
 function App() {
-    // const dispatch = useDispatch();
-    // const getRoleId = useSelector(state => state.userState);
     const isAuthenticated = useSelector(state => state.redirectState);
-    // console.log("isAuth " + isAuthenticated);
-    // console.log(location);
 
     return (
         <Router>
@@ -58,9 +54,7 @@ function App() {
 function PrivateRoute({ children, ...rest }) {
     const isAuthenticated = useSelector(state => state.redirectState);
     let _isAuthLocal = localStorage.getItem("_authLocal");
-    // console.log(_isAuthLocal);
 
-    // console.log(rest);
     return (
         <Route
             {...rest}

@@ -15,7 +15,7 @@ const postUser = async tokenRegis => {
             const role = res.data.success.role_id;
             const data = res.data.success;
             Swal.fire(
-                `สวัสดี ${data.first_name} ${data.last_name} !`,
+                `${data.first_name} ${data.last_name}`,
                 "ยินดีตอนรับเข้าสู่ระบบ!",
                 "success"
             );

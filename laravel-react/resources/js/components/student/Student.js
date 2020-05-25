@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-    Route,
-    Switch,
-    useRouteMatch
-} from "react-router-dom";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -12,6 +8,9 @@ import Profile from "./components/Profile";
 
 export default function Student(props) {
     let { path, url } = useRouteMatch();
+    React.useEffect(() => {
+        return () => {};
+    }, []);
     return (
         <section>
             <Header url={url} user={props.user} />

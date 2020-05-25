@@ -1,16 +1,11 @@
 import React from "react";
 import "./login.css";
-import { Link, useHistory } from "react-router-dom";
+import ComponentRegister from "./ComponentRegister";
+import ComponentForgetPassword from "./ComponentForgetPassword";
+import FormLogin from "./FormLogin";
+import { useHistory } from "react-router-dom";
 import Logo from "./../components/images/logo.png";
-import {
-    Container,
-    Row,
-    Col,
-    Form,
-    Button,
-    Image,
-    Spinner
-} from "react-bootstrap";
+import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../redux/actions";
@@ -18,7 +13,7 @@ import redirectPage from "./RedirectPage";
 import postUser from "./component/element/postUser";
 import Swal from "sweetalert2";
 
-export default function LogIn(props) {
+export default function LogIn() {
     let _history = useHistory();
     const dispatch = useDispatch();
     const [_load, setLoading] = React.useState(true);
@@ -155,7 +150,7 @@ export default function LogIn(props) {
                             </section>
 
                             {!forgetPass ? (
-                                <FromLogIn
+                                <FormLogin
                                     error={_error}
                                     showForget={handleForget}
                                     clickLogin={handleClickLogIn}
@@ -180,101 +175,5 @@ export default function LogIn(props) {
                 </Row>
             </Container>
         </section>
-    );
-}
-
-function ComponentRegister() {
-    return (
-        <section className="w-75 m-auto effectSection">
-            <p>Petition คือ ?</p>
-            <p>เว็บไซต์ส่งแบบคำร้องของมหาวิทยาลัยราชภัฎสวนสุนันทา</p>
-            <hr />
-            <p>คุณต้องการส่งแบบคำร้องแต่ยังไม่ได้ลงทะเบียนใช่หรือไม่ ?</p>
-            <Link className="m-auto btn btn-light" to="/register">
-                ลงทะเบียน
-            </Link>
-        </section>
-    );
-}
-
-function ComponentForgetPassword(props) {
-    return (
-        <Form className="w-75 m-auto effectSection">
-            <Form.Row>
-                <Form.Group as={Col} controlId="formBasicForget">
-                    <Form.Label className="text-info">อีเมล</Form.Label>
-                    <Form.Control type="text" placeholder="อีเมล" />
-                </Form.Group>
-            </Form.Row>
-            <Button onClick={() => props.closeForget(false)}>ยืนยัน</Button>
-        </Form>
-    );
-}
-
-function FromLogIn(props) {
-    return (
-        <Form className="effectSection">
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label
-                    className={
-                        props.error.name === "username"
-                            ? "text-danger"
-                            : "text-info"
-                    }
-                >
-                    Username
-                </Form.Label>
-                <Form.Control
-                    className={
-                        props.error.name === "username"
-                            ? props.error.className
-                            : ""
-                    }
-                    name="username"
-                    type="email"
-                    placeholder="อีเมล"
-                    onChange={props.inputValue}
-                />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label
-                    className={
-                        props.error.name === "password"
-                            ? "text-danger"
-                            : "text-info"
-                    }
-                >
-                    Password
-                </Form.Label>
-                <Form.Control
-                    className={
-                        props.error.name === "password"
-                            ? props.error.className
-                            : ""
-                    }
-                    name="password"
-                    type="text"
-                    placeholder="Password"
-                    onChange={props.inputValue}
-                />
-            </Form.Group>
-            <Container className="d-flex justify-content-between align-items-end">
-                <Form.Group as={Row}>
-                    <Button variant="primary" onClick={props.clickLogin}>
-                        ยืนยัน
-                    </Button>
-                </Form.Group>
-                <Form.Group as={Row}>
-                    <Link
-                        to="/login"
-                        className="text-secondary"
-                        onClick={() => props.showForget(true)}
-                    >
-                        ลืมรหัสผ่าน ?
-                    </Link>
-                </Form.Group>
-            </Container>
-        </Form>
     );
 }
