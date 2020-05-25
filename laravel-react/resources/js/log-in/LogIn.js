@@ -15,6 +15,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../redux/actions";
 import redirectPage from "./RedirectPage";
+import postUser from "./component/element/postUser";
+import Swal from "sweetalert2";
 
 export default function LogIn(props) {
     let _history = useHistory();
@@ -82,38 +84,27 @@ export default function LogIn(props) {
                     }
                 })
                 .catch(error => {
-                    const result = confirm(error);
-                    if (result) {
-                        _history.push("/login");
-                    }
+                    Swal.fire({
+                        icon: "error",
+                        title: "อีเมล หรือ รหัสผ่าน ไม่ถูกต้อง!",
+                        text: `${error}`
+                    });
                     return null;
                 });
 
             const tokenUser = postToken;
             if (tokenUser !== null) {
-                await axios
-                    .post(`http://localhost:8000/api/user`, tokenUser, {
-                        headers: {
-                            Authorization: `Bearer ${tokenUser}`,
-                            "Content-Type": "application/json"
-                        }
-                    })
-                    .then(res => {
-                        const _data = res.data.success;
-
-                        const role_id = _data.role_id;
-                        const _path = redirectPage(role_id);
-                        localStorage.setItem("_authLocal", tokenUser);
-                        _history.push(_path);
-                        dispatch(isAuththen(true));
-                        dispatch(user(_data));
-                    })
-                    .catch(error => {
-                        const result = confirm(error);
-                        if (result) {
-                            _history.push("/login");
-                        }
-                    });
+                const _authUser = await postUser(tokenUser);
+                if (_authUser.status) {
+                    const _data = _authUser._data;
+                    const role_id = _authUser._role;
+                    const _path = redirectPage(role_id);
+                    localStorage.setItem("_authLocal", tokenUser);
+                    _history.push(_path);
+                    dispatch(isAuththen(true));
+                    dispatch(user(_data));
+                } else {
+                }
             } else {
                 setLoading(true);
             }

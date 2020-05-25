@@ -1,8 +1,7 @@
 import React from "react";
-// import axios from "axios";
+import LogoRegis from "./LogoReagis";
 import { useHistory } from "react-router-dom";
-import { Col, Form, Button, Image, Spinner } from "react-bootstrap";
-import Logo from "./../../../components/images/logo.png";
+import { Col, Form, Button, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../../../redux/actions";
 import redirectPage from "../../RedirectPage";
@@ -13,7 +12,7 @@ import postUser from "./postUser";
 import validateConfirmPassword from "./validatePassword";
 import validateId from "./validateStudent-id";
 
-export default function FormRegister(props) {
+export default function FormRegister() {
     let history = useHistory();
     const dispatch = useDispatch();
     const [validated, setValidated] = React.useState(false);
@@ -152,13 +151,11 @@ export default function FormRegister(props) {
         if (form) {
             setLoading(false);
             const tokenRegis = await postToken(item);
-
-            if (tokenRegis.token !== null) {
+            if (tokenRegis.status) {
                 setUser({
                     ..._user,
                     token: tokenRegis.token
                 });
-
                 const _postUser = await postUser(tokenRegis.token);
                 if (!_postUser.status) {
                     setResponError({
@@ -167,6 +164,7 @@ export default function FormRegister(props) {
                     setLoading(true);
                 } else {
                     if (_postUser._role === 3) {
+                        event.preventDefault();
                         const _path = redirectPage(_postUser._role);
                         localStorage.setItem("_authLocal", tokenRegis.token);
                         history.push(_path);
@@ -174,10 +172,15 @@ export default function FormRegister(props) {
                         dispatch(user(_postUser._data));
                         setLoading(true);
                     } else {
-                        console.log("role_id fail");
+                        setLoading(true);
+                        event.preventDefault();
+                        event.stopPropagation();
                     }
                 }
             } else {
+                setLoading(true);
+                event.preventDefault();
+                event.stopPropagation();
                 setResponError({
                     message: [..._responError, tokenRegis.error]
                 });
@@ -193,6 +196,7 @@ export default function FormRegister(props) {
             event.stopPropagation();
         }
     };
+    console.log(location);
 
     return (
         <Form
@@ -201,16 +205,7 @@ export default function FormRegister(props) {
             onSubmit={handleOnClick}
             className="p-4 w-75 m-auto"
         >
-            <section className="d-table text-center m-auto">
-                <Image
-                    className="border-bottom border-info"
-                    src={Logo}
-                    width="80"
-                    height="80"
-                />
-                <p className="text-info">GE Petition</p>
-            </section>
-
+            <LogoRegis />
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="firstName">
                     <Form.Label
@@ -474,7 +469,7 @@ export default function FormRegister(props) {
                 </Form.Group>
             </Form.Row>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={handleOnClick}>
                 {_load ? "ยืนยัน" : <Spinner animation="border" />}
             </Button>
         </Form>
