@@ -3,9 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
-    Redirect,
-    useLocation,
-    Link
+    Redirect
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "sweetalert2/src/sweetalert2.scss";
@@ -14,6 +12,7 @@ import LogIn from "./../log-in/LogIn";
 import Student from "./student/Student";
 import Register from "./../log-in/component/Register";
 import { useSelector } from "react-redux";
+import NoMatch from "../NotMatch404";
 
 function App() {
     const isAuthenticated = useSelector(state => state.redirectState);
@@ -71,21 +70,6 @@ function PrivateRoute({ children, ...rest }) {
                 )
             }
         />
-    );
-}
-
-function NoMatch() {
-    let location = useLocation();
-
-    return (
-        <div
-            className="container d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-        >
-            <h3>
-                404 Not Found Page <Link to="/">{location.pathname}</Link>
-            </h3>
-        </div>
     );
 }
 

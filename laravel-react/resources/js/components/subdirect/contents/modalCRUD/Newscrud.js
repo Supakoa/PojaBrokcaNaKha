@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Container, Modal, Form, Image } from "react-bootstrap";
 
-export function Newsadd(props) {
+export function Newsadd({ newsId }) {
     const [addModal, setAddModal] = React.useState(false);
+    const [_newsURLImage, setNewsURLImage] = React.useState({
+        imageUpload: null
+    });
 
     const handleChange = event => {
         const _name = event.target.name;
+        const _file = event.target.files[0];
         const _value = event.target.value;
 
+        if (_name === "imageUpload") {
+            setNewsURLImage({
+                ..._newsURLImage,
+                [_name]: _file
+            });
+        }
         console.log(_name);
         console.log(_value);
+        console.log(_file);
     };
 
     return (
@@ -39,11 +50,13 @@ export function Newsadd(props) {
                         <div className="mb-3">
                             <Form.File id="formcheck-api-custom" custom>
                                 <Form.File.Input
-                                    name="imageFile"
+                                    name="imageUpload"
                                     onChange={handleChange}
                                 />
                                 <Form.File.Label data-browse="เลือกรูป">
-                                    อัพรูปข่าว
+                                    {_newsURLImage.imageUpload === null
+                                        ? "อัพรูปข่าว"
+                                        : _newsURLImage.imageUpload.name}
                                 </Form.File.Label>
                                 <Form.Control.Feedback type="valid">
                                     คุณอัพแล้ว
@@ -53,8 +66,10 @@ export function Newsadd(props) {
                         <Form.Group controlId="formNewsURL">
                             <Form.Label>URL รูปข่าว</Form.Label>
                             <Form.Control
+                                name="urlUpload"
                                 type="text"
                                 placeholder="www.google.com"
+                                onChange={handleChange}
                             />
                         </Form.Group>
                     </Form>

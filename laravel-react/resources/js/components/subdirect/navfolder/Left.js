@@ -22,7 +22,7 @@ import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
 const useStyles = makeStyles(theme => ({
     root: {
         width: "100%",
-        maxWidth: 360,
+        fontSize: 5,
         backgroundColor: theme.palette.background.paper
     },
     nested: {
@@ -30,8 +30,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Left(props) {
-    const url = props.path;
+export default function Left({ url }) {
     // console.log(url);
 
     const linkClass = "text-dark";
@@ -62,8 +61,7 @@ export default function Left(props) {
                     <ListItemText primary="หน้าแรก" />
                 </ListItem>
             </Link>
-            {/*<Link className={linkClass} to={routPath[1]}>*/}
-            <ListItem button onClick={handleClick} href={`${url}/message`}>
+            <ListItem button onClick={handleClick}>
                 <ListItemIcon>
                     <ForumIcon />
                 </ListItemIcon>
@@ -115,7 +113,7 @@ export default function Left(props) {
                     <ListItemText primary="ข่าว" />
                 </ListItem>
             </Link>
-            <Link className={linkClass} to={`${url}/stepReport`}>
+            <Link className={linkClass} to={`${url}/step-report`}>
                 <ListItem button>
                     <ListItemIcon>
                         <LibraryAddCheckIcon />

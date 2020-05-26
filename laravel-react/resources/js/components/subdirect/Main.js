@@ -8,57 +8,71 @@ import News from "./contents/News";
 import StepReport from "./contents/Stepreport";
 import Header from "./navfolder/Header";
 import Left from "./navfolder/Left";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col } from "react-bootstrap";
 import Footer from "./footer/Footer";
 import "./Appstyle.css";
 import InBox from "./contents/messages/InBox";
 import OutBox from "./contents/messages/OutBox";
 import { useDispatch } from "react-redux";
-import { user } from "../../redux/actions";
+import { user, isAuththen } from "../../redux/actions";
 
 export default function Main() {
     const dispatch = useDispatch();
     const [_info, setInfo] = React.useState({});
     let { path, url } = useRouteMatch();
     const fetchUser = async _token => {
-        const item = await AuthUser(_token);
-        dispatch(user({ item }));
+        const _item = await AuthUser(_token);
+        dispatch(isAuththen(true));
+        dispatch(user({ _item }));
         setInfo({
             ..._info,
-            first: item.first_name,
-            last: item.last_name
+            first: _item.first_name,
+            last: _item.last_name
         });
     };
     React.useEffect(() => {
         const _authToken = localStorage._authLocal;
         const myAbortController = new AbortController();
-        fetchUser(_authToken, { signal: myAbortController.signal });
+        fetchUser(_authToken, {
+            signal: myAbortController.signal
+        });
+
         return () => {
             myAbortController.abort();
         };
-    }, [_info]);
+    }, []);
 
     return (
         <section className="content-body">
             <Row className="app">
-                <Col xs={12} sm={12} md={2} lg={2} className=" pr-0 bg-info">
-                    <Left path={url} />
+                <Col xs={12} sm={12} md={12} lg={2} className="pr-0 bg-info">
+                    <Left url={url} />
                 </Col>
-                <Col xs={12} sm={12} md={10} lg={10} className="p-0">
+                <Col xs={12} sm={12} md={12} lg={10} className="p-0">
                     <Header path={url} info={_info} />
                     <div className="container-fluid p-4">
                         <Switch>
-                            <Route exact path={`${path}`} component={Home} />
-                            <Route path={`${path}/inbox`} component={InBox} />
-                            <Route path={`${path}/outbox`} component={OutBox} />
-                            <Route path={`${path}/report`} component={Report} />
-                            <Route path={`${path}/user`} component={User} />
-                            <Route path={`${path}/news`} component={News} />
-                            <Route
-                                path={`${path}/stepReport`}
-                                component={StepReport}
-                            />
+                            <Route exact path={`${path}`}>
+                                <Home />
+                            </Route>
+                            <Route path={`${path}/inbox`}>
+                                <InBox />
+                            </Route>
+                            <Route path={`${path}/outbox`}>
+                                <OutBox />
+                            </Route>
+                            <Route path={`${path}/report`}>
+                                <Report />
+                            </Route>
+                            <Route path={`${path}/user`}>
+                                <User />
+                            </Route>
+                            <Route path={`${path}/news`}>
+                                <News />
+                            </Route>
+                            <Route path={`${path}/step-report`}>
+                                <StepReport />
+                            </Route>
                         </Switch>
                     </div>
                 </Col>
