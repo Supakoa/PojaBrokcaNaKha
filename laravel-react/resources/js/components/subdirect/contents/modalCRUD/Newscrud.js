@@ -1,37 +1,28 @@
 import React from "react";
-import { Button, Container, Modal, Form, Image } from "react-bootstrap";
+import {
+    Button,
+    Container,
+    Modal,
+    Form,
+    Image,
+    Spinner
+} from "react-bootstrap";
+import imgUpload from "../../../middleware/axios/imageUpload";
+import AddImage from "./components/news/AddImage";
 
-export function Newsadd({ newsId }) {
+export function Newsadd() {
+    const [upload, setUpload] = React.useState(false);
     const [addModal, setAddModal] = React.useState(false);
-    const [_newsURLImage, setNewsURLImage] = React.useState({
+    const [_newsUpload, setnewsUpload] = React.useState({
         imageUpload: null
     });
-
-    const handleChange = event => {
-        const _name = event.target.name;
-        const _file = event.target.files[0];
-        const _value = event.target.value;
-
-        if (_name === "imageUpload") {
-            setNewsURLImage({
-                ..._newsURLImage,
-                [_name]: _file,
-                loaded: null
-            });
-        } else {
-            setNewsURLImage({
-                ..._newsURLImage,
-                [_name]: _value
-            });
-        }
-        console.log(_name);
-        console.log(_value);
-        console.log(_file);
-    };
-
     const onClickHandle = () => {
-        const data = new FormData();
-        data.append();
+        console.log(_newsUpload);
+
+        setUpload(true);
+        setTimeout(() => {
+            setUpload(false);
+        }, 2000);
     };
 
     return (
@@ -57,39 +48,29 @@ export function Newsadd({ newsId }) {
                     <Modal.Title>เพิ่มข่าวใหม่</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <div className="mb-3">
-                            <Form.File id="formcheck-api-custom" custom>
-                                <Form.File.Input
-                                    type="file"
-                                    name="imageUpload"
-                                    onChange={handleChange}
-                                />
-                                <Form.File.Label data-browse="เลือกรูป">
-                                    {_newsURLImage.imageUpload === null
-                                        ? "อัพรูปข่าว"
-                                        : _newsURLImage.imageUpload.name}
-                                </Form.File.Label>
-                                <Form.Control.Feedback>
-                                    คุณอัพแล้ว
-                                </Form.Control.Feedback>
-                            </Form.File>
-                        </div>
-                        <Form.Group controlId="formNewsURL">
-                            <Form.Label>URL รูปข่าว</Form.Label>
-                            <Form.Control
-                                name="urlUpload"
-                                type="text"
-                                placeholder="www.google.com"
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Form>
+                    <AddImage
+                        setImage={setnewsUpload}
+                        showImage={_newsUpload}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" onClick={() => onClickHandle}>
-                        save
-                    </Button>
+                    {upload ? (
+                        <Button variant="primary" disabled>
+                            Loading...{" "}
+                            <Spinner
+                                as="span"
+                                animation="grow"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                        </Button>
+                    ) : (
+                        <Button variant="primary" onClick={onClickHandle}>
+                            save
+                        </Button>
+                    )}
+
                     <Button variant="danger" onClick={() => setAddModal(false)}>
                         Close
                     </Button>
