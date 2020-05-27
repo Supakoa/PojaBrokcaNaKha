@@ -15,12 +15,23 @@ export function Newsadd({ newsId }) {
         if (_name === "imageUpload") {
             setNewsURLImage({
                 ..._newsURLImage,
-                [_name]: _file
+                [_name]: _file,
+                loaded: null
+            });
+        } else {
+            setNewsURLImage({
+                ..._newsURLImage,
+                [_name]: _value
             });
         }
         console.log(_name);
         console.log(_value);
         console.log(_file);
+    };
+
+    const onClickHandle = () => {
+        const data = new FormData();
+        data.append();
     };
 
     return (
@@ -50,6 +61,7 @@ export function Newsadd({ newsId }) {
                         <div className="mb-3">
                             <Form.File id="formcheck-api-custom" custom>
                                 <Form.File.Input
+                                    type="file"
                                     name="imageUpload"
                                     onChange={handleChange}
                                 />
@@ -58,7 +70,7 @@ export function Newsadd({ newsId }) {
                                         ? "อัพรูปข่าว"
                                         : _newsURLImage.imageUpload.name}
                                 </Form.File.Label>
-                                <Form.Control.Feedback type="valid">
+                                <Form.Control.Feedback>
                                     คุณอัพแล้ว
                                 </Form.Control.Feedback>
                             </Form.File>
@@ -75,7 +87,9 @@ export function Newsadd({ newsId }) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success">save</Button>
+                    <Button variant="success" onClick={() => onClickHandle}>
+                        save
+                    </Button>
                     <Button variant="danger" onClick={() => setAddModal(false)}>
                         Close
                     </Button>
