@@ -27,3 +27,13 @@ export const isAuththen = boolean => {
         boolean: boolean
     };
 };
+
+export const newsUpload = obj => {
+    return {
+        type: "UPLOAD",
+        image: {
+            name: obj.image,
+            url: obj.url
+        }
+    };
+};

@@ -1,29 +1,22 @@
-import React, {Component} from 'react';
-import {Badge, Card, Table} from "react-bootstrap";
-import TableReport from "./tableData/TableReport";
+import React, { Component } from "react";
+import { Badge, Card, Table } from "react-bootstrap";
 
-export default class Report extends Component{
+export default class Report extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            stauts: true,
-
-        }
+            stauts: true
+        };
     }
 
     render() {
-        return(
+        return (
             <Card>
                 <Card.Header className="text-center">
-                    <Card.Title className="p-2">
-                        ค้นหาเอกสาร
-                    </Card.Title>
+                    <Card.Title className="p-2">ค้นหาเอกสาร</Card.Title>
                 </Card.Header>
-                <Card.Body>
-                    <TableReport />
-                </Card.Body>
+                <Card.Body></Card.Body>
             </Card>
         );
     }
-
 }

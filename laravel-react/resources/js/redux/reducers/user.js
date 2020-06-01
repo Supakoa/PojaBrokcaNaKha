@@ -6,7 +6,7 @@ const userReducer = (state = {}, action) => {
                 ...action.user
             };
         default:
-            return state;
+            return { ...state };
     }
 };
 
