@@ -8,7 +8,7 @@
         <h3 id="header" class="text-center w-100 p-0 m-0">
             Inbox
         </h3>
-        <table id="table_ans" class="table display table-hover table-striped bg-light">
+        <table id="table_ans" class="table display table-hover table-striped bg-light rounded">
             <thead class="thead-dark">
                 <tr>
                     <th>วันที่</th>

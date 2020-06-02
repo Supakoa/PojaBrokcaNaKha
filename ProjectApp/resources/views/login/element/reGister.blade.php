@@ -5,7 +5,7 @@
 @endpush
 
 @section('login')
-<div class="body-login">
+<div class="body-login h-auto">
     <div class="form-register">
         <div class="box-text container">
             <dl class="row container p-5">
@@ -17,7 +17,7 @@
                 </dd>
             </dl>
             <div class="text-center m-0 p-0">
-                <a href="{{ url('/')}}" class="btn">เข้าสู่ระบบ</a>
+                <a href="{{ url('/login')}}" class="btn">เข้าสู่ระบบ</a>
             </div>
         </div>
     </div>
@@ -29,74 +29,20 @@
             <p class="p-3">GE PETTITION</p>
         </div>
         <div class="body-login">
-            <form class="container h-100" action="">
-                <div class="row container">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">ชื่อ</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="lname">นามสกุล</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="sID">รหัสนักศึกษา</label>
-                            <input type="input" class="form-control" name="sID" id="sID" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="pass">รหัสผ่าน</label>
-                            <input type="password" class="form-control" name="pass" id="pass" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="cPass">ยืนยันรหัสผ่าน</label>
-                            <input type="password" class="form-control" name="cPass" id="cPass" placeholder="">
-                        </div> 
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="mail">อีเมล</label>
-                            <input type="email" class="form-control" name="mail" id="mail" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="num">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" name="num" id="num" placeholder="">
-                        </div>
-                    </div>
+            <form class="container h-100" action="{{url('/register')}}" method="post">
+                @method('POST')
+                @csrf
+                @include('Includes.registerFormInc')
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fac">คณะ</label>
-                            <select class="form-control" id="fac">
-                                <option disabled selected>เลือกคณะ</option>
-                                @foreach ($faculties as $fac)
-                            <option value="{{$fac->id}}" >{{$fac->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="branch">สาขา</label>
-                            <select class="form-control" id="maj" disabled>
-                                <option disabled selected>เลือกสาขา</option>
-
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-
+                @endif
                 <div class="text-center">
                         <button class="btn-sub text-center m-4" type="submit">ลงทะเบียน</button>
                 </div>
@@ -106,35 +52,3 @@
 </div>
 @endsection
 
-@push('js')
-<script>
-    $.ajaxSetup({
-
-headers: {
-
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-}
-
-});
-    $("#fac").change(function (e) {
-        e.preventDefault();
-        // alert($(this).val())
-        $.ajax({
-            type: "post",
-            url: "{{url('/getMajorByFacultyId')}}/"+$(this).val(),
-            data: {"id":$(this).val()},
-            dataType: "json",
-            success: function (response) {
-                $("#maj").html("<option disabled selected>เลือกสาขา</option>");
-                response.forEach(major => {
-                    $("#maj").append("<option value = '"+major.id+"' >"+major.name+"</option>");
-                });
-                $("#maj").removeAttr("disabled");
-            }
-        });
-
-    });
-
-    </script>
-@endpush

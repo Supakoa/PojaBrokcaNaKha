@@ -6,6 +6,7 @@ use App\User;
 use App\Faculty as fac;
 use App\Major as maj;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $fac = fac::all();
-        return view('login.element.reGister')->with('faculties',$fac);
+        return view('login.element.reGister')->with('faculties', $fac);
     }
 
 
@@ -53,30 +54,47 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'student_id' => ['required', 'numeric', 'unique:users'],
+            'tel' => ['required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'fname.required' => 'กรุณากรอกชื่อ',
+            'lname.required' => 'กรุณากรอกนามสกุล',
+            'student_id.required' => 'กรุณากรอกรหัสนักศึกษา',
+            'student_id.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
+            'student_id.size' => 'กรุณากรอกไม่เกิน 11 ตัว',
+            'tel.required' => 'กรุณากรอกเบอร์โทรศัพษ์',
+            'tel.numeric' => 'กรุณากรอกเฉพาะตัวเลข',
+            'tel.size' => 'กรุณากรอกไม่เกิน 10 ตัว',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'firstname' => $data['fname'],
+            'lastname' => $data['lname'],
+            'role_id' => 3,
+            'student_id' =>$data['student_id'],
+            'telephone' =>$data['tel'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['password'])
         ]);
     }
 

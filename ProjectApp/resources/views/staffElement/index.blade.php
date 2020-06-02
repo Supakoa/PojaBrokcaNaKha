@@ -14,5 +14,10 @@
 
 
 @push('js')
-
+<script>
+    $(document).ready( function () {
+        $('#tableInbox').DataTable();
+        $('#tableOutbox').DataTable();
+    } );
+</script>
 @endpush

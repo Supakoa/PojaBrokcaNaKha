@@ -16,7 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'major_id',
+        'role_id', 'email', 'password', 'major_id','student_id','firstname','lastname',
+        'telephone'
     ];
 
     /**
@@ -39,22 +40,22 @@ class User extends Authenticatable
 
     public function license()
     {
-        return $this->hasOne('app/License');
+        return $this->hasOne('app\License');
     }
 
     public function papers()
     {
-        return $this->hasMany('app/Paper');
+        return $this->hasMany('app\Paper');
     }
 
     public function major()
     {
-        return $this->belongsTo('app/Major');
+        return $this->belongsTo('App\Major');
     }
 
     public function role()
     {
-        return $this->belongsTo('app/Role');
+        return $this->hasOne('App\Role', 'id', 'role_id');
     }
 
 }

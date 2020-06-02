@@ -28,11 +28,15 @@ class HomeController extends Controller
     public function index()
     {
         // dd(auth()->user());
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role->id == 1){
             // return view('std_viewer.std_home.index');
-            return redirect('/admin/index');;
+            return redirect('/admin/index');
         }else{
+           if(isset($validator))
              return redirect()->back()->withErrors($validator)->withInput();
+            else{
+               return redirect('/admin/users');
+            }
         }
 
     }

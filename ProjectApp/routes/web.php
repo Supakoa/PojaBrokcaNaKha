@@ -14,27 +14,24 @@
 use App\Http\Controllers\FacultyController;
 use Illuminate\Support\Facades\Route;
 
-
-
-
-
-
-
-
-
+Route::get('/react', function () {
+    return view("app");
+});
 
 // Login
-// Route::get('/', function () {
-//     return view('login.index');
-// });
+ Route::get('/', function () {
+     return redirect("/home");
+ });
 
 
 Auth::routes();
-
-//Admin
-// Route::resource('admin/papers', 'PapersController');
 Route::resource('user', 'UserController');
 Route::resource('/home', 'HomeController');
+//Admin
+// Route::resource('admin/papers', 'PapersController');
+//Route::resource('/admin/users','UserController');
+Route::resource('/admin/users','Admin\Admin_UsersController');
+
 Route::get('/admin/index', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
@@ -43,47 +40,34 @@ Route::get('/admin/mail', function () {
     return view('adminElement.InboxAndOutboxs.inBoxOutbox');
 });
 
-Route::get('/admin/news', function () {
-    return view('adminElement.news.index');
-});
-
-Route::get('/admin/steps',function (){
-    return view('adminElement.steps.index');
-});
-
-Route::get('/admin/member',function (){
-    return view('adminElement.member.index');
-});
-
-Route::get('/admin/document',function (){
-    return view('adminElement.document.index');
-});
-
-Route::post('/getMajorByFacultyId/{faculty}',"FacultyController@getMajorByFacultyId");
-
+Route::resource('/admin/news', 'Admin\ImagesController');
+Route::resource('/admin/steps', 'Admin\StepsController');
+Route::resource('/admin/document', 'Admin\DocumentsController');
+Route::post('/getMajorByFacultyId/{faculty}', "FacultyController@getMajorByFacultyId");
 Route::resource('/faculty', 'FacultyController');
 
 
-//Staff
-Route::get('/staff/index',function (){
+
+
+////////////////////Staff
+Route::get('/staff/index', function () {
     return view('staffElement.index');
 });
 
-//User
+
+
+
+
+
+
+////////////////////User
 
 // Route::resource('user', 'UserController');
+Route::get('/student/profile', 'Student\StudentsController@userProfile');
+Route::resource('/student', 'Student\StudentsController');
 
-Route::get('/user/index', function (){
-    return view('Students.index');
-});
 
-// Route::get('/user/index', function (){
-//     return view('userElement.bBody.index');
-// });
 
-Route::get('/user/profile', function (){
-    return view('Students.proFile');
-});
 
 
 
