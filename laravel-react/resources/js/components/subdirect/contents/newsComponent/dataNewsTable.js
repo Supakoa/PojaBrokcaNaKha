@@ -1,5 +1,5 @@
 import React from "react";
-import ModalNewsAdd from '../modalCRUD/ModalNews'
+import { ModalNewsAdd } from "../modalCRUD/ModalNews";
 
 const dataNewsTable = () => {
     const [_data, setData] = React.useState({
@@ -23,10 +23,11 @@ const dataNewsTable = () => {
                 width: 200
             },
             {
-                label: ,
+                label: <ModalNewsAdd />,
                 field: "action",
                 sort: "asc",
-                width: 100
+                width: 100,
+                sort: "disabled"
             }
         ],
         rows: [
@@ -34,241 +35,241 @@ const dataNewsTable = () => {
                 id: 1,
                 url: "System Architect",
                 images: "Edinburgh",
-                action: "61"
+                action: ""
             },
             {
                 id: 2,
                 url: "Accountant",
                 images: "Tokyo",
-                action: "2011/07/25"
+                action: ""
             },
             {
                 id: 3,
                 url: "Junior Technical Author",
                 images: "San Francisco",
-                action: "2009/01/12"
+                action: ""
             },
             {
                 id: 4,
                 url: "Senior Javascript Developer",
                 images: "Edinburgh",
-                action: "2012/03/29"
+                action: ""
             },
             {
                 id: 5,
                 url: "Accountant",
                 images: "Tokyo",
-                action: "2008/11/28"
+                action: ""
             },
             {
                 id: 6,
                 url: "Integration Specialist",
                 images: "New York",
-                action: "2012/12/02"
+                action: ""
             },
             {
                 id: 7,
                 url: "Sales Assistant",
                 images: "San Francisco",
-                action: "2012/08/06"
+                action: ""
             },
             {
                 id: 8,
                 url: "Integration Specialist",
                 images: "Tokyo",
-                action: "2010/10/14"
+                action: ""
             },
             {
                 id: 9,
                 url: "Javascript Developer",
                 images: "San Francisco",
-                action: "2009/09/15"
+                action: ""
             },
             {
                 id: 10,
                 url: "Software Engineer",
                 images: "Edinburgh",
-                action: "2008/12/13"
+                action: ""
             },
             {
                 id: 11,
                 url: "images Manimagesr",
                 images: "London",
-                action: "2008/12/19"
+                action: ""
             },
             {
                 id: 12,
                 url: "Support Lead",
                 images: "Edinburgh",
-                action: "2013/03/03"
+                action: ""
             },
             {
                 id: 13,
                 url: "Regional Director",
                 images: "San Francisco",
-                action: "2008/10/16"
+                action: ""
             },
             {
                 id: 14,
                 url: "Senior Marketing Designer",
                 images: "London",
-                action: "2012/12/18"
+                action: ""
             },
             {
                 id: 15,
                 url: "Regional Director",
                 images: "London",
-                action: "2010/03/17"
+                action: ""
             },
             {
                 id: 16,
                 url: "Marketing Designer",
                 images: "London",
-                action: "2012/11/27"
+                action: ""
             },
             {
                 id: 17,
                 url: "Chief Financial imagesr (CFO)",
                 images: "New York",
-                action: "2010/06/09"
+                action: ""
             },
             {
                 id: 18,
                 url: "Systems Administrator",
                 images: "New York",
-                action: "2009/04/10"
+                action: ""
             },
             {
                 id: 19,
                 url: "Software Engineer",
                 images: "London",
-                action: "2012/10/13"
+                action: ""
             },
             {
                 id: 20,
                 url: "Personnel Lead",
                 images: "Edinburgh",
-                action: "2012/09/26"
+                action: ""
             },
             {
                 id: 21,
                 url: "Development Lead",
                 images: "New York",
-                action: "2011/09/03"
+                action: ""
             },
             {
                 id: 22,
                 url: "Chief Marketing imagesr (CMO)",
                 images: "New York",
-                action: "2009/06/25"
+                action: ""
             },
             {
                 id: 23,
                 url: "Pre-Sales Support",
                 images: "New York",
-                action: "2011/12/12"
+                action: ""
             },
             {
                 id: 24,
                 url: "Sales Assistant",
                 images: "Sidney",
-                action: "2010/09/20"
+                action: ""
             },
             {
                 id: 25,
                 url: "Chief Executive imagesr (CEO)",
                 images: "London",
-                action: "2009/10/09"
+                action: ""
             },
             {
                 id: 26,
                 url: "Developer",
                 images: "Edinburgh",
-                action: "2010/12/22"
+                action: ""
             },
             {
                 id: 27,
                 url: "Regional Director",
                 images: "Singapore",
-                action: "2010/11/14"
+                action: ""
             },
             {
                 id: 28,
                 url: "Software Engineer",
                 images: "San Francisco",
-                action: "2011/06/07"
+                action: ""
             },
             {
                 id: 29,
                 url: "Chief Operating imagesr (COO)",
                 images: "San Francisco",
-                action: "2010/03/11"
+                action: ""
             },
             {
                 id: 30,
                 url: "Regional Marketing",
                 images: "Tokyo",
-                action: "2011/08/14"
+                action: ""
             },
             {
                 id: 31,
                 url: "Integration Specialist",
                 images: "Sidney",
-                action: "2011/06/02"
+                action: ""
             },
             {
                 id: 32,
                 url: "Developer",
                 images: "London",
-                action: "2009/10/22"
+                action: ""
             },
             {
                 id: 33,
                 url: "Technical Author",
                 images: "London",
-                action: "2011/05/07"
+                action: ""
             },
             {
                 id: 34,
                 url: "Team Leader",
                 images: "San Francisco",
-                action: "2008/10/26"
+                action: ""
             },
             {
                 id: 35,
                 url: "Post-Sales support",
                 images: "Edinburgh",
-                action: "2011/03/09"
+                action: ""
             },
             {
                 id: 36,
                 url: "Marketing Designer",
                 images: "San Francisco",
-                action: "2009/12/09"
+                action: ""
             },
             {
                 id: 37,
                 url: "images Manimagesr",
                 images: "San Francisco",
-                action: "2008/12/16"
+                action: ""
             },
             {
                 id: 38,
                 url: "Secretary",
                 images: "San Francisco",
-                action: "2010/02/12"
+                action: ""
             },
             {
                 id: 39,
                 url: "Financial Controller",
                 images: "San Francisco",
-                action: "2009/02/14"
+                action: ""
             },
             {
                 id: 40,
                 url: "images Manimagesr",
                 images: "London",
-                action: "2008/12/11"
+                action: ""
             }
         ]
     });
@@ -277,9 +278,9 @@ const dataNewsTable = () => {
         const abortController = new AbortController();
 
         return () => {
-            abortController.abort()
+            abortController.abort();
         };
-    },[]);
+    }, []);
 
     return _data;
 };

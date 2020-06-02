@@ -8,6 +8,7 @@ export default function TableNews() {
 
     return (
         <MDBDataTableV5
+            fullPagination
             searchTop
             searchBottom={false}
             hover

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Image } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+import Welcome from "./HomeComponent/Welcome";
+import AlertMessage from "./HomeComponent/AlertMessage";
+import AlertReport from "./HomeComponent/AlertReport";
+import TimeZone from "./HomeComponent/TimeZone";
 
 export default class Home extends Component {
     constructor(props) {
@@ -10,34 +13,30 @@ export default class Home extends Component {
         };
     }
 
-    componentDidMount() {
-        axios.get(`https://reqres.in/api/users?page=2`).then(res => {
-            this.setState({
-                persons: res.data
-            });
-        });
-    }
-
-    checkItem() {
-        // console.log(this.state.persons)
-        if (this.state.persons === null) {
-            return <p> empty </p>;
-        } else {
-            return (
-                <ul>
-                    {this.state.persons.data.map(person => (
-                        <li key={person.id}>
-                            <Image src={person.avatar} />
-                            <p>{`${person.first_name} ${person.last_name}`}</p>
-                            <p>{person.email}</p>
-                        </li>
-                    ))}
-                </ul>
-            );
-        }
-    }
+    componentDidMount() {}
 
     render() {
-        return <div className="text-center">{this.checkItem()}</div>;
+        return (
+            <Container fluid>
+                <Row className="mb-3">
+                    <Col sm={8} md={6} lg={6}>
+                        <Welcome />
+                    </Col>
+                    <Col sm={12} md={6} lg={6}>
+                        <TimeZone />
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col sm={12} md={12} lg={12}>
+                        <AlertReport />
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col sm={12} md={8} lg={8}>
+                        <AlertMessage />
+                    </Col>
+                </Row>
+            </Container>
+        );
     }
 }
