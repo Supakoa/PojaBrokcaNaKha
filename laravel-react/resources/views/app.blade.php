@@ -12,7 +12,8 @@
 
         <!-- Icon -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/2b57be7c42.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id="root"></div>

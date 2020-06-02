@@ -8,11 +8,12 @@ export default function TableNews() {
 
     return (
         <MDBDataTableV5
+            searchTop
+            searchBottom={false}
             hover
             entriesOptions={[5, 20, 25]}
             entries={5}
             pagesAmount={4}
-            fullPagination
             data={_data}
         />
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import ModalNewsAdd from '../modalCRUD/ModalNews'
 
 const dataNewsTable = () => {
     const [_data, setData] = React.useState({
@@ -22,7 +23,7 @@ const dataNewsTable = () => {
                 width: 200
             },
             {
-                label: "Action",
+                label: ,
                 field: "action",
                 sort: "asc",
                 width: 100
@@ -271,6 +272,14 @@ const dataNewsTable = () => {
             }
         ]
     });
+
+    React.useEffect(() => {
+        const abortController = new AbortController();
+
+        return () => {
+            abortController.abort()
+        };
+    },[]);
 
     return _data;
 };
