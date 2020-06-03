@@ -7,10 +7,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import SendIcon from "@material-ui/icons/Send";
-import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import PeopleIcon from "@material-ui/icons/People";
 import LinkIcon from "@material-ui/icons/Link";
@@ -24,9 +21,6 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         fontSize: 5,
         backgroundColor: theme.palette.background.paper
-    },
-    nested: {
-        paddingLeft: theme.spacing(4)
     }
 }));
 
@@ -37,10 +31,6 @@ export default function Left({ url }) {
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
 
     return (
         <List
@@ -61,34 +51,15 @@ export default function Left({ url }) {
                     <ListItemText primary="หน้าแรก" />
                 </ListItem>
             </Link>
-            <ListItem button onClick={handleClick}>
-                <ListItemIcon>
-                    <ForumIcon />
-                </ListItemIcon>
-                <ListItemText primary="ข้อความ" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto">
-                <List component="div" disablePadding>
-                    <Link className={linkClass} to={`${url}/inbox`}>
-                        <ListItem button className={classes.nested}>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Inbox" />
-                        </ListItem>
-                    </Link>
-                    <Link className={linkClass} to={`${url}/outbox`}>
-                        <ListItem button className={classes.nested}>
-                            <ListItemIcon>
-                                <SendIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Outbox" />
-                        </ListItem>
-                    </Link>
-                </List>
-            </Collapse>
-            {/*</Link>*/}
+            <Link className={linkClass} to={`${url}/inbox`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Inbox" />
+                </ListItem>
+            </Link>
+
             <Link className={linkClass} to={`${url}/report`}>
                 <ListItem button>
                     <ListItemIcon>

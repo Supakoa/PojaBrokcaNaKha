@@ -11,8 +11,7 @@ import Left from "./navfolder/Left";
 import { Row, Col } from "react-bootstrap";
 import Footer from "./footer/Footer";
 import "./Appstyle.css";
-import InBox from "./contents/messages/InBox";
-import OutBox from "./contents/messages/OutBox";
+import InBox from "./contents/InBox";
 import { useDispatch } from "react-redux";
 import { user, isAuththen } from "../../redux/actions";
 
@@ -58,9 +57,7 @@ export default function Main() {
                             <Route path={`${path}/inbox`}>
                                 <InBox />
                             </Route>
-                            <Route path={`${path}/outbox`}>
-                                <OutBox />
-                            </Route>
+
                             <Route path={`${path}/report`}>
                                 <Report />
                             </Route>
