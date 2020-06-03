@@ -56,7 +56,7 @@ export default function Left({ url }) {
                     <ListItemIcon>
                         <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Inbox" />
+                    <ListItemText primary="ข้อความ" />
                 </ListItem>
             </Link>
 
