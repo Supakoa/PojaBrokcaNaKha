@@ -2,21 +2,23 @@ import React from "react";
 import { Form, Col, Button } from "react-bootstrap";
 
 const FormSend = props => {
-    const [_message, setMessage] = React.useState({
-        roleId: 1,
-        name: "admin",
-        messages: ""
-    });
+    const [_message, setMessage] = React.useState({});
 
     const handleChange = e => {
         const value = e.target.value;
+        console.log(value);
+
         setMessage({
             ..._message,
+            roleId: 1,
+            name: "admin",
             messages: value
         });
     };
 
     const onClickHandle = () => {
+        console.log(_message);
+
         props.settext([_message]);
     };
 

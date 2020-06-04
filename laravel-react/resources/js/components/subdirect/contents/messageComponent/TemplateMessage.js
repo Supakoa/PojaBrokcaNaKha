@@ -20,7 +20,9 @@ export default function TemplateMessage({ data }) {
         return () => {
             abortController.abort();
         };
-    }, [_text]);
+    }, []);
+
+    console.log(_text);
 
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">

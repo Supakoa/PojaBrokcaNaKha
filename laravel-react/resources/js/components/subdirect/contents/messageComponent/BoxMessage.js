@@ -4,8 +4,6 @@ import { Row, Col, Alert } from "react-bootstrap";
 const BoxMessage = props => {
     const [_chatBox, setChatBox] = React.useState([]);
     // console.log(textMessage);
-    console.log(props);
-    console.log(name);
     const checkRole = _props => {
         const { textMessage, name } = _props;
         if (name !== undefined) {
@@ -29,14 +27,13 @@ const BoxMessage = props => {
 
     React.useEffect(() => {
         const abort = new AbortController();
-        checkRole(props);
+        checkRole(props, { signal: abort.signal });
 
         return () => {
             abort.abort();
         };
-    });
+    }, []);
 
-    // const _position = textMessage.roleId === 1;
     const _sender = { span: 8, offset: 4 };
     const _receiver = 8;
     return (

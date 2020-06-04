@@ -1,7 +1,11 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import { textHeader } from "./components/news/methodNews";
 
-export function ModalNewsAdd() {
+export function ModalNews(props) {
+    // attibute type if true are Modal Add or false are Modale Edit
+
+    const { type } = props;
     const [_modal, setModal] = React.useState(false);
     const [_item, setItem] = React.useState({
         loading: false,
@@ -21,9 +25,9 @@ export function ModalNewsAdd() {
             <Button
                 size="sm"
                 onClick={() => setModal(true)}
-                variant={_item.loading ? "warning" : "info"}
+                variant={type ? "info" : "warning"}
             >
-                {_item.loading ? "แก้ไขข้อมูล" : "เพิ่มข้อมูล"}
+                {textHeader(type)}
             </Button>
             <Modal
                 animation={true}
@@ -36,7 +40,7 @@ export function ModalNewsAdd() {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-modal-sizes-title-lg">
-                        {_item.loading ? "แก้ไขข้อมูล" : "เพิ่มข้อมูล"}
+                        {textHeader(type)}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>...</Modal.Body>

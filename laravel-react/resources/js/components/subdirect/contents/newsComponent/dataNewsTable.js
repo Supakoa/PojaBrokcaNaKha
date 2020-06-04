@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalNewsAdd } from "../modalCRUD/ModalNews";
+import { ModalNews } from "../modalCRUD/ModalNews";
 
 const dataNewsTable = () => {
     const columns = [
@@ -22,7 +22,7 @@ const dataNewsTable = () => {
             width: 200
         },
         {
-            label: <ModalNewsAdd />,
+            label: <ModalNews type={true} />,
             field: "action",
             sort: "asc",
             width: 100,
