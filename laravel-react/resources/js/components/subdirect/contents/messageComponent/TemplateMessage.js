@@ -16,14 +16,11 @@ export default function TemplateMessage({ data }) {
     React.useEffect(() => {
         const abortController = new AbortController();
         fetchMessages(data, { signal: abortController.signal });
-        if (_text.length > 0) {
-            setList([..._list].push(_text));
-        }
 
         return () => {
             abortController.abort();
         };
-    }, []);
+    }, [_text]);
 
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">
@@ -53,17 +50,35 @@ export default function TemplateMessage({ data }) {
                     <hr />
                     <Tab.Content>
                         {_list.map((item, idx) => {
+                            // console.log(item);
+                            const _textBox = item.messages;
                             return (
                                 <Tab.Pane
-                                    key={item.roleId}
+                                    key={idx.toString()}
                                     eventKey={`#${item.name}`}
                                 >
                                     <Card>
                                         <Card.Body>
-                                            <BoxMessage
-                                                key={idx.toString()}
-                                                textMessage={item}
-                                            />
+                                            {_textBox.map((text, idx) => {
+                                                // console.log(text);
+                                                if (text.name === "admin") {
+                                                    console.log(
+                                                        "text from admin"
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <BoxMessage
+                                                            key={idx.toString()}
+                                                            textMessage={text}
+                                                            name={{
+                                                                _role:
+                                                                    item.roleId,
+                                                                _name: item.name
+                                                            }}
+                                                        />
+                                                    );
+                                                }
+                                            })}
                                         </Card.Body>
                                         <Card.Footer className="p-0">
                                             <FormSend settext={setText} />

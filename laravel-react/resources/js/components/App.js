@@ -75,6 +75,3 @@ function PrivateRoute({ children, ...rest }) {
 
 export default App;
 
-// if (document.getElementById('root')) {
-//     ReactDOM.render(<App />, document.getElementById('root'));
-// }

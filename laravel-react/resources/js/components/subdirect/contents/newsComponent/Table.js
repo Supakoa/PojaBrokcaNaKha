@@ -4,7 +4,6 @@ import { MDBDataTableV5 } from "mdbreact";
 
 export default function TableNews() {
     const _data = dataNewsTable();
-    // console.log(_data);
 
     return (
         <MDBDataTableV5

@@ -11,7 +11,7 @@ export default class InBox extends Component {
                     roleId: 3,
                     name: "supakit",
                     messages:
-                        "Children prop should only contain a single child, and is enforced as such"
+                        ["Children prop should only contain a single child, and is enforced as such"]
                 }
             ]
         };

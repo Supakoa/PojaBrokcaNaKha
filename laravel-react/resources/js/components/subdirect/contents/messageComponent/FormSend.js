@@ -10,7 +10,6 @@ const FormSend = props => {
 
     const handleChange = e => {
         const value = e.target.value;
-        console.log(value);
         setMessage({
             ..._message,
             messages: value
