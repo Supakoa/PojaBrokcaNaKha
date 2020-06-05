@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { textHeader } from "./components/news/methodNews";
+import FormNews from "./components/news/FormNews";
 
-export function ModalNews(props) {
+export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
 
-    const { type } = props;
+    const { type, id } = props;
     const [_modal, setModal] = React.useState(false);
     const [_item, setItem] = React.useState({
         loading: false,
@@ -26,6 +27,7 @@ export function ModalNews(props) {
                 size="sm"
                 onClick={() => setModal(true)}
                 variant={type ? "info" : "warning"}
+                className="text-light"
             >
                 {textHeader(type)}
             </Button>
@@ -43,19 +45,17 @@ export function ModalNews(props) {
                         {textHeader(type)}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>...</Modal.Body>
+                <Modal.Body>
+                    <FormNews />
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setModal(false)}>
                         close
                     </Button>
 
-                    <Button variant="info">save</Button>
+                    <Button variant={type ? "info" : "warning"}>save</Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
-}
-
-export function ModalNewsDelete() {
-    return <></>;
 }

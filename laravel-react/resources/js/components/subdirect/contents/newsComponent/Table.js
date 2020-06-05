@@ -7,6 +7,7 @@ export default function TableNews() {
 
     return (
         <MDBDataTableV5
+            className="text-center"
             fullPagination
             searchTop
             searchBottom={false}
