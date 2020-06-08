@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBDataTableV5 } from "mdbreact";
-import {dataReport} from './dataReport'
+import dataReport from "./dataReport";
 
 export default function TableReport() {
     const _data = dataReport();

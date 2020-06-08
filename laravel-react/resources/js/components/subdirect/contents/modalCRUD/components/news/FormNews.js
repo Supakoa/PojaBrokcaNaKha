@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Container, Image, Jumbotron } from "react-bootstrap";
+import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
@@ -16,7 +16,7 @@ function FormNews() {
         if (_name === "upload") {
             let reader = new FileReader();
             let file = e.target.files[0];
-            console.log(file);
+            // console.log(file);
 
             reader.onloadend = () => {
                 _setState({

@@ -1,4 +1,5 @@
 import React from "react";
+import { Image } from "react-bootstrap";
 import ModalNews from "../modalCRUD/ModalNews";
 import ModalDelete from "../modalCRUD/ModalDelete";
 import { testdata } from "./testdata";
@@ -36,7 +37,14 @@ const dataNewsTable = () => {
             // console.log(res);
             const responData = {
                 id: res.id,
-                images: res.images,
+                images: (
+                    <Image
+                        src={res.images}
+                        width="200px"
+                        height="70px"
+                        rounded
+                    />
+                ),
                 url: res.url,
                 action: ColumnActions(idx, res.id)
             };
