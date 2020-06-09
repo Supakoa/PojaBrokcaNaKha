@@ -1,5 +1,8 @@
 import React from "react";
 import ModalUser from "../modalCRUD/Usercrud";
+import { testData } from "./testData";
+import ModalDelete from "../modalCRUD/ModalDelete";
+
 export const dataTableUser = () => {
     const columns = [
         {
@@ -48,5 +51,41 @@ export const dataTableUser = () => {
 
     const [rows, setRows] = React.useState([]);
 
+    const fetchRowData = _data => {
+        const _row = _data.map((res, idx) => {
+            const response = {
+                action: ColumnAction(idx, res),
+                id: res.id,
+                name: `${res.firstName} ${res.lastName}`,
+                role: res.role,
+                email: res.email,
+                faculty: "",
+                major: ""
+            };
+
+            return response;
+        });
+        return _row;
+    };
+
+    React.useEffect(() => {
+        const abort = new AbortController();
+        const _rows = fetchRowData(testData, { signal: abort.signal });
+        setRows(_rows);
+        return () => {
+            abort.abort();
+        };
+    }, []);
+
     return { columns, rows };
+};
+
+const ColumnAction = (idx, res) => {
+    return (
+        <div>
+            <ModalUser key={idx + 1} id={res.id} type={false} />
+            {" || "}
+            <ModalDelete key={idx + 1} id={res.id} />
+        </div>
+    );
 };
