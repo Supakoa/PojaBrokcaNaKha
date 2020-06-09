@@ -6,7 +6,19 @@ export default function ModalUser(props) {
     const { type } = props;
     //If type is true Modal Add else type is false Modal Edit
     // console.log(props);
+    const [_onSubmit, setOnSubmit] = React.useState(false);
     const [_modalUser, setModalUser] = React.useState(false);
+    const formOnSubmit = e => {
+        // console.log(e.currentTarget.checkValidity());
+        console.log("ok");
+
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        // setValidated(true);
+    };
     return (
         <div>
             <Button
@@ -35,15 +47,30 @@ export default function ModalUser(props) {
                 <Modal.Body>
                     <Container>
                         {!type ? (
-                            <FormUser typeForm={type} user="obj" />
+                            <FormUser
+                                typeForm={type}
+                                user="obj"
+                                submitOnButton={formOnSubmit}
+                            />
                         ) : (
-                            <FormUser typeForm={type} />
+                            <FormUser
+                                typeForm={type}
+                                submitOnButton={formOnSubmit}
+                            />
                         )}
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success">บันทัก</Button>
                     <Button
+                        variant="success"
+                        type="submit"
+                        // onClick={() => setOnSubmit(true)}
+                        // formAction="userForm"
+                    >
+                        บันทัก
+                    </Button>
+                    <Button
+                        form="userForm"
                         variant="danger"
                         onClick={() => setModalUser(false)}
                     >
