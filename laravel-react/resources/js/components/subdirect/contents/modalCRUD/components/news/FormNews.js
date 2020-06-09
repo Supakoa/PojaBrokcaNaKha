@@ -3,12 +3,31 @@ import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
-function FormNews() {
+function FormNews(props) {
+    const { response, type } = props;
+    // console.log(response);
+
     const [_state, _setState] = React.useState({
         file: [],
         imagePreviewUrl: "",
         url: ""
     });
+
+    React.useEffect(() => {
+        if (!type) {
+            _setState({
+                ..._state,
+                imagePreviewUrl: response.images,
+                url: response.url
+            });
+        } else {
+            _setState({
+                file: [],
+                imagePreviewUrl: "",
+                url: ""
+            });
+        }
+    }, []);
 
     const _handleImageChange = e => {
         let _name = e.target.name;
@@ -90,6 +109,7 @@ function FormNews() {
                         type="text"
                         name="urlImage"
                         placeholder="URL"
+                        value={!type ? _state.url : ""}
                         onChange={_handleImageChange}
                     />
                 </Form.Group>

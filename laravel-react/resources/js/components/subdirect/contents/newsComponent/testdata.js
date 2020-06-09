@@ -2,7 +2,8 @@ export const testdata = [
     {
         id: 1,
         url: "System Architect",
-        images: "Edinburgh"
+        images:
+            "https://steamcdn-a.akamaihd.net/steam/apps/1089090/header.jpg?t=1585532796"
     },
     {
         id: 2,

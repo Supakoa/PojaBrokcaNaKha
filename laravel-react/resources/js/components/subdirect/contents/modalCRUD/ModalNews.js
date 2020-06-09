@@ -1,17 +1,25 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import { textHeader } from "./components/news/methodNews";
+import { textHeader } from "./components/methods";
 import FormNews from "./components/news/FormNews";
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
 
-    const { type, id } = props;
+    const { type, response } = props;
     const [_modal, setModal] = React.useState(false);
     const [_item, setItem] = React.useState({
         loading: false,
         data: []
     });
+
+    const _editOrAdd = _type => {
+        if (!type) {
+            return <FormNews response={response} type={type} />;
+        } else {
+            return <FormNews type={type} />;
+        }
+    };
 
     React.useEffect(() => {
         const abortController = new AbortController();
@@ -45,9 +53,7 @@ export default function ModalNews(props) {
                         {textHeader(type)}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <FormNews />
-                </Modal.Body>
+                <Modal.Body>{_editOrAdd(type)}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setModal(false)}>
                         close

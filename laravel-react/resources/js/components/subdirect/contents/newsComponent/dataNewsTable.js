@@ -46,7 +46,7 @@ const dataNewsTable = () => {
                     />
                 ),
                 url: res.url,
-                action: ColumnActions(idx, res.id)
+                action: ColumnActions(idx, res)
             };
             return responData;
         });
@@ -66,12 +66,12 @@ const dataNewsTable = () => {
     return { columns, rows };
 };
 
-const ColumnActions = (indexKey, _id) => {
+const ColumnActions = (indexKey, res) => {
     return (
         <div>
-            <ModalNews key={indexKey} type={false} id={_id} />
+            <ModalNews key={indexKey} type={false} response={res} />
             {" || "}
-            <ModalDelete key={indexKey + 1} id={_id} />
+            <ModalDelete key={indexKey + 1} id={res.id} />
         </div>
     );
 };
