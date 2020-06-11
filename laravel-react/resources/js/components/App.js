@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "sweetalert2/src/sweetalert2.scss";
-import Main from "./subdirect/Main";
+import Main from "./mainComponent/Main";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student/Student";
 import Register from "./../log-in/component/Register";
@@ -74,4 +74,3 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 export default App;
-
