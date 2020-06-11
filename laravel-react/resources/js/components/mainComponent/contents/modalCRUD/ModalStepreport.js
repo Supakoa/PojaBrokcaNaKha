@@ -89,13 +89,20 @@ export function ModalStepReport(props) {
 
 const InputNumber = props => {
     const [inputNumber, setInputNumber] = React.useState(false);
-    const handleClick = () => {
-        setInputNumber(true);
-    };
+    const handleClick = () => {};
+    const handleChange=(e)=>{
+        const {value, name} = e.target
+        console.log(value);
+
+    }
     const handleClose = () => setInputNumber(false);
     return (
         <>
-            <Button size="sm" variant="info" onClick={handleClick}>
+            <Button
+                size="sm"
+                variant="info"
+                onClick={() => setInputNumber(true)}
+            >
                 เพิ่ม
             </Button>
             <Modal
@@ -115,6 +122,8 @@ const InputNumber = props => {
                         <Form.Control
                             type="number"
                             placeholder="ใส่จำนวนตัวเลข"
+                            name="numberStep"
+                            onChange={handleChange}
                         />
                         <Form.Text className="text-muted">
                             ควรใส่จำนวนเป็นตัวเลข.
