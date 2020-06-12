@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col, Button, Alert } from "react-bootstrap";
-
+import { Container, Row, Col, Breadcrumb, Alert } from "react-bootstrap";
+import { AddChecker } from "./AddChecker";
 export const StepColors = props => {
     // console.log(props);
     const { numberStep } = props;
@@ -15,31 +15,27 @@ export const StepColors = props => {
                         <Row className="mb-2">
                             <Col xs={12} md={8}>
                                 <Alert variant={item} className="p-2 mb-0">
-                                    <Alert.Link href="#">{item}</Alert.Link>
+                                    <Alert.Link href="#">
+                                        step {index + 1}:
+                                        <Breadcrumb>
+                                            <Breadcrumb.Item>
+                                                Home
+                                            </Breadcrumb.Item>
+                                            <Breadcrumb.Item>
+                                                Library
+                                            </Breadcrumb.Item>
+                                            <Breadcrumb.Item>
+                                                Data
+                                            </Breadcrumb.Item>
+                                        </Breadcrumb>
+                                    </Alert.Link>
                                 </Alert>
                             </Col>
                             <Col xs={6} md={4} className="text-center">
-                                <Button
-                                    size="sm"
-                                    variant="info"
-                                    className="mt-2"
-                                >
-                                    +
-                                </Button>
+                                <AddChecker key={item} />
                             </Col>
-                            {_num !== 1 ? (
-                                <Col xs={12} md={8} className="text-center m-2">
-                                    <Button
-                                        className="text-dark"
-                                        size="sm"
-                                        variant="outline-warning"
-                                        disabled
-                                    >
-                                        step {index + 1}
-                                    </Button>
-                                </Col>
-                            ) : null}
                         </Row>
+                        <hr />
                     </Container>
                 );
             }
