@@ -20,7 +20,7 @@ export default function ModalUser(props) {
         // setValidated(true);
     };
     return (
-        <div>
+        <>
             <Button
                 name="modalUser"
                 variant={!type ? "warning" : "info"}
@@ -78,6 +78,6 @@ export default function ModalUser(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     );
 }

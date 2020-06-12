@@ -24,7 +24,7 @@ export default function dataTableStepReport() {
         {
             label: "actions",
             field: "action",
-            width: 200,
+            width: 100,
             sort: "disabled"
         }
     ];
@@ -58,7 +58,7 @@ export default function dataTableStepReport() {
 
 const ColumsAction = (idx, res) => {
     return (
-        <div className="d-flex justify-content-start">
+        <div>
             <ModalStepReport key={idx} response={res} />
             {" || "}
             <ModalDelete key={idx + 1} id={res.id} />

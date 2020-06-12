@@ -83,7 +83,7 @@ export const dataTableUser = () => {
 
 const ColumnAction = (idx, res) => {
     return (
-        <div className="d-flex justify-content-around">
+        <div>
             <ModalUser key={idx} id={res.id} type={false} />
             {" || "}
             <ModalDelete key={idx + 1} id={res.id} />

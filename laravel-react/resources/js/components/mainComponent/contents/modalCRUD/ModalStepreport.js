@@ -1,13 +1,6 @@
 import React from "react";
-import {
-    Button,
-    Container,
-    Modal,
-    Col,
-    Row,
-    Card,
-    Form
-} from "react-bootstrap";
+import { Button, Container, Modal, Col, Row, Card } from "react-bootstrap";
+import { InputNumber } from "./components/stepReport/InputNumber";
 import { StepColors } from "./components/stepReport/StepColors";
 // import Swal from "sweetalert2";
 
@@ -29,11 +22,23 @@ export function ModalStepReport(props) {
     // console.log(props);
     const { response } = props;
     const [modalShow, setModalShow] = React.useState(false);
-    const [_stepColors, setStepColors] = React.useState([]);
+    const [_stepColors, setStepColors] = React.useState(0);
     const modalStyle = { overflowY: "hidden" };
+    // const stepColorsMount = () => {
+
+    // };
+
+    React.useEffect(() => {
+        const abort = new AbortController();
+        // stepColorsMount({ signal: abort.signal });
+
+        return () => {
+            abort.abort();
+        };
+    }, [_stepColors]);
 
     return (
-        <div>
+        <>
             <Button
                 variant="warning"
                 name="btnEdit"
@@ -74,69 +79,17 @@ export function ModalStepReport(props) {
                                 เส้นทางเอกสาร
                             </Card.Title>
                         </Card.Header>
-                        <Card.Body>{StepColors(_stepColors)}</Card.Body>
+                        <Card.Body>
+                            <StepColors numberStep={_stepColors} />
+                        </Card.Body>
                     </Card>
                 </Modal.Body>
                 <Modal.Footer className="d-block">
                     <div className="text-center align-middle">
-                        <InputNumber />
+                        <InputNumber setColors={setStepColors} />
                     </div>
-                </Modal.Footer>
-            </Modal>
-        </div>
-    );
-}
-
-const InputNumber = props => {
-    const [inputNumber, setInputNumber] = React.useState(false);
-    const handleClick = () => {};
-    const handleChange=(e)=>{
-        const {value, name} = e.target
-        console.log(value);
-
-    }
-    const handleClose = () => setInputNumber(false);
-    return (
-        <>
-            <Button
-                size="sm"
-                variant="info"
-                onClick={() => setInputNumber(true)}
-            >
-                เพิ่ม
-            </Button>
-            <Modal
-                size="sm"
-                show={inputNumber}
-                onHide={handleClose}
-                backdrop="static"
-                centered
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>ใส่จำนวนขั้นตอน</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form.Group controlId="inputNumberStep">
-                        <Form.Label>จำนวน</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder="ใส่จำนวนตัวเลข"
-                            name="numberStep"
-                            onChange={handleChange}
-                        />
-                        <Form.Text className="text-muted">
-                            ควรใส่จำนวนเป็นตัวเลข.
-                        </Form.Text>
-                    </Form.Group>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
-};
+}
