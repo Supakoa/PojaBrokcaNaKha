@@ -11,15 +11,12 @@ export const AddChecker = props => {
 
     const handleSelect = e => {
         const { value } = e.target;
-        // console.log(e.target.value);
         if (value !== "0") {
             setNameChip(value);
         }
     };
 
     const handleClick = () => {
-        // console.log(_nameChip.length);
-
         if (_nameChip.length !== 0) {
             if (oldChipName !== []) {
                 setChip([...oldChipName, _nameChip]);

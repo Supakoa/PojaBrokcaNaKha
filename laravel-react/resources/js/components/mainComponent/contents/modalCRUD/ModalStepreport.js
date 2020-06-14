@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Container, Modal, Col, Row, Card } from "react-bootstrap";
 import { InputNumber } from "./components/stepReport/InputNumber";
 import { StepColors } from "./components/stepReport/StepColors";
-// import Swal from "sweetalert2";
 
 export function StepAdd(props) {
     return (
@@ -19,18 +18,13 @@ export function StepAdd(props) {
 }
 
 export function ModalStepReport(props) {
-    // console.log(props);
     const { response } = props;
     const [modalShow, setModalShow] = React.useState(false);
     const [_stepColors, setStepColors] = React.useState(0);
     const modalStyle = { overflowY: "hidden" };
-    // const stepColorsMount = () => {
-
-    // };
 
     React.useEffect(() => {
         const abort = new AbortController();
-        // stepColorsMount({ signal: abort.signal });
 
         return () => {
             abort.abort();

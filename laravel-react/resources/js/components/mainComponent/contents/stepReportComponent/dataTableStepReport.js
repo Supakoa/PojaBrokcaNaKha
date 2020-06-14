@@ -32,8 +32,6 @@ export default function dataTableStepReport() {
 
     const fetchRowData = _rows => {
         const _row = _rows.map((res, idx) => {
-            // console.log(res);
-
             const _response = {
                 id: res.id,
                 name: res.name,

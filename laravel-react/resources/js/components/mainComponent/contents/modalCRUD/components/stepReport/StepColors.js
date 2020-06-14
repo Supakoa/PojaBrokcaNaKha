@@ -4,13 +4,10 @@ import { AddChecker } from "./AddChecker";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 export const StepColors = props => {
-    // console.log(props);
     const { numberStep } = props;
     const [_chipName, setChipName] = React.useState([]);
 
-    const handleClickDelete = e => {
-        // console.log(e.target);
-    };
+    const handleClickDelete = e => {};
 
     const rowSteps = number => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
@@ -55,7 +52,6 @@ export const StepColors = props => {
     };
 
     React.useEffect(() => {
-        //    const fetchChip = () =>{}
         return () => {};
     }, [numberStep, _chipName]);
 
