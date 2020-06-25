@@ -1,0 +1,28 @@
+form_template : [
+    form: [
+        {
+            id: "",
+            input: [
+                {
+                    th_name = "",
+                    eng_name = "",
+                    type= "",
+                    value = "",
+                }
+            ]
+        }
+    ]
+]
+
+document
+    id Bigint
+    code varchar
+    user_id Bigint
+    form_type int
+    data text(JSON)
+    state int
+    status int
+    who_cancled Bigint
+    cancled_at timestamp
+    created_at timestamp
+    updated_at timestamp
