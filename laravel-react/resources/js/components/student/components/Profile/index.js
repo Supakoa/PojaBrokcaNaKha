@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
+import ProfileForm from "./ProfileForm";
 
 export default class Profile extends Component {
     render() {
@@ -9,10 +10,9 @@ export default class Profile extends Component {
                     <Card.Header>ประวัติส่วนตัว</Card.Header>
                 </Card.Title>
                 <Card.Body>
-                    <Row>
-                        <Col>Left</Col>
-                        <Col>Right</Col>
-                    </Row>
+                    <Container>
+                        <ProfileForm />
+                    </Container>
                 </Card.Body>
             </Card>
         );
