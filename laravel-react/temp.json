@@ -1,4 +1,4 @@
-form_template : [
+form_template : {[
     form: [
         {
             id: "",
@@ -12,7 +12,7 @@ form_template : [
             ]
         }
     ]
-]
+]}
 
 document
     id Bigint
@@ -26,3 +26,11 @@ document
     cancled_at timestamp
     created_at timestamp
     updated_at timestamp
+
+seed
+    subject (วิชา)
+    leave_type (ประเภทการลา)
+    web_type (ประเภทเว็ปไซส์)
+static
+    exam_type (ประเภทการสอบ)
+    academic_year (ปีการศึกษา)
