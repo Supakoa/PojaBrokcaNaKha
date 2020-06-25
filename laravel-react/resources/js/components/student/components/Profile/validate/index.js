@@ -1,4 +1,6 @@
-export const validateTitle = value => {};
+export const validateTitle = value => {
+    const catagories = ["นาย", "นาง", "นางสาว", "Mr", "Miss"];
+};
 
 export const validateFirstname = value => {};
 
