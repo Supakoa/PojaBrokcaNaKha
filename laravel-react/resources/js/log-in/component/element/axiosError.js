@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 const axiosError = error => {
     if (error.response) {
         // Request made and server responded
@@ -10,20 +11,20 @@ const axiosError = error => {
     } else if (error.request) {
         // The request was made but no response was received
         // console.log(error.request);
-        Swal.fire({
-            icon: "error",
-            title: "ผิดพลาด",
-            text: error.request
-        });
+        // Swal.fire({
+        //     icon: "error",
+        //     title: "ผิดพลาด",
+        //     text: error.request.title[0]
+        // });
         return { status: false, token: null, error: error.request };
     } else {
-        Swal.fire({
-            icon: "error",
-            title: "ผิดพลาด",
-            text: error.message
-        });
+        // Swal.fire({
+        //     icon: "error",
+        //     title: "ผิดพลาด",
+        //     text: error.message
+        // });
         // Something happened in setting up the request that triggered an Error
-        console.log("Error", error.message);
+        // console.log("Error", error.message);
         return { status: false, token: null, error: error.message };
     }
 };

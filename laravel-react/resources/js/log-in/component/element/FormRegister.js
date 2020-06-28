@@ -11,6 +11,7 @@ import postToken from "./postToken";
 import postUser from "./postUser";
 import validateConfirmPassword from "./validatePassword";
 import validateId from "./validateStudent-id";
+import Swal from "sweetalert2";
 
 export default function FormRegister() {
     let history = useHistory();
@@ -48,7 +49,7 @@ export default function FormRegister() {
         };
     }, [_faculties]);
 
-    const hadleChanges = event => {
+    const handleChanges = event => {
         const name = event.target.name;
         const value = event.target.value;
         const oldPass = _user.password;
@@ -128,10 +129,12 @@ export default function FormRegister() {
         }
     };
 
+    // console.log(_responError);
+
     const handleOnClick = async event => {
         const form = event.currentTarget.checkValidity();
         const item = {
-            title: "eiei",
+            title: _user.title,
             role_id: 3,
             major_id: _user.major,
             student_id: _user.studentId,
@@ -142,11 +145,15 @@ export default function FormRegister() {
             telephone: _user.phone,
             c_password: _user.conPassword
         };
+        // console.log(item);
+
         setLoading(false);
         setValidated(!form);
         if (form) {
             setLoading(false);
             const tokenRegis = await postToken(item);
+            console.log(tokenRegis.error.error.title[0]);
+
             if (tokenRegis.status) {
                 setUser({
                     ..._user,
@@ -174,17 +181,28 @@ export default function FormRegister() {
                     }
                 }
             } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "ผิดพลาด",
+                    text: tokenRegis.error.error.title[0]
+                });
                 setLoading(true);
                 event.preventDefault();
                 event.stopPropagation();
                 setResponError({
-                    message: [..._responError, tokenRegis.error]
+                    message: [
+                        ..._responError,
+                        tokenRegis.error.error.c_password[0]
+                    ]
                 });
                 setUser({
                     ..._user,
                     token: tokenRegis.token
                 });
-                setLoading(true);
+                setTimeout(() => {
+                    setLoading(true);
+                }, 2000);
+                setLoading(false);
             }
         } else {
             setLoading(true);
@@ -202,6 +220,20 @@ export default function FormRegister() {
         >
             <LogoRegis />
             <Form.Row className="mt-4">
+                <Form.Group as={Col} controlId="title" sm={2} md={3} lg={3}>
+                    <Form.Label
+                        className={validated ? "text-danger" : "text-info"}
+                    >
+                        คำนำหน้า
+                    </Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="คำนำหน้า"
+                        name="title"
+                        onChange={handleChanges}
+                    />
+                </Form.Group>
                 <Form.Group as={Col} controlId="firstName">
                     <Form.Label
                         className={validated ? "text-danger" : "text-info"}
@@ -213,7 +245,7 @@ export default function FormRegister() {
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -234,7 +266,7 @@ export default function FormRegister() {
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -258,7 +290,7 @@ export default function FormRegister() {
                         type="text"
                         placeholder="รหัสนักศึกษา"
                         name="studentId"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                         isInvalid={_isValidStudentId}
                     />
 
@@ -295,7 +327,7 @@ export default function FormRegister() {
                         type="text"
                         placeholder="รหัสผ่าน"
                         name="password"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     />
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
@@ -316,7 +348,7 @@ export default function FormRegister() {
                         isInvalid={_isValidConPass}
                         placeholder="ยืนยัน รหัสผ่าน"
                         name="conPassword"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     />
                     {_isValidConPass ? (
                         _error.error.message.map((message, index) => {
@@ -353,7 +385,7 @@ export default function FormRegister() {
                         type="email"
                         placeholder="example@ssru.ac.th.com"
                         name="email"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     />
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
@@ -375,7 +407,7 @@ export default function FormRegister() {
                         placeholder="เบอร์โทรศัพท์"
                         name="phone"
                         isInvalid={_isValidPhone}
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     />
                     {_isValidPhone ? (
                         _error.error.message.map((message, index) => {
@@ -412,7 +444,7 @@ export default function FormRegister() {
                         as="select"
                         custom
                         name="faculty"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                     >
                         {}
                         <option value="">คณะ</option>
@@ -442,7 +474,7 @@ export default function FormRegister() {
                         as="select"
                         custom
                         name="major"
-                        onChange={hadleChanges}
+                        onChange={handleChanges}
                         disabled={_select}
                     >
                         <option value="">สาขา</option>
