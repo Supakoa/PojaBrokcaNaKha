@@ -11,7 +11,7 @@
                     "eng_title": "Choose your Subject",
                     "th_name": "วิชา",
                     "eng_name": "Subject",
-                    "tag": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -21,7 +21,7 @@
                     "eng_title": "Choose your Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 }
@@ -38,7 +38,7 @@
                     "eng_title": "Choose Subject",
                     "th_name": "วิชา",
                     "eng_name": "Subject",
-                    "tag": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -48,7 +48,7 @@
                     "eng_title": "Enter Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -58,7 +58,7 @@
                     "eng_title": "Choose Type of Exam",
                     "th_name": "ประเภทการสอบ",
                     "eng_name": "Type of Exam",
-                    "tag_type": "dropdown",
+                    "tag_type": "select",
                     "data": ["กลางภาค",  "ปลายภาค"],
                     "size": 6
                 },
@@ -68,7 +68,7 @@
                     "eng_title": "Enter Your cause",
                     "th_name": "สาเหตุ",
                     "eng_name": "cause",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -95,7 +95,7 @@
                     "eng_title": "Choose Subject",
                     "th_name": "วิชา",
                     "eng_name": "Subject",
-                    "tag": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -105,7 +105,7 @@
                     "eng_title": "Enter Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -115,7 +115,7 @@
                     "eng_title": "Enter Academic Year",
                     "th_name": "ปีการศึกษา",
                     "eng_name": "Academic Year",
-                    "tag_type": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -125,7 +125,7 @@
                     "eng_title": "Enter Your cause",
                     "th_name": "สาเหตุ",
                     "eng_name": "cause",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -152,7 +152,7 @@
                     "eng_title": "Choose Subject",
                     "th_name": "วิชา",
                     "eng_name": "Subject",
-                    "tag": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -162,7 +162,7 @@
                     "eng_title": "Enter Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -172,7 +172,7 @@
                     "eng_title": "Choose Type of Exam",
                     "th_name": "ประเภทการสอบ",
                     "eng_name": "Type of Exam",
-                    "tag_type": "dropdown",
+                    "tag_type": "select",
                     "data": ["กลางภาค",  "ปลายภาค"],
                     "size": 6
                 },
@@ -182,7 +182,7 @@
                     "eng_title": "Enter Your cause",
                     "th_name": "สาเหตุ",
                     "eng_name": "cause",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -209,7 +209,7 @@
                     "eng_title": "Choose Subject",
                     "th_name": "วิชา",
                     "eng_name": "Subject",
-                    "tag": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -219,7 +219,7 @@
                     "eng_title": "Enter Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -229,7 +229,7 @@
                     "eng_title": "Choose Leave type",
                     "th_name": "ประเภทการลา",
                     "eng_name": "Leave type",
-                    "tag_type": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -239,7 +239,7 @@
                     "eng_title": "Enter Your cause",
                     "th_name": "สาเหตุ",
                     "eng_name": "cause",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -266,7 +266,7 @@
                     "eng_title": "Choose Subject",
                     "th_name": "วิชา",
                     "eng_name": "Subject",
-                    "tag": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -276,7 +276,7 @@
                     "eng_title": "Enter Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
@@ -286,7 +286,7 @@
                     "eng_title": "Choose Website Type",
                     "th_name": "ประเภทเว็ปไซส์",
                     "eng_name": "Website Type",
-                    "tag_type": "dropdown",
+                    "tag_type": "select",
                     "data": "",
                     "size": 6
                 },
@@ -296,7 +296,7 @@
                     "eng_title": "Enter Your cause",
                     "th_name": "สาเหตุ",
                     "eng_name": "cause",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 }
@@ -313,7 +313,7 @@
                     "eng_title": "Enter Student Group",
                     "th_name": "กลุ่มเรียน",
                     "eng_name": "Student Group",
-                    "tag_type": "input:text",
+                    "tag_type": "text",
                     "data": "",
                     "size": 6
                 },
