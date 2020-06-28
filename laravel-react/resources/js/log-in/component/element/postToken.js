@@ -1,5 +1,5 @@
 import axios from "axios";
-// import Swal from "sweetalert2";
+
 import axiosError from "./axiosError";
 
 const postToken = async item => {

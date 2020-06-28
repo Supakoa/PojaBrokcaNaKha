@@ -34,7 +34,7 @@ export default function FormRegister() {
             message: []
         }
     });
-    const [_responError, setResponError] = React.useState({ message: [] });
+    const [_responError, setResponError] = React.useState({ message: {} });
 
     React.useEffect(() => {
         const abortController = new AbortController();
@@ -184,17 +184,12 @@ export default function FormRegister() {
                 Swal.fire({
                     icon: "error",
                     title: "ผิดพลาด",
-                    text: tokenRegis.error.error.title[0]
+                    text: tokenRegis.error.error.c_password[0]
                 });
                 setLoading(true);
                 event.preventDefault();
                 event.stopPropagation();
-                setResponError({
-                    message: [
-                        ..._responError,
-                        tokenRegis.error.error.c_password[0]
-                    ]
-                });
+                setResponError({ message: tokenRegis.error });
                 setUser({
                     ..._user,
                     token: tokenRegis.token
@@ -233,6 +228,11 @@ export default function FormRegister() {
                         name="title"
                         onChange={handleChanges}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        {_responError.message
+                            ? "กรุณากรอก คำนำหน้า"
+                            : _responError.message.title[0]}
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} controlId="firstName">
                     <Form.Label
@@ -251,7 +251,7 @@ export default function FormRegister() {
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
                             ? "กรุณากรอก ชื่อ"
-                            : _responError.message.first_name}
+                            : _responError.message.first_name[0]}
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -272,7 +272,7 @@ export default function FormRegister() {
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
                             ? "กรุณากรอก นามสกุล"
-                            : _responError.message.last_name}
+                            : _responError.message.last_name[0]}
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
@@ -311,7 +311,7 @@ export default function FormRegister() {
                         <Form.Control.Feedback type="invalid">
                             {_responError.message
                                 ? "กรุณากรอก รหัสนักศึกษา"
-                                : _responError.message.studebt_id}
+                                : _responError.message.studebt_id[0]}
                         </Form.Control.Feedback>
                     )}
                 </Form.Group>
@@ -332,7 +332,7 @@ export default function FormRegister() {
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
                             ? "กรุณากรอก รหัสผ่าน"
-                            : _responError.message.password}
+                            : _responError.message.password[0]}
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -367,7 +367,7 @@ export default function FormRegister() {
                         <Form.Control.Feedback type="invalid">
                             {_responError.message
                                 ? "กรุณากรอก ยืนยันรหัสผ่าน"
-                                : _responError.message.c_password}
+                                : _responError.message.c_password[0]}
                         </Form.Control.Feedback>
                     )}
                 </Form.Group>
@@ -390,7 +390,7 @@ export default function FormRegister() {
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
                             ? "กรุณากรอก อีเมล"
-                            : _responError.message.email}
+                            : _responError.message.email[0]}
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -426,7 +426,7 @@ export default function FormRegister() {
                         <Form.Control.Feedback type="invalid">
                             {_responError.message
                                 ? "กรุณากรอก เบอร์โทรศัพท์"
-                                : _responError.message.telephone}
+                                : _responError.message.telephone[0]}
                         </Form.Control.Feedback>
                     )}
                 </Form.Group>
@@ -491,7 +491,7 @@ export default function FormRegister() {
                     <Form.Control.Feedback type="invalid">
                         {_responError.message
                             ? "กรุณากรอกเลือก สาขา"
-                            : _responError.message.major_id}
+                            : _responError.message.major_id[0]}
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>

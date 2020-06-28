@@ -8,11 +8,12 @@ export default function TableUser() {
 
     return (
         <MDBDataTableV5
-            className="align-self-center align-middle"
+            className="align-self-center align-middle text-center"
             fullPagination
             searchTop
             searchBottom={false}
             hover
+            scrollX
             entriesOptions={[5, 20, 25]}
             entries={5}
             pagesAmount={4}

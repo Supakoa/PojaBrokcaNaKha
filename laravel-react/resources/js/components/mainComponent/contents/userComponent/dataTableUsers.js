@@ -6,12 +6,6 @@ import ModalDelete from "../modalCRUD/ModalDelete";
 export const dataTableUser = () => {
     const columns = [
         {
-            label: <ModalUser type={true} />,
-            field: "action",
-            sort: "disabled",
-            width: 200
-        },
-        {
             label: "#",
             field: "id",
             sort: "desc",
@@ -46,6 +40,12 @@ export const dataTableUser = () => {
             label: "สาขา",
             field: "major",
             width: 100
+        },
+        {
+            label: "action",
+            field: "action",
+            sort: "disabled",
+            width: 250
         }
     ];
 
@@ -57,7 +57,7 @@ export const dataTableUser = () => {
                 action: ColumnAction(idx, res),
                 id: res.id,
                 name: res.firstName + " " + res.lastName,
-                role: res.role,
+                role: userRole(res.role),
                 email: res.email,
                 phone: res.phone,
                 faculty: "",
@@ -67,6 +67,19 @@ export const dataTableUser = () => {
             return response;
         });
         return _row;
+    };
+
+    const userRole = _role => {
+        switch (_role) {
+            case 1:
+                return "ผู้ดูแลระบบ";
+            case 2:
+                return "อาจารย์ ผู้ตรวจ";
+            case 3:
+                return "นักศึกษา";
+            default:
+                return "ไม่มีตำแหน่งกำหนด";
+        }
     };
 
     React.useEffect(() => {
@@ -83,10 +96,10 @@ export const dataTableUser = () => {
 
 const ColumnAction = (idx, res) => {
     return (
-        <div>
+        <>
             <ModalUser key={idx} id={res.id} type={false} />
             {" || "}
             <ModalDelete key={idx + 1} id={res.id} />
-        </div>
+        </>
     );
 };
