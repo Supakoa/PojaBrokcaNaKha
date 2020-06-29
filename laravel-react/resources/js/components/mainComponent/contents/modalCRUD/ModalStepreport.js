@@ -81,7 +81,9 @@ export function ModalStepReport(props) {
                         </div>
                     </Card>
                 </Modal.Body>
-                <Modal.Footer className="d-block"></Modal.Footer>
+                <Modal.Footer>
+                    <Button variant="primary">บันทึก</Button>
+                </Modal.Footer>
             </Modal>
         </>
     );
