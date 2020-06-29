@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Card, Button, Image, Overlay, Popover } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import ModalNews from "./modalCRUD/ModalNews";
 import TableNews from "./newsComponent/Table";
 
 export default class News extends Component {
@@ -12,6 +13,7 @@ export default class News extends Component {
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
+                    <ModalNews type={true} />
                     <TableNews />
                 </Card.Body>
             </Card>

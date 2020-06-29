@@ -24,7 +24,7 @@ const dataNewsTable = () => {
             sort: "disabled"
         },
         {
-            label: <ModalNews type={true} />,
+            label: "action",
             field: "action",
             width: 100,
             sort: "disabled"
