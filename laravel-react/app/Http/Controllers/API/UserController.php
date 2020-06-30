@@ -31,6 +31,7 @@ class UserController extends Controller
     /**
      * Register api
      *
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request)
