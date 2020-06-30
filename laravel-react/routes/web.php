@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::resource('post', 'PostController');
 Route::view('/{path?}', 'app')->where('path', '.*')->name('react');
 //Route::view('/{path?}/{path2?}', 'app');
 //Route::view('/{path?}/{path2?}/{path3?}', 'app');
@@ -20,3 +20,4 @@ Route::view('/{path?}', 'app')->where('path', '.*')->name('react');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+

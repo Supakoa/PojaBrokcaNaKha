@@ -24,4 +24,5 @@ Route::get('faculties/{faculty}/majors', 'CRUD\FacultyController@getMajorByFacul
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user', 'API\UserController@user');
     Route::post('logout', 'API\UserController@logout');
+    Route::resource('ChatMessenger','CRUD\ChatMessengerController');
 });
