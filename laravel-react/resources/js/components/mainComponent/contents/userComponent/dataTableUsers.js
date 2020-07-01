@@ -64,22 +64,20 @@ export const dataTableUser = () => {
     const [users, setUsers] = React.useState(testData);
 
     const fetchRowData = _data => {
-        console.log(_data);
 
         const _row = _data.map((res, idx) => {
-            const response = {
+            return {
                 action: ColumnAction(idx, res),
                 id: res.id,
-                name: res.firstName + " " + res.lastName,
+                name: res.title + " " + res.first_name + " " + res.last_name,
                 role: userRole(res.role),
                 email: res.email,
-                phone: res.phone,
+                phone: res.telephone,
                 faculty: "",
-                major: ""
+                major: res.major_id
             };
-
-            return response;
         });
+        console.log(`row :`, _row)
         return _row;
     };
 
@@ -93,12 +91,14 @@ export const dataTableUser = () => {
                 }
             })
             .then(res => {
-                const { data } = res;
-                const _items = fetchRowData(data);
-                return _items;
+                const { success } = res.data;
+                const _items = fetchRowData(success);
+                setRows(_items)
                 // setUsers(res.data);
+                // console.log(`items: `, typeof _items)
+                // return _items;
             });
-        return _getusers;
+        // return _getusers;
     };
 
     const userRole = _role => {
@@ -117,16 +117,18 @@ export const dataTableUser = () => {
     React.useEffect(() => {
         // mount
         const abort = new AbortController();
-        const _rows = getUsers();
 
-        // setRows(_rows);
+        getUsers();
+        // console.log(`rows :` + _rows)
+        // console.log([_rows])
+        // setRows([_rows]);
         // willmount
         return () => {
             abort.abort();
         };
         // update
     }, []);
-    console.log(users);
+    // console.log(users);
 
     return { columns, rows };
 };
