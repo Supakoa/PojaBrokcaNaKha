@@ -64,6 +64,7 @@ export const dataTableUser = () => {
     const [users, setUsers] = React.useState(testData);
 
     const fetchRowData = _data => {
+
         const _row = _data.map((res, idx) => {
             return {
                 action: ColumnAction(idx, res),
@@ -76,7 +77,7 @@ export const dataTableUser = () => {
                 major: res.major_id
             };
         });
-        console.log(`row :`, _row);
+        console.log(`row :`, _row)
         return _row;
     };
 
@@ -92,7 +93,7 @@ export const dataTableUser = () => {
             .then(res => {
                 const { success } = res.data;
                 const _items = fetchRowData(success);
-                setRows(_items);
+                setRows(_items)
                 // setUsers(res.data);
                 // console.log(`items: `, typeof _items)
                 // return _items;
