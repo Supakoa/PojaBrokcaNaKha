@@ -60,10 +60,12 @@ export const dataTableUser = () => {
         }
     ];
 
-    const [rows, setRows] = React.useState([])
-    const [users, setUsers] = React.useState(testData)
+    const [rows, setRows] = React.useState([]);
+    const [users, setUsers] = React.useState(testData);
 
     const fetchRowData = _data => {
+        console.log(_data);
+
         const _row = _data.map((res, idx) => {
             const response = {
                 action: ColumnAction(idx, res),
@@ -82,14 +84,22 @@ export const dataTableUser = () => {
     };
 
     const getUsers = async () => {
-        await axios.get('http://127.0.0.1:8000/api/users', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('_authLocal')}`
-            }
-        }).then(res => {
-                setUsers(res.data)
+        const _getusers = await axios
+            .get("http://127.0.0.1:8000/api/users", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }
             })
-    }
+            .then(res => {
+                const { data } = res;
+                const _items = fetchRowData(data);
+                return _items;
+                // setUsers(res.data);
+            });
+        return _getusers;
+    };
 
     const userRole = _role => {
         switch (_role) {
@@ -107,17 +117,16 @@ export const dataTableUser = () => {
     React.useEffect(() => {
         // mount
         const abort = new AbortController();
-        console.log(users)
-        const _rows = fetchRowData(users, { signal: abort.signal });
-        setRows(_rows);
+        const _rows = getUsers();
+
+        // setRows(_rows);
         // willmount
         return () => {
             abort.abort();
         };
         // update
     }, []);
+    console.log(users);
 
     return { columns, rows };
 };
-
-
