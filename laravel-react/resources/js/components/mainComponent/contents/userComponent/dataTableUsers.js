@@ -107,7 +107,7 @@ export const dataTableUser = () => {
     React.useEffect(() => {
         // mount
         const abort = new AbortController();
-        console.log(users)
+        // console.log(users)
         const _rows = fetchRowData(users, { signal: abort.signal });
         setRows(_rows);
         // willmount
