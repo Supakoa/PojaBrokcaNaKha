@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "sweetalert2/src/sweetalert2.scss";
-import Main from "./mainComponent/Main";
+import AdminPage from "./AdminPage";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student";
 import Register from "./../log-in/component";
@@ -28,7 +28,7 @@ function App() {
                 </Route>
 
                 <PrivateRoute path="/admin">
-                    <Main />
+                    <AdminPage />
                 </PrivateRoute>
                 <PrivateRoute path="/student">
                     <Student />

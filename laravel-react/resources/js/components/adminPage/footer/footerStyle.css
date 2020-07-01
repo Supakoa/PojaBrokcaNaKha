@@ -1,0 +1,10 @@
+footer{
+    background-color: #E2E3E5;
+    text-align: center;
+    overflow-y: hidden;
+    font-size: 20px;
+    width: 100%;
+    bottom: 0;
+    padding: 4px;
+    height: 6vh;
+}
