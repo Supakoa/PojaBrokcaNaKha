@@ -27,3 +27,5 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::resource('ChatMessenger','CRUD\ChatMessengerController');
 });
+
+Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
