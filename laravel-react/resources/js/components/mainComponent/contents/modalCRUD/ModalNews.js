@@ -43,7 +43,7 @@ export default function ModalNews(props) {
                 animation={true}
                 centered={true}
                 backdrop="static"
-                size="lg"
+                size="md"
                 show={_modal}
                 onHide={() => setModal(false)}
                 aria-labelledby="example-modal-sizes-title-lg"

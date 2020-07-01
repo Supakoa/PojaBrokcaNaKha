@@ -12,12 +12,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            role::class,
+            admin::class,
             faculty::class,
             major::class,
-            role::class,
             status::class,
-            subject::class,
-            admin::class
+            subject::class
         ]);
+        factory(App\User::class, 10)->create();
     }
 }

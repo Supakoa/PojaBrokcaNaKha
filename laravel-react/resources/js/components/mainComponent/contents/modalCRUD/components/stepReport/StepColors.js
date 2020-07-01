@@ -23,6 +23,7 @@ export const StepColors = props => {
                                     {_chipName.map((chip, idx) => {
                                         return (
                                             <Chip
+                                                id={idx}
                                                 color="primary"
                                                 key={idx.toString()}
                                                 avatar={

@@ -14,9 +14,11 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/passport": "^9.1",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "laravelcollective/html": "^6.1"
     },
     "require-dev": {
+        "appzcoder/crud-generator": "^3.2",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "laravel/ui": "^2.0",
@@ -60,6 +62,10 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "singha" : [
+            "@php artisan mi:f --seed",
+            "@php artisan passport:install"
         ]
     }
 }

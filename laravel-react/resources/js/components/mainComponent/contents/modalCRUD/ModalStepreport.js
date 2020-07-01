@@ -76,12 +76,13 @@ export function ModalStepReport(props) {
                         <Card.Body>
                             <StepColors numberStep={_stepColors} />
                         </Card.Body>
+                        <div className="text-center align-middle">
+                            <InputNumber setColors={setStepColors} />
+                        </div>
                     </Card>
                 </Modal.Body>
-                <Modal.Footer className="d-block">
-                    <div className="text-center align-middle">
-                        <InputNumber setColors={setStepColors} />
-                    </div>
+                <Modal.Footer>
+                    <Button variant="primary">บันทึก</Button>
                 </Modal.Footer>
             </Modal>
         </>

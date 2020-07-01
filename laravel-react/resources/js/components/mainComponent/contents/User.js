@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
 import TableUser from "./userComponent/Table";
+import ModalUser from "./modalCRUD/ModalUser";
 
 export default class User extends Component {
     constructor(props) {
@@ -15,6 +16,10 @@ export default class User extends Component {
                     <Card.Title className="p-2">สมาชิก</Card.Title>
                 </Card.Header>
                 <Card.Body className="w-100">
+                    <div className="text-right justify-content-end">
+                        <ModalUser type={true} />
+                    </div>
+
                     <TableUser />
                 </Card.Body>
             </Card>

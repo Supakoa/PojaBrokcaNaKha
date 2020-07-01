@@ -11,17 +11,22 @@ export default function dataReport() {
             width: 20
         },
         {
-            label: "เรื่อง",
-            field: "name",
+            label: "ประเภทคำร้อง",
+            field: "typeForm",
             width: 150
         },
         {
-            label: "เวลาสร้าง",
+            label: "ชื่อผู้ส่ง",
+            field: "sender",
+            width: 150
+        },
+        {
+            label: "เวลาส่ง",
             field: "sendTime",
             width: 120
         },
         {
-            label: "เวลาแก้ไข",
+            label: "แก้ไขล่าสุด",
             field: "editTime",
             width: 120
         },
@@ -41,7 +46,8 @@ export default function dataReport() {
 
             const response = {
                 id: res.id,
-                name: res.name,
+                typeForm: res.typeForm,
+                sender: res.sender,
                 sendTime: res.start,
                 editTime: res.end,
                 status: ReportStatus(res.status)
