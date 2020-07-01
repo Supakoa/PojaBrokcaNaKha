@@ -29,3 +29,5 @@ Route::group(['middleware' => 'auth:api'], function() {
 });
 
 Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
+Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
+Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
