@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\form;
+use App\Form;
 use Illuminate\Http\Request;
 
-class formsController extends Controller
+class FormsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class formsController extends Controller
      */
     public function index(Request $request)
     {
-        $forms = form::latest()->paginate(25);
+        $forms = Form::latest()->paginate(25);
 
         return $forms;
     }
@@ -31,8 +31,8 @@ class formsController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $form = form::create($request->all());
+
+        $form = Form::create($request->all());
 
         return response()->json($form, 201);
     }
@@ -46,7 +46,7 @@ class formsController extends Controller
      */
     public function show($id)
     {
-        $form = form::findOrFail($id);
+        $form = Form::findOrFail($id);
 
         return $form;
     }
@@ -61,8 +61,8 @@ class formsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $form = form::findOrFail($id);
+
+        $form = Form::findOrFail($id);
         $form->update($request->all());
 
         return response()->json($form, 200);
@@ -77,8 +77,11 @@ class formsController extends Controller
      */
     public function destroy($id)
     {
-        form::destroy($id);
+        Form::destroy($id);
 
         return response()->json(null, 204);
+    }
+    public function documents(Form $form){
+        return response()->json(['success' => $form->documents()], $this->successStatus);
     }
 }

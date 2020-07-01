@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class form extends Model
+class Form extends Model
 {
     /**
      * The database table used by the model.
@@ -31,5 +31,5 @@ class form extends Model
     {
         return $this->hasMany('App\Document');
     }
-    
+
 }
