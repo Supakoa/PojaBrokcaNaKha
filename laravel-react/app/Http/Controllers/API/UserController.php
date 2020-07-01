@@ -90,4 +90,8 @@ class UserController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
+
+    public function documents(User $user){
+        return response()->json(['success' => $user->documents()], $this->successStatus);
+    }
 }

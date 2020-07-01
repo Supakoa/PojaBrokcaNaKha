@@ -24,6 +24,7 @@ Route::get('faculties/{faculty}/majors', 'CRUD\FacultyController@getMajorByFacul
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user', 'API\UserController@user');
     Route::get('users', 'API\UserController@users');
+    Route::get('users/{user}/documents', 'API\UserController@documents');
     Route::post('logout', 'API\UserController@logout');
     Route::resource('ChatMessenger','CRUD\ChatMessengerController');
 });
@@ -31,3 +32,4 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
 Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
+Route::resource('forms/{forms}/documents','formsController@documents');
