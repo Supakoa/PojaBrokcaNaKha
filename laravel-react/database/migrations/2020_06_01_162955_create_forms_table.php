@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateFormsTable extends Migration
 {
@@ -15,10 +14,12 @@ class CreateFormsTable extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
-            $table->integer('all_steps');
             $table->timestamps();
-        });
+            $table->string('th_name')->nullable();
+            $table->string('eng_name')->nullable();
+            $table->json('data')->nullable();
+            $table->tinyInteger('all_state')->nullable();
+            });
     }
 
     /**
@@ -28,6 +29,6 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forms');
+        Schema::drop('forms');
     }
 }

@@ -1,0 +1,84 @@
+{
+    "fields": [
+
+        {
+            "name": "user_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "user_cancel_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "form_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "data",
+            "type": "json"
+        },
+        {
+            "name": "state",
+            "type": "tinyint",
+            "default": "0"
+        }, {
+            "name": "status",
+            "type": "select",
+            "options": {
+                "pending": "pending",
+                "success": "success",
+                "reject": "reject",
+                "cancel": "cancel"
+            },
+            "default": "pending"
+        },{
+            "name": "canceled_at",
+            "type": "timestamp"
+        },{
+            "name": "note",
+            "type": "text"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users"
+        },
+        {
+            "column": "user_cancel_id",
+            "references": "id",
+            "on": "users"
+        },
+        {
+            "column": "form_id",
+            "references": "id",
+            "on": "forms"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\User"
+        },{
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Form"
+        }
+    ],
+    "validations": [
+        {
+            "field": "user_id",
+            "rules": "required"
+        },
+        {
+            "field": "form_id",
+            "rules": "required"
+        },
+        {
+            "field": "data",
+            "rules": "required"
+        }
+    ]
+}
