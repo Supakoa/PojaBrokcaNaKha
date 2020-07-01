@@ -1,0 +1,20 @@
+{
+    "fields": [
+        {
+            "name": "type",
+            "type": "string"
+        },
+        {
+            "name": "image",
+            "type": "text"
+        }
+    ],
+    "validations": [
+        {
+            "field": "image",
+            "rules": "mimes:jpeg,jpg,png|required|max:10000"
+        }
+    ]
+
+
+}

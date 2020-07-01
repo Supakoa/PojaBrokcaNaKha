@@ -75,7 +75,7 @@ class UserController extends Controller
     }
     public function users()
     {
-        $user =User::all();
+        $user = User::all();
         return response()->json(['success' => $user], $this->successStatus);
     }
     /**
