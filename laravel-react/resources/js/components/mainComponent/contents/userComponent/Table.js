@@ -13,7 +13,6 @@ export default function TableUser() {
             searchTop
             searchBottom={false}
             hover
-            scrollX
             entriesOptions={[5, 20, 25]}
             entries={5}
             pagesAmount={4}
