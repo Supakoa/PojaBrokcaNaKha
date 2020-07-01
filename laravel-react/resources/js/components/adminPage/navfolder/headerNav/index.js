@@ -8,7 +8,7 @@ export default function HeaderNav(props) {
     const token = localStorage._authLocal;
 
     return (
-        <Navbar bg="light" expand="sm">
+        <Navbar bg="light">
             <Navbar.Brand href={props.path} className="text-info">
                 <img
                     src={Logo}

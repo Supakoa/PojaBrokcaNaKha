@@ -1,4 +1,4 @@
-import Logo from "./../../../components/images/logo.png";
+import Logo from "./../../images/logo.png";
 import { Image } from "react-bootstrap";
 import React from "react";
 const LogoRegis = () => {

@@ -4,16 +4,16 @@ import ComponentRegister from "./ComponentRegister";
 import ComponentForgetPassword from "./ComponentForgetPassword";
 import FormLogin from "./FormLogin";
 import { useHistory } from "react-router-dom";
-import Logo from "./../components/images/logo.png";
+import Logo from "./../../images/logo.png";
 import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { user, isAuththen } from "../redux/actions";
+import { user, isAuththen } from "../../../redux/actions";
 import redirectPage from "./RedirectPage";
-import postUser from "./component/element/postUser";
+import postUser from "../post/postUser";
 import Swal from "sweetalert2";
 
-export default function LogIn() {
+export default function SignIn() {
     let _history = useHistory();
     const dispatch = useDispatch();
     const [_loading, setLoading] = React.useState(true);

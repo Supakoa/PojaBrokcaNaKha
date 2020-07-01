@@ -2,10 +2,10 @@ import React from "react";
 // import { Link, useHistory, useLocation } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 
-import ComponentLogin from "../../components/auth/sign-up/ComponentLogin";
-import FormRegister from "../../components/auth/sign-up/FormRegister";
+import ComponentLogin from "./ComponentLogin";
+import FormRegister from "./FormRegister";
 
-export default function Register() {
+export default function SignUp() {
     return (
         <Container fluid className="effectSection">
             <Row className="section-log-in">

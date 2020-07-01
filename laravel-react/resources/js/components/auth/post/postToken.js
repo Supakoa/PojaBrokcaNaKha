@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import axiosError from "./axiosError";
-
 const postToken = async item => {
     const authToken = await axios
         .post(`http://localhost:8000/api/register`, item)

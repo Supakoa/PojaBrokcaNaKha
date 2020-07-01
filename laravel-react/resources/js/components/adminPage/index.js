@@ -6,7 +6,7 @@ import "./Appstyle.css";
 import { user, isAuththen } from "../../redux/actions";
 import AuthUser from "../middleware/axios/User";
 import StepReport from "./stepReport";
-// import HeaderNav from "./navfolder/headerNav";
+import HeaderNav from "./navfolder/headerNav";
 import SideNav from "./navfolder/sideNav";
 // import Footer from "./footer";
 import Home from "./home";
@@ -43,9 +43,11 @@ export default function AdminPage() {
 
     return (
         <Row className="app">
-            <SideNav url={url} />
-            <Col className="p-0">
-                {/* <HeaderNav path={url} info={_info} /> */}
+            <Col md={2} lg={2} className="bg-secondary pr-0">
+                <SideNav url={url} />
+            </Col>
+            <Col md={10} lg={10} className="p-0">
+                <HeaderNav path={url} info={_info} />
                 <div className="container-fluid p-4">
                     <Switch>
                         <Route exact path={`${path}`}>

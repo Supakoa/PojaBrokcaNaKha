@@ -8,11 +8,11 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "sweetalert2/src/sweetalert2.scss";
 import AdminPage from "./AdminPage";
-import LogIn from "./../log-in/LogIn";
+import SignIn from "./auth/sign-in";
 import Student from "./student";
-import Register from "./../log-in/component";
+import SignUp from "./auth/sign-up";
 import { useSelector } from "react-redux";
-import NoMatch from "../NotMatch404";
+import NoMatch from "./NotMatch404";
 
 function App() {
     const isAuthenticated = useSelector(state => state.redirectState);
@@ -21,12 +21,11 @@ function App() {
         <Router>
             <Switch>
                 <Route path="/login">
-                    <LogIn />
+                    <SignIn />
                 </Route>
                 <Route path="/register">
-                    <Register />
+                    <SignUp />
                 </Route>
-
                 <PrivateRoute path="/admin">
                     <AdminPage />
                 </PrivateRoute>
