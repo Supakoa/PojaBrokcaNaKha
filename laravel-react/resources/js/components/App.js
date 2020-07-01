@@ -10,7 +10,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import Main from "./mainComponent/Main";
 import LogIn from "./../log-in/LogIn";
 import Student from "./student";
-import Register from "./../log-in/component/Register";
+import Register from "./../log-in/component";
 import { useSelector } from "react-redux";
 import NoMatch from "../NotMatch404";
 

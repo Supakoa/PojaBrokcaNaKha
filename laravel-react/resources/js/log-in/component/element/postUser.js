@@ -1,6 +1,5 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import axiosError from "./axiosError";
 // import { user, isAuththen } from "../../../redux/actions";
 
 const postUser = async tokenRegis => {
@@ -21,11 +20,8 @@ const postUser = async tokenRegis => {
                 "success"
             );
             return { status: true, _role: role, _data: data };
-        })
-        .catch(error => {
-            const _error = axiosError(error);
-            return _error;
         });
+
     return userAuth;
 };
 

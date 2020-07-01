@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 export default function LogIn() {
     let _history = useHistory();
     const dispatch = useDispatch();
-    const [_load, setLoading] = React.useState(true);
+    const [_loading, setLoading] = React.useState(true);
     const [forgetPass, setForgetPass] = React.useState(false);
     const [_login, setLogin] = React.useState({
         username: "",
@@ -127,7 +127,7 @@ export default function LogIn() {
                                 />
                                 <p className="text-info">GE Petition</p>
 
-                                {_load ? (
+                                {_loading ? (
                                     <>
                                         {!forgetPass ? (
                                             <h3 className="p-1 effectSection">
