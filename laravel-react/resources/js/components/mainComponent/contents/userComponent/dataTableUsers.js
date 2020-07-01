@@ -2,6 +2,17 @@ import React from "react";
 import ModalUser from "../modalCRUD/ModalUser";
 import { testData } from "./testData";
 import ModalDelete from "../modalCRUD/ModalDelete";
+import axios from "axios";
+
+const ColumnAction = (idx, res) => {
+    return (
+        <>
+            <ModalUser key={idx} id={res.id} type={false} />
+            {" || "}
+            <ModalDelete key={idx + 1} id={res.id} />
+        </>
+    );
+};
 
 export const dataTableUser = () => {
     const columns = [
@@ -49,7 +60,8 @@ export const dataTableUser = () => {
         }
     ];
 
-    const [rows, setRows] = React.useState([]);
+    const [rows, setRows] = React.useState([])
+    const [users, setUsers] = React.useState(testData)
 
     const fetchRowData = _data => {
         const _row = _data.map((res, idx) => {
@@ -69,6 +81,16 @@ export const dataTableUser = () => {
         return _row;
     };
 
+    const getUsers = async () => {
+        await axios.get('http://127.0.0.1:8000/api/users', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('_authLocal')}`
+            }
+        }).then(res => {
+                setUsers(res.data)
+            })
+    }
+
     const userRole = _role => {
         switch (_role) {
             case 1:
@@ -83,23 +105,19 @@ export const dataTableUser = () => {
     };
 
     React.useEffect(() => {
+        // mount
         const abort = new AbortController();
-        const _rows = fetchRowData(testData, { signal: abort.signal });
+        console.log(users)
+        const _rows = fetchRowData(users, { signal: abort.signal });
         setRows(_rows);
+        // willmount
         return () => {
             abort.abort();
         };
+        // update
     }, []);
 
     return { columns, rows };
 };
 
-const ColumnAction = (idx, res) => {
-    return (
-        <>
-            <ModalUser key={idx} id={res.id} type={false} />
-            {" || "}
-            <ModalDelete key={idx + 1} id={res.id} />
-        </>
-    );
-};
+
