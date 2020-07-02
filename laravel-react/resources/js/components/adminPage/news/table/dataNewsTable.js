@@ -3,6 +3,17 @@ import { Image } from "react-bootstrap";
 import ModalNews from "../../modals/ModalNews";
 import ModalDelete from "../../modals/ModalDelete";
 import { testdata } from "./testdata";
+import Axios from "axios";
+
+const ColumnActions = (indexKey, res) => {
+    return (
+        <div>
+            <ModalNews key={indexKey} type={false} response={res} />
+            {" || "}
+            <ModalDelete key={indexKey + 1} id={res.id} />
+        </div>
+    );
+};
 
 const dataNewsTable = () => {
     const columns = [
@@ -30,11 +41,13 @@ const dataNewsTable = () => {
             sort: "disabled"
         }
     ];
+
     const [rows, setRows] = React.useState([]);
+    const [news, setNews] = React.useState(testdata)
 
     const fetchRowData = _data => {
-        const _row = _data.map((res, idx) => {
-            // console.log(res);
+        return _data.map((res, idx) => {
+            // type: File, URL
             const responData = {
                 id: res.id,
                 images: (
@@ -48,32 +61,35 @@ const dataNewsTable = () => {
                 url: res.url,
                 action: ColumnActions(idx, res)
             };
+
             return responData;
         });
-        return _row;
     };
+
+    const getNews = async () => {
+        const newsData = await Axios.get("http://localhost:8000/api/news").then(res => {
+            setNews(res.data.data)
+            console.log(res.data.data)
+        })
+
+        await setRows(fetchRowData(newsData, {
+            signal: abortController.signal
+        }))
+    }
 
     React.useEffect(() => {
         const abortController = new AbortController();
-        const _row = fetchRowData(testdata, { signal: abortController.signal });
-        setRows(_row);
+        getNews()
+        // const _row = fetchRowData(news, { signal: abortController.signal });
+        // setRows(_row);
         // console.log(_row);
 
         return () => {
             abortController.abort();
         };
     }, []);
-    return { columns, rows };
-};
 
-const ColumnActions = (indexKey, res) => {
-    return (
-        <div>
-            <ModalNews key={indexKey} type={false} response={res} />
-            {" || "}
-            <ModalDelete key={indexKey + 1} id={res.id} />
-        </div>
-    );
+    return { columns, rows };
 };
 
 export default dataNewsTable;
