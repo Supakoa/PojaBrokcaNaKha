@@ -58,7 +58,6 @@ export default function ModalNews(props) {
                     <Button variant="secondary" onClick={() => setModal(false)}>
                         close
                     </Button>
-
                     <Button variant={type ? "info" : "warning"}>save</Button>
                 </Modal.Footer>
             </Modal>

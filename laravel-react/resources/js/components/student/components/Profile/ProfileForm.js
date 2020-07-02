@@ -48,10 +48,10 @@ const ProfileForm = () => {
     return (
         <Form>
             <Form.Group as={Row} controlId="formName">
-                <Form.Label column sm={2} md={3} lg={4}>
-                    ชื่อ - นามสกุล
+                <Form.Label column sm={2} md={2} lg={3}>
+                    ชื่อ-นามสกุล
                 </Form.Label>
-                <Col sm={1} md={1} lg={1}>
+                <Col sm={2} md={2} lg={2}>
                     <Form.Control
                         type="text"
                         placeholder="คำนำหน้า"
@@ -60,7 +60,7 @@ const ProfileForm = () => {
                         defaultValue={_profile.title}
                     />
                 </Col>
-                <Col sm={4} md={4} lg={3}>
+                <Col md={4} lg={3}>
                     <Form.Control
                         type="text"
                         placeholder="ชื่อ"
@@ -69,7 +69,7 @@ const ProfileForm = () => {
                         defaultValue={_profile.name_f}
                     />
                 </Col>
-                <Col sm={5} md={5} lg={4}>
+                <Col md={4} lg={4}>
                     <Form.Control
                         type="text"
                         placeholder="นามสกุล"
@@ -79,9 +79,8 @@ const ProfileForm = () => {
                     />
                 </Col>
             </Form.Group>
-
             <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={2} lg={4}>
+                <Form.Label column sm={2} lg={3}>
                     รหัสนักศึกษา
                 </Form.Label>
                 <Col sm={10} md={8} lg={8}>
@@ -96,7 +95,7 @@ const ProfileForm = () => {
             </Form.Group>
 
             <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={2} lg={4}>
+                <Form.Label column sm={2} lg={3}>
                     เบอร์โทรศัพท์
                 </Form.Label>
                 <Col sm={10} md={8} lg={8}>
@@ -111,7 +110,7 @@ const ProfileForm = () => {
             </Form.Group>
 
             <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={2} lg={4}>
+                <Form.Label column sm={2} lg={3}>
                     Email
                 </Form.Label>
                 <Col sm={10} md={8} lg={8}>
