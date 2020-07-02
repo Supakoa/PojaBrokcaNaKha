@@ -42,7 +42,7 @@ export default function FormRegister() {
         console.log(name);
     };
 
-    const handleOnClick = async event => {};
+    const handleOnClick = event => {};
 
     return (
         <Form className="p-4 w-75 m-auto">
@@ -152,7 +152,6 @@ export default function FormRegister() {
                         name="faculty"
                         onChange={handleChanges}
                     >
-                        {}
                         <option value="">คณะ</option>
                     </Form.Control>
                 </Form.Group>
