@@ -3,6 +3,8 @@ import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
+// modal add new news
+
 function FormNews(props) {
     const { response, type } = props;
     // console.log(response);
