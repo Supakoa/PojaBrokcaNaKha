@@ -16,6 +16,7 @@ const ColumnActions = (indexKey, res) => {
 };
 
 const dataNewsTable = () => {
+    
     const columns = [
         {
             label: "#",
@@ -42,8 +43,7 @@ const dataNewsTable = () => {
         }
     ];
 
-    const [rows, setRows] = React.useState([]);
-    const [news, setNews] = React.useState(testdata)
+    const [rows, setRows] = React.useState(testdata)
 
     const fetchRowData = _data => {
         return _data.map((res, idx) => {
@@ -52,13 +52,13 @@ const dataNewsTable = () => {
                 id: res.id,
                 images: (
                     <Image
-                        src={res.images}
+                        src={ res.image }
                         width="200px"
                         height="70px"
                         rounded
                     />
                 ),
-                url: res.url,
+                url: res.ref,
                 action: ColumnActions(idx, res)
             };
 
@@ -66,23 +66,15 @@ const dataNewsTable = () => {
         });
     };
 
-    const getNews = async () => {
-        const newsData = await Axios.get("http://localhost:8000/api/news").then(res => {
-            setNews(res.data.data)
-            console.log(res.data.data)
+    const getNews = async (abortController) => {
+        await Axios.get("http://localhost:8000/api/news").then(res => {
+            setRows(fetchRowData(res.data.data))
         })
-
-        await setRows(fetchRowData(newsData, {
-            signal: abortController.signal
-        }))
     }
 
     React.useEffect(() => {
         const abortController = new AbortController();
-        getNews()
-        // const _row = fetchRowData(news, { signal: abortController.signal });
-        // setRows(_row);
-        // console.log(_row);
+        getNews(abortController)
 
         return () => {
             abortController.abort();
