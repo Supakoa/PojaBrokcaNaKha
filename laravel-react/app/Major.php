@@ -9,12 +9,12 @@ class Major extends Model
 
     public function users()
     {
-        return $this->hasMany('app\User');
+        return $this->hasMany(User::class,"major_id");
     }
 
     public function faculty()
     {
-        return $this->belongsTo('App\Faculty');
+        return $this->belongsTo(Faculty::class);
     }
 
 }
