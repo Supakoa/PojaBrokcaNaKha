@@ -12,6 +12,7 @@ import News from "./components/news";
 import Profile from "./components/Profile";
 import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
+
 export default function Student(props) {
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);

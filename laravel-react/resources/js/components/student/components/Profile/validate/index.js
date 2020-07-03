@@ -1,16 +1,12 @@
-export const validateTitle = value => {
-    const catagories = ["นาย", "นาง", "นางสาว", "Mr", "Miss"];
-};
+import validateTitle from "./validateTitle";
 
-export const validateFirstname = value => {};
+const validateString = value => {};
 
-export const validateLastname = value => {};
+const validateStudentId = value => {};
 
-export const validateStudentId = value => {};
+const validatePhone = value => {};
 
-export const validatePhone = value => {};
-
-export const validateEmail = value => {};
+const validateEmail = value => {};
 
 export const validateIndex = (name, value) => {
     const _state = false;
@@ -19,11 +15,11 @@ export const validateIndex = (name, value) => {
             const _title = validateTitle(value);
             return _title;
         case "name_f":
-            const _firstName = validateFirstname(value);
+            const _firstName = validateString(value);
             return _firstName;
 
         case "name_l":
-            const _lastName = validateLastname(value);
+            const _lastName = validateString(value);
             return _lastName;
 
         case "student_id":
@@ -37,8 +33,13 @@ export const validateIndex = (name, value) => {
         case "email":
             const _email = validateEmail(value);
             return _email;
-
+        case "facuty":
+            return;
+        case "major":
+            return;
         default:
             return _state;
     }
 };
+
+export default validateIndex;

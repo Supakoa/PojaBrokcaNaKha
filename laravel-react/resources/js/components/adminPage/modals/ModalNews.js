@@ -5,7 +5,6 @@ import { colors } from "@material-ui/core";
 import Axios from "axios";
 
 export default function ModalNews(props) {
-
     // attibute type if true are Modal Add or false are Modale Edit
     // props : isCreateProps and response are props in this ModalNews
     const { isCreateProps, response } = props;
@@ -17,13 +16,17 @@ export default function ModalNews(props) {
     //     data: []
     // });
 
-    const isReturnCreateForm = ( props ) => {
-        return (!props) ? <FormNews response={response} type={props} /> : <FormNews type={props} />
-    }
+    const isReturnCreateForm = props => {
+        return !props ? (
+            <FormNews response={response} type={props} />
+        ) : (
+            <FormNews type={props} />
+        );
+    };
 
-    const isCreateTitile = (context) => {
-        return (context) ? "เพิ่มข้อมูล" : "แก้ไขข้อมูล"
-    }
+    const isCreateTitile = context => {
+        return context ? "เพิ่มข้อมูล" : "แก้ไขข้อมูล";
+    };
 
     // not use ofr init
     // React.useEffect(() => {
@@ -47,7 +50,10 @@ export default function ModalNews(props) {
                 onClick={() => setIsShow(true)}
                 variant={isCreateProps ? "info" : "warning"}
                 className="text-light"
-            > { isCreateTitile(isCreateProps) } </Button>
+            >
+                {" "}
+                {isCreateTitile(isCreateProps)}{" "}
+            </Button>
 
             {/* Modal for edit and create : will convert by isCreateProps state*/}
             <Modal
@@ -55,19 +61,17 @@ export default function ModalNews(props) {
                 centered={true}
                 backdrop="static"
                 size="md"
-                show={ isShow }
+                show={isShow}
                 onHide={() => setIsShow(false)}
                 aria-labelledby="example-modal-sizes-title-lg"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title id="example-modal-sizes-title-lg" >
-                        { isCreateTitile(isCreateProps) }
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                        {isCreateTitile(isCreateProps)}
                     </Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>
-                    { isReturnCreateForm(isCreateProps) }
-                </Modal.Body>
+                <Modal.Body>{isReturnCreateForm(isCreateProps)}</Modal.Body>
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setIsShow(false)}> close </Button>
