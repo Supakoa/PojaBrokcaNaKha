@@ -7,16 +7,15 @@ import Axios from "axios";
 
 const ColumnActions = (indexKey, res) => {
     return (
-        <div>
+        <>
             <ModalNews key={indexKey} type={false} response={res} />
             {" || "}
             <ModalDelete key={indexKey + 1} id={res.id} />
-        </div>
+        </>
     );
 };
 
 const dataNewsTable = () => {
-    
     const columns = [
         {
             label: "#",
@@ -43,7 +42,7 @@ const dataNewsTable = () => {
         }
     ];
 
-    const [rows, setRows] = React.useState(testdata)
+    const [rows, setRows] = React.useState(testdata);
 
     const fetchRowData = _data => {
         return _data.map((res, idx) => {
@@ -52,7 +51,7 @@ const dataNewsTable = () => {
                 id: res.id,
                 images: (
                     <Image
-                        src={ res.image }
+                        src={res.image}
                         width="200px"
                         height="70px"
                         rounded
@@ -66,15 +65,15 @@ const dataNewsTable = () => {
         });
     };
 
-    const getNews = async (abortController) => {
+    const getNews = async abortController => {
         await Axios.get("http://localhost:8000/api/news").then(res => {
-            setRows(fetchRowData(res.data.data))
-        })
-    }
+            setRows(fetchRowData(res.data.data));
+        });
+    };
 
     React.useEffect(() => {
         const abortController = new AbortController();
-        getNews(abortController)
+        getNews(abortController);
 
         return () => {
             abortController.abort();

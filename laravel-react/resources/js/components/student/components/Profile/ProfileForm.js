@@ -1,17 +1,11 @@
 import React from "react";
 import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { validateIndex } from "./validate";
+import validateIndex from "./validate";
+import { ProfileContext } from "../../context";
 
 const ProfileForm = () => {
-    const [_profile, setProfile] = React.useState({
-        title: "",
-        name_f: "",
-        name_l: "",
-        student_id: "",
-        phone: "",
-        email: ""
-    });
+    const [_profile, setProfile] = React.useState({});
 
     const [_state, setState] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
@@ -46,97 +40,172 @@ const ProfileForm = () => {
     };
 
     return (
-        <Form>
-            <Form.Group as={Row} controlId="formName">
-                <Form.Label column sm={2} md={2} lg={3}>
-                    ชื่อ-นามสกุล
-                </Form.Label>
-                <Col sm={2} md={2} lg={2}>
-                    <Form.Control
-                        type="text"
-                        placeholder="คำนำหน้า"
-                        name="title"
-                        onChange={handleChange}
-                        defaultValue={_profile.title}
-                    />
-                </Col>
-                <Col md={4} lg={3}>
-                    <Form.Control
-                        type="text"
-                        placeholder="ชื่อ"
-                        name="name_f"
-                        onChange={handleChange}
-                        defaultValue={_profile.name_f}
-                    />
-                </Col>
-                <Col md={4} lg={4}>
-                    <Form.Control
-                        type="text"
-                        placeholder="นามสกุล"
-                        name="name_l"
-                        onChange={handleChange}
-                        defaultValue={_profile.name_l}
-                    />
-                </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={2} lg={3}>
-                    รหัสนักศึกษา
-                </Form.Label>
-                <Col sm={10} md={8} lg={8}>
-                    <Form.Control
-                        type="text"
-                        name="student_id"
-                        placeholder="รหัสนักศึกษา"
-                        onChange={handleChange}
-                        defaultValue={_profile.student_id}
-                    />
-                </Col>
-            </Form.Group>
+        <ProfileContext.Consumer>
+            {user => {
+                console.log(user);
+                return (
+                    <Form>
+                        <Form.Group as={Row} controlId="formName">
+                            <Col sm={12} md={12} lg={12}>
+                                <Form.Label>ชื่อ-นามสกุล</Form.Label>
+                            </Col>
+                            <Col sm={2} md={2} lg={2}>
+                                <Form.Control
+                                    className="border-right-0 border-left-0 border-top-0 p-1"
+                                    maxLength={6}
+                                    type="text"
+                                    placeholder="คำนำหน้า"
+                                    name="title"
+                                    onChange={handleChange}
+                                    defaultValue={
+                                        _profile.title === undefined
+                                            ? user.title
+                                            : _profile.title
+                                    }
+                                />
+                            </Col>
+                            <Col md={4} lg={4}>
+                                <Form.Control
+                                    className="border-right-0 border-left-0 border-top-0 p-1"
+                                    type="text"
+                                    placeholder="ชื่อ"
+                                    name="first_name"
+                                    onChange={handleChange}
+                                    defaultValue={
+                                        _profile.first_name === undefined
+                                            ? user.first_name
+                                            : _profile.first_name
+                                    }
+                                />
+                            </Col>
+                            <Col md={5} lg={5}>
+                                <Form.Control
+                                    className="border-right-0 border-left-0 border-top-0 p-1"
+                                    type="text"
+                                    placeholder="นามสกุล"
+                                    name="last_name"
+                                    onChange={handleChange}
+                                    defaultValue={
+                                        _profile.last_name === undefined
+                                            ? user.last_name
+                                            : _profile.last_name
+                                    }
+                                />
+                            </Col>
+                            <Col sm={12} md={12} lg={12}>
+                                <Form.Text className="text-muted pl-2">
+                                    คำนำหน้า กรุณาใช้เป็น นาย นาง หรือ นางสาว
+                                </Form.Text>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col sm={10} md={6} lg={6}>
+                                <Form.Label>รหัสนักศึกษา</Form.Label>
+                                <Form.Control
+                                    className="border-right-0 border-left-0 border-top-0 p-1"
+                                    type="text"
+                                    name="student_id"
+                                    placeholder="59xxxxxxxxx"
+                                    onChange={handleChange}
+                                    defaultValue={
+                                        _profile.student_id === undefined
+                                            ? user.student_id
+                                            : _profile.student_id
+                                    }
+                                />
+                            </Col>
+                            <Col sm={10} md={6} lg={6}>
+                                <Form.Label>เบอร์โทรศัพท์</Form.Label>
+                                <Form.Control
+                                    className="border-right-0 border-left-0 border-top-0 p-1"
+                                    type="text"
+                                    name="telephone"
+                                    placeholder="08 or 09"
+                                    onChange={handleChange}
+                                    defaultValue={
+                                        _profile.telephone === undefined
+                                            ? user.telephone
+                                            : _profile.telephone
+                                    }
+                                />
+                                <Form.Text className="text-muted pl-2">
+                                    กรุณาใส่หมายเลขที่สามารถติดต่อได้ทันที.
+                                </Form.Text>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col sm={12} md={12} lg={12}>
+                                <Form.Label>อีเมล</Form.Label>
+                            </Col>
+                            <Col sm={10} md={6} lg={6}>
+                                <Form.Control
+                                    className="border-right-0 border-left-0 border-top-0 p-1"
+                                    type="email"
+                                    name="email"
+                                    placeholder="s59xxxxxxxx@ssru.ac.th"
+                                    onChange={handleChange}
+                                    defaultValue={
+                                        _profile.email === undefined
+                                            ? user.email
+                                            : _profile.email
+                                    }
+                                />
+                                <Form.Text className="text-muted pl-2">
+                                    กรุณาบันทึกอีเมลของมหาวิยาลัย.
+                                </Form.Text>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col md={4} lg={4}>
+                                <Form.Group>
+                                    <Form.Label>คณะ</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        custom
+                                        className="border-right-0 border-left-0 border-top-0 "
+                                    >
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Col>
+                            <Col md={4} lg={4}>
+                                <Form.Label>สาขา</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    custom
+                                    className="border-right-0 border-left-0 border-top-0 "
+                                >
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </Form.Control>
+                            </Col>
+                        </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={2} lg={3}>
-                    เบอร์โทรศัพท์
-                </Form.Label>
-                <Col sm={10} md={8} lg={8}>
-                    <Form.Control
-                        type="text"
-                        name="phone"
-                        placeholder="เบอร์โทรศัพท์"
-                        onChange={handleChange}
-                        defaultValue={_profile.phone}
-                    />
-                </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={2} lg={3}>
-                    Email
-                </Form.Label>
-                <Col sm={10} md={8} lg={8}>
-                    <Form.Control
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        onChange={handleChange}
-                        defaultValue={_profile.email}
-                    />
-                </Col>
-            </Form.Group>
-
-            <Col className="text-center">
-                {_loading ? (
-                    <Spinner animation="grow" />
-                ) : (
-                    <Button
-                        variant={_state ? "outline-warning" : "warning"}
-                        onClick={handleSubmit}
-                    >
-                        {_state ? "อัพเดต" : "บันทึก"}
-                    </Button>
-                )}
-            </Col>
-        </Form>
+                        <Col className="text-center">
+                            {_loading ? (
+                                <Spinner animation="grow" />
+                            ) : (
+                                <Button
+                                    variant={
+                                        _state ? "outline-warning" : "warning"
+                                    }
+                                    onClick={handleSubmit}
+                                >
+                                    {_state ? "อัพเดต" : "บันทึก"}
+                                </Button>
+                            )}
+                        </Col>
+                    </Form>
+                );
+            }}
+        </ProfileContext.Consumer>
     );
 };
 

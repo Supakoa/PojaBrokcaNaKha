@@ -42,11 +42,11 @@ export default function AdminPage() {
     }, []);
 
     return (
-        <Row className="app">
-            <Col md={2} lg={2} className="bg-secondary pr-0">
+        <Row className="app w-100">
+            <Col md={1} lg={2} className="bg-secondary pr-0">
                 <SideNav url={url} />
             </Col>
-            <Col md={10} lg={10} className="p-0">
+            <Col md={11} lg={10} className="p-0 w-100">
                 <HeaderNav path={url} info={_info} />
                 <div className="container-fluid p-4">
                     <Switch>

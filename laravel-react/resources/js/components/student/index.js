@@ -12,6 +12,7 @@ import News from "./components/news";
 import Profile from "./components/Profile";
 import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
+
 export default function Student(props) {
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
@@ -29,7 +30,7 @@ export default function Student(props) {
         <div className="mb-3">
             <News />
             <NavHeader url={url} user={props.user} />
-            <Row>
+            <Row className="w-100">
                 <Col md={3} lg={3}>
                     <ListGroup className="border-0">
                         <Link
@@ -50,7 +51,7 @@ export default function Student(props) {
                         </Link>
                     </ListGroup>
                 </Col>
-                <Col md={9} lg={9}>
+                <Col md={9} lg={9} style={{ minHeight: "80vh" }}>
                     <div className="mt-2">
                         <Switch>
                             <Route
