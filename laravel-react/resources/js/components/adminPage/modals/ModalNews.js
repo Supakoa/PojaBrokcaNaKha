@@ -7,6 +7,7 @@ export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
 
     const { type, response } = props;
+
     const [_modal, setModal] = React.useState(false);
     const [_item, setItem] = React.useState({
         loading: false,
