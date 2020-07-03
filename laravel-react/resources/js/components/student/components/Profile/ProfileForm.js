@@ -46,7 +46,7 @@ const ProfileForm = () => {
                 return (
                     <Form>
                         <Form.Group as={Row} controlId="formName">
-                            <Col sm={2} md={2} lg={2}>
+                            <Col sm={2} md={2} lg={2} className="py-2">
                                 <Form.Label>คำนำหน้า</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -62,7 +62,7 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col md={4} lg={4}>
+                            <Col md={4} lg={4} className="py-2">
                                 <Form.Label>ชื่อ</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -77,8 +77,8 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col md={5} lg={5}>
-                                <Form.Label>คำนำหน้า</Form.Label>
+                            <Col md={5} lg={5} className="py-md-2 py-lg-2">
+                                <Form.Label>นามสกุล</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
@@ -93,13 +93,13 @@ const ProfileForm = () => {
                                 />
                             </Col>
                             <Col sm={12} md={12} lg={12}>
-                                <Form.Text className="text-muted pl-2">
+                                <Form.Text className="text-muted">
                                     คำนำหน้า กรุณาใช้เป็น นาย นาง หรือ นางสาว
                                 </Form.Text>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
-                            <Col sm={10} md={6} lg={6}>
+                            <Col sm={10} md={6} lg={6} className="py-2">
                                 <Form.Label>รหัสนักศึกษา</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -114,7 +114,7 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col sm={10} md={5} lg={5}>
+                            <Col sm={10} md={5} lg={5} className="py-2">
                                 <Form.Label>เบอร์โทรศัพท์</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -134,10 +134,8 @@ const ProfileForm = () => {
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
-                            <Col sm={12} md={12} lg={12}>
+                            <Col sm={10} md={6} lg={6} className="py-2">
                                 <Form.Label>อีเมล</Form.Label>
-                            </Col>
-                            <Col sm={10} md={6} lg={6}>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="email"
@@ -156,7 +154,7 @@ const ProfileForm = () => {
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
-                            <Col md={4} lg={4}>
+                            <Col md={4} lg={4} className="py-2">
                                 <Form.Group>
                                     <Form.Label>คณะ</Form.Label>
                                     <Form.Control
@@ -172,7 +170,7 @@ const ProfileForm = () => {
                                     </Form.Control>
                                 </Form.Group>
                             </Col>
-                            <Col md={4} lg={4}>
+                            <Col md={4} lg={4} className="py-2">
                                 <Form.Label>สาขา</Form.Label>
                                 <Form.Control
                                     as="select"
