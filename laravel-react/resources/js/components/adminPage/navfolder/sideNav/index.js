@@ -100,13 +100,13 @@ export default function SideNav({ url }) {
                 </ListItem>
             </Link>
             <Link className={linkClass} to={`${url}/step-report`}>
-                <ListItem button className="text-md-center">
+                <ListItem button>
                     <ListItemIcon>
                         <LibraryAddCheckIcon />
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="ขั้นตอน"
+                        primary="ผู้ตรวจ"
                     />
                 </ListItem>
             </Link>
