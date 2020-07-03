@@ -46,10 +46,8 @@ const ProfileForm = () => {
                 return (
                     <Form>
                         <Form.Group as={Row} controlId="formName">
-                            <Col sm={12} md={12} lg={12}>
-                                <Form.Label>ชื่อ-นามสกุล</Form.Label>
-                            </Col>
                             <Col sm={2} md={2} lg={2}>
+                                <Form.Label>คำนำหน้า</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     maxLength={6}
@@ -65,6 +63,7 @@ const ProfileForm = () => {
                                 />
                             </Col>
                             <Col md={4} lg={4}>
+                                <Form.Label>ชื่อ</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
@@ -79,6 +78,7 @@ const ProfileForm = () => {
                                 />
                             </Col>
                             <Col md={5} lg={5}>
+                                <Form.Label>คำนำหน้า</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
@@ -114,7 +114,7 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col sm={10} md={6} lg={6}>
+                            <Col sm={10} md={5} lg={5}>
                                 <Form.Label>เบอร์โทรศัพท์</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
