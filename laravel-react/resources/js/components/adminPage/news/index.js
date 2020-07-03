@@ -13,7 +13,7 @@ export default class News extends Component {
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <ModalNews type={true} />
+                    <ModalNews isCreateProps={ true } />
                     <TableNews />
                 </Card.Body>
             </Card>
