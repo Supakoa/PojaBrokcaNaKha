@@ -48,7 +48,10 @@ export default function SideNav({ url }) {
                     <ListItemIcon>
                         <HomeIcon />
                     </ListItemIcon>
-                    <ListItemText primary="หน้าแรก" />
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary="หน้าแรก"
+                    />
                 </ListItem>
             </Link>
             <Link className={linkClass} to={`${url}/inbox`}>
@@ -56,7 +59,10 @@ export default function SideNav({ url }) {
                     <ListItemIcon>
                         <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary="ข้อความ" />
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary="ข้อความ"
+                    />
                 </ListItem>
             </Link>
 
@@ -65,7 +71,10 @@ export default function SideNav({ url }) {
                     <ListItemIcon>
                         <DescriptionIcon />
                     </ListItemIcon>
-                    <ListItemText primary="เอกสาร" />
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary="เอกสาร"
+                    />
                 </ListItem>
             </Link>
             <Link className={linkClass} to={`${url}/user`}>
@@ -73,7 +82,10 @@ export default function SideNav({ url }) {
                     <ListItemIcon>
                         <PeopleIcon />
                     </ListItemIcon>
-                    <ListItemText primary="สมาชิก" />
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary="สมาชิก"
+                    />
                 </ListItem>
             </Link>
             <Link className={linkClass} to={`${url}/news`}>
@@ -81,7 +93,10 @@ export default function SideNav({ url }) {
                     <ListItemIcon>
                         <LinkIcon />
                     </ListItemIcon>
-                    <ListItemText primary="ข่าว" />
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary="ข่าว"
+                    />
                 </ListItem>
             </Link>
             <Link className={linkClass} to={`${url}/step-report`}>
@@ -89,7 +104,10 @@ export default function SideNav({ url }) {
                     <ListItemIcon>
                         <LibraryAddCheckIcon />
                     </ListItemIcon>
-                    <ListItemText primary="ขั้นตอนเอกสาร" />
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary="ผู้ตรวจ"
+                    />
                 </ListItem>
             </Link>
         </List>
