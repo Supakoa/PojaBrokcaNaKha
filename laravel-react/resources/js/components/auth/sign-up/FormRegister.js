@@ -2,9 +2,11 @@ import React from "react";
 import LogoRegis from "./LogoReagis";
 import { Col, Form, Button, Spinner } from "react-bootstrap";
 import SimpleReactValidator from 'simple-react-validator';
+import { useTranslation } from 'react-i18next';
 
 export default function FormRegister() {
     // const dispatch = useDispatch();
+    const { t, i18n, ready } = useTranslation('', { useSuspense: false });
     const [_select, setSelect] = React.useState(true);
     const [_majors, setMajors] = React.useState([]);
     const [_facs, setFacs] = React.useState([]);
@@ -68,11 +70,11 @@ export default function FormRegister() {
             <LogoRegis />
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="title" sm={2} md={3} lg={3}>
-                    <Form.Label>คำนำหน้า</Form.Label>
+                    <Form.Label>{t('title')}</Form.Label>
                     <Form.Control
                         required
                         type="text"
-                        placeholder="คำนำหน้า"
+                        placeholder={t('title')}
                         name="title"
                         onChange={handleChanges}
                         onKeyUp = {handleChanges}
