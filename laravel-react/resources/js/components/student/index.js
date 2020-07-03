@@ -29,7 +29,7 @@ export default function Student(props) {
         <div className="mb-3">
             <News />
             <NavHeader url={url} user={props.user} />
-            <Row>
+            <Row className="w-100">
                 <Col md={3} lg={3}>
                     <ListGroup className="border-0">
                         <Link
@@ -50,7 +50,7 @@ export default function Student(props) {
                         </Link>
                     </ListGroup>
                 </Col>
-                <Col md={9} lg={9}>
+                <Col md={9} lg={9} style={{ minHeight: "80vh" }}>
                     <div className="mt-2">
                         <Switch>
                             <Route
