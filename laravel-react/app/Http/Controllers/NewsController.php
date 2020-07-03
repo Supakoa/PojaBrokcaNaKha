@@ -63,9 +63,9 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-			'image' => 'mimes:jpeg,jpg,png|required|max:10000'
-		]);
+        // $this->validate($request, [
+		// 	'image' => 'mimes:jpeg,jpg,png|required|max:10000'
+		// ]);
         $news = News::findOrFail($id);
         $news->update($request->all());
 

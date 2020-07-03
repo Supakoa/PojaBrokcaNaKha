@@ -5,17 +5,8 @@ import ModalDelete from "../../modals/ModalDelete";
 import { testdata } from "./testdata";
 import Axios from "axios";
 
-const ColumnActions = (indexKey, res) => {
-    return (
-        <>
-            <ModalNews key={indexKey} type={false} response={res} />
-            {" || "}
-            <ModalDelete key={indexKey + 1} id={res.id} />
-        </>
-    );
-};
-
 const dataNewsTable = () => {
+
     const columns = [
         {
             label: "#",
@@ -43,6 +34,16 @@ const dataNewsTable = () => {
     ];
 
     const [rows, setRows] = React.useState(testdata);
+
+    const ColumnActions = (indexKey, res) => {
+        return (
+            <div>
+                <ModalNews key={indexKey} type={false} response={res} />
+                {" || "}
+                <ModalDelete key={indexKey + 1} id={res.id} />
+            </div>
+        );
+    };
 
     const fetchRowData = _data => {
         return _data.map((res, idx) => {

@@ -28,7 +28,7 @@ function FormNews(props) {
         //         url: ""
         //     });
         // }
-        (!type) ? _setState({ ..._state, imagePreviewUrl: response.images, url: response.url }) : _setState({ files: [], imagePreviewUrl: "", url: "" })
+        (!type) ? _setState({ ..._state, imagePreviewUrl: response.image, url: response.ref }) : _setState({ files: "", imagePreviewUrl: "", url: "" })
     }, []);
 
     const _handleImageChange = e => {
@@ -50,7 +50,7 @@ function FormNews(props) {
 
             reader.readAsDataURL(file);
         } else {
-            let _value = e.target.value;
+            const _value = e.target.value;
             // console.log(_value);
             _setState({
                 ..._state,
@@ -61,9 +61,9 @@ function FormNews(props) {
 
     const _previewImage = () => {
         let { imagePreviewUrl } = _state;
-        // console.log(imagePreviewUrl);
-
+        // console.log(`imagePreviewUrl: ${imagePreviewUrl}`);
         let _imagePreview = null;
+
         if (imagePreviewUrl) {
             _imagePreview = (
                 <Image
@@ -73,8 +73,10 @@ function FormNews(props) {
                     height="300"
                 />
             );
+        } else {
+            console.log('not have data')
         }
-        
+
         return _imagePreview;
     };
 
