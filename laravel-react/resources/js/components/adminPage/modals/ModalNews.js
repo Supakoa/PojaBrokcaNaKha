@@ -2,10 +2,12 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import FormNews from "../news/FormNews";
 import { colors } from "@material-ui/core";
+import Axios from "axios";
 
 export default function ModalNews(props) {
-    
+
     // attibute type if true are Modal Add or false are Modale Edit
+    // props : isCreateProps and response are props in this ModalNews
     const { isCreateProps, response } = props;
     const [isShow, setIsShow] = React.useState(false);
 
@@ -31,6 +33,11 @@ export default function ModalNews(props) {
     //         abortController.abort();
     //     };
     // }, []);
+
+    const saveImageToDB = ( id ) => {
+        const formData = new FormData()
+        Axios.patch(`http://localhost:8000/api/news/${id}`)
+    }
 
     return (
         <>
@@ -64,7 +71,7 @@ export default function ModalNews(props) {
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setIsShow(false)}> close </Button>
-                    <Button variant={isCreateProps ? "info" : "warning"}> save </Button>
+                    <Button variant={isCreateProps ? "info" : "warning"} onClick={saveImageToDB()}> save </Button>
                 </Modal.Footer>
             </Modal>
         </>
