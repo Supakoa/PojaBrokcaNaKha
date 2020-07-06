@@ -2,21 +2,18 @@ import React from "react";
 import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
 import validateIndex from "./validate";
-import { ProfileContext } from "../../context";
+import { ProfileContext, FacultiesContext } from "../../context";
 
 const ProfileForm = () => {
     const [_profile, setProfile] = React.useState({});
-
+    const [_stateFacu, setStateFac] = React.useState();
     const [_state, setState] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
 
     const handleChange = e => {
         const { name, value } = e.target;
-
         const _validate = validateIndex(name, value);
-
-        console.log(_validate);
-
+        // console.log(_validate);
         if (value) {
             setState(true);
         }
@@ -42,7 +39,7 @@ const ProfileForm = () => {
     return (
         <ProfileContext.Consumer>
             {user => {
-                console.log(user);
+                // console.log(user.major);
                 return (
                     <Form>
                         <Form.Group as={Row} controlId="formName">
@@ -154,34 +151,81 @@ const ProfileForm = () => {
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
-                            <Col md={4} lg={4} className="py-2">
-                                <Form.Group>
-                                    <Form.Label>คณะ</Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        custom
-                                        className="border-right-0 border-left-0 border-top-0 "
-                                    >
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col md={4} lg={4} className="py-2">
+                            <FacultiesContext.Consumer>
+                                {faculties => {
+                                    // console.log(faculties);
+                                    return (
+                                        <Col md={6} lg={6} className="py-2">
+                                            <Form.Group>
+                                                <Form.Label>คณะ</Form.Label>
+                                                <Form.Control
+                                                    onChange={handleChange}
+                                                    as="select"
+                                                    custom
+                                                    className="border-right-0 border-left-0 border-top-0 "
+                                                >
+                                                    {user.major !==
+                                                    undefined ? (
+                                                        <option
+                                                            defaultValue={0}
+                                                        >
+                                                            {
+                                                                user.major
+                                                                    .faculty
+                                                                    .name
+                                                            }
+                                                        </option>
+                                                    ) : (
+                                                        <option
+                                                            defaultValue={0}
+                                                        >
+                                                            เลือกคณะ
+                                                        </option>
+                                                    )}
+                                                    {faculties.map(
+                                                        (items, idx) => {
+                                                            return (
+                                                                <option
+                                                                    key={idx.toString()}
+                                                                    defaultValue={
+                                                                        idx
+                                                                    }
+                                                                    id={
+                                                                        items.id
+                                                                    }
+                                                                >
+                                                                    {items.name}
+                                                                </option>
+                                                            );
+                                                        }
+                                                    )}
+                                                </Form.Control>
+                                            </Form.Group>
+                                            <Form.Text className="text-muted pl-2">
+                                                ต้องทำการเลือก หรือ
+                                                เปลี่ยนแปลงคณะถึงสามารถ
+                                                เลือกสาขาได้.
+                                            </Form.Text>
+                                        </Col>
+                                    );
+                                }}
+                            </FacultiesContext.Consumer>
+                            <Col md={5} lg={5} className="py-2">
                                 <Form.Label>สาขา</Form.Label>
                                 <Form.Control
                                     as="select"
+                                    onChange={handleChange}
                                     custom
                                     className="border-right-0 border-left-0 border-top-0 "
+                                    disabled
                                 >
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    {user.major !== undefined ? (
+                                        <option defaultValue={user.major.id}>
+                                            {user.major.name}
+                                        </option>
+                                    ) : (
+                                        <option>เลือกสาขา</option>
+                                    )}
                                 </Form.Control>
                             </Col>
                         </Form.Group>

@@ -36,7 +36,7 @@ export default function Student(props) {
                         <Link
                             className={`${
                                 !_active ? `active` : ""
-                            } list-group-item list-group-item-action`}
+                            } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                             to={`${url}`}
                         >
                             ตารางฟอร์ม
@@ -44,7 +44,7 @@ export default function Student(props) {
                         <Link
                             className={`${
                                 _active ? `active` : ""
-                            } list-group-item list-group-item-action`}
+                            } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                             to={`${url}/form-report`}
                         >
                             แบบฟอร์ม

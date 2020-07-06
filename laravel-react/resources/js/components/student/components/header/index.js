@@ -8,13 +8,13 @@ function NavHeader(props) {
     const token = localStorage._authLocal;
 
     return (
-        <Navbar bg="light" expand="sm">
+        <Navbar bg="info" expand="sm">
             <Container>
-                <Navbar.Brand href={props.url} className="text-info">
+                <Navbar.Brand href={props.url} className="text-light">
                     <img
                         src={Logo}
-                        width="30"
-                        height="30"
+                        width="35"
+                        height="35"
                         className="d-inline-block align-top"
                     />{" "}
                     Petition Web
@@ -22,10 +22,13 @@ function NavHeader(props) {
                 <Navbar.Toggle aria-controls="petition-nav" />
                 <Navbar.Collapse id="petition-nav">
                     <Nav>
-                        <Link className="nav-link" to={props.url}>
+                        <Link className="nav-link text-light" to={props.url}>
                             หน้าแรก
                         </Link>
-                        <Link className="nav-link" to={`${props.url}/profile`}>
+                        <Link
+                            className="nav-link text-light"
+                            to={`${props.url}/profile`}
+                        >
                             ข้อมูลส่วนตัว
                         </Link>
                     </Nav>
@@ -42,7 +45,7 @@ function NavHeader(props) {
                             {this.state.users.lastName} */}
                         </Nav.Link>
                         <Link
-                            className="nav-link"
+                            className="nav-link text-light"
                             to="/login"
                             onClick={() => SignOut(token)}
                         >
