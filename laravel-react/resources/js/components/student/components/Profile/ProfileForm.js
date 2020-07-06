@@ -39,7 +39,7 @@ const ProfileForm = () => {
     return (
         <ProfileContext.Consumer>
             {user => {
-                // console.log(user.major);
+                // console.log(user);
                 return (
                     <Form>
                         <Form.Group as={Row} controlId="formName">
