@@ -37,18 +37,23 @@ export default function Student(props) {
             });
     };
 
+    const activeMenu = _path => {
+        if (_path === "/student") {
+            setActive(false);
+        } else if (_path === "/student/form-report") {
+            setActive(true);
+        }
+    };
+
     React.useEffect(() => {
         const abt = new AbortController();
         fetchUser();
-        if (pathname !== "/student") {
-            setActive(true);
-        } else {
-            setActive(false);
-        }
+        activeMenu(pathname);
+
         return () => {
             abt.abort();
         };
-    }, [pathname]);
+    }, [pathname, _active]);
 
     return (
         <div className="mb-3">

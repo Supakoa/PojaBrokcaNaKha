@@ -4,11 +4,61 @@ import Swal from "sweetalert2";
 import validateIndex from "./validate";
 import { ProfileContext, FacultiesContext } from "../../context";
 
+const ListFaculties = props => {
+    const { methodHandle, userMajor, faculties } = props;
+    return (
+        <Col md={5} lg={5} className="py-2">
+            <Form.Group>
+                <Form.Label>คณะ</Form.Label>
+                <Form.Control
+                    onChange={methodHandle}
+                    as="select"
+                    custom
+                    className="border-right-0 border-left-0 border-top-0 "
+                >
+                    {userMajor !== undefined ? (
+                        <option defaultValue={0}>
+                            {userMajor.faculty.name}
+                        </option>
+                    ) : (
+                        <option defaultValue={0}>เลือกคณะ</option>
+                    )}
+                    {faculties.map((items, idx) => {
+                        return (
+                            <option
+                                key={idx.toString()}
+                                defaultValue={idx}
+                                id={items.id}
+                            >
+                                {items.name}
+                            </option>
+                        );
+                    })}
+                </Form.Control>
+            </Form.Group>
+            <Form.Text className="text-muted pl-2">
+                ต้องทำการเลือก หรือ เปลี่ยนแปลงคณะถึงสามารถ เลือกสาขาได้.
+            </Form.Text>
+        </Col>
+    );
+};
+
 const ProfileForm = () => {
     const [_profile, setProfile] = React.useState({});
+    const [_disOption, setDisOption] = React.useState(true);
     const [_stateFacu, setStateFac] = React.useState();
     const [_state, setState] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
+
+    const fetchFaculties = async () => {
+        await axios.get(`http://127.0.0.1:8000/api/faculties`, {}).then(res => {
+            const { success } = res.data;
+            this.setState({
+                ...this.state,
+                faculties: success
+            });
+        });
+    };
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -16,11 +66,12 @@ const ProfileForm = () => {
         // console.log(_validate);
         if (value) {
             setState(true);
+
+            setProfile({
+                ..._profile,
+                [name]: value
+            });
         }
-        setProfile({
-            ..._profile,
-            [name]: value
-        });
     };
 
     const handleSubmit = () => {
@@ -43,8 +94,8 @@ const ProfileForm = () => {
                 return (
                     <Form>
                         <Form.Group as={Row} controlId="formName">
-                            <Col sm={2} md={2} lg={2} className="py-2">
-                                <Form.Label>คำนำหน้า</Form.Label>
+                            <Col sm={3} md={2} lg={2} className="py-2">
+                                <Form.Label className="p-0">นำหน้า</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     maxLength={6}
@@ -59,7 +110,7 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col md={4} lg={4} className="py-2">
+                            <Col sm={7} md={3} lg={3} className="py-2">
                                 <Form.Label>ชื่อ</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -74,7 +125,12 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col md={5} lg={5} className="py-md-2 py-lg-2">
+                            <Col
+                                sm={10}
+                                md={5}
+                                lg={5}
+                                className="py-md-2 py-lg-2"
+                            >
                                 <Form.Label>นามสกุล</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -91,12 +147,12 @@ const ProfileForm = () => {
                             </Col>
                             <Col sm={12} md={12} lg={12}>
                                 <Form.Text className="text-muted">
-                                    คำนำหน้า กรุณาใช้เป็น นาย นาง หรือ นางสาว
+                                    นำหน้า กรุณาใช้เป็น นาย นาง หรือ นางสาว
                                 </Form.Text>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
-                            <Col sm={10} md={6} lg={6} className="py-2">
+                            <Col sm={10} md={5} lg={5} className="py-2">
                                 <Form.Label>รหัสนักศึกษา</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -111,7 +167,7 @@ const ProfileForm = () => {
                                     }
                                 />
                             </Col>
-                            <Col sm={10} md={5} lg={5} className="py-2">
+                            <Col sm={10} md={5} lg={5} className="py-sm-2">
                                 <Form.Label>เบอร์โทรศัพท์</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -131,7 +187,7 @@ const ProfileForm = () => {
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
-                            <Col sm={10} md={6} lg={6} className="py-2">
+                            <Col sm={10} md={5} lg={5} className="py-2">
                                 <Form.Label>อีเมล</Form.Label>
                                 <Form.Control
                                     className="border-right-0 border-left-0 border-top-0 p-1"
@@ -155,58 +211,11 @@ const ProfileForm = () => {
                                 {faculties => {
                                     // console.log(faculties);
                                     return (
-                                        <Col md={6} lg={6} className="py-2">
-                                            <Form.Group>
-                                                <Form.Label>คณะ</Form.Label>
-                                                <Form.Control
-                                                    onChange={handleChange}
-                                                    as="select"
-                                                    custom
-                                                    className="border-right-0 border-left-0 border-top-0 "
-                                                >
-                                                    {user.major !==
-                                                    undefined ? (
-                                                        <option
-                                                            defaultValue={0}
-                                                        >
-                                                            {
-                                                                user.major
-                                                                    .faculty
-                                                                    .name
-                                                            }
-                                                        </option>
-                                                    ) : (
-                                                        <option
-                                                            defaultValue={0}
-                                                        >
-                                                            เลือกคณะ
-                                                        </option>
-                                                    )}
-                                                    {faculties.map(
-                                                        (items, idx) => {
-                                                            return (
-                                                                <option
-                                                                    key={idx.toString()}
-                                                                    defaultValue={
-                                                                        idx
-                                                                    }
-                                                                    id={
-                                                                        items.id
-                                                                    }
-                                                                >
-                                                                    {items.name}
-                                                                </option>
-                                                            );
-                                                        }
-                                                    )}
-                                                </Form.Control>
-                                            </Form.Group>
-                                            <Form.Text className="text-muted pl-2">
-                                                ต้องทำการเลือก หรือ
-                                                เปลี่ยนแปลงคณะถึงสามารถ
-                                                เลือกสาขาได้.
-                                            </Form.Text>
-                                        </Col>
+                                        <ListFaculties
+                                            methodHandle={handleChange}
+                                            faculties={faculties}
+                                            userMajor={user.major}
+                                        />
                                     );
                                 }}
                             </FacultiesContext.Consumer>
@@ -217,7 +226,7 @@ const ProfileForm = () => {
                                     onChange={handleChange}
                                     custom
                                     className="border-right-0 border-left-0 border-top-0 "
-                                    disabled
+                                    disabled={_disOption}
                                 >
                                     {user.major !== undefined ? (
                                         <option defaultValue={user.major.id}>
