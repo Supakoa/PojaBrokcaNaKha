@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export const increment = number => {
     return {
         type: "INCREMENT",
@@ -35,5 +33,12 @@ export const newsUpload = obj => {
             name: obj.image,
             url: obj.url
         }
+    };
+};
+
+export const studentProfile = _std => {
+    return {
+        type: "student",
+        payload: _std
     };
 };

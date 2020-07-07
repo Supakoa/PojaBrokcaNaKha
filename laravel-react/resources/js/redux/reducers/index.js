@@ -3,6 +3,7 @@ import loggerReducer from "./isLogged";
 import userReducer from "./user";
 import redirectReducer from "./isRedirect";
 import newsReducer from "./news";
+import studentProfileReducer from "./studentProfileReducer";
 import { combineReducers } from "redux";
 
 const allReducers = combineReducers({
@@ -10,7 +11,8 @@ const allReducers = combineReducers({
     isLogged: loggerReducer,
     userState: userReducer,
     redirectState: redirectReducer,
-    newsState: newsReducer
+    newsState: newsReducer,
+    studentProfile: studentProfileReducer
 });
 
 export default allReducers;

@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import { Card, Container, Spinner } from "react-bootstrap";
-import ProfileForm from "./ProfileForm";
+import { Card, Container } from "react-bootstrap";
+import ProfileForm from "./profileForm";
 import { FacultiesContext } from "../../context";
 import axios from "axios";
-
-function LoadingComponent() {
-    return (
-        <Container className="d-flex align-items-center justify-content-center">
-            <Spinner animation="grow" variant="info" />
-        </Container>
-    );
-}
+import LoadingComponent from "./LoadingComponent";
 
 function FormProfileComponent(props) {
     const { valueFaculties } = props;

@@ -13,14 +13,17 @@ import Profile from "./components/Profile";
 import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
+import { useDispatch } from "react-redux";
+import { studentProfile } from "../../redux/actions";
 
-export default function Student(props) {
+export default function Student() {
+    const _dispatch = useDispatch();
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
     const [_user, setUser] = React.useState({});
 
-    const fetchUser = async () => {
+    const fetchUser = async _dispatch => {
         await axios
             .post(`http://localhost:8000/api/user`, localStorage._authLocal, {
                 headers: {
@@ -30,9 +33,10 @@ export default function Student(props) {
                 }
             })
             .then(res => {
-                const item = res.data.success;
+                const { success } = res.data;
                 // console.log(item);
-                setUser(item);
+                _dispatch(studentProfile(success));
+                setUser(success);
                 // return item;
             });
     };
@@ -47,13 +51,13 @@ export default function Student(props) {
 
     React.useEffect(() => {
         const abt = new AbortController();
-        fetchUser();
+        fetchUser(_dispatch, { signal: abt.signal });
         activeMenu(pathname);
 
         return () => {
             abt.abort();
         };
-    }, [pathname, _active]);
+    }, [pathname, _active, _dispatch]);
 
     return (
         <div className="mb-3">
