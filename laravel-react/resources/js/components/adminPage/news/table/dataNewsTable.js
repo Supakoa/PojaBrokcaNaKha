@@ -36,8 +36,12 @@ const dataNewsTable = () => {
 
     const ColumnActions = (indexKey, res) => {
         return (
-            <div>
-                <ModalNews key={indexKey} isCreateProps={false} response={res} />
+            <>
+                <ModalNews
+                    key={indexKey}
+                    isCreateProps={false}
+                    response={res}
+                />
                 {" || "}
                 <ModalDelete key={indexKey + 1} id={res.id} api="news" />
             </div>
@@ -67,6 +71,8 @@ const dataNewsTable = () => {
 
     const getNews = async setRows => {
         await Axios.get("http://localhost:8000/api/news").then(res => {
+            console.log(res.data.data);
+
             setRows(fetchRowData(res.data.data));
         });
     };
