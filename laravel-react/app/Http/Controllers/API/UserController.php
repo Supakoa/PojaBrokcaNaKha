@@ -80,6 +80,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = User::all();
+        foreach ($user as $value){
+            if ($value->major != null)
+                $value->major->faculty;
+        }
         return response()->json(['success' => $user], $this->successStatus);
     }
 
