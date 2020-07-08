@@ -1,33 +1,9 @@
 import React from "react";
 import { dataTest } from "./dataTest";
-import { ModalStepReport } from "../../modals/ModalStepreport";
-import ModalDelete from "../../modals/ModalDelete";
+import ColumsAction from "./ColumnsAction";
+import { columns } from "./columns";
 
 export default function dataTableStepReport() {
-    const columns = [
-        {
-            label: "#",
-            field: "id",
-            sort: "desc",
-            width: 50
-        },
-        {
-            label: "รูปแบบเอกสาร",
-            field: "name",
-            width: 180
-        },
-        {
-            label: "รหัสเอกสาร",
-            field: "code",
-            width: 150
-        },
-        {
-            label: "actions",
-            field: "action",
-            width: 100,
-            sort: "disabled"
-        }
-    ];
     const [rows, setRows] = React.useState([]);
 
     const fetchRowData = _rows => {
@@ -53,13 +29,3 @@ export default function dataTableStepReport() {
     }, []);
     return { columns, rows };
 }
-
-const ColumsAction = (idx, res) => {
-    return (
-        <div>
-            <ModalStepReport key={idx} response={res} />
-            {" || "}
-            <ModalDelete key={idx + 1} id={res.id} />
-        </div>
-    );
-};
