@@ -97,4 +97,16 @@ class UserController extends Controller
     public function documents(User $user){
         return response()->json(['success' => $user->documents()], $this->successStatus);
     }
+
+    public function destroy($id)
+    {
+        User::destroy($id);
+        return response()->json(null, 204);
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return $user;
+    }
 }
