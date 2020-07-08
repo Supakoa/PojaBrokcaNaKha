@@ -34,7 +34,7 @@ export const validateIndex = (name, value) => {
             const _email = validateEmail(value);
             return _email;
         case "facuty":
-            return;
+            return true;
         case "major":
             return;
         default:

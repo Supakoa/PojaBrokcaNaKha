@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export const increment = number => {
     return {
         type: "INCREMENT",
@@ -66,3 +64,9 @@ export const destroyForm = () => {
     }
 }
 
+export const studentProfile = _std => {
+    return {
+        type: "student",
+        payload: _std
+    };
+};

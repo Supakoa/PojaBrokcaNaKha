@@ -12,17 +12,20 @@ export default class ReportTable extends Component {
             <TeableReportCxt.Consumer>
                 {table => {
                     return (
-                        <div className="p-3">
-                            <MDBDataTable
-                                noBottomColumns={true}
-                                borderless
-                                btn
-                                striped
-                                borderless
-                                hover
-                                data={table}
-                            />
-                        </div>
+                        <MDBDataTable
+                            noBottomColumns={true}
+                            entriesLabel="ข้อมูลที่แสดง"
+                            entriesOptions={[5, 10, 15]}
+                            entries={5}
+                            infoLabel={["กำลังแสดง", "-", "ของ", "รายการ"]}
+                            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
+                            searchLabel="ค้นหา"
+                            barReverse={true}
+                            borderless
+                            striped
+                            hover
+                            data={table}
+                        />
                     );
                 }}
             </TeableReportCxt.Consumer>
