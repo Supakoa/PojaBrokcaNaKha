@@ -1,13 +1,20 @@
 import React from "react";
 import LogoRegis from "./LogoReagis";
 import { Col, Form, Button, Spinner } from "react-bootstrap";
+import SimpleReactValidator from 'simple-react-validator';
+import { useTranslation } from 'react-i18next';
 
 export default function FormRegister() {
     // const dispatch = useDispatch();
+    const { t, i18n, ready } = useTranslation('', { useSuspense: false });
     const [_select, setSelect] = React.useState(true);
     const [_majors, setMajors] = React.useState([]);
     const [_facs, setFacs] = React.useState([]);
     const [_loading, setLoading] = React.useState(true);
+    const [_validator, setValidator] = React.useState(
+        new SimpleReactValidator()
+    );
+    const [_forms, serForms] = React.useState({});
 
     const _fetchFaculties = async () => {
         await axios.get(`http://127.0.0.1:8000/api/faculties`, {}).then(res => {
@@ -38,25 +45,42 @@ export default function FormRegister() {
 
     const handleChanges = event => {
         const { name, value } = event.target;
-
-        console.log(name);
+        serForms({
+            ..._forms,
+            [name]: value
+        });
     };
 
-    const handleOnClick = async event => {};
+    const handleOnBlur = event => {};
+
+    const handleOnClick = event => {};
+    const handleIsInvalid = event => {
+        // const {name,value} = event.target;
+        //
+        // return _validator.fieldValid(name);
+    };
 
     return (
         <Form className="p-4 w-75 m-auto">
             <LogoRegis />
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="title" sm={2} md={3} lg={3}>
-                    <Form.Label>คำนำหน้า</Form.Label>
+                    <Form.Label>{t('title')}</Form.Label>
                     <Form.Control
                         required
                         type="text"
-                        placeholder="คำนำหน้า"
+                        placeholder={t('title')}
                         name="title"
                         onChange={handleChanges}
+                        onKeyUp={handleChanges}
+                        isInvalid={!_validator.fieldValid("title")}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        {_validator.showMessageFor("title")}
+                        {_validator.message("title", _forms.title, "max:3", {
+                            messages: {}
+                        })}
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} controlId="firstName">
                     <Form.Label>ชื่อ</Form.Label>
@@ -152,7 +176,6 @@ export default function FormRegister() {
                         name="faculty"
                         onChange={handleChanges}
                     >
-                        {}
                         <option value="">คณะ</option>
                     </Form.Control>
                 </Form.Group>

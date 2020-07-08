@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Faculty;
-use App\Major;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -72,8 +71,9 @@ class UserController extends Controller
      */
     public function user()
     {
-        $user = auth()->user() ;
-        $user->major->faculty;
+        $user = auth()->user();
+        if ($user->major != null)
+            $user->major->faculty;
         return response()->json(['success' => $user], $this->successStatus);
     }
     public function users()
