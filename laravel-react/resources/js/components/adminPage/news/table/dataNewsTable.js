@@ -6,7 +6,6 @@ import { testdata } from "./testdata";
 import Axios from "axios";
 
 const dataNewsTable = () => {
-
     const columns = [
         {
             label: "#",
@@ -66,7 +65,7 @@ const dataNewsTable = () => {
         });
     };
 
-    const getNews = async abortController => {
+    const getNews = async setRows => {
         await Axios.get("http://localhost:8000/api/news").then(res => {
             setRows(fetchRowData(res.data.data));
         });
@@ -74,12 +73,12 @@ const dataNewsTable = () => {
 
     React.useEffect(() => {
         const abortController = new AbortController();
-        getNews(abortController);
+        getNews(setRows, { signal: abortController.signal });
 
         return () => {
             abortController.abort();
         };
-    }, []);
+    }, [setRows]);
 
     return { columns, rows };
 };
