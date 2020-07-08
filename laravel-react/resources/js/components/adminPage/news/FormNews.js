@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import { useSelector, useDispatch } from 'react-redux'
+import { initForm, updateFile, updateRef, destroyForm } from "../../../redux/actions/";
 
 // modal add new news
 
 function FormNews(props) {
-    const { response, type } = props;
+    const { response, isCreateProps } = props;
+
+    // redux
+    const file = useSelector(state => state.file)
+    const dispatch = useDispatch()
 
     const [_state, _setState] = React.useState({
         file: "",
@@ -14,21 +20,28 @@ function FormNews(props) {
         url: ""
     });
 
+    const [inputText, setInputText] = useState("")
+
     React.useEffect(() => {
-        // if (!type) {
-        //     _setState({
-        //         ..._state,
-        //         imagePreviewUrl: response.images,
-        //         url: response.url
-        //     });
-        // } else {
-        //     _setState({
-        //         file: [],
-        //         imagePreviewUrl: "",
-        //         url: ""
-        //     });
-        // }
-        (!type) ? _setState({ ..._state, imagePreviewUrl: response.image, url: response.ref }) : _setState({ files: "", imagePreviewUrl: "", url: "" })
+        // init state
+        (!isCreateProps) ? _setState({ ..._state, imagePreviewUrl: response.image, url: response.ref }) : _setState({ files: "", imagePreviewUrl: "", url: "" })
+
+        if (!isCreateProps) {
+            // update news
+            setInputText(response.ref)
+
+            dispatch(initForm({
+                file: response.image,
+                ref: response.ref
+            }))
+        } else {
+            // create new news
+            dispatch(initForm({
+                file: "",
+                ref: ""
+            }))
+        }
+
     }, []);
 
     const _handleImageChange = e => {
@@ -36,32 +49,40 @@ function FormNews(props) {
 
         let _name = e.target.name;
 
-        if (_name === "upload") {
-            let reader = new FileReader();
-            let file = e.target.files[0];
-
-            reader.onloadend = () => {
-                _setState({
-                    ..._state,
-                    file: file,
-                    imagePreviewUrl: reader.result
-                });
-            };
-
-            reader.readAsDataURL(file);
+        if (e.target.name === "upload") {
+            createImage(e)
         } else {
             const _value = e.target.value;
-            // console.log(_value);
+
             _setState({
                 ..._state,
                 [_name]: _value
             });
+
+            // update component and redux
+            setInputText(e.target.value)
+            dispatch(updateRef(e.target.value))
         }
     };
 
+    const createImage = ( e ) => {
+        const reader = new FileReader();
+        const file = e.target.files[0];
+
+        reader.onloadend = (e) => {
+            _setState({
+                ..._state,
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+            dispatch(updateFile(e.target.result))
+        };
+
+        reader.readAsDataURL(file);
+    }
+
     const _previewImage = () => {
         let { imagePreviewUrl } = _state;
-        // console.log(`imagePreviewUrl: ${imagePreviewUrl}`);
         let _imagePreview = null;
 
         if (imagePreviewUrl) {
@@ -73,8 +94,6 @@ function FormNews(props) {
                     height="300"
                 />
             );
-        } else {
-            console.log('not have data')
         }
 
         return _imagePreview;
@@ -117,7 +136,8 @@ function FormNews(props) {
                         type="text"
                         name="urlImage"
                         placeholder="URL"
-                        value={!type ? _state.url : ""}
+                        // value={e => console.log(e)}
+                        value={inputText}
                         onChange={_handleImageChange} />
                 </Form.Group>
 
