@@ -9,6 +9,7 @@ export default function TableReport() {
         <MDBDataTableV5
             fullPagination
             searchTop
+            scrollX
             searchBottom={false}
             hover
             entriesOptions={[5, 20, 25]}
