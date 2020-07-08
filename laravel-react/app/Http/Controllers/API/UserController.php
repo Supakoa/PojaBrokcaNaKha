@@ -76,6 +76,7 @@ class UserController extends Controller
             $user->major->faculty;
         return response()->json(['success' => $user], $this->successStatus);
     }
+    
     public function users()
     {
         $user = User::all();

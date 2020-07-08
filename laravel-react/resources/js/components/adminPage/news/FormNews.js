@@ -3,7 +3,7 @@ import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { useSelector, useDispatch } from 'react-redux'
-import { initForm, updateFile, updateRef, destroyForm } from "../../../redux/actions/";
+import { initNewsForm, updateFile, updateRef, destroyForm } from "../../../redux/actions/";
 
 // modal add new news
 
@@ -11,7 +11,7 @@ function FormNews(props) {
     const { response, isCreateProps } = props;
 
     // redux
-    const file = useSelector(state => state.file)
+    // const file = useSelector(state => state.file) not use
     const dispatch = useDispatch()
 
     const [_state, _setState] = React.useState({
@@ -30,13 +30,13 @@ function FormNews(props) {
             // update news
             setInputText(response.ref)
 
-            dispatch(initForm({
+            dispatch(initNewsForm({
                 file: response.image,
                 ref: response.ref
             }))
         } else {
             // create new news
-            dispatch(initForm({
+            dispatch(initNewsForm({
                 file: "",
                 ref: ""
             }))

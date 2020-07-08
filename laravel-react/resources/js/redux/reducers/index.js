@@ -4,8 +4,9 @@ import userReducer from "./user";
 import redirectReducer from "./isRedirect";
 import newsReducer from "./news";
 import studentProfileReducer from "./studentProfileReducer";
+import newsFormReducer from "./newsForm";
+
 import { combineReducers } from "redux";
-import formReducer from "./form";
 
 const allReducers = combineReducers({
     counter: counterReducer,
@@ -13,7 +14,7 @@ const allReducers = combineReducers({
     userState: userReducer,
     redirectState: redirectReducer,
     newsState: newsReducer,
-    form: formReducer,
+    newsForm: newsFormReducer,
     studentProfile: studentProfileReducer
 });
 

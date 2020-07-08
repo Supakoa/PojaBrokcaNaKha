@@ -17,9 +17,8 @@ export default class User extends Component {
                 </Card.Header>
                 <Card.Body className="w-100">
                     <div className="text-right justify-content-end">
-                        <ModalUser type={true} />
+                        <ModalUser isCreatedProp={true} />
                     </div>
-
                     <TableUser />
                 </Card.Body>
             </Card>

@@ -3,17 +3,8 @@ import ModalUser from "../../modals/ModalUser";
 import ModalDelete from "../../modals/ModalDelete";
 import axios from "axios";
 
-const ColumnAction = (idx, res) => {
-    return (
-        <>
-            <ModalUser key={idx} id={res.id} type={false} />
-            {" || "}
-            <ModalDelete key={idx + 1} id={res.id} />
-        </>
-    );
-};
-
 export const dataTableUser = () => {
+
     const columns = [
         {
             label: "#",
@@ -59,8 +50,19 @@ export const dataTableUser = () => {
         }
     ];
 
+    // init state
     const [rows, setRows] = React.useState([]);
     // const [users, setUsers] = React.useState(testData);
+
+    const ColumnAction = (idx, res) => {
+        return (
+            <>
+                <ModalUser key={idx} id={res.id} isCreatedProp={false} />
+                {" || "}
+                <ModalDelete key={idx + 1} id={res.id} api={"user"} />
+            </>
+        );
+    };
 
     const fetchRowData = _data => {
 
@@ -76,7 +78,7 @@ export const dataTableUser = () => {
                 major: res.major_id
             };
         });
-        console.log(`row :`, _row)
+        // console.log(`row :`, _row)
         return _row;
     };
 
