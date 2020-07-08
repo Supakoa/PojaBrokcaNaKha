@@ -1,21 +1,20 @@
 import React from "react";
 import dataNewsTable from "./dataNewsTable";
-import { MDBDataTableV5 } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 
 export default function TableNews() {
     const _data = dataNewsTable();
 
     return (
-        <MDBDataTableV5
-            className="text-center align-item-center align-middle"
-            fullPagination
-            searchTop
-            searchBottom={false}
+        <MDBDataTable
+            striped
+            borderless
+            scrollX
             hover
-            entriesOptions={[5, 20, 25]}
-            entries={5}
-            pagesAmount={4}
+            info={false}
+            paging={false}
             data={_data}
+            searchLabel="ค้นหา"
         />
     );
 }
