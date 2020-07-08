@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Container, Button } from "react-bootstrap";
 import FormUser from "../user/FormUser";
 
 export default function ModalUser(props) {
-    const { type } = props;
-    //If type is true Modal Add else type is false Modal Edit
-    // console.log(props);
-    const [_onSubmit, setOnSubmit] = React.useState(false);
+
+    //If isCreatedProp true is Modal Add but when false is Modal Edit
+    const { isCreatedProp, id } = props;
+
+    // init state
+    // const [_onSubmit, setOnSubmit] = React.useState(false); not use
     const [_modalUser, setModalUser] = React.useState(false);
+
     const formOnSubmit = e => {
         // console.log(e.currentTarget.checkValidity());
         console.log("ok");
@@ -19,16 +22,26 @@ export default function ModalUser(props) {
         }
         // setValidated(true);
     };
+
+    const returnFromUserComponent = () => {
+        return !isCreatedProp ? <FormUser isCreatedProp={isCreatedProp} id={id} submitOnButton={formOnSubmit} /> : <FormUser isCreatedProp={isCreatedProp} submitOnButton={formOnSubmit} />
+    }
+
+    const sendDataToDB = ( e ) => {
+        console.log('sendDataToDB()')
+    }
+
     return (
         <>
             <Button
                 name="modalUser"
-                variant={!type ? "warning" : "info"}
+                variant={!isCreatedProp ? "warning" : "info"}
                 size="sm"
                 onClick={() => setModalUser(true)}
             >
-                {!type ? "แก้ไขข้อมูล" : "เพิ่มข้อมูล"}
+                {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มข้อมูล"}
             </Button>
+
             <Modal
                 show={_modalUser}
                 onHide={() => setModalUser(false)}
@@ -41,41 +54,28 @@ export default function ModalUser(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="modal-user">
-                        {!type ? "แก้ไขข้อมูล" : "เพิ่มสมาชิค"}
+                        {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มสมาชิค"}
                     </Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
                     <Container>
-                        {!type ? (
-                            <FormUser
-                                typeForm={type}
-                                user="obj"
-                                submitOnButton={formOnSubmit}
-                            />
-                        ) : (
-                            <FormUser
-                                typeForm={type}
-                                submitOnButton={formOnSubmit}
-                            />
-                        )}
+                        { returnFromUserComponent() }
                     </Container>
                 </Modal.Body>
+
                 <Modal.Footer>
                     <Button
                         variant="success"
                         type="submit"
-                        // onClick={() => setOnSubmit(true)}
-                        // formAction="userForm"
-                    >
-                        บันทัก
-                    </Button>
+                        onClick={e => sendDataToDB(e)}
+                    >บันทัก</Button>
+
                     <Button
                         form="userForm"
                         variant="danger"
                         onClick={() => setModalUser(false)}
-                    >
-                        ปิด
-                    </Button>
+                    >ปิด</Button>
                 </Modal.Footer>
             </Modal>
         </>

@@ -1,6 +1,6 @@
-const formReducer = (state = {}, action) => {
+const newsFormReducer = (state = {}, action) => {
     switch (action.type) {
-        case "INITFORM":
+        case "INITNEWSFORM":
             return {
                 ...state,
                 file: action.file,
@@ -27,5 +27,5 @@ const formReducer = (state = {}, action) => {
     }
 }
 
-export default formReducer
+export default newsFormReducer
 

@@ -43,8 +43,8 @@ const dataNewsTable = () => {
                     response={res}
                 />
                 {" || "}
-                <ModalDelete key={indexKey + 1} id={res.id} />
-            </>
+                <ModalDelete key={indexKey + 1} id={res.id} api="news" />
+            </div>
         );
     };
 

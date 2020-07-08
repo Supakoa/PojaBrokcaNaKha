@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import Axios from "axios";
 
 export default function ModalDelete(props) {
-    const { id } = props;
+    const { id, api } = props;
 
-    const apiPath = `http://localhost:8000/api/news`
+    const apiPath = `http://localhost:8000/api/${api}`
 
     const handleClick = () => {
         Swal.fire({
@@ -21,7 +21,7 @@ export default function ModalDelete(props) {
         }).then(result => {
             if (result.value) {
                 Axios.delete(`${apiPath}/${id}`).then(res => {
-                    Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                    Swal.fire("Deleted!", `Your ${api} has been deleted.`, "success");
                 })
             }
         });

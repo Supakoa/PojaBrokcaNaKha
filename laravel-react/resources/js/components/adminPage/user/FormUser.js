@@ -1,9 +1,13 @@
 import { Form, Col } from "react-bootstrap";
 import React from "react";
+import Axios from "axios";
 
 export default function FormUser(props) {
-    const { type, submitOnButton } = props;
-    console.log(props);
+    // props
+    const { isCreatedProp, submitOnButton, id } = props;
+    // console.log(props);
+
+    // init state
     // const [_error, setError] = React.useState();
     const [validated, setValidated] = React.useState(false);
     const [_state, setState] = React.useState({
@@ -18,6 +22,8 @@ export default function FormUser(props) {
         phone: "",
         major: ""
     });
+
+    const apiPath = `http://localhost:8000/api`
 
     const _hendleChange = e => {
         const { value, name, maxLength } = e.target;
@@ -39,6 +45,19 @@ export default function FormUser(props) {
         // }
         const abort = new AbortController();
 
+        if (isCreatedProp) {
+            console.log('if')
+        } else {
+            console.log('id: ', id)
+            Axios.post(`${apiPath}/user`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+                }
+            }).then(res => {
+                console.log('user: ', res.data)
+            })
+        }
+
         return () => {
             abort.abort();
         };
@@ -47,6 +66,7 @@ export default function FormUser(props) {
     const finallyOnSubmit = formData => {
         console.log(formData);
     };
+
     return (
         <Form
             name="userForm"
@@ -61,9 +81,10 @@ export default function FormUser(props) {
                     type="email"
                     name="email"
                     placeholder="name@example.com"
-                    defaultValue={!type ? _state.email : ""}
+                    defaultValue={!isCreatedProp ? _state.email : ""}
                 />
             </Form.Group>
+
             <Form.Row>
                 <Form.Group as={Col} controlId="formUserpassword">
                     <Form.Label>รหัสผ่าน</Form.Label>
@@ -72,9 +93,10 @@ export default function FormUser(props) {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        defaultValue={!type ? _state.password : ""}
+                        defaultValue={!isCreatedProp ? _state.password : ""}
                     />
                 </Form.Group>
+
                 <Form.Group as={Col} controlId="formUserCpassword">
                     <Form.Label>คอนเฟิร์ม รหัสผ่าน</Form.Label>
                     <Form.Control
@@ -82,7 +104,7 @@ export default function FormUser(props) {
                         type="password"
                         placeholder="Confirm Password"
                         name="c_password"
-                        defaultValue={!type ? _state.c_password : ""}
+                        defaultValue={!isCreatedProp ? _state.c_password : ""}
                     />
                 </Form.Group>
             </Form.Row>
@@ -101,9 +123,10 @@ export default function FormUser(props) {
                         type="text"
                         placeholder="คำนำหน้า"
                         name="title"
-                        defaultValue={!type ? _state.title : ""}
+                        defaultValue={!isCreatedProp ? _state.title : ""}
                     />
                 </Form.Group>
+
                 <Form.Group
                     controlId="formUserNameLastname"
                     as={Col}
@@ -117,9 +140,10 @@ export default function FormUser(props) {
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
-                        defaultValue={!type ? _state.firstName : ""}
+                        defaultValue={!isCreatedProp ? _state.firstName : ""}
                     />
                 </Form.Group>
+
                 <Form.Group
                     controlId="formUserLastname"
                     as={Col}
@@ -133,7 +157,7 @@ export default function FormUser(props) {
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
-                        defaultValue={!type ? _state.lastName : ""}
+                        defaultValue={!isCreatedProp ? _state.lastName : ""}
                     />
                 </Form.Group>
             </Form.Row>
@@ -141,15 +165,17 @@ export default function FormUser(props) {
             <Form.Row>
                 <Form.Group as={Col} md={8} lg={8} controlId="formUserphone">
                     <Form.Label>เบอร์โทร</Form.Label>
+
                     <Form.Control
                         onChange={_hendleChange}
                         type="text"
                         name="phone"
                         maxLength={11}
                         placeholder="+66 or 08, 09"
-                        defaultValue={!type ? _state.phone : ""}
+                        defaultValue={!isCreatedProp ? _state.phone : ""}
                     />
                 </Form.Group>
+
                 <Form.Group
                     as={Col}
                     md={4}
@@ -157,6 +183,7 @@ export default function FormUser(props) {
                     controlId="formUserSelectRole"
                 >
                     <Form.Label>เลือกประเภท</Form.Label>
+
                     <Form.Control
                         as="select"
                         name="role"
@@ -173,6 +200,7 @@ export default function FormUser(props) {
             <Form.Row>
                 <Form.Group as={Col} controlId="formUserSelectFac">
                     <Form.Label>คณะ</Form.Label>
+
                     <Form.Control
                         as="select"
                         name="faculty"
@@ -181,8 +209,10 @@ export default function FormUser(props) {
                         <option>คณะ</option>
                     </Form.Control>
                 </Form.Group>
+
                 <Form.Group as={Col} controlId="formUserSelectMajor">
                     <Form.Label>สาขา</Form.Label>
+
                     <Form.Control
                         as="select"
                         name="major"

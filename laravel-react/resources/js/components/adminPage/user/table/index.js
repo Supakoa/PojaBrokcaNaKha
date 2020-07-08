@@ -16,7 +16,6 @@ export default function TableUser() {
             entriesOptions={[5, 20, 25]}
             entries={5}
             pagesAmount={4}
-            data={_data}
-        />
+            data={_data} />
     );
 }

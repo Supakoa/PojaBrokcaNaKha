@@ -36,9 +36,9 @@ export const newsUpload = obj => {
     };
 };
 
-export const initForm = (data) => {
+export const initNewsForm = (data) => {
     return {
-        type: "INITFORM",
+        type: "INITNEWSFORM",
         file: data.file,
         ref: data.ref
     }

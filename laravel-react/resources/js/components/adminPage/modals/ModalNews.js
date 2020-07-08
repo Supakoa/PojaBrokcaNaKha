@@ -12,8 +12,7 @@ export default function ModalNews(props) {
     const [isShow, setIsShow] = React.useState(false);
 
     // redux
-    const form = useSelector(state => state.form)
-    const dispatch = useDispatch()
+    const form = useSelector(state => state.newsForm)
 
     const isReturnCreateForm = () => {
         return <FormNews response={response} isCreateProps={isCreateProps} />
