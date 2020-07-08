@@ -18,7 +18,7 @@ export default function dataReport() {
                 sendTime: res.start,
                 editTime: res.end,
                 status: ReportStatus(res.status),
-                action: <ModalReport />
+                action: <ModalReport key={res.id} />
             };
             return response;
         });
