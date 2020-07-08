@@ -54,7 +54,7 @@ export default function dataReport() {
             };
             return response;
         });
-        console.log(_rows);
+        // console.log(_rows);
 
         return _rows;
     };

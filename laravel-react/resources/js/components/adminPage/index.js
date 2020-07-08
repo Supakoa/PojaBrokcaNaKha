@@ -56,7 +56,6 @@ export default function AdminPage() {
                         <Route path={`${path}/inbox`}>
                             <Messagws />
                         </Route>
-
                         <Route path={`${path}/report`}>
                             <Report />
                         </Route>
