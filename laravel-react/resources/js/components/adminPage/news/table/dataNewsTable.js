@@ -37,7 +37,7 @@ const dataNewsTable = () => {
     const ColumnActions = (indexKey, res) => {
         return (
             <div>
-                <ModalNews key={indexKey} type={false} response={res} />
+                <ModalNews key={indexKey} isCreateProps={false} response={res} />
                 {" || "}
                 <ModalDelete key={indexKey + 1} id={res.id} />
             </div>

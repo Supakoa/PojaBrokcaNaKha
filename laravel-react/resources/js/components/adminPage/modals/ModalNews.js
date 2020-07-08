@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import FormNews from "../news/FormNews";
 import { colors } from "@material-ui/core";
 import Axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
@@ -10,41 +11,59 @@ export default function ModalNews(props) {
     const { isCreateProps, response } = props;
     const [isShow, setIsShow] = React.useState(false);
 
-    // not use
-    // const [_item, setItem] = React.useState({
-    //     loading: false,
-    //     data: []
-    // });
+    // redux
+    const form = useSelector(state => state.form)
+    const dispatch = useDispatch()
 
-    const isReturnCreateForm = props => {
-        return !props ? (
-            <FormNews response={response} type={props} />
-        ) : (
-            <FormNews type={props} />
-        );
+    const isReturnCreateForm = () => {
+        return <FormNews response={response} isCreateProps={isCreateProps} />
     };
 
     const isCreateTitile = context => {
         return context ? "เพิ่มข้อมูล" : "แก้ไขข้อมูล";
     };
 
+    const apiPath = `http://localhost:8000/api/news`
+
     // not use ofr init
-    // React.useEffect(() => {
-    //     const abortController = new AbortController();
+    React.useEffect(() => {
+        const abortController = new AbortController();
 
-    //     return () => {
-    //         abortController.abort();
-    //     };
-    // }, []);
+        return () => {
+            abortController.abort();
+        };
+    }, []);
 
-    const saveImageToDB = ( id ) => {
-        const formData = new FormData()
-        Axios.patch(`http://localhost:8000/api/news/${id}`)
+    const saveFormToDB = ( ) => {
+        const sendFormTemplate = {
+            image: form.file,
+            ref: form.ref
+        }
+
+        if (isCreateProps) {
+            Axios.post(`${apiPath}`, sendFormTemplate, {
+                Header: {
+                    'Content-type': 'multipart/form-data'
+                }
+            }).then(res => {
+                console.log(res)
+            })
+        } else {
+            const id = response.id
+
+            Axios.patch(`${apiPath}/${id}`, sendFormTemplate, {
+                Header: {
+                    'Content-type': 'multipart/form-data'
+                }
+            }).then(res => {
+                console.log(res.data)
+            })
+        }
     }
 
     return (
         <>
-            {/* button create and edit : will convert by isCreateProps state*/}
+            {/* button create or edit : will convert by isCreateProps state*/}
             <Button
                 size="sm"
                 onClick={() => setIsShow(true)}
@@ -55,7 +74,7 @@ export default function ModalNews(props) {
                 {isCreateTitile(isCreateProps)}{" "}
             </Button>
 
-            {/* Modal for edit and create : will convert by isCreateProps state*/}
+            {/* Modal for edit or create : will convert by isCreateProps state*/}
             <Modal
                 animation={true}
                 centered={true}
@@ -71,11 +90,11 @@ export default function ModalNews(props) {
                     </Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>{isReturnCreateForm(isCreateProps)}</Modal.Body>
+                <Modal.Body>{isReturnCreateForm()}</Modal.Body>
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setIsShow(false)}> close </Button>
-                    <Button variant={isCreateProps ? "info" : "warning"} onClick={saveImageToDB()}> save </Button>
+                    <Button variant={isCreateProps ? "info" : "warning"} onClick={() => saveFormToDB()}> save </Button>
                 </Modal.Footer>
             </Modal>
         </>

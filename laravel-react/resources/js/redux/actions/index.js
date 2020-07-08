@@ -36,6 +36,34 @@ export const newsUpload = obj => {
     };
 };
 
+export const initForm = (data) => {
+    return {
+        type: "INITFORM",
+        file: data.file,
+        ref: data.ref
+    }
+}
+
+export const updateFile = file => {
+    return {
+        type: "UPDATEFILE",
+        file: file
+    }
+}
+
+export const updateRef = ref => {
+    return {
+        type: "UPDATEREF",
+        ref: ref
+    }
+}
+
+export const destroyForm = () => {
+    return {
+        type: "DESTROYFORM",
+    }
+}
+
 export const studentProfile = _std => {
     return {
         type: "student",
