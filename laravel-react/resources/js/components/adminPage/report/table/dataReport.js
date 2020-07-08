@@ -1,6 +1,6 @@
-import { Badge } from "react-bootstrap";
 import React from "react";
 import { data } from "./testData";
+import ReportStatus from "./ReportStatus";
 
 export default function dataReport() {
     const columns = [
@@ -18,23 +18,29 @@ export default function dataReport() {
         {
             label: "ชื่อผู้ส่ง",
             field: "sender",
-            width: 150
+            width: 250
         },
         {
             label: "เวลาส่ง",
             field: "sendTime",
-            width: 120
+            width: 150
         },
         {
             label: "แก้ไขล่าสุด",
             field: "editTime",
-            width: 120
+            width: 150
         },
         {
             label: "สถานะ",
             field: "status",
             sort: "disabled",
             width: 150
+        },
+        {
+            label: "Action",
+            field: "action",
+            sort: "disabled",
+            width: 200
         }
     ];
 
@@ -50,7 +56,8 @@ export default function dataReport() {
                 sender: res.sender,
                 sendTime: res.start,
                 editTime: res.end,
-                status: ReportStatus(res.status)
+                status: ReportStatus(res.status),
+                action: ""
             };
             return response;
         });
@@ -70,34 +77,3 @@ export default function dataReport() {
 
     return { columns, rows };
 }
-
-const ReportStatus = _status => {
-    switch (_status) {
-        case 0:
-            return (
-                <Badge pill variant="info">
-                    กำลังดำเนินการ...
-                </Badge>
-            );
-        case 1:
-            return (
-                <Badge pill variant="warning">
-                    แก้ไข
-                </Badge>
-            );
-        case 2:
-            return (
-                <Badge pill variant="danger">
-                    ไม่ผ่าน
-                </Badge>
-            );
-        case 3:
-            return (
-                <Badge pill variant="success">
-                    สำเร็จ
-                </Badge>
-            );
-        default:
-            return null;
-    }
-};
