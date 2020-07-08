@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { data } from "./testData";
 import ReportStatus from "./ReportStatus";
+import ModalReport from "../../modals/ModalReport";
 import { columns } from "./columns";
 
 export default function dataReport() {
@@ -18,16 +18,7 @@ export default function dataReport() {
                 sendTime: res.start,
                 editTime: res.end,
                 status: ReportStatus(res.status),
-                action: (
-                    <Button
-                        key={res.id}
-                        variant="warning"
-                        size="sm"
-                        onClick={console.log("eiei")}
-                    >
-                        ตรวจสอบ
-                    </Button>
-                )
+                action: <ModalReport />
             };
             return response;
         });
