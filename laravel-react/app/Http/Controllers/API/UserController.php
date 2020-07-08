@@ -76,12 +76,13 @@ class UserController extends Controller
             $user->major->faculty;
         return response()->json(['success' => $user], $this->successStatus);
     }
-    
-    public function users()
+
+    public function index(Request $request)
     {
         $user = User::all();
         return response()->json(['success' => $user], $this->successStatus);
     }
+
     /**
      * Logout user (Revoke the token)
      *
