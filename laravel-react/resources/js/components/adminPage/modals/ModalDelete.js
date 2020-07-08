@@ -1,10 +1,14 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import Axios from "axios";
 
 export default function ModalDelete(props) {
     const { id } = props;
-    const handleClick = _id => {
+
+    const apiPath = `http://localhost:8000/api/news`
+
+    const handleClick = () => {
         Swal.fire({
             title: "คุณแน่ใจไหม ?",
             text: "คุณต้องการจะลบสิ่งนี้ !",
@@ -16,7 +20,9 @@ export default function ModalDelete(props) {
             confirmButtonText: "ใช่, ฉันต้องการลบ !"
         }).then(result => {
             if (result.value) {
-                Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                Axios.delete(`${apiPath}/${id}`).then(res => {
+                    Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                })
             }
         });
     };
