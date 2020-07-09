@@ -10,9 +10,10 @@ import ListMajors from "./ListMajors";
 const ProfileForm = () => {
     const _studentProfile = useSelector(state => state.studentProfile);
     const [_profile, setProfile] = React.useState({});
+    const [_isSubmit, setIsSubmit] = React.useState(false);
     const [_disOption, setDisOption] = React.useState(true);
     const [_facultyId, setFacultyId] = React.useState(null);
-    const [_state, setState] = React.useState(false);
+    const [_isUpdate, setIsUpdate] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
     const [_validate, setValidate] = React.useState({});
 
@@ -31,19 +32,19 @@ const ProfileForm = () => {
         const _valid = validateIndex(name, value);
         // console.log("validate", name, " value =>", _valid);
 
-        setState(true);
+        setIsUpdate(true);
         if (_valid) {
             if (name === "faculty_id") {
                 setDisOption(false);
                 setFacultyId(Number(value));
             }
+            setIsSubmit(_valid);
             setProfile({
                 ..._profile,
                 [name]: value
             });
         }
         // console.log(name, " => setValidate");
-
         setValidate({
             ..._validate,
             [name]: _valid
@@ -51,15 +52,18 @@ const ProfileForm = () => {
     };
 
     const handleSubmit = () => {
-        if (_state) {
-            setLoading(true);
-            setState(false);
+        if (_isUpdate) {
+            if (_isSubmit) {
+                setLoading(true);
+                setIsUpdate(false);
 
-            setTimeout(() => {
-                setLoading(false);
-            }, 2000);
-        } else {
-            Swal.fire("ข้อมูลไม่มีการเปลี่ยนแปลง. !");
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
+            } else {
+                Swal.fire("ผิดพลาด", "พบข้อมูลไม่ถูกต้อง!", "error");
+                Swal.fire("danger", "พบข้อมูลไม่ถูกต้อง. !");
+            }
         }
     };
 
@@ -276,11 +280,18 @@ const ProfileForm = () => {
                             ) : (
                                 <Button
                                     variant={
-                                        _state ? "outline-warning" : "warning"
+                                        !_isUpdate
+                                            ? "outline-warning"
+                                            : "warning"
+                                    }
+                                    className={
+                                        _isUpdate
+                                            ? "text-white btn-block"
+                                            : "disabled"
                                     }
                                     onClick={handleSubmit}
                                 >
-                                    {_state ? "อัพเดต" : "บันทึก"}
+                                    {_isUpdate ? "อัพเดต" : "บันทึก"}
                                 </Button>
                             )}
                         </Col>
