@@ -33,18 +33,20 @@ const ProfileForm = () => {
         // console.log("validate", name, " value =>", _valid);
 
         setIsUpdate(true);
+        setIsSubmit(_valid);
+
         if (_valid) {
             if (name === "faculty_id") {
                 setDisOption(false);
                 setFacultyId(Number(value));
             }
-            setIsSubmit(_valid);
             setProfile({
                 ..._profile,
                 [name]: value
             });
         }
         // console.log(name, " => setValidate");
+
         setValidate({
             ..._validate,
             [name]: _valid
@@ -62,7 +64,6 @@ const ProfileForm = () => {
                 }, 2000);
             } else {
                 Swal.fire("ผิดพลาด", "พบข้อมูลไม่ถูกต้อง!", "error");
-                Swal.fire("danger", "พบข้อมูลไม่ถูกต้อง. !");
             }
         }
     };
