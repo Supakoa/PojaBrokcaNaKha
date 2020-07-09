@@ -16,7 +16,7 @@ class CreateDocumentsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-            $table->integer('user_cancel_id')->unsigned();
+            $table->integer('user_cancel_id')->unsigned()->nullable();
             $table->integer('form_id')->unsigned();
             $table->json('data')->nullable();
             $table->tinyInteger('state')->nullable();
