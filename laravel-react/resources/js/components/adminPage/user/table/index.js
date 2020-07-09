@@ -1,21 +1,21 @@
 import React from "react";
 import { dataTableUser } from "./dataTableUsers";
-import { MDBDataTableV5 } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 
 export default function TableUser() {
     //Data of Table [columns, rows]
     const _data = dataTableUser();
 
     return (
-        <MDBDataTableV5
-            fullPagination
-            searchTop
+        <MDBDataTable
+            striped
+            borderless
             scrollX
-            searchBottom={false}
             hover
-            entriesOptions={[5, 20, 25]}
-            entries={5}
-            pagesAmount={4}
-            data={_data} />
+            info={false}
+            paging={false}
+            data={_data}
+            searchLabel="ค้นหา"
+        />
     );
 }

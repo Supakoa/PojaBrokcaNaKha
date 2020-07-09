@@ -1,21 +1,20 @@
 import React from "react";
-import { MDBDataTableV5 } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 import dataReport from "./dataReport";
 
 export default function TableReport() {
     const _data = dataReport();
 
     return (
-        <MDBDataTableV5
-            fullPagination
-            searchTop
+        <MDBDataTable
+            striped
+            borderless
             scrollX
-            searchBottom={false}
             hover
-            entriesOptions={[5, 20, 25]}
-            entries={5}
-            pagesAmount={4}
+            info={false}
+            paging={false}
             data={_data}
+            searchLabel="ค้นหา"
         />
     );
 }
