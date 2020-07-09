@@ -17,7 +17,7 @@ class DocumentsController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Document::latest()->paginate(25);
+        $documents = Document::all();
 
         return $documents;
     }
