@@ -13,17 +13,17 @@ const validateEmail = value => {
             if (_str === "s") {
                 _isEmail = true;
             }
-            console.log("first round: ", i);
+            // console.log("first round: ", i);
         } else if (_isEmail) {
             if (i === 1) {
-                console.log("second round: ", i);
+                // console.log("second round: ", i);
                 // second round check Student id after the s.
                 _numID = value.slice(i, 12);
                 if (_numID.length !== 11 || !Number(_numID)) {
                     _isEmail = false;
                 }
             } else if (i === _numID.length + 1) {
-                console.log("round: ", i);
+                // console.log("round: ", i);
                 // end to 12 becuese length Student id = 11
                 if (_str === "@") {
                     // console.log(i);
