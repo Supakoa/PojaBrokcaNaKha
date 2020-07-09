@@ -79,13 +79,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->input('per_page') != null) {
-            $user = User::paginate($request->input('per_page'));
-
-        } else {
-            $user = User::paginate(20);
-        }
-        
+        $user = User::all();
         foreach ($user as $value) {
             if ($value->major != null)
                 $value->major->faculty;

@@ -17,7 +17,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = News::latest()->paginate(25);
+        $news = News::all();
 
         return $news;
     }
