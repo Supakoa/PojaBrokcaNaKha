@@ -1,8 +1,7 @@
 const validateStudentId = value => {
     const _isNum = false;
     if (isNaN(value)) {
-        console.log("if");
-
+        // console.log("if");
         return _isNum;
     } else {
         if (value.length >= 11) {
