@@ -40,10 +40,9 @@ export const dataTableUser = () => {
                 const { success } = res.data;
                 const _items = fetchRowData(success);
                 setRows(_items);
-                // console.log(`items: `, success);
+                console.log(`items: `, success);
                 // return _items;
             });
-        // return _getusers;
     };
 
     React.useEffect(() => {

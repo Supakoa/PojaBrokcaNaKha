@@ -14,23 +14,25 @@ const ProfileForm = () => {
     const [_facultyId, setFacultyId] = React.useState(null);
     const [_state, setState] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
+    const [_validate, setValidate] = React.useState({});
 
     React.useEffect(() => {
         if (Object.entries(_profile).length === 0) {
             setProfile(_studentProfile);
         }
     });
-    console.log(_profile);
+    // console.log(_profile);
 
     const handleChange = e => {
         const { name, value } = e.target;
-        const _validate = validateIndex(name, value);
-        // console.log(_validate);
-        console.log(name, " => name of onChange");
-        console.log(value, " => value onChange");
+        // console.log(name, " => name of onChange");
+        // console.log(value, " => value onChange");
 
-        if (value) {
-            setState(true);
+        const _valid = validateIndex(name, value);
+        // console.log("validate", name, " value =>", _valid);
+
+        setState(true);
+        if (_valid) {
             if (name === "faculty_id") {
                 setDisOption(false);
                 setFacultyId(Number(value));
@@ -40,6 +42,12 @@ const ProfileForm = () => {
                 [name]: value
             });
         }
+        // console.log(name, " => setValidate");
+
+        setValidate({
+            ..._validate,
+            [name]: _valid
+        });
     };
 
     const handleSubmit = () => {
@@ -65,6 +73,17 @@ const ProfileForm = () => {
                             <Col sm={3} md={2} lg={2} className="py-2">
                                 <Form.Label className="p-0">นำหน้า</Form.Label>
                                 <Form.Control
+                                    required
+                                    isValid={
+                                        _validate.title !== undefined
+                                            ? _validate.title
+                                            : false
+                                    }
+                                    isInvalid={
+                                        _validate.title !== undefined
+                                            ? !_validate.title
+                                            : false
+                                    }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     maxLength={6}
                                     type="text"
@@ -81,6 +100,17 @@ const ProfileForm = () => {
                             <Col sm={7} md={3} lg={3} className="py-2">
                                 <Form.Label>ชื่อ</Form.Label>
                                 <Form.Control
+                                    required
+                                    isValid={
+                                        _validate.first_name !== undefined
+                                            ? _validate.first_name
+                                            : false
+                                    }
+                                    isInvalid={
+                                        _validate.first_name !== undefined
+                                            ? !_validate.first_name
+                                            : false
+                                    }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
                                     placeholder="ชื่อ"
@@ -101,6 +131,17 @@ const ProfileForm = () => {
                             >
                                 <Form.Label>นามสกุล</Form.Label>
                                 <Form.Control
+                                    required
+                                    isValid={
+                                        _validate.last_name !== undefined
+                                            ? _validate.last_name
+                                            : false
+                                    }
+                                    isInvalid={
+                                        _validate.last_name !== undefined
+                                            ? !_validate.last_name
+                                            : false
+                                    }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
                                     placeholder="นามสกุล"
@@ -123,9 +164,21 @@ const ProfileForm = () => {
                             <Col sm={10} md={5} lg={5} className="py-2">
                                 <Form.Label>รหัสนักศึกษา</Form.Label>
                                 <Form.Control
+                                    required
+                                    isValid={
+                                        _validate.student_id !== undefined
+                                            ? _validate.student_id
+                                            : false
+                                    }
+                                    isInvalid={
+                                        _validate.student_id !== undefined
+                                            ? !_validate.student_id
+                                            : false
+                                    }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
                                     name="student_id"
+                                    maxLength={11}
                                     placeholder="59xxxxxxxxx"
                                     onChange={handleChange}
                                     defaultValue={
@@ -138,10 +191,22 @@ const ProfileForm = () => {
                             <Col sm={10} md={5} lg={5} className="py-sm-2">
                                 <Form.Label>เบอร์โทรศัพท์</Form.Label>
                                 <Form.Control
+                                    required
+                                    isValid={
+                                        _validate.telephone !== undefined
+                                            ? _validate.telephone
+                                            : false
+                                    }
+                                    isInvalid={
+                                        _validate.telephone !== undefined
+                                            ? !_validate.telephone
+                                            : false
+                                    }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
+                                    maxLength={10}
                                     name="telephone"
-                                    placeholder="08 or 09"
+                                    placeholder="เบอร์โทรศัพท์"
                                     onChange={handleChange}
                                     defaultValue={
                                         _profile.telephone === undefined
@@ -158,6 +223,16 @@ const ProfileForm = () => {
                             <Col sm={10} md={5} lg={5} className="py-2">
                                 <Form.Label>อีเมล</Form.Label>
                                 <Form.Control
+                                    isValid={
+                                        _validate.email !== undefined
+                                            ? _validate.email
+                                            : false
+                                    }
+                                    isInvalid={
+                                        _validate.email !== undefined
+                                            ? !_validate.email
+                                            : false
+                                    }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="email"
                                     name="email"
