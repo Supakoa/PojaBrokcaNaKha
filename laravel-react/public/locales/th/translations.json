@@ -1,3 +1,14 @@
 {
-    "title" :  "คำนำหน้า"
+    "user" : {
+        "title" :  "คำนำหน้า",
+        "firstName" : "ชื่อ",
+        "lastName" : "นามสกุล",
+        "studentId" : "รหัสนักศึกษา",
+        "password" : "รหัสผ่าน",
+        "confirmPassword" : "ยืนยันรหัสผ่าน",
+        "email" : "อีเมล",
+        "phoneNumber" : "เบอร์โทรศัพท์",
+        "faculty" : "คณะ",
+        "major" : "สาขา"
+    }
 }

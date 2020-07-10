@@ -1,3 +1,14 @@
 {
-    "title": "title"
+    "user" : {
+        "title" :  "Title",
+        "firstName" : "First Name",
+        "lastName" : "Last Name",
+        "studentId" : "Student Id",
+        "password" : "Password",
+        "confirmPassword" : "Confirm Password",
+        "email" : "Email",
+        "phoneNumber" : "Phone number",
+        "faculty" : "Faculty",
+        "major" : "Major"
+    }
 }
