@@ -5,6 +5,7 @@ import redirectReducer from "./isRedirect";
 import newsReducer from "./news";
 import studentProfileReducer from "./studentProfileReducer";
 import newsFormReducer from "./newsForm";
+import pathRoleUserReducer from "./pathRoleUser";
 
 import { combineReducers } from "redux";
 
@@ -15,7 +16,8 @@ const allReducers = combineReducers({
     redirectState: redirectReducer,
     newsState: newsReducer,
     newsForm: newsFormReducer,
-    studentProfile: studentProfileReducer
+    studentProfile: studentProfileReducer,
+    pathRoleUser : pathRoleUserReducer
 });
 
 export default allReducers;

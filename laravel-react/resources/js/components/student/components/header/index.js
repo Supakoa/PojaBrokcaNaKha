@@ -2,8 +2,8 @@ import React from "react";
 import { Navbar, Nav, Container, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./../../../images/logo.png";
-import SignOut from "../../../middleware/axios/SignOut";
 import { ProfileContext } from "../../context";
+import SignOut from "../../../auth/sign-out";
 
 function NavHeader(props) {
     const token = localStorage._authLocal;
@@ -81,13 +81,14 @@ function NavHeader(props) {
                             }}
                         </ProfileContext.Consumer>
 
-                        <Link
-                            className="text-light d-flex align-items-center justify-content-center"
-                            to="/login"
-                            onClick={() => SignOut(token)}
-                        >
-                            ออกจากระบบ
-                        </Link>
+                        <SignOut className = "text-light d-flex align-items-center justify-content-center"/>
+                        {/*<Link*/}
+                        {/*    className="text-light d-flex align-items-center justify-content-center"*/}
+                        {/*    to="/login"*/}
+                        {/*    onClick={() => SignOut(token)}*/}
+                        {/*>*/}
+                        {/*    ออกจากระบบ*/}
+                        {/*</Link>*/}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

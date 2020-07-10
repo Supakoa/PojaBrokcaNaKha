@@ -2,10 +2,9 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
-import SignOut from "../../../middleware/axios/SignOut";
+import SignOut from "../../../auth/sign-out";
 
 export default function HeaderNav(props) {
-    const token = localStorage._authLocal;
 
     return (
         <Navbar bg="light">
@@ -31,13 +30,9 @@ export default function HeaderNav(props) {
                         />{" "}
                         {props.info.first} {props.info.last}
                     </Nav.Link>
-                    <Link
-                        className="nav-link"
-                        to="/login"
-                        onClick={() => SignOut(token)}
-                    >
-                        Log-Out
-                    </Link>
+
+                    <SignOut className = "nav-link"/>
+
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
