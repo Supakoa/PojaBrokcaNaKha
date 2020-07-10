@@ -1,42 +1,32 @@
 import validateTitle from "./validateTitle";
+import validateEmpty from "./validateEmpty";
+import validateStudentId from "./validateStudentId";
+import validatePhone from "./validatePhone";
+import validateEmail from "./validateEmail";
 
-const validateString = value => {};
+const validateFaculty = value => {};
 
-const validateStudentId = value => {};
-
-const validatePhone = value => {};
-
-const validateEmail = value => {};
+const validateMajor = value => {};
 
 export const validateIndex = (name, value) => {
     const _state = false;
     switch (name) {
         case "title":
-            const _title = validateTitle(value);
-            return _title;
-        case "name_f":
-            const _firstName = validateString(value);
-            return _firstName;
-
-        case "name_l":
-            const _lastName = validateString(value);
-            return _lastName;
-
+            return validateTitle(value);
+        case "first_name":
+            return validateEmpty(value);
+        case "last_name":
+            return validateEmpty(value);
         case "student_id":
-            const _studentId = validateStudentId(value);
-            return _studentId;
-
-        case "phone":
-            const _phone = validatePhone(value);
-            return _phone;
-
+            return validateStudentId(value);
+        case "telephone":
+            return validatePhone(value);
         case "email":
-            const _email = validateEmail(value);
-            return _email;
+            return validateEmail(value);
         case "facuty":
-            return true;
+            return validateFaculty(value);
         case "major":
-            return;
+            return validateMajor(value);
         default:
             return _state;
     }
