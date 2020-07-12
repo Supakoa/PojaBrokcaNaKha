@@ -70,3 +70,10 @@ export const studentProfile = _std => {
         payload: _std
     };
 };
+
+export const pathRoleUser = _path => {
+    return {
+        type : "SETPATH",
+        data : _path
+    };
+};
