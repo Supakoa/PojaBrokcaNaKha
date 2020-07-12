@@ -28,13 +28,10 @@ const ProfileForm = () => {
         const { name, value } = e.target;
         // console.log(name, " => name of onChange");
         // console.log(value, " => value onChange");
-
         const _valid = validateIndex(name, value);
         // console.log("validate", name, " value =>", _valid);
-
         setIsUpdate(true);
         setIsSubmit(_valid);
-
         if (_valid) {
             if (name === "faculty_id") {
                 setDisOption(false);
@@ -46,7 +43,6 @@ const ProfileForm = () => {
             });
         }
         // console.log(name, " => setValidate");
-
         setValidate({
             ..._validate,
             [name]: _valid
@@ -58,7 +54,6 @@ const ProfileForm = () => {
             if (_isSubmit) {
                 setLoading(true);
                 setIsUpdate(false);
-
                 setTimeout(() => {
                     setLoading(false);
                 }, 2000);
@@ -274,7 +269,6 @@ const ProfileForm = () => {
                                 disOption={_disOption}
                             />
                         </Form.Group>
-
                         <Col className="text-center">
                             {_loading ? (
                                 <Spinner animation="grow" />

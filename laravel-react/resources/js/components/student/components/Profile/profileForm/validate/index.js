@@ -4,9 +4,9 @@ import validateStudentId from "./validateStudentId";
 import validatePhone from "./validatePhone";
 import validateEmail from "./validateEmail";
 
-const validateFaculty = value => {};
+// const validateFaculty = value => {};
 
-const validateMajor = value => {};
+// const validateMajor = value => {};
 
 export const validateIndex = (name, value) => {
     const _state = false;
@@ -23,10 +23,12 @@ export const validateIndex = (name, value) => {
             return validatePhone(value);
         case "email":
             return validateEmail(value);
-        case "facuty":
-            return validateFaculty(value);
-        case "major":
-            return validateMajor(value);
+        case "faculty_id":
+            // return validateFaculty(value);
+            return true;
+        case "major_id":
+            return true;
+        // return validateMajor(value);
         default:
             return _state;
     }

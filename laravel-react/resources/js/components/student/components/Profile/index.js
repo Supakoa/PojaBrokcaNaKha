@@ -43,7 +43,7 @@ export default class Profile extends Component {
                 ...this.state,
                 loading: false
             });
-        }, 1000);
+        }, 1200);
         this.fetchFaculties();
     }
 
