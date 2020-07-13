@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->accessToken;
+            $success['token'] = $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
@@ -58,8 +58,8 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
+        $success['token'] = $user->createToken('MyApp')->accessToken;
+        $success['name'] = $user->name;
 
         return response()->json(['success' => $success], $this->successStatus);
     }
@@ -80,7 +80,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = User::all();
-        foreach ($user as $value){
+        foreach ($user as $value) {
             if ($value->major != null)
                 $value->major->faculty;
         }
@@ -100,7 +100,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function documents(User $user){
+    public function documents(User $user)
+    {
         return response()->json(['success' => $user->documents()], $this->successStatus);
     }
 

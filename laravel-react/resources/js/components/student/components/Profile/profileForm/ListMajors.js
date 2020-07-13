@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Form } from "react-bootstrap";
+import { Col, Form, Spinner } from "react-bootstrap";
 import axios from "axios";
 
 const MajorsOption = props => {
@@ -20,14 +20,17 @@ const MajorsOption = props => {
     React.useEffect(() => {
         const abort = new AbortController();
         _fetchMajor(facultiesId, { signal: abort.signal });
-        return () => abort.abort();
+
+        return () => {
+            abort.abort();
+        };
     }, [facultiesId]);
 
     return (
         <>
             {_majors.map((item, idx) => {
                 return (
-                    <option key={idx.toString()} value={item.id}>
+                    <option key={idx.toString()} defaultValue={item.id}>
                         {item.name}
                     </option>
                 );
@@ -51,15 +54,14 @@ const ListMajors = props => {
                 disabled={disOption}
             >
                 {userMajor !== undefined ? (
-                    <option defaultValue={userMajor.id}>
-                        {userMajor.name}
-                    </option>
+                    facultyId !== null ? (
+                        <MajorsOption facultiesId={facultyId} />
+                    ) : (
+                        <option defaultValue={0}>{userMajor.name}</option>
+                    )
                 ) : (
                     <option>เลือกสาขา</option>
                 )}
-                {facultyId !== null ? (
-                    <MajorsOption facultiesId={facultyId} />
-                ) : null}
             </Form.Control>
         </Col>
     );

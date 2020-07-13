@@ -16,7 +16,8 @@ import NoMatch from "./NotMatch404";
 
 function App() {
     const isAuthenticated = useSelector(state => state.redirectState);
-
+    const pathRoleUser =  localStorage.getItem("pathRoleUser");
+    let _isAuthLocal = localStorage.getItem("_authLocal");
     return (
         <Router>
             <Switch>
@@ -35,9 +36,9 @@ function App() {
                 <Route path="/">
                     <Redirect
                         to={
-                            !isAuthenticated
+                            !_isAuthLocal
                                 ? "/login"
-                                : { state: { from: location } }
+                                : pathRoleUser
                         }
                     />
                 </Route>

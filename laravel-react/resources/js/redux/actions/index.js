@@ -96,3 +96,9 @@ export const clearSelectFaculty = () => {
         type: "CLEARSELECTFACULTY"
     }
 }
+export const pathRoleUser = _path => {
+    return {
+        type : "SETPATH",
+        data : _path
+    };
+};

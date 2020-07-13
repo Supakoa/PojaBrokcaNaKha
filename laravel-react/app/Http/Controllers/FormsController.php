@@ -17,7 +17,7 @@ class FormsController extends Controller
      */
     public function index(Request $request)
     {
-        $forms = Form::latest()->paginate(25);
+        $forms = Form::all();
 
         return $forms;
     }

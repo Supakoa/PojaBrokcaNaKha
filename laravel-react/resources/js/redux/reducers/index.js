@@ -7,6 +7,7 @@ import studentProfileReducer from "./studentProfileReducer";
 import newsFormReducer from "./newsForm";
 import userFormReducer from "./userForm";
 import selectFacultyReducer from "./selectFaculty";
+import pathRoleUserReducer from "./pathRoleUser";
 
 import { combineReducers } from "redux";
 
@@ -19,7 +20,8 @@ const allReducers = combineReducers({
     newsForm: newsFormReducer,
     studentProfile: studentProfileReducer,
     formUser: userFormReducer,
-    selectFaculty: selectFacultyReducer
+    selectFaculty: selectFacultyReducer,
+    pathRoleUser : pathRoleUserReducer
 });
 
 export default allReducers;
