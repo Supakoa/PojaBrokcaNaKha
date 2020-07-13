@@ -3,24 +3,17 @@
 use Illuminate\Database\Seeder;
 use App\Form as AppForm;
 
-class DatabaseSeeder extends Seeder
+class form extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call([
-            role::class,
-            admin::class,
-            faculty::class,
-            major::class,
-            status::class,
-            subject::class
-        ]);
-
+//        $json = Storage::disk("local")->get("form_template.json");
+//        $json = json_decode($json, true);
         $data = array(
             array(
                 "id" => 1,
@@ -354,13 +347,5 @@ class DatabaseSeeder extends Seeder
         );
 
         AppForm::insert($data);
-
-
-        factory(App\User::class, 100)->create()->each(function ($user) {
-//            if ($user->role_id = 3){
-                $documents = factory(App\Document::class,3)->make();
-                $user->documents()->saveMany($documents);
-//            }
-        });
     }
 }

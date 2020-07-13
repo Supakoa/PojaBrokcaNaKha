@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Form;
+use App\Group;
 use Illuminate\Http\Request;
 
-class FormsController extends Controller
+class GroupsController extends Controller
 {
     private $successStatus = 200;
 
@@ -20,9 +19,9 @@ class FormsController extends Controller
      */
     public function index(Request $request)
     {
-        $forms = Form::all();
+        $groups = Group::latest()->paginate(25);
 
-        return $forms;
+        return $groups;
     }
 
     /**
@@ -35,9 +34,9 @@ class FormsController extends Controller
     public function store(Request $request)
     {
 
-        $form = Form::create($request->all());
+        $group = Group::create($request->all());
 
-        return response()->json($form, 201);
+        return response()->json($group, 201);
     }
 
     /**
@@ -49,9 +48,9 @@ class FormsController extends Controller
      */
     public function show($id)
     {
-        $form = Form::findOrFail($id);
+        $group = Group::findOrFail($id);
 
-        return $form;
+        return $group;
     }
 
     /**
@@ -65,10 +64,10 @@ class FormsController extends Controller
     public function update(Request $request, $id)
     {
 
-        $form = Form::findOrFail($id);
-        $form->update($request->all());
+        $group = Group::findOrFail($id);
+        $group->update($request->all());
 
-        return response()->json($form, 200);
+        return response()->json($group, 200);
     }
 
     /**
@@ -80,30 +79,33 @@ class FormsController extends Controller
      */
     public function destroy($id)
     {
-        Form::destroy($id);
+        Group::destroy($id);
 
         return response()->json(null, 204);
     }
 
-    public function documents(Form $form)
+    public function users(Group $group)
     {
-        return response()->json(['success' => $form->documents], $this->successStatus);
+        return response()->json(['success' => $group->users], $this->successStatus);
     }
 
-    public function groups(Form $form)
+    public function addUser(Request $request, Group $group)
     {
-        return response()->json(['success' => $form->groups], $this->successStatus);
+
+        if ($group->type == "normal") {
+            $group->users()->attach($request->input("user_id"));
+        } else {
+            $group->users()->attach($request->input("user_id"), ["subject_id" => $request->input("subject_id")]);
+        }
+
+        return $group->users;
     }
 
-    public function addGroup(Form $form,Request $request){
+    public function deleteUser(Request $request, Group $group)
+    {
 
-        $form->groups()->attach($request->input("group_id"), ["state" => $request->input("state")]);
+        $group->users()->detach($request->input("user_id"));
 
-    }public function deleteGroup(Form $form,Request $request){
-
-        $form->groups()->detach($request->input("group_id"));
-
+        return $group->users;
     }
-
-
 }

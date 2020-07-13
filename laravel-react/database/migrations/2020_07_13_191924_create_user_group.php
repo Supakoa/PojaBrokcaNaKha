@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateFormsTable extends Migration
+class CreateUserGroup extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +13,14 @@ class CreateFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('user_group', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('th_name')->nullable();
-            $table->string('eng_name')->nullable();
-            $table->longText('inputs')->nullable();
-            $table->tinyInteger('all_state')->nullable();
             $table->timestamps();
-        });
+            $table->integer('user_id')->unsigned();
+            $table->integer('group_id')->unsigned();
+            $table->integer('subject_id')->unsigned();
 
+        });
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('forms');
+        //
     }
 }

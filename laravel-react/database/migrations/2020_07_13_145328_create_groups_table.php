@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateGroupsTable extends Migration
 {
@@ -15,10 +14,11 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
-            $table->integer('type');
             $table->timestamps();
-        });
+            $table->string('th_name')->nullable();
+            $table->string('eng_name')->nullable();
+            $table->enum('type',["normal","subject"])->nullable();
+            });
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::drop('groups');
     }
 }

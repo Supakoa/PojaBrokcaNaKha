@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateFormsTable extends Migration
+class CreateDirectionFormsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('direction_forms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('th_name')->nullable();
-            $table->string('eng_name')->nullable();
-            $table->longText('inputs')->nullable();
-            $table->tinyInteger('all_state')->nullable();
             $table->timestamps();
-        });
+            $table->integer('form_id')->unsigned();
+            $table->integer('group_id')->unsigned();
+            $table->tinyInteger('state')->nullable();
 
+        });
     }
 
     /**
@@ -30,6 +29,6 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('forms');
+        Schema::drop('direction_forms');
     }
 }

@@ -50,5 +50,9 @@ class User extends Authenticatable
      return  $this->belongsTo(Major::class);
     }
 
+    public function groups(){
+        return $this->belongsToMany(Group::class,"user_group")
+            ->withPivot("subject_id")->withTimestamps();
+    }
 
 }
