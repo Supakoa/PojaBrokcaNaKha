@@ -70,3 +70,29 @@ export const studentProfile = _std => {
         payload: _std
     };
 };
+
+export const initUserForm = form => {
+    return {
+        type: "INITUSERFORM",
+        email: form.email,
+        title: form.title,
+        firstName: form.first_name,
+        lastName: form.last_name,
+        phoneNumber: form.telephone,
+        majorId: form.major_id,
+        role: form.role_id
+    }
+}
+
+export const selectFacultyId = id => {
+    return {
+        type: "SELECTFACULTY",
+        id: id
+    }
+}
+
+export const clearSelectFaculty = () => {
+    return {
+        type: "CLEARSELECTFACULTY"
+    }
+}

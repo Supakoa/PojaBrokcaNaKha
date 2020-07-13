@@ -54,7 +54,7 @@ export default function ModalUser(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="modal-user">
-                        {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มสมาชิค"}
+                        {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มสมาชิก"}
                     </Modal.Title>
                 </Modal.Header>
 
