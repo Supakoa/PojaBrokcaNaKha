@@ -2,8 +2,13 @@ import React from "react";
 
 const FormDocument = props => {
     const { patternInput } = props;
-    const _inputTemp = JSON.parse(patternInput);
-    console.log(_inputTemp);
+    var _inputTemp = JSON.parse(patternInput);
+
+    // React.useEffect(() => {
+    //     setTest(patternInput);
+    // }, [patternInput]);
+
+    console.error(_inputTemp);
     return <div></div>;
 };
 
