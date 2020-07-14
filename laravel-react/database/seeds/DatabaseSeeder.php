@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
                 "eng_name" => "The request form to edit your grades",
                 "inputs" => '{"inputs": [
                 {
-                    "type"=> 1,
+                    "type" : 1,
                     "th_title": "เลือกวิชา",
                     "eng_title": "Choose Subject",
                     "th_name": "วิชา",
