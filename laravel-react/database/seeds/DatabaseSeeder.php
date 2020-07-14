@@ -25,20 +25,21 @@ class DatabaseSeeder extends Seeder
         $json = Storage::disk("public")->get("form_template.json");
         $data = json_decode($json, true);
         foreach ($data as $key => $value){
-            $text  = "[";
+            $text  = "{ \"inputs\" : [";
             foreach ($value['inputs'] as  $input) {
                 $text .= "{";
                 foreach($input as $key2 => $value3) {
                     if (!is_array($value3)){
-                        $text .= " $key2 :  \"$value3\",";
+                        $text .= " \"$key2\" :  \"$value3\",";
                     }else{
-                        $text .= " $key2 : [\"".implode("\",\"",$value3)."\"],";
+                        $text .= " \"$key2\" : [\"".implode("\",\"",$value3)."\"],";
                     }
                 }
                 $text = substr($text,0,-1);
                 $text .= "},";
             }
             $text = substr($text,0,-1);
+            $text .= "]}";
             $data[$key]['inputs'] =$text;
         }
         AppForm::insert($data);
