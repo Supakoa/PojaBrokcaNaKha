@@ -13,7 +13,7 @@ function FormDocuments(props) {
                 {dataDocuments.th_name}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={id}>
-                <FormDocument patternInput={dataDocuments.inputs.toString()} />
+                <FormDocument patternInput={JSON.parse(dataDocuments.inputs)} />
             </Accordion.Collapse>
         </Card>
     );
