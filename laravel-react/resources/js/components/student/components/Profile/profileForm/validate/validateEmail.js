@@ -1,4 +1,5 @@
 const validateEmail = value => {
+    console.log(value, " validate email");
     return (
         value.indexOf("s") === 0 &&
         value.indexOf("@") === 12 &&

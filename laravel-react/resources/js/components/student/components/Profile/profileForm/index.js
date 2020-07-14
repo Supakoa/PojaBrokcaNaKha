@@ -1,13 +1,18 @@
 import React from "react";
 import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
+import axios from "axios";
 import validateIndex from "./validate";
-import { useSelector } from "react-redux";
+import { studentProfile } from "../../../../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 import { ProfileContext, FacultiesContext } from "../../../context";
 import ListFaculties from "./ListFaculties";
 import ListMajors from "./ListMajors";
+import { _urlUsers } from "../../../../middleware/apis";
+import headerConfig from "../../../../middleware/headerConfig";
 
 const ProfileForm = () => {
+    const _dispatch = useDispatch();
     const _studentProfile = useSelector(state => state.studentProfile);
     const [_profile, setProfile] = React.useState({});
     const [_isSubmit, setIsSubmit] = React.useState(false);
@@ -49,11 +54,33 @@ const ProfileForm = () => {
         });
     };
 
+    const updateUser = _update => {
+        // console.log(_update);
+        axios
+            .put(
+                `${_urlUsers()}/${_update.id}`,
+                _update,
+                headerConfig(localStorage._authLocal, 3600)
+            )
+            .then(res => {
+                _dispatch(studentProfile(res.data));
+            });
+    };
+
     const handleSubmit = () => {
         if (_isUpdate) {
             if (_isSubmit) {
+                // console.log(_profile);
+                //update User to server service
+                updateUser(_profile);
+
+                //set Loading
                 setLoading(true);
+
+                //set isLoading
                 setIsUpdate(false);
+
+                //set Loading to init
                 setTimeout(() => {
                     setLoading(false);
                 }, 2000);
@@ -223,6 +250,7 @@ const ProfileForm = () => {
                             <Col sm={10} md={5} lg={5} className="py-2">
                                 <Form.Label>อีเมล</Form.Label>
                                 <Form.Control
+                                    required
                                     isValid={
                                         _validate.email !== undefined
                                             ? _validate.email
