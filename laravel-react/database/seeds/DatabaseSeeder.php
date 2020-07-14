@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             subject::class
         ]);
 
-        $json = Storage::disk("public")->get("form_template.json");
+        $json = Storage::disk("local")->get("form_template.json");
         $data = json_decode($json, true);
         foreach ($data as $key => $value){
             $text  = "{ \"inputs\" : [";
