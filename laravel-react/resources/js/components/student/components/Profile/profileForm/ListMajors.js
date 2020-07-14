@@ -1,20 +1,18 @@
 import React from "react";
 import { Col, Form, Spinner } from "react-bootstrap";
 import axios from "axios";
+import { _urlMajors } from "../../../../middleware/apis";
 
 const MajorsOption = props => {
     const { facultiesId } = props;
     const [_majors, setMajors] = React.useState([]);
 
     const _fetchMajor = async _facId => {
-        await axios
-            .get(`http://127.0.0.1:8000/api/faculties/${_facId}/majors`)
-            .then(res => {
-                // console.log(res.data);
-                const { data } = res;
-                setMajors(data);
-                // return res.data;
-            });
+        await axios.get(_urlMajors(_facId)).then(res => {
+            // console.log(res.data);
+            setMajors(res.data);
+            // return res.data;
+        });
     };
 
     React.useEffect(() => {
@@ -30,7 +28,11 @@ const MajorsOption = props => {
         <>
             {_majors.map((item, idx) => {
                 return (
-                    <option key={idx.toString()} defaultValue={item.id}>
+                    <option
+                        key={idx.toString()}
+                        defaultValue={idx}
+                        value={item.id}
+                    >
                         {item.name}
                     </option>
                 );
