@@ -6,7 +6,7 @@
         "th_name": "วิชา",
         "eng_name": "Subject",
         "tag_type": "select",
-        "get_api": "/subject",
+        "get_api": "/subjects",
         "size": 6
     },
     {
