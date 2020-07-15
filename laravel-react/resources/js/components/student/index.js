@@ -4,7 +4,7 @@ import {
     Route,
     useRouteMatch,
     Link,
-    useLocation
+    useLocation, useHistory
 } from "react-router-dom";
 import { Row, Col, ListGroup } from "react-bootstrap";
 import NavHeader from "./components/header";
@@ -17,28 +17,27 @@ import { useDispatch } from "react-redux";
 import { studentProfile } from "../../redux/actions";
 import headerConfig from "../middleware/headerConfig";
 import { _urlUser } from "../middleware/apis";
-
+import  {_propsAuth} from "../middleware/props-auth";
+import AuthUser from "../middleware/axios/User";
 export default function Student() {
     const _dispatch = useDispatch();
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
     const [_user, setUser] = React.useState({});
+    const token = localStorage._authLocal;
+    let _history = useHistory();
+    const _props = {
+        "token" : token,
+        "dispatch" : _dispatch,
+        "studentProfile" : studentProfile,
+        "role" : 3,
+        "history" : _history
+    };
 
-    const fetchUser = async _dispatch => {
-        await axios
-            .post(
-                _urlUser(),
-                localStorage._authLocal,
-                headerConfig(localStorage._authLocal, 3600)
-            )
-            .then(res => {
-                const { success } = res.data;
-                // console.log(item);
-                _dispatch(studentProfile(success));
-                setUser(success);
-                // return item;
-            });
+
+    const fetchUser = async _props => {
+        await setUser(AuthUser(_props));
     };
 
     const activeMenu = _path => {
@@ -51,7 +50,8 @@ export default function Student() {
 
     React.useEffect(() => {
         const abt = new AbortController();
-        fetchUser(_dispatch, { signal: abt.signal });
+
+        fetchUser(_propsAuth(_props), { signal: abt.signal });
         activeMenu(pathname);
 
         return () => {

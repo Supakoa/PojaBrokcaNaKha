@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./../../../images/logo.png";
 import { ProfileContext } from "../../context";
-import SignOut from "../../../auth/sign-out";
+import SignOutBtn from "../../../auth/sign-out";
 
 function NavHeader(props) {
     // const token = localStorage._authLocal;
@@ -82,7 +82,7 @@ function NavHeader(props) {
                             }}
                         </ProfileContext.Consumer>
 
-                        <SignOut className="text-light d-flex align-items-center justify-content-center" />
+                        <SignOutBtn className="text-light d-flex align-items-center justify-content-center" />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

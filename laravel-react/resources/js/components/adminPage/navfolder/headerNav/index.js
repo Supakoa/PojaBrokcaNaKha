@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
-import SignOut from "../../../auth/sign-out";
+import SignOutBtn from "../../../auth/sign-out";
 
 export default function HeaderNav(props) {
 
@@ -31,7 +31,7 @@ export default function HeaderNav(props) {
                         {props.info.first} {props.info.last}
                     </Nav.Link>
 
-                    <SignOut className = "nav-link"/>
+                    <SignOutBtn className = "nav-link"/>
 
                 </Nav>
             </Navbar.Collapse>
