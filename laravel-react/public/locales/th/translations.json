@@ -10,5 +10,11 @@
         "phoneNumber" : "เบอร์โทรศัพท์",
         "faculty" : "คณะ",
         "major" : "สาขา"
-    }
+    },
+    "document" : {
+        "index" : "เอกสาร"
+    },
+    "day&time" : "วัน / เวลา"
+
+    
 }

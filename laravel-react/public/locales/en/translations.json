@@ -10,5 +10,10 @@
         "phoneNumber" : "Phone number",
         "faculty" : "Faculty",
         "major" : "Major"
-    }
+    },
+    "document" : {
+        "index" : "Documents"
+    },
+    "day&time" : "Day / Time"
+
 }
