@@ -1,27 +1,54 @@
-import React, { Component } from "react";
-import { Accordion, Card } from "react-bootstrap";
+import React from "react";
+import { Accordion, Spinner } from "react-bootstrap";
+import axios from "axios";
+import { _urlDocuments } from "../../../middleware/apis";
+import headerConfig from "../../../middleware/headerConfig";
+import FormDocuments from "./froms";
 
-export default class ReportForm extends Component {
-    render() {
-        return (
-            <Accordion defaultActiveKey="0">
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0">
-                        Form 1
-                    </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="0">
-                        <Card.Body>Hello! I'm the body</Card.Body>
-                    </Accordion.Collapse>
-                </Card>
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="1">
-                        Form 2
-                    </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="1">
-                        <Card.Body>Hello! I'm another body</Card.Body>
-                    </Accordion.Collapse>
-                </Card>
-            </Accordion>
-        );
-    }
+export default function ReportForm() {
+    const [_tempForm, setTempForm] = React.useState([]);
+    const [_loading, setLoading] = React.useState(true);
+
+    const fetchDocuments = async (_token, _port, setLoading) => {
+        await axios
+            .get(_urlDocuments(), headerConfig(localStorage._authLocal, _port))
+            .then(res => {
+                setTempForm(res.data);
+                setLoading(false);
+            });
+    };
+
+    React.useEffect(() => {
+        const abort = new AbortController();
+        fetchDocuments(localStorage._authLocal, 3600, setLoading, {
+            signal: abort.signal
+        });
+
+        return () => {
+            abort.abort();
+        };
+    }, []);
+
+    return (
+        <Accordion defaultActiveKey="1">
+            {_loading ? (
+                <div
+                    style={{ minHeight: "150px" }}
+                    className="d-flex align-items-center justify-content-center"
+                >
+                    <Spinner animation="border" />
+                </div>
+            ) : (
+                _tempForm.map((item, idx) => {
+                    return (
+                        <FormDocuments
+                            key={idx.toString()}
+                            dataDocuments={item}
+                            id={idx}
+                        />
+                    );
+                })
+            )}
+        </Accordion>
+    );
 }

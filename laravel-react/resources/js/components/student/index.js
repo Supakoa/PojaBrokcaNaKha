@@ -4,7 +4,7 @@ import {
     Route,
     useRouteMatch,
     Link,
-    useLocation
+    useLocation, useHistory
 } from "react-router-dom";
 import { Row, Col, ListGroup } from "react-bootstrap";
 import NavHeader from "./components/header";
@@ -15,30 +15,29 @@ import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
 import { useDispatch } from "react-redux";
 import { studentProfile } from "../../redux/actions";
-
+import headerConfig from "../middleware/headerConfig";
+import { _urlUser } from "../middleware/apis";
+import  {_propsAuth} from "../middleware/props-auth";
+import AuthUser from "../middleware/axios/User";
 export default function Student() {
     const _dispatch = useDispatch();
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
     const [_user, setUser] = React.useState({});
+    const token = localStorage._authLocal;
+    let _history = useHistory();
+    const _props = {
+        "token" : token,
+        "dispatch" : _dispatch,
+        "studentProfile" : studentProfile,
+        "role" : 3,
+        "history" : _history
+    };
 
-    const fetchUser = async _dispatch => {
-        await axios
-            .post(`http://localhost:8000/api/user`, localStorage._authLocal, {
-                headers: {
-                    Authorization: `Bearer ${localStorage._authLocal}`,
-                    "Content-Type": "application/json",
-                    "Retry-After": 3600
-                }
-            })
-            .then(res => {
-                const { success } = res.data;
-                // console.log(item);
-                _dispatch(studentProfile(success));
-                setUser(success);
-                // return item;
-            });
+
+    const fetchUser = async _props => {
+        await setUser(AuthUser(_props));
     };
 
     const activeMenu = _path => {
@@ -51,7 +50,8 @@ export default function Student() {
 
     React.useEffect(() => {
         const abt = new AbortController();
-        fetchUser(_dispatch, { signal: abt.signal });
+
+        fetchUser(_propsAuth(_props), { signal: abt.signal });
         activeMenu(pathname);
 
         return () => {
@@ -74,7 +74,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}`}
                             >
-                                ตารางฟอร์ม
+                                ประวัติการส่งคำร้อง
                             </Link>
                             <Link
                                 className={`${
@@ -82,7 +82,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}/form-report`}
                             >
-                                แบบฟอร์ม
+                                ส่งคำร้อง
                             </Link>
                         </ListGroup>
                     </Col>

@@ -4,6 +4,7 @@ import ProfileForm from "./profileForm";
 import { FacultiesContext } from "../../context";
 import axios from "axios";
 import LoadingComponent from "./LoadingComponent";
+import { _urlFaculties } from "../../../middleware/apis";
 
 function FormProfileComponent(props) {
     const { valueFaculties } = props;
@@ -28,7 +29,7 @@ export default class Profile extends Component {
     }
 
     async fetchFaculties() {
-        await axios.get(`http://127.0.0.1:8000/api/faculties`, {}).then(res => {
+        await axios.get(_urlFaculties(), {}).then(res => {
             const { success } = res.data;
             this.setState({
                 ...this.state,

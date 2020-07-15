@@ -44,7 +44,7 @@ export default function FacultySelect() {
             <Form.Group as={Col} controlId="formGroupFacultySelect">
                 <Form.Label>คณะ</Form.Label>
 
-                <Form.Control as="select" name="facultySelect" onChange={e => handleSelectFaculty(e)} >
+                <Form.Control as="select" name="facultySelect" onChange={e => handleSelectFaculty(e)}>
                     <option key="0" value={0} >เลือกคณะ</option>
                     { RenderFacultyOption() }
                 </Form.Control>

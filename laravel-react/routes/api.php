@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Routing\UrlGenerator;
+use Symfony\Component\HttpFoundation\File\UploadedFile as Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +46,16 @@ Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
 Route::get('groups/{group}/users','GroupsController@users');
 Route::post('groups/{group}/users','GroupsController@addUser');
 Route::delete('groups/{group}/users','GroupsController@deleteUser');
+
+// test route
+Route::get('american/{majorId}', 'FacultyController@getFacultyByMajorId');
+
+Route::post("/uploads",function (Request $request){
+
+
+    $imagePath = request('image')->store('image_slides','public');
+    $image = Image::make(public_path("storage/{$imagePath}"));
+    $image->save();
+    return  $imagePath;
+
+});

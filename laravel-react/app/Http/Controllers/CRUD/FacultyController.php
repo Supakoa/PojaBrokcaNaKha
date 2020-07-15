@@ -86,6 +86,13 @@ class FacultyController extends Controller
     {
         //
     }
+
+    public function getFacultyByMajorId(Major $major) {
+        // return $major->faculties;
+        return "";
+        // return response()->json(['success' => $major]);
+    }
+
     public function getMajorByFacultyId(Faculty $faculty){
 
         return $faculty->majors;
