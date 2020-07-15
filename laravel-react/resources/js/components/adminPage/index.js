@@ -39,8 +39,6 @@ export default function AdminPage() {
 
     const fetchUser = async _props => {
         const _item = await AuthUser(_props);
-        _props.dispatch(_props.isAuththen(true));
-        _props.dispatch(_props.user({ _item }));
         _props.setInfo({
             ..._props.info,
             first: _item.first_name,

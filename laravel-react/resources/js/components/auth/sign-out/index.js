@@ -2,7 +2,7 @@ import React from 'react'
 import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {isAuththen, pathRoleUser} from "../../../redux/actions";
+import {isAuththen, pathRoleUser,user} from "../../../redux/actions";
 import {_signOut} from "./signOut";
 
 export default function SignOutBtn(props) {
@@ -15,6 +15,7 @@ export default function SignOutBtn(props) {
         "dispatch": dispatch,
         "isAuththen": isAuththen,
         "pathRoleUser": pathRoleUser,
+        "user": user,
         "history": _history,
         "token": token
     };

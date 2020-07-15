@@ -46,7 +46,7 @@ export default function Student() {
 
     React.useEffect(() => {
         const abt = new AbortController();
-        if (Object(_user).length === 0) {
+        if (Object.keys(_user).length === 0 && _user.constructor === Object) {
             AuthUser(_props, { signal: abt.signal });
         }
         activeMenu(pathname, setActive, { signal: abt.signal });

@@ -16,6 +16,7 @@ export   const _signOut = async _props => {
 
                 _props.dispatch(_props.isAuththen(false));
                 _props.dispatch(_props.pathRoleUser("/login"));
+                _props.dispatch(_props.user({}));
                 localStorage.removeItem("_authLocal");
                 localStorage.removeItem("pathRoleUser");
                 _props.history.push("/login");

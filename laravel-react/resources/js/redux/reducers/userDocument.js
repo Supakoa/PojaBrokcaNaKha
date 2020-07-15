@@ -1,4 +1,4 @@
-const userDocumentReducer = (sate = [], action) => {
+const userDocumentReducer = (state = [], action) => {
     switch (action.type) {
         case "document":
             return action.payload;
