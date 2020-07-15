@@ -21,7 +21,9 @@ const FormDocument = props => {
                 } else {
                     return (
                         <div key={idx}>
-                            {item.th_name} => {item.tag_type}
+                            {item.th_name}
+                            {"=>"}
+                            {item.tag_type}
                         </div>
                     );
                 }
