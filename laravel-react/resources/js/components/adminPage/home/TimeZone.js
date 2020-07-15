@@ -1,7 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import {useTranslation} from 'react-i18next';
 
 export default function TimeZone() {
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
     const [_date, setDate] = React.useState({
         date: new Date()
     });
@@ -18,7 +20,7 @@ export default function TimeZone() {
     return (
         <Card>
             <Card.Header>
-                <Card.Title>วัน / เวลา</Card.Title>
+                <Card.Title>{t("day&time")}</Card.Title>
             </Card.Header>
             <Card.Body className="d-flex justify-content-around">
                 <h2>{_date.date.toLocaleDateString()}</h2>
