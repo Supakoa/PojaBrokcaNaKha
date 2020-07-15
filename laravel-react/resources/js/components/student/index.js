@@ -4,7 +4,8 @@ import {
     Route,
     useRouteMatch,
     Link,
-    useLocation, useHistory
+    useLocation,
+    useHistory
 } from "react-router-dom";
 import { Row, Col, ListGroup } from "react-bootstrap";
 import NavHeader from "./components/header";
@@ -13,34 +14,29 @@ import Profile from "./components/Profile";
 import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
-import { useDispatch } from "react-redux";
-import { studentProfile } from "../../redux/actions";
-import headerConfig from "../middleware/headerConfig";
-import { _urlUser } from "../middleware/apis";
-import  {_propsAuth} from "../middleware/props-auth";
+import { useDispatch, useSelector } from "react-redux";
+import { user } from "../../redux/actions";
+import { _propsAuth } from "../middleware/props-auth";
 import AuthUser from "../middleware/axios/User";
+
 export default function Student() {
     const _dispatch = useDispatch();
+    const _user = useSelector(state => state.userState);
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
-    const [_user, setUser] = React.useState({});
     const token = localStorage._authLocal;
     let _history = useHistory();
+
     const _props = {
-        "token" : token,
-        "dispatch" : _dispatch,
-        "studentProfile" : studentProfile,
-        "role" : 3,
-        "history" : _history
+        token: token,
+        dispatch: _dispatch,
+        role: 3,
+        history: _history,
+        user: user
     };
 
-
-    const fetchUser = async _props => {
-        await setUser(AuthUser(_props));
-    };
-
-    const activeMenu = _path => {
+    const activeMenu = (_path, setActive) => {
         if (_path === "/student") {
             setActive(false);
         } else if (_path === "/student/form-report") {
@@ -50,14 +46,14 @@ export default function Student() {
 
     React.useEffect(() => {
         const abt = new AbortController();
-
-        fetchUser(_propsAuth(_props), { signal: abt.signal });
-        activeMenu(pathname);
-
+        if (Object(_user).length === 0) {
+            AuthUser(_props, { signal: abt.signal });
+        }
+        activeMenu(pathname, setActive, { signal: abt.signal });
         return () => {
             abt.abort();
         };
-    }, [pathname, _active, _dispatch]);
+    }, [pathname, _active, _props]);
 
     return (
         <div className="mb-3">
