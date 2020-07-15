@@ -35,3 +35,6 @@ Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
 Route::get('forms/{forms}/documents','formsController@documents');
 Route::resource('majors','MajorsController');
 
+// test route
+Route::get('american/{majorId}', 'FacultyController@getFacultyByMajorId');
+
