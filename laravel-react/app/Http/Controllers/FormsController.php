@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 
 class FormsController extends Controller
 {
+    private $successStatus = 200;
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +43,7 @@ class FormsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,7 +58,7 @@ class FormsController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -71,7 +74,7 @@ class FormsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -81,7 +84,26 @@ class FormsController extends Controller
 
         return response()->json(null, 204);
     }
-    public function documents(Form $form){
-        return response()->json(['success' => $form->documents()], $this->successStatus);
+
+    public function documents(Form $form)
+    {
+        return response()->json(['success' => $form->documents], $this->successStatus);
     }
+
+    public function groups(Form $form)
+    {
+        return response()->json(['success' => $form->groups], $this->successStatus);
+    }
+
+    public function addGroup(Form $form,Request $request){
+
+        $form->groups()->attach($request->input("group_id"), ["state" => $request->input("state")]);
+
+    }public function deleteGroup(Form $form,Request $request){
+
+        $form->groups()->detach($request->input("group_id"));
+
+    }
+
+
 }

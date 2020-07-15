@@ -15,6 +15,8 @@ import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
 import { useDispatch } from "react-redux";
 import { studentProfile } from "../../redux/actions";
+import headerConfig from "../middleware/headerConfig";
+import { _urlUser } from "../middleware/apis";
 
 export default function Student() {
     const _dispatch = useDispatch();
@@ -25,13 +27,11 @@ export default function Student() {
 
     const fetchUser = async _dispatch => {
         await axios
-            .post(`http://localhost:8000/api/user`, localStorage._authLocal, {
-                headers: {
-                    Authorization: `Bearer ${localStorage._authLocal}`,
-                    "Content-Type": "application/json",
-                    "Retry-After": 3600
-                }
-            })
+            .post(
+                _urlUser(),
+                localStorage._authLocal,
+                headerConfig(localStorage._authLocal, 3600)
+            )
             .then(res => {
                 const { success } = res.data;
                 // console.log(item);

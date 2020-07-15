@@ -102,7 +102,7 @@ class UserController extends Controller
 
     public function documents(User $user)
     {
-        return response()->json(['success' => $user->documents()], $this->successStatus);
+        return response()->json(['success' => $user->documents], $this->successStatus);
     }
 
     public function destroy($id)
@@ -116,4 +116,16 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return $user;
     }
+
+    public function update(Request $request, $id)
+    {
+
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return response()->json($user, 200);
+    }
+
+
+
 }

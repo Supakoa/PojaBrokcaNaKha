@@ -14,10 +14,10 @@ class Form extends Model
     protected $table = 'forms';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -25,11 +25,16 @@ class Form extends Model
      *
      * @var array
      */
-    protected $fillable = ['th_name', 'eng_name', 'data', 'all_state'];
+    protected $fillable = ['th_name', 'eng_name', 'inputs', 'all_state'];
 
     public function documents()
     {
         return $this->hasMany('App\Document');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class,"direction_forms")->withPivot("state")->withTimestamps();
     }
 
 }

@@ -14,12 +14,13 @@ class CreateFormsTable extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('th_name')->nullable();
             $table->string('eng_name')->nullable();
-            $table->json('data')->nullable();
+            $table->longText('inputs')->nullable();
             $table->tinyInteger('all_state')->nullable();
-            });
+            $table->timestamps();
+        });
+
     }
 
     /**

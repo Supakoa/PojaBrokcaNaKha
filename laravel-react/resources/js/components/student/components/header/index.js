@@ -6,8 +6,9 @@ import { ProfileContext } from "../../context";
 import SignOut from "../../../auth/sign-out";
 
 function NavHeader(props) {
-    const token = localStorage._authLocal;
+    // const token = localStorage._authLocal;
     const [loading, setLoading] = React.useState(true);
+    const [_dataEmp, setDataEmp] = React.useState({});
     React.useEffect(() => {
         setTimeout(() => {
             setLoading(false);
@@ -46,7 +47,7 @@ function NavHeader(props) {
                         <ProfileContext.Consumer>
                             {user => {
                                 return loading ? (
-                                    <div className="d-flex- align-items-center justify-content-center mr-5">
+                                    <div className="d-flex align-items-center justify-content-center mr-5">
                                         <Spinner
                                             animation="grow"
                                             variant="light"
@@ -81,14 +82,7 @@ function NavHeader(props) {
                             }}
                         </ProfileContext.Consumer>
 
-                        <SignOut className = "text-light d-flex align-items-center justify-content-center"/>
-                        {/*<Link*/}
-                        {/*    className="text-light d-flex align-items-center justify-content-center"*/}
-                        {/*    to="/login"*/}
-                        {/*    onClick={() => SignOut(token)}*/}
-                        {/*>*/}
-                        {/*    ออกจากระบบ*/}
-                        {/*</Link>*/}
+                        <SignOut className="text-light d-flex align-items-center justify-content-center" />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -1,0 +1,17 @@
+{
+    "fields": [
+        {
+            "name": "th_name",
+            "type": "string"
+        },
+        {
+            "name": "eng_name",
+            "type": "string"
+        },
+        {
+            "name": "type",
+            "type": "option"
+        }
+    ]
+}
+
