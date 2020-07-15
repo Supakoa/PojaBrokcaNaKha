@@ -1,5 +1,5 @@
 import React from "react";
-import { table } from "./table";
+import { table } from "./tableReport";
 
 export const FacultiesContext = React.createContext({
     faculties: null

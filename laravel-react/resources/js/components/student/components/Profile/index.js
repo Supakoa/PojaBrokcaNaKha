@@ -3,8 +3,8 @@ import { Card, Container } from "react-bootstrap";
 import ProfileForm from "./profileForm";
 import { FacultiesContext } from "../../context";
 import axios from "axios";
-import LoadingComponent from "./LoadingComponent";
 import { _urlFaculties } from "../../../middleware/apis";
+import Loading from "../loading";
 
 function FormProfileComponent(props) {
     const { valueFaculties } = props;
@@ -33,23 +33,14 @@ export default class Profile extends Component {
             const { success } = res.data;
             this.setState({
                 ...this.state,
-                faculties: success
+                faculties: success,
+                loading: false
             });
         });
     }
 
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                ...this.state,
-                loading: false
-            });
-        }, 1200);
         this.fetchFaculties();
-    }
-
-    componentWillMount() {
-        clearTimeout();
     }
 
     render() {
@@ -60,7 +51,9 @@ export default class Profile extends Component {
                 </Card.Title>
                 <Card.Body>
                     {this.state.loading ? (
-                        <LoadingComponent />
+                        <Container className="d-flex align-items-center justify-content-center">
+                            <Loading />
+                        </Container>
                     ) : (
                         <FormProfileComponent
                             valueFaculties={this.state.faculties}

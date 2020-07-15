@@ -1,9 +1,10 @@
 import React from "react";
-import { Navbar, Nav, Container, Spinner } from "react-bootstrap";
+import { Navbar, Nav, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./../../../images/logo.png";
 import { ProfileContext } from "../../context";
 import SignOutBtn from "../../../auth/sign-out";
+import Loading from "../loading";
 
 function NavHeader(props) {
     // const token = localStorage._authLocal;
@@ -46,39 +47,25 @@ function NavHeader(props) {
                     <Nav className="ml-auto pr-2">
                         <ProfileContext.Consumer>
                             {user => {
-                                return loading ? (
-                                    <div className="d-flex align-items-center justify-content-center mr-5">
-                                        <Spinner
-                                            animation="grow"
-                                            variant="light"
-                                            size="sm"
-                                        />
-                                        <Spinner
-                                            animation="grow"
-                                            variant="light"
-                                            size="sm"
-                                        />
-                                        <Spinner
-                                            animation="grow"
-                                            variant="light"
-                                            size="sm"
-                                        />
-                                    </div>
-                                ) : (
-                                    <Link
-                                        className="text-light d-flex align-items-center justify-content-center mr-2"
-                                        to={`${props.url}/profile`}
-                                    >
-                                        <img
-                                            src="https://img.icons8.com/plasticine/2x/user.png"
-                                            className="d-inline-block align-top"
-                                            width="30"
-                                            height="30"
-                                            rounded="true"
-                                        />{" "}
-                                        {`${user.title} ${user.first_name} ${user.last_name}`}
-                                    </Link>
-                                );
+                                if (user.title === undefined) {
+                                    return <Loading />;
+                                } else {
+                                    return (
+                                        <Link
+                                            className="text-light d-flex align-items-center justify-content-center mr-2"
+                                            to={`${props.url}/profile`}
+                                        >
+                                            <Image
+                                                src="https://img.icons8.com/plasticine/2x/user.png"
+                                                className="d-inline-block align-top"
+                                                width="30"
+                                                height="30"
+                                                rounded="true"
+                                            />{" "}
+                                            {`${user.title} ${user.first_name} ${user.last_name}`}
+                                        </Link>
+                                    );
+                                }
                             }}
                         </ProfileContext.Consumer>
 
