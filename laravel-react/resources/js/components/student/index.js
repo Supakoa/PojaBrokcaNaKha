@@ -74,7 +74,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}`}
                             >
-                                ตารางฟอร์ม
+                                ประวัติการส่งคำร้อง
                             </Link>
                             <Link
                                 className={`${
@@ -82,7 +82,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}/form-report`}
                             >
-                                แบบฟอร์ม
+                                ส่งคำร้อง
                             </Link>
                         </ListGroup>
                     </Col>
