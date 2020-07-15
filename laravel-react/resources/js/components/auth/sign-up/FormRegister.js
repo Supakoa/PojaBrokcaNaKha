@@ -3,6 +3,7 @@ import LogoRegis from "./LogoReagis";
 import {Col, Form, Button, Spinner, Row} from "react-bootstrap";
 import SimpleReactValidator from 'simple-react-validator';
 import {useTranslation} from 'react-i18next';
+import SwitchingLanguageBtn from "../../middleware/switchingLanguage";
 
 export default function FormRegister() {
     // const dispatch = useDispatch();
@@ -62,13 +63,7 @@ export default function FormRegister() {
         // return _validator.fieldValid(name);
     };
 
-    const switchingLanguage = () => {
-        if (i18n.language === "en") {
-            i18n.changeLanguage("th");
-        } else {
-            i18n.changeLanguage("en");
-        }
-    };
+
 
     return (
         <Form className="p-4 w-75 m-auto">
@@ -214,7 +209,7 @@ export default function FormRegister() {
 
                 </Col>
                 <Col xl= {3}>
-                    <Button type="button" onClick={switchingLanguage}> SwitchingLanguage </Button>
+                    <SwitchingLanguageBtn className = "nav-link"/>
                 </Col>
             </Row>
         </Form>

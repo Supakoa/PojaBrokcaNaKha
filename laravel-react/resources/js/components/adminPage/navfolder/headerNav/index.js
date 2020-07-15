@@ -3,7 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
 import SignOutBtn from "../../../auth/sign-out";
-
+import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 export default function HeaderNav(props) {
 
     return (
@@ -20,6 +20,9 @@ export default function HeaderNav(props) {
             <Navbar.Toggle aria-controls="petition-nav" />
             <Navbar.Collapse id="petition-nav">
                 <Nav className="ml-auto pr-2">
+                    <Nav.Link>
+                        <SwitchingLanguageBtn className = "nav-link"/>
+                    </Nav.Link>
                     <Nav.Link>
                         <img
                             src="https://img.icons8.com/plasticine/2x/user.png"

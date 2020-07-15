@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "./../../../images/logo.png";
 import { ProfileContext } from "../../context";
 import SignOutBtn from "../../../auth/sign-out";
+import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 
 function NavHeader(props) {
     // const token = localStorage._authLocal;
@@ -44,6 +45,9 @@ function NavHeader(props) {
                         </Link>
                     </Nav>
                     <Nav className="ml-auto pr-2">
+                        <Link>
+                            <SwitchingLanguageBtn className = "nav-link"/>
+                        </Link>
                         <ProfileContext.Consumer>
                             {user => {
                                 return loading ? (
