@@ -1,6 +1,6 @@
 const redirectReducer = (state = false, action) => {
     switch (action.type) {
-        case "REDIRECT":
+        case "IS_AUTHEN":
             return action.boolean;
         default:
             return state;

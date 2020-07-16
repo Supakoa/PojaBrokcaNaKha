@@ -1,6 +1,6 @@
 const userDocumentReducer = (state = [], action) => {
     switch (action.type) {
-        case "document":
+        case "USER_DOCUMENTS":
             return action.payload;
 
         default:

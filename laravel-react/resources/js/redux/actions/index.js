@@ -7,14 +7,14 @@ export const user = obj => {
 
 export const isAuththen = boolean => {
     return {
-        type: "REDIRECT",
+        type: "IS_AUTHEN",
         boolean: boolean
     };
 };
 
 export const newsUpload = obj => {
     return {
-        type: "UPLOAD",
+        type: "NEWS_UPLOAD",
         image: {
             name: obj.image,
             url: obj.url
@@ -24,7 +24,7 @@ export const newsUpload = obj => {
 
 export const initNewsForm = data => {
     return {
-        type: "INITNEWSFORM",
+        type: "INIT_NEWS_FORM",
         file: data.file,
         ref: data.ref
     };
@@ -32,27 +32,27 @@ export const initNewsForm = data => {
 
 export const updateFile = file => {
     return {
-        type: "UPDATEFILE",
+        type: "UPDATE_FILE_FORM_NEWS",
         file: file
     };
 };
 
 export const updateRef = ref => {
     return {
-        type: "UPDATEREF",
+        type: "UPDATE_REF_FORM_NEWS",
         ref: ref
     };
 };
 
 export const destroyForm = () => {
     return {
-        type: "DESTROYFORM"
+        type: "DESTROY_FORM"
     };
 };
 
 export const initUserForm = form => {
     return {
-        type: "INITUSERFORM",
+        type: "INIT_USER_FORM",
         email: form.email,
         title: form.title,
         firstName: form.first_name,
@@ -65,41 +65,41 @@ export const initUserForm = form => {
 
 export const selectFacultyId = id => {
     return {
-        type: "SELECTFACULTY",
+        type: "SELECT_FACULTY",
         id: id
     };
 };
 
 export const clearSelectFaculty = () => {
     return {
-        type: "CLEARSELECTFACULTY"
+        type: "CLEAR_SELECT_FACULTY"
     };
 };
 
 export const pathRoleUser = _path => {
     return {
-        type: "SETPATH",
+        type: "SET_PATH",
         data: _path
     };
 };
 
 export const selectMajorId = id => {
     return {
-        type: "SELECTMAJOR",
+        type: "SELECT_MAJOR",
         id: id
     };
 };
 
 export const userDocument = _doc => {
     return {
-        type: "document",
+        type: "USER_DOCUMENTS",
         payload: _doc
     };
 };
 
 export const updateFormEditUserBySingleData = (name, data) => {
     return {
-        type: "UPDATEEDITFORMUSERBYSINGLEDATA",
+        type: "UPDATE_EDIT_FORM_USER_BY_SINGLE_DATA",
         name: name,
         data: data
     };
