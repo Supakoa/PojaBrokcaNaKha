@@ -36,8 +36,8 @@ export default function Student() {
         user: user
     };
 
-    const activeMenu = (_path, setActive) => {
-        if (_path === "/student") {
+    const activeMenu = (_path, setActive, _id) => {
+        if (_path === `/student/${_id}`) {
             setActive(false);
         } else if (_path === "/student/form-report") {
             setActive(true);
@@ -49,11 +49,11 @@ export default function Student() {
         if (Object.keys(_user).length === 0 && _user.constructor === Object) {
             AuthUser(_props, { signal: abt.signal });
         }
-        activeMenu(pathname, setActive, { signal: abt.signal });
+        activeMenu(pathname, setActive, _user.id, { signal: abt.signal });
         return () => {
             abt.abort();
         };
-    }, [pathname, _active, _props]);
+    }, [pathname, _user.id, _active, _props]);
 
     return (
         <div className="mb-3">
@@ -68,7 +68,7 @@ export default function Student() {
                                 className={`${
                                     !_active ? `active` : ""
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
-                                to={`${url}`}
+                                to={`${url}/${_user.id}`}
                             >
                                 ประวัติการส่งคำร้อง
                             </Link>
@@ -94,7 +94,7 @@ export default function Student() {
                                     component={ReportForm}
                                 />
                                 <Route
-                                    path={`${path}`}
+                                    path={`${path}/:id`}
                                     component={ReportTable}
                                 />
                             </Switch>

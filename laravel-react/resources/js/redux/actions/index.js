@@ -102,5 +102,5 @@ export const updateFormEditUserBySingleData = (name, data) => {
         type: "UPDATEEDITFORMUSERBYSINGLEDATA",
         name: name,
         data: data
-    }
-}
+    };
+};

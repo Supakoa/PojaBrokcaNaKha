@@ -46,9 +46,6 @@ function NavHeader(props) {
                         </Link>
                     </Nav>
                     <Nav className="ml-auto pr-2">
-                        <Link>
-                            <SwitchingLanguageBtn className = "nav-link"/>
-                        </Link>
                         <ProfileContext.Consumer>
                             {user => {
                                 if (user.title === undefined) {
@@ -72,7 +69,9 @@ function NavHeader(props) {
                                 }
                             }}
                         </ProfileContext.Consumer>
-
+                        <Link to="#" className="px-2">
+                            <SwitchingLanguageBtn className="nav-link" />
+                        </Link>
                         <SignOutBtn className="text-light d-flex align-items-center justify-content-center" />
                     </Nav>
                 </Navbar.Collapse>
