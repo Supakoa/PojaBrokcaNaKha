@@ -9,7 +9,11 @@ export default function FacultySelect() {
     const {t, i18n, ready} = useTranslation('', {useSuspense: false});
     const [faculty, setFaculty] = useState(null)
 
+    // local state
+
     // redux
+    const redux_selectFaculty = useSelector(state => state.selectFaculty)
+    const redux_selectMajor = useSelector(state => state.selectMajor)
     const dispatch = useDispatch()
 
     const apiPath = `http://localhost:8000/api/faculties`
@@ -34,6 +38,7 @@ export default function FacultySelect() {
 
     const handleSelectFaculty = (e) => {
         dispatch(selectFacultyId(e.target.value))
+        dispatch(selectMajorId(0))
     }
 
     useEffect(() => {

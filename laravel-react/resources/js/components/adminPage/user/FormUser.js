@@ -2,7 +2,7 @@ import { Form, Col } from "react-bootstrap";
 import React, { useState } from "react";
 import Axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
-import { initUserForm } from "../../../redux/actions";
+import { initUserForm, updateFormEditUserBySingleData } from "../../../redux/actions";
 
 // composent input
 import FacultySelect from "../input/FacultySelect";
@@ -11,7 +11,6 @@ import MajorSelect from "../input/MajorSelect";
 export default function FormUser(props) {
     // props
     const { isCreatedProp, submitOnButton, id } = props;
-    // console.log(props);
 
     // create state
     // const [_error, setError] = React.useState();
@@ -31,7 +30,6 @@ export default function FormUser(props) {
 
     // redux
     const redux_user = useSelector(state => state.formUser)
-    const redux_selectFaculty = useSelector(state => state.selectFaculty)
     const dispatch = useDispatch()
 
     const apiPath = `http://localhost:8000/api`
@@ -57,9 +55,9 @@ export default function FormUser(props) {
     };
     // const validateInput = () => {};
 
-    const finallyOnSubmit = formData => {
-        console.log(formData);
-    };
+    // const finallyOnSubmit = formData => {
+    //     console.log(formData);
+    // };
 
     const initUser = async ( id ) => {
         await Axios.get(`${apiPath}/users/${id}`, {
@@ -101,7 +99,8 @@ export default function FormUser(props) {
             <Form.Group controlId="formUseremail">
                 <Form.Label>อีเมล</Form.Label>
                 <Form.Control
-                    onChange={_hendleChange}
+                    // onChange={_hendleChange}
+                    onChange={e => dispatch(updateFormEditUserBySingleData(`email`, e.target.value))}
                     type="email"
                     name="email"
                     placeholder="name@example.com"
@@ -145,7 +144,8 @@ export default function FormUser(props) {
                 >
                     <Form.Label>คำนำหน้า</Form.Label>
                     <Form.Control
-                        onChange={_hendleChange}
+                        // onChange={_hendleChange}
+                        onChange={e => dispatch(updateFormEditUserBySingleData(`titile`, e.target.value))}
                         type="text"
                         placeholder="คำนำหน้า"
                         name="title"
@@ -163,7 +163,8 @@ export default function FormUser(props) {
                 >
                     <Form.Label>ชื่อ</Form.Label>
                     <Form.Control
-                        onChange={_hendleChange}
+                        // onChange={_hendleChange}
+                        onChange={e => dispatch(updateFormEditUserBySingleData(`firstName`, e.target.value))}
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
@@ -175,7 +176,8 @@ export default function FormUser(props) {
                 <Form.Group controlId="formUserLastname" as={Col} sm={5} md={5} lg={5} >
                     <Form.Label>นามสกุล</Form.Label>
                     <Form.Control
-                        onChange={_hendleChange}
+                        // onChange={_hendleChange}
+                        onChange={e => dispatch(updateFormEditUserBySingleData(`lastName`, e.target.value))}
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
@@ -190,7 +192,8 @@ export default function FormUser(props) {
                     <Form.Label>เบอร์โทร</Form.Label>
 
                     <Form.Control
-                        onChange={_hendleChange}
+                        // onChange={_hendleChange}
+                        onChange={e => dispatch(updateFormEditUserBySingleData(`phoneNumber`, e.target.value))}
                         type="text"
                         name="phone"
                         maxLength={11}
@@ -211,7 +214,8 @@ export default function FormUser(props) {
                     <Form.Control
                         as="select"
                         name="role"
-                        onChange={_hendleChange}
+                        // onChange={_hendleChange}
+                        onChange={e => dispatch(updateFormEditUserBySingleData(`role`, e.target.value))}
                         value={redux_user.role}
                     >
                         <option value={0}>เลือกประเภท</option>

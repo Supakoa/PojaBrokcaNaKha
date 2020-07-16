@@ -1,12 +1,12 @@
 const selectFacultyReducer = (state = {}, action) => {
     switch (action.type) {
-        case "SELECTFACULTY":
+        case "SELECT_FACULTY":
             return {
                 ...state,
                 id: action.id
             }
 
-        case "CLEARSELECTFACULTY":
+        case "CLEAR_SELECT_FACULTY":
             return {
                 ...state,
                 id: 0

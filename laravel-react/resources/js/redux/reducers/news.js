@@ -1,6 +1,6 @@
 const newsReducer = (state = {}, action) => {
     switch (action.type) {
-        case "UPLOAD":
+        case "NEWS_UPLOAD":
             return {
                 ...state,
                 ...action.image

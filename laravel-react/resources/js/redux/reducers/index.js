@@ -7,8 +7,10 @@ import newsFormReducer from "./newsForm";
 import userFormReducer from "./userForm";
 import selectFacultyReducer from "./selectFaculty";
 import pathRoleUserReducer from "./pathRoleUser";
+import documentsTemplateReducer from "./doumentsTemplate";
 
 import { combineReducers } from "redux";
+import selectMajorReducer from "./selectMajor";
 
 const allReducers = combineReducers({
     isLogged: loggerReducer,
@@ -19,7 +21,9 @@ const allReducers = combineReducers({
     formUser: userFormReducer,
     selectFaculty: selectFacultyReducer,
     pathRoleUser: pathRoleUserReducer,
-    userDocument: userDocumentReducer
+    selectMajor: selectMajorReducer,
+    userDocument: userDocumentReducer,
+    documentsTemplate: documentsTemplateReducer
 });
 
 export default allReducers;
