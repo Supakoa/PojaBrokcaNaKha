@@ -15,6 +15,7 @@ import DescriptionIcon from "@material-ui/icons/Description";
 // import ForumIcon from "@material-ui/icons/Forum";
 import HomeIcon from "@material-ui/icons/Home";
 import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
+import {useTranslation} from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SideNav({ url }) {
     // console.log(url);
-
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
     const linkClass = "text-dark";
 
     const classes = useStyles();
@@ -38,7 +39,7 @@ export default function SideNav({ url }) {
             aria-labelledby="nested-list-subheader"
             subheader={
                 <ListSubheader component="div" id="nested-list-subheader">
-                    เมนู
+                    {t('menu.menu')}
                 </ListSubheader>
             }
             className={classes.root}
@@ -50,7 +51,7 @@ export default function SideNav({ url }) {
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="หน้าแรก"
+                        primary={t('menu.home')}
                     />
                 </ListItem>
             </Link>
@@ -61,7 +62,7 @@ export default function SideNav({ url }) {
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="ข้อความ"
+                        primary={t('menu.message')}
                     />
                 </ListItem>
             </Link>
@@ -73,7 +74,7 @@ export default function SideNav({ url }) {
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="เอกสาร"
+                        primary={t('menu.documents')}
                     />
                 </ListItem>
             </Link>
@@ -84,7 +85,7 @@ export default function SideNav({ url }) {
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="สมาชิก"
+                        primary={t('menu.users')}
                     />
                 </ListItem>
             </Link>
@@ -95,7 +96,7 @@ export default function SideNav({ url }) {
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="ข่าว"
+                        primary={t('menu.news')}
                     />
                 </ListItem>
             </Link>
@@ -106,7 +107,7 @@ export default function SideNav({ url }) {
                     </ListItemIcon>
                     <ListItemText
                         className="d-lg-block d-sm-none"
-                        primary="ผู้ตรวจ"
+                        primary={t('menu.forms')}
                     />
                 </ListItem>
             </Link>

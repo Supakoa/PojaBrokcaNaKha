@@ -2,26 +2,27 @@ import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import Axios from "axios";
+import {useTranslation} from 'react-i18next';
 
 export default function ModalDelete(props) {
     const { id, api } = props;
-
+    const {t} = useTranslation('', {useSuspense: false});
     const apiPath = `http://localhost:8000/api/${api}`
 
     const handleClick = () => {
         Swal.fire({
-            title: "คุณแน่ใจไหม ?",
-            text: "คุณต้องการจะลบสิ่งนี้ !",
+            title: t('modalDelete.title'),
+            text: t('modalDelete.text'),
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            cancelButtonText: "ไม่ !",
-            confirmButtonText: "ใช่, ฉันต้องการลบ !"
+            cancelButtonText: t('modalDelete.cancelButtonText'),
+            confirmButtonText: t('modalDelete.confirmButtonText')
         }).then(result => {
             if (result.value) {
                 Axios.delete(`${apiPath}/${id}`).then(res => {
-                    Swal.fire("Deleted!", `Your ${api} has been deleted.`, "success");
+                    Swal.fire(t('modalDelete.deleted'),`${api} ${t('modalDelete.hasBeetDeleted')}`, t('modalDelete.success'));
                 })
             }
         });
@@ -29,7 +30,7 @@ export default function ModalDelete(props) {
 
     return (
         <Button variant="danger" size="sm" onClick={handleClick}>
-            ลบข้อมูล
+            {t('modalDelete.btnModal')}
         </Button>
     );
 }

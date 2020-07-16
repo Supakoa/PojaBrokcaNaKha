@@ -1,7 +1,11 @@
+import {useTranslation} from 'react-i18next';
+
 export const textHeader = type => {
+    const {t} = useTranslation('', {useSuspense: false});
+
     if (type) {
-        return "เพิ่มข้อมูล";
+        return t('add');
     } else {
-        return "แก้ไขข้อมูล";
+        return t('edit');
     }
 };

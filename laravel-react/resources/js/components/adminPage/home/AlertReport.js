@@ -7,7 +7,7 @@ export default function AlertReport() {
     return (
         <Card>
             <Card.Header>
-                <Card.Title>{t("document.index")}</Card.Title>
+                <Card.Title>{t("menu.documents")}</Card.Title>
             </Card.Header>
             <Card.Body className="p-1">
                 {[

@@ -11,9 +11,41 @@
         "faculty" : "Faculty",
         "major" : "Major"
     },
-    "document" : {
-        "index" : "Documents"
+    "menu":{
+        "menu" : "Menu",
+        "home" : "Home",
+        "message" : "Message",
+        "documents" : "Documents",
+        "users" : "Users",
+        "news" : "News",
+        "forms" : "Forms"
+    }, 
+    "faculty" : {
+        "index" : " Faculty",
+        "selectFaculty" : "Choose your faculty"
     },
-    "day&time" : "Day / Time"
+    "major" : {
+        "index" : "Major",
+        "selectMajor" : "Choose your major"
+    },
+    "modalDelete" : {
+        "btnModal" : "Delete",
+        "title" : "Are you shure?",
+        "text" : "You won't be able to revert this!",
+        "cancelButtonText" : "No!",
+        "confirmButtonText" : "Yes, delete it!",
+        "deleted" : "Deleted",
+        "hasBeetDeleted" : "has been deleted.",
+        "success" : "success"
+
+    },
+    "day&time" : "Day / Time",
+    "selectToShowMessage" : "Please select a name To display the message",
+    "sender" : "Sender",
+    "add" : "Add",
+    "edit" : "Edit",
+    "close" : "Close",
+    "save" : "Save",
+    "check" : "Check"
 
 }

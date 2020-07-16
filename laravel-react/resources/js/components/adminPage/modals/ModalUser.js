@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Container, Button } from "react-bootstrap";
 import FormUser from "../user/FormUser";
+import {useTranslation} from 'react-i18next';
 
 export default function ModalUser(props) {
+    const {t} = useTranslation('', {useSuspense: false});
 
     //If isCreatedProp true is Modal Add but when false is Modal Edit
     const { isCreatedProp, id } = props;
@@ -39,7 +41,7 @@ export default function ModalUser(props) {
                 size="sm"
                 onClick={() => setModalUser(true)}
             >
-                {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มข้อมูล"}
+                {!isCreatedProp ? t('edit') : t('add')}
             </Button>
 
             <Modal
@@ -54,7 +56,7 @@ export default function ModalUser(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="modal-user">
-                        {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มสมาชิก"}
+                        {!isCreatedProp ? t('edit') : t('add')}
                     </Modal.Title>
                 </Modal.Header>
 
@@ -69,13 +71,13 @@ export default function ModalUser(props) {
                         variant="success"
                         type="submit"
                         onClick={e => sendDataToDB(e)}
-                    >บันทัก</Button>
+                    >{t('save')}</Button>
 
                     <Button
                         form="userForm"
                         variant="danger"
                         onClick={() => setModalUser(false)}
-                    >ปิด</Button>
+                    >{t('close')}</Button>
                 </Modal.Footer>
             </Modal>
         </>
