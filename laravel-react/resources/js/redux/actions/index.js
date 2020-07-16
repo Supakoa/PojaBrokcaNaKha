@@ -96,3 +96,11 @@ export const userDocument = _doc => {
         payload: _doc
     };
 };
+
+export const updateFormEditUserBySingleData = (name, data) => {
+    return {
+        type: "UPDATEEDITFORMUSERBYSINGLEDATA",
+        name: name,
+        data: data
+    }
+}

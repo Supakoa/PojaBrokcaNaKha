@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Form } from 'react-bootstrap'
 import Axios from 'axios'
-import { selectFacultyId } from '../../../redux/actions'
+import { selectFacultyId, selectMajorId } from '../../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function FacultySelect() {
 
     const [faculty, setFaculty] = useState(null)
 
+    // local state
+
     // redux
     const redux_selectFaculty = useSelector(state => state.selectFaculty)
+    const redux_selectMajor = useSelector(state => state.selectMajor)
     const dispatch = useDispatch()
 
     const apiPath = `http://localhost:8000/api/faculties`
 
     const initFaculty = async () => {
-
         const getFaculty = await Axios.get(apiPath).then(res => {
             return res.data.success
         })
@@ -35,6 +37,7 @@ export default function FacultySelect() {
 
     const handleSelectFaculty = (e) => {
         dispatch(selectFacultyId(e.target.value))
+        dispatch(selectMajorId(0))
     }
 
     useEffect(() => {

@@ -12,6 +12,12 @@ const userFormReducer = (state = {}, action) => {
                 role: action.role
             }
 
+        case "UPDATEEDITFORMUSERBYSINGLEDATA":
+            return {
+                ...state,
+                [action.name]: action.data
+            }
+
         default:
             return state
     }

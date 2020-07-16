@@ -2,7 +2,7 @@ const { useEffect } = require("react");
 
 import React, { useState } from 'react'
 import { Form, Col } from 'react-bootstrap';
-import { selectMajorId, selectFacultyId } from '../../../redux/actions';
+import { selectMajorId, selectFacultyId, updateFormEditUserBySingleData } from '../../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from 'axios';
 
@@ -46,6 +46,7 @@ export default function MajorSelect() {
 
     const handleSelectMajor = (e) => {
         dispatch(selectMajorId(e.target.value))
+        dispatch(updateFormEditUserBySingleData(`majorId`, e.target.value))
     }
 
     // init Major state if have data in db
