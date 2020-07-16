@@ -1,6 +1,6 @@
 const selectMajorReducer = (state = {}, action) => {
     switch (action.type) {
-        case "SELECTMAJOR":
+        case "SELECT_MAJOR":
             return {
                 ...state,
                 id: action.id

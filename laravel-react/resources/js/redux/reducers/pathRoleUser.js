@@ -1,6 +1,6 @@
 const pathRoleUserReducer = (state = {}, action) => {
     switch (action.type) {
-        case "SETPATH" :
+        case "SET_PATH" :
             return {
                 ...state,
                 path: action.data

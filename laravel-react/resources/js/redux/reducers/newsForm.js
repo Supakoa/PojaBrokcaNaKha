@@ -1,25 +1,25 @@
 const newsFormReducer = (state = {}, action) => {
     switch (action.type) {
-        case "INITNEWSFORM":
+        case "INIT_NEWS_FORM":
             return {
                 ...state,
                 file: action.file,
                 ref: action.ref
             }
 
-        case "UPDATEFILE":
+        case "UPDATE_FILE_FORM_NEWS":
             return {
                 ...state,
                 file : action.file
             }
 
-        case "UPDATEREF":
+        case "UPDATE_REF_FORM_NEWS":
             return {
                 ...state,
                 ref: action.ref
             }
 
-        case "DESTROYFORM":
+        case "DESTROY_FORM":
             return {}
 
         default:
