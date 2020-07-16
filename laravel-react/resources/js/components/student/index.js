@@ -4,7 +4,8 @@ import {
     Route,
     useRouteMatch,
     Link,
-    useLocation
+    useLocation,
+    useHistory
 } from "react-router-dom";
 import { Row, Col, ListGroup } from "react-bootstrap";
 import NavHeader from "./components/header";
@@ -13,35 +14,29 @@ import Profile from "./components/Profile";
 import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
-import { useDispatch } from "react-redux";
-import { studentProfile } from "../../redux/actions";
-import headerConfig from "../middleware/headerConfig";
-import { _urlUser } from "../middleware/apis";
+import { useDispatch, useSelector } from "react-redux";
+import { user } from "../../redux/actions";
+import { _propsAuth } from "../middleware/props-auth";
+import AuthUser from "../middleware/axios/User";
 
 export default function Student() {
     const _dispatch = useDispatch();
+    const _user = useSelector(state => state.userState);
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
-    const [_user, setUser] = React.useState({});
+    const token = localStorage._authLocal;
+    let _history = useHistory();
 
-    const fetchUser = async _dispatch => {
-        await axios
-            .post(
-                _urlUser(),
-                localStorage._authLocal,
-                headerConfig(localStorage._authLocal, 3600)
-            )
-            .then(res => {
-                const { success } = res.data;
-                // console.log(item);
-                _dispatch(studentProfile(success));
-                setUser(success);
-                // return item;
-            });
+    const _props = {
+        token: token,
+        dispatch: _dispatch,
+        role: 3,
+        history: _history,
+        user: user
     };
 
-    const activeMenu = _path => {
+    const activeMenu = (_path, setActive) => {
         if (_path === "/student") {
             setActive(false);
         } else if (_path === "/student/form-report") {
@@ -51,13 +46,14 @@ export default function Student() {
 
     React.useEffect(() => {
         const abt = new AbortController();
-        fetchUser(_dispatch, { signal: abt.signal });
-        activeMenu(pathname);
-
+        if (Object.keys(_user).length === 0 && _user.constructor === Object) {
+            AuthUser(_props, { signal: abt.signal });
+        }
+        activeMenu(pathname, setActive, { signal: abt.signal });
         return () => {
             abt.abort();
         };
-    }, [pathname, _active, _dispatch]);
+    }, [pathname, _active, _props]);
 
     return (
         <div className="mb-3">
@@ -74,7 +70,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}`}
                             >
-                                ตารางฟอร์ม
+                                ประวัติการส่งคำร้อง
                             </Link>
                             <Link
                                 className={`${
@@ -82,7 +78,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}/form-report`}
                             >
-                                แบบฟอร์ม
+                                ส่งคำร้อง
                             </Link>
                         </ListGroup>
                     </Col>

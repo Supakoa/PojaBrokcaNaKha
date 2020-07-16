@@ -2,8 +2,8 @@ import React from "react";
 import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
 import axios from "axios";
-import validateIndex from "./validate";
-import { studentProfile } from "../../../../../redux/actions";
+import validateIndex from "../../../../middleware/validate";
+import { user } from "../../../../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { ProfileContext, FacultiesContext } from "../../../context";
 import ListFaculties from "./ListFaculties";
@@ -13,7 +13,7 @@ import headerConfig from "../../../../middleware/headerConfig";
 
 const ProfileForm = () => {
     const _dispatch = useDispatch();
-    const _studentProfile = useSelector(state => state.studentProfile);
+    const _studentProfile = useSelector(state => state.userState);
     const [_profile, setProfile] = React.useState({});
     const [_isSubmit, setIsSubmit] = React.useState(false);
     const [_disOption, setDisOption] = React.useState(true);
@@ -63,7 +63,7 @@ const ProfileForm = () => {
                 headerConfig(localStorage._authLocal, 3600)
             )
             .then(res => {
-                _dispatch(studentProfile(res.data));
+                _dispatch(user(res.data));
             });
     };
 

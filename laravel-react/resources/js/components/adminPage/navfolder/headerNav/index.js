@@ -2,8 +2,8 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
-import SignOut from "../../../auth/sign-out";
-
+import SignOutBtn from "../../../auth/sign-out";
+import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 export default function HeaderNav(props) {
 
     return (
@@ -21,6 +21,9 @@ export default function HeaderNav(props) {
             <Navbar.Collapse id="petition-nav">
                 <Nav className="ml-auto pr-2">
                     <Nav.Link>
+                        <SwitchingLanguageBtn className = "nav-link"/>
+                    </Nav.Link>
+                    <Nav.Link>
                         <img
                             src="https://img.icons8.com/plasticine/2x/user.png"
                             className="d-inline-block align-top"
@@ -31,7 +34,7 @@ export default function HeaderNav(props) {
                         {props.info.first} {props.info.last}
                     </Nav.Link>
 
-                    <SignOut className = "nav-link"/>
+                    <SignOutBtn className = "nav-link"/>
 
                 </Nav>
             </Navbar.Collapse>

@@ -1,11 +1,13 @@
 import React from "react";
 import { Card, Alert } from "react-bootstrap";
+import {useTranslation} from 'react-i18next';
 
 export default function AlertReport() {
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
     return (
         <Card>
             <Card.Header>
-                <Card.Title>เอกสาร</Card.Title>
+                <Card.Title>{t("document.index")}</Card.Title>
             </Card.Header>
             <Card.Body className="p-1">
                 {[
