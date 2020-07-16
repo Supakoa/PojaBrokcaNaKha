@@ -2,7 +2,7 @@ const { useEffect } = require("react");
 
 import React, { useState } from 'react'
 import { Form, Col } from 'react-bootstrap';
-import { selectMajorId } from '../../../redux/actions';
+import { selectMajorId, selectFacultyId } from '../../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from 'axios';
 
@@ -12,9 +12,21 @@ export default function MajorSelect() {
     const [focusReduxSelectFaculty, setfocusReduxSelectFaculty] = useState(true)
 
     const redux_selectFaculty = useSelector(state => state.selectFaculty)
+    const redux_selectMajor = useSelector(state => state.selectMajor)
+    const redux_user = useSelector(state => state.formUser)
     const dispatch = useDispatch()
 
     const initMajor = async () => {
+        if (typeof redux_user.majorId != 'undefined') {
+            dispatch(selectMajorId(redux_user.majorId))
+
+            await Axios.get(`http://localhost:8000/api/majors/${redux_user.majorId}`).then(res => {
+                dispatch(selectFacultyId(res.data.faculty_id))
+            })
+        }
+    }
+
+    const updateMajor = async () => {
         if (redux_selectFaculty.id == 0 || typeof redux_selectFaculty.id == 'undefined') {
             setMajor(null)
         } else {
@@ -27,20 +39,20 @@ export default function MajorSelect() {
     }
 
     const changeDisableState = () => {
-        // ( redux_selectFaculty.id == 0 || typeof redux_selectFaculty.id == 'undefined' ) ? setfocusReduxSelectFaculty(true) : setfocusReduxSelectFaculty(false)
-        // if (redux_selectFaculty.id == 0 || typeof redux_selectFaculty.id == 'undefined') {
-        //     setfocusReduxSelectFaculty(true)
-        // } else {
-        //     setfocusReduxSelectFaculty(false)
-        // }
         setfocusReduxSelectFaculty(redux_selectFaculty.id == 0 || typeof redux_selectFaculty.id == 'undefined')
 
-        initMajor()
+        updateMajor()
     }
 
     const handleSelectMajor = (e) => {
         dispatch(selectMajorId(e.target.value))
     }
+
+    // init Major state if have data in db
+    useEffect(() => {
+        // updateMajor()
+        initMajor()
+    }, [redux_user])
 
     useEffect(() => {
         changeDisableState()
@@ -61,7 +73,7 @@ export default function MajorSelect() {
             <Form.Group as={Col} controlId="formGroupMajorSelect">
                 <Form.Label>สาขา</Form.Label>
 
-                <Form.Control as="select" name="major" onChange={e => handleSelectMajor(e)} disabled={focusReduxSelectFaculty} >
+                <Form.Control as="select" name="major" onChange={e => handleSelectMajor(e)} disabled={focusReduxSelectFaculty} value={redux_selectMajor.id}>
                     <option value={0}>เลือกสาขา</option>
                     { renderMajorOption() }
                 </Form.Control>

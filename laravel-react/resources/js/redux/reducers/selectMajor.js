@@ -1,4 +1,4 @@
-const selectMajorReducer = (state = 0, action) => {
+const selectMajorReducer = (state = {}, action) => {
     switch (action.type) {
         case "SELECTMAJOR":
             return {

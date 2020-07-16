@@ -10,6 +10,7 @@ import selectFacultyReducer from "./selectFaculty";
 import pathRoleUserReducer from "./pathRoleUser";
 
 import { combineReducers } from "redux";
+import selectMajorReducer from "./selectMajor";
 
 const allReducers = combineReducers({
     counter: counterReducer,
@@ -21,7 +22,8 @@ const allReducers = combineReducers({
     studentProfile: studentProfileReducer,
     formUser: userFormReducer,
     selectFaculty: selectFacultyReducer,
-    pathRoleUser : pathRoleUserReducer
+    pathRoleUser : pathRoleUserReducer,
+    selectMajor: selectMajorReducer
 });
 
 export default allReducers;

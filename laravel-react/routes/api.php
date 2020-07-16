@@ -24,6 +24,7 @@ Route::get('faculties', 'CRUD\FacultyController@index');
 Route::get('faculties/{faculty}', 'CRUD\FacultyController@show');
 Route::get('faculties/{faculty}/majors', 'CRUD\FacultyController@getMajorByFacultyId');
 Route::resource('majors','MajorsController');
+
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user', 'API\UserController@user');
     Route::post('logout', 'API\UserController@logout');
@@ -35,12 +36,14 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 
 Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
+
 //Forms
 Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
 Route::get('forms/{form}/documents','formsController@documents');
 Route::get('forms/{form}/groups','formsController@groups');
 Route::post('forms/{form}/groups','formsController@addGroup');
 Route::delete('forms/{form}/groups','formsController@deteleGroup');
+
 //Groups
 Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
 Route::get('groups/{group}/users','GroupsController@users');
