@@ -104,3 +104,10 @@ export const updateFormEditUserBySingleData = (name, data) => {
         data: data
     };
 };
+
+export const documentsTemplate = _doc => {
+    return {
+        type: "DOCUMENT",
+        payload: _doc
+    };
+};

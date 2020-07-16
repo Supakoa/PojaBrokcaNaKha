@@ -15,13 +15,16 @@ import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
 import { useDispatch, useSelector } from "react-redux";
-import { user } from "../../redux/actions";
+import { user, documentsTemplate } from "../../redux/actions";
 import { _propsAuth } from "../middleware/props-auth";
 import AuthUser from "../middleware/axios/User";
+import fetchDocuments from "../middleware/axios/fetchDocuments";
+import activeMenu from "../middleware/method/activeMenu";
 
 export default function Student() {
     const _dispatch = useDispatch();
     const _user = useSelector(state => state.userState);
+    const _docTemp = useSelector(state => state.documentsTemplate);
     let { path, url } = useRouteMatch();
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
@@ -33,23 +36,21 @@ export default function Student() {
         dispatch: _dispatch,
         role: 3,
         history: _history,
-        user: user
-    };
-
-    const activeMenu = (_path, setActive, _id) => {
-        if (_path === `/student/${_id}`) {
-            setActive(false);
-        } else if (_path === "/student/form-report") {
-            setActive(true);
-        }
+        user: user,
+        docTemp: documentsTemplate,
+        path: pathname,
+        setActive: setActive,
+        userId: _user.id
     };
 
     React.useEffect(() => {
         const abt = new AbortController();
         if (Object.keys(_user).length === 0 && _user.constructor === Object) {
             AuthUser(_props, { signal: abt.signal });
+        } else if (_docTemp.length === 0) {
+            fetchDocuments(_props);
         }
-        activeMenu(pathname, setActive, _user.id, { signal: abt.signal });
+        activeMenu(_props, { signal: abt.signal });
         return () => {
             abt.abort();
         };
