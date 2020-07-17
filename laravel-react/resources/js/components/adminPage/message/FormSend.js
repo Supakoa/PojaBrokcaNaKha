@@ -1,9 +1,11 @@
 import React from "react";
 import { Form, Col, Button } from "react-bootstrap";
+import {useTranslation} from 'react-i18next';
+
 
 const FormSend = props => {
     const [_message, setMessage] = React.useState({});
-
+    const {t} = useTranslation('', {useSuspense: false});
     const handleChange = e => {
         const value = e.target.value;
         console.log(value);
@@ -28,7 +30,7 @@ const FormSend = props => {
                 <Col xs={11} sm={11} ms={11} lg={11}>
                     <Form.Control
                         name="textMessage"
-                        placeholder="ข้อความ"
+                        placeholder={t('menu.message')}
                         onChange={handleChange}
                     />
                 </Col>

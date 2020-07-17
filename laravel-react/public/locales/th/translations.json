@@ -11,10 +11,40 @@
         "faculty" : "คณะ",
         "major" : "สาขา"
     },
-    "document" : {
-        "index" : "เอกสาร"
+    "menu":{
+        "menu" : "เมนู",
+        "home" : "หน้าแรก",
+        "message" : "ข้อความ",
+        "documents" : "เอกสาร",
+        "users" : "สมาชิก",
+        "news" : "ข่าว",
+        "forms" : "แบบฟอร์ม"
     },
-    "day&time" : "วัน / เวลา"
+    "faculty" : {
+        "index" : "คณะ",
+        "selectFaculty" : "เลือกคณะ"
+    },
+    "major" : {
+        "index" : "สาขา",
+        "selectMajor" : "เลือกสาขา"
+    },
+    "modalDelete" : {
+        "btnModal" : "ลบข้อมูล",
+        "title" : "คุณแน่ใจไหม?",
+        "text" : "คุณต้องการจะลบสิ่งนี้!",
+        "cancelButtonText" : "ไม่!",
+        "confirmButtonText" : "ใช่, ฉันต้องการลบ!",
+        "deleted" : "ลบแล้ว",
+        "hasBeetDeleted" : "ได้ทำการลบสำเร็จ",
+        "success" : "เสร็จสิ้น"
 
-    
+    },
+    "day&time" : "วัน / เวลา",
+    "selectToShowMessage" : "กรุณาเลือกรายชื่อ เพื่อแสดงข้อความ",
+    "sender" : "รายชื่อผู้ส่ง",
+    "add" : "เพิ่มข้อมูล",
+    "edit" : "แก้ไขข้อมูล",
+    "close" : "ปิด",
+    "save" : "บันทึก",
+    "check" : "ตรวจสอบ"
 }

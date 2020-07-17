@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Form } from 'react-bootstrap'
 import Axios from 'axios'
-import { selectFacultyId, selectMajorId } from '../../../redux/actions'
-import { useDispatch, useSelector } from 'react-redux'
+import { selectFacultyId } from '../../../redux/actions'
+import { useDispatch } from 'react-redux'
+import {useTranslation} from 'react-i18next';
 
 export default function FacultySelect() {
-
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
     const [faculty, setFaculty] = useState(null)
 
     // local state
@@ -47,10 +48,10 @@ export default function FacultySelect() {
     return (
         <div>
             <Form.Group as={Col} controlId="formGroupFacultySelect">
-                <Form.Label>คณะ</Form.Label>
+                <Form.Label>{t('faculty.index')}</Form.Label>
 
-                <Form.Control as="select" name="facultySelect" onChange={e => handleSelectFaculty(e)} value={redux_selectFaculty.id}>
-                    <option key="0" value={0} >เลือกคณะ</option>
+                <Form.Control as="select" name="facultySelect" onChange={e => handleSelectFaculty(e)}>
+                    <option key="0" value={0} >{t('faculty.selectFaculty')}</option>
                     { RenderFacultyOption() }
                 </Form.Control>
             </Form.Group>

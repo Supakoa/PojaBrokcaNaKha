@@ -1,11 +1,14 @@
 import React from "react";
 import { Card, Alert } from "react-bootstrap";
+import {useTranslation} from 'react-i18next';
 
 export default function AlertMessage() {
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
+
     return (
         <Card>
             <Card.Header>
-                <Card.Title>ข้อความ</Card.Title>
+                <Card.Title>{t('menu.message')}</Card.Title>
             </Card.Header>
             <Card.Body className="p-1">
                 {[
