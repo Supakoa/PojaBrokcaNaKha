@@ -11,9 +11,11 @@ export const _setRowsTable = _props => {
             }
             if (_userDoc.created_at) {
                 if (_userDoc.created_at !== null) {
-                    _userDoc.created_at = _convertDate(
+                    if (!_userDoc.converted)
+                    _userDoc.created_at =  _convertDate(
                         _userDoc.created_at
-                    ).toUTCString();
+                    );
+
                     // console.log(_convertDate(_userDoc.created_at));
                 } else {
                     _userDoc.created_at = "-";
@@ -21,9 +23,10 @@ export const _setRowsTable = _props => {
             }
             if (_userDoc.updated_at) {
                 if (_userDoc.updated_at !== null) {
+                    if (!_userDoc.converted)
                     _userDoc.updated_at = _convertDate(
                         _userDoc.updated_at
-                    ).toUTCString();
+                    );
                     // console.log(_convertDate(_userDoc.created_at));
                 } else {
                     _userDoc.updated_at = "-";
@@ -31,19 +34,23 @@ export const _setRowsTable = _props => {
             }
             if (_userDoc.canceled_at) {
                 if (_userDoc.canceled_at !== null) {
+                    if (!_userDoc.converted)
                     _userDoc.canceled_at = _convertDate(
                         _userDoc.canceled_at
-                    ).toUTCString();
+                    );
                     // console.log(_convertDate(_userDoc.created_at));
                 } else {
                     _userDoc.canceled_at = "-";
                 }
             }
+            _userDoc.converted = true;
             _props.row.push(_userDoc);
         }
     }
 };
 
 const _convertDate = _date => {
-    return new Date(_date);
+    let date = new Date(_date);
+     date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())).toISOString().split("T");
+     return ` ${date[1].substr(0,8)} ${date[0].split("-")[2]}/${date[0].split("-")[1]}/${date[0].split("-")[0]}`
 };

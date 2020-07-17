@@ -1,5 +1,5 @@
 const activeMenu = _props => {
-    if (_props.path === `/student/${_props.userId}`) {
+    if (_props.path === `/student`) {
         _props.setActive(false);
     } else if (_props.path === "/student/form-report") {
         _props.setActive(true);

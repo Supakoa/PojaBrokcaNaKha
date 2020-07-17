@@ -14,7 +14,7 @@ class admin extends Seeder
      */
     public function run()
     {
-        $data = [
+        $data = [[
             // 'major_id' => 1,
             'first_name' => 'admin',
             'last_name' => 'SSRU',
@@ -27,7 +27,32 @@ class admin extends Seeder
             'role_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-        ];
+        ], [
+            'first_name' => 'student',
+            'last_name' => 'SSRU',
+            'email' => 's',
+            'password' => Hash::make('s'),
+//            'email' => 'admin@ssru.ac.th',
+//            'password' => Hash::make('adminge@petition'),
+            'title' => 'Mr.',
+            'telephone' => 'Student telephone',
+            'role_id' => 3,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]
+            , [
+                'first_name' => 'Teacher',
+                'last_name' => 'SSRU',
+                'email' => 't',
+                'password' => Hash::make('t'),
+//            'email' => 'admin@ssru.ac.th',
+//            'password' => Hash::make('adminge@petition'),
+                'title' => 'Mr.',
+                'telephone' => 'Teacher telephone',
+                'role_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]];
 
         appUser::insert($data);
 

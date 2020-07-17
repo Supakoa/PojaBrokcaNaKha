@@ -45,9 +45,11 @@ export default function Student() {
 
     React.useEffect(() => {
         const abt = new AbortController();
-        if (Object.keys(_user).length === 0 && _user.constructor === Object) {
+        if (Object.keys(_user).length === 0 && _user.constructor === Object && !_user.isFetchAuthUser) {
+            _user.isFetchAuthUser = true;
             AuthUser(_props, { signal: abt.signal });
-        } else if (_docTemp.length === 0) {
+        } else if (_docTemp.length === 0 && !_docTemp.isFetchdocTemp ) {
+            _docTemp.isFetchdocTemp =true;
             fetchDocuments(_props);
         }
         activeMenu(_props, { signal: abt.signal });
@@ -69,7 +71,7 @@ export default function Student() {
                                 className={`${
                                     !_active ? `active` : ""
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
-                                to={`${url}/${_user.id}`}
+                                to={`${url}`}
                             >
                                 ประวัติการส่งคำร้อง
                             </Link>
@@ -95,7 +97,7 @@ export default function Student() {
                                     component={ReportForm}
                                 />
                                 <Route
-                                    path={`${path}/:id`}
+                                    path={`${path}`}
                                     component={ReportTable}
                                 />
                             </Switch>

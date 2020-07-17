@@ -10,10 +10,11 @@ import { columns } from "./columns";
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
     const _docTemp = useSelector(state => state.documentsTemplate);
+    const _user = useSelector(state => state.userState);
     let rows = [];
     const _dispatch = useDispatch();
     const _token = localStorage._authLocal;
-    const { id } = useParams();
+    const  id  = _user.id;
     // console.log(_userDoc);
 
     const _props = {
@@ -28,7 +29,9 @@ export default function ReportTable() {
 
     React.useEffect(() => {
         const abort = new AbortController();
-        if (_userDoc.length === 0) {
+        if (_userDoc.length === 0 && id  && !_userDoc.isFetchUserDoc)
+        {
+            _userDoc.isFetchUserDoc = true;
             fetchUserDoc(_props, { signal: abort.signal });
         }
         _setRowsTable(_props, { signal: abort.signal });
