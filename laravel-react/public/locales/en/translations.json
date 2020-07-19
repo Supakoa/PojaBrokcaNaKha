@@ -35,7 +35,7 @@
         "cancelButtonText" : "No!",
         "confirmButtonText" : "Yes, delete it!",
         "deleted" : "Deleted",
-        "hasBeetDeleted" : "has been deleted.",
+        "hasBeetDeleted" : "Has been deleted.",
         "success" : "success"
 
     },
@@ -45,6 +45,18 @@
         "image" : "Image"
         
     },
+    "document" : {
+        "form" : "Forms",
+        "creat" : "Created at",
+        "update" : "Updated at",
+        "status" : "Status"
+    },
+    "documentStatus" : {
+        "cencel" : "Cencelled",
+        "pending" : "Pending",
+        "reject" : "Reject",
+        "success" : "Success"
+    },
     "day&time" : "Day / Time",
     "selectToShowMessage" : "Please select a name To display the message",
     "sender" : "Sender",
@@ -52,7 +64,11 @@
     "edit" : "Edit",
     "close" : "Close",
     "save" : "Save",
-    "check" : "Check"
+    "check" : "Check",
+    "search" : "Search"
+    
+
+    
     
 
 }

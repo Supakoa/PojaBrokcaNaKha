@@ -18,7 +18,7 @@ export const columns = arrays => {
             sort: "disabled"
         },
         {
-            label: "action",
+            
             field: "action",
             width: 100,
             sort: "disabled"

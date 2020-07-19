@@ -74,7 +74,7 @@ export default function AdminPage() {
                             <Messagws t={t}/>
                         </Route>
                         <Route path={`${path}/report`}>
-                            <Report />
+                            <Report t={t}/>
                         </Route>
                         <Route path={`${path}/user`}>
                             <User t={t} />
