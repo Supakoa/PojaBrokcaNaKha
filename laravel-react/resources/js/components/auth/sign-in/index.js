@@ -8,7 +8,7 @@ import Logo from "./../../images/logo.png";
 import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { user, isAuththen,pathRoleUser } from "../../../redux/actions";
+import { user, isAuththen, pathRoleUser } from "../../../redux/actions";
 import redirectPage from "./RedirectPage";
 import postUser from "../post/postUser";
 import Swal from "sweetalert2";
@@ -95,7 +95,7 @@ export default function SignIn() {
                     const role_id = _authUser._role;
                     const _path = redirectPage(role_id);
                     localStorage.setItem("_authLocal", tokenUser);
-                    localStorage.setItem("pathRoleUser",_path);
+                    localStorage.setItem("pathRoleUser", _path);
                     _history.push(_path);
                     dispatch(pathRoleUser(_path));
                     dispatch(isAuththen(true));
