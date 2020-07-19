@@ -14,7 +14,7 @@ export const dataTableUser = () => {
             // console.log(res);
             return {
                 action: ColumnAction(idx, res),
-                id: res.id,
+                id: idx.toString(),
                 name: res.title + " " + res.first_name + " " + res.last_name,
                 role: userRole(res.role_id),
                 email: res.email,

@@ -13,10 +13,11 @@ import Student from "./student";
 import SignUp from "./auth/sign-up";
 import { useSelector } from "react-redux";
 import NoMatch from "./NotMatch404";
+import clearLocalStorge from "./middleware/method/clearLocalStorage";
 
 function App() {
     // const isAuthenticated = useSelector(state => state.redirectState);
-    const pathRoleUser = localStorage.getItem("pathRoleUser");
+    // const pathRoleUser = localStorage.getItem("pathRoleUser");
     let _isAuthLocal = localStorage.getItem("_authLocal");
     return (
         <Router>
@@ -34,7 +35,9 @@ function App() {
                     <Student />
                 </PrivateRoute>
                 <Route path="/">
-                    <Redirect to={!_isAuthLocal ? "/login" : pathRoleUser} />
+                    <Redirect
+                        to={!_isAuthLocal ? "/login" : clearLocalStorge()}
+                    />
                 </Route>
                 <Route path="*">
                     <NoMatch />
