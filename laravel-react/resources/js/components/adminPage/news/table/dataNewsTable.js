@@ -12,7 +12,7 @@ const dataNewsTable = () => {
             _data.map((res, idx) => {
                 // type: File, URL
                 const responData = {
-                    id: res.id,
+                    id: idx,
                     images: (
                         <Image
                             src={res.image}
@@ -44,7 +44,7 @@ const dataNewsTable = () => {
         };
     }, []);
 
-    return { columns, rows };
+    return {"columns" : columns(["dddd","eeeee"]) , rows };
 };
 
 export default dataNewsTable;
