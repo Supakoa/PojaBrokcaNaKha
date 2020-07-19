@@ -42,8 +42,7 @@
     "pr" : {
         "index" : "ประชาสัมพันธ์",
         "link" : "ที่อยู่เว็บ",
-        "image" : "Image",
-        "action" : "action"
+        "image" : "รูปข่าว"
     },
     "day&time" : "วัน / เวลา",
     "selectToShowMessage" : "กรุณาเลือกรายชื่อ เพื่อแสดงข้อความ",
