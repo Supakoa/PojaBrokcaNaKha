@@ -39,6 +39,12 @@
         "success" : "success"
 
     },
+    "pr" : {
+        "index" : "Public relations",
+        "link" : "URL",
+        "image" : "Image",
+        "action" : "action"
+    },
     "day&time" : "Day / Time",
     "selectToShowMessage" : "Please select a name To display the message",
     "sender" : "Sender",
@@ -47,5 +53,6 @@
     "close" : "Close",
     "save" : "Save",
     "check" : "Check"
+    
 
 }

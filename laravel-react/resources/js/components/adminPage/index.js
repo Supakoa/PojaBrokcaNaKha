@@ -80,7 +80,7 @@ export default function AdminPage() {
                             <User t={t} />
                         </Route>
                         <Route path={`${path}/news`}>
-                            <News />
+                            <News t={t} />
                         </Route>
                         <Route path={`${path}/step-report`}>
                             <StepReport />
