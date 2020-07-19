@@ -9,7 +9,7 @@ export default class News extends Component {
             <Card>
                 <Card.Header className="text-center">
                     <Card.Title className="p-2">
-                        ตั้งค่าข่าวประชาสัมพันธ์
+                         {this.props.t('pr.index')}
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
