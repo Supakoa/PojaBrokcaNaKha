@@ -7,7 +7,7 @@ import SwitchingLanguageBtn from "../../middleware/switchingLanguage";
 
 export default function FormRegister() {
     // const dispatch = useDispatch();
-    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
+    const {t} = useTranslation('', {useSuspense: false});
     const [_select, setSelect] = React.useState(true);
     const [_majors, setMajors] = React.useState([]);
     const [_facs, setFacs] = React.useState([]);

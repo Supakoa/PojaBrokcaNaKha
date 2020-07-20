@@ -5,9 +5,10 @@ import { Form, Col } from 'react-bootstrap';
 import { selectMajorId, selectFacultyId, updateFormEditUserBySingleData } from '../../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from 'axios';
+import {useTranslation} from 'react-i18next';
 
 export default function MajorSelect() {
-
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
     const [major, setMajor] = useState(null)
     const [focusReduxSelectFaculty, setfocusReduxSelectFaculty] = useState(true)
 
@@ -72,10 +73,10 @@ export default function MajorSelect() {
     return (
         <div>
             <Form.Group as={Col} controlId="formGroupMajorSelect">
-                <Form.Label>สาขา</Form.Label>
+                <Form.Label>{t('major.index')}</Form.Label>
 
-                <Form.Control as="select" name="major" onChange={e => handleSelectMajor(e)} disabled={focusReduxSelectFaculty} value={redux_selectMajor.id}>
-                    <option value={0}>เลือกสาขา</option>
+                <Form.Control as="select" name="major" onChange={e => handleSelectMajor(e)} disabled={focusReduxSelectFaculty} >
+                    <option value={0}>{t('major.selectMajor')}</option>
                     { renderMajorOption() }
                 </Form.Control>
             </Form.Group>

@@ -4,12 +4,14 @@ import FormNews from "../news/FormNews";
 import { colors } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import {useTranslation} from 'react-i18next';
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
     // props : isCreateProps and response are props in this ModalNews
     const { isCreateProps, response } = props;
     const [isShow, setIsShow] = React.useState(false);
+    const {t} = useTranslation('', {useSuspense: false});
 
     // redux
     const form = useSelector(state => state.newsForm)
@@ -19,7 +21,7 @@ export default function ModalNews(props) {
     };
 
     const isCreateTitile = context => {
-        return context ? "เพิ่มข้อมูล" : "แก้ไขข้อมูล";
+        return context ? t('add') : t('edit');
     };
 
     const apiPath = `http://localhost:8000/api/news`
@@ -92,8 +94,8 @@ export default function ModalNews(props) {
                 <Modal.Body>{isReturnCreateForm()}</Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setIsShow(false)}> close </Button>
-                    <Button variant={isCreateProps ? "info" : "warning"} onClick={() => saveFormToDB()}> save </Button>
+                    <Button variant="secondary" onClick={() => setIsShow(false)}> {t('close')} </Button>
+                    <Button variant={isCreateProps ? "info" : "warning"} onClick={() => saveFormToDB()}> {t('save')} </Button>
                 </Modal.Footer>
             </Modal>
         </>

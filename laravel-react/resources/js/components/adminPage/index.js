@@ -16,8 +16,10 @@ import User from "./user";
 import News from "./news";
 import Messagws from "./message";
 import { useSelector } from "react-redux";
+import {useTranslation} from 'react-i18next';
 
 export default function AdminPage() {
+    const {t} = useTranslation('', {useSuspense: false});
     const dispatch = useDispatch();
     const [_info, setInfo] = React.useState({});
     let { path, url } = useRouteMatch();
@@ -69,16 +71,16 @@ export default function AdminPage() {
                             <Home />
                         </Route>
                         <Route path={`${path}/inbox`}>
-                            <Messagws />
+                            <Messagws t={t}/>
                         </Route>
                         <Route path={`${path}/report`}>
-                            <Report />
+                            <Report t={t}/>
                         </Route>
                         <Route path={`${path}/user`}>
-                            <User />
+                            <User t={t} />
                         </Route>
                         <Route path={`${path}/news`}>
-                            <News />
+                            <News t={t} />
                         </Route>
                         <Route path={`${path}/step-report`}>
                             <StepReport />

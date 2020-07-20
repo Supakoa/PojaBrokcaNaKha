@@ -14,7 +14,7 @@ export default class Report extends Component {
         return (
             <Card>
                 <Card.Header className="text-center">
-                    <Card.Title className="p-2">แบบฟอร์มทั้งหมด</Card.Title>
+                    <Card.Title className="p-2">{this.props.t('menu.documents')}</Card.Title>
                 </Card.Header>
                 <Card.Body>
                     <TableReport />

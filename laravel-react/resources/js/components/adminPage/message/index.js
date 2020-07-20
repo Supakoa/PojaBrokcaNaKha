@@ -21,7 +21,7 @@ export default class Meassages extends Component {
         return (
             <Card>
                 <Card.Header className="text-center">
-                    <Card.Title className="p-2">ข้อความเข้า</Card.Title>
+                    <Card.Title className="p-2"> {this.props.t('menu.message')} </Card.Title>
                 </Card.Header>
                 <Card.Body>
                     <TemplateMessage data={this.state.messages} />

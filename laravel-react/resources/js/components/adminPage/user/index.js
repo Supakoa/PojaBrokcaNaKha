@@ -4,6 +4,8 @@ import TableUser from "./table";
 import ModalUser from "../modals/ModalUser";
 
 export default class User extends Component {
+    
+
     constructor(props) {
         super(props);
         this.state = {};
@@ -13,7 +15,7 @@ export default class User extends Component {
         return (
             <Card>
                 <Card.Header className="text-center">
-                    <Card.Title className="p-2">สมาชิก</Card.Title>
+                    <Card.Title className="p-2">{this.props.t('menu.users')}</Card.Title>
                 </Card.Header>
                 <Card.Body className="w-100">
                     <div className="text-right justify-content-end">

@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Container, Button } from "react-bootstrap";
 import FormUser from "../user/FormUser";
+<<<<<<< HEAD
+import { useSelector, useDispatch } from "react-redux";
+import { initShowUsers, updateShowUsers } from "../../../redux/actions";
+import Axios from "axios";
+import qs from "qs";
+=======
+import {useTranslation} from 'react-i18next';
 import { useSelector } from "react-redux";
 import { formUser } from "../../../redux/actions";
+>>>>>>> 5b24dc6dde82d8acad857b33cee3453b99d8ec23
 
 export default function ModalUser(props) {
+    const {t} = useTranslation('', {useSuspense: false});
 
     //If isCreatedProp true is Modal Add but when false is Modal Edit
     const { isCreatedProp, id } = props;
@@ -15,6 +24,8 @@ export default function ModalUser(props) {
 
     // redux
     const redux_formUser = useSelector(state => state.formUser)
+    const redux_users = useSelector(state => state.showUsers)
+    const dispatch = useDispatch()
 
     const formOnSubmit = e => {
         // console.log(e.currentTarget.checkValidity());
@@ -33,7 +44,34 @@ export default function ModalUser(props) {
     }
 
     const sendDataToDB = () => {
-        console.log('sendDataToDB(): ', redux_formUser)
+
+        const data = qs.stringify({
+            'email': redux_formUser.email,
+            'title': redux_formUser.title,
+            'first_name': redux_formUser.firstName,
+            'last_name': redux_formUser.lastName,
+            'major_id': redux_formUser.majorId,
+            'telephone': redux_formUser.phoneNumber,
+            'role_id': redux_formUser.roleId,
+        })
+
+        Axios.put(`http://localhost:8000/api/users/${id}`, data, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem("_authLocal")}`
+            }
+        }).then(res => {
+            let tempUsers = redux_users.data
+            const indexResult = redux_users.data.findIndex(item => {
+                return item.id == id
+            })
+
+            tempUsers[indexResult] = {
+                ...tempUsers[indexResult],
+                ...res.data
+            }
+            dispatch(updateShowUsers(tempUsers))
+        })
     }
 
     return (
@@ -44,7 +82,7 @@ export default function ModalUser(props) {
                 size="sm"
                 onClick={() => setModalUser(true)}
             >
-                {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มข้อมูล"}
+                {!isCreatedProp ? t('edit') : t('add')}
             </Button>
 
             <Modal
@@ -59,7 +97,7 @@ export default function ModalUser(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="modal-user">
-                        {!isCreatedProp ? "แก้ไขข้อมูล" : "เพิ่มสมาชิก"}
+                        {!isCreatedProp ? t('edit') : t('add')}
                     </Modal.Title>
                 </Modal.Header>
 
@@ -73,14 +111,14 @@ export default function ModalUser(props) {
                     <Button
                         variant="success"
                         type="submit"
-                        onClick={e => sendDataToDB()}
-                    >บันทัก</Button>
+                        onClick={e => sendDataToDB(e)}
+                    >{t('save')}</Button>
 
                     <Button
                         form="userForm"
                         variant="danger"
                         onClick={() => setModalUser(false)}
-                    >ปิด</Button>
+                    >{t('close')}</Button>
                 </Modal.Footer>
             </Modal>
         </>

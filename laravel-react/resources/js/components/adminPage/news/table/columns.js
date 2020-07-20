@@ -1,25 +1,27 @@
-export const columns = [
-    {
-        label: "#",
-        field: "id",
-        sort: "desc",
-        width: 20
-    },
-    {
-        label: "ที่อยู่เว็บ",
-        field: "url",
-        width: 270
-    },
-    {
-        label: "รูปข่าว",
-        field: "images",
-        width: 200,
-        sort: "disabled"
-    },
-    {
-        label: "action",
-        field: "action",
-        width: 100,
-        sort: "disabled"
-    }
-];
+export const columns = arrays => {
+    return [
+        {
+            label: "#",
+            field: "id",
+            sort: "desc",
+            width: 20
+        },
+        {
+            label: arrays[0],
+            field: "url",
+            width: 270
+        },
+        {
+            label: arrays[1],
+            field: "images",
+            width: 200,
+            sort: "disabled"
+        },
+        {
+            
+            field: "action",
+            width: 100,
+            sort: "disabled"
+        }
+    ];
+} ;
