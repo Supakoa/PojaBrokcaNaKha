@@ -13,19 +13,19 @@ export const columns = [
     },
     {
         label: "แบบคำร้อง",
-        field: "form_id",
+        field: "form_name",
         sort: "asc",
         width: 320
     },
     {
         label: "วันที่สร้าง",
-        field: "created_at",
+        field: "created_at_converted",
         sort: "asc",
         width: 200
     },
     {
         label: "วันที่แก้ไข",
-        field: "updated_at",
+        field: "updated_at_converted",
         sort: "asc",
         width: 200
     },

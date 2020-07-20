@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { userDocument } from "../../../../redux/actions";
 import { columns } from "./columns";
 import statusDoc from "./statusDocument";
-import actionModal from "./actionModal";
+import { Button, Modal } from "react-bootstrap";
 
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
@@ -26,11 +26,44 @@ export default function ReportTable() {
         token: _token,
         docTemp: _docTemp,
         userDoc: _userDoc,
-        setRow: setRows,
-        statusBadge: statusDoc,
-        action: actionModal,
-        show: show,
-        setShow: setShow
+        statusBadge: statusDoc
+    };
+
+    const fill2Rows = async () => {
+        const tempRows = await _setRowsTable(_props);
+        if (tempRows !== undefined) {
+            const _rows = tempRows.map((item, idx) => {
+                item.action = (
+                    <div key={idx}>
+                        <Button
+                            variant="primary"
+                            size="sm"
+                            onClick={() => setShow(true)}
+                        >
+                            action
+                        </Button>
+
+                        <Modal
+                            show={show}
+                            onHide={() => setShow(false)}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title>{item.form_id}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body></Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="primary">Understood</Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
+                );
+                return item;
+            });
+            console.log(_rows);
+            setRows(_rows);
+        }
     };
 
     React.useEffect(() => {
@@ -39,12 +72,12 @@ export default function ReportTable() {
             _userDoc.isFetchUserDoc = true;
             fetchUserDoc(_props, { signal: abort.signal });
         }
-        _setRowsTable(_props, { signal: abort.signal });
+        if (rows.length === 0) fill2Rows();
         return () => {
             abort.abort();
         };
     }, [_props]);
-    console.log(rows);
+
     return (
         <MDBDataTable
             noBottomColumns={true}

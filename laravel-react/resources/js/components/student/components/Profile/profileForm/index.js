@@ -283,6 +283,7 @@ const ProfileForm = () => {
                                     // console.log(faculties);
                                     return (
                                         <ListFaculties
+                                            nowFacultyId={_facultyId}
                                             methodHandle={handleChange}
                                             faculties={faculties}
                                             userMajor={user.major}

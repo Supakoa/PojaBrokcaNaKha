@@ -1,4 +1,4 @@
-const _convertDate = async _date => {
+const _convertDate = _date => {
     let date = new Date(_date);
     date = new Date(
         Date.UTC(
