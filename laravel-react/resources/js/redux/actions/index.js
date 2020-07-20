@@ -102,7 +102,6 @@ export const updateFormEditUserBySingleData = (name, data) => {
         type: "UPDATE_EDIT_FORM_USER_BY_SINGLE_DATA",
         name: name,
         data: data
-<<<<<<< HEAD
     }
 }
 
@@ -119,9 +118,6 @@ export const updateShowUsers = (data) => {
         data: data
     }
 }
-=======
-    };
-};
 
 export const documentsTemplate = _doc => {
     return {
@@ -129,4 +125,3 @@ export const documentsTemplate = _doc => {
         payload: _doc
     };
 };
->>>>>>> 5b24dc6dde82d8acad857b33cee3453b99d8ec23

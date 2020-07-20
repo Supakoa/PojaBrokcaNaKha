@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Container, Button } from "react-bootstrap";
 import FormUser from "../user/FormUser";
-<<<<<<< HEAD
 import { useSelector, useDispatch } from "react-redux";
-import { initShowUsers, updateShowUsers } from "../../../redux/actions";
+import { initShowUsers, updateShowUsers, formUser } from "../../../redux/actions";
 import Axios from "axios";
 import qs from "qs";
-=======
 import {useTranslation} from 'react-i18next';
-import { useSelector } from "react-redux";
-import { formUser } from "../../../redux/actions";
->>>>>>> 5b24dc6dde82d8acad857b33cee3453b99d8ec23
 
 export default function ModalUser(props) {
     const {t} = useTranslation('', {useSuspense: false});
