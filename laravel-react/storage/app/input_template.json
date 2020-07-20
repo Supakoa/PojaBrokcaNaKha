@@ -26,7 +26,9 @@
         "th_name": "ประเภทการสอบ",
         "eng_name": "Type of Exam",
         "tag_type": "select",
-        "data": ["กลางภาค",  "ปลายภาค"],
+        "th_option": ["กลางภาค",  "ปลายภาค"],
+        "eng_option": ["", ""],
+        "data": "",
         "size": 6
     },
     {
@@ -102,6 +104,16 @@
     {
         "type": 11,
         "th_title": "อธิบายสาเหตุ",
+        "eng_title": "Enter Your cause",
+        "th_name": "สาเหตุ",
+        "eng_name": "cause",
+        "tag_type": "textarea",
+        "data": "",
+        "size": 12
+    },
+    {
+        "type": 12,
+        "th_title": "ประเภท",
         "eng_title": "Enter Your cause",
         "th_name": "สาเหตุ",
         "eng_name": "cause",
