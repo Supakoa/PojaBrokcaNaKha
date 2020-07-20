@@ -8,7 +8,7 @@ const MajorsOption = props => {
     const [_majors, setMajors] = React.useState([]);
 
     const _fetchMajor = async _facId => {
-        await axios.get(_urlMajors(_facId)).then(res => {
+        await axios.get(_urlMajors(Number(_facId))).then(res => {
             // console.log(res.data);
             setMajors(res.data);
             // return res.data;

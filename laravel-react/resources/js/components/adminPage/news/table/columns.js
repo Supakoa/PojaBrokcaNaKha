@@ -1,4 +1,4 @@
-export const columns = arrays => {
+export const columns = _t => {
     return [
         {
             label: "#",
@@ -7,21 +7,20 @@ export const columns = arrays => {
             width: 20
         },
         {
-            label: arrays[0],
+            label: _t("pr.link"),
             field: "url",
             width: 270
         },
         {
-            label: arrays[1],
+            label: _t("pr.image"),
             field: "images",
             width: 200,
             sort: "disabled"
         },
         {
-            
             field: "action",
             width: 100,
             sort: "disabled"
         }
     ];
-} ;
+};

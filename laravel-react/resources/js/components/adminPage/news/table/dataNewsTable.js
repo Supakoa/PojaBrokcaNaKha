@@ -3,11 +3,11 @@ import { Image } from "react-bootstrap";
 import Axios from "axios";
 import { columns } from "./columns";
 import ColumnActions from "./ColumsAction";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const dataNewsTable = () => {
     const [rows, setRows] = React.useState([]);
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation("", { useSuspense: false });
 
     const fetchRowData = _data => {
         setRows(
@@ -46,7 +46,7 @@ const dataNewsTable = () => {
         };
     }, []);
 
-    return {"columns" : columns([t('pr.link'),t('pr.image')]) , rows };
+    return { columns: columns(t), rows };
 };
 
 export default dataNewsTable;
