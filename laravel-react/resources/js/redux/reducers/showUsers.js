@@ -11,8 +11,6 @@ const showUsersReducer = (state = {}, action) => {
                 ...state,
                 data: action.data
             }
-        //     console.log('action.data', action.data)
-        //     return state
 
         default:
             return state
