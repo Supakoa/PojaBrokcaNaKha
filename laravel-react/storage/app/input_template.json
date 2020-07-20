@@ -20,15 +20,39 @@
         "size": 6
     },
     {
+    "type": 3,
+    "th_title": "เลือกประเภทการสอบ",
+    "eng_title": "Choose Type of Exam",
+    "th_name": "ประเภทการสอบ",
+    "eng_name": "Type of Exam",
+    "tag_type": "select",
+    "th_option": ["กลางภาค",  "ปลายภาค"],
+    "eng_option": ["mid", "final"],
+    "data": "",
+    "size": 6
+},
+    {
         "type": 3,
         "th_title": "เลือกประเภทการสอบ",
         "eng_title": "Choose Type of Exam",
         "th_name": "ประเภทการสอบ",
         "eng_name": "Type of Exam",
-        "tag_type": "select",
-        "th_option": ["กลางภาค",  "ปลายภาค"],
-        "eng_option": ["", ""],
-        "data": "",
+        "tag_type": "selectWithOther",
+        "is_other": "true",
+        "th_option": ["กลางภาค",  "ปลายภาค","อื่น ๆ"],
+        "eng_option": ["mid", "final","other"],
+        "data": "ครึ่งควบภาค",
+        "size": 6
+    },
+    {
+        "type": 3,
+        "th_title": "เลือกประเภทการสอบ",
+        "eng_title": "Choose Type of Exam",
+        "th_name": "ประเภทการสอบ",
+        "eng_name": "Type of Exam",
+        "tag_type": "selectWithApi",
+        "api_url": "/api/subjects",
+        "data": "?subject_id",
         "size": 6
     },
     {
