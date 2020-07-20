@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { MDBDataTable } from "mdbreact";
-import { useParams } from "react-router-dom";
 import { fetchUserDoc } from "../../../middleware/axios/fetchUserDoc";
 import { _setRowsTable } from "../../../middleware/method/setRowsTable";
 import { useSelector, useDispatch } from "react-redux";
 import { userDocument } from "../../../../redux/actions";
 import { columns } from "./columns";
+import statusDoc from "./statusDocument";
+import actionModal from "./actionModal";
 
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
     const _docTemp = useSelector(state => state.documentsTemplate);
     const _user = useSelector(state => state.userState);
-    let rows = [];
+    const [show, setShow] = React.useState(false);
+    const [rows, setRows] = React.useState([]);
     const _dispatch = useDispatch();
     const _token = localStorage._authLocal;
-    const  id  = _user.id;
+    const id = _user.id;
     // console.log(_userDoc);
 
     const _props = {
@@ -24,13 +26,16 @@ export default function ReportTable() {
         token: _token,
         docTemp: _docTemp,
         userDoc: _userDoc,
-        row: rows
+        setRow: setRows,
+        statusBadge: statusDoc,
+        action: actionModal,
+        show: show,
+        setShow: setShow
     };
 
     React.useEffect(() => {
         const abort = new AbortController();
-        if (_userDoc.length === 0 && id  && !_userDoc.isFetchUserDoc)
-        {
+        if (_userDoc.length === 0 && id && !_userDoc.isFetchUserDoc) {
             _userDoc.isFetchUserDoc = true;
             fetchUserDoc(_props, { signal: abort.signal });
         }
@@ -39,7 +44,7 @@ export default function ReportTable() {
             abort.abort();
         };
     }, [_props]);
-
+    console.log(rows);
     return (
         <MDBDataTable
             noBottomColumns={true}

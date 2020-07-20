@@ -1,56 +1,41 @@
-export const _setRowsTable = _props => {
+import _convertDate from "./convertDate";
+
+export const _setRowsTable = async _props => {
     // console.log(_data);
     if (_props.docTemp.length !== 0) {
-        for (let i = 0; i < _props.userDoc.length; i++) {
-            const _userDoc = _props.userDoc[i];
-            for (let j = 0; j < _props.docTemp.length; j++) {
-                const _temp = _props.docTemp[j];
-                if (_userDoc.form_id === _temp.id) {
-                    _userDoc.form_id = _temp.th_name;
-                }
-            }
-            if (_userDoc.created_at) {
-                if (_userDoc.created_at !== null) {
-                    if (!_userDoc.converted)
-                    _userDoc.created_at =  _convertDate(
-                        _userDoc.created_at
-                    );
+        const _userDoc = await _props.userDoc.map((user, idx) => {
+            // const _nameDoc = _props.docTemp.find(doc => {
+            //     if (doc.id === user.form_id) {
+            //         return doc.th_name;
+            //     }
+            // });
+            // user.form_id = _nameDoc;
 
-                    // console.log(_convertDate(_userDoc.created_at));
-                } else {
-                    _userDoc.created_at = "-";
-                }
+            user.status = _props.statusBadge(user.status, idx);
+            // if (user.created_at !== null) {
+            //     user.created_at = _convertDate(user.created_at);
+            //     // console.log(_convertDate(user.created_at));
+            // } else {
+            //     user.created_at = "-";
+            // }
+            // if (user.updated_at !== null) {
+            //     user.updated_at = _convertDate(user.updated_at);
+            //     // console.log(_convertDate(user.created_at));
+            // } else {
+            //     user.updated_at = "-";
+            // }
+            // if (user.canceled_at !== null) {
+            //     user.canceled_at = _convertDate(user.canceled_at);
+            //     // console.log(_convertDate(user.created_at));
+            // } else {
+            //     user.canceled_at = "-";
+            // }
+            if (user.note === null) {
+                user.note = "-";
             }
-            if (_userDoc.updated_at) {
-                if (_userDoc.updated_at !== null) {
-                    if (!_userDoc.converted)
-                    _userDoc.updated_at = _convertDate(
-                        _userDoc.updated_at
-                    );
-                    // console.log(_convertDate(_userDoc.created_at));
-                } else {
-                    _userDoc.updated_at = "-";
-                }
-            }
-            if (_userDoc.canceled_at) {
-                if (_userDoc.canceled_at !== null) {
-                    if (!_userDoc.converted)
-                    _userDoc.canceled_at = _convertDate(
-                        _userDoc.canceled_at
-                    );
-                    // console.log(_convertDate(_userDoc.created_at));
-                } else {
-                    _userDoc.canceled_at = "-";
-                }
-            }
-            _userDoc.converted = true;
-            _props.row.push(_userDoc);
-        }
+            return user;
+            // console.log(user);
+        });
+        // _props.setRow(_userDoc);
     }
-};
-
-const _convertDate = _date => {
-    let date = new Date(_date);
-     date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())).toISOString().split("T");
-     return ` ${date[1].substr(0,8)} ${date[0].split("-")[2]}/${date[0].split("-")[1]}/${date[0].split("-")[0]}`
 };
