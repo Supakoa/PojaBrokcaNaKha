@@ -6,13 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { userDocument } from "../../../../redux/actions";
 import { columns } from "./columns";
 import statusDoc from "./statusDocument";
-import { Button, Modal } from "react-bootstrap";
+import UserModalDoc from "./modal";
 
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
     const _docTemp = useSelector(state => state.documentsTemplate);
     const _user = useSelector(state => state.userState);
-    const [show, setShow] = React.useState(false);
+    const abort = new AbortController();
     const [rows, setRows] = React.useState([]);
     const _dispatch = useDispatch();
     const _token = localStorage._authLocal;
@@ -25,58 +25,39 @@ export default function ReportTable() {
         id: Number(id),
         token: _token,
         docTemp: _docTemp,
-        userDoc: _userDoc,
-        statusBadge: statusDoc
+        userDoc: _userDoc
     };
 
     const fill2Rows = async () => {
         const tempRows = await _setRowsTable(_props);
         if (tempRows !== undefined) {
             const _rows = tempRows.map((item, idx) => {
+                item.status_badge = statusDoc(item.status, idx);
+                item.row_id = (idx + 1).toString();
                 item.action = (
-                    <div key={idx}>
-                        <Button
-                            variant="primary"
-                            size="sm"
-                            onClick={() => setShow(true)}
-                        >
-                            action
-                        </Button>
-
-                        <Modal
-                            show={show}
-                            onHide={() => setShow(false)}
-                            backdrop="static"
-                            keyboard={false}
-                        >
-                            <Modal.Header closeButton>
-                                <Modal.Title>{item.form_id}</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body></Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="primary">Understood</Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </div>
+                    <UserModalDoc key={idx.toString()} document={item} />
                 );
                 return item;
             });
-            console.log(_rows);
-            setRows(_rows);
+            if (rows.length === 0) {
+                setRows(_rows);
+            }
         }
     };
 
     React.useEffect(() => {
-        const abort = new AbortController();
         if (_userDoc.length === 0 && id && !_userDoc.isFetchUserDoc) {
             _userDoc.isFetchUserDoc = true;
             fetchUserDoc(_props, { signal: abort.signal });
         }
-        if (rows.length === 0) fill2Rows();
+        if (rows.length === 0) fill2Rows({ signal: abort.signal });
+    }, [_props, rows]);
+
+    React.useEffect(() => {
         return () => {
             abort.abort();
         };
-    }, [_props]);
+    }, []);
 
     return (
         <MDBDataTable

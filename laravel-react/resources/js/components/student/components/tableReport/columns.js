@@ -1,13 +1,13 @@
 export const columns = [
     {
         label: "#",
-        field: "id",
+        field: "row_id",
         sort: "asc",
         width: 50
     },
     {
         label: "สถานะ",
-        field: "status",
+        field: "status_badge",
         sort: "asc",
         width: 120
     },
@@ -30,15 +30,9 @@ export const columns = [
         width: 200
     },
     {
-        label: "หมายเหตุ",
-        field: "note",
-        sort: "asc",
-        width: 200
-    },
-    {
         label: "action",
         field: "action",
         sort: "disabled",
-        width: 250
+        width: 100
     }
 ];

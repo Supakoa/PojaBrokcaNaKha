@@ -8,22 +8,23 @@ export const _setRowsTable = async _props => {
                 return item.form_id === doc.id;
             });
             item.form_name = _nameDoc.th_name;
-
-            item.status = _props.statusBadge(item.status, idx);
             if (item.created_at !== null) {
                 item.created_at_converted = _convertDate(item.created_at);
                 // console.log(_convertDate(item.created_at));
             } else {
-                item.created_at = "-";
+                item.created_at_converted = "-";
             }
             if (item.updated_at !== null) {
                 item.updated_at_converted = _convertDate(item.updated_at);
                 // console.log(_convertDate(item.created_at));
             } else {
-                item.updated_at = "-";
+                item.updated_at_converted = "-";
             }
-            if (item.note === null) {
-                item.note = "-";
+            if (item.canceled_at !== null) {
+                item.canceled_at_converted = _convertDate(item.updated_at);
+                // console.log(_convertDate(item.created_at));
+            } else {
+                item.canceled_at_converted = "-";
             }
             return item;
             // _props.row.push(item);
