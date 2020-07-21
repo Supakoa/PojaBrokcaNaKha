@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, Col, Container } from "react-bootstrap";
+import { Button, Modal, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const UserModalDoc = props => {
@@ -24,8 +24,8 @@ const UserModalDoc = props => {
                 <Modal.Header closeButton>
                     <Modal.Title as="h5">{document.form_name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Container as="dl" className="row">
+                <Modal.Body className="container">
+                    <dl className="row border round">
                         {/* date */}
                         <Col
                             className="py-2 d-table align-items-center justify-content-start"
@@ -141,7 +141,7 @@ const UserModalDoc = props => {
                                 ? document.note
                                 : "ไม่มีข้อมูล"} */}
                         </Col>
-                    </Container>
+                    </dl>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-danger">Cancel Document</Button>
