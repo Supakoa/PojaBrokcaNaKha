@@ -146,3 +146,142 @@
         "size": 12
     }
 ]
+
+[
+    {
+        "type": 1,
+        "th_title": "เลือกประเภทการสอบ",
+        "eng_title": "Choose Exam types.",
+        "th_name": "ประเภทการสอบ",
+        "eng_name": "Exam Types",
+        "tag_type": "select1",
+        "th_options": ["กลางภาค", "ปาลลยภาค"],
+        "eng_options": ["midterm", "final"],
+        "data": "?value_index",
+        "size": 6
+    },
+    {
+        "type": 2,
+        "th_title": "เลือกวิชา",
+        "eng_title": "Choose your study Subjects.",
+        "th_name": "วิชา",
+        "eng_name": "Subject",
+        "tag_type": "select3",
+        "api": "/api/subjects",
+        "data": "?subject_id",
+        "size": 6
+    },
+    {
+        "type": 3,
+        "th_title": "เลือกกลุ่มเรียน",
+        "eng_title": "Choose your study Groups.",
+        "th_name": "กลุ่มเรียน",
+        "eng_name": "Study Group",
+        "tag_type": "select2",
+        "is_select_other": false,
+        "th_options": ["001", "002", "003", "004", "อื่นๆ"],
+        "eng_options": ["001", "002", "003", "004", "Other"],
+        "data": "?value_index, other_value",
+        "size": 6
+    },
+    {
+        "type": 4,
+        "th_title": "เลือกเทอร์มเรียน",
+        "eng_title": "Choose your Terms of study.",
+        "th_name": "เทอร์ม",
+        "eng_name": "Terms of study",
+        "tag_type": "select1",
+        "th_options": ["1", "2"],
+        "eng_options": ["1", "2"],
+        "data": "?value_index",
+        "size": 6
+    },
+    {
+        "type": 5,
+        "th_title": "เลือกปีการศึกษา",
+        "eng_title": "Choose your Academic Year.",
+        "th_name": "ปีการศึกษา",
+        "eng_name": "Academic Year",
+        "tag_type": "select2",
+        "is_select_other": false,
+        "th_options": ["2563", "2562", "2561", "2560", "2559", "อื่นๆ"],
+        "eng_options": ["2020", "2019", "2018", "2017", "2016", "Other"],
+        "data": "?index_option, other_value",
+        "size": 6
+    },
+    {
+        "type": 6,
+        "th_title": "ระบุเหตุผล",
+        "eng_title": "Specify your reason.",
+        "th_name": "เหตุผล",
+        "eng_name": "Specify reason",
+        "tag_type": "text",
+        "data": "?input_value",
+        "size": 6
+    },
+    {
+        "type": 7,
+        "th_title": "เลือกไฟล์แนบ",
+        "eng_title": "Choose your File.",
+        "th_name": "ไฟล์แนบ",
+        "eng_name": "File",
+        "tag_type": "file",
+        "data": "?input_value",
+        "size": 6
+    },
+    {
+        "type": 8,
+        "th_title": "เลือกความประสงค์",
+        "eng_title": "Choose your Desire.",
+        "th_name": "ความประสงค์",
+        "eng_name": "Desire",
+        "tag_type": "select2",
+        "is_select_other": false,
+        "th_options" ["กรณีที่ 1 ผลการเรียนไม่สมบูรณ์(i) เนื่องจากขาดสอบ", "กรณีที่ 2 ชำระค่าเทอร์มล่าช้า", "กรณีที่ 3 คะแนนไม่ถึงเกณฑ์", "กรณีที่ 4 อื่นๆ"],
+        "eng_options": ["Case 1: incomplete grades (i) due to not taking the exam", "Case 2: Delay payment", "Case 3: The score does not meet the criteria", "Case 4: Other"],
+        "data": "?index_option, other_value",
+        "size": 6
+    },
+    {
+        "type": 9,
+        "th_titile": "เลือกประเภทการลา",
+        "eng_title": "Choose leave type",
+        "th_name": "ประเภทการลา",
+        "emg_name": "Leave type",
+        "tag_type": "select1",
+        "th_options": ["ลาป่วย", "ลากิจ"],
+        "eng_options": ["Sick leave", "Personal Leave"],
+        "data": "?index_option",
+        "size": 6
+    },
+    {
+        "type": 10,
+        "th_titile": "ตั้งแต่",
+        "eng_title": "Form",
+        "th_name": "ตั้งแต่",
+        "eng_name": "Form",
+        "tag_type": "date",
+        "data": "?date_value",
+        "size": 6
+    },
+    {
+        "type": 11,
+        "th_titile": "ถึง",
+        "eng_title": "To",
+        "th_name": "ถึง",
+        "eng_name": "To",
+        "tag_type": "date",
+        "data": "?date_value",
+        "size": 6
+    },
+    {
+        "type": 12,
+        "th_title": "กรอกข้อมูลชื่อเรื่อง",
+        "eng_title": "Enter Title name",
+        "th_name": "ชื่อเรื่อง",
+        "eng_name": "Title name",
+        "tag_type": "text",
+        "data": "?data_value",
+        "size": 6
+    }
+]
