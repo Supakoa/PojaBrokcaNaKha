@@ -64,22 +64,22 @@
                 "size": 6
             },
             {
-                "type": 6,
-                "th_title": "ระบุเหตุผล",
-                "eng_title": "Specify your reason.",
-                "th_name": "เหตุผล",
-                "eng_name": "Specify reason",
-                "tag_type": "text",
-                "data": "?inputs_value",
-                "size": 6
-            },
-            {
                 "type": 7,
                 "th_title": "เลือกไฟล์แนบ",
                 "eng_title": "Choose your File.",
                 "th_name": "ไฟล์แนบ",
                 "eng_name": "File",
                 "tag_type": "file",
+                "data": "?inputs_value",
+                "size": 6
+            },
+            {
+                "type": 6,
+                "th_title": "ระบุเหตุผล",
+                "eng_title": "Specify your reason.",
+                "th_name": "เหตุผล",
+                "eng_name": "Specify reason",
+                "tag_type": "text",
                 "data": "?inputs_value",
                 "size": 6
             }
@@ -139,16 +139,6 @@
                 "size": 6
             },
             {
-                "type": 7,
-                "th_title": "เลือกไฟล์แนบ",
-                "eng_title": "Choose your File.",
-                "th_name": "ไฟล์แนบ",
-                "eng_name": "File",
-                "tag_type": "file",
-                "data": "?inputs_value",
-                "size": 6
-            },
-            {
                 "type": 8,
                 "th_title": "เลือกความประสงค์",
                 "eng_title": "Choose your Desire.",
@@ -159,6 +149,16 @@
                 "th_options": ["กรณีที่ 1 ผลการเรียนไม่สมบูรณ์(i) เนื่องจากขาดสอบ", "กรณีที่ 2 ชำระค่าเทอร์มล่าช้า", "กรณีที่ 3 คะแนนไม่ถึงเกณฑ์", "กรณีที่ 4 อื่นๆ"],
                 "eng_options": ["Case 1: incomplete grades (i) due to not taking the exam", "Case 2: Delay payment", "Case 3: The score does not meet the criteria", "Case 4: Other"],
                 "data": "?index_option, other_value",
+                "size": 6
+            },
+            {
+                "type": 7,
+                "th_title": "เลือกไฟล์แนบ",
+                "eng_title": "Choose your File.",
+                "th_name": "ไฟล์แนบ",
+                "eng_name": "File",
+                "tag_type": "file",
+                "data": "?inputs_value",
                 "size": 6
             }
         ]
@@ -210,6 +210,26 @@
         "th_name": "เอกสารลาป่วยลากิจ",
         "eng_name": "Form for Sick Leave & Personal Leave",
         "inputs": [{
+                "type": 10,
+                "th_title": "ตั้งแต่",
+                "eng_title": "Form",
+                "th_name": "ตั้งแต่",
+                "eng_name": "Form",
+                "tag_type": "date",
+                "data": "?date_value",
+                "size": 6
+            },
+            {
+                "type": 11,
+                "th_title": "ถึง",
+                "eng_title": "To",
+                "th_name": "ถึง",
+                "eng_name": "To",
+                "tag_type": "date",
+                "data": "?date_value",
+                "size": 6
+            },
+            {
                 "type": 2,
                 "th_title": "เลือกวิชา",
                 "eng_title": "Choose your study Subjects.",
@@ -259,13 +279,15 @@
                 "size": 6
             },
             {
-                "type": 6,
-                "th_title": "ระบุเหตุผล",
-                "eng_title": "Specify your reason.",
-                "th_name": "เหตุผล",
-                "eng_name": "Specify reason",
-                "tag_type": "text",
-                "data": "?inputs_value",
+                "type": 9,
+                "th_title": "เลือกประเภทการลา",
+                "eng_title": "Choose leave type",
+                "th_name": "ประเภทการลา",
+                "eng_name": "Leave type",
+                "tag_type": "select1",
+                "th_options": ["ลาป่วย", "ลากิจ"],
+                "eng_options": ["Sick leave", "Personal Leave"],
+                "data": "?index_option",
                 "size": 6
             },
             {
@@ -279,35 +301,13 @@
                 "size": 6
             },
             {
-                "type": 9,
-                "th_titile": "เลือกประเภทการลา",
-                "eng_title": "Choose leave type",
-                "th_name": "ประเภทการลา",
-                "emg_name": "Leave type",
-                "tag_type": "select1",
-                "th_options": ["ลาป่วย", "ลากิจ"],
-                "eng_options": ["Sick leave", "Personal Leave"],
-                "data": "?index_option",
-                "size": 6
-            },
-            {
-                "type": 10,
-                "th_titile": "ตั้งแต่",
-                "eng_title": "Form",
-                "th_name": "ตั้งแต่",
-                "eng_name": "Form",
-                "tag_type": "date",
-                "data": "?date_value",
-                "size": 6
-            },
-            {
-                "type": 11,
-                "th_titile": "ถึง",
-                "eng_title": "To",
-                "th_name": "ถึง",
-                "eng_name": "To",
-                "tag_type": "date",
-                "data": "?date_value",
+                "type": 6,
+                "th_title": "ระบุเหตุผล",
+                "eng_title": "Specify your reason.",
+                "th_name": "เหตุผล",
+                "eng_name": "Specify reason",
+                "tag_type": "text",
+                "data": "?inputs_value",
                 "size": 6
             }
         ]
@@ -366,6 +366,16 @@
                 "size": 6
             },
             {
+                "type": 12,
+                "th_title": "กรอกข้อมูลชื่อเรื่อง",
+                "eng_title": "Enter Title name",
+                "th_name": "ชื่อเรื่อง",
+                "eng_name": "Title name",
+                "tag_type": "text",
+                "data": "?data_value",
+                "size": 6
+            },
+            {
                 "type": 6,
                 "th_title": "ระบุเหตุผล",
                 "eng_title": "Specify your reason.",
@@ -383,16 +393,6 @@
                 "eng_name": "File",
                 "tag_type": "file",
                 "data": "?inputs_value",
-                "size": 6
-            },
-            {
-                "type": 12,
-                "th_title": "กรอกข้อมูลชื่อเรื่อง",
-                "eng_title": "Enter Title name",
-                "th_name": "ชื่อเรื่อง",
-                "eng_name": "Title name",
-                "tag_type": "text",
-                "data": "?data_value",
                 "size": 6
             }
         ]
