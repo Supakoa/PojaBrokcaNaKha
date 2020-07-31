@@ -20,13 +20,20 @@ const ProfileForm = () => {
     const [_facultyId, setFacultyId] = React.useState(null);
     const [_isUpdate, setIsUpdate] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
+    const abort = new AbortController();
     const [_validate, setValidate] = React.useState({});
 
     React.useEffect(() => {
-        if (Object.entries(_profile).length === 0) {
-            setProfile(_studentProfile);
+        if (Object.keys(_profile).length === 0) {
+            setProfile(_studentProfile, { signal: abort.signal });
         }
-    });
+    }, [_studentProfile, _profile]);
+
+    React.useEffect(() => {
+        return () => {
+            abort.abort();
+        };
+    }, []);
     // console.log(_profile);
 
     const handleChange = e => {
@@ -286,7 +293,11 @@ const ProfileForm = () => {
                                             nowFacultyId={_facultyId}
                                             methodHandle={handleChange}
                                             faculties={faculties}
-                                            userMajor={user.major}
+                                            userMajor={
+                                                user.major
+                                                    ? user.major
+                                                    : _profile.major
+                                            }
                                         />
                                     );
                                 }}

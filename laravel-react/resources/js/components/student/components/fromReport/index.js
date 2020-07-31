@@ -5,7 +5,6 @@ import FormDocuments from "../template-Documents";
 
 export default function ReportForm() {
     const _docTemp = useSelector(state => state.documentsTemplate);
-
     return (
         <Accordion defaultActiveKey="1">
             {_docTemp.length === 0 ? (

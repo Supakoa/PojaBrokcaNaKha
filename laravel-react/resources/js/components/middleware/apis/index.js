@@ -23,3 +23,7 @@ export const _urlFaculties = () => {
 export const _urlMajors = _id => {
     return `${_www}/api/faculties/${_id}/majors`;
 };
+
+export const _urlUploads = () => {
+    return `${_www}/api/uploads`;
+};

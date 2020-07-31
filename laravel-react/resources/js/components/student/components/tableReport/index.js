@@ -51,7 +51,11 @@ export default function ReportTable() {
             fetchUserDoc(_props, { signal: abort.signal });
         }
         if (rows.length === 0) fill2Rows({ signal: abort.signal });
-    }, [_props, rows]);
+    }, [_props]);
+
+    React.useEffect(() => {
+        if (rows.length === 0) fill2Rows({ signal: abort.signal });
+    }, [rows]);
 
     React.useEffect(() => {
         return () => {

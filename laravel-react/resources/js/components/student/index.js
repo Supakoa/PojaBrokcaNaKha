@@ -29,6 +29,8 @@ export default function Student() {
     const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
     const token = localStorage._authLocal;
+    const abt = new AbortController();
+
     let _history = useHistory();
 
     const _props = {
@@ -37,26 +39,34 @@ export default function Student() {
         role: 3,
         history: _history,
         user: user,
-        docTemp: documentsTemplate,
         path: pathname,
         setActive: setActive,
         userId: _user.id
     };
 
     React.useEffect(() => {
-        const abt = new AbortController();
-        if (Object.keys(_user).length === 0 && _user.constructor === Object && !_user.isFetchAuthUser) {
-            _user.isFetchAuthUser = true;
-            AuthUser(_props, { signal: abt.signal });
-        } else if (_docTemp.length === 0 && !_docTemp.isFetchdocTemp ) {
-            _docTemp.isFetchdocTemp =true;
-            fetchDocuments(_props);
+        if (_docTemp.length === 0) {
+            fetchDocuments(token, _dispatch, documentsTemplate, {
+                signal: abt.signal
+            });
         }
+    }, [_docTemp]);
+
+    React.useEffect(() => {
+        if (Object.keys(_user).length === 0) {
+            AuthUser(_props, { signal: abt.signal });
+        }
+    }, [_user.id]);
+
+    React.useEffect(() => {
         activeMenu(_props, { signal: abt.signal });
+    }, [pathname]);
+
+    React.useEffect(() => {
         return () => {
             abt.abort();
         };
-    }, [pathname, _user.id, _active, _props]);
+    }, []);
 
     return (
         <div className="mb-3">
