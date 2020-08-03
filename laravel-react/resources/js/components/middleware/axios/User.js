@@ -12,7 +12,9 @@ const AuthUser = async _props => {
                 // _signOut(_props)
                 _props.history.push(localStorage.getItem("pathRoleUser"));
             }
-            _props.dispatch(_props.user(item));
+            if (_props.user && _props.dispatch) {
+                _props.dispatch(_props.user(item));
+            }
             return item;
         })
         .catch(() => {

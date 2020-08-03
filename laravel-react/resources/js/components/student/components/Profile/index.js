@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, Container } from "react-bootstrap";
 import ProfileForm from "./profileForm";
 import { FacultiesContext } from "../../context";
@@ -17,50 +17,46 @@ function FormProfileComponent(props) {
     );
 }
 
-export default class Profile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            faculties: [],
-            loading: true,
-            error: []
-        };
-        this.fatchFaculties = this.fetchFaculties.bind(this);
-    }
+export default function Profile() {
+    const [_faculties, setFaculties] = React.useState([]);
+    const [_loading, setLoading] = React.useState(true);
+    const abort = new AbortController();
+    // const [_error, setError] = React.useState([]);
 
-    async fetchFaculties() {
+    const fetchFaculties = async () => {
         await axios.get(_urlFaculties(), {}).then(res => {
             const { success } = res.data;
-            this.setState({
-                ...this.state,
-                faculties: success,
-                loading: false
-            });
+            setFaculties(success);
+            setLoading(false);
         });
-    }
+    };
 
-    componentDidMount() {
-        this.fetchFaculties();
-    }
+    React.useEffect(() => {
+        if (_faculties.length === 0) {
+            fetchFaculties({ signal: abort.signal });
+        }
+    }, [_faculties]);
 
-    render() {
-        return (
-            <Card>
-                <Card.Title className="bg-info text-light text-center">
-                    <Card.Header>ประวัติส่วนตัว</Card.Header>
-                </Card.Title>
-                <Card.Body>
-                    {this.state.loading ? (
-                        <Container className="d-flex align-items-center justify-content-center">
-                            <Loading />
-                        </Container>
-                    ) : (
-                        <FormProfileComponent
-                            valueFaculties={this.state.faculties}
-                        />
-                    )}
-                </Card.Body>
-            </Card>
-        );
-    }
+    React.useEffect(() => {
+        return () => {
+            abort.abort();
+        };
+    }, []);
+
+    return (
+        <Card>
+            <Card.Title className="bg-info text-light text-center">
+                <Card.Header>ประวัติส่วนตัว</Card.Header>
+            </Card.Title>
+            <Card.Body>
+                {_loading ? (
+                    <Container className="d-flex align-items-center justify-content-center">
+                        <Loading />
+                    </Container>
+                ) : (
+                    <FormProfileComponent valueFaculties={_faculties} />
+                )}
+            </Card.Body>
+        </Card>
+    );
 }

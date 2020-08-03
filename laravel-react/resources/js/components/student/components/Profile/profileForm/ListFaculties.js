@@ -3,8 +3,8 @@ import { Col, Form, Spinner } from "react-bootstrap";
 
 const ListFaculties = props => {
     const { methodHandle, userMajor, faculties, nowFacultyId } = props;
-    console.log(nowFacultyId);
-    console.log(userMajor);
+    // console.log(nowFacultyId);
+    // console.log(userMajor);
     React.useEffect(() => {}, [nowFacultyId]);
 
     return (

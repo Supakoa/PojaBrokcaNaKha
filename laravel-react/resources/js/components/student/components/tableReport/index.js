@@ -16,19 +16,18 @@ export default function ReportTable() {
     const [rows, setRows] = React.useState([]);
     const _dispatch = useDispatch();
     const _token = localStorage._authLocal;
-    const id = _user.id;
     // console.log(_userDoc);
 
     const _props = {
         dispatch: _dispatch,
         actionDoc: userDocument,
-        id: Number(id),
+        id: Number(_user.id),
         token: _token,
         docTemp: _docTemp,
         userDoc: _userDoc
     };
 
-    const fill2Rows = async () => {
+    const fill2Rows = async _props => {
         const tempRows = await _setRowsTable(_props);
         if (tempRows !== undefined) {
             const _rows = tempRows.map((item, idx) => {
@@ -46,16 +45,18 @@ export default function ReportTable() {
     };
 
     React.useEffect(() => {
-        if (_userDoc.length === 0 && id && !_userDoc.isFetchUserDoc) {
-            _userDoc.isFetchUserDoc = true;
+        if (
+            _userDoc.length === 0 &&
+            Object.entries(_user).length !== 0 &&
+            _token &&
+            _docTemp.length !== 0
+        )
             fetchUserDoc(_props, { signal: abort.signal });
-        }
-        if (rows.length === 0) fill2Rows({ signal: abort.signal });
-    }, [_props]);
+    }, [_props, _user]);
 
     React.useEffect(() => {
-        if (rows.length === 0) fill2Rows({ signal: abort.signal });
-    }, [rows]);
+        if (rows.length === 0) fill2Rows(_props, { signal: abort.signal });
+    }, [rows, _docTemp]);
 
     React.useEffect(() => {
         return () => {

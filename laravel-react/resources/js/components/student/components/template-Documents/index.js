@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Accordion, Container } from "react-bootstrap";
 import TemplateDocuments from "./tempDocuments";
+import Loading from "../loading";
 
 export default function FormDocuments(props) {
     const { dataDocuments, id } = props;
@@ -14,9 +15,13 @@ export default function FormDocuments(props) {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={id}>
                 <Container fluid="lg">
-                    <TemplateDocuments
-                        patternInput={JSON.parse(dataDocuments.inputs)}
-                    />
+                    {/* {dataDocuments ? (
+                        <TemplateDocuments
+                            patternInput={JSON.parse(dataDocuments.inputs)}
+                        />
+                    ) : (
+                        <Loading />
+                    )} */}
                 </Container>
             </Accordion.Collapse>
         </Card>

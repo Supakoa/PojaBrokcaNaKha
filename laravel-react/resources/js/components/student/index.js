@@ -17,50 +17,54 @@ import { ProfileContext } from "./context";
 import { useDispatch, useSelector } from "react-redux";
 import { user, documentsTemplate } from "../../redux/actions";
 import { _propsAuth } from "../middleware/props-auth";
+import fetchDocuments from '../middleware/axios/fetchDocuments'
 import AuthUser from "../middleware/axios/User";
-import fetchDocuments from "../middleware/axios/fetchDocuments";
-import activeMenu from "../middleware/method/activeMenu";
 
 export default function Student() {
     const _dispatch = useDispatch();
-    const _user = useSelector(state => state.userState);
-    const _docTemp = useSelector(state => state.documentsTemplate);
     let { path, url } = useRouteMatch();
-    const [_active, setActive] = React.useState(false);
     const { pathname } = useLocation();
     const token = localStorage._authLocal;
     const abt = new AbortController();
+    const _docTemp = useSelector(state => state.documentsTemplate);
+    const _user = useSelector(state => state.userState);
 
     let _history = useHistory();
 
     const _props = {
         token: token,
-        dispatch: _dispatch,
         role: 3,
         history: _history,
-        user: user,
-        path: pathname,
-        setActive: setActive,
         userId: _user.id
+    };
+
+    const post2Documents = async () => {
+        const _tempDocs = await fetchDocuments(token);
+        if (_tempDocs) {
+            _dispatch(documentsTemplate(_tempDocs));
+        }
     };
 
     React.useEffect(() => {
         if (_docTemp.length === 0) {
-            fetchDocuments(token, _dispatch, documentsTemplate, {
+            post2Documents({
                 signal: abt.signal
             });
         }
     }, [_docTemp]);
 
-    React.useEffect(() => {
-        if (Object.keys(_user).length === 0) {
-            AuthUser(_props, { signal: abt.signal });
+    const _authUser = async _props => {
+        const _user = await AuthUser(_props);
+        if (_user) {
+            _dispatch(user(_user));
         }
-    }, [_user.id]);
+    };
 
     React.useEffect(() => {
-        activeMenu(_props, { signal: abt.signal });
-    }, [pathname]);
+        if (Object.keys(_user).length === 0 && token) {
+            _authUser(_props, { signal: abt.signal });
+        }
+    }, [_user]);
 
     React.useEffect(() => {
         return () => {
@@ -79,7 +83,7 @@ export default function Student() {
                             <h6 className="py-2 px-2 text-secondary">เมนู</h6>
                             <Link
                                 className={`${
-                                    !_active ? `active` : ""
+                                    pathname === `/student` ? `active` : ""
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}`}
                             >
@@ -87,7 +91,9 @@ export default function Student() {
                             </Link>
                             <Link
                                 className={`${
-                                    _active ? `active` : ""
+                                    pathname === "/student/form-report"
+                                        ? `active`
+                                        : ""
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}/form-report`}
                             >

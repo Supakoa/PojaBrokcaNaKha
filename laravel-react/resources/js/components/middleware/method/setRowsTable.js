@@ -3,7 +3,7 @@ import _convertDate from "./convertDate";
 export const _setRowsTable = async _props => {
     // console.log(_data);
     if (_props.docTemp.length !== 0) {
-        return await _props.userDoc.map((item, idx) => {
+        return await _props.userDoc.map((item) => {
             const _nameDoc = _props.docTemp.find(doc => {
                 return item.form_id === doc.id;
             });
