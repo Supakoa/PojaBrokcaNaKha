@@ -36,7 +36,6 @@ const TemplateDocuments = props => {
 
     const handleSending = () => {};
 
-    console.log(_document);
     return (
         <Form className="py-3" onChange={handleChangeForm}>
             <Form.Row>
