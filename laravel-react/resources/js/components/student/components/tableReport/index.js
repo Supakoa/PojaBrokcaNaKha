@@ -45,18 +45,13 @@ export default function ReportTable() {
     };
 
     React.useEffect(() => {
-        if (
-            _userDoc.length === 0 &&
-            Object.entries(_user).length !== 0 &&
-            _token &&
-            _docTemp.length !== 0
-        )
+        if (_userDoc.length === 0 && _docTemp.length !== 0 && _token)
             fetchUserDoc(_props, { signal: abort.signal });
     }, [_props, _user]);
 
     React.useEffect(() => {
         if (rows.length === 0) fill2Rows(_props, { signal: abort.signal });
-    }, [rows, _docTemp]);
+    }, [rows]);
 
     React.useEffect(() => {
         return () => {
