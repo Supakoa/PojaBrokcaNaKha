@@ -102,26 +102,33 @@ export const updateFormEditUserBySingleData = (name, data) => {
         type: "UPDATE_EDIT_FORM_USER_BY_SINGLE_DATA",
         name: name,
         data: data
-    }
-}
+    };
+};
 
-export const initShowUsers = (data) => {
+export const initShowUsers = data => {
     return {
         type: "INIT_SHOW_USERS",
         data: data
-    }
-}
+    };
+};
 
-export const updateShowUsers = (data) => {
+export const updateShowUsers = data => {
     return {
-        type: 'UPDATE_SHOW_USERS',
+        type: "UPDATE_SHOW_USERS",
         data: data
-    }
-}
+    };
+};
 
 export const documentsTemplate = _doc => {
     return {
         type: "DOCUMENT",
         payload: _doc
+    };
+};
+
+export const inputTemps = _inputs => {
+    return {
+        type: _inputs.type,
+        payload: _inputs.payload
     };
 };

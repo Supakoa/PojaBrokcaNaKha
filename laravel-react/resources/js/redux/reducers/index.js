@@ -10,6 +10,7 @@ import pathRoleUserReducer from "./pathRoleUser";
 import selectMajorReducer from "./selectMajor";
 import showUsersReducer from "./showUsers";
 import documentsTemplateReducer from "./doumentsTemplate";
+import inputTempsReducer from "./inputTemps";
 
 import { combineReducers } from "redux";
 
@@ -25,7 +26,8 @@ const allReducers = combineReducers({
     selectMajor: selectMajorReducer,
     userDocument: userDocumentReducer,
     showUsers: showUsersReducer,
-    documentsTemplate: documentsTemplateReducer
+    documentsTemplate: documentsTemplateReducer,
+    inputTemps: inputTempsReducer
 });
 
 export default allReducers;

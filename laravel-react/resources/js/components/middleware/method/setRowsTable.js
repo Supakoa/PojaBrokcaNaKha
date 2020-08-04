@@ -1,9 +1,8 @@
 import _convertDate from "./convertDate";
 
 export const _setRowsTable = async _props => {
-    // console.log(_data);
     if (_props.docTemp.length !== 0) {
-        return await _props.userDoc.map((item) => {
+        return await _props.userDoc.map(item => {
             const _nameDoc = _props.docTemp.find(doc => {
                 return item.form_id === doc.id;
             });
@@ -27,7 +26,6 @@ export const _setRowsTable = async _props => {
                 item.canceled_at_converted = "-";
             }
             return item;
-            // _props.row.push(item);
         });
     }
 };

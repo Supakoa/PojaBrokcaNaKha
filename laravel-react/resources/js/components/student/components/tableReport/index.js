@@ -19,12 +19,17 @@ export default function ReportTable() {
     // console.log(_userDoc);
 
     const _props = {
-        dispatch: _dispatch,
-        actionDoc: userDocument,
         id: Number(_user.id),
         token: _token,
         docTemp: _docTemp,
         userDoc: _userDoc
+    };
+
+    const post2UserDocuments = async () => {
+        const _documents = await fetchUserDoc(_props);
+        if (_documents) {
+            _dispatch(userDocument(_documents));
+        }
     };
 
     const fill2Rows = async _props => {
@@ -45,13 +50,19 @@ export default function ReportTable() {
     };
 
     React.useEffect(() => {
-        if (_userDoc.length === 0 && _docTemp.length !== 0 && _token)
-            fetchUserDoc(_props, { signal: abort.signal });
-    }, [_props, _user]);
+        if (
+            _userDoc.length === 0 &&
+            _docTemp.length !== 0 &&
+            Object.entries(_user).length !== 0
+        ) {
+            post2UserDocuments(_props, { signal: abort.signal });
+        }
+    }, [_props, _user, _userDoc]);
 
     React.useEffect(() => {
-        if (rows.length === 0) fill2Rows(_props, { signal: abort.signal });
-    }, [rows]);
+        if (rows.length === 0 && _userDoc.length !== 0)
+            fill2Rows(_props, { signal: abort.signal });
+    }, [rows, _userDoc]);
 
     React.useEffect(() => {
         return () => {
