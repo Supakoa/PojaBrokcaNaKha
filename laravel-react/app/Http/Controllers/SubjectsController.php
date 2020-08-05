@@ -17,7 +17,7 @@ class SubjectsController extends Controller
      */
     public function index(Request $request)
     {
-        $subject = Subject::latest()->paginate(25);
+        $subject = Subject::all;
 
         return $subject;
     }
