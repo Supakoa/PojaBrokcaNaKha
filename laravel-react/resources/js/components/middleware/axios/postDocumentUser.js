@@ -1,6 +1,6 @@
 import axios from "axios";
 import headerConfig from "../headerConfig";
-import { _urlPostDocument } from "../apis";
+import { _urlPostDocuments } from "../apis";
 
 export const postDocumentUser = async (_token, _data) => {
     return await axios

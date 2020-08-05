@@ -51,6 +51,7 @@ export default function ReportForm() {
                             <Accordion.Collapse eventKey={item.id}>
                                 <Container fluid="lg">
                                     <TemplateDocuments
+                                        id={item.id}
                                         patternInput={_inputTemp[idx]}
                                     />
                                 </Container>

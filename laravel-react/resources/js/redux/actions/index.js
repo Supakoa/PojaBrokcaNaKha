@@ -132,3 +132,10 @@ export const inputTemps = _inputs => {
         payload: _inputs.payload
     };
 };
+
+export const subjectsForDocument = _sub => {
+    return {
+        type: "SUBJECTS_DOCUMENT",
+        payload: _sub
+    };
+};
