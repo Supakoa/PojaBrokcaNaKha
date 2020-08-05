@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSubjectsTable extends Migration
 {
@@ -15,11 +14,11 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('code');
-            $table->text('th_name');
-            $table->text('eng_name');
             $table->timestamps();
-        });
+            $table->string('th_name')->nullable();
+            $table->string('eng_name')->nullable();
+            $table->string('code')->nullable();
+            });
     }
 
     /**
@@ -29,6 +28,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::drop('subjects');
     }
 }
