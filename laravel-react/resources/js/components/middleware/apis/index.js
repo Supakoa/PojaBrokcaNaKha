@@ -27,3 +27,7 @@ export const _urlMajors = _id => {
 export const _urlUploads = () => {
     return `${_www}/api/uploads`;
 };
+
+export const _urlPostDocument = () => {
+    return `${_www}`;
+};
