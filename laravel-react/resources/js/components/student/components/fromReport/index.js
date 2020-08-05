@@ -38,7 +38,6 @@ export default function ReportForm() {
         <Accordion defaultActiveKey="1">
             {_docTemp.length !== 0 && _inputTemp.length !== 0 ? (
                 _docTemp.map((item, idx) => {
-                    // console.log(idx, " => ", item);
                     return (
                         <Card key={idx.toString()}>
                             <Accordion.Toggle

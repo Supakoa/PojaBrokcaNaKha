@@ -2,19 +2,19 @@ import React from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import SelectOfDocApi from "./formTemplates/SelectOfDocApi";
 import SelectorOfDoc from "./formTemplates/SelectorOfDoc";
-import axios from "axios";
 import FileOfDoc from "./formTemplates/FileOfDoc";
 import TextOfDoc from "./formTemplates/TextOfDoc";
 import DateOfDoc from "./formTemplates/DateOfDoc";
 import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
+import Swal from "sweetalert2";
+import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
 
 const TemplateDocuments = props => {
     const { patternInput } = props;
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState(0);
-
-    console.log(patternInput);
+    const _token = localStorage._authLocal;
 
     const handleChangeForm = async e => {
         const { value, type, name, files } = e.target;
@@ -40,17 +40,26 @@ const TemplateDocuments = props => {
     };
 
     const handleSending = () => {
-        console.log(patternInput.inputs.length);
-        if (_valid < patternInput.inputs.length) {
+        if (_valid === patternInput.length) {
+            const _resDoc = postDocumentUser(_token, _document);
+            if (_resDoc) {
+                Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
+            } else {
+                Swal.fire(
+                    "your forms is fail",
+                    "การส่งผิดพลาด กรุณาตรวจสอบอีกครั้ง",
+                    "error"
+                );
+            }
         } else {
+            Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
         }
     };
 
     return (
         <Form className="py-3">
             <Form.Row>
-                {/* {patternInput.inputs.map((item, idx) => {
-                    // console.log(item);
+                {patternInput.map((item, idx) => {
                     switch (item.tag_type) {
                         case "select1":
                             return (
@@ -110,7 +119,7 @@ const TemplateDocuments = props => {
                                 </Container>
                             );
                     }
-                })} */}
+                })}
             </Form.Row>
             <Button variant="info" onClick={handleSending}>
                 sending
