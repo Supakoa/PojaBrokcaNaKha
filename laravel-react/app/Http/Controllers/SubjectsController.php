@@ -17,7 +17,7 @@ class SubjectsController extends Controller
      */
     public function index(Request $request)
     {
-        $subject = Subject::all;
+        $subject = Subject::all();
 
         return $subject;
     }
