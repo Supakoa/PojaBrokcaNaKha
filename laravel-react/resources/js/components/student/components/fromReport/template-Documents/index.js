@@ -9,12 +9,20 @@ import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
+import { getSubjects } from "../../../../middleware/axios/getSubject";
+import { useSelector } from "react-redux";
 
 const TemplateDocuments = props => {
-    const { patternInput } = props;
+    const { patternInput, id } = props;
+    const _subDoc = useSelector(s => s.subjectsDocuments);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState(0);
     const _token = localStorage._authLocal;
+    const abort = new AbortController();
+
+    const getSubjectsForDoc = _token => {
+        getSubjects(_token);
+    };
 
     const handleChangeForm = async e => {
         const { value, type, name, files } = e.target;
@@ -41,7 +49,11 @@ const TemplateDocuments = props => {
 
     const handleSending = () => {
         if (_valid === patternInput.length) {
-            const _resDoc = postDocumentUser(_token, _document);
+            const _docForm = {
+                form_id: id,
+                data: JSON.stringify(_document)
+            };
+            const _resDoc = postDocumentUser(_token, _docForm);
             if (_resDoc) {
                 Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
             } else {
@@ -55,6 +67,18 @@ const TemplateDocuments = props => {
             Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
         }
     };
+
+    React.useEffect(() => {
+        if (_subDoc.length === 0) {
+            getSubjectsForDoc(_token, { signal: abort.signal });
+        }
+    }, [_subDoc]);
+
+    React.useEffect(() => {
+        return () => {
+            abort.abort();
+        };
+    }, []);
 
     return (
         <Form className="py-3">

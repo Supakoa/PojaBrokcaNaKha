@@ -28,6 +28,10 @@ export const _urlUploads = () => {
     return `${_www}/api/uploads`;
 };
 
-export const _urlPostDocument = () => {
-    return `${_www}`;
+export const _urlPostDocuments = () => {
+    return `${_www}/api/documents`;
+};
+
+export const _urlSubjects = () => {
+    return `${_www}/api/subjects`;
 };
