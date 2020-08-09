@@ -68,6 +68,14 @@
         "singha" : [
             "@php artisan mi:f --seed",
             "@php artisan passport:install"
+        ],
+        "deploy" : [
+            "@composer install",
+            "@npm install",
+            "@php artisan mi:f --seed",
+            "@php artisan passport:install",
+            "@php artisan storage:link",
+            "@php artisan key:gen"
         ]
     }
 }
