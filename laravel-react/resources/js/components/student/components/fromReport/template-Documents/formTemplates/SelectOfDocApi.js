@@ -1,8 +1,10 @@
 import React from "react";
 import { Form, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const SelectOfDocApi = props => {
     const { inputData, handle } = props;
+    const _subjects = useSelector(s => s.subjectsDocument);
     return (
         <Form.Group
             md={inputData.size}
@@ -19,15 +21,15 @@ const SelectOfDocApi = props => {
                 custom
             >
                 <option value="0">{inputData.th_name}</option>
-                {inputData.th_options !== undefined ? (
-                    inputData.th_options.map((item, idx) => {
+                {_subjects.length !== 0 ? (
+                    _subjects.map((item, idx) => {
                         return (
                             <option
                                 key={idx.toString()}
-                                defaultValue={idx.toString()}
+                                defaultValue={item.id}
                                 value={(idx + 1).toString()}
                             >
-                                {item}
+                                {item.th_name}
                             </option>
                         );
                     })

@@ -9,11 +9,9 @@ import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
-import { useSelector } from "react-redux";
 
 const TemplateDocuments = props => {
     const { patternInput, id } = props;
-    const _subDoc = useSelector(s => s.subjectsDocument);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState(0);
 
@@ -42,20 +40,22 @@ const TemplateDocuments = props => {
 
     const handleSending = () => {
         if (_valid === patternInput.length) {
-            const _docForm = {
-                form_id: id,
-                data: JSON.stringify(_document)
-            };
-            const _resDoc = postDocumentUser(_token, _docForm);
-            if (_resDoc) {
-                Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
-            } else {
-                Swal.fire(
-                    "your forms is fail",
-                    "การส่งผิดพลาด กรุณาตรวจสอบอีกครั้ง",
-                    "error"
-                );
-            }
+            console.log(_document);
+
+            // const _docForm = {
+            //     form_id: id,
+            //     data: JSON.stringify(_document)
+            // };
+            // const _resDoc = postDocumentUser(_token, _docForm);
+            // if (_resDoc) {
+            //     Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
+            // } else {
+            //     Swal.fire(
+            //         "your forms is fail",
+            //         "การส่งผิดพลาด กรุณาตรวจสอบอีกครั้ง",
+            //         "error"
+            //     );
+            // }
         } else {
             Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
         }
