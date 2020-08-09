@@ -52,9 +52,6 @@ Route::get('groups/{group}/users','GroupsController@users');
 Route::post('groups/{group}/users','GroupsController@addUser');
 Route::delete('groups/{group}/users','GroupsController@deleteUser');
 
-// test route
-Route::get('american/{majorId}', 'FacultyController@getFacultyByMajorId');
-
 Route::post("/uploads",function (Request $request){
 
 

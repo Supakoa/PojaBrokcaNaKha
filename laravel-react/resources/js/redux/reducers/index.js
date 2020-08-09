@@ -29,7 +29,7 @@ const allReducers = combineReducers({
     showUsers: showUsersReducer,
     documentsTemplate: documentsTemplateReducer,
     inputTemps: inputTempsReducer,
-    subjectsDocuments: subjectsDocumentsReducer
+    subjectsDocument: subjectsDocumentsReducer
 });
 
 export default allReducers;

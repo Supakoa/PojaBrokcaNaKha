@@ -40,7 +40,10 @@ export default function FormUser(props) {
         last_name: "",
         telephone: "",
         major_id: 0,
-        role_id: 0
+        role_id: 0,
+        password: "",
+        c_password: "",
+        student_id: ""
     }
 
     const _hendleChange = e => {
@@ -60,13 +63,61 @@ export default function FormUser(props) {
     // };
 
     const initUser = async ( id ) => {
-        await Axios.get(`${apiPath}/users/${id}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
-            }
-        }).then(res => {
-            dispatch(initUserForm(res.data))
-        })
+        if (!isCreatedProp) {
+            await Axios.get(`${apiPath}/users/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+                }
+            }).then(res => {
+                dispatch(initUserForm(res.data))
+            })
+        } else {
+            console.log('create user') // ไม่เข้าแน่ๆ
+        }
+    }
+
+    const addCreateUserComponet = () => {
+        if (isCreatedProp) {
+            return (
+                <>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formUserpassword">
+                            <Form.Label>รหัสผ่าน</Form.Label>
+                            <Form.Control
+                                onChange={e => dispatch(updateFormEditUserBySingleData(`password`, e.target.value))}
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                // defaultValue={!isCreatedProp ? _state.password : ""}
+                            />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formUserCpassword">
+                            <Form.Label>คอนเฟิร์ม รหัสผ่าน</Form.Label>
+                            <Form.Control
+                                onChange={e => dispatch(updateFormEditUserBySingleData(`confirmPassword`, e.target.value))}
+                                type="password"
+                                placeholder="Confirm Password"
+                                name="c_password"
+                                // defaultValue={!isCreatedProp ? _state.c_password : ""}
+                            />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Group controlId="formUserStudentID">
+                        <Form.Label>รหัสนักศึกษา</Form.Label>
+                        <Form.Control
+                            // onChange={_hendleChange}
+                            onChange={e => dispatch(updateFormEditUserBySingleData(`studentId`, e.target.value))}
+                            type="text"
+                            name="studentId"
+                            placeholder="xxxxxxxxxxx"
+                            // defaultValue={!isCreatedProp ? _state.email : ""}
+                            defaultValue={redux_user.studentId}
+                        />
+                    </Form.Group>
+                </>
+            )
+        }
     }
 
     React.useEffect(() => {
@@ -110,29 +161,7 @@ export default function FormUser(props) {
                 />
             </Form.Group>
 
-            {/* <Form.Row>
-                <Form.Group as={Col} controlId="formUserpassword">
-                    <Form.Label>รหัสผ่าน</Form.Label>
-                    <Form.Control
-                        onChange={_hendleChange}
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        defaultValue={!isCreatedProp ? _state.password : ""}
-                    />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formUserCpassword">
-                    <Form.Label>คอนเฟิร์ม รหัสผ่าน</Form.Label>
-                    <Form.Control
-                        onChange={_hendleChange}
-                        type="password"
-                        placeholder="Confirm Password"
-                        name="c_password"
-                        defaultValue={!isCreatedProp ? _state.c_password : ""}
-                    />
-                </Form.Group>
-            </Form.Row> */}
+            {addCreateUserComponet()}
 
             <Form.Row>
                 <Form.Group
@@ -145,7 +174,7 @@ export default function FormUser(props) {
                     <Form.Label>คำนำหน้า</Form.Label>
                     <Form.Control
                         // onChange={_hendleChange}
-                        onChange={e => dispatch(updateFormEditUserBySingleData(`titile`, e.target.value))}
+                        onChange={e => dispatch(updateFormEditUserBySingleData(`title`, e.target.value))}
                         type="text"
                         placeholder="คำนำหน้า"
                         name="title"

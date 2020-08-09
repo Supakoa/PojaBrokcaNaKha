@@ -7,7 +7,7 @@ const ColumnAction = (idx, res) => {
         <>
             <ModalUser key={idx} id={res.id} isCreatedProp={false} />
             {" || "}
-            <ModalDelete key={idx + 1} id={res.id} api={"user"} />
+            <ModalDelete key={idx + 1} id={res.id} api={"users"} />
         </>
     );
 };

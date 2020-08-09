@@ -9,20 +9,13 @@ import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
-import { getSubjects } from "../../../../middleware/axios/getSubject";
 import { useSelector } from "react-redux";
 
 const TemplateDocuments = props => {
     const { patternInput, id } = props;
-    const _subDoc = useSelector(s => s.subjectsDocuments);
+    const _subDoc = useSelector(s => s.subjectsDocument);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState(0);
-    const _token = localStorage._authLocal;
-    const abort = new AbortController();
-
-    const getSubjectsForDoc = _token => {
-        getSubjects(_token);
-    };
 
     const handleChangeForm = async e => {
         const { value, type, name, files } = e.target;
@@ -68,80 +61,67 @@ const TemplateDocuments = props => {
         }
     };
 
-    React.useEffect(() => {
-        if (_subDoc.length === 0) {
-            getSubjectsForDoc(_token, { signal: abort.signal });
-        }
-    }, [_subDoc]);
-
-    React.useEffect(() => {
-        return () => {
-            abort.abort();
-        };
-    }, []);
-
     return (
         <Form className="py-3">
             <Form.Row>
                 {patternInput.map((item, idx) => {
-                    switch (item.tag_type) {
-                        case "select1":
-                            return (
-                                <SelectorOfDoc
-                                    inputData={item}
-                                    key={idx.toString()}
-                                    handle={handleChangeForm}
-                                />
-                            );
-                        case "select2":
-                            return (
-                                <SelectorOfDoc
-                                    inputData={item}
-                                    key={idx.toString()}
-                                    handle={handleChangeForm}
-                                />
-                            );
-                        case "select3":
-                            return (
-                                <SelectOfDocApi
-                                    inputData={item}
-                                    key={idx.toString()}
-                                    handle={handleChangeForm}
-                                />
-                            );
-                        case "file":
-                            return (
-                                <FileOfDoc
-                                    inputData={item}
-                                    key={idx.toString()}
-                                    handle={handleChangeForm}
-                                />
-                            );
-                        case "text":
-                            return (
-                                <TextOfDoc
-                                    inputData={item}
-                                    key={idx.toString()}
-                                    handle={handleChangeForm}
-                                />
-                            );
-                        case "date":
-                            return (
-                                <DateOfDoc
-                                    inputData={item}
-                                    key={idx.toString()}
-                                    handle={handleChangeForm}
-                                />
-                            );
-                        default:
-                            return (
-                                <Container
-                                    key={idx.toString()}
-                                    className="d-flex align-items-center justify-content-center"
-                                >
-                                    <h6>ไม่มีข้อมูล</h6>{" "}
-                                </Container>
-                            );
+                    if (item.tag_type === "select1") {
+                        return (
+                            <SelectorOfDoc
+                                inputData={item}
+                                key={idx.toString()}
+                                handle={handleChangeForm}
+                            />
+                        );
+                    } else if (item.tag_type === "select2") {
+                        return (
+                            <SelectorOfDoc
+                                inputData={item}
+                                key={idx.toString()}
+                                handle={handleChangeForm}
+                            />
+                        );
+                    } else if (item.tag_type === "select3") {
+                        return (
+                            <SelectOfDocApi
+                                inputData={item}
+                                key={idx.toString()}
+                                handle={handleChangeForm}
+                            />
+                        );
+                    } else if (item.tag_type === "file") {
+                        return (
+                            <FileOfDoc
+                                inputData={item}
+                                key={idx.toString()}
+                                handle={handleChangeForm}
+                            />
+                        );
+                    } else if (item.tag_type === "text") {
+                        return (
+                            <TextOfDoc
+                                inputData={item}
+                                key={idx.toString()}
+                                handle={handleChangeForm}
+                            />
+                        );
+                    } else if (item.tag_type === "date") {
+                        return (
+                            <DateOfDoc
+                                inputData={item}
+                                key={idx.toString()}
+                                handle={handleChangeForm}
+                            />
+                        );
+                    } else {
+                        return (
+                            <Container
+                                key={idx.toString()}
+                                className="d-flex align-items-center justify-content-center"
+                            >
+                                <h6>ไม่มีข้อมูล</h6>{" "}
+                            </Container>
+                        );
                     }
                 })}
             </Form.Row>

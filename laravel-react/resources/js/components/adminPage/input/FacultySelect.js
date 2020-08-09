@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Form } from 'react-bootstrap'
 import Axios from 'axios'
-import { selectFacultyId } from '../../../redux/actions'
+import { selectFacultyId, selectMajorId } from '../../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from 'react-i18next';
 
@@ -22,7 +22,6 @@ export default function FacultySelect() {
         const getFaculty = await Axios.get(apiPath).then(res => {
             return res.data.success
         })
-
         setFaculty(getFaculty)
     }
 
@@ -50,7 +49,7 @@ export default function FacultySelect() {
             <Form.Group as={Col} controlId="formGroupFacultySelect">
                 <Form.Label>{t('faculty.index')}</Form.Label>
 
-                <Form.Control as="select" name="facultySelect" onChange={e => handleSelectFaculty(e)} value={redux_selectFaculty}>
+                <Form.Control as="select" name="facultySelect" onChange={e => handleSelectFaculty(e)} value={redux_selectFaculty.id} >
                     <option key="0" value={0} >{t('faculty.selectFaculty')}</option>
                     { RenderFacultyOption() }
                 </Form.Control>

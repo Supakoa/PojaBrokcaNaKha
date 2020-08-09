@@ -14,16 +14,20 @@ export default function MajorSelect() {
 
     const redux_selectFaculty = useSelector(state => state.selectFaculty)
     const redux_selectMajor = useSelector(state => state.selectMajor)
-    const redux_user = useSelector(state => state.formUser)
+    const redux_userForm = useSelector(state => state.formUser)
     const dispatch = useDispatch()
 
     const initMajor = async () => {
-        if (typeof redux_user.majorId != 'undefined') {
-            dispatch(selectMajorId(redux_user.majorId))
+        if (typeof redux_userForm.majorId != 'undefined') {
+            dispatch(selectMajorId(redux_userForm.majorId))
 
-            await Axios.get(`http://localhost:8000/api/majors/${redux_user.majorId}`).then(res => {
-                dispatch(selectFacultyId(res.data.faculty_id))
-            })
+            if (redux_userForm.majorId == 0) {
+                dispatch(selectFacultyId(0))
+            } else {
+                await Axios.get(`http://localhost:8000/api/majors/${redux_userForm.majorId}`).then(res => {
+                    dispatch(selectFacultyId(res.data.faculty_id))
+                })
+            }
         }
     }
 
@@ -54,7 +58,7 @@ export default function MajorSelect() {
     useEffect(() => {
         // updateMajor()
         initMajor()
-    }, [redux_user])
+    }, [redux_userForm])
 
     useEffect(() => {
         changeDisableState()
@@ -75,7 +79,7 @@ export default function MajorSelect() {
             <Form.Group as={Col} controlId="formGroupMajorSelect">
                 <Form.Label>{t('major.index')}</Form.Label>
 
-                <Form.Control as="select" name="major" onChange={e => handleSelectMajor(e)} disabled={focusReduxSelectFaculty} >
+                <Form.Control as="select" name="major" onChange={e => handleSelectMajor(e)} disabled={focusReduxSelectFaculty} value={redux_selectMajor.id} >
                     <option value={0}>{t('major.selectMajor')}</option>
                     { renderMajorOption() }
                 </Form.Control>

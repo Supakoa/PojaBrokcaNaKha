@@ -3,11 +3,14 @@ import { Accordion, Card, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../loading";
 import TemplateDocuments from "./template-Documents";
-import { inputTemps } from "../../../../redux/actions";
+import { getSubjects } from "../../../middleware/axios/getSubject";
+import { inputTemps, subjectsForDocument } from "../../../../redux/actions";
 
 export default function ReportForm() {
     const _docTemp = useSelector(state => state.documentsTemplate);
     const _inputTemp = useSelector(s => s.inputTemps);
+    const _subDoc = useSelector(s => s.subjectsDocument);
+    const _token = localStorage._authLocal;
     const _dispatch = useDispatch();
     const abort = new AbortController();
 
@@ -22,11 +25,25 @@ export default function ReportForm() {
         }
     };
 
+    const getSubjectsForDoc = async _token => {
+        const _subjects = await getSubjects(_token);
+
+        if (_subjects) {
+            _dispatch(subjectsForDocument(_subjects));
+        }
+    };
+
     React.useEffect(() => {
         if (_docTemp.length !== 0 && _inputTemp.length === 0) {
             post2Inputs(_docTemp, { signal: abort.signal });
         }
     }, [_docTemp, _inputTemp]);
+
+    React.useEffect(() => {
+        if (_subDoc.length === 0) {
+            getSubjectsForDoc(_token, { signal: abort.signal });
+        }
+    }, [_subDoc]);
 
     React.useEffect(() => {
         return () => {
