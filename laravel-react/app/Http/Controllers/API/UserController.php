@@ -122,6 +122,8 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
         $user->update($request->all());
+        if ($user->major != null)
+            $user->major->faculty;
 
         return response()->json($user, 200);
     }

@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 
+Route::resource('subjects', 'SubjectsController', ['except' => ['create', 'edit']]);
+
 Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
 
 //Forms
@@ -53,9 +55,10 @@ Route::delete('groups/{group}/users','GroupsController@deleteUser');
 Route::post("/uploads",function (Request $request){
 
 
-    $imagePath = request('image')->store('image_slides','public');
+    $imagePath = request('image')->store('uploads','public');
     $image = Image::make(public_path("storage/{$imagePath}"));
     $image->save();
     return  $imagePath;
 
 });
+
