@@ -33,7 +33,7 @@ const dataNewsTable = () => {
 
     const getNews = async () => {
         await Axios.get("http://localhost:8000/api/news").then(res => {
-            fetchRowData(res.data.data);
+            fetchRowData(res.data);
         });
     };
 
