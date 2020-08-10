@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const FileOfDoc = props => {
-    const { inputData, handle } = props;
+    const { inputData, handle, name } = props;
     return (
         <Form.Group
             md={inputData.size}
@@ -11,7 +11,7 @@ const FileOfDoc = props => {
             controlId={inputData.tage_type}
         >
             <Form.File
-                name={inputData.type}
+                name={name}
                 id="custom-file"
                 label={inputData.th_name}
                 onChange={handle}

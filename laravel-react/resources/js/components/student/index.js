@@ -17,7 +17,7 @@ import { ProfileContext } from "./context";
 import { useDispatch, useSelector } from "react-redux";
 import { user, documentsTemplate } from "../../redux/actions";
 import { _propsAuth } from "../middleware/props-auth";
-import fetchDocuments from '../middleware/axios/fetchDocuments'
+import fetchDocuments from "../middleware/axios/fetchDocuments";
 import AuthUser from "../middleware/axios/User";
 
 export default function Student() {
@@ -38,7 +38,7 @@ export default function Student() {
         userId: _user.id
     };
 
-    const post2Documents = async () => {
+    const post2Documents = async token => {
         const _tempDocs = await fetchDocuments(token);
         if (_tempDocs) {
             _dispatch(documentsTemplate(_tempDocs));
@@ -46,12 +46,12 @@ export default function Student() {
     };
 
     React.useEffect(() => {
-        if (_docTemp.length === 0) {
-            post2Documents({
+        if (_docTemp.length === 0 && token) {
+            post2Documents(token, {
                 signal: abt.signal
             });
         }
-    }, [_docTemp]);
+    }, [_docTemp, token]);
 
     const _authUser = async _props => {
         const _user = await AuthUser(_props);
