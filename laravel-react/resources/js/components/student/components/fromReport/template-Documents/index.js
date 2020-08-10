@@ -11,16 +11,21 @@ import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
 
 const TemplateDocuments = props => {
-    const { patternInput, id } = props;
+    const { patternInput, id, index } = props;
     const [_document, setDocument] = React.useState({});
-    const [_valid, setValid] = React.useState(0);
+    const [_valid, setValid] = React.useState({});
 
     const handleChangeForm = async e => {
         const { value, type, name, files } = e.target;
+        console.log(value);
+
         if (type === "select-one") {
             if (value !== "0") {
                 setDocument({ ..._document, [name]: value });
-                setValid(_valid + 1);
+                setValid({
+                    ..._valid,
+                    [name]: true
+                });
             }
         } else if (type === "file") {
             const file = files[0];
@@ -30,35 +35,44 @@ const TemplateDocuments = props => {
                     ..._document,
                     [name]: _pathImg
                 });
-                setValid(_valid + 1);
+                setValid({
+                    ..._valid,
+                    [name]: true
+                });
             }
         } else {
             setDocument({ ..._document, [name]: value });
-            setValid(_valid + 1);
+            setValid({
+                ..._valid,
+                [name]: true
+            });
         }
     };
 
     const handleSending = () => {
-        if (_valid === patternInput.length) {
-            console.log(_document);
+        console.log(_document);
+        console.log(Object.keys(_valid).length, " =>valid");
+        console.log(patternInput.length, " => length");
 
-            // const _docForm = {
-            //     form_id: id,
-            //     data: JSON.stringify(_document)
-            // };
-            // const _resDoc = postDocumentUser(_token, _docForm);
-            // if (_resDoc) {
-            //     Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
-            // } else {
-            //     Swal.fire(
-            //         "your forms is fail",
-            //         "การส่งผิดพลาด กรุณาตรวจสอบอีกครั้ง",
-            //         "error"
-            //     );
-            // }
-        } else {
-            Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
-        }
+        // if (_valid === patternInput.length - 1) {
+
+        // const _docForm = {
+        //     form_id: id,
+        //     data: JSON.stringify(_document)
+        // };
+        // const _resDoc = postDocumentUser(_token, _docForm);
+        // if (_resDoc) {
+        //     Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
+        // } else {
+        //     Swal.fire(
+        //         "your forms is fail",
+        //         "การส่งผิดพลาด กรุณาตรวจสอบอีกครั้ง",
+        //         "error"
+        //     );
+        // }
+        // } else {
+        //     Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
+        // }
     };
 
     return (
@@ -71,6 +85,7 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "select2") {
@@ -79,6 +94,7 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "select3") {
@@ -87,6 +103,7 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "file") {
@@ -95,6 +112,7 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "text") {
@@ -103,6 +121,7 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "date") {
@@ -111,6 +130,7 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                name={index + "_" + idx}
                             />
                         );
                     } else {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { MDBDataTable } from "mdbreact";
 import { fetchUserDoc } from "../../../middleware/axios/fetchUserDoc";
 import { _setRowsTable } from "../../../middleware/method/setRowsTable";
@@ -16,7 +16,6 @@ export default function ReportTable() {
     const [rows, setRows] = React.useState([]);
     const _dispatch = useDispatch();
     const _token = localStorage._authLocal;
-    // console.log(_userDoc);
 
     const _props = {
         id: Number(_user.id),
