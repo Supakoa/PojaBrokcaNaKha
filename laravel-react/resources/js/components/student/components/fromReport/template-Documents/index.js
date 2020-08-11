@@ -66,7 +66,7 @@ const TemplateDocuments = props => {
         const _docForm = {
             form_id: id,
             user_id: _userId,
-            data: JSON.stringify(_arry)
+            data: JSON.stringify({ inputs: _arry })
         };
 
         // console.log(_docForm);
