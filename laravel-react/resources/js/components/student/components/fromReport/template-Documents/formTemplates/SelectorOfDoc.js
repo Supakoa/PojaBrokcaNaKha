@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const SelectorOfDoc = props => {
-    const { inputData, handle, name } = props;
+    const { inputData, handle } = props;
     const [_other, setOther] = React.useState(false);
     const [_otherLabel, setOtherLabel] = React.useState("");
 
@@ -36,7 +36,7 @@ const SelectorOfDoc = props => {
             <Form.Label>{inputData.th_title}</Form.Label>
             <Form.Control
                 as="select"
-                name={name}
+                name={inputData.type}
                 size="sm"
                 onChange={onChangeLastIndext}
                 custom

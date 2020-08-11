@@ -46,7 +46,8 @@
             "database/seeds",
             "database/factories",
             "database/seeds/status.php",
-            "app/Http/Controllers/FormsController.php"
+            "app/Http/Controllers/FormsController.php",
+            "app/Status.php"
         ]
     },
     "autoload-dev": {
@@ -69,7 +70,7 @@
         ],
         "singha": [
             "@php artisan mi:f --seed",
-            "@php artisan passport:install"
+            "@php artisan passport:install --force"
         ],
         "deploy": [
             "@composer install",

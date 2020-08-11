@@ -4,10 +4,11 @@ import { _urlUploads } from "../apis";
 const uploadsImage = async _data => {
     var formData = new FormData();
     formData.append("image", _data);
+
     const _path = await axios
         .post(_urlUploads(), formData, {
             headers: {
-                "Content-Type": "multipart/form-data"
+                "content-type": "multipart/form-data"
             }
         })
         .then(res => {

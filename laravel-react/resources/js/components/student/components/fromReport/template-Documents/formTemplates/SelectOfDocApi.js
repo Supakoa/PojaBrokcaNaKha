@@ -3,7 +3,7 @@ import { Form, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const SelectOfDocApi = props => {
-    const { inputData, handle, name } = props;
+    const { inputData, handle } = props;
     const _subjects = useSelector(s => s.subjectsDocument);
     return (
         <Form.Group

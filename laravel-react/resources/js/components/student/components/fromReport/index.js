@@ -71,7 +71,6 @@ export default function ReportForm() {
                                     <TemplateDocuments
                                         id={item.id}
                                         patternInput={_inputTemp[idx]}
-                                        index={idx}
                                     />
                                 </Container>
                             </Accordion.Collapse>

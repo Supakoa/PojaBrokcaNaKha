@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const TextOfDoc = props => {
-    const { inputData, handle, name } = props;
+    const { inputData, handle } = props;
 
     return (
         <Form.Group
@@ -13,7 +13,7 @@ const TextOfDoc = props => {
         >
             <Form.Label>{inputData.th_title}</Form.Label>
             <Form.Control
-                name={name}
+                name={inputData.type}
                 as="textarea"
                 rows="3"
                 onChange={handle}

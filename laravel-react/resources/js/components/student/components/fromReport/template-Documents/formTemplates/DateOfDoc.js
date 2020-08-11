@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const DateOfDoc = props => {
-    const { inputData, handle, name } = props;
+    const { inputData, handle } = props;
     return (
         <Form.Group
             md={inputData.size}
@@ -11,7 +11,7 @@ const DateOfDoc = props => {
             controlId={inputData.tage_type}
         >
             <Form.Label>{inputData.th_title}</Form.Label>
-            <Form.Control name={name} type="date" onChange={handle} />
+            <Form.Control name={inputData.type} type="date" onChange={handle} />
         </Form.Group>
     );
 };

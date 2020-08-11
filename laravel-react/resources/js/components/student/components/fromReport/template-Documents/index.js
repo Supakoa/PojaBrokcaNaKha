@@ -9,15 +9,16 @@ import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
+import { useSelector } from "react-redux";
 
 const TemplateDocuments = props => {
-    const { patternInput, id, index } = props;
+    const { patternInput, id } = props;
+    const _userId = useSelector(s => s.userState.id);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState({});
-
+    const _token = localStorage._authLocal;
     const handleChangeForm = async e => {
         const { value, type, name, files } = e.target;
-        console.log(value);
 
         if (type === "select-one") {
             if (value !== "0") {
@@ -29,6 +30,7 @@ const TemplateDocuments = props => {
             }
         } else if (type === "file") {
             const file = files[0];
+
             const _pathImg = await uploadsImage(file);
             if (_pathImg) {
                 setDocument({
@@ -49,30 +51,33 @@ const TemplateDocuments = props => {
         }
     };
 
-    const handleSending = () => {
-        console.log(_document);
-        console.log(Object.keys(_valid).length, " =>valid");
-        console.log(patternInput.length, " => length");
+    const handleSending = async () => {
+        let _arry = [];
+        Object.keys(_document).map((item, idx) => {
+            const _newDoc = patternInput.find(id => {
+                return id.type === item;
+            });
+            if (_newDoc) {
+                _newDoc.data = Object.values(_document)[idx];
+                _arry = [..._arry, _newDoc];
+            }
+        });
 
-        // if (_valid === patternInput.length - 1) {
+        const _docForm = {
+            form_id: id,
+            user_id: _userId,
+            data: JSON.stringify(_arry)
+        };
 
-        // const _docForm = {
-        //     form_id: id,
-        //     data: JSON.stringify(_document)
-        // };
-        // const _resDoc = postDocumentUser(_token, _docForm);
-        // if (_resDoc) {
-        //     Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
-        // } else {
-        //     Swal.fire(
-        //         "your forms is fail",
-        //         "การส่งผิดพลาด กรุณาตรวจสอบอีกครั้ง",
-        //         "error"
-        //     );
-        // }
-        // } else {
-        //     Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
-        // }
+        // console.log(_docForm);
+        const _resDoc = await postDocumentUser(_token, _docForm);
+        if (_resDoc.created_at) {
+            Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
+        } else {
+            Swal.fire("Error !!", _resDoc.message, "error");
+        }
+
+        // Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
     };
 
     return (
@@ -85,7 +90,6 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
-                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "select2") {
@@ -94,7 +98,6 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
-                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "select3") {
@@ -103,7 +106,6 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
-                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "file") {
@@ -112,7 +114,6 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
-                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "text") {
@@ -121,7 +122,6 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
-                                name={index + "_" + idx}
                             />
                         );
                     } else if (item.tag_type === "date") {
@@ -130,7 +130,6 @@ const TemplateDocuments = props => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
-                                name={index + "_" + idx}
                             />
                         );
                     } else {
