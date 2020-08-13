@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class, // passport-js
         Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class, //intervention/image
     ],
 
     /*
@@ -229,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
-
+        'Image' => Intervention\Image\Facades\Image::class, //intervention/image
     ],
 
 ];

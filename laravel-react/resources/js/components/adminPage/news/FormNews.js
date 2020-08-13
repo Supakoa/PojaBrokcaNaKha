@@ -24,6 +24,7 @@ function FormNews(props) {
     const [inputText, setInputText] = useState("");
 
     React.useEffect(() => {
+
         // init state
         !isCreateProps
             ? _setState({
@@ -33,6 +34,7 @@ function FormNews(props) {
               })
             : _setState({ files: "", imagePreviewUrl: "", url: "" });
 
+        // init redux state
         if (!isCreateProps) {
             // update news
             setInputText(response.ref);
@@ -77,7 +79,7 @@ function FormNews(props) {
 
     const createImage = e => {
         const reader = new FileReader();
-        const file = e.target.files[0];
+        const file =  e.target.files[0];
 
         reader.onloadend = e => {
             _setState({
@@ -85,7 +87,7 @@ function FormNews(props) {
                 file: file,
                 imagePreviewUrl: reader.result
             });
-            dispatch(updateFile(e.target.result));
+            dispatch(updateFile(file));
         };
 
         reader.readAsDataURL(file);

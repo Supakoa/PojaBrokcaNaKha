@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Intervention\Image\ImageManagerStatic as Image;
 
 use App\News;
+use App\Fileupload;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -31,10 +33,23 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-			'image' => 'mimes:jpeg,jpg,png|required|max:10000'
-		]);
+        // $this->validate($request, [
+		// 	'image' => 'mimes:jpeg,jpg,png|required|max:10000'
+        // ]);
+
         $news = News::create($request->all());
+
+        // get file and create image to src
+        // $image = $request->get('image');
+        // $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+        // Image::make($request->get('image'))->save(public_path('images/').$name);
+
+        // $news = new News();
+        // $news->image = $name;
+        // $news->ref = $request->get('ref');
+        // $news->save();
+
+        // $news = News::create($request->all());
 
         return response()->json($news, 201);
     }

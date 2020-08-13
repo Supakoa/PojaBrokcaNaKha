@@ -14,7 +14,7 @@ export default function ModalNews(props) {
     const {t} = useTranslation('', {useSuspense: false});
 
     // redux
-    const form = useSelector(state => state.newsForm)
+    const redux_form = useSelector(state => state.newsForm)
 
     const isReturnCreateForm = () => {
         return <FormNews response={response} isCreateProps={isCreateProps} />
@@ -35,19 +35,28 @@ export default function ModalNews(props) {
         };
     }, []);
 
-    const saveFormToDB = ( ) => {
+    const saveFormToDB = async () => {
+        const FormData = require('form-data')
+        const data = new FormData()
+        data.append('image', redux_form.file)
+
+        const pathImage = await Axios.post(`http://localhost:8000/api/uploads`, data).then(res => {
+            return res.data
+        })
+
         const sendFormTemplate = {
-            image: form.file,
-            ref: form.ref
+            image: pathImage,
+            ref: redux_form.ref
         }
 
         if (isCreateProps) {
             Axios.post(`${apiPath}`, sendFormTemplate, {
                 Header: {
-                    'Content-type': 'multipart/form-data'
+                    'Content-type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem("_authLocal")}`
                 }
             }).then(res => {
-                console.log(res)
+                console.log('res.data', res.data)
             })
         } else {
             const id = response.id
