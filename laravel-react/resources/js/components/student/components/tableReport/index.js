@@ -59,7 +59,7 @@ export default function ReportTable() {
         ) {
             post2UserDocuments(_props, { signal: abort.signal });
         }
-    }, [_props, _user, _userDoc]);
+    }, [_props, _user]);
 
     React.useEffect(() => {
         if (rows.length === 0 && _userDoc.length !== 0)
