@@ -35,3 +35,7 @@ export const _urlPostDocuments = () => {
 export const _urlSubjects = () => {
     return `${_www}/api/subjects`;
 };
+
+export const _urlCancelDocument = id => {
+    return `${_www}/api/documents/${id}/cancel`;
+};

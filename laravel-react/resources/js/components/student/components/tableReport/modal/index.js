@@ -4,7 +4,7 @@ import DetailDocument from "./DetailDocument";
 import InputsDocument from "./InputsDocument";
 
 const UserModalDoc = props => {
-    const { document } = props;
+    const { document, lang } = props;
 
     const [show, setShow] = React.useState(false);
     return (
@@ -33,6 +33,7 @@ const UserModalDoc = props => {
                             <div className="border-left border-right border-bottom rounded">
                                 <InputsDocument
                                     inputs={JSON.parse(document.data)}
+                                    lang={lang}
                                 />
                             </div>
                         </Tab>

@@ -41,7 +41,11 @@ export default function ReportTable() {
                 item.status_badge = statusDoc(item.status, idx);
                 item.row_id = (idx + 1).toString();
                 item.action = (
-                    <UserModalDoc key={idx.toString()} document={item} />
+                    <UserModalDoc
+                        key={idx.toString()}
+                        document={item}
+                        lang={i18n.language}
+                    />
                 );
                 return item;
             });
