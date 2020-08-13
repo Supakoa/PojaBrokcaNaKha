@@ -8,6 +8,9 @@ const fetchDocuments = async token => {
         .then(res => {
             // console.log(res.data);
             return res.data;
+        })
+        .catch(er => {
+            console.log(er);
         });
     return _docs;
 };

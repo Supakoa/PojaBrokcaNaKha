@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const FileOfDoc = props => {
-    const { inputData, handle } = props;
+    const { inputData, handle, lang } = props;
     return (
         <Form.Group
             md={inputData.size}
@@ -13,7 +13,7 @@ const FileOfDoc = props => {
             <Form.File
                 name={inputData.type}
                 id="custom-file"
-                label={inputData.th_name}
+                label={lang === "th" ? inputData.th_name : inputData.eng_name}
                 onChange={handle}
             />
         </Form.Group>
