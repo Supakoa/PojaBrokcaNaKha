@@ -12,7 +12,8 @@ import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser"
 import { useSelector } from "react-redux";
 
 const TemplateDocuments = props => {
-    const { patternInput, id } = props;
+    const { patternInput, id, lang } = props;
+
     const _userId = useSelector(s => s.userState.id);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState({});
@@ -76,8 +77,6 @@ const TemplateDocuments = props => {
         } else {
             Swal.fire("Error !!", _resDoc.message, "error");
         }
-
-        // Swal.fire("your forms is fail", "กรุณาตรวจสอบข้อมูล", "error");
     };
 
     return (
@@ -87,6 +86,7 @@ const TemplateDocuments = props => {
                     if (item.tag_type === "select1") {
                         return (
                             <SelectorOfDoc
+                                lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
@@ -95,6 +95,7 @@ const TemplateDocuments = props => {
                     } else if (item.tag_type === "select2") {
                         return (
                             <SelectorOfDoc
+                                lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
@@ -103,6 +104,7 @@ const TemplateDocuments = props => {
                     } else if (item.tag_type === "select3") {
                         return (
                             <SelectOfDocApi
+                                lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
@@ -111,6 +113,7 @@ const TemplateDocuments = props => {
                     } else if (item.tag_type === "file") {
                         return (
                             <FileOfDoc
+                                lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
@@ -119,6 +122,7 @@ const TemplateDocuments = props => {
                     } else if (item.tag_type === "text") {
                         return (
                             <TextOfDoc
+                                lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
@@ -127,6 +131,7 @@ const TemplateDocuments = props => {
                     } else if (item.tag_type === "date") {
                         return (
                             <DateOfDoc
+                                lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}

@@ -2,6 +2,7 @@ import React from "react";
 import { Accordion, Card, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../loading";
+import { useTranslation } from "react-i18next";
 import TemplateDocuments from "./template-Documents";
 import { getSubjects } from "../../../middleware/axios/getSubject";
 import { inputTemps, subjectsForDocument } from "../../../../redux/actions";
@@ -11,6 +12,7 @@ export default function ReportForm() {
     const _inputTemp = useSelector(s => s.inputTemps);
     const _subDoc = useSelector(s => s.subjectsDocument);
     const _token = localStorage._authLocal;
+    const { i18n } = useTranslation();
     const _dispatch = useDispatch();
     const abort = new AbortController();
 
@@ -64,11 +66,14 @@ export default function ReportForm() {
                             >
                                 {item.id}
                                 {". "}
-                                {item.th_name}
+                                {i18n.language === "th"
+                                    ? item.th_name
+                                    : item.eng_name}
                             </Accordion.Toggle>
                             <Accordion.Collapse eventKey={item.id}>
                                 <Container fluid="lg">
                                     <TemplateDocuments
+                                        lang={i18n.language}
                                         id={item.id}
                                         patternInput={_inputTemp[idx]}
                                     />

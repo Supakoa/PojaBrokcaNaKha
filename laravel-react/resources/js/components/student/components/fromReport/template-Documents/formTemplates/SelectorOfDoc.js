@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const SelectorOfDoc = props => {
-    const { inputData, handle } = props;
+    const { inputData, handle, lang } = props;
     const [_other, setOther] = React.useState(false);
     const [_otherLabel, setOtherLabel] = React.useState("");
 
@@ -33,7 +33,9 @@ const SelectorOfDoc = props => {
             as={Col}
             controlId={inputData.tage_type}
         >
-            <Form.Label>{inputData.th_title}</Form.Label>
+            <Form.Label>
+                {lang === "th" ? inputData.th_title : inputData.eng_title}
+            </Form.Label>
             <Form.Control
                 as="select"
                 name={inputData.type}
@@ -41,23 +43,33 @@ const SelectorOfDoc = props => {
                 onChange={onChangeLastIndext}
                 custom
             >
-                <option value="0">{inputData.th_name}</option>
+                <option value="0">
+                    {lang === "th" ? inputData.th_name : inputData.eng_name}
+                </option>
 
-                {inputData.th_options !== undefined ? (
-                    inputData.th_options.map((item, idx) => {
-                        return (
-                            <option
-                                key={idx.toString()}
-                                defaultValue={idx.toString()}
-                                value={(idx + 1).toString()}
-                            >
-                                {item}
-                            </option>
-                        );
-                    })
-                ) : (
-                    <option>ไม่มีข้อมูล</option>
-                )}
+                {lang === "th"
+                    ? inputData.th_options.map((item, idx) => {
+                          return (
+                              <option
+                                  key={idx.toString()}
+                                  defaultValue={idx.toString()}
+                                  value={idx.toString()}
+                              >
+                                  {item}
+                              </option>
+                          );
+                      })
+                    : inputData.eng_options.map((item, idx) => {
+                          return (
+                              <option
+                                  key={idx.toString()}
+                                  defaultValue={idx.toString()}
+                                  value={idx.toString()}
+                              >
+                                  {item}
+                              </option>
+                          );
+                      })}
             </Form.Control>
             {_other ? (
                 <>

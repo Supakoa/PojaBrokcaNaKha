@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Col } from "react-bootstrap";
 
 const TextOfDoc = props => {
-    const { inputData, handle } = props;
+    const { inputData, handle, lang } = props;
 
     return (
         <Form.Group
@@ -11,7 +11,9 @@ const TextOfDoc = props => {
             as={Col}
             controlId={inputData.tage_type}
         >
-            <Form.Label>{inputData.th_title}</Form.Label>
+            <Form.Label>
+                {lang === "th" ? inputData.th_title : inputData.eng_title}
+            </Form.Label>
             <Form.Control
                 name={inputData.type}
                 as="textarea"

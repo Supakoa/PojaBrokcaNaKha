@@ -7,11 +7,13 @@ import { userDocument } from "../../../../redux/actions";
 import { columns } from "./columns";
 import statusDoc from "./statusDocument";
 import UserModalDoc from "./modal";
+import { useTranslation } from "react-i18next";
 
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
     const _docTemp = useSelector(state => state.documentsTemplate);
     const _user = useSelector(state => state.userState);
+    const { i18n } = useTranslation();
     const abort = new AbortController();
     const [rows, setRows] = React.useState([]);
     const _dispatch = useDispatch();
@@ -21,7 +23,8 @@ export default function ReportTable() {
         id: Number(_user.id),
         token: _token,
         docTemp: _docTemp,
-        userDoc: _userDoc
+        userDoc: _userDoc,
+        lang: i18n.language
     };
 
     const post2UserDocuments = async () => {
