@@ -9,6 +9,7 @@ import {
     updateRef,
     destroyForm
 } from "../../../redux/actions/";
+import Axios from "axios";
 
 // modal add new news
 
@@ -77,17 +78,25 @@ function FormNews(props) {
         }
     };
 
-    const createImage = e => {
+    const createImage = async e => {
         const reader = new FileReader();
         const file =  e.target.files[0];
+        
+        const formData = new FormData()
+        formData.append('image', file)
+
+        // console.log('file', file)
+        const pathImage = await Axios.post(`http://localhost:8000/api/uploads`, formData).then(res => {
+            return res.data
+        })
 
         reader.onloadend = e => {
             _setState({
                 ..._state,
                 file: file,
-                imagePreviewUrl: reader.result
+                imagePreviewUrl: pathImage
             });
-            dispatch(updateFile(file));
+            dispatch(updateFile(pathImage));
         };
 
         reader.readAsDataURL(file);
@@ -100,7 +109,7 @@ function FormNews(props) {
         if (imagePreviewUrl) {
             _imagePreview = (
                 <Image
-                    src={imagePreviewUrl}
+                    src={`/storage/` + imagePreviewUrl}
                     rounded
                     width="100%"
                     height="300"
