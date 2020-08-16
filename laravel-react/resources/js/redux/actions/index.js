@@ -139,3 +139,10 @@ export const subjectsForDocument = _sub => {
         payload: _sub
     };
 };
+
+export const newsActions = (action, news) => {
+    return {
+        type: action,
+        data: news
+    }
+}

@@ -12,6 +12,7 @@ import showUsersReducer from "./showUsers";
 import documentsTemplateReducer from "./doumentsTemplate";
 import inputTempsReducer from "./inputTemps";
 import subjectsDocumentsReducer from "./subjectsDocumnet";
+import showNewsReducer from "./showNews";
 
 import { combineReducers } from "redux";
 
@@ -29,7 +30,8 @@ const allReducers = combineReducers({
     showUsers: showUsersReducer,
     documentsTemplate: documentsTemplateReducer,
     inputTemps: inputTempsReducer,
-    subjectsDocument: subjectsDocumentsReducer
+    subjectsDocument: subjectsDocumentsReducer,
+    showNews: showNewsReducer
 });
 
 export default allReducers;

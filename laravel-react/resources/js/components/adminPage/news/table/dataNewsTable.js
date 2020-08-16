@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image } from "react-bootstrap";
 import Axios from "axios";
 import { columns } from "./columns";
 import ColumnActions from "./ColumsAction";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { newsActions } from "../../../../redux/actions";
 
 const dataNewsTable = () => {
+
+    const localImagePath = `/storage/`
+
     const [rows, setRows] = React.useState([]);
     const { t } = useTranslation("", { useSuspense: false });
+
+    // redux
+    const redux_showNews = useSelector(state => state.showNews)
+    const dispatch = useDispatch()
 
     const fetchRowData = _data => {
         setRows(
@@ -17,7 +26,7 @@ const dataNewsTable = () => {
                     id: idx,
                     images: (
                         <Image
-                            src={res.image}
+                            src={localImagePath + res.image}
                             width="200px"
                             height="70px"
                             rounded
@@ -33,9 +42,19 @@ const dataNewsTable = () => {
 
     const getNews = async () => {
         await Axios.get("http://localhost:8000/api/news").then(async res => {
-            fetchRowData(await res.data);
+            await dispatch(newsActions("INIT_SHOW_NEWS", res.data))
         });
     };
+
+    const initShowNews = () => {
+        if (typeof redux_showNews.data != 'undefined') {
+            const _items = fetchRowData(redux_showNews.data);
+        }
+    }
+
+    useEffect(() => {
+        initShowNews()
+    }, [redux_showNews])
 
     React.useEffect(() => {
         const abortController = new AbortController();

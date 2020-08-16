@@ -2,18 +2,25 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import FormNews from "../news/FormNews";
 import Axios from "axios";
-import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import { newsActions } from "../../../redux/actions";
+import {useTranslation} from 'react-i18next';
+import { first } from "lodash";
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
     // props : isCreateProps and response are props in this ModalNews
     const { isCreateProps, response } = props;
+
     const [isShow, setIsShow] = React.useState(false);
     const { t } = useTranslation("", { useSuspense: false });
 
+    const apiPath = `http://localhost:8000/api/news`
+
     // redux
-    const redux_form = useSelector(state => state.newsForm);
+    const redux_form = useSelector(state => state.newsForm)
+    const redux_showNews = useSelector(state => state.showNews)
+    const dispatch = useDispatch()
 
     const isReturnCreateForm = () => {
         return <FormNews response={response} isCreateProps={isCreateProps} />;
@@ -22,8 +29,6 @@ export default function ModalNews(props) {
     const isCreateTitile = context => {
         return context ? t("add") : t("edit");
     };
-
-    const apiPath = `http://localhost:8000/api/news`;
 
     // not use ofr init
     React.useEffect(() => {
@@ -35,18 +40,9 @@ export default function ModalNews(props) {
     }, []);
 
     const saveFormToDB = async () => {
-        const data = new FormData();
-        data.append("image", redux_form.file);
-
-        const pathImage = await Axios.post(
-            `http://localhost:8000/api/uploads`,
-            data
-        ).then(res => {
-            return res.data;
-        });
 
         const sendFormTemplate = {
-            image: pathImage,
+            image: redux_form.file,
             ref: redux_form.ref
         };
 
@@ -58,19 +54,37 @@ export default function ModalNews(props) {
                         "_authLocal"
                     )}`
                 }
-            }).then(res => {
-                console.log("res.data", res.data);
-            });
+            }).then(async res => {
+                const newNews = res.data
+                let tempShowNews = new Array(redux_showNews.data.length + 1)
+                for (let i = 0; i < redux_showNews.data.length; i++) {
+                    tempShowNews[i] = redux_showNews.data[i]
+                }
+                tempShowNews[redux_showNews.data.length] = newNews
+
+
+                dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
+            })
         } else {
             const id = response.id;
 
             Axios.patch(`${apiPath}/${id}`, sendFormTemplate, {
                 Header: {
-                    "Content-type": "multipart/form-data"
+                    'Content-type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem("_authLocal")}`
                 }
-            }).then(res => {
-                console.log(res.data);
-            });
+            }).then(async res => {
+                let tempShowNews = new Array(redux_showNews.data.length)
+                tempShowNews = redux_showNews.data
+                let updateIndex = tempShowNews.findIndex(item => {
+                    return item.id == res.data.id
+                })
+                tempShowNews[updateIndex] = {
+                    ...tempShowNews[updateIndex],
+                    ...res.data
+                }
+                dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
+            })
         }
     };
 
