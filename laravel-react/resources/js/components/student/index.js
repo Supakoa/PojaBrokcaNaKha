@@ -15,17 +15,23 @@ import ReportTable from "./components/tableReport";
 import ReportForm from "./components/fromReport";
 import { ProfileContext } from "./context";
 import { useDispatch, useSelector } from "react-redux";
-import { user, documentsTemplate } from "../../redux/actions";
+import {
+    user,
+    documentsTemplate,
+    subjectsForDocument
+} from "../../redux/actions";
 import { _propsAuth } from "../middleware/props-auth";
 import fetchDocuments from "../middleware/axios/fetchDocuments";
 import AuthUser from "../middleware/axios/User";
+import { getSubjects } from "../middleware/axios/getSubject";
 
 export default function Student() {
     const _dispatch = useDispatch();
     let { path, url } = useRouteMatch();
     const { pathname } = useLocation();
+    const _subDoc = useSelector(s => s.subjectsDocument);
     const token = localStorage._authLocal;
-    const abt = new AbortController();
+    const abort = new AbortController();
     const _docTemp = useSelector(state => state.documentsTemplate);
     const _user = useSelector(state => state.userState);
 
@@ -45,10 +51,24 @@ export default function Student() {
         }
     };
 
+    const getSubjectsForDoc = async _token => {
+        const _subjects = await getSubjects(_token);
+
+        if (_subjects) {
+            _dispatch(subjectsForDocument(_subjects));
+        }
+    };
+
+    React.useEffect(() => {
+        if (_subDoc.length === 0) {
+            getSubjectsForDoc(token, { signal: abort.signal });
+        }
+    }, [_subDoc]);
+
     React.useEffect(() => {
         if (_docTemp.length === 0 && token) {
             post2Documents(token, {
-                signal: abt.signal
+                signal: abort.signal
             });
         }
     }, [_docTemp, token]);
@@ -62,13 +82,13 @@ export default function Student() {
 
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
-            _authUser(_props, { signal: abt.signal });
+            _authUser(_props, { signal: abort.signal });
         }
     }, [_user]);
 
     React.useEffect(() => {
         return () => {
-            abt.abort();
+            abort.abort();
         };
     }, []);
 

@@ -31,7 +31,7 @@ const SelectOfDocApi = props => {
                               <option
                                   key={idx.toString()}
                                   defaultValue={item.id}
-                                  value={idx.toString()}
+                                  value={item.id}
                               >
                                   {lang === "th" ? item.th_name : item.eng_name}
                               </option>
