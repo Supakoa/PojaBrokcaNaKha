@@ -1,30 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import FormNews from "../news/FormNews";
-import { colors } from "@material-ui/core";
 import Axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import {useTranslation} from 'react-i18next';
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
     // props : isCreateProps and response are props in this ModalNews
     const { isCreateProps, response } = props;
     const [isShow, setIsShow] = React.useState(false);
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation("", { useSuspense: false });
 
     // redux
-    const redux_form = useSelector(state => state.newsForm)
+    const redux_form = useSelector(state => state.newsForm);
 
     const isReturnCreateForm = () => {
-        return <FormNews response={response} isCreateProps={isCreateProps} />
+        return <FormNews response={response} isCreateProps={isCreateProps} />;
     };
 
     const isCreateTitile = context => {
-        return context ? t('add') : t('edit');
+        return context ? t("add") : t("edit");
     };
 
-    const apiPath = `http://localhost:8000/api/news`
+    const apiPath = `http://localhost:8000/api/news`;
 
     // not use ofr init
     React.useEffect(() => {
@@ -36,40 +35,44 @@ export default function ModalNews(props) {
     }, []);
 
     const saveFormToDB = async () => {
-        const FormData = require('form-data')
-        const data = new FormData()
-        data.append('image', redux_form.file)
+        const data = new FormData();
+        data.append("image", redux_form.file);
 
-        const pathImage = await Axios.post(`http://localhost:8000/api/uploads`, data).then(res => {
-            return res.data
-        })
+        const pathImage = await Axios.post(
+            `http://localhost:8000/api/uploads`,
+            data
+        ).then(res => {
+            return res.data;
+        });
 
         const sendFormTemplate = {
             image: pathImage,
             ref: redux_form.ref
-        }
+        };
 
         if (isCreateProps) {
             Axios.post(`${apiPath}`, sendFormTemplate, {
                 Header: {
-                    'Content-type': 'multipart/form-data',
-                    'Authorization': `Bearer ${localStorage.getItem("_authLocal")}`
+                    "Content-type": "multipart/form-data",
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
                 }
             }).then(res => {
-                console.log('res.data', res.data)
-            })
+                console.log("res.data", res.data);
+            });
         } else {
-            const id = response.id
+            const id = response.id;
 
             Axios.patch(`${apiPath}/${id}`, sendFormTemplate, {
                 Header: {
-                    'Content-type': 'multipart/form-data'
+                    "Content-type": "multipart/form-data"
                 }
             }).then(res => {
-                console.log(res.data)
-            })
+                console.log(res.data);
+            });
         }
-    }
+    };
 
     return (
         <>
@@ -103,8 +106,20 @@ export default function ModalNews(props) {
                 <Modal.Body>{isReturnCreateForm()}</Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setIsShow(false)}> {t('close')} </Button>
-                    <Button variant={isCreateProps ? "info" : "warning"} onClick={() => saveFormToDB()}> {t('save')} </Button>
+                    <Button
+                        variant="secondary"
+                        onClick={() => setIsShow(false)}
+                    >
+                        {" "}
+                        {t("close")}{" "}
+                    </Button>
+                    <Button
+                        variant={isCreateProps ? "info" : "warning"}
+                        onClick={() => saveFormToDB()}
+                    >
+                        {" "}
+                        {t("save")}{" "}
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

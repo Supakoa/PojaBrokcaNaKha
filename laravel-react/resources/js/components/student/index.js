@@ -24,18 +24,18 @@ import { _propsAuth } from "../middleware/props-auth";
 import fetchDocuments from "../middleware/axios/fetchDocuments";
 import AuthUser from "../middleware/axios/User";
 import { getSubjects } from "../middleware/axios/getSubject";
+import MessageElements from "./components/message";
 
 export default function Student() {
-    const _dispatch = useDispatch();
     let { path, url } = useRouteMatch();
+    let _history = useHistory();
     const { pathname } = useLocation();
-    const _subDoc = useSelector(s => s.subjectsDocument);
+    const _dispatch = useDispatch();
     const token = localStorage._authLocal;
     const abort = new AbortController();
+    const _subDoc = useSelector(s => s.subjectsDocument);
     const _docTemp = useSelector(state => state.documentsTemplate);
     const _user = useSelector(state => state.userState);
-
-    let _history = useHistory();
 
     const _props = {
         token: token,
@@ -59,6 +59,13 @@ export default function Student() {
         }
     };
 
+    const _authUser = async _props => {
+        const _user = await AuthUser(_props);
+        if (_user) {
+            _dispatch(user(_user));
+        }
+    };
+
     React.useEffect(() => {
         if (_subDoc.length === 0) {
             getSubjectsForDoc(token, { signal: abort.signal });
@@ -72,13 +79,6 @@ export default function Student() {
             });
         }
     }, [_docTemp, token]);
-
-    const _authUser = async _props => {
-        const _user = await AuthUser(_props);
-        if (_user) {
-            _dispatch(user(_user));
-        }
-    };
 
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
@@ -121,7 +121,7 @@ export default function Student() {
                             </Link>
                         </ListGroup>
                     </Col>
-                    <Col md={9} lg={9} style={{ minHeight: "80vh" }}>
+                    <Col md={9} lg={9}>
                         <div className="mt-2">
                             <Switch>
                                 <Route
@@ -141,6 +141,7 @@ export default function Student() {
                     </Col>
                 </Row>
             </ProfileContext.Provider>
+            <MessageElements />
         </div>
     );
 }
