@@ -10,7 +10,10 @@ const MessageElements = () => {
             <div className="px-3 py-3 clearfix">
                 <Button
                     variant="info"
-                    className="rounded-circle float-right"
+                    style={{ bottom: "0" }}
+                    className={`rounded-circle float-right position-sticky ${
+                        show ? `d-none` : ``
+                    }`}
                     onClick={() => setShow(true)}
                 >
                     Message <i className="fas fa-comment-dots"></i>

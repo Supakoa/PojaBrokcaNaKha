@@ -2,7 +2,6 @@ import React from "react";
 import { Navbar, Nav, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./../../../images/logo.png";
-import { ProfileContext } from "../../context";
 import SignOutBtn from "../../../auth/sign-out";
 import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 import { useSelector } from "react-redux";

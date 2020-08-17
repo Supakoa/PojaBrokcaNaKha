@@ -1,6 +1,6 @@
 import React from "react";
 import { Animated } from "react-animated-css";
-import { Card } from "react-bootstrap";
+import { Card, Container, Form, Button } from "react-bootstrap";
 
 const ChatBox = ({ show, closeMessage }) => {
     return (
@@ -11,33 +11,50 @@ const ChatBox = ({ show, closeMessage }) => {
             animationOutDuration={1000}
             isVisible={show}
             style={{ bottom: "0", right: "5px", zIndex: "99" }}
-            className={`w-50 float-right position-sticky pb-3 `}
+            className={`w-25 float-right position-sticky pb-3 ${
+                show ? `d-block` : `d-none`
+            }`}
         >
             <Card style={{ width: "100%" }}>
-                <Card.Body>
-                    <Card.Title className="clearfix">
-                        <h6 className="float-left">
-                            Message <i className="fas fa-comment-dots"></i>
-                        </h6>
-                        <button
-                            type="button"
-                            onClick={() => closeMessage(false)}
-                            className="close float-right"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                        Card Subtitle
-                    </Card.Subtitle>
-                    <Card.Text>
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                    </Card.Text>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
+                <Card.Title className="clearfix mb-0 px-1 py-1">
+                    <h6 className="float-left mb-0">
+                        Message <i className="fas fa-comment-dots"></i>
+                    </h6>
+                    <button
+                        type="button"
+                        onClick={() => closeMessage(false)}
+                        className="close float-right"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </Card.Title>
+                <Card.Body className="p-1">
+                    <Container
+                        style={{ height: "30vh", maxHeight: "50vh" }}
+                        className="w-100 border border-secondary rounded"
+                    >
+                        list messages
+                    </Container>
                 </Card.Body>
+                <Card.Footer className="d-flex align-items-center justify-content-between p-0 border-0">
+                    <div className="w-75">
+                        <Form.Control
+                            className="border-left-0 border-bottom-0"
+                            placeholder="your text"
+                        />
+                    </div>
+                    <div className="w-25 text-center p-0">
+                        <Button
+                            variant="primary"
+                            className="m-0"
+                            size="sm"
+                            block
+                        >
+                            <i className="fas fa-paper-plane"></i>
+                        </Button>
+                    </div>
+                </Card.Footer>
             </Card>
         </Animated>
     );

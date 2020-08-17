@@ -7,7 +7,7 @@ const redirectPage = roleId => {
             return role_name;
         case 2:
             //staff
-            role_name = "/staff";
+            role_name = "/checkers";
             return role_name;
 
         case 3:

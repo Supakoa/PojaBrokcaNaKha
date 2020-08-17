@@ -27,8 +27,6 @@ export default function SignIn() {
         className: "border-danger"
     });
 
-    React.useEffect(() => {});
-
     const handleForget = value => {
         setForgetPass(value);
     };
