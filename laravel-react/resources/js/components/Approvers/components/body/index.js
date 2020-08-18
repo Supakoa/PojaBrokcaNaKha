@@ -1,13 +1,13 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import TableChecker from "./tableChecker";
+import TableApprover from "./tableApprover";
 import { Switch, useRouteMatch, Route } from "react-router-dom";
 
-export default function BodyChecker() {
+export default function BodyApprover() {
     const { path, url } = useRouteMatch();
     return (
         <Container className="py-3">
-            <TableChecker urlChecker={url} />
+            <TableApprover urlApprover={url} />
             <Switch>
                 <Route path={`${path}/show/:id`}>show Document</Route>
             </Switch>
