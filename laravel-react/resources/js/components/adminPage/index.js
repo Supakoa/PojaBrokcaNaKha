@@ -16,6 +16,7 @@ import News from "./news";
 import Messagws from "./message";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import post2User from "../middleware/post2Redux/postToUser";
 
 export default function AdminPage() {
     const { t } = useTranslation("", { useSuspense: false });
@@ -43,7 +44,7 @@ export default function AdminPage() {
 
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
-            fetchUser(_props, {
+            post2User(_props, {
                 signal: abort.signal
             });
         }
