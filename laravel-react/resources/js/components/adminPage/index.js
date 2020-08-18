@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import "./Appstyle.css";
 import { user, isAuththen, pathRoleUser } from "../../redux/actions";
-import AuthUser from "../middleware/axios/User";
 import StepReport from "./stepReport";
 import HeaderNav from "./navfolder/headerNav";
 import SideNav from "./navfolder/sideNav";
