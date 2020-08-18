@@ -51,7 +51,6 @@ export default function Student() {
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
             post2User(_props, { signal: abort.signal });
-            // _authUser(_props, { signal: abort.signal });
         } else if (_docTemp.length === 0 && token) {
             post2Documents(_props, {
                 signal: abort.signal

@@ -21,7 +21,6 @@ export default function AdminPage() {
     const { t } = useTranslation("", { useSuspense: false });
     const _user = useSelector(s => s.userState);
     const dispatch = useDispatch();
-    const [_info, setInfo] = React.useState({});
     let { path, url } = useRouteMatch();
     let _history = useHistory();
     const abort = new AbortController();
@@ -34,28 +33,21 @@ export default function AdminPage() {
         history: _history,
         token: token,
         acUser: user,
-        info: _info,
-        setInfo: setInfo,
         role: 1
     };
 
     const fetchUser = async _props => {
         const _item = await AuthUser(_props);
-        console.log(_props);
-        _props.setInfo({
-            ..._props.info,
-            first: _item.first_name,
-            last: _item.last_name
-        });
+        _props.dispatch(_props.acUser(_item));
     };
 
     React.useEffect(() => {
-        if (Object.keys(_user).length === 0) {
+        if (Object.keys(_user).length === 0 && token) {
             fetchUser(_props, {
                 signal: abort.signal
             });
         }
-    }, [_user]);
+    }, [_user, token]);
 
     React.useEffect(() => {
         return () => {
@@ -69,7 +61,7 @@ export default function AdminPage() {
                 <SideNav url={url} />
             </Col>
             <Col md={11} lg={10} className="p-0 w-100">
-                <HeaderNav path={url} info={_info} />
+                <HeaderNav path={url} />
                 <div className="container-fluid p-4">
                     <Switch>
                         <Route exact path={`${path}`}>
