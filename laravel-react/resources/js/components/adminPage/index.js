@@ -1,60 +1,65 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import {Route, Switch, useHistory, useRouteMatch} from "react-router-dom";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import "./Appstyle.css";
-import {user, isAuththen, pathRoleUser} from "../../redux/actions";
+import { user, isAuththen, pathRoleUser } from "../../redux/actions";
 import AuthUser from "../middleware/axios/User";
 import StepReport from "./stepReport";
 import HeaderNav from "./navfolder/headerNav";
 import SideNav from "./navfolder/sideNav";
-import {_propsAuth} from "../middleware/props-auth";
-// import Footer from "./footer";
+import { _propsAuth } from "../middleware/props-auth";
 import Home from "./home";
 import Report from "./report";
 import User from "./user";
 import News from "./news";
 import Messagws from "./message";
 import { useSelector } from "react-redux";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function AdminPage() {
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation("", { useSuspense: false });
+    const _user = useSelector(s => s.userState);
     const dispatch = useDispatch();
     const [_info, setInfo] = React.useState({});
     let { path, url } = useRouteMatch();
     let _history = useHistory();
+    const abort = new AbortController();
     const token = localStorage._authLocal;
 
     const _props = {
-        "dispatch": dispatch,
-        "isAuththen": isAuththen,
-        "pathRoleUser": pathRoleUser,
-        "history": _history,
-        "token": token,
-        "user" :user,
-        "info" : _info,
-        "setInfo" : setInfo,
-        "role" : 1
+        dispatch: dispatch,
+        isAuththen: isAuththen,
+        pathRoleUser: pathRoleUser,
+        history: _history,
+        token: token,
+        acUser: user,
+        info: _info,
+        setInfo: setInfo,
+        role: 1
     };
-
 
     const fetchUser = async _props => {
         const _item = await AuthUser(_props);
+        console.log(_props);
         _props.setInfo({
             ..._props.info,
             first: _item.first_name,
             last: _item.last_name
         });
     };
-    React.useEffect(() => {
-        const myAbortController = new AbortController();
-        fetchUser(_propsAuth(_props), {
-            signal: myAbortController.signal
-        });
 
+    React.useEffect(() => {
+        if (Object.keys(_user).length === 0) {
+            fetchUser(_props, {
+                signal: abort.signal
+            });
+        }
+    }, [_user]);
+
+    React.useEffect(() => {
         return () => {
-            myAbortController.abort();
+            abort.abort();
         };
     }, []);
 
@@ -71,10 +76,10 @@ export default function AdminPage() {
                             <Home />
                         </Route>
                         <Route path={`${path}/inbox`}>
-                            <Messagws t={t}/>
+                            <Messagws t={t} />
                         </Route>
                         <Route path={`${path}/report`}>
-                            <Report t={t}/>
+                            <Report t={t} />
                         </Route>
                         <Route path={`${path}/user`}>
                             <User t={t} />

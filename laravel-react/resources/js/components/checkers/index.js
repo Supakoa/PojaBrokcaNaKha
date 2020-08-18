@@ -2,9 +2,9 @@ import React from "react";
 import HeaderChecker from "./components/header";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import AuthUser from "../middleware/axios/User";
 import { user } from "../../redux/actions";
 import BodyChecker from "./components/body";
+import post2User from "../middleware/post2Redux/postToUser";
 
 export default function Checkers() {
     const _dispatch = useDispatch();
@@ -17,19 +17,14 @@ export default function Checkers() {
         token: _token,
         role: 2,
         history: _history,
-        userId: _user.id
-    };
-
-    const _authen = async _props => {
-        const _u = await AuthUser(_props);
-        if (_u) {
-            _dispatch(user(_u));
-        }
+        userId: _user.id,
+        dispatch: _dispatch,
+        acUser: user
     };
 
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && _token) {
-            _authen(_props, { signal: abort.signal });
+            post2User(_props, { signal: abort.signal });
         }
     }, [_user, abort]);
 

@@ -21,10 +21,10 @@ import {
     subjectsForDocument
 } from "../../redux/actions";
 import { _propsAuth } from "../middleware/props-auth";
-import fetchDocuments from "../middleware/axios/fetchDocuments";
-import AuthUser from "../middleware/axios/User";
-import { getSubjects } from "../middleware/axios/getSubject";
 import MessageElements from "./components/message";
+import post2Documents from "../middleware/post2Redux/postToDocuments";
+import post2Subjects from "../middleware/post2Redux/postToSubjects";
+import post2User from "../middleware/post2Redux/postToUser";
 
 export default function Student() {
     let { path, url } = useRouteMatch();
@@ -41,50 +41,25 @@ export default function Student() {
         token: token,
         role: 3,
         history: _history,
-        userId: _user.id
+        userId: _user.id,
+        dispatch: _dispatch,
+        acDocTemp: documentsTemplate,
+        acSubject: subjectsForDocument,
+        acUser: user
     };
-
-    const post2Documents = async token => {
-        const _tempDocs = await fetchDocuments(token);
-        if (_tempDocs) {
-            _dispatch(documentsTemplate(_tempDocs));
-        }
-    };
-
-    const getSubjectsForDoc = async _token => {
-        const _subjects = await getSubjects(_token);
-
-        if (_subjects) {
-            _dispatch(subjectsForDocument(_subjects));
-        }
-    };
-
-    const _authUser = async _props => {
-        const _user = await AuthUser(_props);
-        if (_user) {
-            _dispatch(user(_user));
-        }
-    };
-
-    React.useEffect(() => {
-        if (_subDoc.length === 0) {
-            getSubjectsForDoc(token, { signal: abort.signal });
-        }
-    }, [_subDoc]);
-
-    React.useEffect(() => {
-        if (_docTemp.length === 0 && token) {
-            post2Documents(token, {
-                signal: abort.signal
-            });
-        }
-    }, [_docTemp, token]);
 
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
-            _authUser(_props, { signal: abort.signal });
+            post2User(_props, { signal: abort.signal });
+            // _authUser(_props, { signal: abort.signal });
+        } else if (_docTemp.length === 0 && token) {
+            post2Documents(_props, {
+                signal: abort.signal
+            });
+        } else if (_subDoc.length === 0) {
+            post2Subjects(_props, { signal: abort.signal });
         }
-    }, [_user]);
+    }, [_user, _docTemp, token, _subDoc, _props]);
 
     React.useEffect(() => {
         return () => {

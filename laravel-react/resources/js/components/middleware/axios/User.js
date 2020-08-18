@@ -12,8 +12,8 @@ const AuthUser = async _props => {
                 // _signOut(_props)
                 _props.history.push(localStorage.getItem("pathRoleUser"));
             }
-            if (_props.user && _props.dispatch) {
-                _props.dispatch(_props.user(item));
+            if (_props.acUser && _props.dispatch) {
+                _props.dispatch(_props.acUser(item));
             }
             return success;
         })
