@@ -37,11 +37,6 @@ export default function AdminPage() {
         role: 1
     };
 
-    const fetchUser = async _props => {
-        const _item = await AuthUser(_props);
-        _props.dispatch(_props.acUser(_item));
-    };
-
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
             post2User(_props, {
