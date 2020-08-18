@@ -22,8 +22,7 @@ export const StepColors = props => {
 
     // function
     const handleClickDelete = e => {
-        const { id } = e.target;
-        console.log(e.target);
+        console.log('e', e)
     };
 
     const initState = () => {
@@ -82,7 +81,7 @@ export const StepColors = props => {
             return selectComponent.map((item, idx) => {
                 return (
                     <Chip
-                        id={idx}
+                        id={item.id}
                         color="primary"
                         key={idx.toString()}
                         avatar={<Avatar>{item.id}</Avatar>}
