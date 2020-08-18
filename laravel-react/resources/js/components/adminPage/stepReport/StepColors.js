@@ -21,7 +21,9 @@ export const StepColors = props => {
     // local variable
 
     // function
-    const handleClickDelete = e => {};
+    const handleClickDelete = e => {
+        console.log('e', e)
+    };
 
     const initState = () => {
         let chips = new Array(Number(numberStep))
@@ -79,14 +81,14 @@ export const StepColors = props => {
             return selectComponent.map((item, idx) => {
                 return (
                     <Chip
-                        id={idx}
+                        id={item.id}
                         color="primary"
                         key={idx.toString()}
                         avatar={
                             <Avatar>{item.id}</Avatar>
                         }
                         label={`${item.title} ${item.first_name} ${item.last_name}`}
-                        onDelete={handleClickDelete(item.id)}
+                        onDelete={handleClickDelete}
                     />
                 )
             })
