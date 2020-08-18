@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { chipGroupAction } from "../../../redux/actions";
 import { data } from "jquery";
 
-export const AddChecker = props => {
+export const AddApprover = props => {
     // props
     const { setChip, oldChipName, id } = props;
 
@@ -158,7 +158,7 @@ export const AddChecker = props => {
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                aria-labelledby="modal-addChecker"
+                aria-labelledby="modal-addApprover"
                 size="sm"
                 backdrop="static"
                 animation
@@ -168,7 +168,7 @@ export const AddChecker = props => {
                     <Modal.Title>รายชื่อคนตรวจ</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group controlId="dropdownAddChecker">
+                    <Form.Group controlId="dropdownAddApprover">
                         <Form.Label>ชื่อผู้ตรวจ</Form.Label>
                         <Form.Control as="select" onChange={e => handleSelect(e)} defaultValue={0}>
                             <option value="0" disabled={true}>เลือก</option>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col, Alert } from "react-bootstrap";
-import { AddChecker } from "./AddChecker";
+import { AddApprover } from "./AddApprover";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import { array, number } from "prop-types";
@@ -133,7 +133,7 @@ export const StepColors = props => {
                                 </Alert>
                             </Col>
                             <Col xs={6} md={4} className="text-center">
-                                <AddChecker
+                                <AddApprover
                                     id={index}
                                     key={item}
                                     setChip={setChipName}

@@ -11,7 +11,7 @@ import post2Subjects from "../../../middleware/post2Redux/postToSubjects";
 import post2Documents from "../../../middleware/post2Redux/postToDocuments";
 import post2UserDocuments from "../../../middleware/post2Redux/postToUserDocuments";
 
-const TableChecker = ({ urlChecker }) => {
+const TableApprover = ({ urlApprover }) => {
     const _userDocs = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
     const _userId = useSelector(s => s.userState.id);
@@ -67,4 +67,4 @@ const TableChecker = ({ urlChecker }) => {
     );
 };
 
-export default TableChecker;
+export default TableApprover;

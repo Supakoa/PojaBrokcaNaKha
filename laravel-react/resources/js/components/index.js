@@ -14,7 +14,7 @@ import SignUp from "./auth/sign-up";
 import { useSelector } from "react-redux";
 import NoMatch from "./NotMatch404";
 import clearLocalStorge from "./middleware/method/clearLocalStorage";
-import Checkers from "./checkers";
+import Approvers from "./Approvers";
 
 function App() {
     // const isAuthenticated = useSelector(state => state.redirectState);
@@ -35,8 +35,8 @@ function App() {
                 <PrivateRoute path="/student">
                     <Student />
                 </PrivateRoute>
-                <PrivateRoute path="/checkers">
-                    <Checkers />
+                <PrivateRoute path="/Approvers">
+                    <Approvers />
                 </PrivateRoute>
                 <Route path="/">
                     <Redirect

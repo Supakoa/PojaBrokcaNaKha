@@ -1,12 +1,12 @@
 import React from "react";
-import HeaderChecker from "./components/header";
+import HeaderApprover from "./components/header";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { user } from "../../redux/actions";
-import BodyChecker from "./components/body";
+import BodyApprover from "./components/body";
 import post2User from "../middleware/post2Redux/postToUser";
 
-export default function Checkers() {
+export default function Approvers() {
     const _dispatch = useDispatch();
     let _history = useHistory();
     const abort = new AbortController();
@@ -36,8 +36,8 @@ export default function Checkers() {
 
     return (
         <div className="w-100" style={{ minHeight: "70vh" }}>
-            <HeaderChecker />
-            <BodyChecker />
+            <HeaderApprover />
+            <BodyApprover />
         </div>
     );
 }

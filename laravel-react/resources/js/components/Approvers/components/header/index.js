@@ -6,7 +6,7 @@ import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 import SignOutBtn from "../../../auth/sign-out";
 import { useSelector } from "react-redux";
 
-const HeaderChecker = () => {
+const HeaderApprover = () => {
     const _user = useSelector(s => s.userState);
     return (
         <Navbar
@@ -54,4 +54,4 @@ const HeaderChecker = () => {
     );
 };
 
-export default HeaderChecker;
+export default HeaderApprover;
