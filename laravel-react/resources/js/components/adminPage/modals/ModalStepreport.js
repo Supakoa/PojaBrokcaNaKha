@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Container, Modal, Col, Row, Card } from "react-bootstrap";
 import { InputNumber } from "../stepReport/InputNumber";
 import { StepColors } from "../stepReport/StepColors";
@@ -18,10 +18,27 @@ export function StepAdd(props) {
 }
 
 export function ModalStepReport(props) {
+    // prop
     const { response } = props;
+
+    // state
     const [modalShow, setModalShow] = React.useState(false);
     const [_stepColors, setStepColors] = React.useState(0);
+
+    // redux
+
+    // local variable
     const modalStyle = { overflowY: "hidden" };
+
+    // function
+    const initState = () => {
+        // console.log('props', props)
+        // console.log(`initState`)
+    }
+
+    useEffect(() => {
+        initState()
+    }, [])
 
     React.useEffect(() => {
         const abort = new AbortController();
@@ -29,7 +46,7 @@ export function ModalStepReport(props) {
         return () => {
             abort.abort();
         };
-    }, [_stepColors]);
+    }, []);
 
     return (
         <>
@@ -42,6 +59,8 @@ export function ModalStepReport(props) {
             >
                 แก้ไข
             </Button>
+
+            {/* hidden modal :: why it render? */}
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -57,13 +76,13 @@ export function ModalStepReport(props) {
                 <Modal.Body>
                     <Container>
                         <Row>
-                            <Col>รหัสฟอร์มเอกสาร: </Col>
-                            <Col>{response.code}</Col>
+                            <Col>ลำดับขั้นทั้งหมด: </Col>
+                            <Col>{response.all_state}</Col>
                         </Row>
                         <hr />
                         <Row>
                             <Col>ชื่อฟอร์มเอกสาร: </Col>
-                            <Col> {response.name}</Col>
+                            <Col>{response.th_name}</Col>
                         </Row>
                     </Container>
                     <hr />

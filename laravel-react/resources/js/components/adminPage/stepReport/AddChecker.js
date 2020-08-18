@@ -1,31 +1,149 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import Axios from "axios";
+import { first, filter } from "lodash";
+import { useSelector, useDispatch } from 'react-redux'
+import { chipGroupAction } from "../../../redux/actions";
+import { data } from "jquery";
 
 export const AddChecker = props => {
-    const { setChip, oldChipName } = props;
-    const [show, setShow] = React.useState(false);
-    const _names = ["john", "steve", "devid", "luis"];
-    const [_nameChip, setNameChip] = React.useState();
-    React.useEffect(() => {});
+    // props
+    const { setChip, oldChipName, id } = props;
 
+    // local state
+    const [show, setShow] = React.useState(false);
+    const [_nameChip, setNameChip] = React.useState(null);
+    const [users, setusers] = useState(null)
+
+    // redux
+    const redux_chipGroup = useSelector(state => state.chipGroup)
+    const dispatch = useDispatch()
+
+    // local variable
+    const _names = ["john", "steve", "devid", "luis"]; // not to use
+
+    // local function
     const handleSelect = e => {
         const { value } = e.target;
+
         if (value !== "0") {
-            setNameChip(value);
+            let filterUsers = users.filter(item => {
+                return item.id == value
+            })
+            filterUsers = first(filterUsers)
+
+            setNameChip(filterUsers);
         }
     };
 
     const handleClick = () => {
-        if (_nameChip.length !== 0) {
-            if (oldChipName !== []) {
-                setChip([...oldChipName, _nameChip]);
-            } else {
-                setChip([_nameChip]);
+        if (_nameChip) {
+            // if (oldChipName[id] !== []) {
+            //     setChip([...oldChipName, _nameChip]);
+            // } else {
+            //     setChip([_nameChip]);
+            // }
+
+            let tmpChip
+            switch (id) {
+                case 0:
+                    tmpChip = redux_chipGroup.data.step1
+                    break;
+
+                case 1:
+                    tmpChip = redux_chipGroup.data.step2
+                    break
+
+                case 2:
+                    tmpChip = redux_chipGroup.data.step3
+                    break
+
+                case 3:
+                    tmpChip = redux_chipGroup.data.step4
+                    break
+
+                case 4:
+                    tmpChip = redux_chipGroup.data.step5
+                    break
             }
+            if (tmpChip.length > 0) {
+                console.log('if')
+                tmpChip.filter(item => {
+                    return tmpChip.id == _nameChip.id
+                })
+            }
+            tmpChip.push(_nameChip)
+            tmpChip = [...new Set(tmpChip)]
+
+            let sendChip = new Array()
+            if (typeof oldChipName[id] != 'undefined') {
+                for (let i = 0; i < oldChipName[id].length; i++) {
+                    sendChip.push(oldChipName[id][i])
+                }
+            }
+            sendChip.push(_nameChip)
+
+            const sendReduxData = {
+                sendChip: tmpChip
+            }
+            dispatch(chipGroupAction(`UPDATE_STEP_${id+1}`, sendReduxData))
+
             setShow(false);
         }
     };
+
+    const initState = async () => {
+        const users = await Axios.get(`http://localhost:8000/api/users`).then(res => {
+            const { success } = res.data
+            let filterUsers = new Array(success.length)
+
+            for (let i = 0; i < filterUsers.length; i++) {
+                filterUsers[i] = success[i]
+            }
+
+            filterUsers = filterUsers.filter(item => {
+                return item.role_id == 2
+            })
+
+            return filterUsers
+        })
+
+        setusers(users)
+    }
+
+    const addApproverOptions = () => {
+        if (users) {
+            return users.map((item, idx) => {
+                return (
+                    <option key={idx.toString()} value={item.id} >{`${item.id}: ${item.title} ${item.first_name} ${item.last_name}`}</option>
+                );
+            })
+        } else {
+            return
+        }
+    }
+
+    const updateUsersOptions = () => {
+        // if (users) {
+        //     let tmpUsers = users.filter(item => {
+        //         return item.id != _nameChip.id
+        //     })
+        //     setusers(tmpUsers)
+        // }
+    }
+
+    // useEffect
+    React.useEffect(() => {}); // not to use
+
+    useEffect(() => {
+        initState()
+    }, [])
+
+    useEffect(() => {
+        updateUsersOptions()
+    }, [redux_chipGroup])
+
     return (
         <>
             <Button
@@ -36,6 +154,7 @@ export const AddChecker = props => {
             >
                 <AddCircleOutlineIcon />
             </Button>
+
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
@@ -51,13 +170,9 @@ export const AddChecker = props => {
                 <Modal.Body>
                     <Form.Group controlId="dropdownAddChecker">
                         <Form.Label>ชื่อผู้ตรวจ</Form.Label>
-                        <Form.Control as="select" onClick={handleSelect}>
-                            <option value="0">เลือก</option>
-                            {_names.map((name, idx) => {
-                                return (
-                                    <option key={idx.toString()}>{name}</option>
-                                );
-                            })}
+                        <Form.Control as="select" onChange={e => handleSelect(e)} defaultValue={0}>
+                            <option value="0" disabled={true}>เลือก</option>
+                            {addApproverOptions()}
                         </Form.Control>
                     </Form.Group>
                 </Modal.Body>

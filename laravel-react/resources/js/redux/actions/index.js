@@ -1,3 +1,5 @@
+import { type } from "jquery";
+
 export const user = obj => {
     return {
         type: "USER",
@@ -144,5 +146,12 @@ export const newsActions = (action, news) => {
     return {
         type: action,
         data: news
+    }
+}
+
+export const chipGroupAction = (action, data) => {
+    return {
+        type: action,
+        data: data
     }
 }

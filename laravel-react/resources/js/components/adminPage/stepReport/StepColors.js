@@ -1,17 +1,102 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import { AddChecker } from "./AddChecker";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
+import { array, number } from "prop-types";
+import { chipGroupAction } from "../../../redux/actions"
+import { useSelector, useDispatch } from 'react-redux'
+
 export const StepColors = props => {
+    // props
     const { numberStep } = props;
+
+    // local state
     const [_chipName, setChipName] = React.useState([]);
 
+    //redux
+    const rerdux_chipGroup = useSelector(state => state.chipGroup)
+    const dispatch = useDispatch()
+
+    // local variable
+
+    // function
     const handleClickDelete = e => {};
+
+    const initState = () => {
+        let chips = new Array(Number(numberStep))
+
+        dispatch(chipGroupAction("NEW_CHIP_GROUP"))
+        setChipName(chips)
+    }
+
+    const setNewValue = () => {
+        console.log('_chipName', _chipName)
+    }
+
+    const updateChipGroup = () => {
+        console.log('updateChipGroup')
+    }
+
+    // useEffect
+    React.useEffect(() => {
+        initState()
+    }, []);
+
+    useEffect(() => {
+        setNewValue()
+    }, [_chipName])
+
+    useEffect(() => {
+        updateChipGroup()
+    }, [rerdux_chipGroup])
+
+    // component with condition
+    const returnStepComponent = (index) => {
+        let selectComponent
+        switch (index + 1) {
+            case 1:
+                selectComponent = rerdux_chipGroup.data.step1
+                break
+
+            case 2:
+                selectComponent = rerdux_chipGroup.data.step2
+                break
+
+            case 3:
+                selectComponent = rerdux_chipGroup.data.step3
+                break
+
+            case 4:
+                selectComponent = rerdux_chipGroup.data.step4
+                break
+
+            case 5:
+                selectComponent = rerdux_chipGroup.data.step5
+                break
+        }
+        if (selectComponent.length > 0) {
+            return selectComponent.map((item, idx) => {
+                return (
+                    <Chip
+                        id={idx}
+                        color="primary"
+                        key={idx.toString()}
+                        avatar={
+                            <Avatar>{item.id}</Avatar>
+                        }
+                        label={`${item.title} ${item.first_name} ${item.last_name}`}
+                        onDelete={handleClickDelete(item.id)}
+                    />
+                )
+            })
+        }
+    }
 
     const rowSteps = number => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
         const _num = Number(number);
+
         const row = _colorSet.map((item, index) => {
             if (index + 1 <= _num) {
                 return (
@@ -20,24 +105,34 @@ export const StepColors = props => {
                             <Col xs={12} md={8}>
                                 <Alert variant={item} className="p-2 mb-0">
                                     step {index + 1}:{" "}
-                                    {_chipName.map((chip, idx) => {
+                                    { returnStepComponent(index) }
+                                    {/* {_chipName.map((chip, idx) => {
+                                        console.log('chip', chip)
+                                        let arrayChips = new Array(chip.length)
+                                        for (let i = 0; i < array.length; i++) {
+                                            arrayChips[i] = chip[i]
+                                        }
+                                        // arrayChips.map((arrayChip, idx) => {
+                                        //     console.log('arrayChip', arrayChip)
+                                        // })
                                         return (
                                             <Chip
                                                 id={idx}
                                                 color="primary"
                                                 key={idx.toString()}
                                                 avatar={
-                                                    <Avatar>{chip[0]}</Avatar>
+                                                    <Avatar>{chip.id}</Avatar>
                                                 }
-                                                label={chip}
-                                                onDelete={handleClickDelete}
+                                                label={`${chip.title} ${chip.first_name} ${chip.last_name}`}
+                                                onDelete={handleClickDelete(chip.id)}
                                             />
                                         );
-                                    })}
+                                    })} */}
                                 </Alert>
                             </Col>
                             <Col xs={6} md={4} className="text-center">
                                 <AddChecker
+                                    id={index}
                                     key={item}
                                     setChip={setChipName}
                                     oldChipName={_chipName}
@@ -52,10 +147,6 @@ export const StepColors = props => {
 
         return row;
     };
-
-    React.useEffect(() => {
-        return () => {};
-    }, [numberStep, _chipName]);
 
     return <>{numberStep !== 0 ? rowSteps(numberStep) : null}</>;
 };

@@ -13,6 +13,7 @@ import documentsTemplateReducer from "./doumentsTemplate";
 import inputTempsReducer from "./inputTemps";
 import subjectsDocumentsReducer from "./subjectsDocumnet";
 import showNewsReducer from "./showNews";
+import chipGroupReducer from "./chipGroup";
 
 import { combineReducers } from "redux";
 
@@ -31,7 +32,8 @@ const allReducers = combineReducers({
     documentsTemplate: documentsTemplateReducer,
     inputTemps: inputTempsReducer,
     subjectsDocument: subjectsDocumentsReducer,
-    showNews: showNewsReducer
+    showNews: showNewsReducer,
+    chipGroup: chipGroupReducer
 });
 
 export default allReducers;

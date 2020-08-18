@@ -6,8 +6,8 @@ const ColumsAction = (idx, res) => {
     return (
         <>
             <ModalStepReport key={idx} response={res} />
-            {" || "}
-            <ModalDelete key={idx + 1} id={res.id} />
+            {/* {" || "}
+            <ModalDelete key={idx + 1} id={res.id} /> */}
         </>
     );
 };

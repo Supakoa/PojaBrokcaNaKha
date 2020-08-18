@@ -3,18 +3,18 @@ export const columns = [
         label: "#",
         field: "id",
         sort: "desc",
-        width: 50
+        width: 100
     },
     {
         label: "รูปแบบเอกสาร",
         field: "name",
-        width: 180
+        width: 300 // default: 180
     },
-    {
-        label: "รหัสเอกสาร",
-        field: "code",
-        width: 150
-    },
+    // {
+    //     label: "รหัสเอกสาร",
+    //     field: "code",
+    //     width: 150
+    // },
     {
         label: "actions",
         field: "action",
