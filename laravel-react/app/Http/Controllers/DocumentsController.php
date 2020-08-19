@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Document;
+use App\User;
 use Illuminate\Http\Request;
 
 class DocumentsController extends Controller
@@ -37,6 +38,10 @@ class DocumentsController extends Controller
 			'data' => 'required'
 		]);
         $document = Document::create($request->all());
+
+        $approver = User::find(3);
+
+        $document->approver()->attach($approver);
 
         return response()->json($document, 201);
     }

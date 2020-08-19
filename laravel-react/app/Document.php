@@ -31,5 +31,7 @@ class Document extends Model
     {
         return $this->belongsTo('App\User');
     }
-
+    public function approver(){
+        return $this->belongsToMany(User::class,"user_approve");
+    }
 }

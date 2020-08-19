@@ -25,6 +25,7 @@ class admin extends Seeder
             'title' => 'Mr.',
             'telephone' => 'admin telephone',
             'role_id' => 1,
+            'major_id' => null,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ], [
@@ -36,6 +37,7 @@ class admin extends Seeder
 //            'password' => Hash::make('adminge@petition'),
             'title' => 'Mr.',
             'telephone' => 'Student telephone',
+            'major_id' => 1,
             'role_id' => 3,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -50,6 +52,7 @@ class admin extends Seeder
                 'title' => 'Mr.',
                 'telephone' => 'Teacher telephone',
                 'role_id' => 2,
+                'major_id' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]];
