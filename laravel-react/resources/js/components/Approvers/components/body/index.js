@@ -19,8 +19,6 @@ import FilterSort from "./FilterSort";
 export default function BodyApprover() {
     const { path, url } = useRouteMatch();
     const _dispatch = useDispatch();
-    const _userDocs = useSelector(s => s.userDocument);
-    const _docTemps = useSelector(s => s.documentsTemplate);
     const _userId = useSelector(s => s.userState.id);
 
     const _props = {
@@ -34,15 +32,13 @@ export default function BodyApprover() {
 
     React.useEffect(() => {
         const abort = new AbortController();
-
-        if (_userId && _userDocs.length === 0) {
+        if (_userId) {
             post2UserDocuments(_props, { signal: abort.signal });
-        } else if (_docTemps.length === 0) {
             post2Subjects(_props, { signal: abort.signal });
             post2Documents(_props, { signal: abort.signal });
         }
         return () => abort.abort();
-    }, [_docTemps, _userDocs, _userId]);
+    }, [_userId]);
 
     return (
         <Container className="py-3">
