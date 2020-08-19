@@ -19,10 +19,11 @@ import FilterSort from "./FilterSort";
 export default function BodyApprover() {
     const { path, url } = useRouteMatch();
     const _dispatch = useDispatch();
+    const token = localStorage._authLocal;
     const _userId = useSelector(s => s.userState.id);
 
     const _props = {
-        token: localStorage._authLocal,
+        token: token,
         id: _userId,
         dispatch: _dispatch,
         acDocTemp: documentsTemplate,
@@ -32,13 +33,13 @@ export default function BodyApprover() {
 
     React.useEffect(() => {
         const abort = new AbortController();
-        if (_userId) {
+        if (_userId && token) {
             post2UserDocuments(_props, { signal: abort.signal });
             post2Subjects(_props, { signal: abort.signal });
             post2Documents(_props, { signal: abort.signal });
         }
         return () => abort.abort();
-    }, [_userId]);
+    }, [_userId, token]);
 
     return (
         <Container className="py-3">

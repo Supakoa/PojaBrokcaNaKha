@@ -35,11 +35,11 @@ const TableApprover = ({ urlApprover }) => {
 
     React.useEffect(() => {
         const abort = new AbortController();
-
-        setRowsOnTable(_userDocs, { signal: abort.signal });
+        if (rows.length < _userDocs.length)
+            setRowsOnTable(_userDocs, { signal: abort.signal });
 
         return () => abort.abort();
-    }, []);
+    }, [rows, _userDocs]);
 
     return (
         <MDBDataTable
