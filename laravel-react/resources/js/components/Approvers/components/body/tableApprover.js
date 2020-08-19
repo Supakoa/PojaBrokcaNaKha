@@ -33,16 +33,15 @@ const TableApprover = ({ urlApprover }) => {
     };
 
     React.useEffect(() => {
-        if (_userId) {
+        if (_userId && _userDocs.length === 0) {
             post2UserDocuments(_props, { signal: abort.signal });
         } else if (_docTemps.length === 0) {
-            post2Documents(_props, { signal: abort.signal });
-        } else if (_userDocs.length === 0) {
             post2Subjects(_props, { signal: abort.signal });
+            post2Documents(_props, { signal: abort.signal });
         } else if (_userDocs.length !== 0 && rows.length === 0) {
             setRowsOnTable(_userDocs, { signal: abort.signal });
         }
-    }, [_docTemps, _userDocs, rows]);
+    }, [_docTemps, _userDocs, rows, _userId]);
 
     React.useEffect(() => {
         return () => abort.abort();

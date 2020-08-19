@@ -4,8 +4,8 @@ import { AddApprover } from "./AddApprover";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import { array, number } from "prop-types";
-import { chipGroupAction } from "../../../redux/actions"
-import { useSelector, useDispatch } from 'react-redux'
+import { chipGroupAction } from "../../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 export const StepColors = props => {
     // props
@@ -15,8 +15,8 @@ export const StepColors = props => {
     const [_chipName, setChipName] = React.useState([]);
 
     //redux
-    const rerdux_chipGroup = useSelector(state => state.chipGroup)
-    const dispatch = useDispatch()
+    const rerdux_chipGroup = useSelector(state => state.chipGroup);
+    const dispatch = useDispatch();
 
     // local variable
 
@@ -26,56 +26,56 @@ export const StepColors = props => {
     };
 
     const initState = () => {
-        let chips = new Array(Number(numberStep))
+        let chips = new Array(Number(numberStep));
 
-        dispatch(chipGroupAction("NEW_CHIP_GROUP"))
-        setChipName(chips)
-    }
+        dispatch(chipGroupAction("NEW_CHIP_GROUP"));
+        setChipName(chips);
+    };
 
     const setNewValue = () => {
-        console.log('_chipName', _chipName)
-    }
+        console.log("_chipName", _chipName);
+    };
 
     const updateChipGroup = () => {
-        console.log('updateChipGroup')
-    }
+        console.log("updateChipGroup");
+    };
 
     // useEffect
     React.useEffect(() => {
-        initState()
+        initState();
     }, []);
 
     useEffect(() => {
-        setNewValue()
-    }, [_chipName])
+        setNewValue();
+    }, [_chipName]);
 
     useEffect(() => {
-        updateChipGroup()
-    }, [rerdux_chipGroup])
+        updateChipGroup();
+    }, [rerdux_chipGroup]);
 
     // component with condition
-    const returnStepComponent = (index) => {
-        let selectComponent
+    const returnStepComponent = index => {
+        let selectComponent;
         switch (index + 1) {
             case 1:
-                selectComponent = rerdux_chipGroup.data.step1
-                break
+                selectComponent = rerdux_chipGroup.data.step1;
+                break;
 
             case 2:
-                selectComponent = rerdux_chipGroup.data.step2
-                break
+                selectComponent = rerdux_chipGroup.data.step2;
+                break;
 
             case 3:
-                selectComponent = rerdux_chipGroup.data.step3
-                break
+                selectComponent = rerdux_chipGroup.data.step3;
+                break;
 
             case 4:
-                selectComponent = rerdux_chipGroup.data.step4
-                break
+                selectComponent = rerdux_chipGroup.data.step4;
+                break;
 
             case 5:
-                selectComponent = rerdux_chipGroup.data.step5
-                break
+                selectComponent = rerdux_chipGroup.data.step5;
+                break;
         }
         if (selectComponent.length > 0) {
             return selectComponent.map((item, idx) => {
@@ -102,7 +102,7 @@ export const StepColors = props => {
                 )
             })
         }
-    }
+    };
 
     const rowSteps = number => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
@@ -116,7 +116,7 @@ export const StepColors = props => {
                             <Col xs={12} md={8}>
                                 <Alert variant={item} className="p-2 mb-0">
                                     step {index + 1}:{" "}
-                                    { returnStepComponent(index) }
+                                    {returnStepComponent(index)}
                                     {/* {_chipName.map((chip, idx) => {
                                         console.log('chip', chip)
                                         let arrayChips = new Array(chip.length)
