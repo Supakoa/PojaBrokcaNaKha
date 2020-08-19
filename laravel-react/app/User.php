@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
 
      public function approve_documents(){
-         return $this->belongsToMany(Document::class,"user_approve");
+         return $this->belongsToMany(Document::class,"user_approve")->withPivot(["comment","return_file","state"])->withTimestamps();
      }
 
     public function major()

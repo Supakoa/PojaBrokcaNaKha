@@ -41,7 +41,7 @@ class DocumentsController extends Controller
 
         $approver = User::find(3);
 
-        $document->approver()->attach($approver);
+        $document->approver()->attach($approver,["state"=>0]);
 
         return response()->json($document, 201);
     }
