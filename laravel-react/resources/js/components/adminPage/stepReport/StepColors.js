@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Alert } from "react-bootstrap";
+import { Container, Row, Col, Alert, Button, Badge } from "react-bootstrap";
 import { AddApprover } from "./AddApprover";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
@@ -79,17 +79,26 @@ export const StepColors = props => {
         }
         if (selectComponent.length > 0) {
             return selectComponent.map((item, idx) => {
+                // return (
+                //     <Chip
+                //         id={item.id}
+                //         color="primary"
+                //         key={idx.toString()}
+                //         avatar={
+                //             <Avatar>{item.id}</Avatar>
+                //         }
+                //         label={`${item.title} ${item.first_name} ${item.last_name}`}
+                //         onDelete={handleClickDelete}
+                //     />
+                // )
                 return (
-                    <Chip
-                        id={item.id}
-                        color="primary"
-                        key={idx.toString()}
-                        avatar={
-                            <Avatar>{item.id}</Avatar>
-                        }
-                        label={`${item.title} ${item.first_name} ${item.last_name}`}
-                        onDelete={handleClickDelete}
-                    />
+                    <Badge key={idx} pill variant="primary">
+                        <Badge variant="light">{$(item.id)}</Badge>
+                        {` ${item.title} ${item.first_name} ${item.last_name}`}
+                        <Button type="button" className="close rounded-circle btn-sm p-0" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </Button>
+                    </Badge>
                 )
             })
         }
