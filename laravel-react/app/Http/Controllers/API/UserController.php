@@ -102,7 +102,16 @@ class UserController extends Controller
 
     public function documents(User $user)
     {
-        return response()->json(['success' => $user->documents], $this->successStatus);
+       switch (auth()->user()->role_id){
+            case 1 :
+                return response()->json(['success' => $user->documents], $this->successStatus);
+            case 2 :
+                return response()->json(['success' => auth()->user()->approve_documents], $this->successStatus);
+            case 3 :
+                return response()->json(['success' => auth()->user()->documents], $this->successStatus);
+           default :
+               return response()->json(['error' => "403"], 403);
+       }
     }
 
     public function destroy($id)
