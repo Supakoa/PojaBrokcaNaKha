@@ -23,7 +23,7 @@ export default function HeaderNav(props) {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="petition-nav" />
             <Navbar.Collapse id="petition-nav">
-                <Nav className="d-flex align-items-center justify-content-end text-light">
+                <Nav className="ml-auto text-light">
                     {Object.keys(_user).length !== 0 ? (
                         <Link
                             to="#"

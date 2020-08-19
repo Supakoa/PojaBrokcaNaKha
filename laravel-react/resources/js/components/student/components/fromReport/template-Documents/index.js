@@ -9,15 +9,18 @@ import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { userDocument } from "../../../../../redux/actions";
+import { fetchUserDoc } from "../../../../middleware/axios/fetchUserDoc";
 
 const TemplateDocuments = props => {
     const { patternInput, id, lang } = props;
-
+    const _dispatch = useDispatch();
+    const _history = useHistory();
     const _userId = useSelector(s => s.userState.id);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState({});
-    const _token = localStorage._authLocal;
     const handleChangeForm = async e => {
         const { value, type, name, files } = e.target;
 
@@ -71,9 +74,23 @@ const TemplateDocuments = props => {
         };
 
         // console.log(_docForm);
-        const _resDoc = await postDocumentUser(_token, _docForm);
+        const _resDoc = await postDocumentUser(
+            localStorage._authLocal,
+            _docForm
+        );
         if (_resDoc.created_at) {
-            Swal.fire("complete. !", "ส่งเรียบร้อย", "success");
+            Swal.fire("complete. !", "ส่งเรียบร้อย", "success").then(
+                async () => {
+                    _history.push("/student");
+                    const _newDocs = await fetchUserDoc({
+                        id: _userId,
+                        token: localStorage._authLocal
+                    });
+                    if (_newDocs) {
+                        _dispatch(userDocument(_newDocs));
+                    }
+                }
+            );
         } else {
             Swal.fire("Error !!", _resDoc.message, "error");
         }
