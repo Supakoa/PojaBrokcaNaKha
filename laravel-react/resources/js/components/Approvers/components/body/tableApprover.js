@@ -1,55 +1,50 @@
 import React from "react";
 import { MDBDataTable } from "mdbreact";
 import { columns } from "./columns";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    documentsTemplate,
-    subjectsForDocument,
-    userDocument
-} from "../../../../redux/actions";
-import post2Subjects from "../../../middleware/post2Redux/postToSubjects";
-import post2Documents from "../../../middleware/post2Redux/postToDocuments";
-import post2UserDocuments from "../../../middleware/post2Redux/postToUserDocuments";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import statusDoc from "../../../student/components/tableReport/statusDocument";
+import _convertDate from "../../../middleware/method/convertDate";
+import { Link } from "react-router-dom";
 
 const TableApprover = ({ urlApprover }) => {
     const _userDocs = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
-    const _userId = useSelector(s => s.userState.id);
-    const abort = new AbortController();
-    const _dispatch = useDispatch();
+    const { i18n } = useTranslation();
+
     const [rows, setRows] = React.useState([]);
 
-    const _props = {
-        token: localStorage._authLocal,
-        id: _userId,
-        dispatch: _dispatch,
-        acDocTemp: documentsTemplate,
-        acSubject: subjectsForDocument,
-        acUserDocs: userDocument
-    };
-
     const setRowsOnTable = userDocs => {
-        console.log(userDocs);
+        const _add2Rows = userDocs.map((uDoc, idx) => {
+            const _name = _docTemps.find(tDoc => {
+                return tDoc.id === uDoc.form_id;
+            });
+
+            return {
+                row_id: (idx + 1).toString(),
+                status_badge: statusDoc(uDoc.status, idx),
+                form_name:
+                    i18n.language === "th" ? _name.th_name : _name.eng_name,
+                from_user: "อิอิอิ",
+                created_at_converted: _convertDate(uDoc.created_at),
+                action: <Link to={`${urlApprover}/show/${uDoc.id}`}>show</Link>
+            };
+        });
+        setRows(_add2Rows);
     };
 
     React.useEffect(() => {
-        if (_userId) {
-            post2UserDocuments(_props, { signal: abort.signal });
-        } else if (_docTemps.length === 0) {
-            post2Documents(_props, { signal: abort.signal });
-        } else if (_userDocs.length === 0) {
-            post2Subjects(_props, { signal: abort.signal });
-        } else if (_userDocs.length !== 0 && rows.length === 0) {
+        const abort = new AbortController();
+
+        if (_userDocs.length !== 0 && rows.length === 0) {
             setRowsOnTable(_userDocs, { signal: abort.signal });
         }
-    }, [_docTemps, _userDocs, rows]);
-
-    React.useEffect(() => {
         return () => abort.abort();
-    }, []);
+    }, [_userDocs, rows]);
 
     return (
         <MDBDataTable
+            small
             noBottomColumns={true}
             entriesLabel="ข้อมูลที่แสดง"
             scrollX
