@@ -18,13 +18,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     user,
     documentsTemplate,
-    subjectsForDocument
+    subjectsForDocument,
+    userDocument
 } from "../../redux/actions";
 import { _propsAuth } from "../middleware/props-auth";
 import MessageElements from "./components/message";
 import post2Documents from "../middleware/post2Redux/postToDocuments";
 import post2Subjects from "../middleware/post2Redux/postToSubjects";
 import post2User from "../middleware/post2Redux/postToUser";
+import post2UserDocuments from "../middleware/post2Redux/postToUserDocuments";
 
 export default function Student() {
     let { path, url } = useRouteMatch();
@@ -33,32 +35,31 @@ export default function Student() {
     const _dispatch = useDispatch();
     const token = localStorage._authLocal;
     const abort = new AbortController();
-    const _subDoc = useSelector(s => s.subjectsDocument);
-    const _docTemp = useSelector(state => state.documentsTemplate);
     const _user = useSelector(state => state.userState);
 
     const _props = {
         token: token,
         role: 3,
         history: _history,
-        userId: _user.id,
+        id: _user.id,
         dispatch: _dispatch,
         acDocTemp: documentsTemplate,
         acSubject: subjectsForDocument,
+        acUserDocs: userDocument,
         acUser: user
     };
 
     React.useEffect(() => {
         if (Object.keys(_user).length === 0 && token) {
             post2User(_props, { signal: abort.signal });
-        } else if (_docTemp.length === 0 && token) {
+        } else if (_user.id && token) {
             post2Documents(_props, {
                 signal: abort.signal
             });
-        } else if (_subDoc.length === 0) {
             post2Subjects(_props, { signal: abort.signal });
+            post2UserDocuments(_props, { signal: abort.signal });
         }
-    }, [_user, _docTemp, token, _subDoc, _props]);
+    }, [token, _user.id]);
 
     React.useEffect(() => {
         return () => {
