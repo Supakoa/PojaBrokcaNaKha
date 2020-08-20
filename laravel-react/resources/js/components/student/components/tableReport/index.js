@@ -21,6 +21,7 @@ export default function ReportTable() {
     };
 
     const fill2Rows = async _props => {
+
         const tempRows = await _setRowsTable(_props);
         if (tempRows !== undefined) {
             const _rows = tempRows.map((item, idx) => {
@@ -42,9 +43,9 @@ export default function ReportTable() {
     };
 
     React.useEffect(() => {
-        if (rows.length < _userDoc.length)
+        if (rows.length < _userDoc.length && _docTemp.length !== 0)
             fill2Rows(_props, { signal: abort.signal });
-    }, [rows, _userDoc]);
+    }, [rows, _userDoc, _docTemp]);
 
     React.useEffect(() => {
         return () => {

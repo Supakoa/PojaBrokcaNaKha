@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function FormLogin(props) {
     return (
-        <Form className="effectSection">
+        <Form onSubmit={props.clickLogin} className="effectSection">
             <Form.Group controlId="formBasicEmail">
                 <Form.Label
                     className={
@@ -22,7 +22,7 @@ function FormLogin(props) {
                             : ""
                     }
                     name="username"
-                    type="email"
+                    type="text"
                     placeholder="อีเมล"
                     onChange={props.inputValue}
                 />
@@ -52,7 +52,7 @@ function FormLogin(props) {
             </Form.Group>
             <Container className="d-flex justify-content-between align-items-end">
                 <Form.Group as={Row}>
-                    <Button variant="primary" onClick={props.clickLogin}>
+                    <Button variant="primary" type="submit">
                         ยืนยัน
                     </Button>
                 </Form.Group>
