@@ -33,33 +33,35 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('users/{user}/documents', 'API\UserController@documents');
     Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
     Route::post('documents/{document}/cancel',"DocumentsController@cancel");
-});
 
-Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
+    Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 
-Route::resource('subjects', 'SubjectsController', ['except' => ['create', 'edit']]);
+    Route::resource('subjects', 'SubjectsController', ['except' => ['create', 'edit']]);
 
 
 //Forms
-Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
-Route::get('forms/{form}/documents','formsController@documents');
-Route::get('forms/{form}/groups','formsController@groups');
-Route::post('forms/{form}/groups','formsController@addGroup');
-Route::delete('forms/{form}/groups','formsController@deteleGroup');
+    Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
+    Route::get('forms/{form}/documents','formsController@documents');
+    Route::get('forms/{form}/groups','formsController@groups');
+    Route::post('forms/{form}/groups','formsController@addGroup');
+    Route::delete('forms/{form}/groups','formsController@deteleGroup');
 
-//Groups
-Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
-Route::get('groups/{group}/users','GroupsController@users');
-Route::post('groups/{group}/users','GroupsController@addUser');
-Route::delete('groups/{group}/users','GroupsController@deleteUser');
+    //Groups
+    Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
+    Route::get('groups/{group}/users','GroupsController@users');
+    Route::post('groups/{group}/users','GroupsController@addUser');
+    Route::delete('groups/{group}/users','GroupsController@deleteUser');
 
-Route::post("/uploads",function (Request $request){
+    Route::post("/uploads",function (Request $request){
 
+        $imagePath = request('image')->store('uploads','public');
+        $image = Image::make(public_path("storage/{$imagePath}"));
+        $image->save();
+        return  $imagePath;
 
-    $imagePath = request('image')->store('uploads','public');
-    $image = Image::make(public_path("storage/{$imagePath}"));
-    $image->save();
-    return  $imagePath;
+    });
 
 });
+
+
 
