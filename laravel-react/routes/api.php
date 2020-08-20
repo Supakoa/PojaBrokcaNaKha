@@ -31,13 +31,14 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::resource('ChatMessenger','CRUD\ChatMessengerController');
     Route::resource('users', 'API\UserController');
     Route::get('users/{user}/documents', 'API\UserController@documents');
+    Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
+    Route::post('documents/{document}/cancel',"DocumentsController@cancel");
 });
 
 Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 
 Route::resource('subjects', 'SubjectsController', ['except' => ['create', 'edit']]);
 
-Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
 
 //Forms
 Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
