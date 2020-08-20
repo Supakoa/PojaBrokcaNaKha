@@ -8,7 +8,7 @@ export const columns = [
     {
         label: "สถานะ",
         field: "status_badge",
-        sort: "asc",
+        sort: "desc",
         width: 120
     },
     {

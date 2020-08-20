@@ -20,10 +20,12 @@ const InputsDocument = ({ inputs, lang }) => {
                                         className="py-2"
                                     >
                                         <p className="mb-1">
-                                            {lang === "th"
-                                                ? item.th_name
-                                                : item.eng_name}
-                                            :{" "}
+                                            <strong>
+                                                {lang === "th"
+                                                    ? item.th_name
+                                                    : item.eng_name}
+                                                :{" "}
+                                            </strong>
                                             {item.th_options.map((sub, idx) => {
                                                 return idx === Number(item.data)
                                                     ? sub
@@ -42,10 +44,13 @@ const InputsDocument = ({ inputs, lang }) => {
                                         className="py-2"
                                     >
                                         <p className="mb-1">
-                                            {lang === "th"
-                                                ? item.th_name
-                                                : item.eng_name}
-                                            :{" "}
+                                            <strong>
+                                                {lang === "th"
+                                                    ? item.th_name
+                                                    : item.eng_name}
+                                                :{" "}
+                                            </strong>
+
                                             {!isNaN(item.data)
                                                 ? lang === "th"
                                                     ? item.th_options.map(
@@ -101,10 +106,12 @@ const InputsDocument = ({ inputs, lang }) => {
                                         className="py-2"
                                     >
                                         <p className="mb-1">
-                                            {lang === "th"
-                                                ? item.th_name
-                                                : item.eng_name}
-                                            :{" "}
+                                            <strong>
+                                                {lang === "th"
+                                                    ? item.th_name
+                                                    : item.eng_name}
+                                                :{" "}
+                                            </strong>
                                             {lang === "th"
                                                 ? s.th_name
                                                 : s.eng_name}
@@ -120,10 +127,12 @@ const InputsDocument = ({ inputs, lang }) => {
                                         className="py-2 w-100"
                                     >
                                         <p className="mb-1">
-                                            {lang === "th"
-                                                ? item.th_name
-                                                : item.eng_name}
-                                            :{" "}
+                                            <strong>
+                                                {lang === "th"
+                                                    ? item.th_name
+                                                    : item.eng_name}
+                                                :{" "}
+                                            </strong>
                                             {item.data !== "" ? (
                                                 <Image
                                                     className="d-block "
@@ -146,9 +155,11 @@ const InputsDocument = ({ inputs, lang }) => {
                                         className="py-2"
                                     >
                                         <p className="mb-1">
-                                            {lang === "th"
-                                                ? item.th_name
-                                                : item.eng_name}
+                                            <strong>
+                                                {lang === "th"
+                                                    ? item.th_name
+                                                    : item.eng_name}
+                                            </strong>
                                             : {item.data}
                                         </p>
                                     </Col>

@@ -10,7 +10,7 @@ const fetchDocuments = async token => {
             return res.data;
         })
         .catch(er => {
-            console.log(er);
+            return er.error;
         });
     return _docs;
 };

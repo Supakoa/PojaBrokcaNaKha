@@ -14,8 +14,7 @@ import { useHistory } from "react-router-dom";
 import { userDocument } from "../../../../../redux/actions";
 import { fetchUserDoc } from "../../../../middleware/axios/fetchUserDoc";
 
-const TemplateDocuments = props => {
-    const { patternInput, id, lang } = props;
+const TemplateDocuments = ({ patternInput, id, lang }) => {
     const _dispatch = useDispatch();
     const _history = useHistory();
     const _userId = useSelector(s => s.userState.id);
@@ -166,7 +165,7 @@ const TemplateDocuments = props => {
                     }
                 })}
             </Form.Row>
-            <Button variant="info" type="submit" >
+            <Button variant="info" type="submit">
                 sending
             </Button>
         </Form>
