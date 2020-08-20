@@ -97,7 +97,7 @@ const TemplateDocuments = props => {
     };
 
     return (
-        <Form className="py-3">
+        <Form className="py-3" onSubmit={handleSending}>
             <Form.Row>
                 {patternInput.map((item, idx) => {
                     if (item.tag_type === "select1") {
@@ -166,7 +166,7 @@ const TemplateDocuments = props => {
                     }
                 })}
             </Form.Row>
-            <Button variant="info" onClick={handleSending}>
+            <Button variant="info" type="submit" >
                 sending
             </Button>
         </Form>

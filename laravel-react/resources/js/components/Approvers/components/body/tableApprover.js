@@ -19,27 +19,31 @@ const TableApprover = ({ urlApprover }) => {
             const _name = _docTemps.find(tDoc => {
                 return tDoc.id === uDoc.form_id;
             });
-
-            return {
-                row_id: (idx + 1).toString(),
-                status_badge: statusDoc(uDoc.status, idx),
-                form_name:
-                    i18n.language === "th" ? _name.th_name : _name.eng_name,
-                from_user: "อิอิอิ",
-                created_at_converted: _convertDate(uDoc.created_at),
-                action: <Link to={`${urlApprover}/show/${uDoc.id}`}>show</Link>
-            };
+            if (_name !== undefined) {
+                return {
+                    row_id: (idx + 1).toString(),
+                    status_badge: statusDoc(uDoc.status, idx),
+                    form_name:
+                        i18n.language === "th" ? _name.th_name : _name.eng_name,
+                    from_user: "อิอิอิ",
+                    created_at_converted: _convertDate(uDoc.created_at),
+                    action: (
+                        <Link to={`${urlApprover}/show/${uDoc.id}`}>show</Link>
+                    )
+                };
+            }
         });
+
         setRows(_add2Rows);
     };
 
     React.useEffect(() => {
         const abort = new AbortController();
-        if (rows.length < _userDocs.length)
+        if (rows.length < _userDocs.length && _docTemps.length !== 0)
             setRowsOnTable(_userDocs, { signal: abort.signal });
 
         return () => abort.abort();
-    }, [rows, _userDocs]);
+    }, [rows, _userDocs, _docTemps]);
 
     return (
         <MDBDataTable
