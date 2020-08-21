@@ -14,7 +14,7 @@ import post2UserDocuments from "../../../middleware/post2Redux/postToUserDocumen
 import { Switch, useRouteMatch, Route } from "react-router-dom";
 import ShowDetail from "./ShowDetail";
 import NoneDetail from "./NoneDetatil";
-import FilterSort from "./FilterSort";
+import FilterSort from "../../../filter";
 
 export default function BodyApprover() {
     const { path, url } = useRouteMatch();
