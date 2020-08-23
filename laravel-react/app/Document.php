@@ -32,6 +32,6 @@ class Document extends Model
         return $this->belongsTo('App\User');
     }
     public function approver(){
-        return $this->belongsToMany(User::class,"user_approve")->withPivot(["comment","return_file","state"])->withTimestamps();
+        return $this->belongsToMany(User::class,"user_approve")->withPivot(["comment","return_file","state","status"])->withTimestamps();
     }
 }

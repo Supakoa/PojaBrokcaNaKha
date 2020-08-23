@@ -21,6 +21,10 @@ export default function BodyApprover() {
     const _dispatch = useDispatch();
     const token = localStorage._authLocal;
     const _userId = useSelector(s => s.userState.id);
+    const [_filValid, setFilValid] = React.useState(false);
+    const [_sortBy, setSortBy] = React.useState("pending");
+    const _optionSort = ["approve", "pending", "all"];
+    const [rows, setRows] = React.useState([]);
 
     const _props = {
         token: token,
@@ -29,6 +33,12 @@ export default function BodyApprover() {
         acDocTemp: documentsTemplate,
         acSubject: subjectsForDocument,
         acUserDocs: userDocument
+    };
+
+    const setFilterTable = e => {
+        const _selected = e.target.name;
+        setSortBy(_selected ? _selected : _sortBy);
+        setRows(_selected ? [] : rows);
     };
 
     React.useEffect(() => {
@@ -43,8 +53,23 @@ export default function BodyApprover() {
 
     return (
         <Container className="py-3">
-            <FilterSort />
-            <TableApprover urlApprover={url} />
+            <FilterSort
+                setFilterVaild={setFilValid}
+                filterValid={_filValid}
+                sortBy={_sortBy}
+                setSort={setFilterTable}
+                arrayData={_optionSort}
+                noti={rows.length}
+            />
+            <TableApprover
+                urlApprover={url}
+                sortTable={_sortBy}
+                setValidSort={setFilValid}
+                validSort={_filValid}
+                setSortBy={setSortBy}
+                setRows={setRows}
+                rows={rows}
+            />
             <Switch>
                 <Route exact path={`${path}`} component={NoneDetail} />
                 <Route path={`${path}/show/:id`} component={ShowDetail} />

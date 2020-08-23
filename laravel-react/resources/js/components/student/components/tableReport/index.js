@@ -3,7 +3,7 @@ import { MDBDataTable } from "mdbreact";
 import { _setRowsTable } from "../../../middleware/method/setRowsTable";
 import { useSelector } from "react-redux";
 import { columns } from "./columns";
-import statusDoc from "./statusDocument";
+import StatusBadgeDoc from "./statusDocument";
 import UserModalDoc from "./modal";
 import { useTranslation } from "react-i18next";
 import FilterSort from "../../../filter";
@@ -15,8 +15,8 @@ export default function ReportTable() {
     const { i18n } = useTranslation();
     const [rows, setRows] = React.useState([]);
     const [_filValid, setFilValid] = React.useState(false);
-    const [_sortBy, setSortBy] = React.useState("all");
-    const _optionSort = ["all", "approve", "pending", "cancel", "edit", "fuck"];
+    const [_sortBy, setSortBy] = React.useState("pending");
+    const _optionSort = ["all", "approve", "pending", "cancel", "edit"];
     const _props = {
         docTemp: _docTemp,
         userDoc: _userDoc,
@@ -26,18 +26,18 @@ export default function ReportTable() {
 
     const setFilterTable = e => {
         const _selected = e.target.name;
-        if (_selected) {
-            setSortBy(_selected);
-            setRows([]);
-        }
+        setSortBy(_selected ? _selected : _sortBy);
+        setRows(_selected ? [] : rows);
     };
 
     const fill2Rows = async _props => {
         const tempRows = await _setRowsTable(_props);
 
-        if (tempRows !== undefined) {
+        if (tempRows) {
             const _rows = tempRows.map((item, idx) => {
-                item.status_badge = statusDoc(item.status, idx);
+                item.status_badge = (
+                    <StatusBadgeDoc key={idx} status={item.status} />
+                );
                 item.row_id = (idx + 1).toString();
                 item.action = (
                     <UserModalDoc
@@ -49,11 +49,8 @@ export default function ReportTable() {
                 return item;
             });
             if (rows.length === 0) {
-                let arr = [];
-                _rows.forEach(item => {
-                    if (item.status === _sortBy) {
-                        arr = [...arr, item];
-                    }
+                const arr = _rows.filter(item => {
+                    return item.status === _sortBy;
                 });
                 if (_sortBy !== "all" && arr.length === 0) {
                     Swal.fire(
@@ -96,6 +93,7 @@ export default function ReportTable() {
                     arrayData={_optionSort}
                     filterValid={_filValid}
                     setFilterVaild={setFilValid}
+                    noti={rows.length}
                 />
             </div>
             <MDBDataTable
