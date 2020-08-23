@@ -25,7 +25,6 @@ export default function dataTableStepReport() {
 
     const initShowStepReports = async () => {
         const showForms = await Axios.get(pathGetForms).then(res => {
-            console.log('res.data', res.data)
             return res.data
         })
 

@@ -155,3 +155,24 @@ export const chipGroupAction = (action, data) => {
         data: data
     }
 }
+
+export const showGroupAction = (action, data) => {
+    return {
+        type: action,
+        data: data
+    }
+}
+
+export const showApproversAction = (action, data) => {
+    return {
+        type: action,
+        data: data
+    }
+}
+
+export const showSubjectsAction = (action, data) => {
+    return {
+        type: action,
+        data: data
+    }
+}

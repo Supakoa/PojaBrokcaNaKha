@@ -19,7 +19,7 @@ class GroupsController extends Controller
      */
     public function index(Request $request)
     {
-        $groups = Group::latest()->paginate(25);
+        $groups = Group::all();
 
         return $groups;
     }

@@ -14,8 +14,11 @@ import inputTempsReducer from "./inputTemps";
 import subjectsDocumentsReducer from "./subjectsDocumnet";
 import showNewsReducer from "./showNews";
 import chipGroupReducer from "./chipGroup";
+import showGroupReducer from "./showGroup";
+import showApproversReducer from "./showApprovers";
 
 import { combineReducers } from "redux";
+import showSubjectsReducer from "./showSubjects";
 
 const allReducers = combineReducers({
     isLogged: loggerReducer,
@@ -33,7 +36,10 @@ const allReducers = combineReducers({
     inputTemps: inputTempsReducer,
     subjectsDocument: subjectsDocumentsReducer,
     showNews: showNewsReducer,
-    chipGroup: chipGroupReducer
+    chipGroup: chipGroupReducer,
+    showGroup: showGroupReducer,
+    showApprovers: showApproversReducer,
+    showSubjects: showSubjectsReducer,
 });
 
 export default allReducers;

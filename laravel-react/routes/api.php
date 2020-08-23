@@ -42,14 +42,14 @@ Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edi
 //Forms
 Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
 Route::get('forms/{form}/documents','formsController@documents');
-Route::get('forms/{form}/groups','formsController@groups');
-Route::post('forms/{form}/groups','formsController@addGroup');
+Route::get('forms/{form}/groups','formsController@groups'); // direction form
+Route::post('forms/{form}/groups','formsController@addGroup'); // direction form
 Route::delete('forms/{form}/groups','formsController@deteleGroup');
 
 //Groups
 Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
 Route::get('groups/{group}/users','GroupsController@users');
-Route::post('groups/{group}/users','GroupsController@addUser');
+Route::post('groups/{group}/users','GroupsController@addUser'); // group_user
 Route::delete('groups/{group}/users','GroupsController@deleteUser');
 
 Route::post("/uploads",function (Request $request){
