@@ -41,7 +41,13 @@ const dataNewsTable = () => {
     };
 
     const getNews = async () => {
-        await Axios.get("http://localhost:8000/api/news").then(async res => {
+        await Axios.get("http://localhost:8000/api/news", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(async res => {
             await dispatch(newsActions("INIT_SHOW_NEWS", res.data))
         });
     };

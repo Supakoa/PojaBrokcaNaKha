@@ -12,7 +12,7 @@ export const StepColors = props => {
     const { numberStep } = props;
 
     // local state
-    const [_chipName, setChipName] = React.useState([]);
+    // const [_chipName, setChipName] = React.useState([]);
 
     //redux
     const rerdux_chipGroup = useSelector(state => state.chipGroup);
@@ -21,37 +21,47 @@ export const StepColors = props => {
     // local variable
 
     // function
-    const handleClickDelete = e => {
-        console.log('e', e)
-    };
-
     const initState = () => {
-        let chips = new Array(Number(numberStep));
-
-        dispatch(chipGroupAction("NEW_CHIP_GROUP"));
-        setChipName(chips);
+        dispatch(chipGroupAction("NEW_CHIP_GROUP", numberStep));
     };
 
-    const setNewValue = () => {
-        console.log("_chipName", _chipName);
-    };
+    const deleteUserOnStep = (item, onStep) => {
+        let selectStep
+        switch (onStep + 1) {
+            case 1:
+                selectStep = rerdux_chipGroup.data.step1;
+                break;
 
-    const updateChipGroup = () => {
-        console.log("updateChipGroup");
-    };
+            case 2:
+                selectStep = rerdux_chipGroup.data.step2;
+                break;
+
+            case 3:
+                selectStep = rerdux_chipGroup.data.step3;
+                break;
+
+            case 4:
+                selectStep = rerdux_chipGroup.data.step4;
+                break;
+
+            case 5:
+                selectStep = rerdux_chipGroup.data.step5;
+                break;
+        }
+        selectStep = selectStep.filter(interest => {
+            return interest.id != item.id
+        })
+
+        const sendReduxData = {
+            sendChip: selectStep
+        }
+        dispatch(chipGroupAction(`UPDATE_STEP_${onStep + 1}`, sendReduxData))
+    }
 
     // useEffect
     React.useEffect(() => {
         initState();
-    }, []);
-
-    useEffect(() => {
-        setNewValue();
-    }, [_chipName]);
-
-    useEffect(() => {
-        updateChipGroup();
-    }, [rerdux_chipGroup]);
+    }, [numberStep]);
 
     // component with condition
     const returnStepComponent = index => {
@@ -95,7 +105,12 @@ export const StepColors = props => {
                     <Badge key={idx} pill variant="primary">
                         <Badge variant="light">{$(item.id)}</Badge>
                         {` ${item.title} ${item.first_name} ${item.last_name}`}
-                        <Button type="button" className="close rounded-circle btn-sm p-0" aria-label="Close">
+                        <Button
+                            type="button"
+                            className="close rounded-circle btn-sm p-0"
+                            aria-label="Close"
+                            onClick={e => deleteUserOnStep(item, index)}
+                        >
                             <span aria-hidden="true">&times;</span>
                         </Button>
                     </Badge>
@@ -117,36 +132,12 @@ export const StepColors = props => {
                                 <Alert variant={item} className="p-2 mb-0">
                                     step {index + 1}:{" "}
                                     {returnStepComponent(index)}
-                                    {/* {_chipName.map((chip, idx) => {
-                                        console.log('chip', chip)
-                                        let arrayChips = new Array(chip.length)
-                                        for (let i = 0; i < array.length; i++) {
-                                            arrayChips[i] = chip[i]
-                                        }
-                                        // arrayChips.map((arrayChip, idx) => {
-                                        //     console.log('arrayChip', arrayChip)
-                                        // })
-                                        return (
-                                            <Chip
-                                                id={idx}
-                                                color="primary"
-                                                key={idx.toString()}
-                                                avatar={
-                                                    <Avatar>{chip.id}</Avatar>
-                                                }
-                                                label={`${chip.title} ${chip.first_name} ${chip.last_name}`}
-                                                onDelete={handleClickDelete(chip.id)}
-                                            />
-                                        );
-                                    })} */}
                                 </Alert>
                             </Col>
                             <Col xs={6} md={4} className="text-center">
                                 <AddApprover
                                     id={index}
                                     key={item}
-                                    setChip={setChipName}
-                                    oldChipName={_chipName}
                                 />
                             </Col>
                         </Row>

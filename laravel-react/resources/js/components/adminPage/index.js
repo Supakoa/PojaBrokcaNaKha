@@ -13,6 +13,7 @@ import Report from "./report";
 import User from "./user";
 import News from "./news";
 import Messagws from "./message";
+import Group from "./group";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import post2User from "../middleware/post2Redux/postToUser";
@@ -73,6 +74,9 @@ export default function AdminPage() {
                         </Route>
                         <Route path={`${path}/news`}>
                             <News t={t} />
+                        </Route>
+                        <Route path={`${path}/group`}>
+                            <Group />
                         </Route>
                         <Route path={`${path}/step-report`}>
                             <StepReport />

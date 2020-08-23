@@ -9,7 +9,7 @@ import { data } from "jquery";
 
 export const AddApprover = props => {
     // props
-    const { setChip, oldChipName, id } = props;
+    const { id } = props;
 
     // local state
     const [show, setShow] = React.useState(false);
@@ -68,21 +68,12 @@ export const AddApprover = props => {
                     break
             }
             if (tmpChip.length > 0) {
-                console.log('if')
                 tmpChip.filter(item => {
                     return tmpChip.id == _nameChip.id
                 })
             }
             tmpChip.push(_nameChip)
             tmpChip = [...new Set(tmpChip)]
-
-            let sendChip = new Array()
-            if (typeof oldChipName[id] != 'undefined') {
-                for (let i = 0; i < oldChipName[id].length; i++) {
-                    sendChip.push(oldChipName[id][i])
-                }
-            }
-            sendChip.push(_nameChip)
 
             const sendReduxData = {
                 sendChip: tmpChip
@@ -124,25 +115,12 @@ export const AddApprover = props => {
         }
     }
 
-    const updateUsersOptions = () => {
-        // if (users) {
-        //     let tmpUsers = users.filter(item => {
-        //         return item.id != _nameChip.id
-        //     })
-        //     setusers(tmpUsers)
-        // }
-    }
-
     // useEffect
     React.useEffect(() => {}); // not to use
 
     useEffect(() => {
         initState()
     }, [])
-
-    useEffect(() => {
-        updateUsersOptions()
-    }, [redux_chipGroup])
 
     return (
         <>

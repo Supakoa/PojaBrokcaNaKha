@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Button, Container, Modal, Col, Row, Card } from "react-bootstrap";
 import { InputNumber } from "../stepReport/InputNumber";
 import { StepColors } from "../stepReport/StepColors";
+import { useSelector, useDispatch } from 'react-redux'
+import { chipGroupAction } from "../../../redux/actions";
 
 export function StepAdd(props) {
     return (
@@ -26,6 +28,8 @@ export function ModalStepReport(props) {
     const [_stepColors, setStepColors] = React.useState(0);
 
     // redux
+    const redux_chipGroup = useSelector(state => state.chipGroup)
+    const dispatch = useDispatch()
 
     // local variable
     const modalStyle = { overflowY: "hidden" };
@@ -34,6 +38,11 @@ export function ModalStepReport(props) {
     const initState = () => {
         // console.log('props', props)
         // console.log(`initState`)
+    }
+
+    const sendDataToDB = () => {
+        console.log('sendDataToDB')
+        console.log('redux_chipGroup', redux_chipGroup)
     }
 
     useEffect(() => {
@@ -101,7 +110,12 @@ export function ModalStepReport(props) {
                     </Card>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary">บันทึก</Button>
+                    <Button
+                        variant="primary"
+                        onClick={e => sendDataToDB()}
+                    >
+                        บันทึก
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

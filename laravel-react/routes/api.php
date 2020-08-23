@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::resource('subjects', 'SubjectsController', ['except' => ['create', 'edit']]);
 
 
-//Forms
+    //Forms
     Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
     Route::get('forms/{form}/documents','formsController@documents');
     Route::get('forms/{form}/groups','formsController@groups');

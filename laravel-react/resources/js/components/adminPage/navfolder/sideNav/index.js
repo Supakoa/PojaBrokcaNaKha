@@ -8,6 +8,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import GroupsIcon from "@material-ui/icons/Group";
 // import ExpandMore from "@material-ui/icons/ExpandMore";
 import PeopleIcon from "@material-ui/icons/People";
 import LinkIcon from "@material-ui/icons/Link";
@@ -97,6 +98,17 @@ export default function SideNav({ url }) {
                     <ListItemText
                         className="d-lg-block d-sm-none"
                         primary={t('menu.news')}
+                    />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={`${url}/group`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <GroupsIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={"ตั้งค่ากลุ่ม"}
                     />
                 </ListItem>
             </Link>
