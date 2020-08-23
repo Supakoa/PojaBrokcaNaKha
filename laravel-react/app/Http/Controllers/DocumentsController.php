@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Document;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DocumentsController extends Controller
@@ -37,6 +39,10 @@ class DocumentsController extends Controller
 			'data' => 'required'
 		]);
         $document = Document::create($request->all());
+
+        $approver = User::find(3);
+
+        $document->approver()->attach($approver,["state"=>0]);
 
         return response()->json($document, 201);
     }
@@ -88,5 +94,18 @@ class DocumentsController extends Controller
         Document::destroy($id);
 
         return response()->json(null, 204);
+    }
+
+    public function cancel(Document $document){
+
+        if (auth()->user()->role_id == 1 || auth()->user()->id == $document->user_id){
+            $document->status = "cancel";
+            $document->user_cancel_id = auth()->user()->id;
+            $document->canceled_at = Carbon::now();
+            $document->note  = "cancel";
+            $document->save();
+            return response()->json($document, 200);
+        }
+            return response()->json("Nooo", 403);
     }
 }

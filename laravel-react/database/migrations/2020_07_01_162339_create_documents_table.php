@@ -20,7 +20,7 @@ class CreateDocumentsTable extends Migration
             $table->integer('form_id')->unsigned();
             $table->json('data')->nullable();
             $table->tinyInteger('state')->default(0);
-            $table->enum('status',["pending","success","reject","cancel"]);
+            $table->enum('status',["pending","success","reject","cancel","edit"]);
             $table->timestamp('canceled_at')->nullable();
             $table->text('note')->nullable();
             $table->foreign('user_id')->references('id')->on('users');

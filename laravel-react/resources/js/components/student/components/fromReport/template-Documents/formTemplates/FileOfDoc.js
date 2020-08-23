@@ -12,7 +12,7 @@ const FileOfDoc = props => {
         >
             <Form.File
                 name={inputData.type}
-                id="custom-file"
+                id={inputData.id}
                 label={lang === "th" ? inputData.th_name : inputData.eng_name}
                 onChange={handle}
             />

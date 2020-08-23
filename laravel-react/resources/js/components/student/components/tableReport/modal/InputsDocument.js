@@ -1,51 +1,58 @@
 import React from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const InputsDocument = ({ inputs, lang }) => {
     const _subjects = useSelector(s => s.subjectsDocument);
-
+    const _styleList = {
+        listStyle: "none"
+    };
     return (
-        <Container className="py-2">
+        <Container
+            style={{ maxHeight: "60vh", overflowY: "scroll" }}
+            className="py-2 "
+        >
             {inputs !== null ? (
-                <Row>
+                <ul>
                     {inputs.inputs.map((item, idx) => {
                         switch (item.tag_type) {
                             case "select1":
                                 return (
-                                    <Col
+                                    <li
+                                        style={_styleList}
+                                        className="w-100 clearfix border-bottom py-2"
                                         key={idx}
-                                        lg={item.size}
-                                        md={item.size}
-                                        className="py-2"
                                     >
-                                        <p className="mb-1">
+                                        <strong className="pl-2 float-left">
                                             {lang === "th"
                                                 ? item.th_name
                                                 : item.eng_name}
                                             :{" "}
+                                        </strong>
+                                        <span className="mb-1 px-2 float-right">
                                             {item.th_options.map((sub, idx) => {
                                                 return idx === Number(item.data)
                                                     ? sub
                                                     : null;
                                             })}
-                                        </p>
-                                    </Col>
+                                        </span>
+                                    </li>
                                 );
                             case "select2":
                                 //it's has other choice
                                 return (
-                                    <Col
+                                    <li
+                                        style={_styleList}
+                                        className="w-100 clearfix border-bottom py-2"
                                         key={idx}
-                                        lg={item.size}
-                                        md={item.size}
-                                        className="py-2"
                                     >
-                                        <p className="mb-1">
+                                        <strong className="pl-2 float-left">
                                             {lang === "th"
                                                 ? item.th_name
                                                 : item.eng_name}
                                             :{" "}
+                                        </strong>
+                                        <span className="mb-1 px-2 float-right">
                                             {!isNaN(item.data)
                                                 ? lang === "th"
                                                     ? item.th_options.map(
@@ -69,8 +76,8 @@ const InputsDocument = ({ inputs, lang }) => {
                                                           }
                                                       )
                                                 : item.data}
-                                        </p>
-                                    </Col>
+                                        </span>
+                                    </li>
                                 );
                             case "select3":
                                 let s = {};
@@ -94,71 +101,88 @@ const InputsDocument = ({ inputs, lang }) => {
                                 }
                                 //Subject
                                 return (
-                                    <Col
+                                    <li
+                                        style={_styleList}
+                                        className="w-100 clearfix border-bottom py-2"
                                         key={idx}
-                                        lg={item.size}
-                                        md={item.size}
-                                        className="py-2"
                                     >
-                                        <p className="mb-1">
+                                        <strong className="pl-2 float-left">
                                             {lang === "th"
                                                 ? item.th_name
                                                 : item.eng_name}
                                             :{" "}
+                                        </strong>
+                                        <span className="mb-1 px-2 float-right">
                                             {lang === "th"
                                                 ? s.th_name
                                                 : s.eng_name}
-                                        </p>
-                                    </Col>
+                                        </span>
+                                    </li>
                                 );
-                            case "file":
+
+                            case "text":
                                 return (
-                                    <Col
+                                    <li
                                         key={idx}
-                                        lg={item.size}
-                                        md={item.size}
-                                        className="py-2 w-100"
+                                        className="w-100 clearfix border-bottom py-2"
+                                        style={_styleList}
                                     >
-                                        <p className="mb-1">
+                                        <strong className="pl-2 float-left">
                                             {lang === "th"
                                                 ? item.th_name
                                                 : item.eng_name}
                                             :{" "}
-                                            {item.data !== "" ? (
-                                                <Image
-                                                    className="d-block "
-                                                    width="100"
-                                                    height="100"
-                                                    src={`../../../../../../../storage/${item.data}`}
-                                                />
-                                            ) : (
-                                                "-"
-                                            )}
-                                        </p>
-                                    </Col>
+                                        </strong>
+                                        <span className="mb-1 px-2 float-right">
+                                            {item.data}
+                                        </span>
+                                    </li>
                                 );
-                            case "text":
+
+                            case "file":
                                 return (
-                                    <Col
+                                    <li
                                         key={idx}
-                                        lg={item.size}
-                                        md={item.size}
-                                        className="py-2"
+                                        style={_styleList}
+                                        className={
+                                            item.data !== ""
+                                                ? "w-100 d-table py-2"
+                                                : "w-100 clearfix py-2"
+                                        }
                                     >
-                                        <p className="mb-1">
+                                        <strong
+                                            className={
+                                                item.data !== ""
+                                                    ? "pl-2"
+                                                    : "pl-2 float-left"
+                                            }
+                                        >
                                             {lang === "th"
                                                 ? item.th_name
                                                 : item.eng_name}
-                                            : {item.data}
-                                        </p>
-                                    </Col>
+                                            :{" "}
+                                        </strong>
+                                        {item.data !== "" ? (
+                                            <Image
+                                                rounded
+                                                className="d-block m-auto"
+                                                width="100"
+                                                height="100"
+                                                src={`../../../../../../../storage/${item.data}`}
+                                            />
+                                        ) : (
+                                            <span className="mb-1 px-2 float-right">
+                                                -
+                                            </span>
+                                        )}
+                                    </li>
                                 );
 
                             default:
-                                null;
+                                return null;
                         }
                     })}
-                </Row>
+                </ul>
             ) : (
                 <div
                     style={{ minHeight: "50px" }}

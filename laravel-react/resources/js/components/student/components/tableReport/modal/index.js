@@ -2,11 +2,41 @@ import React from "react";
 import { Button, Modal, Tabs, Tab } from "react-bootstrap";
 import DetailDocument from "./DetailDocument";
 import InputsDocument from "./InputsDocument";
+import deleteDocument from "../../../../middleware/axios/deleteDocument";
+import Swal from "sweetalert2";
 
-const UserModalDoc = props => {
-    const { document, lang } = props;
-
+const UserModalDoc = ({ document, lang }) => {
     const [show, setShow] = React.useState(false);
+    const deleteDoc = () =>
+        Swal.fire({
+            title: "คุณแน่ใจใช่ไหม ?",
+            text: "ว่าคุณต้องการยกเลิกคำร้องนี้ !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่!",
+            cancelButtonText: "ใม่!"
+        }).then(async result => {
+            if (result.value) {
+                const _del = await deleteDocument(
+                    document.id,
+                    localStorage._authLocal
+                );
+                if (_del.id) {
+                    Swal.fire(
+                        "Deleted!",
+                        "Your file has been deleted.",
+                        "success"
+                    ).then(async res => {
+                        if (res.value) {
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        });
+
     return (
         <div>
             <Button variant="info" size="sm" onClick={() => setShow(true)}>
@@ -40,7 +70,13 @@ const UserModalDoc = props => {
                     </Tabs>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-danger">Cancel Document</Button>
+                    <Button
+                        variant="outline-danger"
+                        hidden={document.status === "cancel" ? true : false}
+                        onClick={deleteDoc}
+                    >
+                        Cancel Document
+                    </Button>
                     <Button onClick={() => setShow(false)} variant="secondary">
                         close
                     </Button>

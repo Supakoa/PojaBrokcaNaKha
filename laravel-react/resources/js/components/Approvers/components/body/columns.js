@@ -18,14 +18,14 @@ export const columns = [
         width: 320
     },
     {
-        label: "วันที่สร้าง",
-        field: "created_at_converted",
+        label: "ชื่อผู้ส่ง",
+        field: "from_user",
         sort: "asc",
         width: 200
     },
     {
-        label: "วันที่แก้ไข",
-        field: "updated_at_converted",
+        label: "วันที่สร้าง",
+        field: "created_at_converted",
         sort: "asc",
         width: 200
     },

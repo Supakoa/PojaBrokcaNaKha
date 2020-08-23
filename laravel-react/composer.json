@@ -17,8 +17,7 @@
         "laravel/framework": "^7.0",
         "laravel/passport": "^9.1",
         "laravel/tinker": "^2.0",
-        "laravelcollective/html": "^6.1",
-        "ext-json": "*"
+        "laravelcollective/html": "^6.1"
     },
     "require-dev": {
         "appzcoder/crud-generator": "^3.2",

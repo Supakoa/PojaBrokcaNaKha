@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             role::class,
-            admin::class,
             faculty::class,
             major::class,
+            admin::class,
             status::class,
             subject::class
         ]);
