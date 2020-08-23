@@ -1,31 +1,30 @@
 import React from "react";
 import { Badge } from "react-bootstrap";
 
-const statusDoc = (_status, _idx) => {
-    // console.log(_status);
-    switch (_status) {
+const StatusBadgeDoc = ({ status }) => {
+    switch (status) {
         case "pending":
             return (
-                <Badge key={_idx} variant="info" pill>
-                    {_status}
+                <Badge variant="info" pill>
+                    {status}
                 </Badge>
             );
         case "cancel":
             return (
-                <Badge key={_idx} variant="warning" pill>
-                    {_status}
+                <Badge variant="warning" pill>
+                    {status}
                 </Badge>
             );
         case "reject":
             return (
-                <Badge key={_idx} variant="danger" pill>
-                    {_status}
+                <Badge variant="danger" pill>
+                    {status}
                 </Badge>
             );
-        case "success":
+        case "approve":
             return (
-                <Badge key={_idx} variant="success" pill>
-                    {_status}
+                <Badge variant="success" pill>
+                    {status}
                 </Badge>
             );
 
@@ -34,4 +33,4 @@ const statusDoc = (_status, _idx) => {
     }
 };
 
-export default statusDoc;
+export default StatusBadgeDoc;

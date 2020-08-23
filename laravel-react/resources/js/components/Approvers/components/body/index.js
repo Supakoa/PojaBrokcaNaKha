@@ -23,7 +23,7 @@ export default function BodyApprover() {
     const _userId = useSelector(s => s.userState.id);
     const [_filValid, setFilValid] = React.useState(false);
     const [_sortBy, setSortBy] = React.useState("pending");
-    const _optionSort = ["all", "approve", "pending", "cancel", "edit"];
+    const _optionSort = ["approve", "pending", "all"];
     const [rows, setRows] = React.useState([]);
 
     const _props = {
@@ -59,6 +59,7 @@ export default function BodyApprover() {
                 sortBy={_sortBy}
                 setSort={setFilterTable}
                 arrayData={_optionSort}
+                noti={rows.length}
             />
             <TableApprover
                 urlApprover={url}

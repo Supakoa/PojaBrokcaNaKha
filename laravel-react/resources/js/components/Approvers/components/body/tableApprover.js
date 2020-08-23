@@ -3,7 +3,7 @@ import { MDBDataTable } from "mdbreact";
 import { columns } from "./columns";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import statusDoc from "../../../student/components/tableReport/statusDocument";
+import StatusBadgeDoc from "../../../student/components/tableReport/statusDocument";
 import _convertDate from "../../../middleware/method/convertDate";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -21,17 +21,19 @@ const TableApprover = ({
     const _docTemps = useSelector(s => s.documentsTemplate);
     const { i18n } = useTranslation();
 
-    const setRowsOnTable = userDocs => {
-        const _add2Rows = userDocs.map((uDoc, idx) => {
-            console.log(uDoc);
+    const setRowsOnTable = async userDocs => {
+        const _add2Rows = await userDocs.map((uDoc, idx) => {
             const _name = _docTemps.find(tDoc => {
                 return tDoc.id === uDoc.form_id;
             });
-            if (_name !== undefined) {
+            if (_name) {
                 return {
                     row_id: (idx + 1).toString(),
-                    status_badge: statusDoc(uDoc.status, idx),
+                    status_badge: (
+                        <StatusBadgeDoc key={idx} status={uDoc.status} />
+                    ),
                     status: uDoc.status,
+                    pivot_status: uDoc.pivot.status,
                     form_name:
                         i18n.language === "th" ? _name.th_name : _name.eng_name,
                     from_user: "อิอิอิ",
@@ -48,11 +50,8 @@ const TableApprover = ({
             }
         });
         if (rows.length === 0) {
-            let arr = [];
-            _add2Rows.forEach(item => {
-                if (item.status === sortTable) {
-                    arr = [...arr, item];
-                }
+            const arr = _add2Rows.filter(item => {
+                return item.status === sortTable;
             });
             if (sortTable !== "all" && arr.length === 0) {
                 Swal.fire(
@@ -76,7 +75,11 @@ const TableApprover = ({
 
     React.useEffect(() => {
         const abort = new AbortController();
-        if (rows.length < _userDocs.length && _docTemps.length !== 0)
+        if (
+            rows.length < _userDocs.length &&
+            _docTemps.length !== 0 &&
+            _userDocs.length > 0
+        )
             setRowsOnTable(_userDocs, { signal: abort.signal });
 
         return () => abort.abort();
