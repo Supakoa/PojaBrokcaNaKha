@@ -15,8 +15,8 @@ export default function ReportTable() {
     const { i18n } = useTranslation();
     const [rows, setRows] = React.useState([]);
     const [_filValid, setFilValid] = React.useState(false);
-    const [_sortBy, setSortBy] = React.useState("all");
-    const _optionSort = ["all", "approve", "pending", "cancel", "edit", "fuck"];
+    const [_sortBy, setSortBy] = React.useState("pending");
+    const _optionSort = ["all", "approve", "pending", "cancel", "edit"];
     const _props = {
         docTemp: _docTemp,
         userDoc: _userDoc,
@@ -26,10 +26,8 @@ export default function ReportTable() {
 
     const setFilterTable = e => {
         const _selected = e.target.name;
-        if (_selected) {
-            setSortBy(_selected);
-            setRows([]);
-        }
+        setSortBy(_selected ? _selected : _sortBy);
+        setRows(_selected ? [] : rows);
     };
 
     const fill2Rows = async _props => {

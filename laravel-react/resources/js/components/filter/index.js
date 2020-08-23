@@ -10,6 +10,12 @@ const FilterSort = ({
     filterValid,
     setFilterVaild
 }) => {
+    const [_defSort, setDefSort] = React.useState("all");
+
+    const defaultSetSort = e => {
+        setDefSort(e.target.name ? e.target.name : _defSort);
+    };
+
     React.useEffect(() => {
         if (filterValid && setFilterVaild) {
             setTimeout(() => {
@@ -19,10 +25,11 @@ const FilterSort = ({
         return () => clearTimeout(0);
     }, [filterValid, setFilterVaild]);
 
+
     return (
         <DropdownButton
             variant={filterValid ? "danger" : "outline-info"}
-            title={`Sort ${sortBy}. `}
+            title={`Sort ${sortBy ? sortBy : _defSort}. `}
             drop="right"
         >
             {arrayData ? (
@@ -43,7 +50,10 @@ const FilterSort = ({
                     );
                 })
             ) : (
-                <FixItemDefault setSort={setSort} onSelect={sortBy} />
+                <FixItemDefault
+                    setSort={setSort ? setSort : defaultSetSort}
+                    onSelect={sortBy ? sortBy : _defSort}
+                />
             )}
         </DropdownButton>
     );
