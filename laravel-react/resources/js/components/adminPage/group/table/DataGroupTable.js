@@ -34,14 +34,14 @@ const DataGroupTable = () => {
     };
 
     const getGroup = async () => {
-        await Axios.get(`http://localhost:8000/api/groups`).then(async res => {
-            setGourps(res.data)
-        }, {
+        await Axios.get(`http://localhost:8000/api/groups`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"
                 )}`
             }
+        }).then(async res => {
+            setGourps(res.data)
         })
     };
 

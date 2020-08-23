@@ -18,8 +18,7 @@ class CreateUserGroup extends Migration
             $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->integer('group_id')->unsigned();
-            $table->integer('subject_id')->unsigned();
-
+            $table->integer('subject_id')->unsigned()->nullable();
         });
     }
 
