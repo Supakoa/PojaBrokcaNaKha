@@ -18,7 +18,7 @@ export default class Group extends Component {
                 </Card.Header>
                 <Card.Body>
                     {/* <ModalGroup isCreateProps={ true } /> */}
-                    <ModalNewGroup />
+                    <ModalNewGroup isCreateProps={true} />
                     <TableGroups />
                 </Card.Body>
             </Card>

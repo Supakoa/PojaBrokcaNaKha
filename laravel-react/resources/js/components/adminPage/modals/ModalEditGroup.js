@@ -3,54 +3,145 @@ import { Button, Modal, Form, Container, Col, Row, Card, Table, Badge } from "re
 import {useTranslation} from 'react-i18next';
 import MaterialTable from "material-table";
 import AddUser from "../group/modal/AddUser";
+import Axios from "axios";
+import { updateShowUsers } from "../../../redux/actions";
+import { useSelector } from "react-redux";
+import { first } from "lodash";
+import ModalNewGroup from "../group/modal/ModalNewGroup";
 
 const ModalEditGroup = (props) => {
+    // props
     const { isCreateProps, response } = props
 
+    // local state
     const [show, setShow] = React.useState(false);
     const [modalHidden, setModalHidden] = useState(false)
     const {t} = useTranslation('', {useSuspense: false});
     const [table, setTable] = React.useState({
         columns: [
+            { title: 'วิชา', field: 'subject' },
             {
                 title: 'ID',
-                field: 'birthCity',
-                render: item => <Badge className="p-2" pill variant="primary">{item.birthCity}</Badge>,
+                field: 'userId',
+                render: item => <Badge className="p-2" pill variant="primary">{item.userId}</Badge>,
             },
-            { title: 'คำนำหน้า', field: 'name' },
-            { title: 'ชื่อ', field: 'surname' },
-            { title: 'นามสกุล', field: 'birthYear' },
-            { title: 'วิชา', field: 'subject' },
+            { title: 'คำนำหน้า', field: 'titleName' },
+            { title: 'ชื่อ', field: 'firstName' },
+            { title: 'นามสกุล', field: 'lastName' },
         ],
-        data: [
-          { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-          {
-            name: 'Zerya Betül',
-            surname: 'Baran',
-            birthYear: 2017,
-            birthCity: 34,
-          },
-        ],
+        data: [],
     });
+    const [showGroupUsers, setShowGroupUsers] = useState(null)
 
     // redux
+    const redux_showSubjects = useSelector(state => state.showSubjects)
 
     //local variable
 
-
+    // function
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // function
+    const initState = () => {
+        updateTableColumn()
+        getGroupUser()
+    }
 
+    const updateTableColumn = () => {
+        if (response.type == "normal") {
+            setTable({
+                ...table,
+                columns: [
+                    {
+                        title: 'ID',
+                        field: 'userId',
+                        render: item => <Badge className="p-2" pill variant="primary">{item.userId}</Badge>,
+                    },
+                    { title: 'คำนำหน้า', field: 'titleName' },
+                    { title: 'ชื่อ', field: 'firstName' },
+                    { title: 'นามสกุล', field: 'lastName' },
+                ]
+            })
+        }
+    }
+
+    const getGroupUser = () => {
+        Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
+            setShowGroupUsers(res.data.success)
+        })
+    }
+
+    const updateShowUsersTable = () => {
+        if (showGroupUsers) {
+            let tmp_showGroupUsers = new Array()
+            tmp_showGroupUsers = [...showGroupUsers]
+
+            tmp_showGroupUsers = tmp_showGroupUsers.map(item => {
+                let tmp_selectSubject = new Array()
+                tmp_selectSubject = [...redux_showSubjects.data]
+                tmp_selectSubject = tmp_selectSubject.filter(filterItem => {
+                    return filterItem.id == item.pivot.subject_id
+                })
+                tmp_selectSubject = first(tmp_selectSubject)
+
+                if (typeof tmp_selectSubject == "undefined") {
+                    return {
+                        titleName: item.title,
+                        firstName: item.first_name,
+                        lastName: item.last_name,
+                        userId: item.id,
+                    }
+                } else {
+                    return {
+                        titleName: item.title,
+                        firstName: item.first_name,
+                        lastName: item.last_name,
+                        userId: item.id,
+                        subject: tmp_selectSubject.th_name
+                    }
+                }
+            })
+
+            setTable({
+                ...table,
+                data: [...tmp_showGroupUsers]
+            })
+        }
+    }
+
+    const deleteGroupUser = (item) => {
+        console.log('deleteGroupUser')
+        console.log('item.data', item.data)
+        let tmp_deleteVal = [...item.data]
+        tmp_deleteVal = tmp_deleteVal.find(i => {
+            return i.tableData.editing == "delete"
+        })
+        console.log('tmp_deleteVal', tmp_deleteVal)
+
+    }
+
+    // useEffect
     useEffect(() => {
         const abort = new AbortController();
+        initState()
 
         // willmount
         return () => {
             abort.abort();
         };
     }, [])
+
+    useEffect(() => {
+        updateShowUsersTable()
+    }, [showGroupUsers])
+
+    // function return component
 
     return (
         <>
@@ -76,7 +167,7 @@ const ModalEditGroup = (props) => {
                     <Container>
                         <Row>
                             <Col className="p-0" >
-                                <Card className="m-3">
+                                <Card className="ml-0 mt-3 mr-3">
                                     {/* table */}
                                     <MaterialTable
                                         title={"👥"}
@@ -112,6 +203,7 @@ const ModalEditGroup = (props) => {
                                                     setTimeout(() => {
                                                         resolve();
                                                         setTable((prevState) => {
+                                                            deleteGroupUser(prevState)
                                                             const data = [...prevState.data];
                                                             data.splice(data.indexOf(oldData), 1);
                                                             return { ...prevState, data };
@@ -145,8 +237,8 @@ const ModalEditGroup = (props) => {
                                     </Form.Group>
                                 </Card>
                                 <Card className="mt-3" style={{border: "none"}} >
-                                    <AddUser group={response} setModalHidden={setModalHidden} />
-                                    <Button className="mt-3" >{"แก้ไขข้อมูลกลุ่ม"}</Button>
+                                    <AddUser setTable={setTable} table={table} groupUsers={table.data} group={response} setModalHidden={setModalHidden} />
+                                    <ModalNewGroup setModalHidden={setModalHidden} res={response} isCreateProps={false} />
                                 </Card>
                             </Col>
                         </Row>

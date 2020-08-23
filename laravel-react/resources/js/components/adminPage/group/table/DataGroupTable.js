@@ -19,7 +19,6 @@ const DataGroupTable = () => {
     const fetchRowData = _data => {
         setRows(
             _data.map((res, idx) => {
-                console.log('res', res)
                 const responData = {
                     id: idx,
                     th_name: res.th_name,
