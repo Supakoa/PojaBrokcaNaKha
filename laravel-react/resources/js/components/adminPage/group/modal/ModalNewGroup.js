@@ -27,14 +27,14 @@ const ModalNewGroup = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const sendDataToDB = () => {
+    const sendDataToDB = async () => {
         let data = new FormData()
         data.append('th_name', th_nameGroup)
         data.append('eng_name', eng_nameGroup),
         data.append('type', selectTypeGroup)
 
         if (isCreateProps) {
-            Axios.post(`http://localhost:8000/api/groups`, data ,{
+            await Axios.post(`http://localhost:8000/api/groups`, data ,{
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"
@@ -69,6 +69,21 @@ const ModalNewGroup = (props) => {
             })
         } else {
             // not have id sing will edit tommorow
+            let select = (selectTypeGroup == 1) ? "normal" : "subject"
+            let sendData = new FormData()
+            sendData.append('th_name', th_nameGroup)
+            sendData.append('eng_name', eng_nameGroup)
+            sendData.append('type', select)
+
+            await Axios.patch(`http://localhost:8000/api/groups/${res.id}`, sendData, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }
+            }).then(res => {
+                console.log('res', res)
+            })
         }
     }
 
