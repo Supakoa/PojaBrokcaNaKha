@@ -171,8 +171,8 @@
             },
             "footer": {
                 "show": "Show now",
-                "of": "Of",
-                "list": "Lists",
+                "of": "of",
+                "list": "lists",
                 "prev": "Previous",
                 "next": "Next"
             }
