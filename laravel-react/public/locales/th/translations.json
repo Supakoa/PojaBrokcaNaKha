@@ -1,70 +1,178 @@
 {
-    "user" : {
-        "title" :  "คำนำหน้า",
-        "firstName" : "ชื่อ",
-        "lastName" : "นามสกุล",
-        "studentId" : "รหัสนักศึกษา",
-        "password" : "รหัสผ่าน",
-        "confirmPassword" : "ยืนยันรหัสผ่าน",
-        "email" : "อีเมล",
-        "phoneNumber" : "เบอร์โทรศัพท์",
-        "faculty" : "คณะ",
-        "major" : "สาขา"
+    "user": {
+        "title": "คำนำหน้า",
+        "firstName": "ชื่อ",
+        "lastName": "นามสกุล",
+        "studentId": "รหัสนักศึกษา",
+        "password": "รหัสผ่าน",
+        "confirmPassword": "ยืนยันรหัสผ่าน",
+        "email": "อีเมล",
+        "phoneNumber": "เบอร์โทรศัพท์",
+        "faculty": "คณะ",
+        "major": "สาขา"
     },
-    "menu":{
-        "menu" : "เมนู",
-        "home" : "หน้าแรก",
-        "message" : "ข้อความ",
-        "documents" : "เอกสาร",
-        "users" : "สมาชิก",
-        "news" : "ข่าว",
-        "forms" : "แบบฟอร์ม"
+    "menu": {
+        "menu": "เมนู",
+        "home": "หน้าแรก",
+        "message": "ข้อความ",
+        "documents": "เอกสาร",
+        "users": "สมาชิก",
+        "news": "ข่าว",
+        "forms": "แบบฟอร์ม"
     },
-    "faculty" : {
-        "index" : "คณะ",
-        "selectFaculty" : "เลือกคณะ"
+    "faculty": {
+        "index": "คณะ",
+        "selectFaculty": "เลือกคณะ"
     },
-    "major" : {
-        "index" : "สาขา",
-        "selectMajor" : "เลือกสาขา"
+    "major": {
+        "index": "สาขา",
+        "selectMajor": "เลือกสาขา"
     },
-    "modalDelete" : {
-        "btnModal" : "ลบข้อมูล",
-        "title" : "คุณแน่ใจไหม?",
-        "text" : "คุณต้องการจะลบสิ่งนี้!",
-        "cancelButtonText" : "ไม่!",
-        "confirmButtonText" : "ใช่, ฉันต้องการลบ!",
-        "deleted" : "ลบแล้ว",
-        "hasBeetDeleted" : "ได้ทำการลบสำเร็จ",
-        "success" : "เสร็จสิ้น"
-
+    "modalDelete": {
+        "btnModal": "ลบข้อมูล",
+        "title": "คุณแน่ใจไหม?",
+        "text": "คุณต้องการจะลบสิ่งนี้!",
+        "cancelButtonText": "ไม่!",
+        "confirmButtonText": "ใช่, ฉันต้องการลบ!",
+        "deleted": "ลบแล้ว",
+        "hasBeetDeleted": "ได้ทำการลบสำเร็จ",
+        "success": "เสร็จสิ้น"
     },
-    "pr" : {
-        "index" : "ประชาสัมพันธ์",
-        "link" : "ที่อยู่เว็บ",
-        "image" : "รูปข่าว"
+    "pr": {
+        "index": "ประชาสัมพันธ์",
+        "link": "ที่อยู่เว็บ",
+        "image": "รูปข่าว"
     },
-    "document" : {
-        "form" : "ประเภทเอกสาร",
-        "creat" : "เวลาส่ง",
-        "update" : "แก้ไขล่าสุด",
-        "status" : "สถานะ"
+    "document": {
+        "form": "ประเภทเอกสาร",
+        "creat": "เวลาส่ง",
+        "update": "แก้ไขล่าสุด",
+        "status": "สถานะ"
     },
-    "documentStatus" : {
-        "cencel" : "ยกเลิก",
-        "pending" : "กำลังดำเนินการ",
-        "reject" : "ไม่อนุมัติ",
-        "success" : "สำเร็จ"
+    "documentStatus": {
+        "cencel": "ยกเลิก",
+        "pending": "กำลังดำเนินการ",
+        "reject": "ไม่อนุมัติ",
+        "success": "สำเร็จ"
     },
-    "day&time" : "วัน / เวลา",
-    "selectToShowMessage" : "กรุณาเลือกรายชื่อ เพื่อแสดงข้อความ",
-    "sender" : "รายชื่อผู้ส่ง",
-    "add" : "เพิ่มข้อมูล",
-    "edit" : "แก้ไขข้อมูล",
-    "close" : "ปิด",
-    "save" : "บันทึก",
-    "check" : "ตรวจสอบ",
-    "search" : "ค้นหา"
-    
-
+    "day&time": "วัน / เวลา",
+    "selectToShowMessage": "กรุณาเลือกรายชื่อ เพื่อแสดงข้อความ",
+    "sender": "รายชื่อผู้ส่ง",
+    "add": "เพิ่มข้อมูล",
+    "edit": "แก้ไขข้อมูล",
+    "close": "ปิด",
+    "save": "บันทึก",
+    "check": "ตรวจสอบ",
+    "search": "ค้นหา",
+    "sign-out": "ออกจากระบบ",
+    "txt-logo": "เว็บไซต์ส่งแบบคำร้อง",
+    "students": {
+        "table": {
+            "header": {
+                "search": "ค้นหา",
+                "pagination": "จำนวนที่แสดง"
+            },
+            "columns": {
+                "status": "สถานะ",
+                "form": "แบบคำร้อง",
+                "create": "วันที่สร้าง",
+                "edit": "วันที่แก้ไข",
+                "action": "แอ็คชัน"
+            },
+            "footer": {
+                "show": "กำลังแสดง",
+                "of": "ของ",
+                "list": "รายการ",
+                "prev": "ก่อนหน้า",
+                "next": "ถัดไป"
+            }
+        },
+        "navbar-top": {
+            "home": "หน้าแรก",
+            "profile": "ข้อมูลส่วนตัว"
+        },
+        "nav-left": {
+            "title": "เมนู",
+            "history": "ประวัติการส่งคำร้อง",
+            "form": "ส่งคำร้อง"
+        },
+        "forms": {
+            "title": "คำนำหน้า",
+            "firstname": {
+                "title": "ชื่อ",
+                "text": "นำหน้า กรุณาใช้เป็น นาย นาง หรือ นางสาว"
+            },
+            "lastname": "นามสกุล",
+            "student-id": "รหัสนักศึกษา",
+            "phone": {
+                "title": "เบอร์โทรศัพท์",
+                "text": "กรุณาใส่หมายเลขที่สามารถติดต่อได้ทันที"
+            },
+            "mail": {
+                "title": "อีเมล",
+                "text": "กรุณาบันทึกอีเมลของมหาวิยาลัย."
+            },
+            "faculty": {
+                "title": "คณะ",
+                "option": "เลือกคณะ",
+                "text": "ต้องทำการเลือก หรือ เปลี่ยนแปลงคณะถึงสามารถ เลือกสาขาได้."
+            },
+            "major": "สาขา"
+        },
+        "message": {
+            "title": "ช่วยเหลือ",
+            "place-holder": "พิมข้อความ"
+        },
+        "modal": {
+            "btn-title": "ดูเพิ่ม",
+            "status-documents": {
+                "title": "สถานะเอกสาร",
+                "create": "สร้างวันที่",
+                "edit": "แก้ไขวันที่",
+                "cancel": "ยกเลิกวันที่",
+                "status": "สถานะ",
+                "sender": "ผู้ส่ง",
+                "canceler": "ผู้ยกเลิก",
+                "note": "หมายเหตุ"
+            },
+            "detail": "ข้อมูลเอกสาร",
+            "btn": {
+                "cancel": "ยกเลิกเอกสาร",
+                "close": "ปิด"
+            },
+            "swal": {
+                "title": "คุณแน่ใจใช่ไหม ?",
+                "text": "ว่าคุณต้องการยกเลิกคำร้องนี้ !",
+                "yes": "ใช่!",
+                "no": "ไม่",
+                "then": {
+                    "title": "ยกเลิกเรียบร้อย",
+                    "text": "คำร้องของคุณถูกยกเลิกเรียบร้อย."
+                }
+            }
+        }
+    },
+    "approvers": {
+        "table": {
+            "header": {
+                "search": "ค้นหา",
+                "pagination": "จำนวนที่แสดง"
+            },
+            "columns": {
+                "status": "สถานะ",
+                "form": "แบบคำร้อง",
+                "create": "วันที่สร้าง",
+                "name_sender": "ผู้ส่ง",
+                "action": "แอ็คชัน"
+            },
+            "footer": {
+                "show": "กำลังแสดง",
+                "of": "ของ",
+                "list": "รายการ",
+                "prev": "ก่อนหน้า",
+                "next": "ถัดไป"
+            }
+        },
+        "emptyDetail": "คุณยังไม่ได้เลือกเอกสาร."
+    }
 }

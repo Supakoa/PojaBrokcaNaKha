@@ -52,7 +52,10 @@ export default function BodyApprover() {
     }, [_userId, token]);
 
     return (
-        <Container className="py-3">
+        <Container
+            className="py-3"
+            style={{ backgroundColor: "#F1F1F1", minHeight: "90vh" }}
+        >
             <FilterSort
                 setFilterVaild={setFilValid}
                 filterValid={_filValid}

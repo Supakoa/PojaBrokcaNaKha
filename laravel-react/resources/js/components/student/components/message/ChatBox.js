@@ -1,8 +1,10 @@
 import React from "react";
 import { Animated } from "react-animated-css";
 import { Card, Container, Form, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const ChatBox = ({ show, closeMessage }) => {
+    const { t } = useTranslation();
     return (
         <Animated
             animationIn="fadeInUp"
@@ -10,15 +12,16 @@ const ChatBox = ({ show, closeMessage }) => {
             animationInDuration={1000}
             animationOutDuration={1000}
             isVisible={show}
-            style={{ bottom: "0", right: "5px", zIndex: "99" }}
-            className={`w-25 float-right position-sticky pb-3 ${
+            style={{ bottom: "0", left: "5px", zIndex: "99" }}
+            className={`float-left position-sticky pb-3 ${
                 show ? `d-block` : `d-none`
             }`}
         >
             <Card style={{ width: "100%" }}>
                 <Card.Title className="clearfix mb-0 px-1 py-1">
                     <h6 className="float-left mb-0">
-                        Message <i className="fas fa-comment-dots"></i>
+                        {t("students.message.title")}{" "}
+                        <i className="fas fa-comment-dots"></i>
                     </h6>
                     <button
                         type="button"
@@ -41,7 +44,7 @@ const ChatBox = ({ show, closeMessage }) => {
                     <div className="w-75">
                         <Form.Control
                             className="border-left-0 border-bottom-0"
-                            placeholder="your text"
+                            placeholder={t("students.message.place-holder")}
                         />
                     </div>
                     <div className="w-25 text-center p-0">

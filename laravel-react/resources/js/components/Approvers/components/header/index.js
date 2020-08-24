@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 import SignOutBtn from "../../../auth/sign-out";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const HeaderApprover = () => {
     const _user = useSelector(s => s.userState);
+    const { t } = useTranslation();
     return (
         <Navbar
             bg="info"
@@ -23,7 +25,7 @@ const HeaderApprover = () => {
                         height="30"
                         className="d-inline-block align-top"
                     />{" "}
-                    Petition
+                    {t("txt-logo")}
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -31,7 +33,7 @@ const HeaderApprover = () => {
                         {Object.keys(_user).length !== 0 ? (
                             <Link
                                 to="#"
-                                className="text-light d-flex align-items-center justify-content-center px-2"
+                                className="text-light d-flex align-items-center justify-content-start mr-lg-3 mr-md-3 py-sm-2"
                             >
                                 <Image
                                     src="https://img.icons8.com/plasticine/2x/user.png"
@@ -45,10 +47,11 @@ const HeaderApprover = () => {
                         ) : (
                             <Spinner animation="border" size="sm" />
                         )}
-                        <Link to="#" className="px-3">
+
+                        <SignOutBtn className="text-light d-flex align-items-center justify-content-start py-sm-2" />
+                        <Link to="#" className="px-2 py-sm-2">
                             <SwitchingLanguageBtn />
                         </Link>
-                        <SignOutBtn className="text-light" />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

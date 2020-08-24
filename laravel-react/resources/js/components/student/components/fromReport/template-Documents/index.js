@@ -13,10 +13,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userDocument } from "../../../../../redux/actions";
 import { fetchUserDoc } from "../../../../middleware/axios/fetchUserDoc";
+import { useTranslation } from "react-i18next";
 
 const TemplateDocuments = ({ patternInput, id, lang }) => {
     const _dispatch = useDispatch();
     const _history = useHistory();
+    const { i18n } = useTranslation();
     const _userId = useSelector(s => s.userState.id);
     const [_document, setDocument] = React.useState({});
     const [_valid, setValid] = React.useState({});
@@ -34,7 +36,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
         } else if (type === "file") {
             const file = files[0];
 
-            const _pathImg = await uploadsImage(file);
+            const _pathImg = await uploadsImage(file, localStorage._authLocal);
             if (_pathImg) {
                 setDocument({
                     ..._document,
@@ -71,16 +73,14 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
             user_id: _userId,
             data: JSON.stringify({ inputs: _arry })
         };
-
-        // console.log(_docForm);
         const _resDoc = await postDocumentUser(
             localStorage._authLocal,
             _docForm
         );
         if (_resDoc.created_at) {
             Swal.fire("complete. !", "ส่งเรียบร้อย", "success").then(
-                async () => {
-                    _history.push("/student");
+                async res => {
+                    if (res.value) _history.push("/student");
                     const _newDocs = await fetchUserDoc({
                         id: _userId,
                         token: localStorage._authLocal
@@ -159,14 +159,19 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 key={idx.toString()}
                                 className="d-flex align-items-center justify-content-center"
                             >
-                                <h6>ไม่มีข้อมูล</h6>{" "}
+                                <h6>
+                                    {i18n.language === "th"
+                                        ? "ไม่มีข้อมูล"
+                                        : "data empty."}
+                                </h6>{" "}
                             </Container>
                         );
                     }
                 })}
             </Form.Row>
             <Button variant="info" type="submit">
-                sending
+                {i18n.language === "th" ? "ส่ง" : "send"}{" "}
+                <i className="fas fa-paper-plane"></i>
             </Button>
         </Form>
     );

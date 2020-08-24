@@ -1,5 +1,6 @@
-const _convertDate = _date => {
-    let date = new Date(_date);
+import React from "react";
+const ConvertDate = ({ dateTime }) => {
+    let date = new Date(dateTime);
     date = new Date(
         Date.UTC(
             date.getFullYear(),
@@ -12,9 +13,13 @@ const _convertDate = _date => {
     )
         .toISOString()
         .split("T");
-    return ` ${date[1].substr(0, 8)} ${date[0].split("-")[2]}/${
-        date[0].split("-")[1]
-    }/${date[0].split("-")[0]}`;
+    return (
+        <span>
+            {` ${date[1].substr(0, 8)} ${date[0].split("-")[2]}/${
+                date[0].split("-")[1]
+            }/${date[0].split("-")[0]}`}
+        </span>
+    );
 };
 
-export default _convertDate;
+export default ConvertDate;
