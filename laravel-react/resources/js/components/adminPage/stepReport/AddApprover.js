@@ -85,7 +85,13 @@ export const AddApprover = props => {
     };
 
     const initState = async () => {
-        const users = await Axios.get(`http://localhost:8000/api/users`).then(res => {
+        const users = await Axios.get(`http://localhost:8000/api/users`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
             const { success } = res.data
             let filterUsers = new Array(success.length)
 

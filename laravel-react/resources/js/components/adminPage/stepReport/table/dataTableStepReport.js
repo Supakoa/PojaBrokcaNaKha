@@ -24,7 +24,13 @@ export default function dataTableStepReport() {
     };
 
     const initShowStepReports = async () => {
-        const showForms = await Axios.get(pathGetForms).then(res => {
+        const showForms = await Axios.get(pathGetForms, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
             return res.data
         })
 

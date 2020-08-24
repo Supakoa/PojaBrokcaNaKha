@@ -6,10 +6,11 @@ import Avatar from "@material-ui/core/Avatar";
 import { array, number } from "prop-types";
 import { chipGroupAction } from "../../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import { AddGroup } from "./AddGroup";
 
 export const StepColors = props => {
     // props
-    const { numberStep } = props;
+    const { numberStep, setModalShow } = props;
 
     // local state
     // const [_chipName, setChipName] = React.useState([]);
@@ -133,6 +134,9 @@ export const StepColors = props => {
                                     step {index + 1}:{" "}
                                     {returnStepComponent(index)}
                                 </Alert>
+                            </Col>
+                            <Col>
+                                <AddGroup />
                             </Col>
                             <Col xs={6} md={4} className="text-center">
                                 <AddApprover

@@ -68,9 +68,7 @@ const ModalEditGroup = (props) => {
     const getGroupUser = () => {
         Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    "_authLocal"
-                )}`
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(res => {
             setShowGroupUsers(res.data.success)
@@ -89,6 +87,8 @@ const ModalEditGroup = (props) => {
                     return filterItem.id == item.pivot.subject_id
                 })
                 tmp_selectSubject = first(tmp_selectSubject)
+
+                console.log('item', item)
 
                 if (typeof tmp_selectSubject == "undefined") {
                     return {
@@ -123,7 +123,7 @@ const ModalEditGroup = (props) => {
             return i.tableData.editing == "delete"
         })
         console.log('tmp_deleteVal', tmp_deleteVal)
-
+        console.log('response', response)
     }
 
     // useEffect
