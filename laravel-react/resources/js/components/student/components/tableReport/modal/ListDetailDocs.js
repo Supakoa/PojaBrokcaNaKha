@@ -14,14 +14,10 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                     <dd className="col-lg-8 col-md-8">
                         {i18n.language === "th"
                             ? data.th_options.map((sub, idx) => {
-                                  return idx + 1 === Number(data.data)
-                                      ? sub
-                                      : null;
+                                  return idx === Number(data.data) ? sub : null;
                               })
                             : data.eng_options.map((sub, idx) => {
-                                  return idx + 1 === Number(data.data)
-                                      ? sub
-                                      : null;
+                                  return idx === Number(data.data) ? sub : null;
                               })}
                     </dd>
                 </dl>
