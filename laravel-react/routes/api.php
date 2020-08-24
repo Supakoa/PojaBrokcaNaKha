@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('users/{user}/documents', 'API\UserController@documents');
     Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
     Route::post('documents/{document}/cancel',"DocumentsController@cancel");
+    Route::post('documents/{document}/approve',"DocumentsController@approve");
 
     Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 

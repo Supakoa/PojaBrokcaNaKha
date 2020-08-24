@@ -157,6 +157,16 @@
         }
     },
     "approvers": {
+        "show-detail": {
+            "user": {
+                "title": "Sender Information.",
+                "fullname": "Fullname",
+                "studentId": "Student ID",
+                "faculty": "Faculty",
+                "major": "Major"
+            },
+            "document": "Petition Information."
+        },
         "table": {
             "header": {
                 "search": "Search",
@@ -171,8 +181,8 @@
             },
             "footer": {
                 "show": "Show now",
-                "of": "Of",
-                "list": "Lists",
+                "of": "of",
+                "list": "lists",
                 "prev": "Previous",
                 "next": "Next"
             }

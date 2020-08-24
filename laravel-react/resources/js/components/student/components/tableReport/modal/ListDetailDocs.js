@@ -1,6 +1,6 @@
 import React from "react";
-import { Image } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import ModalImage from "./ModalImage";
 
 const ListDetailDocs = ({ subjects, data, inputData }) => {
     const { i18n } = useTranslation();
@@ -93,13 +93,7 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                         {i18n.language === "th" ? data.th_name : data.eng_name}:{" "}
                     </dt>
                     <dd className="col-lg-8 col-md-8 px-0">
-                        <Image
-                            rounded
-                            className="d-block m-auto"
-                            width="100"
-                            height="100"
-                            src={`../../../../../../../storage/${data.data}`}
-                        />
+                        <ModalImage src={data.data} />
                     </dd>
                 </dl>
             );

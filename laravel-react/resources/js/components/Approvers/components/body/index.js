@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     documentsTemplate,
     subjectsForDocument,
-    userDocument
+    userDocument,
+    allUsers
 } from "../../../../redux/actions";
 import post2Subjects from "../../../middleware/post2Redux/postToSubjects";
 import post2Documents from "../../../middleware/post2Redux/postToDocuments";
@@ -15,6 +16,7 @@ import { Switch, useRouteMatch, Route } from "react-router-dom";
 import ShowDetail from "./ShowDetail";
 import NoneDetail from "./NoneDetatil";
 import FilterSort from "../../../filter";
+import post2AllUsers from "../../../middleware/post2Redux/postToUsers";
 
 export default function BodyApprover() {
     const { path, url } = useRouteMatch();
@@ -32,7 +34,8 @@ export default function BodyApprover() {
         dispatch: _dispatch,
         acDocTemp: documentsTemplate,
         acSubject: subjectsForDocument,
-        acUserDocs: userDocument
+        acUserDocs: userDocument,
+        acAllUsers: allUsers
     };
 
     const setFilterTable = e => {
@@ -47,13 +50,14 @@ export default function BodyApprover() {
             post2UserDocuments(_props, { signal: abort.signal });
             post2Subjects(_props, { signal: abort.signal });
             post2Documents(_props, { signal: abort.signal });
+            post2AllUsers(_props, { signal: abort.signal });
         }
         return () => abort.abort();
     }, [_userId, token]);
 
     return (
         <Container
-            className="py-3"
+            className="py-3 mb-3"
             style={{ backgroundColor: "#F1F1F1", minHeight: "90vh" }}
         >
             <FilterSort

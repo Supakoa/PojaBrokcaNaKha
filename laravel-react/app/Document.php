@@ -25,7 +25,7 @@ class Document extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'user_cancel_id', 'form_id', 'data', 'state', 'status', 'canceled_at', 'note'];
+    protected $fillable = ['user_id', 'user_cancel_id', 'form_id', 'data', 'state', 'status', 'canceled_at', 'note','max_state'];
 
     public function user()
     {
@@ -33,5 +33,9 @@ class Document extends Model
     }
     public function approver(){
         return $this->belongsToMany(User::class,"user_approve")->withPivot(["comment","return_file","state","status"])->withTimestamps();
+    }
+    public function form(){
+        return $this->belongsTo(Form::class);
+
     }
 }
