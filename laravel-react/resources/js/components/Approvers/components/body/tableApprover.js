@@ -7,6 +7,7 @@ import StatusBadgeDoc from "../../../student/components/tableReport/statusDocume
 import ConvertDate from "../../../middleware/method/convertDate";
 import Swal from "sweetalert2";
 import ButtonShowDoc from "./ButtonShowDoc";
+import NameFormOnTable from "../../../name-form-ontable";
 
 const TableApprover = ({
     urlApprover,
@@ -33,16 +34,20 @@ const TableApprover = ({
                         <StatusBadgeDoc key={idx} status={uDoc.pivot.status} />
                     ),
                     status: uDoc.pivot.status,
-                    pivot_status: uDoc.pivot.status,
-                    form_name:
-                        i18n.language === "th" ? _name.th_name : _name.eng_name,
+                    form_name: (
+                        <NameFormOnTable
+                            key={idx + 1}
+                            thName={_name.th_name}
+                            engName={_name.eng_name}
+                        />
+                    ),
                     from_user: uDoc.user_id,
                     created_at_converted: (
-                        <ConvertDate key={idx + 1} dateTime={uDoc.created_at} />
+                        <ConvertDate key={idx + 2} dateTime={uDoc.created_at} />
                     ),
                     action: (
                         <ButtonShowDoc
-                            key={idx + 2}
+                            key={idx + 3}
                             url={urlApprover}
                             id={uDoc.id}
                         />
@@ -52,7 +57,7 @@ const TableApprover = ({
         });
         if (rows.length === 0) {
             const arr = _add2Rows.filter(item => {
-                return item.pivot_status === sortTable;
+                return item.status === sortTable;
             });
             if (sortTable !== "all" && arr.length === 0) {
                 Swal.fire(

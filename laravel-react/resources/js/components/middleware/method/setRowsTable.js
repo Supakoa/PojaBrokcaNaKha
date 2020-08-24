@@ -1,5 +1,6 @@
 import React from "react";
 import ConvertDate from "./convertDate";
+import NameFormOnTable from "../../name-form-ontable";
 
 export const _setRowsTable = async _props => {
     if (_props.docTemp.length !== 0) {
@@ -7,13 +8,17 @@ export const _setRowsTable = async _props => {
             const _nameDoc = _props.docTemp.find(doc => {
                 return item.form_id === doc.id;
             });
-            item.form_name =
-                _props.lang === "th" ? _nameDoc.th_name : _nameDoc.eng_name;
+            item.form_name = (
+                <NameFormOnTable
+                    thName={_nameDoc.th_name}
+                    engName={_nameDoc.eng_name}
+                />
+            );
+
             if (item.created_at !== null) {
                 item.created_at_converted = (
                     <ConvertDate dateTime={item.created_at} />
                 );
-                // console.log(_convertDate(item.created_at));
             } else {
                 item.created_at_converted = "-";
             }
@@ -21,7 +26,6 @@ export const _setRowsTable = async _props => {
                 item.updated_at_converted = (
                     <ConvertDate dateTime={item.updated_at} />
                 );
-                // console.log(_convertDate(item.created_at));
             } else {
                 item.updated_at_converted = "-";
             }
@@ -29,7 +33,6 @@ export const _setRowsTable = async _props => {
                 item.canceled_at_converted = (
                     <ConvertDate dateTime={item.updated_at} />
                 );
-                // console.log(_convertDate(item.created_at));
             } else {
                 item.canceled_at_converted = "-";
             }

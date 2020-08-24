@@ -178,5 +178,12 @@
             }
         },
         "emptyDetail": "You not selected documents."
+    },
+    "filter": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "cancel": "Canceled",
+        "edit": "Edited",
+        "all": "All"
     }
 }
