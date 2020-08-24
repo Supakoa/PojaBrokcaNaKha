@@ -4,19 +4,22 @@ import DetailDocument from "./DetailDocument";
 import InputsDocument from "./InputsDocument";
 import deleteDocument from "../../../../middleware/axios/deleteDocument";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 const UserModalDoc = ({ document, lang }) => {
     const [show, setShow] = React.useState(false);
+    const { t } = useTranslation();
+
     const deleteDoc = () =>
         Swal.fire({
-            title: "คุณแน่ใจใช่ไหม ?",
-            text: "ว่าคุณต้องการยกเลิกคำร้องนี้ !",
+            title: t("students.modal.swal.title"),
+            text: t("students.modal.swal.text"),
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ใช่!",
-            cancelButtonText: "ใม่!"
+            confirmButtonText: t("students.modal.swal.yes"),
+            cancelButtonText: t("students.modal.swal.no")
         }).then(async result => {
             if (result.value) {
                 const _del = await deleteDocument(
@@ -25,8 +28,8 @@ const UserModalDoc = ({ document, lang }) => {
                 );
                 if (_del.id) {
                     Swal.fire(
-                        "Deleted!",
-                        "Your file has been deleted.",
+                        t("students.modal.swal.then.title"),
+                        t("students.modal.swal.then.text"),
                         "success"
                     ).then(async res => {
                         if (res.value) {
@@ -40,7 +43,7 @@ const UserModalDoc = ({ document, lang }) => {
     return (
         <div>
             <Button variant="info" size="sm" onClick={() => setShow(true)}>
-                ดูเพิ่ม
+                {t("students.modal.btn-title")}
             </Button>
 
             <Modal
@@ -56,10 +59,16 @@ const UserModalDoc = ({ document, lang }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Tabs defaultActiveKey="infoDocument" id="ModalDocument">
-                        <Tab eventKey="infoDocument" title="สถานะเอกสาร">
+                        <Tab
+                            eventKey="infoDocument"
+                            title={t("students.modal.status-documents.title")}
+                        >
                             <DetailDocument document={document} />
                         </Tab>
-                        <Tab eventKey="formDocument" title="ข้อมูลเอกสาร">
+                        <Tab
+                            eventKey="formDocument"
+                            title={t("students.modal.detail")}
+                        >
                             <div className="border-left border-right border-bottom rounded">
                                 <InputsDocument
                                     inputs={JSON.parse(document.data)}
@@ -75,10 +84,10 @@ const UserModalDoc = ({ document, lang }) => {
                         hidden={document.status === "cancel" ? true : false}
                         onClick={deleteDoc}
                     >
-                        Cancel Document
+                        {t("students.modal.btn.cancel")}
                     </Button>
                     <Button onClick={() => setShow(false)} variant="secondary">
-                        close
+                        {t("students.modal.btn.close")}
                     </Button>
                 </Modal.Footer>
             </Modal>

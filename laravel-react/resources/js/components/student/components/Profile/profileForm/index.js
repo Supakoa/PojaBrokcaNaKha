@@ -10,9 +10,11 @@ import ListFaculties from "./ListFaculties";
 import ListMajors from "./ListMajors";
 import { _urlUsers } from "../../../../middleware/apis";
 import headerConfig from "../../../../middleware/headerConfig";
+import { useTranslation } from "react-i18next";
 
 const ProfileForm = () => {
     const _dispatch = useDispatch();
+    const { t } = useTranslation();
     const _studentProfile = useSelector(state => state.userState);
     const [_profile, setProfile] = React.useState({});
     const [_isSubmit, setIsSubmit] = React.useState(false);
@@ -34,14 +36,10 @@ const ProfileForm = () => {
             abort.abort();
         };
     }, []);
-    // console.log(_profile);
 
     const handleChange = e => {
         const { name, value } = e.target;
-        // console.log(name, " => name of onChange");
-        // console.log(value, " => value onChange");
         const _valid = validateIndex(name, value);
-        // console.log("validate", name, " value =>", _valid);
         setIsUpdate(true);
         setIsSubmit(_valid);
         if (_valid) {
@@ -54,7 +52,6 @@ const ProfileForm = () => {
                 [name]: value
             });
         }
-        // console.log(name, " => setValidate");
         setValidate({
             ..._validate,
             [name]: _valid
@@ -62,7 +59,6 @@ const ProfileForm = () => {
     };
 
     const updateUser = _update => {
-        // console.log(_update);
         axios
             .put(
                 `${_urlUsers()}/${_update.id}`,
@@ -77,7 +73,6 @@ const ProfileForm = () => {
     const handleSubmit = () => {
         if (_isUpdate) {
             if (_isSubmit) {
-                // console.log(_profile);
                 //update User to server service
                 updateUser(_profile);
 
@@ -100,12 +95,13 @@ const ProfileForm = () => {
     return (
         <ProfileContext.Consumer>
             {user => {
-                // console.log(user);
                 return (
                     <Form>
                         <Form.Group as={Row} controlId="formName">
                             <Col sm={3} md={2} lg={2} className="py-2">
-                                <Form.Label className="p-0">นำหน้า</Form.Label>
+                                <Form.Label className="p-0">
+                                    {t("students.forms.title")}
+                                </Form.Label>
                                 <Form.Control
                                     required
                                     isValid={
@@ -121,7 +117,7 @@ const ProfileForm = () => {
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     maxLength={6}
                                     type="text"
-                                    placeholder="คำนำหน้า"
+                                    placeholder={t("students.forms.title")}
                                     name="title"
                                     onChange={handleChange}
                                     defaultValue={
@@ -132,7 +128,9 @@ const ProfileForm = () => {
                                 />
                             </Col>
                             <Col sm={7} md={3} lg={3} className="py-2">
-                                <Form.Label>ชื่อ</Form.Label>
+                                <Form.Label>
+                                    {t("students.forms.firstname.title")}
+                                </Form.Label>
                                 <Form.Control
                                     required
                                     isValid={
@@ -147,7 +145,9 @@ const ProfileForm = () => {
                                     }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
-                                    placeholder="ชื่อ"
+                                    placeholder={t(
+                                        "students.forms.firstname.title"
+                                    )}
                                     name="first_name"
                                     onChange={handleChange}
                                     defaultValue={
@@ -163,7 +163,9 @@ const ProfileForm = () => {
                                 lg={5}
                                 className="py-md-2 py-lg-2"
                             >
-                                <Form.Label>นามสกุล</Form.Label>
+                                <Form.Label>
+                                    {t("students.forms.lastname")}
+                                </Form.Label>
                                 <Form.Control
                                     required
                                     isValid={
@@ -178,7 +180,7 @@ const ProfileForm = () => {
                                     }
                                     className="border-right-0 border-left-0 border-top-0 p-1"
                                     type="text"
-                                    placeholder="นามสกุล"
+                                    placeholder={t("students.forms.lastname")}
                                     name="last_name"
                                     onChange={handleChange}
                                     defaultValue={
@@ -190,13 +192,15 @@ const ProfileForm = () => {
                             </Col>
                             <Col sm={12} md={12} lg={12}>
                                 <Form.Text className="text-muted">
-                                    นำหน้า กรุณาใช้เป็น นาย นาง หรือ นางสาว
+                                    {t("students.forms.firstname.text")}
                                 </Form.Text>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
                             <Col sm={10} md={5} lg={5} className="py-2">
-                                <Form.Label>รหัสนักศึกษา</Form.Label>
+                                <Form.Label>
+                                    {t("students.forms.student-id")}
+                                </Form.Label>
                                 <Form.Control
                                     required
                                     isValid={
@@ -223,7 +227,9 @@ const ProfileForm = () => {
                                 />
                             </Col>
                             <Col sm={10} md={5} lg={5} className="py-sm-2">
-                                <Form.Label>เบอร์โทรศัพท์</Form.Label>
+                                <Form.Label>
+                                    {t("students.forms.phone.title")}
+                                </Form.Label>
                                 <Form.Control
                                     required
                                     isValid={
@@ -240,7 +246,9 @@ const ProfileForm = () => {
                                     type="text"
                                     maxLength={10}
                                     name="telephone"
-                                    placeholder="เบอร์โทรศัพท์"
+                                    placeholder={t(
+                                        "students.forms.phone.title"
+                                    )}
                                     onChange={handleChange}
                                     defaultValue={
                                         _profile.telephone === undefined
@@ -249,13 +257,15 @@ const ProfileForm = () => {
                                     }
                                 />
                                 <Form.Text className="text-muted pl-2">
-                                    กรุณาใส่หมายเลขที่สามารถติดต่อได้ทันที.
+                                    {t("students.forms.phone.text")}
                                 </Form.Text>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
                             <Col sm={10} md={5} lg={5} className="py-2">
-                                <Form.Label>อีเมล</Form.Label>
+                                <Form.Label>
+                                    {t("students.forms.mail.title")}
+                                </Form.Label>
                                 <Form.Control
                                     required
                                     isValid={
@@ -280,14 +290,13 @@ const ProfileForm = () => {
                                     }
                                 />
                                 <Form.Text className="text-muted pl-2">
-                                    กรุณาบันทึกอีเมลของมหาวิยาลัย.
+                                    {t("students.forms.mail.text")}
                                 </Form.Text>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
                             <FacultiesContext.Consumer>
                                 {faculties => {
-                                    // console.log(faculties);
                                     return (
                                         <ListFaculties
                                             nowFacultyId={_facultyId}
@@ -326,7 +335,9 @@ const ProfileForm = () => {
                                     }
                                     onClick={handleSubmit}
                                 >
-                                    {_isUpdate ? "อัพเดต" : "บันทึก"}
+                                    {_isUpdate
+                                        ? t("students.forms.btn.update")
+                                        : t("students.forms.btn.save")}
                                 </Button>
                             )}
                         </Col>

@@ -3,6 +3,7 @@ import { Dropdown, Button, DropdownButton, Badge } from "react-bootstrap";
 import { IconCheck } from "./iconCheck";
 import FixItemDefault from "./FixItemDefault";
 import wordShow from "./showMyWord";
+import { useTranslation } from "react-i18next";
 
 const FilterSort = ({
     sortBy,
@@ -13,7 +14,7 @@ const FilterSort = ({
     noti
 }) => {
     const [_defSort, setDefSort] = React.useState("all");
-
+    const { t } = useTranslation();
     const defaultSetSort = e => {
         setDefSort(e.target.name ? e.target.name : _defSort);
     };
@@ -31,7 +32,7 @@ const FilterSort = ({
         <Dropdown drop="right">
             <Dropdown.Toggle variant={filterValid ? "danger" : "outline-info"}>
                 <i className="fas fa-filter"></i>{" "}
-                {sortBy ? wordShow(sortBy) : wordShow(_defSort)}.{" "}
+                {sortBy ? wordShow(sortBy, t) : wordShow(_defSort, t)}.{" "}
                 {noti && noti > 0 ? (
                     <Badge variant="danger">{noti}</Badge>
                 ) : null}
@@ -49,7 +50,9 @@ const FilterSort = ({
                                 className="d-flex align-items-center justify-content-between"
                                 onClick={setSort}
                             >
-                                <strong name={item}>{item} </strong>
+                                <strong className="px-1" name={item}>
+                                    {wordShow(item, t)}{" "}
+                                </strong>
                                 <IconCheck isSort={sortBy === item} />
                             </Dropdown.Item>
                         );

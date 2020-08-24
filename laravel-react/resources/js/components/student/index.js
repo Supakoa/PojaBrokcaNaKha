@@ -27,10 +27,12 @@ import post2Documents from "../middleware/post2Redux/postToDocuments";
 import post2Subjects from "../middleware/post2Redux/postToSubjects";
 import post2User from "../middleware/post2Redux/postToUser";
 import post2UserDocuments from "../middleware/post2Redux/postToUserDocuments";
+import { useTranslation } from "react-i18next";
 
 export default function Student() {
     let { path, url } = useRouteMatch();
     let _history = useHistory();
+    const { t } = useTranslation();
     const { pathname } = useLocation();
     const _dispatch = useDispatch();
     const token = localStorage._authLocal;
@@ -75,14 +77,17 @@ export default function Student() {
                 <Row className="w-100 container-fluid">
                     <Col md={3} lg={3}>
                         <ListGroup className="border-0">
-                            <h6 className="py-2 px-2 text-secondary">เมนู</h6>
+                            <h6 className="py-2 px-2 text-secondary">
+                                <i className="fas fa-th-list"></i>{" "}
+                                {t("students.nav-left.title")}
+                            </h6>
                             <Link
                                 className={`${
                                     pathname === `/student` ? `active` : ""
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}`}
                             >
-                                ประวัติการส่งคำร้อง
+                                {t("students.nav-left.history")}
                             </Link>
                             <Link
                                 className={`${
@@ -92,7 +97,7 @@ export default function Student() {
                                 } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
                                 to={`${url}/form-report`}
                             >
-                                ส่งคำร้อง
+                                {t("students.nav-left.form")}
                             </Link>
                         </ListGroup>
                     </Col>

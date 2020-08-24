@@ -4,9 +4,10 @@ import { columns } from "./columns";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import StatusBadgeDoc from "../../../student/components/tableReport/statusDocument";
-import _convertDate from "../../../middleware/method/convertDate";
-import { Link } from "react-router-dom";
+import ConvertDate from "../../../middleware/method/convertDate";
 import Swal from "sweetalert2";
+import ButtonShowDoc from "./ButtonShowDoc";
+import NameFormOnTable from "../../../name-form-ontable";
 
 const TableApprover = ({
     urlApprover,
@@ -19,7 +20,7 @@ const TableApprover = ({
 }) => {
     const _userDocs = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
 
     const setRowsOnTable = async userDocs => {
         const _add2Rows = await userDocs.map((uDoc, idx) => {
@@ -30,21 +31,26 @@ const TableApprover = ({
                 return {
                     row_id: (idx + 1).toString(),
                     status_badge: (
-                        <StatusBadgeDoc key={idx} status={uDoc.status} />
+                        <StatusBadgeDoc key={idx} status={uDoc.pivot.status} />
                     ),
-                    status: uDoc.status,
-                    pivot_status: uDoc.pivot.status,
-                    form_name:
-                        i18n.language === "th" ? _name.th_name : _name.eng_name,
-                    from_user: "อิอิอิ",
-                    created_at_converted: _convertDate(uDoc.created_at),
+                    status: uDoc.pivot.status,
+                    form_name: (
+                        <NameFormOnTable
+                            key={idx + 1}
+                            thName={_name.th_name}
+                            engName={_name.eng_name}
+                        />
+                    ),
+                    from_user: uDoc.user_id,
+                    created_at_converted: (
+                        <ConvertDate key={idx + 2} dateTime={uDoc.created_at} />
+                    ),
                     action: (
-                        <Link
-                            className="btn btn-sm btn-info"
-                            to={`${urlApprover}/show/${uDoc.id}`}
-                        >
-                            show <i className="fas fa-edit"></i>
-                        </Link>
+                        <ButtonShowDoc
+                            key={idx + 3}
+                            url={urlApprover}
+                            id={uDoc.id}
+                        />
                     )
                 };
             }
@@ -55,8 +61,10 @@ const TableApprover = ({
             });
             if (sortTable !== "all" && arr.length === 0) {
                 Swal.fire(
-                    `${sortTable} error !!`,
-                    `ไม่พบ ${sortTable} ของคุณ`,
+                    i18n.language === "th" ? `ขออภัย` : `Sorry !`,
+                    `${sortTable} ${
+                        i18n.language === "th" ? `ไม่มีข้อมูล` : `Empty`
+                    } `,
                     "warning"
                 ).then(() => {
                     setValidSort(!validSort);
@@ -89,18 +97,26 @@ const TableApprover = ({
         <MDBDataTable
             small
             noBottomColumns={true}
-            entriesLabel="ข้อมูลที่แสดง"
+            entriesLabel={t("approvers.table.header.pagination")}
             scrollX
             entriesOptions={[5, 10, 15]}
             entries={5}
-            infoLabel={["กำลังแสดง", "-", "ของ", "รายการ"]}
-            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
-            searchLabel="ค้นหา"
+            infoLabel={[
+                t("approvers.table.footer.show"),
+                "-",
+                t("approvers.table.footer.of"),
+                t("approvers.table.footer.list")
+            ]}
+            paginationLabel={[
+                t("approvers.table.footer.prev"),
+                t("approvers.table.footer.next")
+            ]}
+            searchLabel={t("approvers.table.header.search")}
             barReverse={true}
             borderless
             striped
             hover
-            data={{ columns, rows }}
+            data={{ columns: columns(t), rows: rows }}
         />
     );
 };

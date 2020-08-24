@@ -1,14 +1,17 @@
-const wordShow = word => {
+const wordShow = (word, t) => {
     switch (word) {
         case "edit":
-            return word.toLowerCase() + "ed";
+            return t("filter.edit");
         case "approve":
-            return word.toLowerCase() + "d";
+            return t("filter.approved");
         case "cancel":
-            return word.toLowerCase() + "ed";
-
+            return t("filter.cancel");
+        case "all":
+            return t("filter.all");
+        case "pending":
+            return t("filter.pending");
         default:
-            return word.toLowerCase();
+            return "Not Found";
     }
 };
 

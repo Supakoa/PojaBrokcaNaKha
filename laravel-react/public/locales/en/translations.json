@@ -1,74 +1,189 @@
 {
-    "user" : {
-        "title" :  "Title",
-        "firstName" : "First Name",
-        "lastName" : "Last Name",
-        "studentId" : "Student Id",
-        "password" : "Password",
-        "confirmPassword" : "Confirm Password",
-        "email" : "Email",
-        "phoneNumber" : "Phone number",
-        "faculty" : "Faculty",
-        "major" : "Major"
+    "user": {
+        "title": "Title",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "studentId": "Student Id",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "email": "Email",
+        "phoneNumber": "Phone number",
+        "faculty": "Faculty",
+        "major": "Major"
     },
-    "menu":{
-        "menu" : "Menu",
-        "home" : "Home",
-        "message" : "Message",
-        "documents" : "Documents",
-        "users" : "Users",
-        "news" : "News",
-        "forms" : "Forms"
-    }, 
-    "faculty" : {
-        "index" : " Faculty",
-        "selectFaculty" : "Choose your faculty"
+    "menu": {
+        "menu": "Menu",
+        "home": "Home",
+        "message": "Message",
+        "documents": "Documents",
+        "users": "Users",
+        "news": "News",
+        "forms": "Forms"
     },
-    "major" : {
-        "index" : "Major",
-        "selectMajor" : "Choose your major"
+    "faculty": {
+        "index": " Faculty",
+        "selectFaculty": "Choose your faculty"
     },
-    "modalDelete" : {
-        "btnModal" : "Delete",
-        "title" : "Are you shure?",
-        "text" : "You won't be able to revert this!",
-        "cancelButtonText" : "No!",
-        "confirmButtonText" : "Yes, delete it!",
-        "deleted" : "Deleted",
-        "hasBeetDeleted" : "Has been deleted.",
-        "success" : "success"
-
+    "major": {
+        "index": "Major",
+        "selectMajor": "Choose your major"
     },
-    "pr" : {
-        "index" : "Public relations",
-        "link" : "URL",
-        "image" : "Image"
-        
+    "modalDelete": {
+        "btnModal": "Delete",
+        "title": "Are you shure?",
+        "text": "You won't be able to revert this!",
+        "cancelButtonText": "No!",
+        "confirmButtonText": "Yes, delete it!",
+        "deleted": "Deleted",
+        "hasBeetDeleted": "Has been deleted.",
+        "success": "success"
     },
-    "document" : {
-        "form" : "Forms",
-        "creat" : "Created at",
-        "update" : "Updated at",
-        "status" : "Status"
+    "pr": {
+        "index": "Public relations",
+        "link": "URL",
+        "image": "Image"
     },
-    "documentStatus" : {
-        "cencel" : "Cencelled",
-        "pending" : "Pending",
-        "reject" : "Reject",
-        "success" : "Success"
+    "document": {
+        "form": "Forms",
+        "creat": "Created at",
+        "update": "Updated at",
+        "status": "Status"
     },
-    "day&time" : "Day / Time",
-    "selectToShowMessage" : "Please select a name To display the message",
-    "sender" : "Sender",
-    "add" : "Add",
-    "edit" : "Edit",
-    "close" : "Close",
-    "save" : "Save",
-    "check" : "Check",
-    "search" : "Search"
-    
-
-    
-    
-
+    "documentStatus": {
+        "cencel": "Cencelled",
+        "pending": "Pending",
+        "reject": "Reject",
+        "success": "Success"
+    },
+    "day&time": "Day / Time",
+    "selectToShowMessage": "Please select a name To display the message",
+    "sender": "Sender",
+    "add": "Add",
+    "edit": "Edit",
+    "close": "Close",
+    "save": "Save",
+    "check": "Check",
+    "search": "Search",
+    "sign-out": "Sign-out",
+    "txt-logo": "Petition Website",
+    "students": {
+        "table": {
+            "header": {
+                "search": "Search",
+                "pagination": "Show Data"
+            },
+            "columns": {
+                "status": "Status",
+                "form": "Forms",
+                "create": "Created at",
+                "edit": "Edit at",
+                "action": "Action"
+            },
+            "footer": {
+                "show": "Show now",
+                "of": "Of",
+                "list": "Lists",
+                "prev": "Previous",
+                "next": "Next"
+            }
+        },
+        "navbar-top": {
+            "home": "Home",
+            "profile": "Profile"
+        },
+        "nav-left": {
+            "title": "Menu",
+            "history": "Pettion history",
+            "form": "Send Petition"
+        },
+        "forms": {
+            "title": "Title",
+            "firstname": {
+                "title": "Firstname",
+                "text": "Please use it as Mr., Mrs. or Miss."
+            },
+            "lastname": "Lastname",
+            "student-id": "Student ID",
+            "phone": {
+                "title": "Phone",
+                "text": "Please enter a number that you can contact immediately."
+            },
+            "mail": {
+                "title": "Email",
+                "text": "Please save the university email."
+            },
+            "faculty": {
+                "title": "Faculty",
+                "option": "Choose Faculty",
+                "text": "You must select or change faculties to be able to select a major."
+            },
+            "major": "Major",
+            "btn": {
+                "save": "Save",
+                "update": "Updated"
+            }
+        },
+        "message": {
+            "title": "Help",
+            "place-holder": "message"
+        },
+        "modal": {
+            "btn-title": "more",
+            "status-documents": {
+                "title": "Document Status",
+                "create": "Created at",
+                "edit": "Edit at",
+                "cancel": "Cancel at",
+                "status": "Status",
+                "sender": "Sender",
+                "canceler": "Canceler",
+                "note": "Note"
+            },
+            "detail": "Detail Document",
+            "btn": {
+                "cancel": "Cancel Document",
+                "close": "Close"
+            },
+            "swal": {
+                "title": "Are you sure ?",
+                "text": "That you want to cancel this pettion !",
+                "yes": "Yes!",
+                "no": "No",
+                "then": {
+                    "title": "Canceled",
+                    "text": "Your petition has been cancel."
+                }
+            }
+        }
+    },
+    "approvers": {
+        "table": {
+            "header": {
+                "search": "Search",
+                "pagination": "Show Data"
+            },
+            "columns": {
+                "status": "Status",
+                "form": "Forms",
+                "create": "Created at",
+                "name_sender": "Sender",
+                "action": "Action"
+            },
+            "footer": {
+                "show": "Show now",
+                "of": "Of",
+                "list": "Lists",
+                "prev": "Previous",
+                "next": "Next"
+            }
+        },
+        "emptyDetail": "You not selected documents."
+    },
+    "filter": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "cancel": "Canceled",
+        "edit": "Edited",
+        "all": "All"
+    }
 }

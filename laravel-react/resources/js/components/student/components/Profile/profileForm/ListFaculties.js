@@ -1,17 +1,17 @@
 import React from "react";
 import { Col, Form, Spinner } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const ListFaculties = props => {
     const { methodHandle, userMajor, faculties, nowFacultyId } = props;
-    // console.log(nowFacultyId);
-    // console.log(userMajor);
+    const { t } = useTranslation();
     React.useEffect(() => {}, [nowFacultyId]);
 
     return (
         <Col md={5} lg={5} className="py-2">
             {userMajor ? (
                 <Form.Group>
-                    <Form.Label>คณะ</Form.Label>
+                    <Form.Label>{t("students.forms.faculty.title")}</Form.Label>
                     <Form.Control
                         onChange={methodHandle}
                         as="select"
@@ -49,7 +49,9 @@ const ListFaculties = props => {
                                 }
                             })
                         ) : (
-                            <option defaultValue={0}>เลือกคณะ</option>
+                            <option defaultValue={0}>
+                                {t("students.forms.faculty.option")}
+                            </option>
                         )}
                     </Form.Control>
                 </Form.Group>
@@ -58,7 +60,7 @@ const ListFaculties = props => {
             )}
 
             <Form.Text className="text-muted pl-2">
-                ต้องทำการเลือก หรือ เปลี่ยนแปลงคณะถึงสามารถ เลือกสาขาได้.
+                {t("students.forms.faculty.text")}
             </Form.Text>
         </Col>
     );

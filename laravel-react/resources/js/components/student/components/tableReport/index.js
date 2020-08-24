@@ -12,15 +12,15 @@ import Swal from "sweetalert2";
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
     const _docTemp = useSelector(state => state.documentsTemplate);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const [rows, setRows] = React.useState([]);
     const [_filValid, setFilValid] = React.useState(false);
     const [_sortBy, setSortBy] = React.useState("pending");
     const _optionSort = ["all", "approve", "pending", "cancel", "edit"];
+
     const _props = {
         docTemp: _docTemp,
         userDoc: _userDoc,
-        lang: i18n.language,
         defSort: _sortBy
     };
 
@@ -98,18 +98,26 @@ export default function ReportTable() {
             </div>
             <MDBDataTable
                 noBottomColumns={true}
-                entriesLabel="ข้อมูลที่แสดง"
+                entriesLabel={t("students.table.header.pagination")}
                 scrollX
                 entriesOptions={[5, 10, 15]}
                 entries={5}
-                infoLabel={["กำลังแสดง", "-", "ของ", "รายการ"]}
-                paginationLabel={["ก่อนหน้า", "ถัดไป"]}
-                searchLabel="ค้นหา"
+                infoLabel={[
+                    t("students.table.footer.show"),
+                    "-",
+                    t("students.table.footer.of"),
+                    t("students.table.footer.list")
+                ]}
+                paginationLabel={[
+                    t("students.table.footer.prev"),
+                    t("students.table.footer.next")
+                ]}
+                searchLabel={t("students.table.header.search")}
                 barReverse={true}
                 borderless
                 striped
                 hover
-                data={{ columns, rows }}
+                data={{ columns: columns(t), rows: rows }}
             />
         </>
     );

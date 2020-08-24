@@ -1,18 +1,18 @@
 import React from "react";
-import { Container, Card, Spinner, Badge } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Container, Card, Spinner } from "react-bootstrap";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import _convertDate from "../../../middleware/method/convertDate";
+import ConvertDate from "../../../middleware/method/convertDate";
 import StatusBadgeDoc from "../../../student/components/tableReport/statusDocument";
 import { useTranslation } from "react-i18next";
 import InputsDocument from "../../../student/components/tableReport/modal/InputsDocument";
 
 const ShowDetail = () => {
     const { id } = useParams();
+    const { i18n } = useTranslation();
+    const _history = useHistory();
     const _userDoc = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
-    const { i18n } = useTranslation();
-
     const [_detail, setDetail] = React.useState({});
 
     const findingDocument = (_userDoc, id) => {
@@ -36,12 +36,16 @@ const ShowDetail = () => {
     React.useEffect(() => {
         const abort = new AbortController();
 
-        if (id) {
+        if (id && _userDoc.length !== 0) {
             findingDocument(_userDoc, id, { signal: abort.signal });
+        } else {
+            setTimeout(() => {
+                _history.push("/approvers");
+            }, 2000);
         }
+
         return () => abort.abort();
-    }, [id]);
-    console.log(_detail);
+    }, [id, _userDoc]);
 
     if (Object.keys(_detail).length > 0) {
         return (
@@ -49,7 +53,7 @@ const ShowDetail = () => {
                 <Card.Header className="d-flex justify-content-between">
                     <span>
                         <i className="far fa-clock"></i>{" "}
-                        {_convertDate(_detail.created_at)}
+                        <ConvertDate dateTime={_detail.created_at} />
                     </span>
                     <span>
                         <StatusBadgeDoc status={_detail.pivot.status} />
@@ -62,10 +66,7 @@ const ShowDetail = () => {
                             : _detail.eng_form_name}
                     </Card.Title>
 
-                    <InputsDocument
-                        inputs={JSON.parse(_detail.data)}
-                        lang={i18n.language}
-                    />
+                    <InputsDocument inputs={JSON.parse(_detail.data)} />
                 </Card.Body>
                 <Card.Footer>Footer actions.</Card.Footer>
             </Card>
