@@ -34,7 +34,7 @@ function NavHeader(props) {
                     <Nav>
                         <Link
                             className="nav-link text-light"
-                            to={`${props.url}/${_user.id}`}
+                            to={`${props.url}`}
                         >
                             {t("students.navbar-top.home")}
                         </Link>

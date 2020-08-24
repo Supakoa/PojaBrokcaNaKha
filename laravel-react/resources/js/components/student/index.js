@@ -84,7 +84,7 @@ export default function Student() {
                             <Link
                                 className={`${
                                     pathname === `/student` ? `active` : ""
-                                } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0`}
+                                } list-group-item list-group-item-action border-left-0 border-right-0 border-top-0 text-truncate`}
                                 to={`${url}`}
                             >
                                 {t("students.nav-left.history")}

@@ -116,6 +116,7 @@ export default function ReportTable() {
                 barReverse={true}
                 borderless
                 striped
+                small
                 hover
                 data={{ columns: columns(t), rows: rows }}
             />
