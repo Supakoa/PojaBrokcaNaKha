@@ -98,7 +98,6 @@ export default function SignIn() {
                     dispatch(pathRoleUser(_path));
                     dispatch(isAuththen(true));
                     dispatch(user(_data));
-                } else {
                 }
             } else {
                 setLoading(true);

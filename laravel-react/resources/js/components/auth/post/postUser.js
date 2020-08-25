@@ -1,25 +1,20 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import headerConfig from "../../middleware/headerConfig";
+import { _urlUser } from "../../middleware/apis";
 // import { user, isAuththen } from "../../../redux/actions";
 
 const postUser = async tokenRegis => {
     const userAuth = await axios
-        .post(`http://localhost:8000/api/user`, tokenRegis, {
-            headers: {
-                Authorization: `Bearer ${tokenRegis}`,
-                "Content-Type": "application/json",
-                "Retry-After": 3600
-            }
-        })
+        .post(_urlUser(), tokenRegis, headerConfig(tokenRegis, 3600))
         .then(res => {
-            const role = res.data.success.role_id;
-            const data = res.data.success;
+            const { success } = res.data;
             Swal.fire(
-                `${data.first_name} ${data.last_name}`,
+                `${success.first_name} ${success.last_name}`,
                 "ยินดีตอนรับเข้าสู่ระบบ!",
                 "success"
             );
-            return { status: true, _role: role, _data: data };
+            return { status: true, _role: success.role_id, _data: success };
         });
 
     return userAuth;
