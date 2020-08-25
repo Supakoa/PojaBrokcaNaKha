@@ -9,7 +9,7 @@ const TextOfDoc = props => {
             md={inputData.size}
             lg={inputData.size}
             as={Col}
-            controlId={inputData.tage_type}
+            controlId={inputData.tag_type}
         >
             <Form.Label>
                 {lang === "th" ? inputData.th_title : inputData.eng_title}

@@ -8,20 +8,12 @@ export const _urlUser = () => {
     return `${_www}/api/user`;
 };
 
-export const _urlGetUserDocuments = _id => {
-    return `${_www}/api/users/${_id}/documents`;
-};
-
 export const _urlDocuments = () => {
     return `${_www}/api/forms`;
 };
 
 export const _urlFaculties = () => {
     return `${_www}/api/faculties`;
-};
-
-export const _urlMajors = _id => {
-    return `${_www}/api/faculties/${_id}/majors`;
 };
 
 export const _urlUploads = () => {
@@ -36,6 +28,18 @@ export const _urlSubjects = () => {
     return `${_www}/api/subjects`;
 };
 
+export const _urlMajors = id => {
+    return `${_www}/api/faculties/${id}/majors`;
+};
+
+export const _urlGetUserDocuments = id => {
+    return `${_www}/api/users/${id}/documents`;
+};
+
 export const _urlCancelDocument = id => {
     return `${_www}/api/documents/${id}/cancel`;
+};
+
+export const _urlPostApprove = id => {
+    return `${_www}/api/documents/${id}/approve`;
 };

@@ -30,7 +30,7 @@ const SenderDetail = ({ id, translate }) => {
                             {translate("approvers.show-detail.user.studentId")}:
                         </dt>
                         <dd className="col-lg-3 col-md-3 col-sm-9 px-0">
-                            {_user.student_id}
+                            {_user.student_id !== null ? _user.student_id : "-"}
                         </dd>
                     </dl>
 
@@ -39,13 +39,24 @@ const SenderDetail = ({ id, translate }) => {
                             {translate("approvers.show-detail.user.faculty")}:
                         </dt>
                         <dd className="col-lg-10 col-md-10 col-sm-9 px-0">
-                            {_user.major.faculty.name}
+                            {_user.major.faculty.name
+                                ? _user.major.faculty.name
+                                : "-"}
                         </dd>
                         <dt className="col-lg-2 col-md-2 col-sm-3 pr-0">
                             {translate("approvers.show-detail.user.major")}:
                         </dt>
                         <dd className="col-lg-10 col-md-10 col-sm-9 px-0">
-                            {_user.major.name}
+                            {_user.major.name ? _user.major.name : "-"}
+                        </dd>
+                        <dt className="col-lg-2 col-md-2 col-sm-3 pr-0">
+                            {translate(
+                                "approvers.show-detail.user.phoneNumber"
+                            )}
+                            :
+                        </dt>
+                        <dd className="col-lg-10 col-md-10 col-sm-9 px-0">
+                            {_user.telephone ? _user.telephone : "-"}
                         </dd>
                     </dl>
                 </Card.Body>

@@ -10,19 +10,15 @@ const SelectorOfDoc = props => {
         const { value } = e.target;
         if (
             inputData.tag_type === "select2" &&
-            inputData.th_options.length === Number(value)
+            inputData.th_options.length - 1 === Number(value)
         ) {
-            setOtherLabel(
-                inputData.th_options.length === Number(value)
-                    ? e.target.children[inputData.th_options.length].label
-                    : ""
-            );
+            setOtherLabel(e.target.children[inputData.th_options.length].label);
         } else {
             handle(e);
         }
         setOther(
             inputData.tag_type === "select2" &&
-                inputData.th_options.length === Number(value)
+                inputData.th_options.length - 1 === Number(value)
         );
     };
 
@@ -31,19 +27,29 @@ const SelectorOfDoc = props => {
             md={inputData.size}
             lg={inputData.size}
             as={Col}
-            controlId={inputData.tage_type}
+            controlId={inputData.tag_type + inputData.type}
         >
             <Form.Label>
                 {lang === "th" ? inputData.th_title : inputData.eng_title}
             </Form.Label>
             <Form.Control
+                isInvalid={
+                    props.required[inputData.tag_type + inputData.type] ===
+                    false
+                        ? props.required[inputData.tag_type + inputData.type]
+                        : props.isSubmit
+                }
+                isValid={
+                    props.required[inputData.tag_type + inputData.type] ===
+                    inputData.tag_type + inputData.type
+                }
                 as="select"
                 name={inputData.type}
                 size="sm"
                 onChange={onChangeLastIndext}
                 custom
             >
-                <option value="0">
+                <option>
                     {lang === "th" ? inputData.th_name : inputData.eng_name}
                 </option>
 
@@ -71,16 +77,18 @@ const SelectorOfDoc = props => {
                           );
                       })}
             </Form.Control>
-            {_other ? (
-                <>
-                    <Form.Label className="pt-2">{_otherLabel}</Form.Label>
-                    <Form.Control
-                        size="sm"
-                        onChange={handle}
-                        name={inputData.type}
-                    />
-                </>
-            ) : null}
+
+            <Form.Label hidden={!_other} className="pt-2">
+                {_otherLabel}
+            </Form.Label>
+            <Form.Control
+                isInvalid={props.required}
+                hidden={!_other}
+                size="sm"
+                onChange={handle}
+                name={inputData.type}
+                placeholder="กรุณาใส่ข้อความที่ต้องการ"
+            />
         </Form.Group>
     );
 };

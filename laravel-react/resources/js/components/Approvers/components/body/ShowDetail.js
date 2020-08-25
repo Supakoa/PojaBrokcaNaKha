@@ -7,6 +7,7 @@ import StatusBadgeDoc from "../../../student/components/tableReport/statusDocume
 import { useTranslation } from "react-i18next";
 import InputsDocument from "../../../student/components/tableReport/modal/InputsDocument";
 import SenderDetail from "./SenderDetail";
+import ActionApprovers from "./ActionApprovers";
 
 const ShowDetail = () => {
     const { id } = useParams();
@@ -76,7 +77,12 @@ const ShowDetail = () => {
                         <InputsDocument inputs={JSON.parse(_detail.data)} />
                     </div>
                 </Card.Body>
-                <Card.Footer>Footer actions.</Card.Footer>
+                <Card.Footer>
+                    <ActionApprovers
+                        stateApprovers={_detail.pivot.state}
+                        stateDocument={_detail.state}
+                    />
+                </Card.Footer>
             </Card>
         );
     } else {

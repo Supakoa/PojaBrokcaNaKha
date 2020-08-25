@@ -72,7 +72,7 @@ const TableApprover = ({
                     "warning"
                 ).then(() => {
                     setValidSort(!validSort);
-                    setSortBy("all");
+                    setSortBy("pending");
                 });
             }
             setRows(

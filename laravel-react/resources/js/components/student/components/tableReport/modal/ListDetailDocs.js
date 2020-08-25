@@ -30,7 +30,8 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                         {i18n.language === "th" ? data.th_name : data.eng_name}:{" "}
                     </dt>
                     <dd className="col-lg-8 col-md-8">
-                        {!isNaN(data.data)
+                        {!isNaN(data.data) &&
+                        data.data < data.th_options.length - 1
                             ? i18n.language === "th"
                                 ? data.th_options.map((sub, idx) => {
                                       return idx === Number(data.data)
