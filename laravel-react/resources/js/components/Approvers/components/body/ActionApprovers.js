@@ -36,7 +36,6 @@ const ActionApprovers = ({ stateApprovers, stateDocument, documentID }) => {
         }
     };
 
-    postTo;
     const handleSubmit = () => {
         setFormValid(_pivot.status && _pivot.status !== "none" ? false : true);
         if (_pivot.status && _pivot.status !== "none") {
