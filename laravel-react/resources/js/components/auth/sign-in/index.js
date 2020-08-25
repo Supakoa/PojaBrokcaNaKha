@@ -98,7 +98,6 @@ export default function SignIn() {
                     dispatch(pathRoleUser(_path));
                     dispatch(isAuththen(true));
                     dispatch(user(_data));
-                } else {
                 }
             } else {
                 setLoading(true);
@@ -111,9 +110,7 @@ export default function SignIn() {
             <Container fluid>
                 <Row className="section-log-in">
                     <Col
-                        xs={12}
-                        sm={12}
-                        md={6}
+                        md={12}
                         lg={6}
                         className="bg-light d-flex align-item-center"
                     >
@@ -164,9 +161,7 @@ export default function SignIn() {
                         </section>
                     </Col>
                     <Col
-                        xs={12}
-                        sm={12}
-                        md={6}
+                        md={12}
                         lg={6}
                         className="bg-info text-light d-flex align-item-center"
                     >

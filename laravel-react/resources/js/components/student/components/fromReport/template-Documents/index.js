@@ -20,19 +20,16 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
     const _history = useHistory();
     const { i18n } = useTranslation();
     const _userId = useSelector(s => s.userState.id);
+    const [_isRequire, setIsRequire] = React.useState({});
+    const [_numRequired, setNumRequired] = React.useState(0);
+    const [_isSubmit, setIsSubmit] = React.useState(false);
     const [_document, setDocument] = React.useState({});
-    const [_valid, setValid] = React.useState({});
-    const handleChangeForm = async e => {
-        const { value, type, name, files } = e.target;
 
-        if (type === "select-one") {
-            if (value !== "0") {
-                setDocument({ ..._document, [name]: value });
-                setValid({
-                    ..._valid,
-                    [name]: true
-                });
-            }
+    const handleChangeForm = async e => {
+        const { value, type, name, files, id } = e.target;
+
+        if (type === "textarea") {
+            setDocument({ ..._document, [name]: value });
         } else if (type === "file") {
             const file = files[0];
 
@@ -42,66 +39,87 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                     ..._document,
                     [name]: _pathImg
                 });
-                setValid({
-                    ..._valid,
-                    [name]: true
-                });
             }
         } else {
+            setIsRequire({
+                ..._isRequire,
+                [id]: false
+            });
             setDocument({ ..._document, [name]: value });
-            setValid({
-                ..._valid,
-                [name]: true
-            });
         }
     };
 
-    const handleSending = async () => {
+    const handleSending = async e => {
         let _arry = [];
-        Object.keys(_document).map((item, idx) => {
-            const _newDoc = patternInput.find(id => {
-                return id.type === item;
-            });
-            if (_newDoc) {
-                _newDoc.data = Object.values(_document)[idx];
-                _arry = [..._arry, _newDoc];
-            }
-        });
 
-        const _docForm = {
-            form_id: id,
-            user_id: _userId,
-            data: JSON.stringify({ inputs: _arry })
-        };
-        const _resDoc = await postDocumentUser(
-            localStorage._authLocal,
-            _docForm
-        );
-        if (_resDoc.created_at) {
-            Swal.fire("complete. !", "ส่งเรียบร้อย", "success").then(
-                async res => {
-                    if (res.value) _history.push("/student");
-                    const _newDocs = await fetchUserDoc({
-                        id: _userId,
-                        token: localStorage._authLocal
-                    });
-                    if (_newDocs) {
-                        _dispatch(userDocument(_newDocs));
-                    }
+        if (Object.keys(_isRequire).length === _numRequired) {
+            Object.keys(_document).map((item, idx) => {
+                const _newDoc = patternInput.find(id => {
+                    return id.type === item;
+                });
+                if (_newDoc) {
+                    _newDoc.data = Object.values(_document)[idx];
+                    _arry = [..._arry, _newDoc];
                 }
+            });
+
+            const _docForm = {
+                form_id: id,
+                user_id: _userId,
+                data: JSON.stringify({ inputs: _arry })
+            };
+            const _resDoc = await postDocumentUser(
+                localStorage._authLocal,
+                _docForm
             );
+            if (_resDoc.id) {
+                Swal.fire("complete. !", "ส่งเรียบร้อย", "success").then(
+                    async res => {
+                        if (res.value) {
+                            const _newDocs = await fetchUserDoc({
+                                id: _userId,
+                                token: localStorage._authLocal
+                            });
+                            if (_newDocs) {
+                                _dispatch(userDocument(_newDocs));
+                                _history.push("/student");
+                            }
+                        }
+                    }
+                );
+            }
         } else {
-            Swal.fire("Error !!", _resDoc.message, "error");
+            setIsSubmit(true);
         }
     };
+
+    const filterRequiredInput = patternInput => {
+        const _numRequired = patternInput.filter(item => {
+            return (
+                item.tag_type === "select1" ||
+                item.tag_type === "select2" ||
+                item.tag_type === "select3" ||
+                item.tag_type === "date"
+            );
+        });
+        setNumRequired(_numRequired.length);
+    };
+
+    React.useEffect(() => {
+        const abort = new AbortController();
+        filterRequiredInput(patternInput, { signal: abort.signal });
+        return () => abort.abort();
+    });
 
     return (
-        <Form className="py-3" onSubmit={handleSending}>
+        <Form className="py-3">
             <Form.Row>
                 {patternInput.map((item, idx) => {
                     if (item.tag_type === "select1") {
                         return (
                             <SelectorOfDoc
+                                isSubmit={_isSubmit}
+                                required={_isRequire}
                                 lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
@@ -111,6 +129,8 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                     } else if (item.tag_type === "select2") {
                         return (
                             <SelectorOfDoc
+                                required={_isRequire}
+                                isSubmit={_isSubmit}
                                 lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
@@ -120,6 +140,8 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                     } else if (item.tag_type === "select3") {
                         return (
                             <SelectOfDocApi
+                                required={_isRequire}
+                                isSubmit={_isSubmit}
                                 lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
@@ -147,6 +169,8 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                     } else if (item.tag_type === "date") {
                         return (
                             <DateOfDoc
+                                required={_isRequire}
+                                isSubmit={_isSubmit}
                                 lang={lang}
                                 inputData={item}
                                 key={idx.toString()}
@@ -169,7 +193,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                     }
                 })}
             </Form.Row>
-            <Button variant="info" type="submit">
+            <Button variant="info" onClick={handleSending}>
                 {i18n.language === "th" ? "ส่ง" : "send"}{" "}
                 <i className="fas fa-paper-plane"></i>
             </Button>

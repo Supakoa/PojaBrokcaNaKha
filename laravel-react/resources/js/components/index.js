@@ -17,8 +17,6 @@ import clearLocalStorge from "./middleware/method/clearLocalStorage";
 import Approvers from "./Approvers";
 
 function App() {
-    // const isAuthenticated = useSelector(state => state.redirectState);
-    // const pathRoleUser = localStorage.getItem("pathRoleUser");
     let _isAuthLocal = localStorage.getItem("_authLocal");
     return (
         <Router>

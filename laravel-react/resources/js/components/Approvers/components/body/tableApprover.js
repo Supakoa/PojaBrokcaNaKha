@@ -8,6 +8,7 @@ import ConvertDate from "../../../middleware/method/convertDate";
 import Swal from "sweetalert2";
 import ButtonShowDoc from "./ButtonShowDoc";
 import NameFormOnTable from "../../../name-form-ontable";
+import NameSender from "./NameSender";
 
 const TableApprover = ({
     urlApprover,
@@ -20,6 +21,8 @@ const TableApprover = ({
 }) => {
     const _userDocs = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
+    const _allUses = useSelector(s => s.allUsers);
+
     const { i18n, t } = useTranslation();
 
     const setRowsOnTable = async userDocs => {
@@ -27,6 +30,7 @@ const TableApprover = ({
             const _name = _docTemps.find(tDoc => {
                 return tDoc.id === uDoc.form_id;
             });
+
             if (_name) {
                 return {
                     row_id: (idx + 1).toString(),
@@ -41,7 +45,7 @@ const TableApprover = ({
                             engName={_name.eng_name}
                         />
                     ),
-                    from_user: uDoc.user_id,
+                    from_user: <NameSender id={uDoc.user_id} />,
                     created_at_converted: (
                         <ConvertDate key={idx + 2} dateTime={uDoc.created_at} />
                     ),
@@ -68,7 +72,7 @@ const TableApprover = ({
                     "warning"
                 ).then(() => {
                     setValidSort(!validSort);
-                    setSortBy("all");
+                    setSortBy("pending");
                 });
             }
             setRows(
@@ -83,15 +87,17 @@ const TableApprover = ({
 
     React.useEffect(() => {
         const abort = new AbortController();
+
         if (
             rows.length < _userDocs.length &&
-            _docTemps.length !== 0 &&
-            _userDocs.length > 0
+            _docTemps.length > 0 &&
+            _userDocs.length > 0 &&
+            _allUses.length > 0
         )
             setRowsOnTable(_userDocs, { signal: abort.signal });
 
         return () => abort.abort();
-    }, [rows, _userDocs, _docTemps]);
+    }, [rows, _userDocs, _docTemps, _allUses]);
 
     return (
         <MDBDataTable

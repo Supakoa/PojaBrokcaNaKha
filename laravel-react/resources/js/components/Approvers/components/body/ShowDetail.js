@@ -6,10 +6,12 @@ import ConvertDate from "../../../middleware/method/convertDate";
 import StatusBadgeDoc from "../../../student/components/tableReport/statusDocument";
 import { useTranslation } from "react-i18next";
 import InputsDocument from "../../../student/components/tableReport/modal/InputsDocument";
+import SenderDetail from "./SenderDetail";
+import ActionApprovers from "./ActionApprovers";
 
 const ShowDetail = () => {
     const { id } = useParams();
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const _history = useHistory();
     const _userDoc = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
@@ -61,14 +63,26 @@ const ShowDetail = () => {
                 </Card.Header>
                 <Card.Body>
                     <Card.Title>
+                        <i className="fas fa-paperclip"></i>{" "}
                         {i18n.language === "th"
                             ? _detail.th_form_name
                             : _detail.eng_form_name}
                     </Card.Title>
-
-                    <InputsDocument inputs={JSON.parse(_detail.data)} />
+                    <SenderDetail id={_detail.user_id} translate={t} />
+                    <div className="border rounded">
+                        <h5 className="p-3">
+                            <i className="fas fa-info-circle"></i>{" "}
+                            {t("approvers.show-detail.document")}
+                        </h5>
+                        <InputsDocument inputs={JSON.parse(_detail.data)} />
+                    </div>
                 </Card.Body>
-                <Card.Footer>Footer actions.</Card.Footer>
+                <Card.Footer>
+                    <ActionApprovers
+                        stateApprovers={_detail.pivot.state}
+                        stateDocument={_detail.state}
+                    />
+                </Card.Footer>
             </Card>
         );
     } else {

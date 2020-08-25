@@ -10,19 +10,25 @@ const SelectOfDocApi = props => {
             md={inputData.size}
             lg={inputData.size}
             as={Col}
-            controlId={inputData.tage_type}
+            controlId={inputData.tag_type + inputData.type}
         >
             <Form.Label>
                 {lang === "th" ? inputData.th_title : inputData.eng_title}
             </Form.Label>
             <Form.Control
+                isInvalid={
+                    props.required[inputData.tag_type + inputData.type] ===
+                    false
+                        ? props.required[inputData.tag_type + inputData.type]
+                        : props.isSubmit
+                }
                 as="select"
                 name={inputData.type}
                 size="sm"
                 onChange={handle}
                 custom
             >
-                <option value="0">
+                <option>
                     {lang === "th" ? inputData.th_name : inputData.eng_name}
                 </option>
                 {_subjects.length !== 0

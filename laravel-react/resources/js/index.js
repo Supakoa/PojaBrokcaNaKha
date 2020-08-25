@@ -2,31 +2,30 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import * as serviceWorker from './serviceWorker'
 import { createStore } from "redux";
 import allReducers from "./redux/reducers";
 import { Provider } from "react-redux";
 import "./i18n";
-import { Spinner, Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 
 const store = createStore(
     allReducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-const LoadingLang = () => {
+const LoadSuspense = () => {
     return (
         <Container
-            className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
+            className="d-flex align-items-center justify-content-center"
         >
-            <Spinner animation="grow" />
+            <Spinner animation="border" variant="info" />
         </Container>
     );
 };
 
 ReactDOM.render(
-    <React.Suspense fallback={LoadingLang}>
+    <React.Suspense fallback={<LoadSuspense />}>
         <Provider store={store}>
             <App />
         </Provider>

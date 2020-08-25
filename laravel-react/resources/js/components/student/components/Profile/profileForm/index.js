@@ -58,37 +58,32 @@ const ProfileForm = () => {
         });
     };
 
-    const updateUser = _update => {
-        axios
-            .put(
-                `${_urlUsers()}/${_update.id}`,
-                _update,
-                headerConfig(localStorage._authLocal, 3600)
-            )
-            .then(res => {
-                _dispatch(user(res.data));
-            });
-    };
+    const handleSubmit = async () => {
+        if (_isUpdate && _isSubmit) {
+            //set Loading
+            setLoading(true);
+            //update User to server service
+            await axios
+                .put(
+                    `${_urlUsers()}/${_profile.id}`,
+                    _profile,
+                    headerConfig(localStorage._authLocal, 3600)
+                )
+                .then(res => {
+                    _dispatch(user(res.data));
 
-    const handleSubmit = () => {
-        if (_isUpdate) {
-            if (_isSubmit) {
-                //update User to server service
-                updateUser(_profile);
-
-                //set Loading
-                setLoading(true);
-
-                //set isLoading
-                setIsUpdate(false);
-
-                //set Loading to init
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000);
-            } else {
-                Swal.fire("ผิดพลาด", "พบข้อมูลไม่ถูกต้อง!", "error");
-            }
+                    //set isLoading
+                    setIsUpdate(false);
+                    Swal.fire(
+                        "เรียบร้อย",
+                        "แก้ไขข้อมูลเรียบร้อย",
+                        "success"
+                    ).then(res => {
+                        if (res.value) setLoading(false);
+                    });
+                });
+        } else {
+            Swal.fire("ผิดพลาด", "พบข้อมูลไม่ถูกต้อง!", "error");
         }
     };
 
@@ -105,7 +100,7 @@ const ProfileForm = () => {
                                 <Form.Control
                                     required
                                     isValid={
-                                        _validate.title !== undefined
+                                        _validate.title
                                             ? _validate.title
                                             : false
                                     }
@@ -121,9 +116,9 @@ const ProfileForm = () => {
                                     name="title"
                                     onChange={handleChange}
                                     defaultValue={
-                                        _profile.title === undefined
-                                            ? user.title
-                                            : _profile.title
+                                        _profile.title
+                                            ? _profile.title
+                                            : user.title
                                     }
                                 />
                             </Col>
@@ -134,7 +129,7 @@ const ProfileForm = () => {
                                 <Form.Control
                                     required
                                     isValid={
-                                        _validate.first_name !== undefined
+                                        _validate.first_name
                                             ? _validate.first_name
                                             : false
                                     }
@@ -151,9 +146,9 @@ const ProfileForm = () => {
                                     name="first_name"
                                     onChange={handleChange}
                                     defaultValue={
-                                        _profile.first_name === undefined
-                                            ? user.first_name
-                                            : _profile.first_name
+                                        _profile.first_name
+                                            ? _profile.first_name
+                                            : user.first_name
                                     }
                                 />
                             </Col>
@@ -169,7 +164,7 @@ const ProfileForm = () => {
                                 <Form.Control
                                     required
                                     isValid={
-                                        _validate.last_name !== undefined
+                                        _validate.last_name
                                             ? _validate.last_name
                                             : false
                                     }
@@ -184,9 +179,9 @@ const ProfileForm = () => {
                                     name="last_name"
                                     onChange={handleChange}
                                     defaultValue={
-                                        _profile.last_name === undefined
-                                            ? user.last_name
-                                            : _profile.last_name
+                                        _profile.last_name
+                                            ? _profile.last_name
+                                            : user.last_name
                                     }
                                 />
                             </Col>
@@ -204,7 +199,7 @@ const ProfileForm = () => {
                                 <Form.Control
                                     required
                                     isValid={
-                                        _validate.student_id !== undefined
+                                        !!_validate.student_id
                                             ? _validate.student_id
                                             : false
                                     }
@@ -220,9 +215,9 @@ const ProfileForm = () => {
                                     placeholder="59xxxxxxxxx"
                                     onChange={handleChange}
                                     defaultValue={
-                                        _profile.student_id === undefined
-                                            ? user.student_id
-                                            : _profile.student_id
+                                        _profile.student_id
+                                            ? _profile.student_id
+                                            : user.student_id
                                     }
                                 />
                             </Col>
@@ -233,7 +228,7 @@ const ProfileForm = () => {
                                 <Form.Control
                                     required
                                     isValid={
-                                        _validate.telephone !== undefined
+                                        _validate.telephone
                                             ? _validate.telephone
                                             : false
                                     }
@@ -251,9 +246,9 @@ const ProfileForm = () => {
                                     )}
                                     onChange={handleChange}
                                     defaultValue={
-                                        _profile.telephone === undefined
-                                            ? user.telephone
-                                            : _profile.telephone
+                                        _profile.telephone
+                                            ? _profile.telephone
+                                            : user.telephone
                                     }
                                 />
                                 <Form.Text className="text-muted pl-2">
@@ -269,7 +264,7 @@ const ProfileForm = () => {
                                 <Form.Control
                                     required
                                     isValid={
-                                        _validate.email !== undefined
+                                        _validate.email
                                             ? _validate.email
                                             : false
                                     }
@@ -284,9 +279,9 @@ const ProfileForm = () => {
                                     placeholder="s59xxxxxxxx@ssru.ac.th"
                                     onChange={handleChange}
                                     defaultValue={
-                                        _profile.email === undefined
-                                            ? user.email
-                                            : _profile.email
+                                        _profile.email
+                                            ? _profile.email
+                                            : user.email
                                     }
                                 />
                                 <Form.Text className="text-muted pl-2">

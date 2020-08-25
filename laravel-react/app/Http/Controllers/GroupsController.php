@@ -20,6 +20,9 @@ class GroupsController extends Controller
     public function index(Request $request)
     {
         $groups = Group::all();
+        foreach ($groups as $index => $group) {
+            $group->users;
+        }
 
         return $groups;
     }
@@ -91,10 +94,14 @@ class GroupsController extends Controller
 
     public function addUser(Request $request, Group $group)
     {
-
         if ($group->type == "normal") {
+            if ($group->users()->get()->contains("id",$request->input("user_id")))
+              return  response()->json("ซ้ำ", 406 );
             $group->users()->attach($request->input("user_id"));
         } else {
+            if ($group->users()->where("user_id",$request->input("user_id"))
+                ->wherePivot("subject_id",$request->input("subject_id"))->count() > 0)
+                return  response()->json("ซ้ำ", 406 );
             $group->users()->attach($request->input("user_id"), ["subject_id" => $request->input("subject_id")]);
         }
 
@@ -103,9 +110,12 @@ class GroupsController extends Controller
 
     public function deleteUser(Request $request, Group $group)
     {
-
-        $group->users()->detach($request->input("user_id"));
-
+        if ($group->type == "normal") {
+            $group->users()->detach($request->input("user_id"));
+        } else {
+            $group->users()->where('user_id', $request->input("user_id"))
+                ->withPivot("subject_id", $request->input("subject_id"))->detach();
+        }
         return $group->users;
     }
 }

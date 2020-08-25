@@ -1,11 +1,17 @@
 import React from "react";
-import { Navbar, Nav, Container, Image } from "react-bootstrap";
+import {
+    Navbar,
+    Nav,
+    Container,
+    Image,
+    Spinner,
+    Dropdown
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./../../../images/logo.png";
 import SignOutBtn from "../../../auth/sign-out";
 import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 import { useSelector } from "react-redux";
-import Loading from "../loading";
 import { useTranslation } from "react-i18next";
 
 function NavHeader(props) {
@@ -28,7 +34,7 @@ function NavHeader(props) {
                     <Nav>
                         <Link
                             className="nav-link text-light"
-                            to={`${props.url}/${_user.id}`}
+                            to={`${props.url}`}
                         >
                             {t("students.navbar-top.home")}
                         </Link>
@@ -39,27 +45,36 @@ function NavHeader(props) {
                             {t("students.navbar-top.profile")}
                         </Link>
                     </Nav>
-                    <Nav className="ml-auto pr-2">
-                        {_user.title === undefined ? (
-                            <Loading />
-                        ) : (
-                            <Link
-                                className="text-light d-flex align-items-center justify-content-start mr-lg-3 mr-md-3 py-sm-2"
-                                to={`${props.url}/profile`}
-                            >
-                                <Image
-                                    src="https://img.icons8.com/plasticine/2x/user.png"
-                                    className="d-inline-block align-top"
-                                    width="30"
-                                    height="30"
-                                    rounded="true"
-                                />{" "}
-                                {`${_user.title} ${_user.first_name} ${_user.last_name}`}
-                            </Link>
-                        )}
+                    <Nav className="ml-auto">
+                        <Dropdown>
+                            {Object.keys(_user).length > 0 ? (
+                                <Dropdown.Toggle
+                                    as={Link}
+                                    id="dropdown-custom-components"
+                                    to="#"
+                                    className="text-light d-flex align-items-center justify-content-start mr-lg-3 mr-md-3 py-2"
+                                >
+                                    <Image
+                                        src="https://img.icons8.com/plasticine/2x/user.png"
+                                        className="d-inline-block align-top"
+                                        width="30"
+                                        height="30"
+                                        rounded="true"
+                                    />{" "}
+                                    {`${_user.title} ${_user.first_name} ${_user.last_name}`}
+                                </Dropdown.Toggle>
+                            ) : (
+                                <Spinner animation="border" size="sm" />
+                            )}
 
-                        <SignOutBtn className="text-light d-flex align-items-center justify-content-start py-sm-2" />
-                        <Link to="#" className="px-2 py-sm-2">
+                            <Dropdown.Menu className="bg-info">
+                                <Dropdown.Item
+                                    as={SignOutBtn}
+                                    className="text-light d-flex align-items-center justify-content-start py-2 pl-2"
+                                />
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Link to="#" className="px-2 py-2">
                             <SwitchingLanguageBtn className="nav-link" />
                         </Link>
                     </Nav>

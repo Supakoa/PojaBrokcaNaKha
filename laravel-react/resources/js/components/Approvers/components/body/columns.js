@@ -31,7 +31,7 @@ export const columns = t => {
             width: 200
         },
         {
-            label: t("approvers.table.columns.action"),
+            label: "",
             field: "action",
             sort: "disabled",
             width: 100

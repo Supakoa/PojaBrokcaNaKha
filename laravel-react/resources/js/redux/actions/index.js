@@ -1,5 +1,3 @@
-import { type } from "jquery";
-
 export const user = obj => {
     return {
         type: "USER",
@@ -146,33 +144,40 @@ export const newsActions = (action, news) => {
     return {
         type: action,
         data: news
-    }
-}
+    };
+};
 
 export const chipGroupAction = (action, data) => {
     return {
         type: action,
         data: data
-    }
-}
+    };
+};
 
 export const showGroupAction = (action, data) => {
     return {
         type: action,
         data: data
-    }
-}
+    };
+};
 
 export const showApproversAction = (action, data) => {
     return {
         type: action,
         data: data
-    }
-}
+    };
+};
 
 export const showSubjectsAction = (action, data) => {
     return {
         type: action,
         data: data
-    }
-}
+    };
+};
+
+export const allUsers = _users => {
+    return {
+        type: _users.type,
+        payload: _users.payload
+    };
+};

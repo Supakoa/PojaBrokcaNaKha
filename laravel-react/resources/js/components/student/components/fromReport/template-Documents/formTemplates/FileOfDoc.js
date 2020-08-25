@@ -8,7 +8,7 @@ const FileOfDoc = props => {
             md={inputData.size}
             lg={inputData.size}
             as={Col}
-            controlId={inputData.tage_type}
+            controlId={inputData.tag_type}
         >
             <Form.File
                 name={inputData.type}

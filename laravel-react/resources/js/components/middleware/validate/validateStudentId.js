@@ -1,11 +1,8 @@
 const validateStudentId = value => {
-    if (isNaN(value)) {
-        // console.log("if");
+    if (isNaN(value) || value.length < 11) {
         return false;
-    } else if (value.length >= 11) {
-        return true;
     }
-    return false;
+    return true;
 };
 
 export default validateStudentId;

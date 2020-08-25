@@ -106,7 +106,9 @@ class UserController extends Controller
             case 1 :
                 return response()->json(['success' => $user->documents], $this->successStatus);
             case 2 :
-                return response()->json(['success' => auth()->user()->approve_documents], $this->successStatus);
+                return response()->json(['success' => array_values(auth()->user()->approve_documents->where("status","!=","cancel")->filter(function ($doc){
+                    return $doc->state >= $doc->pivot->state;
+                })->toArray())], $this->successStatus);
             case 3 :
                 return response()->json(['success' => auth()->user()->documents], $this->successStatus);
            default :

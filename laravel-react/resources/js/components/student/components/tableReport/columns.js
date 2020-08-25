@@ -31,7 +31,7 @@ export const columns = t => {
             width: 200
         },
         {
-            label: t("students.table.columns.action"),
+            label: "",
             field: "action",
             sort: "disabled",
             width: 100

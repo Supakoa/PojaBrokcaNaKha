@@ -153,6 +153,17 @@
         }
     },
     "approvers": {
+        "show-detail": {
+            "user": {
+                "title": "ข้อมูลผู้ส่ง",
+                "fullname": "ชื่อ-นามสกุล",
+                "studentId": "รหัสนักศึกษา",
+                "faculty": "คณะ",
+                "major": "สาขา",
+                "phoneNumber": "เบอร์โทรศัพท์"
+            },
+            "document": "ข้อมูลแบบคำร้อง"
+        },
         "table": {
             "header": {
                 "search": "ค้นหา",

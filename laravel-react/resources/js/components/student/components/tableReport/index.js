@@ -59,7 +59,7 @@ export default function ReportTable() {
                         "warning"
                     ).then(() => {
                         setFilValid(!_filValid);
-                        setSortBy("all");
+                        setSortBy("pending");
                     });
                 }
                 setRows(
@@ -116,6 +116,7 @@ export default function ReportTable() {
                 barReverse={true}
                 borderless
                 striped
+                small
                 hover
                 data={{ columns: columns(t), rows: rows }}
             />

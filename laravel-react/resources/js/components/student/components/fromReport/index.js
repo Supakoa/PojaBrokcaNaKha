@@ -17,7 +17,6 @@ export default function ReportForm() {
         let _arrInputs = [];
         _docTemp.map(items => {
             let _newInput = JSON.parse(items.inputs);
-            // console.log(_newInput);
             _arrInputs = [..._arrInputs, _newInput.inputs];
         });
         if (_arrInputs.lengt !== 0) {
