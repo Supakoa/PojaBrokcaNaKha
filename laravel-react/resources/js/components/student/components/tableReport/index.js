@@ -59,7 +59,7 @@ export default function ReportTable() {
                         "warning"
                     ).then(() => {
                         setFilValid(!_filValid);
-                        setSortBy("pending");
+                        setSortBy("all");
                     });
                 }
                 setRows(

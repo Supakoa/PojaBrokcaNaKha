@@ -14,7 +14,13 @@ const StatusBadgeDoc = ({ status }) => {
             );
         case "cancel":
             return (
-                <Badge variant="warning" pill>
+                <Badge variant="danger" pill>
+                    {wordShow(status, t)}
+                </Badge>
+            );
+        case "edit":
+            return (
+                <Badge variant="warning" className="text-white" pill>
                     {wordShow(status, t)}
                 </Badge>
             );

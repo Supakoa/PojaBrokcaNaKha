@@ -49,7 +49,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
         }
     };
 
-    const handleSending = async e => {
+    const handleSending = async () => {
         let _arry = [];
 
         if (Object.keys(_isRequire).length === _numRequired) {
