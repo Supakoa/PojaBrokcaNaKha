@@ -81,7 +81,11 @@ const UserModalDoc = ({ document, lang }) => {
                 <Modal.Footer>
                     <Button
                         variant="outline-danger"
-                        hidden={document.status === "cancel" ? true : false}
+                        hidden={
+                            document.status === "cancel" ||
+                            document.status === "approved" ||
+                            document.status === "rejected"
+                        }
                         onClick={deleteDoc}
                     >
                         {t("students.modal.btn.cancel")}

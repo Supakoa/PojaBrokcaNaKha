@@ -82,6 +82,7 @@ const ShowDetail = () => {
                         documentID={_detail.pivot.document_id}
                         stateApprovers={_detail.pivot.state}
                         stateDocument={_detail.state}
+                        statusDocument={_detail.pivot.status}
                     />
                 </Card.Footer>
             </Card>

@@ -19,13 +19,13 @@ const FixItemDefault = ({ onSelect, setSort }) => {
             </Dropdown.Item>
             <Dropdown.Item
                 as={Button}
-                name="approve"
+                name="approved"
                 drop="right"
                 className="d-flex align-items-center justify-content-between"
                 onClick={setSort}
             >
                 <strong name="approve">{t("filter.approved")}</strong>
-                <IconCheck isSort={onSelect === "approve"} />
+                <IconCheck isSort={onSelect === "approved"} />
             </Dropdown.Item>
             <Dropdown.Item
                 as={Button}
@@ -39,23 +39,33 @@ const FixItemDefault = ({ onSelect, setSort }) => {
             </Dropdown.Item>
             <Dropdown.Item
                 as={Button}
-                name="cancel"
+                name="cancelled"
                 drop="right"
                 className="d-flex align-items-center justify-content-between"
                 onClick={setSort}
             >
                 <strong name="cancel">{t("filter.cancel")}</strong>
-                <IconCheck isSort={onSelect === "cancel"} />
+                <IconCheck isSort={onSelect === "cancelled"} />
             </Dropdown.Item>
             <Dropdown.Item
                 as={Button}
-                name="edit"
+                name="rejected"
+                drop="right"
+                className="d-flex align-items-center justify-content-between"
+                onClick={setSort}
+            >
+                <strong name="cancel">{t("filter.reject")}</strong>
+                <IconCheck isSort={onSelect === "rejected"} />
+            </Dropdown.Item>
+            <Dropdown.Item
+                as={Button}
+                name="edited"
                 drop="right"
                 className="d-flex align-items-center justify-content-between"
                 onClick={setSort}
             >
                 <strong name="edit">{t("filter.edit")}</strong>
-                <IconCheck isSort={onSelect === "edit"} />
+                <IconCheck isSort={onSelect === "edited"} />
             </Dropdown.Item>
         </>
     );

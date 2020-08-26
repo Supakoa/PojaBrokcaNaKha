@@ -16,7 +16,14 @@ export default function ReportTable() {
     const [rows, setRows] = React.useState([]);
     const [_filValid, setFilValid] = React.useState(false);
     const [_sortBy, setSortBy] = React.useState("pending");
-    const _optionSort = ["all", "approve", "pending", "cancel", "edit"];
+    const _optionSort = [
+        "all",
+        "pending",
+        "approved",
+        "rejected",
+        "cancelled",
+        "edited"
+    ];
 
     const _props = {
         docTemp: _docTemp,

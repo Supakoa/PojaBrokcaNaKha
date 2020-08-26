@@ -103,10 +103,10 @@ class DocumentsController extends Controller
     {
 
         if (auth()->user()->role_id == 1 || auth()->user()->id == $document->user_id) {
-            $document->status = "cancel";
+            $document->status = "cancelled";
             $document->user_cancel_id = auth()->user()->id;
             $document->canceled_at = Carbon::now();
-            $document->note = "cancel";
+            $document->note = "cancelled";
             $document->save();
             return response()->json($document, 200);
         }
@@ -118,10 +118,10 @@ class DocumentsController extends Controller
 //        if ($document->status == 'pending') {
             $document->approver()->updateExistingPivot(auth()->user()->id, $request->all());
 
-            if ($request->get("status") == "success") {
+            if ($request->get("status") == "approved") {
 
                 if ($document->state >= $document->max_state) {
-                    $document->status = "success";
+                    $document->status = "approved";
                 } else {
                     $document->state++;
                 }

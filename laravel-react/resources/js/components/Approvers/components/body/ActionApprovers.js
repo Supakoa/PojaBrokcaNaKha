@@ -8,7 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { userDocument } from "../../../../redux/actions";
 import { useHistory } from "react-router-dom";
 
-const ActionApprovers = ({ stateApprovers, stateDocument, documentID }) => {
+const ActionApprovers = ({
+    stateApprovers,
+    stateDocument,
+    documentID,
+    statusDocument
+}) => {
     const [_formValid, setFormValid] = React.useState(false);
     const [_pivot, setPivot] = React.useState({});
     const _userId = useSelector(s => s.userState.id);
@@ -77,8 +82,7 @@ const ActionApprovers = ({ stateApprovers, stateDocument, documentID }) => {
                                         id: _userId,
                                         dispatch: _dispatch,
                                         acUserDocs: userDocument
-                                    }).then(()=>_history.push("/Approvers"));
-
+                                    }).then(() => _history.push("/Approvers"));
                                 }
                             });
                         } else {
@@ -94,7 +98,11 @@ const ActionApprovers = ({ stateApprovers, stateDocument, documentID }) => {
         }
     };
 
-    if (stateDocument === Number(stateApprovers)) {
+    if (
+        (stateDocument === Number(stateApprovers) &&
+            statusDocument === "pending") ||
+        statusDocument === "edit"
+    ) {
         return (
             <Form>
                 <Row>
@@ -126,9 +134,9 @@ const ActionApprovers = ({ stateApprovers, stateDocument, documentID }) => {
                                 defaultValue="Choose..."
                             >
                                 <option value="none">Choose Status.</option>
-                                <option value="approved">Approve.</option>
-                                <option value="edit">Edit</option>
-                                <option value="cancel">Cancel</option>
+                                <option value="approved">Approve</option>
+                                <option value="edited">Edit</option>
+                                <option value="rejected">reject</option>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group

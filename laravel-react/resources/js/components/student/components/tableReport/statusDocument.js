@@ -9,31 +9,31 @@ const StatusBadgeDoc = ({ status }) => {
         case "pending":
             return (
                 <Badge variant="info" pill>
-                    {wordShow(status, t)}
+                    <i className="fas fa-tasks"></i> {wordShow(status, t)}
                 </Badge>
             );
-        case "cancel":
+        case "cancelled":
             return (
                 <Badge variant="danger" pill>
-                    {wordShow(status, t)}
+                    <i className="fas fa-ban"></i> {wordShow(status, t)}
                 </Badge>
             );
-        case "edit":
+        case "edited":
             return (
                 <Badge variant="warning" className="text-white" pill>
-                    {wordShow(status, t)}
+                    <i className="fas fa-edit"></i> {wordShow(status, t)}
                 </Badge>
             );
-        case "reject":
+        case "rejected":
             return (
-                <Badge variant="danger" pill>
-                    {wordShow(status, t)}
+                <Badge variant="outline-danger" pill>
+                    <i className="fas fa-backspace"></i> {wordShow(status, t)}
                 </Badge>
             );
-        case "approve":
+        case "approved":
             return (
                 <Badge variant="success" pill>
-                    {wordShow(status, t)}
+                    <i className="fas fa-thumbs-up"></i> {wordShow(status, t)}
                 </Badge>
             );
 

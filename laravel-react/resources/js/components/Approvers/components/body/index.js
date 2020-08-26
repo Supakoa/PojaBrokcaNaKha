@@ -25,7 +25,7 @@ export default function BodyApprover() {
     const _userId = useSelector(s => s.userState.id);
     const [_filValid, setFilValid] = React.useState(false);
     const [_sortBy, setSortBy] = React.useState("pending");
-    const _optionSort = ["approve", "pending", "all"];
+    const _optionSort = ["all", "pending", "approved", "rejected", "edited"];
     const [rows, setRows] = React.useState([]);
 
     const _props = {
@@ -77,6 +77,7 @@ export default function BodyApprover() {
                 setRows={setRows}
                 rows={rows}
             />
+            <hr />
             <Switch>
                 <Route exact path={`${path}`} component={NoneDetail} />
                 <Route path={`${path}/show/:id`} component={ShowDetail} />

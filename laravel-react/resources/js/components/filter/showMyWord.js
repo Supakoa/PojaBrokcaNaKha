@@ -1,13 +1,15 @@
 const wordShow = (word, t) => {
     switch (word) {
-        case "edit":
+        case "edited":
             return t("filter.edit");
-        case "approve":
+        case "approved":
             return t("filter.approved");
-        case "cancel":
+        case "cancelled":
             return t("filter.cancel");
         case "all":
             return t("filter.all");
+        case "rejected":
+            return t("filter.reject");
         case "pending":
             return t("filter.pending");
         default:

@@ -195,6 +195,7 @@
         "pending": "Pending",
         "cancel": "Canceled",
         "edit": "Edited",
-        "all": "All"
+        "all": "All",
+        "reject": "Reject"
     }
 }

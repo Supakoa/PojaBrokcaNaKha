@@ -22,7 +22,7 @@ export const columns = t => {
             label: t("approvers.table.columns.name_sender"),
             field: "from_user",
             sort: "asc",
-            width: 200
+            width: 250
         },
         {
             label: t("approvers.table.columns.create"),
