@@ -3,7 +3,7 @@ import { dataTest } from "./dataTest";
 import ColumsAction from "./ColumnsAction";
 import { columns } from "./columns";
 import Axios from "axios";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { showGroupAction, showFormsAction } from "../../../../redux/actions";
 
 export default function dataTableStepReport() {
@@ -14,6 +14,7 @@ export default function dataTableStepReport() {
     // const [showForms, setShowForms] = useState(null)
 
     // redux
+    const redux_showForms = useSelector(state => state.showForm)
     const dispatch = useDispatch()
 
     // local variable
@@ -42,10 +43,10 @@ export default function dataTableStepReport() {
                 )}`
             }
         }).then(res => {
-            dispatch(showFormsAction("INIT_SHOW_FORM", res.data))
-
             return res.data
         })
+
+        dispatch(showFormsAction("INIT_SHOW_FORM", showForms))
 
         setRows(fetchRowData(showForms));
     }

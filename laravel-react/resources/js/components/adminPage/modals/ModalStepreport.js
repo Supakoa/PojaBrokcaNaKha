@@ -37,8 +37,8 @@ export function ModalStepReport(props) {
 
     // function
     const initState = () => {
-        // console.log('props', props)
-        // console.log(`initState`)
+        console.log('response ModalStepReport:', response)
+        console.log('redux_showForms', redux_showForms)
     }
 
     const handleCloseButton = () => {
