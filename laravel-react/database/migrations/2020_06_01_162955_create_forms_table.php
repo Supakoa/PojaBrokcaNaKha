@@ -17,7 +17,7 @@ class CreateFormsTable extends Migration
             $table->string('th_name')->nullable();
             $table->string('eng_name')->nullable();
             $table->longText('inputs')->nullable();
-            $table->tinyInteger('all_state')->nullable();
+            $table->tinyInteger('all_state')->default(0);
             $table->timestamps();
         });
 
