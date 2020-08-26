@@ -114,7 +114,7 @@ class GroupsController extends Controller
             $group->users()->detach($request->input("user_id"));
         } else {
             $group->users()->where('user_id', $request->input("user_id"))
-                ->withPivot("subject_id", $request->input("subject_id"))->detach();
+                ->wherePivot("subject_id", $request->input("subject_id"))->detach();
         }
         return $group->users;
     }
