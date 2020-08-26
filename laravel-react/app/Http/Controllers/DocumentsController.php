@@ -47,6 +47,18 @@ class DocumentsController extends Controller
 
         $document->approver()->attach($approver, ["state" => 1]);
 
+        $approver = User::find(3);
+
+        $document->approver()->attach($approver, ["state" => 2]);
+
+        $approver = User::find(4);
+
+        $document->approver()->attach($approver, ["state" => 1]);
+
+        $approver = User::find(5);
+
+        $document->approver()->attach($approver, ["state" => 1]);
+
         return response()->json($document, 201);
     }
 
@@ -115,25 +127,31 @@ class DocumentsController extends Controller
 
     public function approve(Document $document, Request $request)
     {
-//        if ($document->status == 'pending') {
+        if ($document->status == 'pending') {
             $document->approver()->updateExistingPivot(auth()->user()->id, $request->all());
 
             if ($request->get("status") == "approved") {
-
+                $document->approver()->wherePivot("state",$document->state)->wherePivot("status","pending")->detach();
                 if ($document->state >= $document->max_state) {
                     $document->status = "approved";
+                    $document->status = $request->get("status");
+                    $document->note = $request->get("comment");
                 } else {
                     $document->state++;
                 }
-
+            } else if ($request->get("status") == "edited") {
+//                $document->approver()->wherePivot("state","",$document->state)->wherePivot("status","pending")->detach();
+                $document->status = $request->get("status");
+                $document->note = $request->get("comment");
             } else {
+                $document->approver()->wherePivot("state",">=",$document->state)->wherePivot("status","pending")->detach();
                 $document->status = $request->get("status");
                 $document->note = $request->get("comment");
             }
             $document->save();
             return response()->json($document->approver, 200);
-//        } else {
-//             return   response()->json("Document status is not pending", 204);
-//        }
+        } else {
+             return   response()->json("Document status is not pending", 400);
+        }
     }
 }
