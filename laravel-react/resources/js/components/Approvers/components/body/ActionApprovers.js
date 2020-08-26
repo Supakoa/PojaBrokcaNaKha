@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userDocument } from "../../../../redux/actions";
 import { useHistory } from "react-router-dom";
 import { fetchUserDoc } from "../../../middleware/axios/fetchUserDoc";
+import { useTranslation } from "react-i18next";
 
 const ActionApprovers = ({
     stateApprovers,
@@ -19,6 +20,7 @@ const ActionApprovers = ({
     const [_pivot, setPivot] = React.useState({});
     const _userId = useSelector(s => s.userState.id);
     const _dispatch = useDispatch();
+    const { t } = useTranslation();
     let _history = useHistory();
     const [_loading, setLoading] = React.useState(false);
 
@@ -112,18 +114,25 @@ const ActionApprovers = ({
                 <Row>
                     <Col lg={6} md={6}>
                         <Form.Group controlId="comment">
-                            <Form.Label>Comment</Form.Label>
+                            <Form.Label>
+                                {t("approvers.action.comment")}
+                            </Form.Label>
                             <Form.Control
                                 onChange={handleChange}
                                 as="textarea"
                                 name="comment"
+                                placeholder={t(
+                                    "approvers.action.place-comment"
+                                )}
                                 rows="3"
                             />
                         </Form.Group>
                     </Col>
                     <Col className="row" lg={6} md={6}>
                         <Form.Group as={Col} lg={6} md={6} controlId="status">
-                            <Form.Label>Status</Form.Label>
+                            <Form.Label>
+                                {t("approvers.action.status")}
+                            </Form.Label>
                             <Form.Control
                                 isValid={
                                     _pivot.status && _pivot.status !== "none"
@@ -135,12 +144,19 @@ const ActionApprovers = ({
                                 required
                                 onChange={handleChange}
                                 name="status"
-                                defaultValue="Choose..."
                             >
-                                <option value="none">Choose Status.</option>
-                                <option value="approved">Approve</option>
-                                <option value="edited">Edit</option>
-                                <option value="rejected">reject</option>
+                                <option value="none">
+                                    {t("approvers.action.place-status")}
+                                </option>
+                                <option value="approved">
+                                    {t("filter.approved")}
+                                </option>
+                                <option value="edited">
+                                    {t("filter.edit")}
+                                </option>
+                                <option value="rejected">
+                                    {t("filter.reject")}
+                                </option>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group
@@ -149,11 +165,16 @@ const ActionApprovers = ({
                             md={6}
                             controlId="return_file"
                         >
+                            <Form.Label>
+                                {t("approvers.action.file")}
+                            </Form.Label>
                             <Form.File
                                 onChange={handleChange}
                                 className="position-relative"
+                                custom
+                                placeholder="eiei"
                                 id="return_file"
-                                label="File"
+                                label={t("approvers.action.place-file")}
                                 name="file"
                             />
                         </Form.Group>
@@ -164,7 +185,8 @@ const ActionApprovers = ({
                         <Spinner animation="border" size="sm" />
                     ) : (
                         <Button onClick={handleSubmit} variant="info">
-                            Submit <i className="fas fa-paper-plane"></i>
+                            {t("approvers.action.btn")}{" "}
+                            <i className="fas fa-paper-plane"></i>
                         </Button>
                     )}
                 </div>

@@ -188,13 +188,22 @@
                 "next": "Next"
             }
         },
-        "emptyDetail": "You not selected documents."
+        "emptyDetail": "You not selected documents.",
+        "action": {
+            "comment": "Comment.",
+            "status": "Status.",
+            "file": "File.",
+            "place-comment": "Add Your Comment",
+            "place-status": "Choose Status.",
+            "place-file": "Choose File.",
+            "btn": "Submit"
+        }
     },
     "filter": {
         "approved": "Approved",
         "pending": "Pending",
         "cancel": "Canceled",
-        "edit": "Edited",
+        "edit": "Edit",
         "all": "All",
         "reject": "Reject"
     }
