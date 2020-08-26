@@ -97,11 +97,11 @@ class FormsController extends Controller
 
     public function addGroup(Form $form,Request $request){
         $form->groups()->attach($request->input("group_id"), ["state" => $request->input("state")]);
-        return $form->groups();
+        return $form->groups;
     }
     public function deleteGroup(Form $form,Request $request){
         $form->groups()->detach($request->input("group_id"));
-        return $form->groups();
+        return $form->groups;
     }
 
 
