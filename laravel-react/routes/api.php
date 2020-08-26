@@ -44,8 +44,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
     Route::get('forms/{form}/documents','formsController@documents');
     Route::get('forms/{form}/groups','formsController@groups');
+    Route::get('forms/{form}/groups/{state}','formsController@groupsByState');
     Route::post('forms/{form}/groups','formsController@addGroup');
-    Route::delete('forms/{form}/groups','formsController@deteleGroup');
+    Route::delete('forms/{form}/groups','formsController@deleteGroup');
 
     //Groups
     Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
@@ -63,6 +64,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     });
 
 });
-
+Route::post('password/email', 'ForgotPasswordController@forgot');
 
 

@@ -95,7 +95,15 @@ class FormsController extends Controller
         return response()->json(['success' => $form->groups], $this->successStatus);
     }
 
+    public function groupsByState(Form $form,int $state)
+    {
+        return response()->json(['success' => $form->groups()->wherePivot("state",$state)->get()], $this->successStatus);
+    }
+
     public function addGroup(Form $form,Request $request){
+        $groups = $form->groups()->where("group_id",$request->input("group_id"));
+        if ($groups->count() > 0)
+            return  response()->json("ซ้ำ", 406 );
         $form->groups()->attach($request->input("group_id"), ["state" => $request->input("state")]);
         return $form->groups;
     }
