@@ -22,12 +22,12 @@ export const column = () => {
             width: 60,
             sort: "disabled"
         },
-        {
-            label: "รายชื่อ",
-            field: "list",
-            width: 150,
-            sort: "disabled"
-        },
+        // {
+        //     label: "รายชื่อ",
+        //     field: "list",
+        //     width: 150,
+        //     sort: "disabled"
+        // },
         {
             field: "action",
             width: 60,

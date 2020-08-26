@@ -29,6 +29,7 @@ export function ModalStepReport(props) {
 
     // redux
     const redux_chipGroup = useSelector(state => state.chipGroup)
+    const redux_showForms = useSelector(state => state.showForm)
     const dispatch = useDispatch()
 
     // local variable
@@ -38,6 +39,10 @@ export function ModalStepReport(props) {
     const initState = () => {
         // console.log('props', props)
         // console.log(`initState`)
+    }
+
+    const handleCloseButton = () => {
+        setModalShow(false)
     }
 
     const sendDataToDB = () => {
@@ -62,7 +67,6 @@ export function ModalStepReport(props) {
             <Button
                 variant="warning"
                 name="btnEdit"
-                size="sm"
                 className="text-light"
                 onClick={() => setModalShow(true)}
             >
@@ -79,14 +83,14 @@ export function ModalStepReport(props) {
                 animation
                 centered
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>ตั้งค่าเส้นทางเอกสาร</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row>
                             <Col>ลำดับขั้นทั้งหมด: </Col>
-                            <Col>{response.all_state}</Col>
+                            <Col>{_stepColors}</Col>
                         </Row>
                         <hr />
                         <Row>
@@ -102,7 +106,7 @@ export function ModalStepReport(props) {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <StepColors numberStep={_stepColors} />
+                            <StepColors setModalShow={setModalShow} response={response} numberStep={_stepColors} />
                         </Card.Body>
                         <div className="text-center align-middle">
                             <InputNumber setColors={setStepColors} />
@@ -111,11 +115,14 @@ export function ModalStepReport(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
+                        variant="secondary"
+                        onClick={handleCloseButton}
+                    >{"ปิด"}</Button>
+
+                    <Button
                         variant="primary"
                         onClick={e => sendDataToDB()}
-                    >
-                        บันทึก
-                    </Button>
+                    >{"บันทึก"}</Button>
                 </Modal.Footer>
             </Modal>
         </>

@@ -26,7 +26,7 @@ const DataGroupTable = () => {
                     th_name: res.th_name,
                     eng_name: res.eng_name,
                     type: res.type,
-                    list: (<Button size={"sm"}><Badge pill variant="light">1</Badge> naja</Button>),
+                    // list: (<Button size={"sm"}><Badge pill variant="light">1</Badge> naja</Button>),
                     action: ColumnAction(idx, res)
                 };
                 return responData;

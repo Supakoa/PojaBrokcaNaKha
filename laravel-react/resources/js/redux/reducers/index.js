@@ -20,6 +20,7 @@ import showApproversReducer from "./showApprovers";
 import { combineReducers } from "redux";
 import showSubjectsReducer from "./showSubjects";
 import allUsersReducer from "./allUsres";
+import showFormsReducer from "./showForms";
 
 const allReducers = combineReducers({
     isLogged: loggerReducer,
@@ -41,7 +42,8 @@ const allReducers = combineReducers({
     showGroup: showGroupReducer,
     showApprovers: showApproversReducer,
     showSubjects: showSubjectsReducer,
-    allUsers: allUsersReducer
+    allUsers: allUsersReducer,
+    showForm: showFormsReducer,
 });
 
 export default allReducers;

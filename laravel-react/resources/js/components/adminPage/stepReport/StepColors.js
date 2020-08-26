@@ -10,10 +10,9 @@ import { AddGroup } from "./AddGroup";
 
 export const StepColors = props => {
     // props
-    const { numberStep, setModalShow } = props;
+    const { numberStep, setModalShow, response } = props;
 
     // local state
-    // const [_chipName, setChipName] = React.useState([]);
 
     //redux
     const rerdux_chipGroup = useSelector(state => state.chipGroup);
@@ -88,20 +87,9 @@ export const StepColors = props => {
                 selectComponent = rerdux_chipGroup.data.step5;
                 break;
         }
+
         if (selectComponent.length > 0) {
             return selectComponent.map((item, idx) => {
-                // return (
-                //     <Chip
-                //         id={item.id}
-                //         color="primary"
-                //         key={idx.toString()}
-                //         avatar={
-                //             <Avatar>{item.id}</Avatar>
-                //         }
-                //         label={`${item.title} ${item.first_name} ${item.last_name}`}
-                //         onDelete={handleClickDelete}
-                //     />
-                // )
                 return (
                     <Badge key={idx} pill variant="primary">
                         <Badge variant="light">{$(item.id)}</Badge>
@@ -132,17 +120,11 @@ export const StepColors = props => {
                             <Col xs={12} md={8}>
                                 <Alert variant={item} className="p-2 mb-0">
                                     step {index + 1}:{" "}
-                                    {returnStepComponent(index)}
+                                    {/* {returnStepComponent(index)} */}
                                 </Alert>
                             </Col>
                             <Col>
-                                <AddGroup />
-                            </Col>
-                            <Col xs={6} md={4} className="text-center">
-                                <AddApprover
-                                    id={index}
-                                    key={item}
-                                />
+                                <AddGroup step={index + 1} setModalShow={setModalShow} response={response} />
                             </Col>
                         </Row>
                         <hr />

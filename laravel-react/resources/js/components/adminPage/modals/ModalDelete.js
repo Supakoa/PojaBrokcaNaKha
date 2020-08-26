@@ -21,7 +21,11 @@ export default function ModalDelete(props) {
             confirmButtonText: t('modalDelete.confirmButtonText')
         }).then(result => {
             if (result.value) {
-                Axios.delete(`${apiPath}/${id}`).then(res => {
+                Axios.delete(`${apiPath}/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
+                    }
+                }).then(res => {
                     Swal.fire(t('modalDelete.deleted'),`${api} ${t('modalDelete.hasBeetDeleted')}`, t('modalDelete.success'));
                 })
             }

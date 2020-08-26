@@ -181,3 +181,10 @@ export const allUsers = _users => {
         payload: _users.payload
     };
 };
+
+export const showFormsAction = (action, data) => {
+    return {
+        type: action,
+        data: data
+    }
+}

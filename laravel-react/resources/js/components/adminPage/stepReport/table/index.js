@@ -3,7 +3,9 @@ import { MDBDataTable } from "mdbreact";
 import dataTableStepReport from "./dataTableStepReport";
 
 export default function StepTable() {
+    
     const _data = dataTableStepReport();
+
     return (
         <MDBDataTable
             striped
