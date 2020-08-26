@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Modal, Col, Row, Card } from "react-bootstrap";
 import { InputNumber } from "../stepReport/InputNumber";
 import { StepColors } from "../stepReport/StepColors";
@@ -26,6 +26,7 @@ export function ModalStepReport(props) {
     // state
     const [modalShow, setModalShow] = React.useState(false);
     const [_stepColors, setStepColors] = React.useState(0);
+    const [test, setTest] = useState(null)
 
     // redux
     const redux_chipGroup = useSelector(state => state.chipGroup)
@@ -37,8 +38,12 @@ export function ModalStepReport(props) {
 
     // function
     const initState = () => {
-        console.log('response ModalStepReport:', response)
-        console.log('redux_showForms', redux_showForms)
+        // console.log('response ModalStepReport:', response)
+        // console.log('redux_showForms', redux_showForms)
+        let tmp_test = new Array()
+        tmp_test.length = 5
+        setTest({...tmp_test})
+        console.log('test naja', test)
     }
 
     const handleCloseButton = () => {
@@ -54,13 +59,13 @@ export function ModalStepReport(props) {
         initState()
     }, [])
 
-    React.useEffect(() => {
-        const abort = new AbortController();
+    // React.useEffect(() => {
+    //     const abort = new AbortController();
 
-        return () => {
-            abort.abort();
-        };
-    }, []);
+    //     return () => {
+    //         abort.abort();
+    //     };
+    // }, []);
 
     return (
         <>

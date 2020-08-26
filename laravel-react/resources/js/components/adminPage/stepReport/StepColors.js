@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Alert, Button, Badge } from "react-bootstrap";
 import { AddApprover } from "./AddApprover";
 import Chip from "@material-ui/core/Chip";
@@ -7,12 +7,14 @@ import { array, number } from "prop-types";
 import { chipGroupAction } from "../../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { AddGroup } from "./AddGroup";
+import Axios from "axios";
 
 export const StepColors = props => {
     // props
     const { numberStep, setModalShow, response } = props;
 
     // local state
+    const [groupUserSteps, setGroupUserSteps] = useState(null)
 
     //redux
     const rerdux_chipGroup = useSelector(state => state.chipGroup);
@@ -23,8 +25,25 @@ export const StepColors = props => {
     // function
     const initState = () => {
         dispatch(chipGroupAction("NEW_CHIP_GROUP", numberStep));
+        initFormGroupStep()
     };
 
+    const initFormGroupStep = async () => {
+        console.log('initFormGroupStep')
+        for (let i = 0; i < numberStep; i++) {
+            Axios.get(`http://localhost:8000/api/forms/${response.id}/groups/${(i + 1)}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }
+            }).then(res => [
+                console.log('res.data', res.data)
+            ])
+        }
+    }
+
+    // FIXME: not to use now
     const deleteUserOnStep = (item, onStep) => {
         let selectStep
         switch (onStep + 1) {
@@ -64,6 +83,7 @@ export const StepColors = props => {
     }, [numberStep]);
 
     // component with condition
+    // FIXME: not to use now
     const returnStepComponent = index => {
         let selectComponent;
         switch (index + 1) {
@@ -124,7 +144,7 @@ export const StepColors = props => {
                                 </Alert>
                             </Col>
                             <Col>
-                                <AddGroup step={index + 1} setModalShow={setModalShow} response={response} />
+                                <AddGroup step={index} setModalShow={setModalShow} response={response} />
                             </Col>
                         </Row>
                         <hr />

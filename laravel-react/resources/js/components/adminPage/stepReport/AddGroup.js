@@ -14,9 +14,11 @@ export const AddGroup = (props) => {
     const [showModal, setShowModal] = useState(false)
     const [showGroups, setshowGroups] = useState(null)
     const [selectData, setSelectData] = useState(0)
+    const [dataThisStep, setDataThisStep] = useState(null)
 
     // redux
     const redux_showGroups = useSelector(state => state.showGroup)
+    const redux_chipGroup = useSelector(state => state.chipGroup)
 
     // fuction
     const handleClose = () => {
@@ -31,6 +33,11 @@ export const AddGroup = (props) => {
 
     const initState = () => {
         setshowGroups([...redux_showGroups.data])
+        getDataThisStep()
+    }
+
+    const getDataThisStep = async () => {
+        await setDataThisStep([...redux_chipGroup.data])
     }
 
     const saveDataToDB = () => {
