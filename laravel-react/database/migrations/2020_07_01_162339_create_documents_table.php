@@ -21,13 +21,13 @@ class CreateDocumentsTable extends Migration
             $table->json('data')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->tinyInteger('max_state')->default(1);
-            $table->enum('status',["pending","success","reject","cancel","edit"]);
+            $table->enum('status', ["pending", "approved", "rejected", "cancelled", "edited"]);
             $table->timestamp('canceled_at')->nullable();
             $table->text('note')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('user_cancel_id')->references('id')->on('users');
             $table->foreign('form_id')->references('id')->on('forms');
-            });
+        });
     }
 
     /**
