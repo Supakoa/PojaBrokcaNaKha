@@ -61,7 +61,6 @@ const ModalEditGroup = (props) => {
             eng_name: response.eng_name,
             type: response.type
         })
-        console.log('groupDetail', groupDetail)
     }
 
     const updateTableColumn = () => {
@@ -148,42 +147,87 @@ const ModalEditGroup = (props) => {
     }
 
     const deleteGroupUser = async (item) => {
+
+        // searcch delete data
         let tmp_deleteVal = [...item.data]
         tmp_deleteVal = tmp_deleteVal.find(i => {
             return i.tableData.editing == "delete"
         })
-        await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
-            data: {
-                user_id: tmp_deleteVal.userId
-            },
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
-            }
-        }).then(res => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 1500,
-                // timerProgressBar: true,
-                onOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
+
+        // search delete subject od this data
+        let tmp_subjectId = redux_showSubjects.data.find(i => {
+            return i.th_name == tmp_deleteVal.subject
+        })
+        tmp_subjectId = tmp_subjectId.id
+
+        if (groupDetail.type == "normal") {
+            await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
+                data: {
+                    user_id: tmp_deleteVal.userId,
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
+                }
+            }).then(res => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    // timerProgressBar: true,
+                    onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                if (res.status == 200) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'ลบผู้ตรวจสำเร็จ'
+                    })
+                } else {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'เกิดข้อผิดพลาดในการลบผู้ตรวจ'
+                    })
                 }
             })
+        } else {
+            await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
+                data: {
+                    user_id: tmp_deleteVal.userId,
+                    subject_id: tmp_subjectId,
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
+                }
+            }).then(res => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    // timerProgressBar: true,
+                    onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
 
-            if (res.status == 200) {
-                Toast.fire({
-                    icon: 'success',
-                    title: 'ลบผู้ตรวจสำเร็จ'
-                })
-            } else {
-                Toast.fire({
-                    icon: 'warning',
-                    title: 'เกิดข้อผิดพลาดในการลบผู้ตรวจ'
-                })
-            }
-        })
+                if (res.status == 200) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'ลบผู้ตรวจสำเร็จ'
+                    })
+                } else {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'เกิดข้อผิดพลาดในการลบผู้ตรวจ'
+                    })
+                }
+            })
+        }
     }
 
     // useEffect

@@ -22,7 +22,7 @@ const DataGroupTable = () => {
             _data.map((res, idx) => {
                 let listData = getUserGroupToTable(res.id)
                 const responData = {
-                    id: idx,
+                    id: idx + 1,
                     th_name: res.th_name,
                     eng_name: res.eng_name,
                     type: res.type,
