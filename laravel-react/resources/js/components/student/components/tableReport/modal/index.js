@@ -82,7 +82,7 @@ const UserModalDoc = ({ document, lang }) => {
                     <Button
                         variant="outline-danger"
                         hidden={
-                            document.status === "cancel" ||
+                            document.status === "cancelled" ||
                             document.status === "approved" ||
                             document.status === "rejected"
                         }

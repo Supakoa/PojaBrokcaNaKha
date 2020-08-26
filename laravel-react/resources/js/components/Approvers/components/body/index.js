@@ -18,6 +18,8 @@ import NoneDetail from "./NoneDetatil";
 import FilterSort from "../../../filter";
 import post2AllUsers from "../../../middleware/post2Redux/postToUsers";
 
+export const SetRowsTable = React.createContext();
+
 export default function BodyApprover() {
     const { path, url } = useRouteMatch();
     const _dispatch = useDispatch();
@@ -80,7 +82,9 @@ export default function BodyApprover() {
             <hr />
             <Switch>
                 <Route exact path={`${path}`} component={NoneDetail} />
-                <Route path={`${path}/show/:id`} component={ShowDetail} />
+                <Route path={`${path}/show/:id`}>
+                    <ShowDetail setRowsToInit={setRows} />
+                </Route>
             </Switch>
         </Container>
     );
