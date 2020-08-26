@@ -17,7 +17,7 @@ class CreateUserApproveTable extends Migration
             $table->id();
             $table->unsignedInteger("user_id");
             $table->unsignedInteger("document_id");
-            $table->enum('status',["pending","success","reject","edit"]);
+            $table->enum('status',["pending","approved","rejected","edited"]);
             $table->string("comment")->nullable();
             $table->string("return_file")->nullable();
             $table->string("state")->nullable();

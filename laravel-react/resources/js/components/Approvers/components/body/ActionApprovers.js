@@ -77,8 +77,8 @@ const ActionApprovers = ({ stateApprovers, stateDocument, documentID }) => {
                                         id: _userId,
                                         dispatch: _dispatch,
                                         acUserDocs: userDocument
-                                    });
-                                    _history.push("/Approvers");
+                                    }).then(()=>_history.push("/Approvers"));
+
                                 }
                             });
                         } else {
