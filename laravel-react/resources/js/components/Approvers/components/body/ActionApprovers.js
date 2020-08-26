@@ -3,16 +3,17 @@ import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import uploadsImage from "../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postApproveDocument } from "../../../middleware/axios/approveDocument";
-import post2UserDocuments from "../../../middleware/post2Redux/postToUserDocuments";
 import { useDispatch, useSelector } from "react-redux";
 import { userDocument } from "../../../../redux/actions";
 import { useHistory } from "react-router-dom";
+import { fetchUserDoc } from "../../../middleware/axios/fetchUserDoc";
 
 const ActionApprovers = ({
     stateApprovers,
     stateDocument,
     documentID,
-    statusDocument
+    statusDocument,
+    setRows
 }) => {
     const [_formValid, setFormValid] = React.useState(false);
     const [_pivot, setPivot] = React.useState({});
@@ -75,14 +76,17 @@ const ActionApprovers = ({
                                 "เรียบร้อย!",
                                 "ยืนยันการตรวจเรียบร้อย!",
                                 "success"
-                            ).then(res => {
+                            ).then(async res => {
                                 if (res.value) {
-                                    post2UserDocuments({
+                                    const _newDocs = await fetchUserDoc({
                                         token: localStorage._authLocal,
-                                        id: _userId,
-                                        dispatch: _dispatch,
-                                        acUserDocs: userDocument
-                                    }).then(() => _history.push("/Approvers"));
+                                        id: _userId
+                                    });
+                                    if (_newDocs) {
+                                        _dispatch(userDocument(_newDocs));
+                                        setRows([]);
+                                        _history.push("/Approvers");
+                                    }
                                 }
                             });
                         } else {
@@ -101,7 +105,7 @@ const ActionApprovers = ({
     if (
         (stateDocument === Number(stateApprovers) &&
             statusDocument === "pending") ||
-        statusDocument === "edit"
+        statusDocument === "edited"
     ) {
         return (
             <Form>

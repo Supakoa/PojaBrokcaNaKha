@@ -9,7 +9,7 @@ import InputsDocument from "../../../student/components/tableReport/modal/Inputs
 import SenderDetail from "./SenderDetail";
 import ActionApprovers from "./ActionApprovers";
 
-const ShowDetail = () => {
+const ShowDetail = ({ setRowsToInit }) => {
     const { id } = useParams();
     const { i18n, t } = useTranslation();
     const _history = useHistory();
@@ -42,7 +42,7 @@ const ShowDetail = () => {
             findingDocument(_userDoc, id, { signal: abort.signal });
         } else {
             setTimeout(() => {
-                _history.push("/approvers");
+                _history.push("/Approvers");
             }, 2000);
         }
 
@@ -80,6 +80,7 @@ const ShowDetail = () => {
                 <Card.Footer>
                     <ActionApprovers
                         documentID={_detail.pivot.document_id}
+                        setRows={setRowsToInit}
                         stateApprovers={_detail.pivot.state}
                         stateDocument={_detail.state}
                         statusDocument={_detail.pivot.status}

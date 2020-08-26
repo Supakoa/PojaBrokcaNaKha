@@ -26,7 +26,7 @@ const StatusBadgeDoc = ({ status }) => {
             );
         case "rejected":
             return (
-                <Badge variant="outline-danger" pill>
+                <Badge variant="danger" pill>
                     <i className="fas fa-backspace"></i> {wordShow(status, t)}
                 </Badge>
             );
