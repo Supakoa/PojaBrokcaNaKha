@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image } from "react-bootstrap";
+import { Image, Button, Badge } from "react-bootstrap";
 import Axios from "axios";
 import { column } from "./column";
 import ColumnAction from "./ColumnAction";
@@ -11,26 +11,43 @@ const DataGroupTable = () => {
 
     const [rows, setRows] = React.useState([]);
     const [gourps, setGourps] = useState(null)
+    const [listApprovers, setListApprovers] = useState(null)
 
     // redux
     const redux_approvers = useSelector(state => state.showApprovers)
     const dispatch = useDispatch()
 
-    const fetchRowData = _data => {
-        setRows(
+    const fetchRowData = async _data => {
+        await setRows(
             _data.map((res, idx) => {
+                let listData = getUserGroupToTable(res.id)
                 const responData = {
                     id: idx,
                     th_name: res.th_name,
                     eng_name: res.eng_name,
                     type: res.type,
-                    list: "asdf",
+                    list: (<Button size={"sm"}><Badge pill variant="light">1</Badge> naja</Button>),
                     action: ColumnAction(idx, res)
                 };
                 return responData;
             })
         );
     };
+
+    const getUserGroupToTable = (id) => {
+        Axios.get(`http://localhost:8000/api/groups/${id}/users`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
+            console.log('res.data.success.length', res.data.success.length)
+            // const result = (res.data.)
+            // setListApprovers(res.data.success.length)
+            return res.data.success.length
+        })
+    }
 
     const getGroup = async () => {
         await Axios.get(`http://localhost:8000/api/groups`, {
@@ -39,7 +56,7 @@ const DataGroupTable = () => {
                     "_authLocal"
                 )}`
             }
-        }).then(async res => {
+        }).then(res => {
             setGourps(res.data)
         })
     };

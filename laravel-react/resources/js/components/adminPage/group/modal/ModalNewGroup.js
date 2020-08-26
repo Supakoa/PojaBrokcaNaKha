@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal, Form, Container, Col } from "react-bootstrap";
+import { Button, Modal, Form, Container, Col, Row } from "react-bootstrap";
 import {useTranslation, composeInitialProps} from 'react-i18next';
 import Axios from "axios";
 import Swal from "sweetalert2";
@@ -7,7 +7,7 @@ import { initNewsForm } from "../../../../redux/actions";
 
 const ModalNewGroup = (props) => {
     // props
-    const { isCreateProps, res, setModalHidden } = props
+    const { isCreateProps, res, setModalHidden, setgroupDetail, groupDetail } = props
 
     // local state
     const [show, setShow] = useState(false);
@@ -70,19 +70,33 @@ const ModalNewGroup = (props) => {
         } else {
             // not have id sing will edit tommorow
             let select = (selectTypeGroup == 1) ? "normal" : "subject"
-            let sendData = new FormData()
-            sendData.append('th_name', th_nameGroup)
-            sendData.append('eng_name', eng_nameGroup)
-            sendData.append('type', select)
+            // let sendData = new FormData()
+            // sendData.append('th_name', th_nameGroup)
+            // sendData.append('eng_name', eng_nameGroup)
+            // sendData.append('type', select)
 
-            await Axios.patch(`http://localhost:8000/api/groups/${res.id}`, sendData, {
+            let qs = require('qs')
+            let sendData = qs.stringify({
+                th_name: th_nameGroup,
+                eng_name: eng_nameGroup,
+                type: select
+            })
+
+            await Axios.put(`http://localhost:8000/api/groups/${res.id}`, sendData, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${localStorage.getItem(
                         "_authLocal"
-                    )}`
+                    )}`,
                 }
             }).then(res => {
-                console.log('res', res)
+                setgroupDetail({
+                    th_name: res.data.th_name,
+                    eng_name: res.data.eng_name,
+                    type: res.data.type,
+                })
+                handleClose()
+                setModalHidden(false)
             })
         }
     }
@@ -171,7 +185,7 @@ const ModalNewGroup = (props) => {
                             <Form.Control type="text" placeholder="ใส่ชื่อกลุ่ม ภาษาอังกฤษ" defaultValue={eng_nameGroup} onChange={e => setEngNameGroup(e.target.value)} />
                         </Form.Group>
                         <hr/>
-                        <Form.Group>
+                        <Form.Group as={Row}>
                             <Form.Label as="legend" column>
                                 ประเภทกลุ่ม
                             </Form.Label>
@@ -182,7 +196,7 @@ const ModalNewGroup = (props) => {
                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios1"
                                     onChange={e => setSelectTypeGroup(1)}
-                                    defaultChecked={(isCreateProps) ? false : res.type == "normal"}
+                                    defaultChecked={(isCreateProps) ? false : groupDetail.type == "normal"}
                                 />
                                 <Form.Check
                                     type="radio"
@@ -190,7 +204,7 @@ const ModalNewGroup = (props) => {
                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios2"
                                     onChange={e => setSelectTypeGroup(2)}
-                                    defaultChecked={(isCreateProps) ? false : res.type != "normal"}
+                                    defaultChecked={(isCreateProps) ? false : groupDetail.type != "normal"}
                                 />
                             </Col>
                         </Form.Group>

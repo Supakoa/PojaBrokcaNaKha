@@ -8,6 +8,8 @@ import { updateShowUsers } from "../../../redux/actions";
 import { useSelector } from "react-redux";
 import { first } from "lodash";
 import ModalNewGroup from "../group/modal/ModalNewGroup";
+import Swal from "sweetalert2";
+import AddSubject from "../group/modal/AddSubject";
 
 const ModalEditGroup = (props) => {
     // props
@@ -32,6 +34,11 @@ const ModalEditGroup = (props) => {
         data: [],
     });
     const [showGroupUsers, setShowGroupUsers] = useState(null)
+    const [groupDetail, setgroupDetail] = useState({
+        th_name: "",
+        eng_name: "",
+        type: ""
+    })
 
     // redux
     const redux_showSubjects = useSelector(state => state.showSubjects)
@@ -45,13 +52,38 @@ const ModalEditGroup = (props) => {
     const initState = () => {
         updateTableColumn()
         getGroupUser()
+        setupGroupDetail()
+    }
+
+    const setupGroupDetail = () => {
+        setgroupDetail({
+            th_name: response.th_name,
+            eng_name: response.eng_name,
+            type: response.type
+        })
+        console.log('groupDetail', groupDetail)
     }
 
     const updateTableColumn = () => {
-        if (response.type == "normal") {
+        if (groupDetail.type == "normal") {
             setTable({
                 ...table,
                 columns: [
+                    {
+                        title: 'ID',
+                        field: 'userId',
+                        render: item => <Badge className="p-2" pill variant="primary">{item.userId}</Badge>,
+                    },
+                    { title: 'คำนำหน้า', field: 'titleName' },
+                    { title: 'ชื่อ', field: 'firstName' },
+                    { title: 'นามสกุล', field: 'lastName' },
+                ]
+            })
+        } else {
+            setTable({
+                ...table,
+                columns: [
+                    { title: 'วิชา', field: 'subject' },
                     {
                         title: 'ID',
                         field: 'userId',
@@ -68,7 +100,7 @@ const ModalEditGroup = (props) => {
     const getGroupUser = () => {
         Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
             }
         }).then(res => {
             setShowGroupUsers(res.data.success)
@@ -115,15 +147,43 @@ const ModalEditGroup = (props) => {
         }
     }
 
-    const deleteGroupUser = (item) => {
-        console.log('deleteGroupUser')
-        console.log('item.data', item.data)
+    const deleteGroupUser = async (item) => {
         let tmp_deleteVal = [...item.data]
         tmp_deleteVal = tmp_deleteVal.find(i => {
             return i.tableData.editing == "delete"
         })
-        console.log('tmp_deleteVal', tmp_deleteVal)
-        console.log('response', response)
+        await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
+            data: {
+                user_id: tmp_deleteVal.userId
+            },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
+            }
+        }).then(res => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                // timerProgressBar: true,
+                onOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            if (res.status == 200) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'ลบผู้ตรวจสำเร็จ'
+                })
+            } else {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'เกิดข้อผิดพลาดในการลบผู้ตรวจ'
+                })
+            }
+        })
     }
 
     // useEffect
@@ -141,7 +201,22 @@ const ModalEditGroup = (props) => {
         updateShowUsersTable()
     }, [showGroupUsers])
 
+    useEffect(() => {
+        updateTableColumn()
+    }, [groupDetail])
+
     // function return component
+    const returnByGroupType = () => {
+        if (response.type == "normal") {
+            return (
+                <AddUser setTable={setTable} table={table} groupUsers={table.data} group={response} setModalHidden={setModalHidden} />
+            )
+        } else {
+            return (
+                <AddSubject setTable={setTable} table={table} groupUsers={table.data} group={response} setModalHidden={setModalHidden} />
+            )
+        }
+    }
 
     return (
         <>
@@ -185,13 +260,13 @@ const ModalEditGroup = (props) => {
                                                 if(props.action.icon === 'save'){
                                                     return(
                                                         <Button
-                                                        onClick={(event) => props.action.onClick(event, props.data)}
-                                                        color="primary"
-                                                        variant="contained"
-                                                        style={{textTransform: 'none'}}
-                                                        size="small"
-                                                        >
-                                                        My Button
+                                                            onClick={(event) => props.action.onClick(event, props.data)}
+                                                            color="primary"
+                                                            variant="contained"
+                                                            style={{textTransform: 'none'}}
+                                                            size="small"
+                                                            >
+                                                            My Button
                                                         </Button>
                                                     )
                                                 }
@@ -209,7 +284,7 @@ const ModalEditGroup = (props) => {
                                                             return { ...prevState, data };
                                                         });
                                                     }, 600);
-                                            }),
+                                                }),
                                         }}
                                     />
                                 </Card>
@@ -219,26 +294,26 @@ const ModalEditGroup = (props) => {
                                     <Form.Group>
                                         <Container>
                                             <Form.Label>ชื่อกลุ่มภาษาไทย</Form.Label>
-                                            <Form.Control type="text" value={response.th_name} disabled />
+                                            <Form.Control type="text" value={groupDetail.th_name} disabled />
                                         </Container>
                                     </Form.Group>
                                     <Form.Group controlId="formEngGroupName">
                                         <Container>
                                             <Form.Label>ชื่อกลุ่มภาษาอังกฤษ</Form.Label>
-                                            <Form.Control type="text" value={response.eng_name} disabled />
+                                            <Form.Control type="text" value={groupDetail.eng_name} disabled />
                                         </Container>
                                     </Form.Group>
                                     <hr className="mt-0 mb-0" />
                                     <Form.Group className="mt-2" >
                                         <Container>
                                             <Form.Label>ประเภทกลุ่ม</Form.Label>
-                                            <Form.Control type="text" value={response.type} disabled />
+                                            <Form.Control type="text" value={groupDetail.type} disabled />
                                         </Container>
                                     </Form.Group>
                                 </Card>
                                 <Card className="mt-3" style={{border: "none"}} >
-                                    <AddUser setTable={setTable} table={table} groupUsers={table.data} group={response} setModalHidden={setModalHidden} />
-                                    <ModalNewGroup setModalHidden={setModalHidden} res={response} isCreateProps={false} />
+                                    {returnByGroupType()}
+                                    <ModalNewGroup groupDetail={groupDetail} setgroupDetail={setgroupDetail} setModalHidden={setModalHidden} res={response} isCreateProps={false} />
                                 </Card>
                             </Col>
                         </Row>
