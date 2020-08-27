@@ -35,30 +35,31 @@ export const AddGroup = (props) => {
         // setshowGroups([...redux_showGroups.data])
     }
 
-    const saveDataToDB = () => {
+    const saveDataToDB = async () => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            // timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
         let sendData = new FormData()
         sendData.append('form_id', response.id)
         sendData.append('group_id', selectData)
         sendData.append('state', (step + 1))
 
-        Axios.post(`http://localhost:8000/api/forms/${response.id}/groups`, sendData, {
+        await Axios.post(`http://localhost:8000/api/forms/${response.id}/groups`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"
                 )}`
             }
         }).then(res => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                // timerProgressBar: true,
-                onOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
 
             let tmp_groupStep = groupSteps
             tmp_groupStep[step] = res.data
@@ -75,10 +76,19 @@ export const AddGroup = (props) => {
                     title: 'เกิดข้อผิดพลาดในการเพิ่มกลุ่ม'
                 })
             }
-
-            setSelectData(0)
-            setShowModal(false)
+        }).catch(error => {
+            if (error.response) {
+                if (error.response.status == 406) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'ไม่สามารถเพิ่มกลุ่มในแต่ะชั้นที่ซ้ำกันได้'
+                    })
+                }
+            }
         })
+
+        setSelectData(0)
+        setShowModal(false)
     }
 
     const handlerShowAddGroup = () => {

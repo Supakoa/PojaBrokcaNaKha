@@ -137,7 +137,7 @@ export function ModalStepReport(props) {
                             <StepColors setModalShow={setModalShow} setGroupSteps={setGroupSteps} groupSteps={groupSteps} response={response} numberStep={_stepColors} />
                         </Card.Body>
                         <div className="text-center align-middle">
-                            <InputNumber setGroupSteps={setGroupSteps} groupSteps={groupSteps} setColors={setStepColors} />
+                            <InputNumber response={response} setGroupSteps={setGroupSteps} groupSteps={groupSteps} setColors={setStepColors} />
                         </div>
                     </Card>
                 </Modal.Body>
@@ -147,10 +147,10 @@ export function ModalStepReport(props) {
                         onClick={handleCloseButton}
                     >{"ปิด"}</Button>
 
-                    <Button
+                    {/* <Button
                         variant="primary"
                         onClick={e => sendDataToDB()}
-                    >{"บันทึก"}</Button>
+                    >{"บันทึก"}</Button> */}
                 </Modal.Footer>
             </Modal>
         </>

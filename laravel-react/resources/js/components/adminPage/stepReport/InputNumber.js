@@ -1,32 +1,64 @@
 import React, { useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
+import Axios from "axios";
+import Swal from "sweetalert2";
 
 export const InputNumber = props => {
     // props
-    const { setColors, groupSteps, setGroupSteps } = props;
+    const { setColors, groupSteps, setGroupSteps, response } = props;
 
     // local state
     const [_state, setState] = React.useState(0);
     const [inputNumber, setInputNumber] = React.useState(false);
 
     const handleClick = () => {
-        if (_state !== 0) {
-            setColors(_state);
-
-            let tmp_groupStep = new Array()
-            for (let i = 0; i < _state; i++) {
-                if (groupSteps[i]) {
-                    tmp_groupStep.push(groupSteps[i])
-                } else {
-                    tmp_groupStep.push([])
-                }
+        let tmp_groupStep = new Array()
+        for (let i = 0; i < _state; i++) {
+            if (groupSteps[i]) {
+                tmp_groupStep.push(groupSteps[i])
+            } else {
+                tmp_groupStep.push([])
             }
-            console.log('tmp_groupStep', tmp_groupStep)
-            setGroupSteps(tmp_groupStep)
-
-            setInputNumber(false);
-            setState(0)
         }
+        setGroupSteps(tmp_groupStep)
+
+        const qs = require('qs')
+        let sendData = qs.stringify({
+            all_state: _state
+        })
+        Axios.patch(`http://localhost:8000/api/forms/${response.id}`, sendData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            if (res.status == 200) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'แก้ไขข้อมูลจำนวนขั้นตอนการตรวจสำเร็จ'
+                })
+            } else {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'เกิดข้อผิดพลาดในการแก้ไขข้อมูลลำดับชั้น'
+                })
+            }
+        })
+
+        setColors(_state);
+        setInputNumber(false);
+        setState(0)
     };
 
     // redux

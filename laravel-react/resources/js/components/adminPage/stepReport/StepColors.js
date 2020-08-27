@@ -178,13 +178,17 @@ export const StepColors = props => {
     };
 
     const MapStepComponent = (index) => {
-        return groupSteps[index.index].map((item, idx) => {
-            return (
-                <Button onClick={() => handleClickGroup(item)} className="m-1" key={idx} variant={(item.type == "normal" ? "info" : "warning")}>
-                    <Badge pill variant="light">{`${item.id}`}</Badge> {`${item.th_name}`}
-                </Button>
-            )
-        })
+        if (groupSteps[index.index]) {
+            return groupSteps[index.index].map((item, idx) => {
+                return (
+                    <Button onClick={() => handleClickGroup(item)} className="m-1" key={idx} variant={(item.type == "normal" ? "info" : "warning")}>
+                        <Badge pill variant="light">{`${item.id}`}</Badge> {`${item.th_name}`}
+                    </Button>
+                )
+            })
+        } else {
+            return (<></>)
+        }
     }
 
     const rowSteps = number => {
