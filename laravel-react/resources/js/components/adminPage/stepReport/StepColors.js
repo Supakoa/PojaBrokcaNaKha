@@ -8,10 +8,11 @@ import { chipGroupAction } from "../../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { AddGroup } from "./AddGroup";
 import Axios from "axios";
+import Swal from "sweetalert2";
 
 export const StepColors = props => {
     // props
-    const { numberStep, setModalShow, response } = props;
+    const { numberStep, setModalShow, response, groupSteps, setGroupSteps } = props;
 
     // local state
     const [groupUserSteps, setGroupUserSteps] = useState(null)
@@ -25,23 +26,8 @@ export const StepColors = props => {
     // function
     const initState = () => {
         dispatch(chipGroupAction("NEW_CHIP_GROUP", numberStep));
-        initFormGroupStep()
+        // initFormGroupStep()
     };
-
-    const initFormGroupStep = async () => {
-        console.log('initFormGroupStep')
-        for (let i = 0; i < numberStep; i++) {
-            Axios.get(`http://localhost:8000/api/forms/${response.id}/groups/${(i + 1)}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "_authLocal"
-                    )}`
-                }
-            }).then(res => [
-                console.log('res.data', res.data)
-            ])
-        }
-    }
 
     // FIXME: not to use now
     const deleteUserOnStep = (item, onStep) => {
@@ -77,9 +63,72 @@ export const StepColors = props => {
         dispatch(chipGroupAction(`UPDATE_STEP_${onStep + 1}`, sendReduxData))
     }
 
+    const initGroupUserSteps = () => {
+        console.log('initGroupUserSteps')
+        console.log('numberStep', numberStep)
+        console.log('groupSteps', groupSteps)
+    }
+
+    const handleClickGroup = (item) => {
+        console.log('handleClickGroup')
+        console.log('item', item)
+
+        Swal.fire({
+            title: 'ยืนยันการลบ?',
+            text: `คุณต้องการที่จะลบข้อมูล [${item.id}: ${item.th_name}] หรือไม่!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "ลบ",
+            cancelButtonText: "ยกเลิก",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+          }).then((result) => {
+            if (result.value) {
+                Axios.delete(`http://localhost:8000/api/forms/${item.pivot.form_id}/groups`, {
+                    data: {
+                        group_id: item.id
+                    },
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "_authLocal"
+                        )}`
+                    }
+                }).then(res => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        onOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    let tmp_newGroupSteps = groupSteps
+                    tmp_newGroupSteps[item.pivot.state - 1] = res.data
+                    setGroupSteps(tmp_newGroupSteps)
+
+                    if (res.status == 200) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'ลบข้อมูลกลุ่มสำเร็จ'
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'warning',
+                            title: 'เกิดข้อผิดพลาดในการลบข้อมูล'
+                        })
+                    }
+                })
+            }
+          })
+    }
+
     // useEffect
     React.useEffect(() => {
         initState();
+        initGroupUserSteps()
     }, [numberStep]);
 
     // component with condition
@@ -128,6 +177,16 @@ export const StepColors = props => {
         }
     };
 
+    const MapStepComponent = (index) => {
+        return groupSteps[index.index].map((item, idx) => {
+            return (
+                <Button onClick={() => handleClickGroup(item)} className="m-1" key={idx} variant={(item.type == "normal" ? "info" : "warning")}>
+                    <Badge pill variant="light">{`${item.id}`}</Badge> {`${item.th_name}`}
+                </Button>
+            )
+        })
+    }
+
     const rowSteps = number => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
         const _num = Number(number);
@@ -137,14 +196,15 @@ export const StepColors = props => {
                 return (
                     <Container key={index.toString()}>
                         <Row className="mb-2">
-                            <Col xs={12} md={8}>
+                            <Col xs={12} md={10}>
                                 <Alert variant={item} className="p-2 mb-0">
                                     step {index + 1}:{" "}
                                     {/* {returnStepComponent(index)} */}
+                                    <MapStepComponent index={index} />
                                 </Alert>
                             </Col>
                             <Col>
-                                <AddGroup step={index} setModalShow={setModalShow} response={response} />
+                                <AddGroup setGroupSteps={setGroupSteps} groupSteps={groupSteps} step={index} setModalShow={setModalShow} response={response} />
                             </Col>
                         </Row>
                         <hr />

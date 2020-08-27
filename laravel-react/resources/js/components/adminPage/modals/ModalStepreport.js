@@ -4,6 +4,7 @@ import { InputNumber } from "../stepReport/InputNumber";
 import { StepColors } from "../stepReport/StepColors";
 import { useSelector, useDispatch } from 'react-redux'
 import { chipGroupAction } from "../../../redux/actions";
+import Axios from "axios";
 
 export function StepAdd(props) {
     return (
@@ -26,7 +27,7 @@ export function ModalStepReport(props) {
     // state
     const [modalShow, setModalShow] = React.useState(false);
     const [_stepColors, setStepColors] = React.useState(0);
-    const [test, setTest] = useState(null)
+    const [groupSteps, setGroupSteps] = useState([])
 
     // redux
     const redux_chipGroup = useSelector(state => state.chipGroup)
@@ -40,10 +41,6 @@ export function ModalStepReport(props) {
     const initState = () => {
         // console.log('response ModalStepReport:', response)
         // console.log('redux_showForms', redux_showForms)
-        let tmp_test = new Array()
-        tmp_test.length = 5
-        setTest({...tmp_test})
-        console.log('test naja', test)
     }
 
     const handleCloseButton = () => {
@@ -55,8 +52,34 @@ export function ModalStepReport(props) {
         console.log('redux_chipGroup', redux_chipGroup)
     }
 
+    const initFormGroupStep = async () => {
+        let tmp_chipGroupVal = new Array()
+
+        for (let i = 0; i < response.all_state; i++) {
+            Axios.get(`http://localhost:8000/api/forms/${response.id}/groups/${(i + 1)}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }
+            }).then(res => {
+                tmp_chipGroupVal.push(res.data.success)
+            })
+        }
+
+        setGroupSteps(tmp_chipGroupVal)
+    }
+
+    const initNumberStep = () => {
+        if (response.all_state > 0 || response.all_state != null) {
+            setStepColors(response.all_state)
+        }
+    }
+
     useEffect(() => {
         initState()
+        initFormGroupStep()
+        initNumberStep()
     }, [])
 
     // React.useEffect(() => {
@@ -111,10 +134,10 @@ export function ModalStepReport(props) {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <StepColors setModalShow={setModalShow} response={response} numberStep={_stepColors} />
+                            <StepColors setModalShow={setModalShow} setGroupSteps={setGroupSteps} groupSteps={groupSteps} response={response} numberStep={_stepColors} />
                         </Card.Body>
                         <div className="text-center align-middle">
-                            <InputNumber setColors={setStepColors} />
+                            <InputNumber setGroupSteps={setGroupSteps} groupSteps={groupSteps} setColors={setStepColors} />
                         </div>
                     </Card>
                 </Modal.Body>

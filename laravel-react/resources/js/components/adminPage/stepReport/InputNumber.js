@@ -3,7 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 
 export const InputNumber = props => {
     // props
-    const { setColors, setModalShow } = props;
+    const { setColors, groupSteps, setGroupSteps } = props;
 
     // local state
     const [_state, setState] = React.useState(0);
@@ -12,6 +12,18 @@ export const InputNumber = props => {
     const handleClick = () => {
         if (_state !== 0) {
             setColors(_state);
+
+            let tmp_groupStep = new Array()
+            for (let i = 0; i < _state; i++) {
+                if (groupSteps[i]) {
+                    tmp_groupStep.push(groupSteps[i])
+                } else {
+                    tmp_groupStep.push([])
+                }
+            }
+            console.log('tmp_groupStep', tmp_groupStep)
+            setGroupSteps(tmp_groupStep)
+
             setInputNumber(false);
             setState(0)
         }

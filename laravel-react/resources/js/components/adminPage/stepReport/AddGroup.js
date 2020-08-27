@@ -8,11 +8,10 @@ import Swal from 'sweetalert2';
 export const AddGroup = (props) => {
 
     // props
-    const { response, setModalShow, step } = props
+    const { response, setModalShow, step, groupSteps, setGroupSteps } = props
 
     // local state
     const [showModal, setShowModal] = useState(false)
-    const [showGroups, setshowGroups] = useState(null)
     const [selectData, setSelectData] = useState(0)
     const [dataThisStep, setDataThisStep] = useState(null)
 
@@ -23,6 +22,7 @@ export const AddGroup = (props) => {
     // fuction
     const handleClose = () => {
         setShowModal(false);
+        setSelectData(0)
         // setModalShow(true)
     }
 
@@ -32,19 +32,14 @@ export const AddGroup = (props) => {
     }
 
     const initState = () => {
-        setshowGroups([...redux_showGroups.data])
-        getDataThisStep()
-    }
-
-    const getDataThisStep = async () => {
-        await setDataThisStep([...redux_chipGroup.data])
+        // setshowGroups([...redux_showGroups.data])
     }
 
     const saveDataToDB = () => {
         let sendData = new FormData()
         sendData.append('form_id', response.id)
         sendData.append('group_id', selectData)
-        sendData.append('state', step)
+        sendData.append('state', (step + 1))
 
         Axios.post(`http://localhost:8000/api/forms/${response.id}/groups`, sendData, {
             headers: {
@@ -53,8 +48,6 @@ export const AddGroup = (props) => {
                 )}`
             }
         }).then(res => {
-            console.log('res', res)
-
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -67,6 +60,10 @@ export const AddGroup = (props) => {
                 }
             })
 
+            let tmp_groupStep = groupSteps
+            tmp_groupStep[step] = res.data
+            setGroupSteps(tmp_groupStep)
+
             if (res.status == 200) {
                 Toast.fire({
                     icon: 'success',
@@ -78,6 +75,9 @@ export const AddGroup = (props) => {
                     title: 'เกิดข้อผิดพลาดในการเพิ่มกลุ่ม'
                 })
             }
+
+            setSelectData(0)
+            setShowModal(false)
         })
     }
 
@@ -89,13 +89,25 @@ export const AddGroup = (props) => {
 
     // useeffect
     useEffect(() => {
+        console.log('naja')
         initState()
-        handlerShowAddGroup()
     }, [])
+
+    useEffect(() => {
+        // handlerShowAddGroup()
+    }, [showModal])
 
     // return component
     const RenderGroupOptions = () => {
-        return showGroups.map((item, idx) => {
+        let filterGroupOption = redux_showGroups.data
+
+        groupSteps[step].map(i=> {
+            filterGroupOption = filterGroupOption.filter(j => {
+                return i.id != j.id
+            })
+        })
+
+        return filterGroupOption.map((item, idx) => {
             return <option key={idx + 1} value={item.id} >{`${item.id}: ${item.th_name}`}</option>
         })
     }
@@ -119,7 +131,7 @@ export const AddGroup = (props) => {
                     <Modal.Title>เพิ่มกลุ่มในเส้นทางเอกสาร</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Container style={{backgroundColor: "green"}}>
+                    <Container>
                         <Form>
                             <Form.Group controlId="exampleForm.SelectCustom">
                                 <Form.Label>เลือกกลุ่มผู้ตรวจ</Form.Label>

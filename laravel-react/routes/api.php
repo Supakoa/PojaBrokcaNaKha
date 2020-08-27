@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     //Forms
     Route::resource('forms', 'formsController', ['except' => ['create', 'edit']]);
     Route::get('forms/{form}/documents','formsController@documents');
+    // form group == direction form
     Route::get('forms/{form}/groups','formsController@groups');
     Route::get('forms/{form}/groups/{state}','formsController@groupsByState');
     Route::post('forms/{form}/groups','formsController@addGroup');
