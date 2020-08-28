@@ -21,7 +21,7 @@ class role extends Seeder
                 'updated_at' => Carbon::now(),
             ),
             array(
-                'name' => 'teach',
+                'name' => 'approver',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ),
