@@ -1,8 +1,14 @@
 import React from "react";
 import { Form, Col } from "react-bootstrap";
 
-const SelectorOfDoc = props => {
-    const { inputData, handle, lang } = props;
+const SelectorOfDoc = ({
+    inputData,
+    handle,
+    lang,
+    defaultData,
+    required,
+    isSubmit
+}) => {
     const [_other, setOther] = React.useState(false);
     const [_otherLabel, setOtherLabel] = React.useState("");
 
@@ -34,13 +40,12 @@ const SelectorOfDoc = props => {
             </Form.Label>
             <Form.Control
                 isInvalid={
-                    props.required[inputData.tag_type + inputData.type] ===
-                    false
-                        ? props.required[inputData.tag_type + inputData.type]
-                        : props.isSubmit
+                    required[inputData.tag_type + inputData.type] === false
+                        ? required[inputData.tag_type + inputData.type]
+                        : isSubmit
                 }
                 isValid={
-                    props.required[inputData.tag_type + inputData.type] ===
+                    required[inputData.tag_type + inputData.type] ===
                     inputData.tag_type + inputData.type
                 }
                 as="select"
@@ -50,7 +55,13 @@ const SelectorOfDoc = props => {
                 custom
             >
                 <option>
-                    {lang === "th" ? inputData.th_name : inputData.eng_name}
+                    {!!defaultData
+                        ? lang === "th"
+                            ? inputData.th_options[Number(defaultData)]
+                            : inputData.eng_options[Number(defaultData)]
+                        : lang === "th"
+                        ? inputData.th_name
+                        : inputData.eng_name}{" "}
                 </option>
 
                 {lang === "th"
@@ -82,7 +93,7 @@ const SelectorOfDoc = props => {
                 {_otherLabel}
             </Form.Label>
             <Form.Control
-                isInvalid={props.required}
+                isInvalid={required}
                 hidden={!_other}
                 size="sm"
                 onChange={handle}

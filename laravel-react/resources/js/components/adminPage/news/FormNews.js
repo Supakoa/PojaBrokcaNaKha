@@ -2,20 +2,13 @@ import React, { useState } from "react";
 import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    initNewsForm,
-    updateFile,
-    updateRef,
-    destroyForm
-} from "../../../redux/actions/";
+import { useDispatch } from "react-redux";
+import { initNewsForm, updateFile, updateRef } from "../../../redux/actions/";
 import Axios from "axios";
 
 // modal add new news
 
-function FormNews(props) {
-    const { response, isCreateProps } = props;
-
+function FormNews({ response, isCreateProps }) {
     // redux
     // const file = useSelector(state => state.file) not use
     const dispatch = useDispatch();
@@ -25,7 +18,6 @@ function FormNews(props) {
     const [inputText, setInputText] = useState("");
 
     React.useEffect(() => {
-
         // init state
         !isCreateProps
             ? _setState({
@@ -80,15 +72,18 @@ function FormNews(props) {
 
     const createImage = async e => {
         const reader = new FileReader();
-        const file =  e.target.files[0];
-        
-        const formData = new FormData()
-        formData.append('image', file)
+        const file = e.target.files[0];
+
+        const formData = new FormData();
+        formData.append("image", file);
 
         // console.log('file', file)
-        const pathImage = await Axios.post(`http://localhost:8000/api/uploads`, formData).then(res => {
-            return res.data
-        })
+        const pathImage = await Axios.post(
+            `http://localhost:8000/api/uploads`,
+            formData
+        ).then(res => {
+            return res.data;
+        });
 
         reader.onloadend = e => {
             _setState({

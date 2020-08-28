@@ -24,6 +24,10 @@ export const _urlPostDocuments = () => {
     return `${_www}/api/documents`;
 };
 
+export const _urlPutDocuments = (id) => {
+    return `${_www}/api/documents/${id}`;
+};
+
 export const _urlSubjects = () => {
     return `${_www}/api/subjects`;
 };

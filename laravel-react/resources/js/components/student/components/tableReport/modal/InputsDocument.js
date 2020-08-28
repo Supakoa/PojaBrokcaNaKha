@@ -2,19 +2,30 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ListDetailDocs from "./ListDetailDocs";
+import { useTranslation } from "react-i18next";
+import TemplateDocuments from "../../fromReport/template-Documents";
 
-const InputsDocument = ({ inputs }) => {
+const InputsDocument = ({
+    inputs,
+    documentStatus,
+    formId,
+    styles,
+    setRows
+}) => {
     const _subjects = useSelector(s => s.subjectsDocument);
+    const { i18n } = useTranslation();
+
     return (
-        <Container
-            style={{
-                minHeight: "30vh",
-                maxHeight: "60vh",
-                overflowY: "scroll"
-            }}
-            className="py-2 "
-        >
-            {inputs !== null ? (
+        <Container style={styles} className="py-2 ">
+            {documentStatus === "edited" ? (
+                <TemplateDocuments
+                    patternInput={inputs.inputs}
+                    lang={i18n.language}
+                    id={formId}
+                    statusDocument={documentStatus}
+                    setRows={setRows}
+                />
+            ) : inputs !== null ? (
                 inputs.inputs.map((item, idx) => {
                     return (
                         <ListDetailDocs

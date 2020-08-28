@@ -1,8 +1,14 @@
 import React from "react";
 import { Form, Col } from "react-bootstrap";
 
-const DateOfDoc = props => {
-    const { inputData, handle, lang } = props;
+const DateOfDoc = ({
+    inputData,
+    handle,
+    lang,
+    defaultData,
+    required,
+    isSubmit
+}) => {
     return (
         <Form.Group
             md={inputData.size}
@@ -13,14 +19,15 @@ const DateOfDoc = props => {
             <Form.Label>
                 {lang === "th" ? inputData.th_title : inputData.eng_title}
             </Form.Label>
+
             <Form.Control
                 isInvalid={
-                    props.required[inputData.tag_type + inputData.type] ===
-                    false
-                        ? props.required[inputData.tag_type + inputData.type]
-                        : props.isSubmit
+                    required[inputData.tag_type + inputData.type] === false
+                        ? required[inputData.tag_type + inputData.type]
+                        : isSubmit
                 }
                 name={inputData.type}
+                defaultValue={defaultData}
                 type="date"
                 onChange={handle}
             />

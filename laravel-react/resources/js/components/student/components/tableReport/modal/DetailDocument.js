@@ -3,12 +3,11 @@ import { Container, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-const DetailDocument = props => {
-    const { document } = props;
+const DetailDocument = ({ document, styles }) => {
     const { t } = useTranslation();
     const _userName = useSelector(state => state.userState);
     return (
-        <Container>
+        <Container style={styles}>
             <dl className="row border-left border-right border-bottom rounded">
                 {/* date */}
                 <Col

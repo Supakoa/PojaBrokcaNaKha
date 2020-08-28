@@ -9,13 +9,20 @@ import { _urlUploads } from "../../../../middleware/apis";
 import uploadsImage from "../../../../middleware/axios/uploads";
 import Swal from "sweetalert2";
 import { postDocumentUser } from "../../../../middleware/axios/postDocumentUser";
+import { putDocumentUser } from "../../../../middleware/axios/putDocumentUser";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userDocument } from "../../../../../redux/actions";
 import { fetchUserDoc } from "../../../../middleware/axios/fetchUserDoc";
 import { useTranslation } from "react-i18next";
 
-const TemplateDocuments = ({ patternInput, id, lang }) => {
+const TemplateDocuments = ({
+    patternInput,
+    id,
+    lang,
+    statusDocument,
+    setRows
+}) => {
     const _dispatch = useDispatch();
     const _history = useHistory();
     const { i18n } = useTranslation();
@@ -35,6 +42,21 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
 
             const _pathImg = await uploadsImage(file, localStorage._authLocal);
             if (_pathImg) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    onOpen: toast => {
+                        toast.addEventListener("mouseenter", Swal.stopTimer);
+                        toast.addEventListener("mouseleave", Swal.resumeTimer);
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Upload Success !!"
+                });
                 setDocument({
                     ..._document,
                     [name]: _pathImg
@@ -51,15 +73,24 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
 
     const handleSending = async () => {
         let _arry = [];
-
-        if (Object.keys(_isRequire).length === _numRequired) {
-            Object.keys(_document).map((item, idx) => {
-                const _newDoc = patternInput.find(id => {
-                    return id.type === item;
+        let _newDoc = {};
+        if (
+            Object.keys(_isRequire).length === _numRequired ||
+            !!statusDocument
+        ) {
+            patternInput.forEach(master => {
+                let isData = false;
+                Object.keys(_document).forEach((input, idx) => {
+                    if (master.type === input) {
+                        _arry = [
+                            ..._arry,
+                            { ...master, data: Object.values(_document)[idx] }
+                        ];
+                        isData = true;
+                    }
                 });
-                if (_newDoc) {
-                    _newDoc.data = Object.values(_document)[idx];
-                    _arry = [..._arry, _newDoc];
+                if (!isData) {
+                    _arry = [..._arry, master];
                 }
             });
 
@@ -68,11 +99,21 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                 user_id: _userId,
                 data: JSON.stringify({ inputs: _arry })
             };
-            const _resDoc = await postDocumentUser(
-                localStorage._authLocal,
-                _docForm
-            );
-            if (_resDoc.id) {
+
+            if (!!statusDocument) {
+                _newDoc = await putDocumentUser(
+                    localStorage._authLocal,
+                    _docForm,
+                    id
+                );
+            } else {
+                _newDoc = await postDocumentUser(
+                    localStorage._authLocal,
+                    _docForm
+                );
+            }
+
+            if (_newDoc.id) {
                 Swal.fire("complete. !", "ส่งเรียบร้อย", "success").then(
                     async res => {
                         if (res.value) {
@@ -83,6 +124,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                             if (_newDocs) {
                                 _dispatch(userDocument(_newDocs));
                                 _history.push("/student");
+                                if (!!statusDocument) setRows([]);
                             }
                         }
                     }
@@ -110,7 +152,6 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
         filterRequiredInput(patternInput, { signal: abort.signal });
         return () => abort.abort();
     });
-
     return (
         <Form className="py-3">
             <Form.Row>
@@ -124,6 +165,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                defaultData={item.data}
                             />
                         );
                     } else if (item.tag_type === "select2") {
@@ -135,6 +177,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                defaultData={item.data}
                             />
                         );
                     } else if (item.tag_type === "select3") {
@@ -146,6 +189,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                defaultData={item.data}
                             />
                         );
                     } else if (item.tag_type === "file") {
@@ -155,6 +199,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                defaultData={item.data}
                             />
                         );
                     } else if (item.tag_type === "text") {
@@ -164,6 +209,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                defaultData={item.data}
                             />
                         );
                     } else if (item.tag_type === "date") {
@@ -175,6 +221,7 @@ const TemplateDocuments = ({ patternInput, id, lang }) => {
                                 inputData={item}
                                 key={idx.toString()}
                                 handle={handleChangeForm}
+                                defaultData={item.data}
                             />
                         );
                     } else {

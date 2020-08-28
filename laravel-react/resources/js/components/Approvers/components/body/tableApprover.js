@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import ButtonShowDoc from "./ButtonShowDoc";
 import NameFormOnTable from "../../../name-form-ontable";
 import NameSender from "./NameSender";
+import wordShow from "../../../filter/showMyWord";
 
 const TableApprover = ({
     urlApprover,
@@ -66,7 +67,7 @@ const TableApprover = ({
             if (sortTable !== "all" && arr.length === 0) {
                 Swal.fire(
                     i18n.language === "th" ? `ขออภัย` : `Sorry !`,
-                    `${sortTable} ${
+                    `${wordShow(sortTable, t)} ${
                         i18n.language === "th" ? `ไม่มีข้อมูล` : `Empty`
                     } `,
                     "warning"
@@ -89,7 +90,7 @@ const TableApprover = ({
         const abort = new AbortController();
 
         if (
-            rows.length < _userDocs.length &&
+            rows.length !== _userDocs.length &&
             _docTemps.length > 0 &&
             _userDocs.length > 0 &&
             _allUses.length > 0

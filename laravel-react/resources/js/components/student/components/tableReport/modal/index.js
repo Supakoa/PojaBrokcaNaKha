@@ -5,9 +5,17 @@ import InputsDocument from "./InputsDocument";
 import deleteDocument from "../../../../middleware/axios/deleteDocument";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import StatusBadgeDoc from "../statusDocument";
 
-const UserModalDoc = ({ document, lang }) => {
+const contentStyle = {
+    maxHeight: "60vh",
+    height: "40vh",
+    overflowY: "scroll"
+};
+
+const UserModalDoc = ({ document, setRows }) => {
     const [show, setShow] = React.useState(false);
+    const [_status, setStatus] = React.useState(false);
     const { t } = useTranslation();
 
     const deleteDoc = () =>
@@ -55,24 +63,45 @@ const UserModalDoc = ({ document, lang }) => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title as="h6">- {document.form_name}</Modal.Title>
+                    <div className="w-100 d-flex align-items-center justify-content-between">
+                        <Modal.Title as="h6">
+                            - {document.form_name}
+                        </Modal.Title>
+                        {_status ? (
+                            <StatusBadgeDoc status={document.status} />
+                        ) : null}
+                    </div>
                 </Modal.Header>
                 <Modal.Body>
-                    <Tabs defaultActiveKey="infoDocument" id="ModalDocument">
+                    <Tabs
+                        defaultActiveKey="infoDocument"
+                        id="ModalDocument"
+                        onClick={e =>
+                            setStatus(
+                                e.target.id === "ModalDocument-tab-formDocument"
+                            )
+                        }
+                    >
                         <Tab
                             eventKey="infoDocument"
                             title={t("students.modal.status-documents.title")}
                         >
-                            <DetailDocument document={document} />
+                            <DetailDocument
+                                document={document}
+                                styles={contentStyle}
+                            />
                         </Tab>
                         <Tab
                             eventKey="formDocument"
                             title={t("students.modal.detail")}
                         >
-                            <div className="border-left border-right border-bottom rounded">
+                            <div className="border-left border-right border-bottom rounded py-2">
                                 <InputsDocument
+                                    styles={contentStyle}
                                     inputs={JSON.parse(document.data)}
-                                    lang={lang}
+                                    documentStatus={document.status}
+                                    formId={document.form_id}
+                                    setRows={setRows}
                                 />
                             </div>
                         </Tab>

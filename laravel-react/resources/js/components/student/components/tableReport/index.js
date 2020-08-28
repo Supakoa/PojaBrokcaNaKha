@@ -8,6 +8,7 @@ import UserModalDoc from "./modal";
 import { useTranslation } from "react-i18next";
 import FilterSort from "../../../filter";
 import Swal from "sweetalert2";
+import wordShow from "../../../filter/showMyWord";
 
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
@@ -16,6 +17,7 @@ export default function ReportTable() {
     const [rows, setRows] = React.useState([]);
     const [_filValid, setFilValid] = React.useState(false);
     const [_sortBy, setSortBy] = React.useState("pending");
+    const _th = i18n.language === "th";
     const _optionSort = [
         "all",
         "pending",
@@ -43,14 +45,14 @@ export default function ReportTable() {
         if (tempRows) {
             const _rows = tempRows.map((item, idx) => {
                 item.status_badge = (
-                    <StatusBadgeDoc key={idx} status={item.status} />
+                    <StatusBadgeDoc key={idx.toString()} status={item.status} />
                 );
                 item.row_id = (idx + 1).toString();
                 item.action = (
                     <UserModalDoc
                         key={idx.toString()}
                         document={item}
-                        lang={i18n.language}
+                        setRows={setRows}
                     />
                 );
                 return item;
@@ -61,8 +63,11 @@ export default function ReportTable() {
                 });
                 if (_sortBy !== "all" && arr.length === 0) {
                     Swal.fire(
-                        `${_sortBy} error !!`,
-                        `ไม่พบ ${_sortBy} ของคุณ`,
+                        `${wordShow(_sortBy, t)} !!`,
+                        `${_th ? `ไม่พบ` : `not found your`} ${wordShow(
+                            _sortBy,
+                            t
+                        )} ${_th ? `ของคุณ` : ``}`,
                         "warning"
                     ).then(() => {
                         setFilValid(!_filValid);
@@ -80,7 +85,7 @@ export default function ReportTable() {
         const abort = new AbortController();
         if (
             _userDoc.length !== 0 &&
-            rows.length < _userDoc.length &&
+            rows.length !== _userDoc.length &&
             _docTemp.length !== 0
         ) {
             fill2Rows(_props, { signal: abort.signal });

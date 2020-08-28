@@ -4,6 +4,7 @@ import ModalImage from "./ModalImage";
 
 const ListDetailDocs = ({ subjects, data, inputData }) => {
     const { i18n } = useTranslation();
+
     switch (data.tag_type) {
         case "select1":
             return (
@@ -81,8 +82,8 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                     <dt className="col-lg-4 col-md-4">
                         {i18n.language === "th" ? data.th_name : data.eng_name}:{" "}
                     </dt>
-                    <dd className="col-lg-8 col-md-8" as="dd">
-                        {data.data}
+                    <dd className="col-lg-8 col-md-8">
+                        {!!data.data ? data.data : "-"}
                     </dd>
                 </dl>
             );
@@ -93,8 +94,8 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                     <dt className="col-lg-4 col-md-4">
                         {i18n.language === "th" ? data.th_name : data.eng_name}:{" "}
                     </dt>
-                    <dd className="col-lg-8 col-md-8 px-0">
-                        <ModalImage src={data.data} />
+                    <dd className="col-lg-8 col-md-8">
+                        {!!data.data ? <ModalImage src={data.data} /> : "-"}
                     </dd>
                 </dl>
             );
@@ -106,7 +107,7 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                         <i className="fas fa-calendar-day"></i>
                     ) : null}{" "}
                     {i18n.language === "th" ? data.th_name : data.eng_name}{" "}
-                    {data.data}{" "}
+                    {!!data.data ? data.data : "-"}{" "}
                 </span>
             );
 
