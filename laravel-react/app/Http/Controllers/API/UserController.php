@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -139,6 +144,25 @@ class UserController extends Controller
         return response()->json($user, 200);
     }
 
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+    public function import(Request $request)
+    {
+        Excel::import(new UsersImport, $request->file('file'));
+
+        return response()->json('success', 200);
+    }
+
+    public function importTemplate(){
+        $file= public_path(). "/storage/file/users_import.xlsx";
+        $headers = [
+            'Content-Type' => 'application/vnd.ms-excel',
+        ];
+
+        return Response::download($file, "users_import_template.xlsx", $headers);
+    }
 
 
 }
