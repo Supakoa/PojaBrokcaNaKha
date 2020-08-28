@@ -9,14 +9,19 @@ export default function TableGroups() {
 
     return (
         <MDBDataTable
-            striped
+            noBottomColumns={true}
+            entriesLabel="จำนวนที่แสดง"
+            entriesOptions={[5, 10, 15]}
+            entries={5}
+            infoLabel={["แสดง", "-", "ของ", "รายการ"]}
+            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
+            barReverse={true}
             borderless
-            scrollX
+            striped
+            small
             hover
-            info={false}
-            paging={false}
+            scrollX
             data={_data}
-            searchLabel={"ค้นหา"}
         />
     );
 }

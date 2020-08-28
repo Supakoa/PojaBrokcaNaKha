@@ -1,22 +1,28 @@
 import React from "react";
 import dataNewsTable from "./dataNewsTable";
 import { MDBDataTable } from "mdbreact";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function TableNews() {
     const _data = dataNewsTable();
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation("", { useSuspense: false });
 
     return (
         <MDBDataTable
-            striped
+            noBottomColumns={true}
+            entriesLabel="จำนวนที่แสดง"
+            entriesOptions={[5, 10, 15]}
+            entries={5}
+            infoLabel={["แสดง", "-", "ของ", "รายการ"]}
+            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
+            barReverse={true}
             borderless
-            scrollX
+            striped
+            small
             hover
-            info={false}
-            paging={false}
+            scrollX
             data={_data}
-            searchLabel={t('search')}
+            searchLabel={t("search")}
         />
     );
 }

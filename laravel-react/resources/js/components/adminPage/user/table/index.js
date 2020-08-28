@@ -8,14 +8,20 @@ export default function TableUser() {
 
     return (
         <MDBDataTable
-            striped
-            borderless
-            scrollX
-            hover
-            info={false}
-            paging={false}
-            data={_data}
+            noBottomColumns={true}
+            entriesLabel="จำนวนที่แสดง"
+            entriesOptions={[5, 10, 15]}
+            entries={5}
+            infoLabel={["แสดง", "-", "ของ", "รายการ"]}
+            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
             searchLabel="ค้นหา"
+            barReverse={true}
+            borderless
+            striped
+            small
+            hover
+            scrollX
+            data={_data}
         />
     );
 }

@@ -24,7 +24,6 @@ export default function AdminPage() {
     const dispatch = useDispatch();
     let { path, url } = useRouteMatch();
     let _history = useHistory();
-    const abort = new AbortController();
     const token = localStorage._authLocal;
 
     const _props = {
@@ -38,21 +37,21 @@ export default function AdminPage() {
     };
 
     React.useEffect(() => {
+        const abort = new AbortController();
+
         if (Object.keys(_user).length === 0 && token) {
             post2User(_props, {
                 signal: abort.signal
             });
         }
-    }, [_user, token]);
-
-    React.useEffect(() => {
         return () => {
             abort.abort();
         };
-    }, []);
+    }, [_user, token]);
+
 
     return (
-        <Row className="app w-100">
+        <Row className="app w-100 m-0">
             <Col md={1} lg={2} className="bg-secondary pr-0">
                 <SideNav url={url} />
             </Col>
