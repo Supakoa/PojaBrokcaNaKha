@@ -204,7 +204,7 @@ const AddSubject = forwardRef((props, ref) => {
         let tmp_filterData = new Array()
         tmp_filterData = [...redux_showApprovers.data]
 
-        console.log('groupUsers.length > 0', groupUsers.length > 0)
+        // console.log('groupUsers.length > 0', groupUsers.length > 0)
 
         if (groupUsers.length > 0) {
             let tmp_selectSubjectName = redux_showSubjects.data.find(i => {

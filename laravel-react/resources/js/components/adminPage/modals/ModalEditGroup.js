@@ -110,25 +110,27 @@ const ModalEditGroup = (props) => {
         }
     }
 
-    const getGroupUser = () => {
-        Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
-            }
-        }).then(res => {
-            setResultSubjects(res.data.subjects_id)
-            setShowGroupUsers(res.data.success)
-        })
+    const getGroupUser = async () => {
+        await setTimeout(() => {
+            setResultSubjects(response.subjects_id)
+            setShowGroupUsers(response.users)
+        }, Math.max((response.users.length + 1) * 20, 500));
+        // Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
+        //     headers: {
+        //         Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
+        //     }
+        // }).then(res => {
+        //     setResultSubjects(res.data.subjects_id)
+        //     setShowGroupUsers(res.data.success)
+        // })
     }
 
     const updateShowUsersTable = () => {
         if (showGroupUsers) {
-            let tmp_showGroupUsers = new Array()
-            tmp_showGroupUsers = [...showGroupUsers]
+            let tmp_showGroupUsers = [...showGroupUsers]
 
-            tmp_showGroupUsers = tmp_showGroupUsers.map(item => {
-                let tmp_selectSubject = new Array()
-                tmp_selectSubject = [...redux_showSubjects.data]
+            tmp_showGroupUsers = showGroupUsers.map(item => {
+                let tmp_selectSubject = [...redux_showSubjects.data]
                 tmp_selectSubject = tmp_selectSubject.find(filterItem => {
                     return filterItem.id == item.pivot.subject_id
                 })
@@ -233,6 +235,10 @@ const ModalEditGroup = (props) => {
                         title: 'เกิดข้อผิดพลาดในการลบผู้ตรวจ'
                     })
                 }
+
+                return true
+            }).catch(error => {
+                return false
             })
         }
     }
@@ -365,10 +371,12 @@ const ModalEditGroup = (props) => {
                                                     setTimeout(() => {
                                                         resolve();
                                                         setTable((prevState) => {
-                                                            deleteGroupUser(prevState)
-                                                            const data = [...prevState.data];
-                                                            data.splice(data.indexOf(oldData), 1);
-                                                            return { ...prevState, data };
+                                                            let isSuccess = deleteGroupUser(prevState)
+                                                            if (isSuccess) {
+                                                                const data = [...prevState.data];
+                                                                data.splice(data.indexOf(oldData), 1);
+                                                                return { ...prevState, data };
+                                                            }
                                                         });
                                                     }, 600);
                                                 }),

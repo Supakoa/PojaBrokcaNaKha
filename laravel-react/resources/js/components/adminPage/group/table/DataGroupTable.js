@@ -20,7 +20,7 @@ const DataGroupTable = () => {
     const fetchRowData = async _data => {
         await setRows(
             _data.map((res, idx) => {
-                let listData = getUserGroupToTable(res.id)
+                // let listData = getUserGroupToTable(res.id)
                 const responData = {
                     id: idx + 1,
                     th_name: res.th_name,
@@ -34,20 +34,20 @@ const DataGroupTable = () => {
         );
     };
 
-    const getUserGroupToTable = (id) => {
-        Axios.get(`http://localhost:8000/api/groups/${id}/users`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    "_authLocal"
-                )}`
-            }
-        }).then(res => {
-            console.log('res.data.success.length', res.data.success.length)
-            // const result = (res.data.)
-            // setListApprovers(res.data.success.length)
-            return res.data.success.length
-        })
-    }
+    // const getUserGroupToTable = (id) => {
+    //     Axios.get(`http://localhost:8000/api/groups/${id}/users`, {
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem(
+    //                 "_authLocal"
+    //             )}`
+    //         }
+    //     }).then(res => {
+    //         console.log('res.data.success.length', res.data.success.length)
+    //         // const result = (res.data.)
+    //         // setListApprovers(res.data.success.length)
+    //         return res.data.success.length
+    //     })
+    // }
 
     const getGroup = async () => {
         await Axios.get(`http://localhost:8000/api/groups`, {
