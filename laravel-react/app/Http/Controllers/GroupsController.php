@@ -23,9 +23,19 @@ class GroupsController extends Controller
         $groups = Group::all();
         foreach ($groups as $index => $group) {
             $group->users;
+            $subjects = Subject::all();
+            $subjects_id = [];
+            $subjects = $subjects->filter(function ($subject, $key) use ($group) {
+                $users = $group->users();
+                return $users->wherePivot("subject_id", $subject->id)->count() == 0;
+            })->all();
+
+            foreach ($subjects as $subject) {
+                array_push($subjects_id, $subject->id);
+            }
         }
 
-        return $groups;
+        return response()->json(['success' => $group->users, "subjects_id" => $subjects_id], $this->successStatus);
     }
 
     /**
@@ -124,11 +134,15 @@ class GroupsController extends Controller
 
     public function deleteUser(Request $request, Group $group)
     {
+        $this->validate($request, [
+            'user_id' => 'required',
+            'subject_id' => 'required'
+        ]);
         if ($group->type == "normal") {
             $group->users()->detach($request->input("user_id"));
         } else {
             $group->users()->where('user_id', $request->input("user_id"))
-                ->wherePivot("subject_id", $request->input("subject_id"))->detach();
+                ->wherePivot("subject_id", $request->input("subject_id"))->detach($request->input("user_id"));
         }
         return $group->users;
     }
