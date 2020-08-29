@@ -33,9 +33,10 @@ class GroupsController extends Controller
             foreach ($subjects as $subject) {
                 array_push($subjects_id, $subject->id);
             }
+            $group->subjects_id = $subjects_id;
         }
 
-        return response()->json(['success' => $group->users, "subjects_id" => $subjects_id], $this->successStatus);
+        return $groups;
     }
 
     /**
