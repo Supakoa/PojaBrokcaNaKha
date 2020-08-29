@@ -4,13 +4,12 @@ namespace App\Http\Controllers\API;
 
 
 use App\Exports\UsersExport;
-use App\Imports\UsersImport;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -107,18 +106,25 @@ class UserController extends Controller
 
     public function documents(User $user)
     {
-       switch (auth()->user()->role_id){
+        $documents = [];
+        switch (auth()->user()->role_id) {
             case 1 :
-                return response()->json(['success' => $user->documents], $this->successStatus);
+                $documents = $user->documents;
+                break;
             case 2 :
-                return response()->json(['success' => array_values(auth()->user()->approve_documents->where("status","!=","cancelled")->filter(function ($doc){
+                $documents = auth()->user()->approve_documents->where("status", "!=", "cancelled")->filter(function ($doc) {
                     return $doc->state >= $doc->pivot->state;
-                })->toArray())], $this->successStatus);
+                })->all();
+                break;
             case 3 :
-                return response()->json(['success' => auth()->user()->documents], $this->successStatus);
-           default :
-               return response()->json(['error' => "403"], 403);
-       }
+                $documents = auth()->user()->documents;
+                break;
+        }
+        foreach ($documents as $index => $document) {
+            $document->approver =   $document->approver()->wherePivot('state',"<=",$document->state)->get();
+        }
+        return response()->json(['success' => $documents], $this->successStatus);
+
     }
 
     public function destroy($id)
@@ -148,6 +154,7 @@ class UserController extends Controller
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
+
     public function import(Request $request)
     {
         Excel::import(new UsersImport, $request->file('file'));
@@ -155,8 +162,9 @@ class UserController extends Controller
         return response()->json('success', 200);
     }
 
-    public function importTemplate(){
-        $file= public_path(). "/storage/file/users_import.xlsx";
+    public function importTemplate()
+    {
+        $file = public_path() . "/storage/file/users_import.xlsx";
         $headers = [
             'Content-Type' => 'application/vnd.ms-excel',
         ];
