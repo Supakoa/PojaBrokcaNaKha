@@ -11,10 +11,10 @@ const DataGroupTable = () => {
 
     const [rows, setRows] = React.useState([]);
     const [gourps, setGourps] = useState(null)
-    const [listApprovers, setListApprovers] = useState(null)
+    const [listApprovers, setListApprovers] = useState(null) // not to use now
 
     // redux
-    const redux_approvers = useSelector(state => state.showApprovers)
+    const redux_approvers = useSelector(state => state.showApprovers) // not to use
     const dispatch = useDispatch()
 
     const fetchRowData = async _data => {

@@ -142,6 +142,10 @@ const ModalNewGroup = (props) => {
         handleClose()
     }
 
+    const mapTitleName = () => {
+        return isCreateProps ? `สร้างกลุ่มผู้ตรวจ` : `แก้ไขกลุ่มผู้ตรวจ`
+    }
+
     // useEffect
     useEffect(() => {
         initGroupForm()
@@ -172,7 +176,7 @@ const ModalNewGroup = (props) => {
                 centered
             >
                 <Modal.Header>
-                    <Modal.Title>สร้างกลุ่มผู้ตรวจ</Modal.Title>
+                    <Modal.Title>{mapTitleName()}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
@@ -197,14 +201,16 @@ const ModalNewGroup = (props) => {
                                     id="formHorizontalRadios1"
                                     onChange={e => setSelectTypeGroup(1)}
                                     defaultChecked={(isCreateProps) ? false : groupDetail.type == "normal"}
+                                    disabled={!isCreateProps}
                                 />
                                 <Form.Check
                                     type="radio"
-                                    label="กลุ่มที่ 1: ตรวจตามวิชาในเอกสาร"
+                                    label="กลุ่มที่ 2: ตรวจตามวิชาในเอกสาร"
                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios2"
                                     onChange={e => setSelectTypeGroup(2)}
                                     defaultChecked={(isCreateProps) ? false : groupDetail.type != "normal"}
+                                    disabled={!isCreateProps}
                                 />
                             </Col>
                         </Form.Group>
