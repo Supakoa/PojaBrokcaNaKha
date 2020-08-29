@@ -11,7 +11,7 @@ import qs from "qs";
 import { useTranslation } from "react-i18next";
 
 export default function ModalUser({ isCreatedProp, id }) {
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
     // init state
     const [_modalUser, setModalUser] = React.useState(false);
     const [_userData, setUserData] = React.useState({});
