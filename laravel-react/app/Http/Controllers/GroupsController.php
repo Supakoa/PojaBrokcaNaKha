@@ -92,19 +92,30 @@ class GroupsController extends Controller
 
     public function users(Group $group)
     {
-        return response()->json(['success' => $group->users], $this->successStatus);
+        $subjects = Subject::all();
+        $subjects_id = [];
+        $subjects = $subjects->filter(function ($subject, $key) use ($group) {
+            $users = $group->users();
+            return $users->wherePivot("subject_id", $subject->id)->count() == 0;
+        })->all();
+
+        foreach ($subjects as $subject) {
+            array_push($subjects_id, $subject->id);
+        }
+        return response()->json(['success' => $group->users, "subjects_id" => $subjects_id], $this->successStatus);
+
     }
 
     public function addUser(Request $request, Group $group)
     {
         if ($group->type == "normal") {
-            if ($group->users()->get()->contains("id",$request->input("user_id")))
-              return  response()->json("ซ้ำ", 406 );
+            if ($group->users()->get()->contains("id", $request->input("user_id")))
+                return response()->json("ซ้ำ", 406);
             $group->users()->attach($request->input("user_id"));
         } else {
-            if ($group->users()->where("user_id",$request->input("user_id"))
-                ->wherePivot("subject_id",$request->input("subject_id"))->count() > 0)
-                return  response()->json("ซ้ำ", 406 );
+            if ($group->users()->where("user_id", $request->input("user_id"))
+                    ->wherePivot("subject_id", $request->input("subject_id"))->count() > 0)
+                return response()->json("ซ้ำ", 406);
             $group->users()->attach($request->input("user_id"), ["subject_id" => $request->input("subject_id")]);
         }
 
