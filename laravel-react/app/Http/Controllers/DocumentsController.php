@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
-
 use App\Document;
-use App\User;
+use App\Form;
+use App\Http\Requests;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class DocumentsController extends Controller
@@ -30,6 +29,7 @@ class DocumentsController extends Controller
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -38,26 +38,26 @@ class DocumentsController extends Controller
             'form_id' => 'required',
             'data' => 'required'
         ]);
-
-        $request->max_state = 1;
+        $someArray = json_decode($request->get("data"), true);
+        $inputs = Collection::make($someArray['inputs']);
+        $subject_id = $inputs->where('type', 2)->first()['data'];
+        $form = Form::find($request->get('form_id'));
+        $directionForms = $form->groups;
+        $request->max_state = $form->all_state;
 
         $document = Document::create($request->all());
-
-        $approver = User::find(3);
-
-        $document->approver()->attach($approver, ["state" => 1]);
-
-        $approver = User::find(3);
-
-        $document->approver()->attach($approver, ["state" => 2]);
-
-        $approver = User::find(4);
-
-        $document->approver()->attach($approver, ["state" => 1]);
-
-        $approver = User::find(5);
-
-        $document->approver()->attach($approver, ["state" => 1]);
+        foreach ($directionForms as $state => $group) {
+            $approvers = $group->users();
+            if ($group->type == "subject") {
+                foreach ($approvers->wherePivot("subject_id", $subject_id)->get() as $index => $approver) {
+                    $document->approver()->attach($approver, ["state" => $state + 1]);
+                }
+            } else {
+                foreach ($approvers->get() as $index => $approver) {
+                    $document->approver()->attach($approver, ["state" => $state + 1]);
+                }
+            }
+        }
 
         return response()->json($document, 201);
     }
@@ -83,6 +83,7 @@ class DocumentsController extends Controller
      * @param int $id
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -92,6 +93,7 @@ class DocumentsController extends Controller
             'data' => 'required'
         ]);
         $document = Document::findOrFail($id);
+        $document->status = "pending";
         $document->update($request->all());
 
         return response()->json($document, 200);
@@ -131,7 +133,7 @@ class DocumentsController extends Controller
             $document->approver()->updateExistingPivot(auth()->user()->id, $request->all());
 
             if ($request->get("status") == "approved") {
-                $document->approver()->wherePivot("state",$document->state)->wherePivot("status","pending")->detach();
+                $document->approver()->wherePivot("state", $document->state)->wherePivot("status", "pending")->detach();
                 if ($document->state >= $document->max_state) {
                     $document->status = "approved";
                     $document->status = $request->get("status");
@@ -144,14 +146,14 @@ class DocumentsController extends Controller
                 $document->status = $request->get("status");
                 $document->note = $request->get("comment");
             } else {
-                $document->approver()->wherePivot("state",">=",$document->state)->wherePivot("status","pending")->detach();
+                $document->approver()->wherePivot("state", ">=", $document->state)->wherePivot("status", "pending")->detach();
                 $document->status = $request->get("status");
                 $document->note = $request->get("comment");
             }
             $document->save();
             return response()->json($document->approver, 200);
         } else {
-             return   response()->json("Document status is not pending", 400);
+            return response()->json("Document status is not pending", 400);
         }
     }
 }

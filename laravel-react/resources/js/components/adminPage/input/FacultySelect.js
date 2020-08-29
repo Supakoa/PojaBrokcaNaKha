@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 export default function FacultySelect({ defaultData, onSelectOption }) {
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
     const [faculty, setFaculty] = useState([]);
 
     // local state
