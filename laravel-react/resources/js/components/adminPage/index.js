@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import post2User from "../middleware/post2Redux/postToUser";
 
 export default function AdminPage() {
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
     const _user = useSelector(s => s.userState);
     const dispatch = useDispatch();
     let { path, url } = useRouteMatch();
@@ -52,7 +52,7 @@ export default function AdminPage() {
 
     return (
         <Row className="app w-100 m-0">
-            <Col md={1} lg={2} className="bg-secondary pr-0">
+            <Col md={1} lg={2} className="bg-secondary px-0">
                 <SideNav url={url} />
             </Col>
             <Col md={11} lg={10} className="p-0 w-100">

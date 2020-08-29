@@ -1,167 +1,61 @@
 import { Form, Col } from "react-bootstrap";
-import React, { useState } from "react";
-import Axios from "axios";
-import { useSelector, useDispatch } from 'react-redux'
-import { initUserForm, updateFormEditUserBySingleData } from "../../../redux/actions";
+import React from "react";
 
 // composent input
 import FacultySelect from "../input/FacultySelect";
 import MajorSelect from "../input/MajorSelect";
 
-export default function FormUser(props) {
-    // props
-    const { isCreatedProp, submitOnButton, id } = props;
-
-    // create state
-    // const [_error, setError] = React.useState();
-    const [validated, setValidated] = React.useState(false);
-    const [_state, setState] = React.useState({
-        id: "",
-        password: "",
-        c_password: "",
-        firstName: "",
-        lastName: "",
-        title: "",
-        role: "",
-        email: "",
-        phone: "",
-        major: ""
-    });
-
-    // redux
-    const redux_user = useSelector(state => state.formUser)
-    const dispatch = useDispatch()
-
-    const apiPath = `http://localhost:8000/api`
-    const userFormTemplate = {
-        email: "",
-        title: "",
-        first_name: "",
-        last_name: "",
-        telephone: "",
-        major_id: 0,
-        role_id: 0,
-        password: "",
-        c_password: "",
-        student_id: ""
-    }
-
-    const _hendleChange = e => {
-        const { value, name, maxLength } = e.target;
-        // console.log(e.target);
-        // console.log(value);
-
-        setState({
-            ..._state,
-            [name]: value
-        });
-    };
-    // const validateInput = () => {};
-
-    // const finallyOnSubmit = formData => {
-    //     console.log(formData);
-    // };
-
-    const initUser = async ( id ) => {
-        if (!isCreatedProp) {
-            await Axios.get(`${apiPath}/users/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
-                }
-            }).then(res => {
-                dispatch(initUserForm(res.data))
-            })
-        } else {
-            console.log('create user') // ไม่เข้าแน่ๆ
-        }
-    }
-
-    const addCreateUserComponet = () => {
-        if (isCreatedProp) {
-            return (
-                <>
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formUserpassword">
-                            <Form.Label>รหัสผ่าน</Form.Label>
-                            <Form.Control
-                                onChange={e => dispatch(updateFormEditUserBySingleData(`password`, e.target.value))}
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                // defaultValue={!isCreatedProp ? _state.password : ""}
-                            />
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formUserCpassword">
-                            <Form.Label>คอนเฟิร์ม รหัสผ่าน</Form.Label>
-                            <Form.Control
-                                onChange={e => dispatch(updateFormEditUserBySingleData(`confirmPassword`, e.target.value))}
-                                type="password"
-                                placeholder="Confirm Password"
-                                name="c_password"
-                                // defaultValue={!isCreatedProp ? _state.c_password : ""}
-                            />
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Group controlId="formUserStudentID">
-                        <Form.Label>รหัสนักศึกษา</Form.Label>
-                        <Form.Control
-                            // onChange={_hendleChange}
-                            onChange={e => dispatch(updateFormEditUserBySingleData(`studentId`, e.target.value))}
-                            type="text"
-                            name="studentId"
-                            placeholder="xxxxxxxxxxx"
-                            // defaultValue={!isCreatedProp ? _state.email : ""}
-                            defaultValue={redux_user.studentId}
-                        />
-                    </Form.Group>
-                </>
-            )
-        }
-    }
-
-    React.useEffect(() => {
-        // if (submitOnButton) {
-        //     console.log("yeah! you Click me");
-        //     const formData = {};
-        //     finallyOnSubmit();
-        // }
-        const abort = new AbortController();
-
-        // init when component is create
-        if (isCreatedProp) {
-            dispatch(initUserForm(userFormTemplate))
-        } else {
-            initUser(id)
-        }
-
-        return () => {
-            abort.abort();
-        };
-    }, []);
-
+export default function FormUser({ isCreatedProp, user, onChangeState }) {
+    console.log(user);
     return (
-        <Form
-            name="userForm"
-            noValidate
-            validated={validated}
-            onSubmit={submitOnButton}
-        >
+        <Form name="userForm">
             <Form.Group controlId="formUseremail">
                 <Form.Label>อีเมล</Form.Label>
                 <Form.Control
-                    // onChange={_hendleChange}
-                    onChange={e => dispatch(updateFormEditUserBySingleData(`email`, e.target.value))}
+                    onChange={onChangeState}
                     type="email"
                     name="email"
                     placeholder="name@example.com"
-                    disabled={!isCreatedProp}
-                    // defaultValue={!isCreatedProp ? _state.email : ""}
-                    defaultValue={redux_user.email}
+                    disabled={isCreatedProp}
+                    defaultValue={user.email}
                 />
             </Form.Group>
 
-            {addCreateUserComponet()}
+            <Form.Row hidden={isCreatedProp}>
+                <Form.Group as={Col} controlId="formUserpassword">
+                    <Form.Label>รหัสผ่าน</Form.Label>
+                    <Form.Control
+                        onChange={onChangeState}
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                    />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formUserCpassword">
+                    <Form.Label>คอนเฟิร์ม รหัสผ่าน</Form.Label>
+                    <Form.Control
+                        onChange={onChangeState}
+                        type="password"
+                        placeholder="Confirm Password"
+                        name="confirmPassword"
+                    />
+                </Form.Group>
+            </Form.Row>
+
+            <Form.Group
+                hidden={user.role_id !== 3 && isCreatedProp}
+                controlId="formUserStudentID"
+            >
+                <Form.Label>รหัสนักศึกษา</Form.Label>
+                <Form.Control
+                    onChange={onChangeState}
+                    type="text"
+                    name="studentId"
+                    placeholder="xxxxxxxxxxx"
+                    defaultValue={user.student_id ? user.student_id : ""}
+                />
+            </Form.Group>
 
             <Form.Row>
                 <Form.Group
@@ -173,13 +67,11 @@ export default function FormUser(props) {
                 >
                     <Form.Label>คำนำหน้า</Form.Label>
                     <Form.Control
-                        // onChange={_hendleChange}
-                        onChange={e => dispatch(updateFormEditUserBySingleData(`title`, e.target.value))}
+                        onChange={onChangeState}
                         type="text"
                         placeholder="คำนำหน้า"
                         name="title"
-                        // defaultValue={!isCreatedProp ? _state.title : ""}
-                        defaultValue={redux_user.title}
+                        defaultValue={user.title ? user.title : ""}
                     />
                 </Form.Group>
 
@@ -192,26 +84,28 @@ export default function FormUser(props) {
                 >
                     <Form.Label>ชื่อ</Form.Label>
                     <Form.Control
-                        // onChange={_hendleChange}
-                        onChange={e => dispatch(updateFormEditUserBySingleData(`firstName`, e.target.value))}
+                        onChange={onChangeState}
                         type="text"
                         placeholder="ชื่อ"
                         name="firstName"
-                        // defaultValue={!isCreatedProp ? _state.firstName : ""}
-                        defaultValue={redux_user.firstName}
+                        defaultValue={user.first_name ? user.first_name : ""}
                     />
                 </Form.Group>
 
-                <Form.Group controlId="formUserLastname" as={Col} sm={5} md={5} lg={5} >
+                <Form.Group
+                    controlId="formUserLastname"
+                    as={Col}
+                    sm={5}
+                    md={5}
+                    lg={5}
+                >
                     <Form.Label>นามสกุล</Form.Label>
                     <Form.Control
-                        // onChange={_hendleChange}
-                        onChange={e => dispatch(updateFormEditUserBySingleData(`lastName`, e.target.value))}
+                        onChange={onChangeState}
                         type="text"
                         placeholder="นามสกุล"
                         name="lastName"
-                        // defaultValue={!isCreatedProp ? _state.lastName : ""}
-                        defaultValue={redux_user.lastName}
+                        defaultValue={user.last_name ? user.last_name : ""}
                     />
                 </Form.Group>
             </Form.Row>
@@ -221,14 +115,12 @@ export default function FormUser(props) {
                     <Form.Label>เบอร์โทร</Form.Label>
 
                     <Form.Control
-                        // onChange={_hendleChange}
-                        onChange={e => dispatch(updateFormEditUserBySingleData(`phoneNumber`, e.target.value))}
+                        onChange={onChangeState}
                         type="text"
-                        name="phone"
+                        name="phoneNumber"
                         maxLength={11}
                         placeholder="+66 or 08, 09"
-                        // defaultValue={!isCreatedProp ? _state.phone : ""}
-                        defaultValue={redux_user.phoneNumber}
+                        defaultValue={user.telephone ? user.telephone : ""}
                     />
                 </Form.Group>
 
@@ -243,9 +135,8 @@ export default function FormUser(props) {
                     <Form.Control
                         as="select"
                         name="role"
-                        // onChange={_hendleChange}
-                        onChange={e => dispatch(updateFormEditUserBySingleData(`role`, e.target.value))}
-                        value={redux_user.role}
+                        onChange={onChangeState}
+                        value={user.role_id ? user.role_id : 0}
                     >
                         <option value={0}>เลือกประเภท</option>
                         <option value={1}>แอดดมิน</option>
@@ -255,35 +146,15 @@ export default function FormUser(props) {
                 </Form.Group>
             </Form.Row>
 
-            <Form.Row>
-                {/* <Form.Group as={Col} controlId="formUserSelectFac">
-                    <Form.Label>คณะ</Form.Label>
-
-                    <Form.Control
-                        as="select"
-                        name="faculty"
-                        onChange={_hendleChange}
-                    >
-                        <option value={0}>เลือกคณะ</option>
-                    </Form.Control>
-                </Form.Group> */}
-
-                <FacultySelect />
-
-                {/* <Form.Group as={Col} controlId="formUserSelectMajor" >
-                    <Form.Label>สาขา</Form.Label>
-
-                    <Form.Control
-                        as="select"
-                        name="major"
-                        onChange={_hendleChange}
-                        disabled={redux_selectFaculty.id != 0}
-                    >
-                        <option>เลือกสาขา</option>
-                    </Form.Control>
-                </Form.Group> */}
-
-                <MajorSelect />
+            <Form.Row hidden={user.role_id !== 3 && isCreatedProp}>
+                <FacultySelect
+                    defaultData={user.major ? user.major : ""}
+                    onSelectOption={onChangeState}
+                />
+                <MajorSelect
+                    defaultData={user.major ? user.major : ""}
+                    onSelectOption={onChangeState}
+                />
             </Form.Row>
         </Form>
     );

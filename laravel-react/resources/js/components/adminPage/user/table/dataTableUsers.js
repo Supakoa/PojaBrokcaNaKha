@@ -9,17 +9,15 @@ import { initShowUsers } from "../../../../redux/actions";
 export const dataTableUser = () => {
     // init state
     const [rows, setRows] = React.useState([]);
-    // const [users, setUsers] = React.useState(testData);
 
     // redux
-    const redux_showUsers = useSelector(state => state.showUsers)
-    const dispatch = useDispatch()
+    const redux_showUsers = useSelector(state => state.showUsers);
+    const dispatch = useDispatch();
 
     const fetchRowData = _data => {
         const _row = _data.map((res, idx) => {
-            // console.log(res);
             return {
-                action: ColumnAction(idx, res),
+                action: <ColumnAction key idx={idx} res={res} />,
                 id: idx + 1,
                 name: res.title + " " + res.first_name + " " + res.last_name,
                 role: userRole(res.role_id),
@@ -34,7 +32,8 @@ export const dataTableUser = () => {
     };
 
     const getUsers = async () => {
-        await axios.get("http://127.0.0.1:8000/api/users", {
+        await axios
+            .get("http://127.0.0.1:8000/api/users", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"
@@ -43,20 +42,16 @@ export const dataTableUser = () => {
             })
             .then(res => {
                 const { success } = res.data;
-                dispatch(initShowUsers(success))
-                // const _items = fetchRowData(success);
-                // setRows(_items);
-                // console.log(`items: `, success);
-                // return _items;
+                dispatch(initShowUsers(success));
             });
     };
 
     const initUsers = () => {
-        if (typeof redux_showUsers.data != 'undefined') {
+        if (!!redux_showUsers.data ) {
             const _items = fetchRowData(redux_showUsers.data);
             setRows(_items);
         }
-    }
+    };
 
     React.useEffect(() => {
         // mount
@@ -71,8 +66,8 @@ export const dataTableUser = () => {
     }, []);
 
     useEffect(() => {
-        initUsers()
-    }, [redux_showUsers])
+        initUsers();
+    }, [redux_showUsers]);
 
     return { columns, rows };
 };

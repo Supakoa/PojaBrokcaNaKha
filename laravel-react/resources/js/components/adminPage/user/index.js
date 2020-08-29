@@ -4,7 +4,7 @@ import TableUser from "./table";
 import ModalUser from "../modals/ModalUser";
 
 export default class User extends Component {
-    
+
 
     constructor(props) {
         super(props);
