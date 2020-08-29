@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Group;
+use App\Subject;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -80,9 +81,11 @@ class GroupsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Group $group)
     {
-        Group::destroy($id);
+
+        $group->users()->detach();
+        Group::destroy($group->id);
 
         return response()->json(null, 204);
     }

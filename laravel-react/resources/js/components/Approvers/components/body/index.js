@@ -29,7 +29,10 @@ export default function BodyApprover() {
     const [_sortBy, setSortBy] = React.useState("pending");
     const _optionSort = ["all", "pending", "approved", "rejected", "edited"];
     const [rows, setRows] = React.useState([]);
-
+    let channel = window.Echo.channel('channel-chat');
+    channel.listen('.event-chat-user-'+_userId, function(data) {
+       console.log(JSON.stringify(data));
+    });
     const _props = {
         token: token,
         id: _userId,

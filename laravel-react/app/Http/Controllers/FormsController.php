@@ -74,14 +74,13 @@ class FormsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param Form $form
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Form $form)
     {
-        Form::destroy($id);
-
+        $form->groups()->detach();
+        Form::destroy($form->id);
         return response()->json(null, 204);
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\MyEvent\ChatEcho;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -69,6 +70,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 });
 Route::post('password/email', 'ForgotPasswordController@forgot');
+Route::get('test/{text}',function ($text) {
+    event(new ChatEcho($text,3));
+    return $text;
+});
 
 
 
