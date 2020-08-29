@@ -11,7 +11,23 @@ export const InputNumber = props => {
     const [_state, setState] = React.useState(0);
     const [inputNumber, setInputNumber] = React.useState(false);
 
+    // redux
+
+    // local variable
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     const handleClick = () => {
+        // console.log('response', response)
+
         let tmp_groupStep = new Array()
         for (let i = 0; i < _state; i++) {
             if (groupSteps[i]) {
@@ -33,16 +49,7 @@ export const InputNumber = props => {
                 )}`
             }
         }).then(res => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
+
             if (res.status == 200) {
                 Toast.fire({
                     icon: 'success',

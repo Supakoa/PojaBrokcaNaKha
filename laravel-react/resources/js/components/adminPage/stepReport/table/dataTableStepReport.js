@@ -26,8 +26,9 @@ export default function dataTableStepReport() {
                 id: res.id,
                 name: res.th_name,
                 all_state: res.all_state,
-                // code: res.code,
-                action: <ColumsAction idx={idx} res={res} />
+                // code: res.code, 
+                // action: <ColumsAction idx={idx} res={res} />
+                action: ColumsAction(idx, res)
             };
             return _response;
         });

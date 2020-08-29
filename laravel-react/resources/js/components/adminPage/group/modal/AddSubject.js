@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { Button, Modal, Container, Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import Axios from 'axios'
 import { first } from 'lodash'
 
-const AddSubject = (props) => {
+const AddSubject = forwardRef((props, ref) => {
 
     // props
-    const { setModalHidden, group, groupUsers, setTable, table } = props
+    const { setModalHidden, group, groupUsers, setTable, table, resultSubjects, setResultSubjects } = props
 
     // local state
     const [showModalSubject, setShowModalSubject] = useState(false)
@@ -23,6 +23,16 @@ const AddSubject = (props) => {
     const redux_showApprovers = useSelector(state => state.showApprovers)
 
     // local variable
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
     // fuction
     const handleClose = () => {
@@ -76,7 +86,6 @@ const AddSubject = (props) => {
     }
 
     const sendDataToDB = async () => {
-        console.log('sendDataToDB')
         let sendData = new FormData()
         sendData.append('user_id', selectData.approver)
         sendData.append('subject_id', selectData.subject)
@@ -98,32 +107,25 @@ const AddSubject = (props) => {
                 tmp_selectSubject = tmp_selectSubject.find(filterItem => {
                     return filterItem.id == item.pivot.subject_id
                 })
-                // tmp_selectSubject = first(tmp_selectSubject)
 
                 return {
                     titleName: item.title,
                     firstName: item.first_name,
                     lastName: item.last_name,
                     userId: item.id,
-                    subject: tmp_selectSubject.th_name
+                    subject: tmp_selectSubject.id,
+                    subjectName: tmp_selectSubject.th_name
                 }
             })
+
+            let tmp_newResultSubjects = resultSubjects.filter(i => {
+                return i != selectData.subject
+            })
+            setResultSubjects(tmp_newResultSubjects)
 
             setTable({
                 ...table,
                 data: [...tmp_newUsers]
-            })
-
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 1500,
-                // timerProgressBar: true,
-                onOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
             })
 
             if (res.status == 200) {
@@ -139,17 +141,6 @@ const AddSubject = (props) => {
             }
         }).catch(error => {
             if (error.response) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    onOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                  })
-
                 if (error.response.status == 406) {
                     Toast.fire({
                         icon: 'warning',
@@ -163,6 +154,17 @@ const AddSubject = (props) => {
         handleCloseApproverEvent()
     }
 
+    const mapSubjectIdToName = (subjectId) => {
+        if (subjectId > 0) {
+            let showSubject = redux_showSubjects.data.find(item => {
+                return item.id == subjectId
+            })
+            return showSubject.th_name
+        } else {
+            return ""
+        }
+    }
+
     // useEffect
     useEffect(() => {
         checkShowEvent()
@@ -171,6 +173,21 @@ const AddSubject = (props) => {
     useEffect(() => {
         checkShowCloseApproveEvent()
     }, [showModalApprover])
+
+    // useImperativeHandle
+    useImperativeHandle(
+        ref,
+        () => ({
+            sendSubjectData(item) {
+                setSelectData({
+                    approver: 0,
+                    subject: item.id
+                })
+                setModalHidden(true)
+                setShowModalApprover(true)
+            },
+        }),
+    )
 
     // return component
     const MapSubjectOption = () => {
@@ -187,15 +204,16 @@ const AddSubject = (props) => {
         let tmp_filterData = new Array()
         tmp_filterData = [...redux_showApprovers.data]
 
+        console.log('groupUsers.length > 0', groupUsers.length > 0)
+
         if (groupUsers.length > 0) {
             let tmp_selectSubjectName = redux_showSubjects.data.find(i => {
                 return i.id == selectData.subject
             })
 
-            let tmp_filterSelectApprover = new Array()
-            tmp_filterSelectApprover = [...groupUsers]
+            let tmp_filterSelectApprover = [...groupUsers]
             tmp_filterSelectApprover = tmp_filterSelectApprover.filter(j => {
-                return j.subject == tmp_selectSubjectName.th_name
+                return j.subject == tmp_selectSubjectName.id
             })
 
             tmp_filterSelectApprover.forEach(k => {
@@ -252,7 +270,7 @@ const AddSubject = (props) => {
                 backdrop="static"
                 centered
             >
-                <Modal.Header>เพิ่มผู้ตรวจ</Modal.Header>
+                <Modal.Header>{`เพิ่มผู้ตรวจ [ วิชา: ${mapSubjectIdToName(selectData.subject)} ]`}</Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Form.Group>
@@ -272,6 +290,6 @@ const AddSubject = (props) => {
             </Modal>
         </>
     )
-}
+})
 
 export default AddSubject

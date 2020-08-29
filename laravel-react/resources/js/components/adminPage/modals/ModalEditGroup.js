@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal, Form, Container, Col, Row, Card, Table, Badge } from "react-bootstrap";
+import React, { useState, useEffect, useRef } from "react";
+import { Button, Modal, Form, Container, Col, Row, Card, Table, Badge, ListGroup } from "react-bootstrap";
 import {useTranslation} from 'react-i18next';
 import MaterialTable from "material-table";
 import AddUser from "../group/modal/AddUser";
@@ -10,6 +10,7 @@ import { first } from "lodash";
 import ModalNewGroup from "../group/modal/ModalNewGroup";
 import Swal from "sweetalert2";
 import AddSubject from "../group/modal/AddSubject";
+import { Chip } from "@material-ui/core";
 
 const ModalEditGroup = (props) => {
     // props
@@ -39,11 +40,24 @@ const ModalEditGroup = (props) => {
         eng_name: "",
         type: ""
     })
+    const [resultSubjects, setResultSubjects] = useState(null)
 
     // redux
     const redux_showSubjects = useSelector(state => state.showSubjects)
 
     //local variable
+    const refAddSubject = useRef()
+    const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            // timerProgressBar: true,
+            onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
     // function
     const handleClose = () => setShow(false);
@@ -82,7 +96,7 @@ const ModalEditGroup = (props) => {
             setTable({
                 ...table,
                 columns: [
-                    { title: 'วิชา', field: 'subject' },
+                    { title: 'วิชา', field: 'subjectName' },
                     {
                         title: 'ID',
                         field: 'userId',
@@ -102,6 +116,7 @@ const ModalEditGroup = (props) => {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
             }
         }).then(res => {
+            setResultSubjects(res.data.subjects_id)
             setShowGroupUsers(res.data.success)
         })
     }
@@ -114,12 +129,9 @@ const ModalEditGroup = (props) => {
             tmp_showGroupUsers = tmp_showGroupUsers.map(item => {
                 let tmp_selectSubject = new Array()
                 tmp_selectSubject = [...redux_showSubjects.data]
-                tmp_selectSubject = tmp_selectSubject.filter(filterItem => {
+                tmp_selectSubject = tmp_selectSubject.find(filterItem => {
                     return filterItem.id == item.pivot.subject_id
                 })
-                tmp_selectSubject = first(tmp_selectSubject)
-
-                console.log('item', item)
 
                 if (typeof tmp_selectSubject == "undefined") {
                     return {
@@ -127,6 +139,8 @@ const ModalEditGroup = (props) => {
                         firstName: item.first_name,
                         lastName: item.last_name,
                         userId: item.id,
+                        subject: null,
+                        subjectName: null,
                     }
                 } else {
                     return {
@@ -134,7 +148,8 @@ const ModalEditGroup = (props) => {
                         firstName: item.first_name,
                         lastName: item.last_name,
                         userId: item.id,
-                        subject: tmp_selectSubject.th_name
+                        subject: tmp_selectSubject.id,
+                        subjectName: tmp_selectSubject.th_name,
                     }
                 }
             })
@@ -154,12 +169,6 @@ const ModalEditGroup = (props) => {
             return i.tableData.editing == "delete"
         })
 
-        // search delete subject od this data
-        let tmp_subjectId = redux_showSubjects.data.find(i => {
-            return i.th_name == tmp_deleteVal.subject
-        })
-        tmp_subjectId = tmp_subjectId.id
-
         if (groupDetail.type == "normal") {
             await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
                 data: {
@@ -169,17 +178,6 @@ const ModalEditGroup = (props) => {
                     Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
                 }
             }).then(res => {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    // timerProgressBar: true,
-                    onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
 
                 if (res.status == 200) {
                     Toast.fire({
@@ -194,6 +192,13 @@ const ModalEditGroup = (props) => {
                 }
             })
         } else {
+            // search delete subject od this data
+            let tmp_subjectId = redux_showSubjects.data.find(i => {
+                return i.id == tmp_deleteVal.subject
+            })
+
+            tmp_subjectId = tmp_subjectId.id
+
             await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
                 data: {
                     user_id: tmp_deleteVal.userId,
@@ -203,17 +208,19 @@ const ModalEditGroup = (props) => {
                     Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
                 }
             }).then(res => {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    // timerProgressBar: true,
-                    onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
+                let tmp_resultSubject = resultSubjects.find(i => {
+                    return tmp_deleteVal.subject == i
                 })
+                let tmp_resultGroupUsers = table.data.filter(j => {
+                    return j.userId != tmp_deleteVal.userId
+                })
+                tmp_resultGroupUsers = tmp_resultGroupUsers.filter(k => {
+                    return k.subject == tmp_subjectId
+                })
+                if (!tmp_resultSubject && tmp_resultGroupUsers.length == 0) {
+                    tmp_resultSubject = [...resultSubjects, tmp_deleteVal.subject]
+                    setResultSubjects(tmp_resultSubject)
+                }
 
                 if (res.status == 200) {
                     Toast.fire({
@@ -228,6 +235,10 @@ const ModalEditGroup = (props) => {
                 }
             })
         }
+    }
+
+    const sendToSelectUserComponent = (item) => {
+        refAddSubject.current.sendSubjectData(item)
     }
 
     // useEffect
@@ -257,8 +268,40 @@ const ModalEditGroup = (props) => {
             )
         } else {
             return (
-                <AddSubject setTable={setTable} table={table} groupUsers={table.data} group={response} setModalHidden={setModalHidden} />
+                <AddSubject resultSubjects={resultSubjects} setResultSubjects={setResultSubjects} ref={refAddSubject} setTable={setTable} table={table} groupUsers={table.data} group={response} setModalHidden={setModalHidden} />
             )
+        }
+    }
+
+    const ResultNotUseSubject = () => {
+        let tmp_resultSubject = redux_showSubjects.data
+
+        if (resultSubjects && response.type == "subject") {
+            tmp_resultSubject = resultSubjects.map(i => {
+                return redux_showSubjects.data.find(j => {
+                    return i == j.id
+                })
+            })
+        }
+
+        const mapToComponent = () => {
+            return tmp_resultSubject.map((item, idx) => {
+                return (<Chip onClick={() => sendToSelectUserComponent(item)} className="pt-1 mr-2 mt-2" clickable key={idx} label={item.th_name} />)
+            })
+        }
+
+        if (response.type != "normal") {
+            return (
+                <Card className="mt-3 pt-1 pb-2">
+                    <Container className="mb-1">วิชาที่ยังไม่ได้เลือก: {tmp_resultSubject.length} วิชา</Container>
+                        <hr className="mt-0 mb-0" />
+                    <Container className="ml-2 mr-2 p-0">
+                        {mapToComponent()}
+                    </Container>
+                </Card>
+            )
+        } else {
+            return (<></>)
         }
     }
 
@@ -359,6 +402,11 @@ const ModalEditGroup = (props) => {
                                     {returnByGroupType()}
                                     <ModalNewGroup groupDetail={groupDetail} setgroupDetail={setgroupDetail} setModalHidden={setModalHidden} res={response} isCreateProps={false} />
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="pl-0 pr-0">
+                                <ResultNotUseSubject />
                             </Col>
                         </Row>
                     </Container>
