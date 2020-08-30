@@ -3,7 +3,6 @@ import { Row, Col, Alert } from "react-bootstrap";
 
 const BoxMessage = props => {
     const [_chatBox, setChatBox] = React.useState([]);
-    // console.log(textMessage);
     const checkRole = _props => {
         const { textMessage, name } = _props;
         if (name !== undefined) {
@@ -34,27 +33,12 @@ const BoxMessage = props => {
         };
     }, []);
 
-    const _sender = { span: 8, offset: 4 };
-    const _receiver = 8;
     return (
         <Row>
-            <Col
-            // xs={_position ? _sender : _receiver}
-            // sm={_position ? _sender : _receiver}
-            // md={_position ? _sender : _receiver}
-            // lg={_position ? _sender : _receiver}
-            // md={_receiver}
-            >
-                <Alert
-                    className="shadow"
-                    // variant={_position ? "info" : "light"}
-                    variant="light"
-                >
-                    {/* <p>{name !== undefined ? textMessage : textMessage}</p> */}
+            <Col lg={6} md={6} sm={12}>
+                <Alert className="shadow" variant="light">
                     <hr />
-                    <div className="d-flex justify-content-end p-0">
-                        {/* {name === undefined ? "admin" : name} */}
-                    </div>
+                    <div className="d-flex justify-content-end p-0"></div>
                 </Alert>
             </Col>
         </Row>

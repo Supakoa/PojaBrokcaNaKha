@@ -1,11 +1,10 @@
 import React from "react";
-import { Form, Col, Button } from "react-bootstrap";
-import {useTranslation} from 'react-i18next';
-
+import { Button, InputGroup } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const FormSend = props => {
     const [_message, setMessage] = React.useState({});
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation();
     const handleChange = e => {
         const value = e.target.value;
         console.log(value);
@@ -25,22 +24,20 @@ const FormSend = props => {
     };
 
     return (
-        <Form>
-            <Form.Row>
-                <Col xs={11} sm={11} ms={11} lg={11}>
-                    <Form.Control
-                        name="textMessage"
-                        placeholder={t('menu.message')}
-                        onChange={handleChange}
-                    />
-                </Col>
-                <Col xs={1} sm={1} ms={1} lg={1} className="p-0">
-                    <Button className="btn-block" onClick={onClickHandle}>
-                        <i className="far fa-paper-plane"></i>
-                    </Button>
-                </Col>
-            </Form.Row>
-        </Form>
+        <InputGroup className="mb-3">
+            <FormControl
+                name="textMessage"
+                placeholder={t("menu.message")}
+                onChange={handleChange}
+                aria-label="textMessage"
+                aria-describedby="basic-addon2"
+            />
+            <InputGroup.Append>
+                <Button variant="outline-secondary" onClick={onClickHandle}>
+                    <i className="far fa-paper-plane"></i>
+                </Button>
+            </InputGroup.Append>
+        </InputGroup>
     );
 };
 
