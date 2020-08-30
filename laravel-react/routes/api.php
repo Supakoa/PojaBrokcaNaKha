@@ -72,6 +72,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 });
 Route::post('password/email', 'ForgotPasswordController@forgot');
+Route::post('password/reset', 'ForgotPasswordController@reset');
 Route::get('test/{id}/{text}',function ($id,$text) {
     event(new ChatEchoToAdmin($text, $id, 0,));
     return $text;
