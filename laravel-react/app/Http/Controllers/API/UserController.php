@@ -121,9 +121,9 @@ class UserController extends Controller
                 break;
         }
         foreach ($documents as $index => $document) {
-            $document->approver =   $document->approver()->wherePivot('state',"<=",$document->state)->get();
+            $document->approver =   $document->approver()->wherePivot('state',"<",$document->state)->get();
         }
-        return response()->json(['success' => $documents], $this->successStatus);
+        return response()->json(['success' => array_values($documents)], $this->successStatus);
 
     }
 

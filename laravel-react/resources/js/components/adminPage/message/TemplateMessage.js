@@ -2,12 +2,12 @@ import React from "react";
 import { Card, Row, Col, Tab, ListGroup, Alert } from "react-bootstrap";
 import BoxMessage from "./BoxMessage";
 import FormSend from "./FormSend";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function TemplateMessage({ data }) {
     const [_list, setList] = React.useState([]);
     const [_text, setText] = React.useState([]);
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation();
 
     const fetchMessages = _data => {
         _data.map(item => {
@@ -24,13 +24,11 @@ export default function TemplateMessage({ data }) {
         };
     }, []);
 
-    console.log(_text);
-
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">
             <Row>
                 <Col xs={12} sm={12} md={4} lg={4} className="border-right">
-                    <p>{t('sender')}</p>
+                    <p>{t("sender")}</p>
                     <hr />
                     <ListGroup variant="flush" className="rounded">
                         {_list !== []
@@ -50,7 +48,7 @@ export default function TemplateMessage({ data }) {
                     </ListGroup>
                 </Col>
                 <Col xs={12} sm={12} md={8} lg={8}>
-                    <p>{t('menu.message')}</p>
+                    <p>{t("menu.message")}</p>
                     <hr />
                     <Tab.Content>
                         {_list.map((item, idx) => {
@@ -93,7 +91,7 @@ export default function TemplateMessage({ data }) {
                         })}
                         <Tab.Pane eventKey="#default" className="text-center">
                             <Alert variant="info">
-                                {t('selectToShowMessage')}
+                                {t("selectToShowMessage")}
                             </Alert>
                         </Tab.Pane>
                     </Tab.Content>

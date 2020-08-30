@@ -31,8 +31,6 @@ export default function FacultySelect({ defaultData, onSelectOption }) {
         }
     });
 
-    console.log(faculty);
-
     return (
         <Form.Group as={Col} controlId="formGroupFacultySelect">
             <Form.Label>{t("faculty.index")}</Form.Label>
