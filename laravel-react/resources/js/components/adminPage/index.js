@@ -12,7 +12,7 @@ import Home from "./home";
 import Report from "./report";
 import User from "./user";
 import News from "./news";
-import Messagws from "./message";
+import Messages from "./message";
 import Group from "./group";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -63,7 +63,7 @@ export default function AdminPage() {
                             <Home />
                         </Route>
                         <Route path={`${path}/inbox`}>
-                            <Messagws t={t} />
+                            <Messages t={t} />
                         </Route>
                         <Route path={`${path}/report`}>
                             <Report t={t} />

@@ -59,4 +59,8 @@ class User extends Authenticatable
             ->withPivot("subject_id")->withTimestamps();
     }
 
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
 }

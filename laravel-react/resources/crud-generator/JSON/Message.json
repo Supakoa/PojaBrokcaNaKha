@@ -1,0 +1,43 @@
+{
+    "fields": [
+        {
+            "name": "user_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "admin_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "message",
+            "type": "text"
+        },
+        {
+            "name": "is_user",
+            "type": "boolean"
+        },
+        {
+            "name": "read",
+            "type": "boolean"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users"
+        },
+        {
+            "column": "admin_id",
+            "references": "id",
+            "on": "users"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "beLongTo",
+            "class": "App\\User"
+        }
+    ]
+}

@@ -71,9 +71,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 });
 Route::post('password/email', 'ForgotPasswordController@forgot');
 Route::get('test/{text}',function ($text) {
-    event(new ChatEcho($text,3));
+    event(new ChatEcho($text, 3, 0));
     return $text;
 });
 
 
 
+
+Route::resource('messages', 'MessagesController', ['except' => ['create', 'edit']]);
