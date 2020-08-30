@@ -22,7 +22,7 @@ export function StepAdd(props) {
 
 export function ModalStepReport(props) {
     // prop
-    const { response } = props;
+    const { response, step } = props;
 
     // state
     const [modalShow, setModalShow] = React.useState(false);
@@ -31,6 +31,7 @@ export function ModalStepReport(props) {
 
     // redux
     const redux_chipGroup = useSelector(state => state.chipGroup)
+    // FIXME: not to use now
     const redux_showForms = useSelector(state => state.showForm)
     const dispatch = useDispatch()
 
@@ -47,25 +48,17 @@ export function ModalStepReport(props) {
         setModalShow(false)
     }
 
-    const sendDataToDB = () => {
-        console.log('sendDataToDB')
-        console.log('redux_chipGroup', redux_chipGroup)
-    }
+    // FIXME: not to use
+    // const sendDataToDB = () => {
+    //     console.log('sendDataToDB')
+    //     console.log('redux_chipGroup', redux_chipGroup)
+    // }
 
-    const initFormGroupStep = async () => {
+    const initGroupStep = async () => {
         let tmp_chipGroupVal = new Array()
-
-        for (let i = 0; i < response.all_state; i++) {
-            Axios.get(`http://localhost:8000/api/forms/${response.id}/groups/${(i + 1)}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "_authLocal"
-                    )}`
-                }
-            }).then(res => {
-                tmp_chipGroupVal.push(res.data.success)
-            })
-        }
+        redux_showForms.data.map(i => {
+            tmp_chipGroupVal.push(i.groups)
+        })
 
         setGroupSteps(tmp_chipGroupVal)
     }
@@ -78,7 +71,7 @@ export function ModalStepReport(props) {
 
     useEffect(() => {
         initState()
-        initFormGroupStep()
+        initGroupStep()
         initNumberStep()
     }, [])
 
@@ -97,9 +90,7 @@ export function ModalStepReport(props) {
                 name="btnEdit"
                 className="text-light"
                 onClick={() => setModalShow(true)}
-            >
-                แก้ไข
-            </Button>
+            >{"ตั้งค่าขั้นตอนเอกสาร"}</Button>
 
             {/* hidden modal :: why it render? */}
             <Modal
@@ -134,7 +125,9 @@ export function ModalStepReport(props) {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <StepColors setModalShow={setModalShow} setGroupSteps={setGroupSteps} groupSteps={groupSteps} response={response} numberStep={_stepColors} />
+                            <Container>
+                                <StepColors step={step} setModalShow={setModalShow} setGroupSteps={setGroupSteps} groupSteps={groupSteps} response={response} numberStep={_stepColors} />
+                            </Container>
                         </Card.Body>
                         <div className="text-center align-middle">
                             <InputNumber response={response} setGroupSteps={setGroupSteps} groupSteps={groupSteps} setColors={setStepColors} />

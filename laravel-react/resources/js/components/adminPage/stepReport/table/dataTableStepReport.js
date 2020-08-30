@@ -4,6 +4,7 @@ import { columns } from "./columns";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { showGroupAction, showFormsAction } from "../../../../redux/actions";
+import Swal from "sweetalert2";
 
 export default function dataTableStepReport() {
     // props
@@ -13,11 +14,21 @@ export default function dataTableStepReport() {
     // const [showForms, setShowForms] = useState(null)
 
     // redux
-    const redux_showForms = useSelector(state => state.showForm);
+    const redux_showForms = useSelector(state => state.showForm); // not to use now
     const dispatch = useDispatch();
 
     // local variable
     const pathGetForms = `http://localhost:8000/api/forms`;
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: 'top-end',
+    //     showConfirmButton: false,
+    //     timer: 2000,
+    //     onOpen: (toast) => {
+    //       toast.addEventListener('mouseenter', Swal.stopTimer)
+    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //     }
+    // })
 
     // function
     const fetchRowData = _rows => {
@@ -26,7 +37,7 @@ export default function dataTableStepReport() {
                 id: res.id,
                 name: res.th_name,
                 all_state: res.all_state,
-                // code: res.code, 
+                // code: res.code,
                 // action: <ColumsAction idx={idx} res={res} />
                 action: ColumsAction(idx, res)
             };
@@ -62,6 +73,7 @@ export default function dataTableStepReport() {
     // useEffect
     React.useEffect(() => {
         const abort = new AbortController();
+
         initShowStepReports({ signal: abort.signal });
         initShowGroupsRedux();
 

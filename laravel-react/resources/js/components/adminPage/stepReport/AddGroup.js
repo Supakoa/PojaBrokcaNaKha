@@ -61,6 +61,8 @@ export const AddGroup = (props) => {
             }
         }).then(res => {
 
+            console.log('res', res)
+
             let tmp_groupStep = groupSteps
             tmp_groupStep[step] = res.data
             setGroupSteps(tmp_groupStep)
@@ -118,7 +120,7 @@ export const AddGroup = (props) => {
         })
 
         return filterGroupOption.map((item, idx) => {
-            return <option key={idx + 1} value={item.id} >{`${item.id}: ${item.th_name}`}</option>
+            return <option key={idx + 1} value={item.id} >{`[ ${item.id}: ${item.type} ] ${item.th_name}`}</option>
         })
     }
 
