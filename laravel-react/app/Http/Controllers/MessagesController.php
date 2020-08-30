@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Message;
-use App\MyEvent\ChatEcho;
+use App\MyEvent\ChatEchoToAdmin;
+use App\MyEvent\ChatEchoToUser;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,16 +39,33 @@ class MessagesController extends Controller
     public function store(Request $request)
     {
 //        return auth()->user()->id;
-        $this->validate($request, [
-            'user_id' => 'required',
-            'message' => 'required'
-        ]);
-        $user_id = $request->get("user_id");
-        if (auth()->user()->role_id == 1)
-            $request['admin_id'] = auth()->user()->id;
+
+        $is_admin = auth()->user()->role_id == 1;
+
+        if ($is_admin){
+            $this->validate($request, [
+                'user_id' => 'required',
+                'message' => 'required'
+            ]);
+            $user_id = $request->get("user_id");
+            $request['admin_id'] = auth()->id();
+        }else{
+            $this->validate($request, [
+                'message' => 'required'
+            ]);
+            $user_id = auth()->id();
+            $request['user_id'] = $user_id;
+        }
+
         $message = Message::create($request->all());
-        $count_messages = Message::query()->where("user_id",$user_id)->count();
-        event(new ChatEcho($request->get("message"), $user_id, $count_messages,$message->admin_id));
+        $count_messages = Message::query()->where("user_id", $user_id)->count();
+        if ($is_admin) {
+           $count_unread =  Message::query()->where("user_id", $user_id)->whereNotNull("admin_id")->where("read",0)->count();
+            event(new ChatEchoToUser($request->get("message"), $user_id, $count_messages, $count_unread));
+        } else {
+            $count_unread =  Message::query()->where("user_id", $user_id)->whereNull("admin_id")->where("read",0)->count();
+            event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
+        }
         return response()->json($message, 201);
     }
 
@@ -96,9 +114,9 @@ class MessagesController extends Controller
         return response()->json(null, 204);
     }
 
-    public function read(Request $request){
-
-
+    public function read(Request $request)
+    {
+        
     }
 
 

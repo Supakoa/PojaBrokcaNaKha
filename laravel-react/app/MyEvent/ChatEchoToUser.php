@@ -7,31 +7,31 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ChatEcho implements ShouldBroadcast
+class ChatEchoToUser implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
 
-    public $user_id;
+    private $user_id;
 
-    public $count;
+    public $count_messages;
 
-    public $admin_id;
+    public $count_messages_unread;
 
     /**
-     * ChatEcho constructor.
+     * ChatEchoToUser constructor.
      * @param $message
      * @param $user_id
-     * @param $count
-     * @param $admin_id
+     * @param $count_messages
+     * @param $count_messages_unread
      */
-    public function __construct($message, $user_id, $count, $admin_id)
+    public function __construct($message, $user_id, $count_messages, $count_messages_unread)
     {
         $this->message = $message;
         $this->user_id = $user_id;
-        $this->count = $count;
-        $this->admin_id = $admin_id;
+        $this->count_messages = $count_messages;
+        $this->count_messages_unread = $count_messages_unread;
     }
 
 

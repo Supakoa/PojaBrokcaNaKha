@@ -1,4 +1,4 @@
-const showSubjectsReducer = (state = [], action) => {
+const showSubjectsReducer = (state = {"data":[]}, action) => {
     switch (action.type) {
         case "INIT_SHOW_SUBJEECTS":
             return {
