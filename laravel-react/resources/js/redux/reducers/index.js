@@ -22,6 +22,14 @@ import showSubjectsReducer from "./showSubjects";
 import allUsersReducer from "./allUsres";
 import showFormsReducer from "./showForms";
 
+const rootReducer = (state, action) => {
+    if (action.type === "DESTROY") {
+        state = undefined;
+    }
+
+    return allReducers(state, action);
+};
+
 const allReducers = combineReducers({
     isLogged: loggerReducer,
     userState: userReducer,
@@ -43,7 +51,7 @@ const allReducers = combineReducers({
     showApprovers: showApproversReducer,
     showSubjects: showSubjectsReducer,
     allUsers: allUsersReducer,
-    showForm: showFormsReducer,
+    showForm: showFormsReducer
 });
 
-export default allReducers;
+export default rootReducer;

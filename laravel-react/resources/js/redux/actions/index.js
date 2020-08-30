@@ -186,5 +186,5 @@ export const showFormsAction = (action, data) => {
     return {
         type: action,
         data: data
-    }
-}
+    };
+};

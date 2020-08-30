@@ -156,7 +156,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                     return filterItem.id == item.pivot.subject_id;
                 });
 
-                if (typeof tmp_selectSubject == "undefined") {
+                if (typeof tmp_selectSubject) {
                     return {
                         titleName: item.title,
                         firstName: item.first_name,
@@ -192,15 +192,20 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
         });
 
         if (groupDetail.type == "normal") {
-            await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
-                data: {
-                    user_id: tmp_deleteVal.userId,
-                    subject_id: 0,
-                },
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
+            await Axios.delete(
+                `http://localhost:8000/api/groups/${response.id}/users`,
+                {
+                    data: {
+                        user_id: tmp_deleteVal.userId,
+                        subject_id: 0
+                    },
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "_authLocal"
+                        )}`
+                    }
                 }
-            }).then(res => {
+            ).then(res => {
                 if (res.status == 200) {
                     Toast.fire({
                         icon: "success",
@@ -291,6 +296,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
         };
     }, [response]);
 
+    console.log("showGroupUsers", showGroupUsers);
     useEffect(() => {
         updateShowUsersTable();
     }, [showGroupUsers]);

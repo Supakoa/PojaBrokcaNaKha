@@ -35,6 +35,8 @@ const ShowDetail = ({ setRowsToInit }) => {
         }
     };
 
+    console.log(_detail);
+
     React.useEffect(() => {
         const abort = new AbortController();
 

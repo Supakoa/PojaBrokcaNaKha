@@ -9,25 +9,25 @@ export const columns = t => {
         {
             label: t("students.table.columns.status"),
             field: "status_badge",
-            sort: "desc",
+            sort: "asc",
             width: 120
         },
         {
             label: t("students.table.columns.form"),
             field: "form_name",
-            sort: "asc",
+            sort: "desc",
             width: 320
         },
         {
             label: t("students.table.columns.create"),
             field: "created_at_converted",
-            sort: "asc",
+            sort: "desc",
             width: 200
         },
         {
             label: t("students.table.columns.edit"),
             field: "updated_at_converted",
-            sort: "asc",
+            sort: "desc",
             width: 200
         },
         {

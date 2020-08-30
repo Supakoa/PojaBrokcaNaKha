@@ -16,7 +16,7 @@ export default function ReportTable() {
     const { i18n, t } = useTranslation();
     const [rows, setRows] = React.useState([]);
     const [_filValid, setFilValid] = React.useState(false);
-    const [_sortBy, setSortBy] = React.useState("pending");
+    const [_sortBy, setSortBy] = React.useState("all");
     const _th = i18n.language === "th";
     const _optionSort = [
         "all",
