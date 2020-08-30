@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
-
 use App\Form;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class FormsController extends Controller
 {
@@ -16,11 +14,15 @@ class FormsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(Request $request)
     {
         $forms = Form::all();
+        if (auth()->user()->role_id == 1)
+            foreach ($forms as $form) {
+                $form->groups;
+            }
 
         return $forms;
     }
@@ -30,7 +32,7 @@ class FormsController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -45,7 +47,7 @@ class FormsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -60,14 +62,12 @@ class FormsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Form $form)
     {
 
-        $form = Form::findOrFail($id);
         $form->update($request->all());
-
         return response()->json($form, 200);
     }
 
@@ -75,7 +75,7 @@ class FormsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Form $form
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Form $form)
     {
@@ -94,19 +94,22 @@ class FormsController extends Controller
         return response()->json(['success' => $form->groups], $this->successStatus);
     }
 
-    public function groupsByState(Form $form,int $state)
+    public function groupsByState(Form $form, int $state)
     {
-        return response()->json(['success' => $form->groups()->wherePivot("state",$state)->get()], $this->successStatus);
+        return response()->json(['success' => $form->groups()->wherePivot("state", $state)->get()], $this->successStatus);
     }
 
-    public function addGroup(Form $form,Request $request){
-        $groups = $form->groups()->where("group_id",$request->input("group_id"));
+    public function addGroup(Form $form, Request $request)
+    {
+        $groups = $form->groups()->where("group_id", $request->input("group_id"));
         if ($groups->count() > 0)
-            return  response()->json("ซ้ำ", 406 );
+            return response()->json("ซ้ำ", 406);
         $form->groups()->attach($request->input("group_id"), ["state" => $request->input("state")]);
         return $form->groups;
     }
-    public function deleteGroup(Form $form,Request $request){
+
+    public function deleteGroup(Form $form, Request $request)
+    {
         $form->groups()->detach($request->input("group_id"));
         return $form->groups;
     }
