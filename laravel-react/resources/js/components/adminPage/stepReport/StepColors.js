@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 export const StepColors = props => {
     // props
-    const { numberStep, setModalShow, response, groupSteps, setGroupSteps } = props;
+    const { numberStep, setModalShow, response, groupSteps, setGroupSteps, step } = props;
 
     // local state
     const [groupUserSteps, setGroupUserSteps] = useState(null)
@@ -22,6 +22,16 @@ export const StepColors = props => {
     const dispatch = useDispatch();
 
     // local variable
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
     // function
     const initState = () => {
@@ -70,9 +80,6 @@ export const StepColors = props => {
     }
 
     const handleClickGroup = (item) => {
-        console.log('handleClickGroup')
-        console.log('item', item)
-
         Swal.fire({
             title: 'ยืนยันการลบ?',
             text: `คุณต้องการที่จะลบข้อมูล [${item.id}: ${item.th_name}] หรือไม่!`,
@@ -94,16 +101,6 @@ export const StepColors = props => {
                         )}`
                     }
                 }).then(res => {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 2000,
-                        onOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
 
                     let tmp_newGroupSteps = groupSteps
                     tmp_newGroupSteps[item.pivot.state - 1] = res.data
@@ -129,11 +126,11 @@ export const StepColors = props => {
     React.useEffect(() => {
         initState();
         initGroupUserSteps()
-    }, [numberStep]);
+    }, [numberStep, groupSteps]);
 
     // component with condition
     // FIXME: not to use now
-    const returnStepComponent = index => {
+    const returnStepComponent = (index) => {
         let selectComponent;
         switch (index + 1) {
             case 1:
@@ -177,9 +174,11 @@ export const StepColors = props => {
         }
     };
 
-    const MapStepComponent = (index) => {
-        if (groupSteps[index.index]) {
-            return groupSteps[index.index].map((item, idx) => {
+    const MapStepComponent = (props) => {
+        const { thisStep } = props
+
+        if (thisStep) {
+            return thisStep.map((item, idx) => {
                 return (
                     <Button onClick={() => handleClickGroup(item)} className="m-1" key={idx} variant={(item.type == "normal" ? "info" : "warning")}>
                         <Badge pill variant="light">{`${item.id}`}</Badge> {`${item.th_name}`}
@@ -191,20 +190,20 @@ export const StepColors = props => {
         }
     }
 
-    const rowSteps = number => {
+    const rowSteps = (number) => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
         const _num = Number(number);
 
-        const row = _colorSet.map((item, index) => {
+        return groupSteps[step].map((item, index) => {
             if (index + 1 <= _num) {
                 return (
-                    <Container key={index.toString()}>
+                    <div key={index}>
                         <Row className="mb-2">
                             <Col xs={12} md={10}>
-                                <Alert variant={item} className="p-2 mb-0">
+                                <Alert variant={_colorSet[index]} className="p-2 mb-0">
                                     step {index + 1}:{" "}
                                     {/* {returnStepComponent(index)} */}
-                                    <MapStepComponent index={index} />
+                                    <MapStepComponent thisStep={item} />
                                 </Alert>
                             </Col>
                             <Col>
@@ -212,13 +211,15 @@ export const StepColors = props => {
                             </Col>
                         </Row>
                         <hr />
-                    </Container>
+                    </div>
                 );
             }
         });
-
-        return row;
     };
 
-    return <>{numberStep !== 0 ? rowSteps(numberStep) : null}</>;
+    return (
+        <>
+            { rowSteps(numberStep) }
+        </>
+    )
 };

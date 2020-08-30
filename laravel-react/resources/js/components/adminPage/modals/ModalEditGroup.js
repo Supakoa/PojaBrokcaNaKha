@@ -114,7 +114,7 @@ const ModalEditGroup = (props) => {
         await setTimeout(() => {
             setResultSubjects(response.subjects_id)
             setShowGroupUsers(response.users)
-        }, Math.max((response.users.length + 1) * 20, 500));
+        }, Math.max((response.users.length + 1) * 30, 500));
         // Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
         //     headers: {
         //         Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
@@ -175,12 +175,12 @@ const ModalEditGroup = (props) => {
             await Axios.delete(`http://localhost:8000/api/groups/${response.id}/users`, {
                 data: {
                     user_id: tmp_deleteVal.userId,
+                    subject_id: 0,
                 },
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
                 }
             }).then(res => {
-
                 if (res.status == 200) {
                     Toast.fire({
                         icon: 'success',

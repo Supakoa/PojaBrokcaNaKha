@@ -15,7 +15,8 @@ export default function StepTable() {
             paginationLabel={["ก่อนหน้า", "ถัดไป"]}
             searchLabel="ค้นหา"
             barReverse={true}
-            borderless
+            // borderless
+            bordered
             striped
             small
             hover
