@@ -3,26 +3,26 @@ import { Card, Row, Col, Tab, ListGroup, Alert } from "react-bootstrap";
 import BoxMessage from "./BoxMessage";
 import FormSend from "./FormSend";
 import { useTranslation } from "react-i18next";
+import { getMessages } from "../../middleware/axios/getMessages";
+import ListMeassges from "../../student/components/message/list-message";
 
 export default function TemplateMessage({ data }) {
     const [_list, setList] = React.useState([]);
-    const [_text, setText] = React.useState([]);
     const { t } = useTranslation();
 
-    const fetchMessages = _data => {
-        _data.map(item => {
-            setList([..._list, item]);
-        });
+    const fetchMessages = async token => {
+        const _getAll = await getMessages(token);
+        if (_getAll) setList(_getAll);
     };
 
     React.useEffect(() => {
-        const abortController = new AbortController();
-        fetchMessages(data, { signal: abortController.signal });
+        const abort = new AbortController();
+        fetchMessages(localStorage._authLocal, { signal: abort.signal });
 
         return () => {
-            abortController.abort();
+            abort.abort();
         };
-    }, []);
+    }, [localStorage._authLocal]);
 
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">
@@ -37,10 +37,11 @@ export default function TemplateMessage({ data }) {
                                       <ListGroup.Item
                                           key={idx.toString()}
                                           action
-                                          href={`#${item.name}`}
+                                          href={`#${item.id}`}
                                           className="border rounded"
                                       >
-                                          {item.name}
+                                          <i className="fas fa-comment-dots"></i>{" "}
+                                          {`${item.title} ${item.first_name} ${item.last_name}`}
                                       </ListGroup.Item>
                                   );
                               })
@@ -52,38 +53,34 @@ export default function TemplateMessage({ data }) {
                     <hr />
                     <Tab.Content>
                         {_list.map((item, idx) => {
-                            // console.log(item);
-                            const _textBox = item.messages;
                             return (
                                 <Tab.Pane
                                     key={idx.toString()}
-                                    eventKey={`#${item.name}`}
+                                    eventKey={`#${item.id}`}
                                 >
                                     <Card>
-                                        <Card.Body>
-                                            {_textBox.map((text, idx) => {
-                                                // console.log(text);
-                                                if (text.name === "admin") {
-                                                    console.log(
-                                                        "text from admin"
-                                                    );
-                                                } else {
-                                                    return (
-                                                        <BoxMessage
-                                                            key={idx.toString()}
-                                                            textMessage={text}
-                                                            name={{
-                                                                _role:
-                                                                    item.roleId,
-                                                                _name: item.name
-                                                            }}
-                                                        />
-                                                    );
-                                                }
+                                        <Card.Body
+                                            style={{
+                                                height: "30vh",
+                                                overflowY: "scroll"
+                                            }}
+                                            className="w-100 clearfix pt-1"
+                                        >
+                                            {item.messages.map(item => {
+                                                return (
+                                                    <ListMeassges
+                                                        key={item.id}
+                                                        data={item}
+                                                        onRight={
+                                                            item.admin_id == 1
+                                                        }
+                                                        name={item.first_name}
+                                                    />
+                                                );
                                             })}
                                         </Card.Body>
                                         <Card.Footer className="p-0">
-                                            <FormSend settext={setText} />
+                                            <FormSend userId={item.id} />
                                         </Card.Footer>
                                     </Card>
                                 </Tab.Pane>

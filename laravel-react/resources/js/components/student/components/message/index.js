@@ -12,7 +12,7 @@ const MessageElements = () => {
     const fetchUserMessage = async token => {
         const _getAll = await getMessages(token);
 
-        setMessages(_getAll);
+        if (!!_getAll) setMessages(_getAll);
     };
 
     React.useEffect(() => {

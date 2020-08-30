@@ -1,36 +1,33 @@
 import React from "react";
-import { Button, InputGroup } from "react-bootstrap";
+import { Button, InputGroup, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { postMessage } from "../../middleware/axios/postMessage";
 
-const FormSend = props => {
-    const [_message, setMessage] = React.useState({});
+const FormSend = ({ userId }) => {
+    const [_message, setMessage] = React.useState("");
     const { t } = useTranslation();
     const handleChange = e => {
-        const value = e.target.value;
-        console.log(value);
-
-        setMessage({
-            ..._message,
-            roleId: 1,
-            name: "admin",
-            messages: value
-        });
+        console.log(e.target.value);
+        setMessage(e.target.value);
     };
 
-    const onClickHandle = () => {
-        console.log(_message);
-
-        props.settext([_message]);
+    const onClickHandle = async () => {
+        if (!!_message) {
+            await postMessage(localStorage._authLocal, {
+                message: _message,
+                user_id: userId
+            });
+            setMessage("");
+        }
     };
 
     return (
-        <InputGroup className="mb-3">
-            <FormControl
+        <InputGroup>
+            <Form.Control
                 name="textMessage"
                 placeholder={t("menu.message")}
                 onChange={handleChange}
-                aria-label="textMessage"
-                aria-describedby="basic-addon2"
+                value={_message}
             />
             <InputGroup.Append>
                 <Button variant="outline-secondary" onClick={onClickHandle}>
