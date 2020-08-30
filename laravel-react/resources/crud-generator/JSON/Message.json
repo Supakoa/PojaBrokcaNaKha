@@ -13,10 +13,6 @@
             "type": "text"
         },
         {
-            "name": "is_user",
-            "type": "boolean"
-        },
-        {
             "name": "read",
             "type": "boolean"
         }

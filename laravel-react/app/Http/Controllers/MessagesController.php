@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class MessagesController extends Controller
 {
@@ -36,10 +37,17 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
+//        return auth()->user()->id;
+        $this->validate($request, [
+            'user_id' => 'required',
+            'message' => 'required'
+        ]);
         $user_id = $request->get("user_id");
+        if (auth()->user()->role_id == 1)
+            $request['admin_id'] = auth()->user()->id;
         $message = Message::create($request->all());
         $count_messages = Message::query()->where("user_id",$user_id)->count();
-        event(new ChatEcho($request->get("message"), $user_id, $count_messages));
+        event(new ChatEcho($request->get("message"), $user_id, $count_messages,$message->admin_id));
         return response()->json($message, 201);
     }
 
@@ -92,4 +100,6 @@ class MessagesController extends Controller
 
 
     }
+
+
 }

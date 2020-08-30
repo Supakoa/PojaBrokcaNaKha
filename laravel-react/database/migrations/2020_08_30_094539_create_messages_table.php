@@ -16,9 +16,8 @@ class CreateMessagesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('admin_id')->unsigned()->nullable();
-            $table->text('message')->nullable();
-            $table->boolean('is_user')->nullable();
-            $table->boolean('read')->nullable();
+            $table->text('message');
+            $table->boolean('read')->nullable()->default(false);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('admin_id')->references('id')->on('users');

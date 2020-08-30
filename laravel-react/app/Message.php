@@ -25,7 +25,7 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'admin_id', 'message', 'is_user', 'read'];
+    protected $fillable = ['user_id', 'admin_id', 'message', 'read'];
 
     public function user()
     {

@@ -32,12 +32,14 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('users/export', 'API\UserController@export');
     Route::get('users/import', 'API\UserController@importTemplate');
     Route::post('users/import', 'API\UserController@import');
+    Route::get('users/messages', 'API\UserController@messages');
     Route::resource('ChatMessenger','CRUD\ChatMessengerController');
     Route::resource('users', 'API\UserController');
     Route::get('users/{user}/documents', 'API\UserController@documents');
     Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
     Route::post('documents/{document}/cancel',"DocumentsController@cancel");
     Route::post('documents/{document}/approve',"DocumentsController@approve");
+    Route::resource('messages', 'MessagesController', ['except' => ['create', 'edit']]);
 
     Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 
@@ -70,12 +72,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 });
 Route::post('password/email', 'ForgotPasswordController@forgot');
-Route::get('test/{text}',function ($text) {
-    event(new ChatEcho($text, 3, 0));
+Route::get('test/{id}/{text}',function ($id,$text) {
+    event(new ChatEcho($text, $id, 0));
     return $text;
 });
 
 
 
 
-Route::resource('messages', 'MessagesController', ['except' => ['create', 'edit']]);

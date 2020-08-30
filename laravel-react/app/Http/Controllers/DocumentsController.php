@@ -43,7 +43,7 @@ class DocumentsController extends Controller
         $subject_id = $inputs->where('type', 2)->first()['data'];
         $form = Form::find($request->get('form_id'));
         $directionForms = $form->groups;
-        $request->max_state = $form->all_state;
+        $request['max_state'] = $form->all_state;
 
         $document = Document::create($request->all());
         foreach ($directionForms as $state => $group) {
@@ -130,7 +130,8 @@ class DocumentsController extends Controller
     public function approve(Document $document, Request $request)
     {
         if ($document->status == 'pending') {
-            $document->approver()->updateExistingPivot(auth()->user()->id, $request->all());
+            $document->approver()->wherePivot("state", $document->state)->updateExistingPivot(auth()->user()->id, $request->all());
+            $document->approver()->wherePivot("state",">", $document->state)->detach(auth()->user()->id);
 
             if ($request->get("status") == "approved") {
                 $document->approver()->wherePivot("state", $document->state)->wherePivot("status", "pending")->detach();

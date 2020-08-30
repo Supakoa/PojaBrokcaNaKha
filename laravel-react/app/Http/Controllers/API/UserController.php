@@ -121,9 +121,9 @@ class UserController extends Controller
                 break;
         }
         foreach ($documents as $index => $document) {
-            $document->approver =   $document->approver()->wherePivot('state',"<=",$document->state)->get();
+            $document->approver = $document->approver()->wherePivot('state', "<", $document->state)->get();
         }
-        return response()->json(['success' => $documents], $this->successStatus);
+        return response()->json(['success' => gettype($documents) == "object" ? $documents : array_values($documents)  ], $this->successStatus);
 
     }
 
@@ -170,6 +170,24 @@ class UserController extends Controller
         ];
 
         return Response::download($file, "users_import_template.xlsx", $headers);
+    }
+
+    public function messages()
+    {
+        $user = auth()->user();
+        if ($user->role_id == 1) {
+            $users = User::all();
+            foreach ($users as $user) {
+                if ($user->messages()->count() > 0)
+                    $user->messages;
+            }
+            $users = $users->filter(function ($user, $key) {
+                return  count($user->messages) > 0;
+            });
+            return response()->json(['success' => $users], $this->successStatus);
+        } else {
+            return response()->json(['success' => $user->messages], $this->successStatus);
+        }
     }
 
 

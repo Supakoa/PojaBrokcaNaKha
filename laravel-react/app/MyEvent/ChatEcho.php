@@ -14,17 +14,26 @@ class ChatEcho implements ShouldBroadcast
     public $message;
 
     public $user_id;
-    /**
-     * @var int
-     */
-    private $count;
 
-    public function __construct($message, $id, int $count)
+    public $count;
+
+    public $admin_id;
+
+    /**
+     * ChatEcho constructor.
+     * @param $message
+     * @param $user_id
+     * @param $count
+     * @param $admin_id
+     */
+    public function __construct($message, $user_id, $count, $admin_id)
     {
         $this->message = $message;
-        $this->user_id = $id;
+        $this->user_id = $user_id;
         $this->count = $count;
+        $this->admin_id = $admin_id;
     }
+
 
     public function broadcastOn()
     {
