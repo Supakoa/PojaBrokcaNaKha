@@ -23,8 +23,9 @@ class FormsController extends Controller
             foreach ($forms as $form) {
                 if ($form->all_state == 0)
                     $form->groups = [];
-                for ($i = 0; $i < $form->all_state; $i++)
-                    $form->groups[$i] = $form->groups()->wherePivot('state', $i + 1)->get();;
+                for ($i = 0; $i < $form->all_state; $i++){
+                    $form->groups[$i] = $form->groups()->wherePivot('state', $i + 1)->get();
+                }
             }
 
         return $forms;

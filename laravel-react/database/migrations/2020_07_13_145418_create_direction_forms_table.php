@@ -19,6 +19,8 @@ class CreateDirectionFormsTable extends Migration
             $table->integer('group_id')->unsigned();
             $table->tinyInteger('state')->nullable();
 
+            $table->foreign('form_id')->references('id')->on('forms')->cascadeOnDelete();
+            $table->foreign('group_id')->references('id')->on('groups')->cascadeOnDelete();
         });
     }
 
