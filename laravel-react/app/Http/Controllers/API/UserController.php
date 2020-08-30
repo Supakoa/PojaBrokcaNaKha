@@ -184,7 +184,7 @@ class UserController extends Controller
             $users = $users->filter(function ($user, $key) {
                 return  count($user->messages) > 0;
             });
-            return response()->json(['success' => $users], $this->successStatus);
+            return response()->json(['success' => array_values($users)], $this->successStatus);
         } else {
             return response()->json(['success' => $user->messages], $this->successStatus);
         }
