@@ -19,15 +19,16 @@ class FormsController extends Controller
     public function index(Request $request)
     {
         $forms = Form::all();
-        if (auth()->user()->role_id == 1)
+        if (auth()->user()->role_id == 1){
             foreach ($forms as $form) {
                 if ($form->all_state == 0)
                     $form->groups = [];
                 for ($i = 0; $i < $form->all_state; $i++){
                     $form->groups[$i] = $form->groups()->wherePivot('state', $i + 1)->get();
                 }
+                unset($form->inputs);
             }
-
+        }
         return $forms;
     }
 
