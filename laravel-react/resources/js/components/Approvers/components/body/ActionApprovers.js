@@ -8,6 +8,7 @@ import { userDocument } from "../../../../redux/actions";
 import { useHistory } from "react-router-dom";
 import { fetchUserDoc } from "../../../middleware/axios/fetchUserDoc";
 import { useTranslation } from "react-i18next";
+import ProgressState from "./history-approvers/ProgressState";
 
 const ActionApprovers = ({
     stateApprovers,
@@ -111,6 +112,7 @@ const ActionApprovers = ({
     ) {
         return (
             <Form>
+                <ProgressState />
                 <Row>
                     <Col lg={6} md={6}>
                         <Form.Group controlId="comment">

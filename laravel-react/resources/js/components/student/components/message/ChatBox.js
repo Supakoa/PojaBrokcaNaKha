@@ -2,9 +2,25 @@ import React from "react";
 import { Animated } from "react-animated-css";
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { postMessage } from "../../../middleware/axios/postMessage";
 
-const ChatBox = ({ show, closeMessage }) => {
+const ChatBox = ({ show, closeMessage, listMsg }) => {
+    const [_newMsg, setNewMsg] = React.useState("");
+
+    const handleChange = e => {
+        setNewMsg(e.target.value);
+    };
+
+    const handleSendMsg = async () => {
+        if (!!_newMsg) {
+            const _msg = await postMessage(localStorage._authLocal, {
+                message: _newMsg
+            });
+        }
+    };
+
     const { t } = useTranslation();
+
     return (
         <Animated
             animationIn="fadeInUp"
@@ -37,6 +53,11 @@ const ChatBox = ({ show, closeMessage }) => {
                         style={{ height: "30vh", maxHeight: "50vh" }}
                         className="w-100 border border-secondary rounded"
                     >
+                        <ul>
+                            {listMsg.map(item => {
+                                return <li key={item.id}>{item.message}</li>;
+                            })}
+                        </ul>
                         list messages
                     </Container>
                 </Card.Body>
@@ -45,6 +66,7 @@ const ChatBox = ({ show, closeMessage }) => {
                         <Form.Control
                             className="border-left-0 border-bottom-0"
                             placeholder={t("students.message.place-holder")}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="w-25 text-center p-0">
@@ -52,7 +74,7 @@ const ChatBox = ({ show, closeMessage }) => {
                             variant="primary"
                             className="m-0"
                             size="sm"
-                            block
+                            onClick={handleSendMsg}
                         >
                             <i className="fas fa-paper-plane"></i>
                         </Button>

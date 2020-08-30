@@ -24,7 +24,7 @@ export const _urlPostDocuments = () => {
     return `${_www}/api/documents`;
 };
 
-export const _urlPutDocuments = (id) => {
+export const _urlPutDocuments = id => {
     return `${_www}/api/documents/${id}`;
 };
 
@@ -46,4 +46,12 @@ export const _urlCancelDocument = id => {
 
 export const _urlPostApprove = id => {
     return `${_www}/api/documents/${id}/approve`;
+};
+
+export const _urlGetMessages = () => {
+    return `${_www}/api/users/messages`;
+};
+
+export const _urlPostMessage = () => {
+    return `${_www}/api/messages`;
 };

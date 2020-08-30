@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { user } from "../../redux/actions";
 import BodyApprover from "./components/body";
 import post2User from "../middleware/post2Redux/postToUser";
-import { Button } from "react-bootstrap";
 
 export default function Approvers() {
     const _dispatch = useDispatch();
