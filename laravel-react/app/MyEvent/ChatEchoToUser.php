@@ -15,6 +15,8 @@ class ChatEchoToUser implements ShouldBroadcast
 
     private $user_id;
 
+    public $admin_id;
+
     public $count_messages;
 
     public $count_messages_unread;
@@ -23,13 +25,15 @@ class ChatEchoToUser implements ShouldBroadcast
      * ChatEchoToUser constructor.
      * @param $message
      * @param $user_id
+     * @param $admin_id
      * @param $count_messages
      * @param $count_messages_unread
      */
-    public function __construct($message, $user_id, $count_messages, $count_messages_unread)
+    public function __construct($message, $user_id,$admin_id, $count_messages, $count_messages_unread)
     {
         $this->message = $message;
         $this->user_id = $user_id;
+        $this->admin_id = $admin_id;
         $this->count_messages = $count_messages;
         $this->count_messages_unread = $count_messages_unread;
     }

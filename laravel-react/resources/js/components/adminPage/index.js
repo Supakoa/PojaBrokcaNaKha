@@ -25,11 +25,7 @@ export default function AdminPage() {
     let { path, url } = useRouteMatch();
     let _history = useHistory();
     const token = localStorage._authLocal;
-    let channel = window.Echo.channel("channel-chat");
 
-    channel.listen(".event-chat-admin", function(data) {
-        console.log(JSON.stringify(data));
-    });
     const _props = {
         dispatch: dispatch,
         isAuththen: isAuththen,

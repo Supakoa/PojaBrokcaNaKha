@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 
-const ListMeassges = ({ data, isSender, name }) => {
+const ListMessages = ({ data, isSender, name }) => {
     return (
         <Alert
             variant={!isSender ? "ligth" : "info"}
@@ -37,4 +37,4 @@ const ListMeassges = ({ data, isSender, name }) => {
     );
 };
 
-export default ListMeassges;
+export default ListMessages;

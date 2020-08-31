@@ -7,10 +7,11 @@ export const postMessage = async (_token, data) => {
     const _send = await axios
         .post(_urlPostMessage(), data ,headerConfig(_token, 3000))
         .then(res => {
-            return res.data.success;
+            return res.data;
         })
         .catch(er => {
             Swal.fire("error", er, "error");
+            return undefined;
         });
 
     return _send;
