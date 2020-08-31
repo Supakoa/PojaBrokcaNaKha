@@ -12,13 +12,19 @@ const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
         setNewMsg(e.target.value);
     };
     const user = useSelector(state => state.userState);
-
+    const handleOnKeyDown = e => {
+        // console.log(e.key)
+        if (e.key === "Enter")
+            handleSendMsg();
+    }
     const handleSendMsg = async () => {
         if (!!_newMsg) {
-            let  new_message =   await postMessage(localStorage._authLocal, {
-                message: _newMsg
-            });
+            let tmp_message = _newMsg;
             setNewMsg("");
+            let  new_message =   await postMessage(localStorage._authLocal, {
+                message: tmp_message
+            });
+
 
             if (_messages.findIndex(value => value.id === new_message.count_messages +1) === -1){
                 new_message['admin_id'] = null;
@@ -98,6 +104,8 @@ const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
                             name="textMessage"
                             placeholder={t("students.message.place-holder")}
                             onChange={handleChange}
+                            onKeyPress={handleOnKeyDown}
+
                             // defaultValue={_newMsg}
                             value={_newMsg}
                         />

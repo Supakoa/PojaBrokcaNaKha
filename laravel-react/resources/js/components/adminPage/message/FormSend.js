@@ -1,34 +1,41 @@
 import React from "react";
-import { Button, InputGroup, Form } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { postMessage } from "../../middleware/axios/postMessage";
+import {Button, InputGroup, Form} from "react-bootstrap";
+import {useTranslation} from "react-i18next";
+import {postMessage} from "../../middleware/axios/postMessage";
 
-const FormSend = ({ userId,_listUsers,setListUsers }) => {
+const FormSend = ({userId, _listUsers, setListUsers}) => {
     const [_message, setMessage] = React.useState("");
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const handleChange = e => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setMessage(e.target.value);
     };
 
+    const handleOnKeyDown = e => {
+        // console.log(e.key)
+        if (e.key === "Enter")
+            onClickHandle();
+    }
+
     const onClickHandle = async () => {
         if (!!_message) {
-        let  new_message =  await postMessage(localStorage._authLocal, {
-                message: _message,
+            let tpm_message = _message;
+            setMessage("");
+            let new_message = await postMessage(localStorage._authLocal, {
+                message: tpm_message,
                 user_id: userId
             });
-        if (new_message){
-            let user = _listUsers.find(value => value.id === userId);
+            if (new_message) {
+                let user = _listUsers.find(value => value.id === userId);
 
-            if (!!user) {
-                if (user.messages.findIndex(value => value.id === new_message.count_messages +1) === -1){
+                if (!!user) {
+                    if (user.messages.findIndex(value => value.id === new_message.count_messages + 1) === -1) {
 
-                    user.messages.push(new_message);
-                    setListUsers([..._listUsers])
+                        user.messages.push(new_message);
+                        setListUsers([..._listUsers])
+                    }
                 }
             }
-        }
-            setMessage("");
         }
     };
 
@@ -38,6 +45,8 @@ const FormSend = ({ userId,_listUsers,setListUsers }) => {
                 name="textMessage"
                 placeholder={t("menu.message")}
                 onChange={handleChange}
+                onKeyPress={handleOnKeyDown}
+
                 value={_message}
             />
             <InputGroup.Append>
