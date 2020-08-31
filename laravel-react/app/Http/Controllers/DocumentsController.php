@@ -93,7 +93,7 @@ class DocumentsController extends Controller
             'data' => 'required'
         ]);
         $document = Document::findOrFail($id);
-        $document->status = "pending";
+        $request['status'] = "pending";
         $document->update($request->all());
 
         return response()->json($document, 200);

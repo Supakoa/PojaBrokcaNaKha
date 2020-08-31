@@ -29,6 +29,19 @@ export default function TemplateMessage({data}) {
             }
         }else if (data.count_messages ===1){
          // setState
+            user = {};
+            user.id = data.user_id;
+            user.title = "Mr"
+            user.first_name = "singha"
+            user.last_name ="eiei"
+            let tmp_message = {};
+            tmp_message.id = data.count_messages  ;
+            tmp_message.message = data.message;
+            tmp_message.admin_id = null;
+            tmp_message.user_id = data.user_id;
+            user.messages = [tmp_message]
+            _listUsers.push(user)
+            setListUsers([..._listUsers])
         }
     });
 
