@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Col, Form } from "react-bootstrap";
 import Axios from "axios";
-import { selectFacultyId, selectMajorId } from "../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-export default function FacultySelect({ defaultData, onSelectOption }) {
+export default function FacultySelect({
+    defaultData,
+    onSelectOption,
+    isSelect,
+    setIdFac
+}) {
     const { t } = useTranslation();
     const [faculty, setFaculty] = useState([]);
-
-    // local state
-
-    // redux
-    const redux_selectFaculty = useSelector(state => state.selectFaculty);
-    const redux_selectMajor = useSelector(state => state.selectMajor);
-    const dispatch = useDispatch();
+    const [selected, setSelected] = React.useState(0);
 
     const apiPath = `http://localhost:8000/api/faculties`;
+
+    const selectedFaculty = e => {
+        setSelected(e.target.value);
+        setIdFac(e.target.value);
+        isSelect(false);
+        onSelectOption(e);
+    };
 
     const initFaculty = async () => {
         const getFaculty = await Axios.get(apiPath).then(res => {
@@ -26,10 +30,10 @@ export default function FacultySelect({ defaultData, onSelectOption }) {
     };
 
     React.useEffect(() => {
-        if (!!defaultData && faculty.length === 0) {
+        if (faculty.length === 0) {
             initFaculty();
         }
-    });
+    }, [selected]);
 
     return (
         <Form.Group as={Col} controlId="formGroupFacultySelect">
@@ -38,8 +42,14 @@ export default function FacultySelect({ defaultData, onSelectOption }) {
             <Form.Control
                 as="select"
                 name="facultySelect"
-                onChange={onSelectOption}
-                value={defaultData.faculty_id ? defaultData.faculty_id : 0}
+                onChange={selectedFaculty}
+                value={
+                    selected == 0
+                        ? defaultData.faculty_id
+                            ? defaultData.faculty_id
+                            : selected
+                        : selected
+                }
             >
                 <option key="0" value={0}>
                     {t("faculty.selectFaculty")}

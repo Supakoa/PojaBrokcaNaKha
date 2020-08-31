@@ -17,7 +17,7 @@ export const dataTableUser = () => {
     const fetchRowData = _data => {
         const _row = _data.map((res, idx) => {
             return {
-                action: <ColumnAction key idx={idx} res={res} />,
+                action: <ColumnAction key={idx} idx={idx} res={res} />,
                 id: idx + 1,
                 name: res.title + " " + res.first_name + " " + res.last_name,
                 role: userRole(res.role_id),
@@ -47,7 +47,7 @@ export const dataTableUser = () => {
     };
 
     const initUsers = () => {
-        if (!!redux_showUsers.data ) {
+        if (!!redux_showUsers.data) {
             const _items = fetchRowData(redux_showUsers.data);
             setRows(_items);
         }

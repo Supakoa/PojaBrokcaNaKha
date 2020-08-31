@@ -9,28 +9,24 @@ export const column = () => {
         {
             label: "ชื่อไทย",
             field: "th_name",
-            width: 140
+            width: 240,
+            sort: "desc"
         },
         {
             label: "ชื่ออังกฤษ",
             field: "eng_name",
-            width: 140
+            width: 240,
+            sort: "desc"
         },
         {
             label: "ประเภท",
             field: "type",
-            width: 60,
+            width: 100,
             sort: "disabled"
         },
-        // {
-        //     label: "รายชื่อ",
-        //     field: "list",
-        //     width: 150,
-        //     sort: "disabled"
-        // },
         {
             field: "action",
-            width: 60,
+            width: 260,
             sort: "disabled"
         }
     ];

@@ -6,7 +6,8 @@ import FacultySelect from "../input/FacultySelect";
 import MajorSelect from "../input/MajorSelect";
 
 export default function FormUser({ isCreatedProp, user, onChangeState }) {
-    console.log(user);
+    const [isSelectFac, setIsSeclected] = React.useState(true);
+    const [facultyId, setFacultyId] = React.useState(0);
     return (
         <Form name="userForm">
             <Form.Group controlId="formUseremail">
@@ -150,10 +151,14 @@ export default function FormUser({ isCreatedProp, user, onChangeState }) {
                 <FacultySelect
                     defaultData={user.major ? user.major : ""}
                     onSelectOption={onChangeState}
+                    isSelect={setIsSeclected}
+                    setIdFac={setFacultyId}
                 />
                 <MajorSelect
                     defaultData={user.major ? user.major : ""}
                     onSelectOption={onChangeState}
+                    isSelectFac={isSelectFac}
+                    facultyId={facultyId}
                 />
             </Form.Row>
         </Form>

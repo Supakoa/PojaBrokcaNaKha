@@ -1,58 +1,39 @@
-const { useEffect } = require("react");
-
 import React, { useState } from "react";
 import { Form, Col } from "react-bootstrap";
-import {
-    selectMajorId,
-    selectFacultyId,
-    updateFormEditUserBySingleData
-} from "../../../redux/actions";
-import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
 import { useTranslation } from "react-i18next";
 
-export default function MajorSelect({ defaultData, onSelectOption }) {
+export default function MajorSelect({
+    defaultData,
+    onSelectOption,
+    isSelectFac,
+    facultyId
+}) {
     const { t } = useTranslation();
-    const [major, setMajor] = useState(null);
-    const [focusReduxSelectFaculty, setfocusReduxSelectFaculty] = useState(
-        true
-    );
+    const [major, setMajor] = useState([]);
+    const [selected, setSelected] = useState(0);
 
-    const redux_selectFaculty = useSelector(state => state.selectFaculty);
-    const redux_selectMajor = useSelector(state => state.selectMajor);
-    const redux_userForm = useSelector(state => state.formUser);
-    const dispatch = useDispatch();
+    const selcetedMajor = e => {
+        setSelected(e.target.value);
+        onSelectOption(e);
+    };
 
-    // const initMajor = async () => {
-    //     if (!!redux_userForm.majorId) {
-    //         dispatch(selectMajorId(redux_userForm.majorId));
+    const initMajor = async id => {
+        if (!!id) {
+            await Axios.get(`http://localhost:8000/api/majors/${id}`).then(
+                res => {
+                    console.log(res);
+                    setMajor(res.data.faculty_id);
+                }
+            );
+        }
+    };
 
-    //         if (redux_userForm.majorId === 0) {
-    //             dispatch(selectFacultyId(0));
-    //         } else {
-    //             await Axios.get(
-    //                 `http://localhost:8000/api/majors/${redux_userForm.majorId}`
-    //             ).then(res => {
-    //                 dispatch(selectFacultyId(res.data.faculty_id));
-    //             });
-    //         }
-    //     }
-    // };
-
-    // const updateMajor = async () => {
-    //     if (redux_selectFaculty.id === 0 || !!redux_selectFaculty.id) {
-    //         setMajor(null);
-    //     } else {
-    //         const getMajor = await Axios.get(
-    //             `http://localhost:8000/api/faculties/${redux_selectFaculty.id}/majors`
-    //         ).then(res => {
-    //             return res.data;
-    //         });
-
-    //         setMajor(getMajor);
-    //     }
-    // };
-
+    React.useEffect(() => {
+        if (major.length === 0) {
+            initMajor(facultyId);
+        }
+    }, [facultyId, major]);
 
     return (
         <Form.Group as={Col} controlId="formGroupMajorSelect">
@@ -61,12 +42,28 @@ export default function MajorSelect({ defaultData, onSelectOption }) {
             <Form.Control
                 as="select"
                 name="major"
-                onChange={onSelectOption}
-                disabled={focusReduxSelectFaculty}
-                value={defaultData.id ? defaultData.id : 0}
+                onChange={selcetedMajor}
+                disabled={isSelectFac}
+                value={
+                    selected == 0
+                        ? defaultData.id
+                            ? defaultData.id
+                            : selected
+                        : selected
+                }
             >
                 <option value={0}>{t("major.selectMajor")}</option>
-                <option>-</option>
+                {major.length > 0 ? (
+                    major.map((item, idx) => {
+                        return (
+                            <option key={idx} value={item.id}>
+                                {item.name}
+                            </option>
+                        );
+                    })
+                ) : (
+                    <option>-</option>
+                )}
             </Form.Control>
         </Form.Group>
     );

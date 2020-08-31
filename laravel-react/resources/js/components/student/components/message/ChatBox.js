@@ -34,6 +34,8 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
                 setMessages([..._messages]);
             }
         }
+        var element = document.getElementById("chatBody");
+        element.scrollTop = element.scrollHeight;
     };
     let channel = window.Echo.channel("channel-chat");
     channel.listen(".event-chat-user-" + user.id, function(data) {

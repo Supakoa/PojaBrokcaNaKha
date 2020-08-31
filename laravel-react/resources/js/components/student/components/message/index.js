@@ -4,7 +4,7 @@ import ChatBox from "./ChatBox";
 import { useTranslation } from "react-i18next";
 import { getMessages } from "../../../middleware/axios/getMessages";
 
-const MessageElements = () => {
+const MessageElements = ({ token }) => {
     const [show, setShow] = React.useState(false);
     const [_messages, setMessages] = React.useState([]);
     const { t } = useTranslation();
@@ -25,10 +25,10 @@ const MessageElements = () => {
     React.useEffect(() => {
         const abort = new AbortController();
         if (show) {
-            fetchUserMessage(localStorage._authLocal, { signal: abort.signal });
+            fetchUserMessage(token, { signal: abort.signal });
         }
         return () => abort.abort();
-    }, [localStorage._authLocal, show]);
+    }, [token, show]);
 
     return (
         <>

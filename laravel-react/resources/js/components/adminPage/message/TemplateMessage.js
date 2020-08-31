@@ -38,7 +38,8 @@ export default function TemplateMessage() {
             const _getAll = await getMessages(localStorage._authLocal);
             if (_getAll) setListUsers(_getAll);
         }
-        scrollToBottom();
+        var element = document.getElementById("chatBody");
+        element.scrollTop = element.scrollHeight;
     });
 
     const scrollToBottom = () => {
@@ -99,7 +100,9 @@ export default function TemplateMessage() {
                                         <Card.Body
                                             id="chatBody"
                                             style={{
-                                                height: "30vh",
+                                                minHeight: "20vh",
+                                                height: "100%",
+                                                maxHeight: "50vh",
                                                 overflowY: "scroll"
                                             }}
                                             className="w-100 clearfix pt-1"

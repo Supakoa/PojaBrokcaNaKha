@@ -13,10 +13,8 @@ import {
 const DataGroupTable = () => {
     const [rows, setRows] = React.useState([]);
     const [gourps, setGourps] = useState(null);
-    const [listApprovers, setListApprovers] = useState(null); // not to use now
 
     // redux
-    const redux_approvers = useSelector(state => state.showApprovers); // not to use
     const dispatch = useDispatch();
 
     const fetchRowData = _data => {
@@ -31,21 +29,6 @@ const DataGroupTable = () => {
         });
         setRows(item);
     };
-
-    // const getUserGroupToTable = (id) => {
-    //     Axios.get(`http://localhost:8000/api/groups/${id}/users`, {
-    //         headers: {
-    //             Authorization: `Bearer ${localStorage.getItem(
-    //                 "_authLocal"
-    //             )}`
-    //         }
-    //     }).then(res => {
-    //         console.log('res.data.success.length', res.data.success.length)
-    //         // const result = (res.data.)
-    //         // setListApprovers(res.data.success.length)
-    //         return res.data.success.length
-    //     })
-    // }
 
     const getGroup = async () => {
         await Axios.get(`http://localhost:8000/api/groups`, {
@@ -85,7 +68,6 @@ const DataGroupTable = () => {
     };
 
     const initShowNews = () => {
-        console.log("groups", gourps);
         if (gourps) {
             fetchRowData(gourps);
         }

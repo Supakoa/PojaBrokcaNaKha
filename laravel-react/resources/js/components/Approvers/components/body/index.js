@@ -17,6 +17,7 @@ import ShowDetail from "./ShowDetail";
 import NoneDetail from "./NoneDetatil";
 import FilterSort from "../../../filter";
 import post2AllUsers from "../../../middleware/post2Redux/postToUsers";
+import MessageElements from "../../../student/components/message";
 
 export const SetRowsTable = React.createContext();
 
@@ -29,9 +30,9 @@ export default function BodyApprover() {
     const [_sortBy, setSortBy] = React.useState("pending");
     const _optionSort = ["all", "pending", "approved", "rejected", "edited"];
     const [rows, setRows] = React.useState([]);
-    let channel = window.Echo.channel('channel-chat');
-    channel.listen('.event-chat-user-'+_userId, function(data) {
-       console.log(JSON.stringify(data));
+    let channel = window.Echo.channel("channel-chat");
+    channel.listen(".event-chat-user-" + _userId, function(data) {
+        console.log(JSON.stringify(data));
     });
     const _props = {
         token: token,
@@ -89,6 +90,7 @@ export default function BodyApprover() {
                     <ShowDetail setRowsToInit={setRows} />
                 </Route>
             </Switch>
+            <MessageElements token={token} />
         </Container>
     );
 }

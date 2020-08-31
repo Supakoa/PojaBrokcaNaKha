@@ -121,7 +121,7 @@ export default function Student() {
                     </Col>
                 </Row>
             </ProfileContext.Provider>
-            <MessageElements />
+            <MessageElements token={token} />
         </div>
     );
 }
