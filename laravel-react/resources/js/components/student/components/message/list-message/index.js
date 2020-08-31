@@ -4,7 +4,7 @@ import { Alert } from "react-bootstrap";
 const ListMeassges = ({ data, isSender, name }) => {
     return (
         <Alert
-            variant={isSender ? "ligth" : "info"}
+            variant={!isSender ? "ligth" : "info"}
             className={`py-1 px-1 w-75 row d-table ${
                 isSender ? `float-right` : `floate-left`
             }`}
@@ -30,7 +30,9 @@ const ListMeassges = ({ data, isSender, name }) => {
                 </strong>
             </p>
             <hr className="my-1 " />
-            <p className="px-4">{data.message} </p>
+            <p className="px-4 lead mb-0" style={{ fontSize: "16px" }}>
+                {data.message}{" "}
+            </p>
         </Alert>
     );
 };

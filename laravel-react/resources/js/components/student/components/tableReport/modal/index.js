@@ -6,6 +6,7 @@ import deleteDocument from "../../../../middleware/axios/deleteDocument";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import StatusBadgeDoc from "../statusDocument";
+import StepProgress from "./StepProgress";
 
 const contentStyle = {
     maxHeight: "60vh",
@@ -90,6 +91,13 @@ const UserModalDoc = ({ document, setRows }) => {
                                 document={document}
                                 styles={contentStyle}
                             />
+                            <div className="d-flex aling-items-center w-100 justify-content-center">
+                                <StepProgress
+                                    steps={document.max_state}
+                                    stateNow={document.state}
+                                    status={document.status}
+                                />
+                            </div>
                         </Tab>
                         <Tab
                             eventKey="formDocument"

@@ -49,7 +49,7 @@ const ShowDetail = ({ setRowsToInit }) => {
 
         return () => abort.abort();
     }, [id, _userDoc]);
-    console.log(_detail);
+    // console.log(_detail);
     if (Object.keys(_detail).length > 0) {
         return (
             <Card>
@@ -77,15 +77,12 @@ const ShowDetail = ({ setRowsToInit }) => {
                         </h5>
                         <InputsDocument inputs={JSON.parse(_detail.data)} />
                     </div>
-                    {_detail.approver.map((item, idx) => {
-                        return (
-                            <ListDetailApprovers
-                                key={idx}
-                                translate={t}
-                                approver={item}
-                            />
-                        );
-                    })}
+                    {_detail.approver ? (
+                        <ListDetailApprovers
+                            translate={t}
+                            approvers={_detail.approver}
+                        />
+                    ) : null}
                 </Card.Body>
                 <Card.Footer>
                     <ActionApprovers
@@ -94,6 +91,7 @@ const ShowDetail = ({ setRowsToInit }) => {
                         stateApprovers={_detail.pivot.state}
                         stateDocument={_detail.state}
                         statusDocument={_detail.pivot.status}
+                        maxState={_detail.max_state}
                     />
                 </Card.Footer>
             </Card>

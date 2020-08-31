@@ -15,7 +15,8 @@ const ActionApprovers = ({
     stateDocument,
     documentID,
     statusDocument,
-    setRows
+    setRows,
+    maxState
 }) => {
     const [_formValid, setFormValid] = React.useState(false);
     const [_pivot, setPivot] = React.useState({});
@@ -112,7 +113,7 @@ const ActionApprovers = ({
     ) {
         return (
             <Form>
-                <ProgressState />
+                <ProgressState max={maxState} now={stateDocument} />
                 <Row>
                     <Col lg={6} md={6}>
                         <Form.Group controlId="comment">

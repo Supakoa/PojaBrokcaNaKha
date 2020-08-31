@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { postMessage } from "../../../middleware/axios/postMessage";
 import ListMeassges from "./list-message";
 
-const ChatBox = ({ show, closeMessage, listMsg }) => {
+const ChatBox = ({ show, closeMessage, listMsg, setMessage }) => {
     const [_newMsg, setNewMsg] = React.useState("");
     const handleChange = e => {
         setNewMsg(e.target.value);
@@ -34,7 +34,7 @@ const ChatBox = ({ show, closeMessage, listMsg }) => {
                 show ? `d-block` : `d-none`
             }`}
         >
-            <Card style={{ width: "50%" }}>
+            <Card style={{ width: "100%", maxWidth: "350px" }}>
                 <Card.Title className="clearfix mb-0 px-1 py-1">
                     <h6 className="float-left mb-0">
                         {t("students.message.title")}{" "}
@@ -52,6 +52,7 @@ const ChatBox = ({ show, closeMessage, listMsg }) => {
                 <Card.Body className="p-1">
                     <Container
                         style={{
+                            minHeight: "20vh",
                             height: "100%",
                             maxHeight: "40vh",
                             overflowY: "scroll"
