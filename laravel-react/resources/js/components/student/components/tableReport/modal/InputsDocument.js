@@ -8,7 +8,8 @@ import TemplateDocuments from "../../fromReport/template-Documents";
 const InputsDocument = ({
     inputs,
     documentStatus,
-    formId,
+    documentId,
+    documentFormId,
     styles,
     setRows
 }) => {
@@ -21,7 +22,8 @@ const InputsDocument = ({
                 <TemplateDocuments
                     patternInput={inputs.inputs}
                     lang={i18n.language}
-                    id={formId}
+                    id={documentFormId}
+                    documentId={documentId}
                     statusDocument={documentStatus}
                     setRows={setRows}
                 />
