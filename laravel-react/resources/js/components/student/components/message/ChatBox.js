@@ -1,12 +1,12 @@
 import React from "react";
-import {Animated} from "react-animated-css";
-import {Card, Container, Form, Button, InputGroup} from "react-bootstrap";
-import {useTranslation} from "react-i18next";
-import {postMessage} from "../../../middleware/axios/postMessage";
+import { Animated } from "react-animated-css";
+import { Card, Container, Form, Button, InputGroup } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { postMessage } from "../../../middleware/axios/postMessage";
 import ListMessages from "./list-message";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
+const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
     const [_newMsg, setNewMsg] = React.useState("");
     const handleChange = e => {
         setNewMsg(e.target.value);
@@ -15,34 +15,40 @@ const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
 
     const handleSendMsg = async () => {
         if (!!_newMsg) {
-            let  new_message =   await postMessage(localStorage._authLocal, {
+            let new_message = await postMessage(localStorage._authLocal, {
                 message: _newMsg
             });
             setNewMsg("");
 
-            if (_messages.findIndex(value => value.id === new_message.count_messages +1) === -1){
-                new_message['admin_id'] = null;
+            if (
+                _messages.findIndex(
+                    value => value.id === new_message.count_messages + 1
+                ) === -1
+            ) {
+                new_message["admin_id"] = null;
                 _messages.push(new_message);
-                setMessages([..._messages])
+                setMessages([..._messages]);
             }
         }
     };
     let channel = window.Echo.channel("channel-chat");
-    channel.listen(".event-chat-user-" + user.id, function (data) {
-        if (_messages.length || data.count_messages === 1){
+    channel.listen(".event-chat-user-" + user.id, function(data) {
+        if (_messages.length || data.count_messages === 1) {
             let tmp_message = {};
             tmp_message.id = data.count_messages + 1;
             tmp_message.message = data.message;
             tmp_message.admin_id = data.admin_id;
             tmp_message.user_id = user.id;
-            if (_messages.findIndex(value => value.id === tmp_message.id) === -1) {
+            if (
+                _messages.findIndex(value => value.id === tmp_message.id) === -1
+            ) {
                 _messages.push(tmp_message);
-                setMessages([..._messages])
+                setMessages([..._messages]);
             }
         }
     });
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <Animated
@@ -51,7 +57,7 @@ const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
             animationInDuration={1000}
             animationOutDuration={1000}
             isVisible={show}
-            style={{bottom: "10px", left: "15px", zIndex: "99"}}
+            style={{ bottom: "10px", left: "15px", zIndex: "99" }}
             className={`float-left position-sticky pb-3 ${
                 show ? `d-block` : `d-none`
             }`}
@@ -80,8 +86,9 @@ const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
                             overflowY: "scroll"
                         }}
                         className="w-100 border border-secondary rounded clearfix pt-3"
+                        id="chatBody"
                     >
-                        {_messages.map((item , idx) => {
+                        {_messages.map((item, idx) => {
                             return (
                                 <ListMessages
                                     key={idx}

@@ -14,6 +14,13 @@ const MessageElements = () => {
 
         if (!!_getAll) setMessages(_getAll);
     };
+    const scrollToBottom = () => {
+        setShow(true);
+        setTimeout(() => {
+            var element = document.getElementById("chatBody");
+            element.scrollTop = element.scrollHeight;
+        }, 800);
+    };
 
     React.useEffect(() => {
         const abort = new AbortController();
@@ -32,7 +39,7 @@ const MessageElements = () => {
                     className={` float-left position-sticky ${
                         show ? `d-none` : ``
                     }`}
-                    onClick={() => setShow(true)}
+                    onClick={scrollToBottom}
                 >
                     {t("students.message.title")}{" "}
                     <i className="fas fa-comment-dots"></i>

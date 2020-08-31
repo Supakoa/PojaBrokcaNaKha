@@ -8,6 +8,7 @@ import ListMessages from "../../student/components/message/list-message";
 
 export default function TemplateMessage() {
     const [_listUsers, setListUsers] = React.useState([]);
+    const [isopen, setIsOpen] = React.useState(true);
     const { t } = useTranslation();
 
     const fetchMessages = async token => {
@@ -18,6 +19,7 @@ export default function TemplateMessage() {
     let channel = window.Echo.channel("channel-chat");
     channel.listen(".event-chat-admin", async function(data) {
         let user = _listUsers.find(value => value.id === data.user_id);
+        setIsOpen(true);
         if (!!user) {
             let tmp_message = {};
             tmp_message.id = data.count_messages + 1;
@@ -36,11 +38,23 @@ export default function TemplateMessage() {
             const _getAll = await getMessages(localStorage._authLocal);
             if (_getAll) setListUsers(_getAll);
         }
+        scrollToBottom();
     });
+
+    const scrollToBottom = () => {
+        if (isopen) {
+            setIsOpen(false);
+            setTimeout(() => {
+                var element = document.getElementById("chatBody");
+                element.scrollTop = element.scrollHeight;
+            }, 200);
+        }
+    };
 
     React.useEffect(() => {
         const abort = new AbortController();
         fetchMessages(localStorage._authLocal, { signal: abort.signal });
+
         return () => {
             abort.abort();
         };
@@ -60,6 +74,7 @@ export default function TemplateMessage() {
                                           key={idx.toString()}
                                           action
                                           href={`#${item.id}`}
+                                          onClick={scrollToBottom}
                                           className="border rounded"
                                       >
                                           <i className="fas fa-comment-dots"></i>{" "}
@@ -82,6 +97,7 @@ export default function TemplateMessage() {
                                 >
                                     <Card>
                                         <Card.Body
+                                            id="chatBody"
                                             style={{
                                                 height: "30vh",
                                                 overflowY: "scroll"
