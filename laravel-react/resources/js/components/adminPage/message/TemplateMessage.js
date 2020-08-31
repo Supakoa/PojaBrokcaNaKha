@@ -52,11 +52,11 @@ export default function TemplateMessage({ data }) {
                     <p>{t("menu.message")}</p>
                     <hr />
                     <Tab.Content>
-                        {_list.map((item, idx) => {
+                        {_list.map((list, idx) => {
                             return (
                                 <Tab.Pane
                                     key={idx.toString()}
-                                    eventKey={`#${item.id}`}
+                                    eventKey={`#${list.id}`}
                                 >
                                     <Card>
                                         <Card.Body
@@ -66,21 +66,21 @@ export default function TemplateMessage({ data }) {
                                             }}
                                             className="w-100 clearfix pt-1"
                                         >
-                                            {item.messages.map(item => {
+                                            {list.messages.map(item => {
                                                 return (
                                                     <ListMeassges
                                                         key={item.id}
                                                         data={item}
-                                                        onRight={
+                                                        isSender={
                                                             item.admin_id == 1
                                                         }
-                                                        name={item.first_name}
+                                                        name={`${list.title} ${list.first_name} ${list.last_name}`}
                                                     />
                                                 );
                                             })}
                                         </Card.Body>
                                         <Card.Footer className="p-0">
-                                            <FormSend userId={item.id} />
+                                            <FormSend userId={list.id} />
                                         </Card.Footer>
                                     </Card>
                                 </Tab.Pane>

@@ -63,7 +63,7 @@ const ChatBox = ({ show, closeMessage, listMsg }) => {
                                 <ListMeassges
                                     key={item.id}
                                     data={item}
-                                    onRight={item.admin_id === null}
+                                    isSender={item.admin_id === null}
                                 />
                             );
                         })}
