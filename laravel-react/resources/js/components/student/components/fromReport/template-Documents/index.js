@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 const TemplateDocuments = ({
     patternInput,
     id,
+    documentId,
     lang,
     statusDocument,
     setRows
@@ -104,7 +105,7 @@ const TemplateDocuments = ({
                 _newDoc = await putDocumentUser(
                     localStorage._authLocal,
                     _docForm,
-                    id
+                    documentId
                 );
             } else {
                 _newDoc = await postDocumentUser(

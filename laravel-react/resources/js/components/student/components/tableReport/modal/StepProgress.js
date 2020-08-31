@@ -36,8 +36,6 @@ const colorSteps = status => {
 };
 
 const DotBorder = ({ value, now, status }) => {
-    console.log("value", value);
-    console.log("now", now);
     return (
         <>
             <div

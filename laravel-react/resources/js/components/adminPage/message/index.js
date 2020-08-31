@@ -5,26 +5,17 @@ import TemplateMessage from "./TemplateMessage";
 export default class Messages extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            messages: [
-                {
-                    roleId: 3,
-                    name: "supakit",
-                    messages: [
-                        "Children prop should only contain a single child, and is enforced as such"
-                    ]
-                }
-            ]
-        };
     }
     render() {
         return (
             <Card>
                 <Card.Header className="text-center">
-                    <Card.Title className="p-2"> {this.props.t('menu.message')} </Card.Title>
+                    <Card.Title className="p-2">
+                        {this.props.t("menu.message")}{" "}
+                    </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <TemplateMessage data={this.state.messages} />
+                    <TemplateMessage />
                 </Card.Body>
             </Card>
         );

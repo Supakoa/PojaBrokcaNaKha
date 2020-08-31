@@ -42,7 +42,7 @@ const MessageElements = () => {
             <ChatBox
                 show={show}
                 closeMessage={setShow}
-                listMsg={_messages}
+                _messages={_messages}
                 setMessages={setMessages}
             />
         </>

@@ -6,7 +6,7 @@ import {postMessage} from "../../../middleware/axios/postMessage";
 import ListMessages from "./list-message";
 import {useSelector} from "react-redux";
 
-const ChatBox = ({ show, closeMessage, listMsg, setMessage }) => {
+const ChatBox = ({show, closeMessage, _messages, setMessages}) => {
     const [_newMsg, setNewMsg] = React.useState("");
     const handleChange = e => {
         setNewMsg(e.target.value);

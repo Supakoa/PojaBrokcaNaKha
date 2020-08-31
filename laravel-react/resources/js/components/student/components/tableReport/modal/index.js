@@ -49,6 +49,8 @@ const UserModalDoc = ({ document, setRows }) => {
             }
         });
 
+    console.log(document);
+
     return (
         <div>
             <Button variant="info" size="sm" onClick={() => setShow(true)}>
@@ -108,7 +110,8 @@ const UserModalDoc = ({ document, setRows }) => {
                                     styles={contentStyle}
                                     inputs={JSON.parse(document.data)}
                                     documentStatus={document.status}
-                                    formId={document.form_id}
+                                    documentFormId={document.form_id}
+                                    documentId={document.id}
                                     setRows={setRows}
                                 />
                             </div>
