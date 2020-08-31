@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import InputsDocument from "../../../student/components/tableReport/modal/InputsDocument";
 import SenderDetail from "./SenderDetail";
 import ActionApprovers from "./ActionApprovers";
+import ListDetailApprovers from "./history-approvers/ListDetail";
 
 const ShowDetail = ({ setRowsToInit }) => {
     const { id } = useParams();
@@ -35,8 +36,6 @@ const ShowDetail = ({ setRowsToInit }) => {
         }
     };
 
-    console.log(_detail);
-
     React.useEffect(() => {
         const abort = new AbortController();
 
@@ -50,7 +49,7 @@ const ShowDetail = ({ setRowsToInit }) => {
 
         return () => abort.abort();
     }, [id, _userDoc]);
-
+    console.log(_detail);
     if (Object.keys(_detail).length > 0) {
         return (
             <Card>
@@ -78,6 +77,15 @@ const ShowDetail = ({ setRowsToInit }) => {
                         </h5>
                         <InputsDocument inputs={JSON.parse(_detail.data)} />
                     </div>
+                    {_detail.approver.map((item, idx) => {
+                        return (
+                            <ListDetailApprovers
+                                key={idx}
+                                translate={t}
+                                approver={item}
+                            />
+                        );
+                    })}
                 </Card.Body>
                 <Card.Footer>
                     <ActionApprovers
