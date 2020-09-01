@@ -7,6 +7,11 @@ export const columns = t => {
             width: 50
         },
         {
+            label:t("document.code"),
+            field: "code",
+            width: 120
+        },
+        {
             label: t("students.table.columns.status"),
             field: "status_badge",
             sort: "asc",

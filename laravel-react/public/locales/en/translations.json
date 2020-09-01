@@ -47,7 +47,8 @@
         "form": "Forms",
         "creat": "Created at",
         "update": "Updated at",
-        "status": "Status"
+        "status": "Status",
+        "code" : "Code"
     },
     "documentStatus": {
         "cancelled": "Cancelled",

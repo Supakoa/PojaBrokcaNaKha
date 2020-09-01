@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import FilterSort from "../../../filter";
 import Swal from "sweetalert2";
 import wordShow from "../../../filter/showMyWord";
+import {vsprintf} from "sprintf-js";
 
 export default function ReportTable() {
     const _userDoc = useSelector(state => state.userDocument);
@@ -48,6 +49,7 @@ export default function ReportTable() {
                     <StatusBadgeDoc key={idx.toString()} status={item.status} />
                 );
                 item.row_id = (idx + 1).toString();
+                item.code = vsprintf("DOC%06d",[item.id]);
                 item.action = (
                     <UserModalDoc
                         key={idx.toString()}

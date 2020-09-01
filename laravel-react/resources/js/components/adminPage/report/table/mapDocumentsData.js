@@ -6,12 +6,13 @@ import ReportStatus from "./ReportStatus";
 import ModalReport from "../../modals/ModalReport";
 import StatusBadgeDoc from "../../../student/components/tableReport/statusDocument";
 import SpanSwitchLanguages from "../../../name-form-ontable";
-
+import {vsprintf} from "sprintf-js"
 export default function mapDocuments(datas) {
 
-    return datas.map(res => {
+    return datas.map((res,idx) => {
         const doc = {
-            id: res.id,
+            id: idx+1,
+            code : vsprintf("DOC%06d",[res.id]),
             typeForm: <SpanSwitchLanguages thName={res.form.th_name} engName={res.form.eng_name}/> ,
             sender: `${res.user.title} ${res.user.first_name} ${res.user.last_name}`,
             sendTime:   <ConvertDate dateTime={res.created_at} />,

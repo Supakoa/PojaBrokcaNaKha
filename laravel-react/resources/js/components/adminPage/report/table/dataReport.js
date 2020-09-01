@@ -29,7 +29,7 @@ export default function dataReport() {
             return []
         });
         setRows(mapDocuments(response,t,i18n));
-        // console.log(_rows);
+        console.log(rows);
 
     };
 
@@ -42,7 +42,7 @@ export default function dataReport() {
     }, []);
 
     return {
-        "columns": columns([t('document.form'), t('sender'), t('document.creat'), t('document.update'), t('document.status')]),
+        "columns": columns([t('document.form'), t('sender'), t('document.creat'), t('document.update'), t('document.status'),t('document.code')]),
         rows
     };
 }

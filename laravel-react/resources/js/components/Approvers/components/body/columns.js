@@ -5,6 +5,10 @@ export const columns = t => {
             field: "row_id",
             sort: "asc",
             width: 50
+        }, {
+            label:t("document.code"),
+            field: "code",
+            width: 120
         },
         {
             label: t("approvers.table.columns.status"),

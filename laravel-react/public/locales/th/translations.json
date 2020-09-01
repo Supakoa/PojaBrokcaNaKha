@@ -47,7 +47,8 @@
         "form": "ประเภทเอกสาร",
         "creat": "เวลาส่ง",
         "update": "แก้ไขล่าสุด",
-        "status": "สถานะ"
+        "status": "สถานะ",
+        "code" : "รหัสเอกสาร"
     },
     "documentStatus": {
         "cancelled": "ยกเลิก",

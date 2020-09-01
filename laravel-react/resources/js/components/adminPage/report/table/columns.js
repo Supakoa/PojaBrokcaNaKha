@@ -7,6 +7,11 @@ export const columns = arrays => {
             width: 20
         },
         {
+            label: arrays[5],
+            field: "code",
+            width: 120
+        },
+        {
             label: arrays[0],
             field: "typeForm",
             width: 150
@@ -33,7 +38,7 @@ export const columns = arrays => {
             width: 150
         },
         {
-            
+
             field: "action",
             sort: "disabled",
             width: 200

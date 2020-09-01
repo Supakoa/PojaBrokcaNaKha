@@ -10,6 +10,7 @@ import ButtonShowDoc from "./ButtonShowDoc";
 import NameFormOnTable from "../../../name-form-ontable";
 import NameSender from "./NameSender";
 import wordShow from "../../../filter/showMyWord";
+import {vsprintf} from "sprintf-js";
 
 const TableApprover = ({
     urlApprover,
@@ -35,6 +36,7 @@ const TableApprover = ({
             if (_name) {
                 return {
                     row_id: (idx + 1).toString(),
+                    code : vsprintf("DOC%06d",[uDoc.id]),
                     status_badge: (
                         <StatusBadgeDoc key={idx} status={uDoc.pivot.status} />
                     ),
