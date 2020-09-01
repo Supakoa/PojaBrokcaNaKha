@@ -61,7 +61,7 @@ export const AddGroup = (props) => {
             }
         }).then(res => {
 
-            console.log('res', res)
+            // console.log('res', res)
 
             let tmp_groupStep = groupSteps
             tmp_groupStep[step] = res.data
@@ -101,7 +101,7 @@ export const AddGroup = (props) => {
 
     // useeffect
     useEffect(() => {
-        console.log('naja')
+        // console.log('naja')
         initState()
     }, [])
 

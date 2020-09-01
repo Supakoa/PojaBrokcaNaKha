@@ -22,7 +22,7 @@ export default function MajorSelect({
         if (!!id) {
             await Axios.get(`http://localhost:8000/api/majors/${id}`).then(
                 res => {
-                    console.log(res);
+                    // console.log(res);
                     setMajor(res.data.faculty_id);
                 }
             );

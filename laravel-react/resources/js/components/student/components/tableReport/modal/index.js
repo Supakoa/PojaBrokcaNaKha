@@ -49,7 +49,7 @@ const UserModalDoc = ({ document, setRows }) => {
             }
         });
 
-    console.log(document);
+    // console.log(document);
 
     return (
         <div>

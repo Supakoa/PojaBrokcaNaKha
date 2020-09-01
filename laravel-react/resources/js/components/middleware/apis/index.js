@@ -8,7 +8,7 @@ export const _urlUser = () => {
     return `${_www}/api/user`;
 };
 
-export const _urlDocuments = () => {
+export const _urlForms = () => {
     return `${_www}/api/forms`;
 };
 
@@ -18,6 +18,10 @@ export const _urlFaculties = () => {
 
 export const _urlUploads = () => {
     return `${_www}/api/uploads`;
+};
+
+export const _urlDocuments = () => {
+    return `${_www}/api/documents`;
 };
 
 export const _urlPostDocuments = () => {

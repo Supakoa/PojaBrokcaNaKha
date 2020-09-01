@@ -1,10 +1,10 @@
 import axios from "axios";
-import { _urlDocuments } from "../apis";
+import { _urlForms } from "../apis";
 import headerConfig from "../headerConfig";
 
-const fetchDocuments = async token => {
+const fetchForms = async token => {
     const _docs = await axios
-        .get(_urlDocuments(), headerConfig(token, 3600))
+        .get(_urlForms(), headerConfig(token, 3600))
         .then(res => {
             // console.log(res.data);
             return res.data;
@@ -15,4 +15,4 @@ const fetchDocuments = async token => {
     return _docs;
 };
 
-export default fetchDocuments;
+export default fetchForms;

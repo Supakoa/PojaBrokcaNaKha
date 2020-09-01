@@ -74,9 +74,9 @@ export const StepColors = props => {
     }
 
     const initGroupUserSteps = () => {
-        console.log('initGroupUserSteps')
-        console.log('numberStep', numberStep)
-        console.log('groupSteps', groupSteps)
+        // console.log('initGroupUserSteps')
+        // console.log('numberStep', numberStep)
+        // console.log('groupSteps', groupSteps)
     }
 
     const handleClickGroup = (item) => {
