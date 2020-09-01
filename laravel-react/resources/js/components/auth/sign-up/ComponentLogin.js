@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function ComponentLogIn() {
+    const { t } = useTranslation();
     return (
         <section className="w-75 m-auto p-sm-5 p-xs-4">
-            <p>Petition คือ ?</p>
-            <p>เว็บไซต์ส่งแบบคำร้องของมหาวิทยาลัยราชภัฎสวนสุนันทา</p>
+            <p>{t("sign.component.whatIs")}</p>
+            <p>{t("sign.component.mean")}</p>
             <hr />
-            <p>คุณต้องการเข้าสู่ระบบเพื่อส่งแบบคำร้องใช่หรือไม่ ?</p>
+            <p>{t("sign.component.you-need")}</p>
             <Link className="m-auto btn btn-light" to="/login">
-                ล็อคอิน
+                {t("sign.component.btn")}
             </Link>
         </section>
     );
