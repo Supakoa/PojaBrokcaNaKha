@@ -45,11 +45,11 @@ class DatabaseSeeder extends Seeder
         AppForm::insert($data);
 
 
-        factory(App\User::class, 100)->create()->each(function ($user) {
-//            if ($user->role_id = 3){
-                $documents = factory(App\Document::class,3)->make();
-                $user->documents()->saveMany($documents);
-//            }
-        });
+//        factory(App\User::class, 100)->create()->each(function ($user) {
+////            if ($user->role_id = 3){
+//                $documents = factory(App\Document::class,3)->make();
+//                $user->documents()->saveMany($documents);
+////            }
+//        });
     }
 }
