@@ -50,9 +50,7 @@ const FilterSort = ({
                                 className="d-flex align-items-center justify-content-between"
                                 onClick={setSort}
                             >
-                                <strong className="px-1" name={item}>
                                     {wordShow(item, t)}{" "}
-                                </strong>
                                 <IconCheck isSort={sortBy === item} />
                             </Dropdown.Item>
                         );
