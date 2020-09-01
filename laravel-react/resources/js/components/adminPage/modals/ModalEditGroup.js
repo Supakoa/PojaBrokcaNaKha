@@ -72,7 +72,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
     });
 
     // function
-    const handleClose = () => setShow(false);
+    const handleClose = () => {setShow(false); window.location.reload(false);};
     const handleShow = () => setShow(true);
 
     const initState = response => {
@@ -383,7 +383,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
 
             <Modal
                 show={show}
-                onHide={() => handleClose}
+                onHide={() => setShow(false)}
                 hidden={modalHidden}
                 aria-labelledby="modal-user"
                 size="lg"
@@ -531,7 +531,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={()=>setShow(false)}>
                         {t("close")}
                     </Button>
                     <Button variant="primary" onClick={handleClose}>

@@ -28,6 +28,7 @@ import post2Subjects from "../middleware/post2Redux/postToSubjects";
 import post2User from "../middleware/post2Redux/postToUser";
 import post2UserDocuments from "../middleware/post2Redux/postToUserDocuments";
 import { useTranslation } from "react-i18next";
+import Axios from "axios";
 
 export default function Student() {
     let { path, url } = useRouteMatch();
@@ -36,7 +37,6 @@ export default function Student() {
     const { pathname } = useLocation();
     const _dispatch = useDispatch();
     const token = localStorage._authLocal;
-    const abort = new AbortController();
     const _user = useSelector(state => state.userState);
 
     const _props = {
@@ -50,28 +50,31 @@ export default function Student() {
         acUserDocs: userDocument,
         acUser: user
     };
+    const [_news, setNews] = React.useState([]);
 
     React.useEffect(() => {
+        const abort = new AbortController();
+
         if (Object.keys(_user).length === 0 && token) {
             post2User(_props, { signal: abort.signal });
-        } else if (_user.id && token) {
+        } else if (_user.id && token ) {
             post2Documents(_props, {
                 signal: abort.signal
             });
             post2Subjects(_props, { signal: abort.signal });
             post2UserDocuments(_props, { signal: abort.signal });
         }
-    }, [token, _user.id]);
 
-    React.useEffect(() => {
         return () => {
             abort.abort();
         };
-    }, []);
+    }, [token, _user.id]);
+
+
 
     return (
         <div className="mb-3">
-            <News />
+            <News images = {_news} />
             <ProfileContext.Provider value={_user}>
                 <NavHeader url={url} />
                 <Row className="w-100 container-fluid">

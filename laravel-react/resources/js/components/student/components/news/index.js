@@ -1,62 +1,52 @@
-import React, { Component } from "react";
-import { Carousel, Image } from "react-bootstrap";
+import React from "react";
+import {Carousel, Image} from "react-bootstrap";
+import Axios from "axios";
 
-export default class News extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            carousel: {
-                index: 0,
-                images: [
-                    {
-                        alt: "First slide",
-                        src:
-                            "http://gen-ed.ssru.ac.th/useruploads/images/20200330/2020033015855464553016.png"
-                    },
-                    {
-                        alt: "Second slide",
-                        src:
-                            "http://gen-ed.ssru.ac.th/useruploads/images/20200309/2020030915837508516704.png"
-                    },
-                    {
-                        alt: "Third slide",
-                        src:
-                            "http://gen-ed.ssru.ac.th/useruploads/images/20200409/2020040915864081832711.png"
-                    },
-                    {
-                        alt: "First slide",
-                        src:
-                            "http://gen-ed.ssru.ac.th/useruploads/images/20200406/2020040615861723466921.jpg"
-                    }
-                ]
-            }
-        };
-        this.handleSelect = this.handleSelect.bind(this);
-    }
+export default function News () {
+    const [news, setNews] = React.useState([])
+    const [index, setIndex] = React.useState(0);
 
-    handleSelect(selectedIndex, e) {
-        this.setState({
-            carousel: {
-                ...this.state.carousel,
-                index: selectedIndex
+    const fetchNews = async () => {
+        await Axios.get(`http://127.0.0.1:8000/api/news`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
+        }).then(res => {
+            setNews(res.data)
         });
-    }
-    render() {
-        return (
+    };
+
+    console.log(news)
+
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+    React.useEffect(()=>{
+        const abort = new AbortController()
+        if (news.length === 0){
+            fetchNews({signal:abort.signal})
+        }
+        return ()=>{
+            abort.abort()
+        }
+    },[])
+
+
+    return (
             <div>
                 <Carousel
-                    activeIndex={this.state.index}
-                    onSelect={this.handleSelect}
+                    activeIndex={index}
+                    onSelect={handleSelect}
                 >
-                    {this.state.carousel.images.map((image, index) => {
+                    {news.map((image, index) => {
                         return (
                             <Carousel.Item key={index.toString()}>
                                 <Image
                                     // height="450"
                                     className="d-block w-100"
-                                    src={image.src}
-                                    alt={image.alt}
+                                    src={`storage/${image.image}`}
+                                    alt={image.ref}
                                     fluid
                                 />
                             </Carousel.Item>
@@ -65,5 +55,5 @@ export default class News extends Component {
                 </Carousel>
             </div>
         );
-    }
+
 }
