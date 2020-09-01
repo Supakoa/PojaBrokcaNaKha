@@ -10,5 +10,6 @@ export const _title = [
     "Miss",
     "Mr.",
     "Miss.",
-    "Dr."
+    "Dr.",
+    "mr"
 ];

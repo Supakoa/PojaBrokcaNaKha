@@ -14,28 +14,28 @@ export const columns = arrays => {
         {
             label: arrays[0],
             field: "typeForm",
-            width: 150
+            width: 350
         },
         {
             label: arrays[1],
             field: "sender",
-            width: 250
+            width: 200
         },
         {
             label: arrays[2],
             field: "sendTime",
-            width: 150
+            width: 250
         },
         {
             label: arrays[3],
             field: "editTime",
-            width: 150
+            width: 250
         },
         {
             label: arrays[4],
             field: "status",
             sort: "disabled",
-            width: 150
+            width: 100
         },
         {
 
