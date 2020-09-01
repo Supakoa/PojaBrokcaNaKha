@@ -1,8 +1,10 @@
 import React from "react";
 import { Form, Container, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function FormLogin(props) {
+    const { t } = useTranslation();
     return (
         <Form onSubmit={props.clickLogin} className="effectSection">
             <Form.Group controlId="formBasicEmail">
@@ -13,7 +15,7 @@ function FormLogin(props) {
                             : "text-info"
                     }
                 >
-                    Username
+                    {t("sign.sign-in.username")}
                 </Form.Label>
                 <Form.Control
                     className={
@@ -23,7 +25,7 @@ function FormLogin(props) {
                     }
                     name="username"
                     type="text"
-                    placeholder="อีเมล"
+                    placeholder={t("sign.sign-in.username")}
                     onChange={props.inputValue}
                 />
             </Form.Group>
@@ -36,7 +38,7 @@ function FormLogin(props) {
                             : "text-info"
                     }
                 >
-                    Password
+                    {t("sign.sign-in.password")}
                 </Form.Label>
                 <Form.Control
                     className={
@@ -46,14 +48,14 @@ function FormLogin(props) {
                     }
                     name="password"
                     type="text"
-                    placeholder="Password"
+                    placeholder={t("sign.sign-in.password")}
                     onChange={props.inputValue}
                 />
             </Form.Group>
             <Container className="d-flex justify-content-between align-items-end">
                 <Form.Group as={Row}>
                     <Button variant="primary" type="submit">
-                        ยืนยัน
+                        {t("sign.component.btn")}
                     </Button>
                 </Form.Group>
                 <Form.Group as={Row}>
@@ -62,7 +64,7 @@ function FormLogin(props) {
                         className="text-secondary"
                         onClick={() => props.showForget(true)}
                     >
-                        ลืมรหัสผ่าน ?
+                        {t("sign.forget")} ?
                     </Link>
                 </Form.Group>
             </Container>

@@ -59,3 +59,11 @@ export const _urlGetMessages = () => {
 export const _urlPostMessage = () => {
     return `${_www}/api/messages`;
 };
+
+export const _urlPostForgetPasswordEmail = () => {
+    return `${_www}/api/password/email`;
+};
+
+export const _urlPostForgetPasswordReset = () => {
+    return `${_www}/api/password/reset`;
+};

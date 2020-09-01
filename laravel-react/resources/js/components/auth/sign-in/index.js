@@ -12,16 +12,25 @@ import { user, isAuththen, pathRoleUser } from "../../../redux/actions";
 import redirectPage from "./RedirectPage";
 import postUser from "../post/postUser";
 import Swal from "sweetalert2";
+import SwitchingLanguageBtn from "../../middleware/switchingLanguage";
+import { useTranslation } from "react-i18next";
+import alertResetPassword from "./AlertResetPassword";
 
 export default function SignIn() {
     let _history = useHistory();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [_loading, setLoading] = React.useState(true);
     const [forgetPass, setForgetPass] = React.useState(false);
+    const [isStatus, setIsStatus] = React.useState(true);
     const [_login, setLogin] = React.useState({
         username: "",
         password: ""
     });
+    // //use Param campaign_id in url
+    let _param = new URLSearchParams(window.location.search);
+    let status = _param.get("status");
+
     const [_error, setError] = React.useState({
         name: "",
         className: "border-danger"
@@ -105,6 +114,13 @@ export default function SignIn() {
         }
     };
 
+    React.useEffect(() => {
+        if (!!status && isStatus) {
+            alertResetPassword(status);
+            setIsStatus(false);
+        }
+    });
+
     return (
         <section className="overflow-hidden">
             <Container fluid>
@@ -114,6 +130,13 @@ export default function SignIn() {
                         lg={6}
                         className="bg-light d-flex align-item-center"
                     >
+                        <div
+                            style={{ top: "0", right: "0" }}
+                            className="position-absolute py-5 px-5 d-flex align-items-center"
+                        >
+                            <span className="px-2">{t("sign.language")} </span>{" "}
+                            <SwitchingLanguageBtn className="nav-link float-right" />
+                        </div>
                         <section className="d-table p-4 w-50 m-auto">
                             <section className="d-table text-center m-auto">
                                 <Image
@@ -128,11 +151,11 @@ export default function SignIn() {
                                     <>
                                         {!forgetPass ? (
                                             <h3 className="p-1 effectSection">
-                                                เข้าสู่ระบบ
+                                                {t("sign.sign-in.signIn")}
                                             </h3>
                                         ) : (
                                             <h3 className="p-1 effectSection">
-                                                ลืมรหัสผ่าน
+                                                {t("sign.forget")}
                                             </h3>
                                         )}
                                     </>

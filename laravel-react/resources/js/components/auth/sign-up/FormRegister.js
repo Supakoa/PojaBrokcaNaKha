@@ -1,124 +1,117 @@
 import React from "react";
 import LogoRegis from "./LogoReagis";
-import {Col, Form, Button, Spinner, Row} from "react-bootstrap";
-import SimpleReactValidator from 'simple-react-validator';
-import {useTranslation} from 'react-i18next';
-import SwitchingLanguageBtn from "../../middleware/switchingLanguage";
+import { Col, Form, Button, Spinner, Row } from "react-bootstrap";
+import validateIndex from "../../middleware/validate";
+import { useTranslation } from "react-i18next";
 
 export default function FormRegister() {
     // const dispatch = useDispatch();
-    const {t} = useTranslation('', {useSuspense: false});
-    const [_select, setSelect] = React.useState(true);
+    const { t } = useTranslation();
     const [_majors, setMajors] = React.useState([]);
+    const [selectedFaculty, setSelectedFaculty] = React.useState(0);
+    const [selectedMajor, setSelectedMajor] = React.useState(0);
     const [_facs, setFacs] = React.useState([]);
     const [_loading, setLoading] = React.useState(true);
-    const [_validator, setValidator] = React.useState(
-        new SimpleReactValidator()
-    );
+    const [_validator, setValidator] = React.useState(false);
     const [_forms, serForms] = React.useState({});
 
-    const _fetchFaculties = async () => {
+    const fetchFaculties = async () => {
         await axios.get(`http://127.0.0.1:8000/api/faculties`, {}).then(res => {
-            const {success} = res.data;
+            const { success } = res.data;
             setFacs(success);
         });
-        // .catch(error => {
-        //     const result = confirm(error);
-        //     if (result) {
-        //         return null;
-        //     }
-        // });
     };
 
     const _fetchMajors = async _facId => {
         await axios
-            .get(`http://127.0.0.1:8000/api/faculties/${_facId}/majors`)
+            .get(`http://127.0.0.1:8000/api/faculties/${Number(_facId)}/majors`)
             .then(res => {
-                funcSet(res.data);
+                setMajors(res.data);
                 // return res.data;
             });
     };
 
-    React.useEffect(() => {
-        _fetchFaculties();
-        // _fetchMajors();
-    }, []);
-
     const handleChanges = event => {
-        const {name, value} = event.target;
-        serForms({
-            ..._forms,
-            [name]: value
+        const { name, value } = event.target;
+        const valid = validateIndex(name, value);
+
+        setValidator({
+            ..._validator,
+            [name]: !valid
         });
+        if (name == "faculty") {
+            setSelectedFaculty(value);
+        } else if (name == "major") {
+            setSelectedMajor(value);
+            serForms({
+                ..._forms,
+                [name]: value
+            });
+        } else {
+            serForms({
+                ..._forms,
+                [name]: value
+            });
+        }
     };
 
-    const handleOnBlur = event => {
-    };
+    const handleOnClick = event => {};
 
-    const handleOnClick = event => {
-    };
-    const handleIsInvalid = event => {
-        // const {name,value} = event.target;
-        //
-        // return _validator.fieldValid(name);
-    };
-
-
+    React.useEffect(() => {
+        if (_facs.length === 0) {
+            fetchFaculties();
+        } else if (Number(selectedFaculty) > 0) {
+            _fetchMajors(selectedFaculty);
+        }
+    }, [_facs, selectedFaculty]);
 
     return (
         <Form className="p-4 w-75 m-auto">
-            <LogoRegis/>
+            <LogoRegis />
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="title" sm={2} md={3} lg={3}>
-                    <Form.Label>{t('user.title')}</Form.Label>
+                    <Form.Label>{t("user.title")}</Form.Label>
                     <Form.Control
                         required
                         type="text"
-                        placeholder={t('user.title')}
+                        placeholder={t("user.title")}
                         name="title"
+                        isInvalid={_validator.title ? _validator.title : false}
                         onChange={handleChanges}
-                        onKeyUp={handleChanges}
-                        isInvalid={!_validator.fieldValid("title")}
                     />
-                    <Form.Control.Feedback type="invalid">
-                        {_validator.showMessageFor("title")}
-                        {_validator.message("title", _forms.title, "max:3", {
-                            messages: {}
-                        })}
-                    </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} controlId="firstName">
+                <Form.Group as={Col} controlId="first_name">
                     <Form.Label>{t("user.firstName")}</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         placeholder={t("user.firstName")}
-                        name="firstName"
+                        name="first_name"
                         onChange={handleChanges}
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="lastName">
+                <Form.Group as={Col} controlId="last_name">
                     <Form.Label>{t("user.lastName")}</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         placeholder={t("user.lastName")}
-                        name="lastName"
+                        name="last_name"
                         onChange={handleChanges}
                     />
                 </Form.Group>
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} md={8} controlId="studentId">
+                <Form.Group as={Col} md={8} controlId="student_id">
                     <Form.Label>{t("user.studentId")}</Form.Label>
                     <Form.Control
                         maxLength={11}
                         required
                         type="text"
                         placeholder={t("user.studentId")}
-                        name="studentId"
+                        name="student_id"
                         onChange={handleChanges}
                     />
                 </Form.Group>
@@ -134,13 +127,14 @@ export default function FormRegister() {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} md={6} controlId="conPassword">
+                <Form.Group as={Col} md={6} controlId="c_password">
                     <Form.Label>{t("user.confirmPassword")}</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         placeholder={t("user.confirmPassword")}
-                        name="conPassword"
+                        name="c_password"
+                        disabled={!_forms.password}
                         onChange={handleChanges}
                     />
                 </Form.Group>
@@ -158,58 +152,77 @@ export default function FormRegister() {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="phone">
+                <Form.Group as={Col} controlId="telephone">
                     <Form.Label>{t("user.phoneNumber")}</Form.Label>
                     <Form.Control
                         maxLength={10}
                         required
                         type="text"
                         placeholder={t("user.phoneNumber")}
-                        name="phone"
+                        name="telephone"
                         onChange={handleChanges}
                     />
                 </Form.Group>
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} controlId="faculty">
+                <Form.Group as={Col} controlId="faculty_id">
                     <Form.Label>{t("user.faculty")}</Form.Label>
                     <Form.Control
-                        required
+                        // required={!!_validator.faculty_id}
+                        // isInvalid={
+                        //     _validator.faculty_id
+                        //         ? _validator.faculty_id
+                        //         : false
+                        // }
                         as="select"
                         custom
-                        name="faculty"
+                        name="faculty_id"
                         onChange={handleChanges}
+                        value={selectedFaculty > 0 ? selectedFaculty : 0}
                     >
-                        <option value="">{t("user.faculty")}</option>
+                        <option value="0">{t("user.faculty")}</option>
+                        {_facs.map((item, idx) => {
+                            return (
+                                <option key={idx} value={item.id}>
+                                    {item.name}
+                                </option>
+                            );
+                        })}
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="major">
+                <Form.Group as={Col} controlId="major_id">
                     <Form.Label>{t("user.major")}</Form.Label>
                     <Form.Control
                         required
                         as="select"
                         custom
-                        name="major"
+                        name="major_id"
                         onChange={handleChanges}
-                        disabled={_select}
+                        disabled={selectedFaculty === 0}
+                        value={selectedMajor > 0 ? selectedMajor : 0}
                     >
-                        <option value="">{t("user.major")}</option>
+                        <option value="0">{t("user.major")}</option>
+                        {_majors.map((item, idx) => {
+                            return (
+                                <option key={idx} value={item.id}>
+                                    {item.name}
+                                </option>
+                            );
+                        })}
                     </Form.Control>
                 </Form.Group>
             </Form.Row>
             <Row>
-                <Col xl= {3}>
+                <Col xl={3}>
                     <Button variant="primary" onClick={handleOnClick}>
-                        {_loading ? "ยืนยัน" : <Spinner animation="border"/>}
+                        {_loading ? (
+                            t("user.btn")
+                        ) : (
+                            <Spinner animation="border" />
+                        )}
                     </Button>
-                </Col>
-                <Col xl={6}>
-
-                </Col>
-                <Col xl= {3}>
-                    <SwitchingLanguageBtn className = "nav-link"/>
                 </Col>
             </Row>
         </Form>

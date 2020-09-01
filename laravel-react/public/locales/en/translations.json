@@ -9,7 +9,25 @@
         "email": "Email",
         "phoneNumber": "Phone number",
         "faculty": "Faculty",
-        "major": "Major"
+        "major": "Major",
+        "btn": "Submit"
+    },
+    "sign": {
+        "language": "English",
+        "component": {
+            "whatIs": "What is Petition ?",
+            "mean": "Website for submitting applications from Suan Sunandha Rajabhat University",
+            "you-need": "Would you like to Sign-in ?",
+            "you-need-regist": "Do you want to submit a request but have not registered yet ?",
+            "btn": "Submit",
+            "btn-regist": "register"
+        },
+        "sign-in": {
+            "signIn": "Sign-in",
+            "username": "Email",
+            "password": "Password"
+        },
+        "forget": "Forget Password"
     },
     "menu": {
         "menu": "Menu",
