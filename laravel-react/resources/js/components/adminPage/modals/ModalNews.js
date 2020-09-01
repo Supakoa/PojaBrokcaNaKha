@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { newsActions } from "../../../redux/actions";
 import {useTranslation} from 'react-i18next';
 import { first } from "lodash";
+import Swal from "sweetalert2";
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
@@ -62,8 +63,18 @@ export default function ModalNews(props) {
                 }
                 tempShowNews[redux_showNews.data.length] = newNews
                 setIsShow(false)
-
+                return Swal.fire(
+                    "เพิ่มข้อมูลสำเร็จ",
+                    "Success",
+                    status = "success"
+                );
                 dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
+            }).catch(reason => {
+                return Swal.fire(
+                    "เพิ่มข้อมูลไม่สำเร็จ",
+                    "Fail",
+                    status = "error"
+                );
             })
         } else {
             const id = response.id;
@@ -84,6 +95,17 @@ export default function ModalNews(props) {
                 }
                 dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
                 setIsShow(false)
+                return Swal.fire(
+                    "แก้ไขสำเร็จ",
+                    "Success",
+                    status = "success"
+                );
+            }).catch(reason => {
+                return Swal.fire(
+                    "แก้ไขไม่สำเร็จ",
+                    "Fail",
+                    status = "error"
+                );
             })
         }
     };
