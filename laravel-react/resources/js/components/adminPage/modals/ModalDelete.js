@@ -27,6 +27,7 @@ export default function ModalDelete(props) {
                     }
                 }).then(res => {
                     Swal.fire(t('modalDelete.deleted'),`${api} ${t('modalDelete.hasBeetDeleted')}`, t('modalDelete.success'));
+                    window.location.reload(false);
                 })
             }
         });

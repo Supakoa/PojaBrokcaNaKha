@@ -3,7 +3,7 @@ import DataGroupTable from "./DataGroupTable";
 import { MDBDataTable } from "mdbreact";
 // import {useTranslation} from 'react-i18next';
 
-export default function TableGroups() {
+export default function TableGroups({groups,setGroups}) {
     const _data = DataGroupTable();
     // const {t} = useTranslation('', {useSuspense: false});
 

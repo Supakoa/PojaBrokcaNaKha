@@ -12,7 +12,7 @@ import {
 
 const DataGroupTable = () => {
     const [rows, setRows] = React.useState([]);
-    const [gourps, setGourps] = useState(null);
+    const [groups, setGroups] = useState(null);
 
     // redux
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const DataGroupTable = () => {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(res => {
-            setGourps(res.data);
+            setGroups(res.data);
         });
     };
 
@@ -68,8 +68,8 @@ const DataGroupTable = () => {
     };
 
     const initShowNews = () => {
-        if (gourps) {
-            fetchRowData(gourps);
+        if (groups) {
+            fetchRowData(groups);
         }
     };
 
@@ -87,7 +87,7 @@ const DataGroupTable = () => {
 
     useEffect(() => {
         initShowNews();
-    }, [gourps]);
+    }, [groups]);
 
     return { columns: column(), rows };
 };

@@ -6,7 +6,7 @@ import TableGroups from "./table";
 import ModalNewGroup from "./modal/ModalNewGroup";
 
 export default function Group() {
-    const [gourps, setGourps] = useState(null);
+    const [groups, setGroups] = useState([]);
     return (
         <Card>
             <Card.Header className="text-center">
@@ -17,8 +17,8 @@ export default function Group() {
             </Card.Header>
             <Card.Body>
                 {/* <ModalGroup isCreateProps={ true } /> */}
-                <ModalNewGroup isCreateProps={true} />
-                <TableGroups />
+                <ModalNewGroup isCreateProps={true}  groups = {groups} setGroups = {setGroups} />
+                <TableGroups groups = {groups} setGroups = {setGroups} />
             </Card.Body>
         </Card>
     );

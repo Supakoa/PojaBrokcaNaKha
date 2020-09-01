@@ -4,13 +4,15 @@ import { useTranslation, composeInitialProps } from "react-i18next";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import { initNewsForm } from "../../../../redux/actions";
+import TableGroups from "../table";
 
 const ModalNewGroup = ({
     isCreateProps,
     res,
     setModalHidden,
     setgroupDetail,
-    groupDetail
+    groupDetail,
+    groups, setGroups
 }) => {
     // local state
     const [show, setShow] = useState(false);
@@ -69,7 +71,7 @@ const ModalNewGroup = ({
                         title: "เกิดข้อผิดพลาดในการสร้างกลุ่ม"
                     });
                 }
-
+                window.location.reload(false);
                 handleClose();
             });
         } else {
@@ -106,6 +108,8 @@ const ModalNewGroup = ({
                 });
                 handleClose();
                 setModalHidden(false);
+                // window.location.reload(false);
+
             });
         }
     };
