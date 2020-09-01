@@ -50,10 +50,11 @@
         "status": "Status"
     },
     "documentStatus": {
-        "cencel": "Cencelled",
+        "cancelled": "Cancelled",
         "pending": "Pending",
-        "reject": "Reject",
-        "success": "Success"
+        "edited": "Edited",
+        "rejected": "Rejected",
+        "approved": "Approved"
     },
     "day&time": "Day / Time",
     "selectToShowMessage": "Please select a name To display the message",

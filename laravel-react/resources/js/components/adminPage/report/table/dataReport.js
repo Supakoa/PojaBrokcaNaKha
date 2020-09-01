@@ -1,42 +1,48 @@
 import React from "react";
-import { data } from "./testData";
 import ReportStatus from "./ReportStatus";
 import ModalReport from "../../modals/ModalReport";
-import { columns } from "./columns";
+import {columns} from "./columns";
 import {useTranslation} from 'react-i18next';
+import Axios from "axios";
+import ConvertDate from "../../../middleware/method/convertDate";
+import mapDocuments from "./mapDocumentsData";
 
 export default function dataReport() {
     const [rows, setRows] = React.useState([]);
-    const {t} = useTranslation('', {useSuspense: false});
+    const {t,i18n} = useTranslation();
 
-    const fetchRowData = _data => {
-        const _rows = _data.map(res => {
-            // console.log(res);
 
-            const response = {
-                id: res.id,
-                typeForm: res.typeForm,
-                sender: res.sender,
-                sendTime: res.start,
-                editTime: res.end,
-                status: ReportStatus(res.status,t),
-                action: <ModalReport key={res.id} />
-            };
-            return response;
+
+
+
+    const fetchRowData = async () => {
+        let response = [];
+        response = await Axios.get(`http://localhost:8000/api/documents`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
+            return res.data
+        }).catch(e => {
+            return []
         });
+        setRows(mapDocuments(response,t,i18n));
         // console.log(_rows);
 
-        return _rows;
     };
 
     React.useEffect(() => {
         const abort = new AbortController();
-        const _row = fetchRowData(data, { signal: abort.signal });
-        setRows(_row);
+        fetchRowData();
         return () => {
             abort.abort();
         };
-    }, [t]);
+    }, []);
 
-    return {"columns" : columns([t('document.form'),t('sender'),t('document.creat'),t('document.update'),t('document.status')]) , rows };
+    return {
+        "columns": columns([t('document.form'), t('sender'), t('document.creat'), t('document.update'), t('document.status')]),
+        rows
+    };
 }

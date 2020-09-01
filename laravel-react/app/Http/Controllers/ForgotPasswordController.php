@@ -6,6 +6,7 @@ use Carbon\Exceptions\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class ForgotPasswordController extends Controller
@@ -51,9 +52,10 @@ class ForgotPasswordController extends Controller
         });
 
         if ($reset_password_status == Password::INVALID_TOKEN) {
-            return response()->json(["msg" => "Invalid token provided"], 400);
-        }
+            return Redirect::to("/login?status=reset-fail");
 
-        return response()->json(["msg" => "Password has been successfully changed"]);
+        }else{
+            return Redirect::to("/login?status=reset-success");
+        }
     }
 }

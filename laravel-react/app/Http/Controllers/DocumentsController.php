@@ -14,12 +14,16 @@ class DocumentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Document[]|Collection
      */
     public function index(Request $request)
     {
         $documents = Document::all();
-
+        foreach ($documents as  $document) {
+            $document->user;
+            $document->form;
+//            $document['code'] =
+        }
         return $documents;
     }
 

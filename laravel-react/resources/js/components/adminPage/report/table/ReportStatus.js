@@ -5,25 +5,31 @@ const ReportStatus = (_status,t) => {
 
     switch (_status) {
 
-        case 0:
+        case "pending":
             return (
                 <Badge pill variant="info">
                     {t('documentStatus.pending')}
                 </Badge>
             );
-        case 1:
+        case "cancelled":
             return (
                 <Badge pill variant="warning">
-                    {t('documentStatus.cencel')}
+                    {t('documentStatus.cancelled')}
                 </Badge>
             );
-        case 2:
+        case "edited":
+            return (
+                <Badge pill variant="warning">
+                    {t('documentStatus.edited')}
+                </Badge>
+            );
+        case "rejected":
             return (
                 <Badge pill variant="danger">
                     {t('documentStatus.reject')}
                 </Badge>
             );
-        case 3:
+        case "approved":
             return (
                 <Badge pill variant="success">
                     {t('documentStatus.success')}

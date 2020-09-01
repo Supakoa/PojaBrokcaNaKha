@@ -50,10 +50,11 @@
         "status": "สถานะ"
     },
     "documentStatus": {
-        "cencel": "ยกเลิก",
+        "cancelled": "ยกเลิก",
         "pending": "กำลังดำเนินการ",
-        "reject": "ไม่อนุมัติ",
-        "success": "สำเร็จ"
+        "edited": "แก้ไข",
+        "rejected": "ไม่อนุมัติ",
+        "approved": "สำเร็จ"
     },
     "day&time": "วัน / เวลา",
     "selectToShowMessage": "กรุณาเลือกรายชื่อ เพื่อแสดงข้อความ",
