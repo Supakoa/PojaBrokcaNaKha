@@ -79,8 +79,12 @@ function FormNews({ response, isCreateProps }) {
 
         // console.log('file', file)
         const pathImage = await Axios.post(
-            `http://localhost:8000/api/uploads`,
-            formData
+            `http://localhost:8000/api/uploadNews`,
+            formData,{headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }}
         ).then(res => {
             return res.data;
         });
@@ -106,8 +110,9 @@ function FormNews({ response, isCreateProps }) {
                 <Image
                     src={`/storage/` + imagePreviewUrl}
                     rounded
-                    width="100%"
-                    height="300"
+                    className="mt-4"
+                    width="auto"
+                    height="150"
                 />
             );
         }

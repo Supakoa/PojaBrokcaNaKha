@@ -48,8 +48,8 @@ export default function ModalNews(props) {
 
         if (isCreateProps) {
             Axios.post(`${apiPath}`, sendFormTemplate, {
-                Header: {
-                    "Content-type": "multipart/form-data",
+                headers: {
+                    // "Content-type": "multipart/form-data",
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"
                     )}`
@@ -61,7 +61,7 @@ export default function ModalNews(props) {
                     tempShowNews[i] = redux_showNews.data[i]
                 }
                 tempShowNews[redux_showNews.data.length] = newNews
-
+                setIsShow(false)
 
                 dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
             })
@@ -69,8 +69,7 @@ export default function ModalNews(props) {
             const id = response.id;
 
             Axios.patch(`${apiPath}/${id}`, sendFormTemplate, {
-                Header: {
-                    'Content-type': 'multipart/form-data',
+                headers: {
                     'Authorization': `Bearer ${localStorage.getItem("_authLocal")}`
                 }
             }).then(async res => {
@@ -84,6 +83,7 @@ export default function ModalNews(props) {
                     ...res.data
                 }
                 dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
+                setIsShow(false)
             })
         }
     };

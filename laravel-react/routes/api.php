@@ -62,9 +62,17 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::delete('groups/{group}/users','GroupsController@deleteUser');
 
     Route::post("/uploads",function (Request $request){
-
+//        1140 × 420
         $imagePath = request('image')->store('uploads','public');
         $image = Image::make(public_path("storage/{$imagePath}"));
+        $image->save();
+        return  $imagePath;
+
+    });    Route::post("/uploadNews",function (Request $request){
+//        1140 × 420
+        $imagePath = request('image')->store('uploads','public');
+        $image = Image::make(public_path("storage/{$imagePath}"));
+        $image->fit(1140, 420);
         $image->save();
         return  $imagePath;
 
