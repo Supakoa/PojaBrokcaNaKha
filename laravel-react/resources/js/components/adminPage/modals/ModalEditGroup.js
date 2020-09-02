@@ -296,7 +296,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
         };
     }, [response]);
 
-    console.log("showGroupUsers", showGroupUsers);
+    // console.log("showGroupUsers", showGroupUsers);
     useEffect(() => {
         updateShowUsersTable();
     }, [showGroupUsers]);
