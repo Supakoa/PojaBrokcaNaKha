@@ -14,7 +14,7 @@ const ShowDetail = ({ setRowsToInit }) => {
     const { id } = useParams();
     const { i18n, t } = useTranslation();
     const _history = useHistory();
-    const _location = useLocation()
+    const _location = useLocation();
     const _userDoc = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
     const [_detail, setDetail] = React.useState({});
@@ -42,7 +42,7 @@ const ShowDetail = ({ setRowsToInit }) => {
 
         if (id && _userDoc.length !== 0) {
             findingDocument(_userDoc, id, { signal: abort.signal });
-        } else  if(_location.pathname !== '/profile'){
+        } else if (_location.pathname !== "/profile") {
             setTimeout(() => {
                 _history.push("/Approvers");
             }, 2000);
@@ -78,7 +78,7 @@ const ShowDetail = ({ setRowsToInit }) => {
                         </h5>
                         <InputsDocument inputs={JSON.parse(_detail.data)} />
                     </div>
-                    {_detail.approver ? (
+                    {_detail.approver && _detail.approver.length > 0 ? (
                         <ListDetailApprovers
                             translate={t}
                             approvers={_detail.approver}
