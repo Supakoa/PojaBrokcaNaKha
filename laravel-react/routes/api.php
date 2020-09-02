@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('documents/{document}/cancel',"DocumentsController@cancel");
     Route::post('documents/{document}/approve',"DocumentsController@approve");
     Route::resource('messages', 'MessagesController', ['except' => ['create', 'edit']]);
+    Route::get('messages/{user}/read', 'MessagesController@read');
 
     Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 

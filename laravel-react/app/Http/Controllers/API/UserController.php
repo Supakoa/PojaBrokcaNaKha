@@ -6,6 +6,8 @@ namespace App\Http\Controllers\API;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
+use App\Message;
+use App\MyEvent\ChatEchoToAdmin;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -184,9 +186,16 @@ class UserController extends Controller
             $users = $users->filter(function ($user, $key) {
                 return  count($user->messages) > 0;
             });
+            foreach ($users as $user) {
+                $count_unread =  Message::query()->where("user_id", $user->id)->whereNull("admin_id")->where("read",0)->count();
+//                event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
+                $user["count_unread"] = $count_unread;
+            }
             return response()->json(['success' => array_values($users->all())], $this->successStatus);
         } else {
-            return response()->json(['success' => $user->messages], $this->successStatus);
+                $count_unread =  Message::query()->where("user_id", $user->id)->whereNull("admin_id")->where("read",0)->count();
+//                event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
+            return response()->json(['success' => $user->messages,'count_unread',$count_unread], $this->successStatus);
         }
     }
 
