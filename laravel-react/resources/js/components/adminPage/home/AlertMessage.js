@@ -1,32 +1,59 @@
 import React from "react";
-import { Card, Alert } from "react-bootstrap";
-import {useTranslation} from 'react-i18next';
+import { Card, ListGroup } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { getMessages } from "../../middleware/axios/getMessages";
 
 export default function AlertMessage() {
-    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation();
+    const [_listUsers, setListUsers] = React.useState([]);
+    const [isopen, setIsOpen] = React.useState(true);
 
+    const fetchMessages = async token => {
+        const _getAll = await getMessages(token);
+        if (_getAll) setListUsers(_getAll);
+    };
+    const scrollToBottom = () => {
+        if (isopen) {
+            setIsOpen(false);
+            setTimeout(() => {
+                var element = document.getElementById("chatBody");
+                element.scrollTop = element.scrollHeight;
+            }, 200);
+        }
+    };
+
+    React.useEffect(() => {
+        const abort = new AbortController();
+        fetchMessages(localStorage._authLocal, { signal: abort.signal });
+
+        return () => {
+            abort.abort();
+        };
+    }, [localStorage._authLocal]);
     return (
         <Card>
             <Card.Header>
-                <Card.Title>{t('menu.message')}</Card.Title>
+                <Card.Title>{t("menu.message")}</Card.Title>
             </Card.Header>
             <Card.Body className="p-1">
-                {[
-                    "primary",
-                    "secondary",
-                    "success",
-                    "danger",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark"
-                ].map((variant, idx) => (
-                    <Alert key={idx} variant={variant}>
-                        This is a {variant} alert with{" "}
-                        <Alert.Link href="#">an example link</Alert.Link>. Give
-                        it a click if you like.
-                    </Alert>
-                ))}
+                <ListGroup variant="flush" className="rounded">
+                    {_listUsers.length > 0
+                        ? _listUsers.map((item, idx) => {
+                              return (
+                                  <ListGroup.Item
+                                      key={idx.toString()}
+                                      action
+                                      href={`/admin/inbox#${item.id}`}
+                                      onClick={scrollToBottom}
+                                      className="border rounded"
+                                  >
+                                      <i className="fas fa-comment-dots"></i>{" "}
+                                      {`${item.title} ${item.first_name} ${item.last_name}`}
+                                  </ListGroup.Item>
+                              );
+                          })
+                        : "Empty List"}
+                </ListGroup>
             </Card.Body>
         </Card>
     );
