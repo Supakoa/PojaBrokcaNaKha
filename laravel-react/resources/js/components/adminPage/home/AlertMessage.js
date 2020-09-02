@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, ListGroup, Badge } from "react-bootstrap";
+import { Card, ListGroup, Badge, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { getMessages } from "../../middleware/axios/getMessages";
 
@@ -43,22 +43,26 @@ export default function AlertMessage() {
                 className="p-1"
             >
                 <ListGroup variant="flush" className="rounded">
-                    {_listUsers.length > 0
-                        ? _listUsers.map((item, idx) => {
-                              return (
-                                  <ListGroup.Item
-                                      key={idx.toString()}
-                                      action
-                                      href={`/admin/inbox#${item.id}`}
-                                      onClick={scrollToBottom}
-                                      className="border rounded"
-                                  >
-                                      <i className="fas fa-comment-dots"></i>{" "}
-                                      {`${item.title} ${item.first_name} ${item.last_name}`}
-                                  </ListGroup.Item>
-                              );
-                          })
-                        : "Empty List"}
+                    {_listUsers.length > 0 ? (
+                        _listUsers.map((item, idx) => {
+                            return (
+                                <ListGroup.Item
+                                    key={idx.toString()}
+                                    action
+                                    href={`/admin/inbox#${item.id}`}
+                                    onClick={scrollToBottom}
+                                    className="border rounded"
+                                >
+                                    <i className="fas fa-comment-dots"></i>{" "}
+                                    {`${item.title} ${item.first_name} ${item.last_name}`}
+                                </ListGroup.Item>
+                            );
+                        })
+                    ) : (
+                        <div className="d-flex align-items-center justify-content-center py-2">
+                            <Spinner animation="border" />
+                        </div>
+                    )}
                 </ListGroup>
             </Card.Body>
         </Card>

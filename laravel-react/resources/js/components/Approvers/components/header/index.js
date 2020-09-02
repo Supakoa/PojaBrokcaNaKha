@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 const HeaderApprover = () => {
     const _user = useSelector(s => s.userState);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     return (
         <Navbar
             bg="info"
@@ -35,8 +35,20 @@ const HeaderApprover = () => {
                     />{" "}
                     {t("txt-logo")}
                 </Navbar.Brand>
+
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="text-white px-2">
+                        <Nav.Item
+                            as={Link}
+                            className="text-light list-unstyled"
+                            to="/Approvers/profile"
+                        >
+                            {i18n.language === "th"
+                                ? "ข้อมูลส่วนตัว"
+                                : "Profile"}
+                        </Nav.Item>
+                    </Nav>
                     <Nav className="ml-auto">
                         <Dropdown>
                             {Object.keys(_user).length > 0 ? (

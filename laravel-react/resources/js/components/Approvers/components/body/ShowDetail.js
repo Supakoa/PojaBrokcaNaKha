@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Card, Spinner } from "react-bootstrap";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ConvertDate from "../../../middleware/method/convertDate";
 import StatusBadgeDoc from "../../../student/components/tableReport/statusDocument";
@@ -14,6 +14,7 @@ const ShowDetail = ({ setRowsToInit }) => {
     const { id } = useParams();
     const { i18n, t } = useTranslation();
     const _history = useHistory();
+    const _location = useLocation()
     const _userDoc = useSelector(s => s.userDocument);
     const _docTemps = useSelector(s => s.documentsTemplate);
     const [_detail, setDetail] = React.useState({});
@@ -41,7 +42,7 @@ const ShowDetail = ({ setRowsToInit }) => {
 
         if (id && _userDoc.length !== 0) {
             findingDocument(_userDoc, id, { signal: abort.signal });
-        } else {
+        } else  if(_location.pathname !== '/profile'){
             setTimeout(() => {
                 _history.push("/Approvers");
             }, 2000);

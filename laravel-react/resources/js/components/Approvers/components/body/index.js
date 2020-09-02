@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import TableApprover from "./tableApprover";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,11 +18,14 @@ import NoneDetail from "./NoneDetatil";
 import FilterSort from "../../../filter";
 import post2AllUsers from "../../../middleware/post2Redux/postToUsers";
 import MessageElements from "../../../student/components/message";
+import ProfileForm from "../../../student/components/Profile/profileForm";
+import { useTranslation } from "react-i18next";
 
 export const SetRowsTable = React.createContext();
 
 export default function BodyApprover() {
     const { path, url } = useRouteMatch();
+    const { i18n } = useTranslation();
     const _dispatch = useDispatch();
     const token = localStorage._authLocal;
     const _userId = useSelector(s => s.userState.id);
@@ -88,6 +91,20 @@ export default function BodyApprover() {
                 <Route exact path={`${path}`} component={NoneDetail} />
                 <Route path={`${path}/show/:id`}>
                     <ShowDetail setRowsToInit={setRows} />
+                </Route>
+                <Route path={`${path}/profile`}>
+                    <Card>
+                        <Card.Header>
+                            <h4 className="text-center">
+                                {i18n.language === "th"
+                                    ? "ข้อมูลส่วนตัว"
+                                    : "Profile"}
+                            </h4>
+                        </Card.Header>
+                        <Card.Body>
+                            <ProfileForm role="approver" />
+                        </Card.Body>
+                    </Card>
                 </Route>
             </Switch>
             <MessageElements token={token} />

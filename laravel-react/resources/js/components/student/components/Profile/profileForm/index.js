@@ -12,9 +12,9 @@ import { _urlUsers } from "../../../../middleware/apis";
 import headerConfig from "../../../../middleware/headerConfig";
 import { useTranslation } from "react-i18next";
 
-const ProfileForm = () => {
+const ProfileForm = ({ role }) => {
     const _dispatch = useDispatch();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const _studentProfile = useSelector(state => state.userState);
     const [_profile, setProfile] = React.useState({});
     const [_isSubmit, setIsSubmit] = React.useState(false);
@@ -288,8 +288,30 @@ const ProfileForm = () => {
                                     {t("students.forms.mail.text")}
                                 </Form.Text>
                             </Col>
+                            <Col
+                                className={
+                                    role === "approver" ? "d-block" : "d-none"
+                                }
+                                sm={10}
+                                md={5}
+                                lg={5}
+                            >
+                                <Form.File
+                                    className="position-relative"
+                                    name="file"
+                                    label={
+                                        i18n.language === "th"
+                                            ? "นำเข้า ลายเซ็นต์"
+                                            : "import licence"
+                                    }
+                                />
+                            </Col>
                         </Form.Group>
-                        <Form.Group as={Row}>
+
+                        <Form.Group
+                            className={role === "approver" ? "d-none" : ""}
+                            as={Row}
+                        >
                             <FacultiesContext.Consumer>
                                 {faculties => {
                                     return (
@@ -313,16 +335,13 @@ const ProfileForm = () => {
                                 disOption={_disOption}
                             />
                         </Form.Group>
+
                         <Col className="text-center">
                             {_loading ? (
                                 <Spinner animation="grow" />
                             ) : (
                                 <Button
-                                    variant={
-                                        !_isUpdate
-                                            ? "outline-warning"
-                                            : "warning"
-                                    }
+                                    variant={!_isUpdate ? "info" : "warning"}
                                     className={
                                         _isUpdate
                                             ? "text-white btn-block"

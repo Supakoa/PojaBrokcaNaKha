@@ -1,15 +1,24 @@
 import React from "react";
-import {Card, Row, Col, Tab, ListGroup, Alert, Badge} from "react-bootstrap";
+import {
+    Card,
+    Row,
+    Col,
+    Tab,
+    ListGroup,
+    Alert,
+    Badge,
+    Spinner
+} from "react-bootstrap";
 import BoxMessage from "./BoxMessage";
 import FormSend from "./FormSend";
 import { useTranslation } from "react-i18next";
 import { getMessages } from "../../middleware/axios/getMessages";
 import ListMessages from "../../student/components/message/list-message";
 import axios from "axios";
-import {_urlGetMessages} from "../../middleware/apis";
+import { _urlGetMessages } from "../../middleware/apis";
 import headerConfig from "../../middleware/headerConfig";
 import Swal from "sweetalert2";
-import {forEach} from "react-bootstrap/cjs/ElementChildren";
+import { forEach } from "react-bootstrap/cjs/ElementChildren";
 
 export default function TemplateMessage() {
     const [_listUsers, setListUsers] = React.useState([]);
@@ -21,28 +30,33 @@ export default function TemplateMessage() {
         if (_getAll) setListUsers(_getAll);
     };
 
-    const read =async (id) => axios.get(`http://localhost:8000/api/messages/${id}/read`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
-        }
-    }).then(res => {
-        let user = _listUsers.find(value => {
-            console.log("value",value.id)
-            console.log("e.target.name ",id)
-            return   value.id == id
-        });
-        if (!!user){
-            console.log("user ",user)
-            user.count_unread = 0;
-            setListUsers([..._listUsers]);
-        }
-    });
+    const read = async id =>
+        axios
+            .get(`http://localhost:8000/api/messages/${id}/read`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }
+            })
+            .then(res => {
+                let user = _listUsers.find(value => {
+                    console.log("value", value.id);
+                    console.log("e.target.name ", id);
+                    return value.id == id;
+                });
+                if (!!user) {
+                    console.log("user ", user);
+                    user.count_unread = 0;
+                    setListUsers([..._listUsers]);
+                }
+            });
     let channel = window.Echo.channel("channel-chat");
     channel.listen(".event-chat-admin", async function(data) {
         let user = _listUsers.find(value => value.id === data.user_id);
         setIsOpen(true);
         if (!!user) {
-            user['count_unread'] = data.count_messages_unread;
+            user["count_unread"] = data.count_messages_unread;
             let tmp_message = {};
             tmp_message.id = data.count_messages + 1;
             tmp_message.message = data.message;
@@ -64,11 +78,10 @@ export default function TemplateMessage() {
         element.scrollTop = element.scrollHeight;
     });
 
-
-    const scrollToBottom = (e) => {
+    const scrollToBottom = e => {
         if (isopen) {
-            let id = e.target.name
-               read(id)
+            let id = e.target.name;
+            read(id);
             setIsOpen(false);
             setTimeout(() => {
                 var element = document.getElementById("chatBody");
@@ -93,26 +106,37 @@ export default function TemplateMessage() {
                     <p>{t("sender")}</p>
                     <hr />
                     <ListGroup variant="flush" className="rounded">
-                        {_listUsers.length > 0
-                            ? _listUsers.map((item, idx) => {
-                                  return (
-                                      <ListGroup.Item
-                                          key={idx.toString()}
-                                          action
-                                          href={`#${item.id}`}
-                                          name={item.id}
-                                          onClick={scrollToBottom}
-                                          className="border rounded clearfix"
-                                      >
-
-                                          <i className="fas fa-comment-dots"></i>{" "}
-                                          {`${item.title} ${item.first_name} ${item.last_name}`}
-                                          {item.count_unread ?  <Badge variant='danger' className='float-right' >{item.count_unread}</Badge> : ""}
-
-                                      </ListGroup.Item>
-                                  );
-                              })
-                            : "Empty List"}
+                        {_listUsers.length > 0 ? (
+                            _listUsers.map((item, idx) => {
+                                return (
+                                    <ListGroup.Item
+                                        key={idx.toString()}
+                                        action
+                                        href={`#${item.id}`}
+                                        name={item.id}
+                                        onClick={scrollToBottom}
+                                        className="border rounded clearfix"
+                                    >
+                                        <i className="fas fa-comment-dots"></i>{" "}
+                                        {`${item.title} ${item.first_name} ${item.last_name}`}
+                                        {item.count_unread ? (
+                                            <Badge
+                                                variant="danger"
+                                                className="float-right"
+                                            >
+                                                {item.count_unread}
+                                            </Badge>
+                                        ) : (
+                                            ""
+                                        )}
+                                    </ListGroup.Item>
+                                );
+                            })
+                        ) : (
+                            <div className="d-flex align-items-center justify-content-center py-2">
+                                <Spinner animation="border" />
+                            </div>
+                        )}
                     </ListGroup>
                 </Col>
                 <Col xs={12} sm={12} md={8} lg={8}>
