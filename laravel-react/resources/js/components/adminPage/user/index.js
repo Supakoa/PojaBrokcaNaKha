@@ -46,7 +46,7 @@ export default class User extends Component {
         let formData = new FormData();
         formData.append("file", e.target.files[0]);
 
-        Axios.post("http://localhost:8000", formData, {
+        Axios.post("http://localhost:8000/api/users/import", formData, {
             headers: {
                 Authorization: `Bearer ${localStorage._authLocal}`,
                 "Content-Type": "application/json",
@@ -68,21 +68,19 @@ export default class User extends Component {
                     </Card.Title>
                 </Card.Header>
                 <Card.Body className="w-100">
-                    <div className="text-right py-2">
+                    <div className="w-100 d-table align-items-center justify-content-end py-2">
                         <Form.Group>
+                            <Form.Label>import file</Form.Label>
                             <Form.File
                                 className="position-relative"
-                                required
                                 name="file"
-                                label="File"
                                 onChange={this.importUsers}
                                 id="validationFormik107"
-                                feedbackTooltip
                             />
                         </Form.Group>
 
                         <a
-                            className="mx-2"
+                            className="btn btn- mx-2"
                             size="sm"
                             variant="info"
                             href={"../api/users/export"}
