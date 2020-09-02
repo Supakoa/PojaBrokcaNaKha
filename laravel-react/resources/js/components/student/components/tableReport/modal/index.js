@@ -68,7 +68,10 @@ const UserModalDoc = ({ document, setRows }) => {
                 <Modal.Header closeButton>
                     <div className="w-100 d-flex align-items-center justify-content-between">
                         <Modal.Title as="h6">
-                            - {document.form_name}
+                            -{" "}
+                            {document.form_name
+                                ? document.form_name
+                                : document.form.th_name}
                         </Modal.Title>
                         {_status ? (
                             <StatusBadgeDoc status={document.status} />
@@ -108,7 +111,11 @@ const UserModalDoc = ({ document, setRows }) => {
                             <div className="border-left border-right border-bottom rounded py-2">
                                 <InputsDocument
                                     styles={contentStyle}
-                                    inputs={JSON.parse(document.data)}
+                                    inputs={
+                                        document.data !== null
+                                            ? JSON.parse(document.data)
+                                            : JSON.parse(document.form.inputs)
+                                    }
                                     documentStatus={document.status}
                                     documentFormId={document.form_id}
                                     documentId={document.id}

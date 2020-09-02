@@ -1,9 +1,25 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ModalImage from "./ModalImage";
+import { getSubjects } from "../../../../middleware/axios/getSubject";
 
 const ListDetailDocs = ({ subjects, data, inputData }) => {
     const { i18n } = useTranslation();
+    const [newSubject, setNewSubject] = React.useState([]);
+
+    const getSubjectByAttNone = async token => {
+        const done = await getSubjects(token);
+
+        if (done) {
+            setNewSubject(done);
+        }
+    };
+
+    React.useEffect(() => {
+        if (!!subjects && subjects.length == 0) {
+            getSubjectByAttNone(localStorage._authLocal);
+        }
+    });
 
     switch (data.tag_type) {
         case "select1":
@@ -50,15 +66,21 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
             );
         case "select3":
             let s = {};
+            let _theSub = {};
             if (inputData !== null) {
                 const _subject = inputData.inputs.find(data => {
                     return data.tag_type === "select3";
                 });
                 if (_subject) {
-                    const _theSub = subjects.find(sub => {
-                        return sub.id === Number(_subject.data);
-                    });
-
+                    if (newSubject.length > 0) {
+                        _theSub = newSubject.find(sub => {
+                            return sub.id === Number(_subject.data);
+                        });
+                    } else {
+                        _theSub = subjects.find(sub => {
+                            return sub.id === Number(_subject.data);
+                        });
+                    }
                     if (_theSub) {
                         s = _theSub;
                     }
