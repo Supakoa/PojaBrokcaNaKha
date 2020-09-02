@@ -31,6 +31,10 @@ class Document extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function userCancel()
+    {
+        return $this->belongsTo('App\User',"user_cancel_id");
+    }
     public function approver(){
         return $this->belongsToMany(User::class,"user_approve")->withPivot(["comment","return_file","state","status"])->withTimestamps();
     }

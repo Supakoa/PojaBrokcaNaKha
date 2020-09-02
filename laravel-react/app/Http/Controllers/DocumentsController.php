@@ -22,6 +22,7 @@ class DocumentsController extends Controller
         foreach ($documents as  $document) {
             $document->user;
             $document->form;
+            $document->userCancel;
 //            $document['code'] =
         }
         return $documents;
