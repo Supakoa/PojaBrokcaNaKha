@@ -21,7 +21,7 @@ export default function dataReport() {
             .catch(e => {
                 return [];
             });
-        setRows(mapDocuments(response, t, i18n));
+        setRows(mapDocuments(response, t, i18n, setRows));
         console.log(rows);
     };
 

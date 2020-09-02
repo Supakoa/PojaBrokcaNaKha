@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, ListGroup, Badge } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { getMessages } from "../../middleware/axios/getMessages";
 
@@ -33,9 +33,15 @@ export default function AlertMessage() {
     return (
         <Card>
             <Card.Header>
-                <Card.Title>{t("menu.message")}</Card.Title>
+                <Card.Title>
+                    {t("menu.message")}{" "}
+                    <Badge variant="warning">{_listUsers.length}</Badge>
+                </Card.Title>
             </Card.Header>
-            <Card.Body className="p-1">
+            <Card.Body
+                style={{ maxHeight: "150px", overflowY: "scroll" }}
+                className="p-1"
+            >
                 <ListGroup variant="flush" className="rounded">
                     {_listUsers.length > 0
                         ? _listUsers.map((item, idx) => {

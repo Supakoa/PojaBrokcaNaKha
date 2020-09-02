@@ -6,15 +6,13 @@ import Axios from "axios";
 import {newsActions} from "../../../redux/actions";
 import fileDownload from "js-file-download";
 export default class User extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = {};
 
         this.exportUsers = this.exportUsers.bind(this);
         this.importUsers = this.importUsers.bind(this);
-        this.templateUser = this.templateUser.bind(this)
+        this.templateUser = this.templateUser.bind(this);
     }
     templateUser(){
         //  Axios.get("http://localhost:8000/api/users/import", {
@@ -42,15 +40,15 @@ export default class User extends Component {
     //     });
     }
 
-    importUsers(){
-
-    }
+    importUsers() {}
 
     render() {
         return (
             <Card>
                 <Card.Header className="text-center">
-                    <Card.Title className="p-2">{this.props.t('menu.users')}</Card.Title>
+                    <Card.Title className="p-2">
+                        {this.props.t("menu.users")}
+                    </Card.Title>
                 </Card.Header>
                 <Card.Body className="w-100">
                     <div className='text-right py-2'>
@@ -67,7 +65,7 @@ export default class User extends Component {
                     <div className="text-right justify-content-end">
                         <ModalUser isCreatedProp={true} />
                     </div>
-                    <TableUser />
+                    <TableUser paging={true} />
                 </Card.Body>
             </Card>
         );

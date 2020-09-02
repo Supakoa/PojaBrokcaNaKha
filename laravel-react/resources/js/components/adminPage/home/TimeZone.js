@@ -1,9 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function TimeZone() {
-    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation();
     const [_date, setDate] = React.useState({
         date: new Date()
     });
@@ -23,8 +23,11 @@ export default function TimeZone() {
                 <Card.Title>{t("day&time")}</Card.Title>
             </Card.Header>
             <Card.Body className="d-flex justify-content-around">
-                <h2>{_date.date.toLocaleDateString()}</h2>
-                <h2>{_date.date.toLocaleTimeString()}</h2>
+                <h4>{_date.date.toLocaleDateString()}</h4>
+                <h4>{_date.date.toLocaleTimeString()}</h4>
+                <h4>
+                    <i className="far fa-clock"></i>
+                </h4>
             </Card.Body>
         </Card>
     );

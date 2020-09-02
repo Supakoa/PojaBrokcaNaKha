@@ -9,12 +9,12 @@ export default class News extends Component {
             <Card>
                 <Card.Header className="text-center">
                     <Card.Title className="p-2">
-                         {this.props.t('pr.index')}
+                        {this.props.t("pr.index")}
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <ModalNews isCreateProps={ true } />
-                    <TableNews />
+                    <ModalNews isCreateProps={true} />
+                    <TableNews paging={true} />
                 </Card.Body>
             </Card>
         );

@@ -1,17 +1,18 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import ListDetailDocs from "../../student/components/tableReport/modal/ListDetailDocs";
 
-const ModalReport = () => {
+const ModalReport = ({ id }) => {
     const [show, setShow] = React.useState(false);
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
         <>
             <Button variant="warning" size="sm" onClick={handleShow}>
-                {t('check')}
+                {t("check")}
             </Button>
             <Modal
                 show={show}
@@ -24,13 +25,13 @@ const ModalReport = () => {
                 centered
             >
                 <Modal.Header>
-                    <Modal.Title>header</Modal.Title>
+                    <Modal.Title>{id}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>body</Modal.Body>
+                <Modal.Body></Modal.Body>
                 <Modal.Footer>
                     footer
                     <Button variant="secondary" onClick={handleClose}>
-                        {t('close')}
+                        {t("close")}
                     </Button>
                     {/*<Button variant="primary">Understood</Button> */}
                 </Modal.Footer>

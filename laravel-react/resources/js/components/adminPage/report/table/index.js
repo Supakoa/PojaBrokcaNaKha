@@ -3,9 +3,9 @@ import { MDBDataTable } from "mdbreact";
 import dataReport from "./dataReport";
 import { useTranslation } from "react-i18next";
 
-export default function TableReport() {
+export default function TableReport({ paging }) {
     const _data = dataReport();
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
 
     return (
         <MDBDataTable
@@ -13,6 +13,8 @@ export default function TableReport() {
             entriesLabel="จำนวนที่แสดง"
             entriesOptions={[5, 10, 15]}
             entries={5}
+            displayEntries={paging}
+            paging={paging}
             infoLabel={["แสดง", "-", "ของ", "รายการ"]}
             paginationLabel={["ก่อนหน้า", "ถัดไป"]}
             barReverse={true}

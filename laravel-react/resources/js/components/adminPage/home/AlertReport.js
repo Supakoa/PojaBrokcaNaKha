@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Alert } from "react-bootstrap";
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function AlertReport() {
-    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation();
     return (
         <Card>
             <Card.Header>
