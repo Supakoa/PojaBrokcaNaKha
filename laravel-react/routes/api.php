@@ -25,13 +25,13 @@ Route::get('faculties', 'CRUD\FacultyController@index');
 Route::get('faculties/{faculty}', 'CRUD\FacultyController@show');
 Route::get('faculties/{faculty}/majors', 'CRUD\FacultyController@getMajorByFacultyId');
 Route::resource('majors','MajorsController');
+Route::get('users/export', 'API\UserController@export');
+Route::get('users/import', 'API\UserController@importTemplate');
+Route::post('users/import', 'API\UserController@import');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user', 'API\UserController@user');
     Route::post('logout', 'API\UserController@logout');
-    Route::get('users/export', 'API\UserController@export');
-    Route::get('users/import', 'API\UserController@importTemplate');
-    Route::post('users/import', 'API\UserController@import');
     Route::get('users/messages', 'API\UserController@messages');
     Route::resource('ChatMessenger','CRUD\ChatMessengerController');
     Route::resource('users', 'API\UserController');
