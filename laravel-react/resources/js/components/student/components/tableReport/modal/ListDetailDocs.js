@@ -9,17 +9,16 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
 
     const getSubjectByAttNone = async token => {
         const done = await getSubjects(token);
-
         if (done) {
             setNewSubject(done);
         }
     };
 
     React.useEffect(() => {
-        if (!!subjects && subjects.length == 0) {
+        if (!!subjects && newSubject.length === 0) {
             getSubjectByAttNone(localStorage._authLocal);
         }
-    });
+    }, [subjects, newSubject]);
 
     switch (data.tag_type) {
         case "select1":
@@ -93,7 +92,13 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
                         {i18n.language === "th" ? data.th_name : data.eng_name}:{" "}
                     </dt>
                     <dd className="col-lg-8 col-md-8">
-                        {i18n.language === "th" ? s.th_name : s.eng_name}
+                        {i18n.language === "th"
+                            ? s.th_name
+                                ? s.th_name
+                                : "-"
+                            : s.eng_name
+                            ? s.th_name
+                            : "-"}
                     </dd>
                 </dl>
             );
