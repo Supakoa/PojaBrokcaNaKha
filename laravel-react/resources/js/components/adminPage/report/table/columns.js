@@ -7,6 +7,12 @@ export const columns = arrays => {
             width: 20
         },
         {
+            label: arrays[4],
+            field: "status",
+            sort: "disabled",
+            width: 100
+        },
+        {
             label: arrays[5],
             field: "code",
             width: 120
@@ -32,17 +38,9 @@ export const columns = arrays => {
             width: 250
         },
         {
-            label: arrays[4],
-            field: "status",
-            sort: "disabled",
-            width: 100
-        },
-        {
-
             field: "action",
             sort: "disabled",
             width: 200
         }
     ];
 };
-
