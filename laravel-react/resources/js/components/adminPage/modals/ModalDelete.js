@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 
 export default function ModalDelete(props) {
     const { id, api } = props;
-    const {t} = useTranslation('', {useSuspense: false});
+    const {t} = useTranslation();
     const apiPath = `http://localhost:8000/api/${api}`
 
     const handleClick = () => {

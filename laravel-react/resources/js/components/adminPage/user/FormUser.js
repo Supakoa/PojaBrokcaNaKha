@@ -8,6 +8,12 @@ import MajorSelect from "../input/MajorSelect";
 export default function FormUser({ isCreatedProp, user, onChangeState }) {
     const [isSelectFac, setIsSeclected] = React.useState(true);
     const [facultyId, setFacultyId] = React.useState(0);
+    const  [selected, setSelected] = React.useState(0);
+    console.log(user.role_id)
+    const selecetedRole = (e) =>{
+        setSelected(e.target.value)
+    }
+
     return (
         <Form name="userForm">
             <Form.Group controlId="formUseremail">
@@ -135,14 +141,14 @@ export default function FormUser({ isCreatedProp, user, onChangeState }) {
 
                     <Form.Control
                         as="select"
-                        name="role"
-                        onChange={onChangeState}
-                        value={user.role_id ? user.role_id : 0}
+                        name="role_id"
+                        onChange={selecetedRole}
+                        value={user.role_id ? user.role_id : selected}
                     >
-                        <option value={0}>เลือกประเภท</option>
-                        <option value={1}>แอดดมิน</option>
-                        <option value={2}>อาจารย์</option>
-                        <option value={3}>นักศึกษา</option>
+                        <option value='0'>เลือกประเภท</option>
+                        <option value='1'>แอดดมิน</option>
+                        <option value='2'>อาจารย์</option>
+                        <option value='3'>นักศึกษา</option>
                     </Form.Control>
                 </Form.Group>
             </Form.Row>

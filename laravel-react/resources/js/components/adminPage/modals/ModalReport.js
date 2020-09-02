@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 
 const ModalReport = () => {
     const [show, setShow] = React.useState(false);
-    const {t} = useTranslation('', {useSuspense: false});
+    const {t} = useTranslation();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

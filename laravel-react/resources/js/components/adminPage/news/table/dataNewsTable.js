@@ -23,7 +23,7 @@ const dataNewsTable = () => {
             _data.map((res, idx) => {
                 // type: File, URL
                 const responData = {
-                    id: idx,
+                    id: idx+1,
                     images: (
                         <Image
                             src={localImagePath + res.image}

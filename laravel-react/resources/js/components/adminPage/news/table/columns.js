@@ -19,7 +19,7 @@ export const columns = _t => {
         },
         {
             field: "action",
-            width: 100,
+            width: 230,
             sort: "disabled"
         }
     ];

@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 
 export const textHeader = type => {
-    const {t} = useTranslation('', {useSuspense: false});
+    const {t} = useTranslation();
 
     if (type) {
         return t('add');

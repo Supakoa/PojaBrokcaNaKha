@@ -39,8 +39,8 @@ export default function ModalUser({ isCreatedProp, id }) {
         if (isCreatedProp) {
             const data = {
                 title: redux_formUser.title,
-                role_id: Number(redux_formUser.role),
-                major_id: Number(redux_formUser.majorId),
+                role_id: Number(redux_formUser.role_id),
+                major_id: Number(redux_formUser.major),
                 student_id: Number(redux_formUser.studentId),
                 first_name: redux_formUser.firstName,
                 last_name: redux_formUser.lastName,
@@ -80,6 +80,7 @@ export default function ModalUser({ isCreatedProp, id }) {
                     ...res.data
                 };
                 dispatch(updateShowUsers(tempUsers));
+                window.location.reload(false);
             });
         }
     };

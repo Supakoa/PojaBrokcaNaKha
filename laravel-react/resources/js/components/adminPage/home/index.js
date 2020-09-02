@@ -4,6 +4,7 @@ import Welcome from "./Welcome";
 import AlertMessage from "./AlertMessage";
 import AlertReport from "./AlertReport";
 import TimeZone from "./TimeZone";
+import TableReport from "../report/table";
 
 export default class Home extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ export default class Home extends Component {
                 </Row>
                 <Row className="mb-3">
                     <Col sm={12} md={12} lg={12}>
-                        <AlertReport />
+                      <TableReport/ >
                     </Col>
                 </Row>
                 <Row className="mb-3">

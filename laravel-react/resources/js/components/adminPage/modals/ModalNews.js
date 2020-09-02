@@ -14,7 +14,7 @@ export default function ModalNews(props) {
     const { isCreateProps, response } = props;
 
     const [isShow, setIsShow] = React.useState(false);
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
 
     const apiPath = `http://localhost:8000/api/news`
 

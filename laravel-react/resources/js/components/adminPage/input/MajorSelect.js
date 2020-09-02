@@ -20,10 +20,10 @@ export default function MajorSelect({
 
     const initMajor = async id => {
         if (!!id) {
-            await Axios.get(`http://localhost:8000/api/majors/${id}`).then(
+            await Axios.get(`http://127.0.0.1:8000/api/faculties/${Number(id)}/majors`).then(
                 res => {
                     // console.log(res);
-                    setMajor(res.data.faculty_id);
+                    setMajor(res.data);
                 }
             );
         }

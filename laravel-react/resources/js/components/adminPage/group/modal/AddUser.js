@@ -118,7 +118,7 @@ const AddUser = (props) => {
                 Toast.fire({
                     icon: 'success',
                     title: 'เพิ่มผู้ตรวจสำเร็จ'
-                })
+                }).then((res) =>{if (res.value) window.location.reload(false)})
             } else {
                 Toast.fire({
                     icon: 'warning',

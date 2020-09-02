@@ -27,7 +27,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
     // local state
     const [show, setShow] = React.useState(false);
     const [modalHidden, setModalHidden] = useState(false);
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
     const [table, setTable] = React.useState({
         columns: [
             { title: "วิชา", field: "subject" },
@@ -72,7 +72,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
     });
 
     // function
-    const handleClose = () => {setShow(false); window.location.reload(false);};
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const initState = response => {
@@ -210,6 +210,8 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                     Toast.fire({
                         icon: "success",
                         title: "ลบผู้ตรวจสำเร็จ"
+                    }).then((res)=>{
+                        window.location.reload(false);
                     });
                 } else {
                     Toast.fire({
@@ -265,7 +267,9 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                         Toast.fire({
                             icon: "success",
                             title: "ลบผู้ตรวจสำเร็จ"
-                        });
+                        }).then((res)=>{
+                            window.location.reload(false)
+                    });
                     } else {
                         Toast.fire({
                             icon: "warning",
@@ -296,7 +300,6 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
         };
     }, [response]);
 
-    // console.log("showGroupUsers", showGroupUsers);
     useEffect(() => {
         updateShowUsersTable();
     }, [showGroupUsers]);
@@ -383,7 +386,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
 
             <Modal
                 show={show}
-                onHide={() => setShow(false)}
+                onHide={() => handleClose}
                 hidden={modalHidden}
                 aria-labelledby="modal-user"
                 size="lg"
