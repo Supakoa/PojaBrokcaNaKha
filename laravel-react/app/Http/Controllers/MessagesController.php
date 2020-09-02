@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Message;
 use App\MyEvent\ChatEchoToAdmin;
 use App\MyEvent\ChatEchoToUser;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -116,9 +117,14 @@ class MessagesController extends Controller
         return response()->json(null, 204);
     }
 
-    public function read(Request $request)
+    public function read(User $user)
     {
-
+        if (auth()->user()->role_id===1){
+         $messages =    Message::query()->where("user_id", $user->id)->whereNull("admin_id")->where("read",0)->update(["read"=>1]);
+        }else{
+            $messages =    Message::query()->where("user_id", $user->id)->whereNotNull("admin_id")->where("read",0)->update(["read"=>1]);
+        }
+        return $messages;
     }
 
 
