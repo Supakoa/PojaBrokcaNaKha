@@ -38,7 +38,13 @@ const ProfileForm = ({ role }) => {
     }, []);
 
     const handleChange = e => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
+        if (name === "file") {
+            setProfile({
+                ..._profile,
+                [name]: files.files[0]
+            });
+        }
         const _valid = validateIndex(name, value);
         setIsUpdate(true);
         setIsSubmit(_valid);
@@ -299,6 +305,7 @@ const ProfileForm = ({ role }) => {
                                 <Form.File
                                     className="position-relative"
                                     name="file"
+                                    onChange={handleChange}
                                     label={
                                         i18n.language === "th"
                                             ? "นำเข้า ลายเซ็นต์"
