@@ -1,22 +1,30 @@
 import React from "react";
 import { dataTableUser } from "./dataTableUsers";
 import { MDBDataTable } from "mdbreact";
+import { useTranslation } from "react-i18next";
 
 export default function TableUser({ paging }) {
-    //Data of Table [columns, rows]
     const _data = dataTableUser();
-
+    const { t } = useTranslation();
     return (
         <MDBDataTable
             noBottomColumns={true}
-            entriesLabel="จำนวนที่แสดง"
+            entriesLabel={t("students.table.header.pagination")}
+            infoLabel={[
+                t("students.table.footer.show"),
+                "-",
+                t("students.table.footer.of"),
+                t("students.table.footer.list")
+            ]}
+            paginationLabel={[
+                t("students.table.footer.prev"),
+                t("students.table.footer.next")
+            ]}
+            searchLabel={t("students.table.header.search")}
             entriesOptions={[5, 10, 15]}
-            entries={5}
+            entries={10}
             displayEntries={paging}
             paging={paging}
-            infoLabel={["แสดง", "-", "ของ", "รายการ"]}
-            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
-            searchLabel="ค้นหา"
             barReverse={true}
             borderless
             striped

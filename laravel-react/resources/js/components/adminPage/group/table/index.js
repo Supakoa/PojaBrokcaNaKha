@@ -1,20 +1,29 @@
 import React from "react";
 import DataGroupTable from "./DataGroupTable";
 import { MDBDataTable } from "mdbreact";
-// import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-export default function TableGroups({groups,setGroups}) {
+export default function TableGroups({ groups, setGroups }) {
     const _data = DataGroupTable();
-    // const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation();
 
     return (
         <MDBDataTable
             noBottomColumns={true}
-            entriesLabel="จำนวนที่แสดง"
+            entriesLabel={t("students.table.header.pagination")}
+            infoLabel={[
+                t("students.table.footer.show"),
+                "-",
+                t("students.table.footer.of"),
+                t("students.table.footer.list")
+            ]}
+            paginationLabel={[
+                t("students.table.footer.prev"),
+                t("students.table.footer.next")
+            ]}
+            searchLabel={t("students.table.header.search")}
             entriesOptions={[5, 10, 15]}
-            entries={5}
-            infoLabel={["แสดง", "-", "ของ", "รายการ"]}
-            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
+            entries={10}
             barReverse={true}
             borderless
             striped

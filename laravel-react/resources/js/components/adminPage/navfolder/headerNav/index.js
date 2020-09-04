@@ -1,5 +1,12 @@
 import React from "react";
-import { Navbar, Spinner, Image, Nav, Container } from "react-bootstrap";
+import {
+    Navbar,
+    Spinner,
+    Image,
+    Nav,
+    Container,
+    Dropdown
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "./logo.png";
 import SignOutBtn from "../../../auth/sign-out";
@@ -10,7 +17,7 @@ export default function HeaderNav(props) {
     return (
         <Navbar
             bg="info"
-            className="d-flex align-items-center justify-content-around"
+            className="d-flex align-items-center justify-content-around sticky-top"
             variant="dark"
         >
             <Container>
@@ -27,27 +34,36 @@ export default function HeaderNav(props) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        {Object.keys(_user).length !== 0 ? (
-                            <Link
-                                to="#"
-                                className="text-light d-flex align-items-center justify-content-center px-2"
-                            >
-                                <Image
-                                    src="https://img.icons8.com/plasticine/2x/user.png"
-                                    className="d-inline-block align-top"
-                                    width="30"
-                                    height="30"
-                                    rounded="true"
-                                />{" "}
-                                {`${_user.title} ${_user.first_name} ${_user.last_name}`}
-                            </Link>
-                        ) : (
-                            <Spinner animation="border" size="sm" />
-                        )}
-                        <Link to="#" className="px-3">
-                            <SwitchingLanguageBtn />
-                        </Link>
-                        <SignOutBtn className="text-light" />
+                        <Dropdown>
+                            {Object.keys(_user).length > 0 ? (
+                                <Dropdown.Toggle
+                                    as={Link}
+                                    id="dropdown-custom-components"
+                                    to="#"
+                                    className="text-light d-flex align-items-center justify-content-start mr-lg-3 mr-md-3 py-2"
+                                >
+                                    <Image
+                                        src="https://img.icons8.com/plasticine/2x/user.png"
+                                        className="d-inline-block align-top"
+                                        width="30"
+                                        height="30"
+                                        rounded="true"
+                                    />{" "}
+                                    {`${_user.title} ${_user.first_name} ${_user.last_name}`}
+                                </Dropdown.Toggle>
+                            ) : (
+                                <Spinner animation="border" size="sm" />
+                            )}
+
+                            <Dropdown.Menu className="bg-info">
+                                <Dropdown.Item
+                                    as={SignOutBtn}
+                                    className="text-light d-flex align-items-center justify-content-start py-2 pl-2"
+                                />
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <SwitchingLanguageBtn />
+                        {/* <SignOutBtn className="text-light py-3" /> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -10,13 +10,8 @@ export const columns = [
         field: "name",
         width: 300 // default: 180
     },
-    // {
-    //     label: "รหัสเอกสาร",
-    //     field: "code",
-    //     width: 150
-    // },
     {
-        label: "actions",
+        label: "",
         field: "action",
         width: 200,
         sort: "disabled"

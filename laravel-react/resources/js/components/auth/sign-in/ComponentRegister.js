@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 function ComponentRegister() {
     const { t } = useTranslation();
     return (
-        <section className="w-75 m-auto effectSection p-sm-5 p-xs-4">
+        <section className="w-75 m-auto py-3">
             <p>{t("sign.component.whatIs")}</p>
             <p>{t("sign.component.mean")}</p>
             <hr />

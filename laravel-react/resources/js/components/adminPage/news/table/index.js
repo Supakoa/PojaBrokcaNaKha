@@ -10,13 +10,10 @@ export default function TableNews({ paging }) {
     return (
         <MDBDataTable
             noBottomColumns={true}
-            entriesLabel="จำนวนที่แสดง"
             entriesOptions={[5, 10, 15]}
-            entries={5}
+            entries={10}
             displayEntries={paging}
             paging={paging}
-            infoLabel={["แสดง", "-", "ของ", "รายการ"]}
-            paginationLabel={["ก่อนหน้า", "ถัดไป"]}
             barReverse={true}
             borderless
             striped
@@ -24,7 +21,18 @@ export default function TableNews({ paging }) {
             hover
             scrollX
             data={_data}
-            searchLabel={t("search")}
+            entriesLabel={t("students.table.header.pagination")}
+            infoLabel={[
+                t("students.table.footer.show"),
+                "-",
+                t("students.table.footer.of"),
+                t("students.table.footer.list")
+            ]}
+            paginationLabel={[
+                t("students.table.footer.prev"),
+                t("students.table.footer.next")
+            ]}
+            searchLabel={t("students.table.header.search")}
         />
     );
 }

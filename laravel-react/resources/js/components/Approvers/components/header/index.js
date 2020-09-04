@@ -21,7 +21,7 @@ const HeaderApprover = () => {
         <Navbar
             bg="info"
             expand="sm"
-            className="d-flex align-items-center justify-content-around"
+            className="d-flex align-items-center justify-content-around sticky-top"
             variant="dark"
         >
             <Container>
@@ -79,9 +79,7 @@ const HeaderApprover = () => {
                             </Dropdown.Menu>
                         </Dropdown>
 
-                        <Link to="#" className="px-2 py-2">
-                            <SwitchingLanguageBtn />
-                        </Link>
+                        <SwitchingLanguageBtn />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

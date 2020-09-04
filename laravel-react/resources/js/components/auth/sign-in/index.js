@@ -137,7 +137,7 @@ export default function SignIn() {
                             <span className="px-2">{t("sign.language")} </span>{" "}
                             <SwitchingLanguageBtn className="nav-link float-right" />
                         </div>
-                        <section className="d-table p-4 w-50 m-auto">
+                        <section className="d-table p-4 w-75 m-auto">
                             <section className="d-table text-center m-auto">
                                 <Image
                                     className="border-bottom border-info"

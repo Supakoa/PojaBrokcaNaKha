@@ -94,11 +94,13 @@ export default function ModalUser({ isCreatedProp, id }) {
     return (
         <>
             <Button
+                className="mx-2"
                 name="modalUser"
                 variant={!isCreatedProp ? "warning" : "info"}
                 size="sm"
                 onClick={() => setModalUser(true)}
             >
+                <i className="fas fa-user-plus"></i>{" "}
                 {!isCreatedProp ? t("edit") : t("add")}
             </Button>
 

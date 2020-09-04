@@ -74,9 +74,7 @@ function NavHeader(props) {
                                 />
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Link to="#" className="px-2 py-2">
-                            <SwitchingLanguageBtn className="nav-link" />
-                        </Link>
+                        <SwitchingLanguageBtn className="nav-link" />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -16,7 +16,7 @@ const store = createStore(
 const LoadSuspense = () => {
     return (
         <Container
-            style={{ minHeight: "100vh" }}
+            style={{ minHeight: "100vh", width: "100%" }}
             className="d-flex align-items-center justify-content-center"
         >
             <Spinner animation="border" variant="info" />
