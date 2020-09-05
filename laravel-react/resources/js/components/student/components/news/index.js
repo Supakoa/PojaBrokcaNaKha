@@ -7,7 +7,7 @@ export default function News () {
     const [index, setIndex] = React.useState(0);
 
     const fetchNews = async () => {
-        await Axios.get(`http://127.0.0.1:8000/api/news`, {
+        await Axios.get(`${_URL}/api/news`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }

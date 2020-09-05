@@ -5,6 +5,7 @@ import { userRole } from "./userRole";
 import { columns } from "./columns";
 import { useSelector, useDispatch } from "react-redux";
 import { initShowUsers } from "../../../../redux/actions";
+import {_URL} from "../../../middleware/URL";
 
 export const dataTableUser = () => {
     // init state
@@ -33,7 +34,7 @@ export const dataTableUser = () => {
 
     const getUsers = async () => {
         await axios
-            .get("http://127.0.0.1:8000/api/users", {
+            .get(`${_URL}/api/users`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"

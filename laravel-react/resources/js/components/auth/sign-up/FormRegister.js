@@ -22,7 +22,7 @@ export default function FormRegister() {
     const [_forms, serForms] = React.useState({});
 
     const fetchFaculties = async () => {
-        await axios.get(`http://127.0.0.1:8000/api/faculties`, {}).then(res => {
+        await axios.get(`${_URL}/api/faculties`, {}).then(res => {
             const { success } = res.data;
             setFacs(success);
         });
@@ -30,7 +30,7 @@ export default function FormRegister() {
 
     const _fetchMajors = async _facId => {
         await axios
-            .get(`http://127.0.0.1:8000/api/faculties/${Number(_facId)}/majors`)
+            .get(`${_URL}/api/faculties/${Number(_facId)}/majors`)
             .then(res => {
                 setMajors(res.data);
             });

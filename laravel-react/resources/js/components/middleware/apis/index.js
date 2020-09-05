@@ -1,4 +1,6 @@
-const _www = "http://127.0.0.1:8000";
+import {_URL} from "../URL";
+
+const _www = `${_URL}`;
 
 export const _urlUsers = () => {
     return `${_www}/api/users`;
