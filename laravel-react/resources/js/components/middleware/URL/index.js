@@ -1,3 +1,1 @@
-export const _URL = () => {
-    return `http://localhost:8000`;
-};
+export const _URL =  `http://localhost:8000`;
