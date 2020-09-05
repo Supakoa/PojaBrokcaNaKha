@@ -6,6 +6,7 @@ import Axios from "axios";
 import { newsActions } from "../../../redux/actions";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import {_URL} from "../../middleware/URL";
 // import fileDownload from "js-file-download";
 export default function User({ t }) {
     const { i18n } = useTranslation();
@@ -15,7 +16,7 @@ export default function User({ t }) {
         let formData = new FormData();
         formData.append("file", e.target.files[0]);
         setNameFile(e.target.files[0].name);
-        Axios.post("http://localhost:8000/api/users/import", formData, {
+        Axios.post(`${_URL}/api/users/import`, formData, {
             headers: {
                 Authorization: `Bearer ${localStorage._authLocal}`,
                 "Content-Type": "application/json",

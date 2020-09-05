@@ -5,6 +5,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import { initNewsForm } from "../../../../redux/actions";
 import TableGroups from "../table";
+import {_URL} from "../../../middleware/URL";
 
 const ModalNewGroup = ({
     isCreateProps,
@@ -39,7 +40,7 @@ const ModalNewGroup = ({
             data.append("type", selectTypeGroup);
 
         if (isCreateProps) {
-            await Axios.post(`http://localhost:8000/api/groups`, data, {
+            await Axios.post(`${_URL}/api/groups`, data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"
@@ -90,7 +91,7 @@ const ModalNewGroup = ({
             });
 
             await Axios.put(
-                `http://localhost:8000/api/groups/${res.id}`,
+                `${_URL}/api/groups/${res.id}`,
                 sendData,
                 {
                     headers: {

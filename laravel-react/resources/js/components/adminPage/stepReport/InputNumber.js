@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import {_URL} from "../../middleware/URL";
 
 export const InputNumber = props => {
     // props
@@ -42,7 +43,7 @@ export const InputNumber = props => {
         let sendData = qs.stringify({
             all_state: _state
         })
-        Axios.patch(`http://localhost:8000/api/forms/${response.id}`, sendData, {
+        Axios.patch(`${_URL}/api/forms/${response.id}`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

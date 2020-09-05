@@ -10,7 +10,7 @@ export default function dataReport() {
 
     const fetchRowData = async () => {
         let response = [];
-        response = await Axios.get(`http://localhost:8000/api/documents`, {
+        response = await Axios.get(`${_URL}/api/documents`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }

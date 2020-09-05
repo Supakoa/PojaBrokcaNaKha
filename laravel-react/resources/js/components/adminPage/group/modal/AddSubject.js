@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import Axios from 'axios'
 import { first } from 'lodash'
+import {_URL} from "../../../middleware/URL";
 
 const AddSubject = forwardRef((props, ref) => {
 
@@ -92,7 +93,7 @@ const AddSubject = forwardRef((props, ref) => {
         sendData.append('group_id', group.id)
         sendData.append('type', group.type)
 
-        await Axios.post(`http://localhost:8000/api/groups/${group.id}/users`, sendData, {
+        await Axios.post(`${_URL}/api/groups/${group.id}/users`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

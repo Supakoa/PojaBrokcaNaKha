@@ -19,6 +19,7 @@ import { _urlGetMessages } from "../../middleware/apis";
 import headerConfig from "../../middleware/headerConfig";
 import Swal from "sweetalert2";
 import { forEach } from "react-bootstrap/cjs/ElementChildren";
+import {_URL} from "../../middleware/URL";
 
 export default function TemplateMessage() {
     const [_listUsers, setListUsers] = React.useState([]);
@@ -32,7 +33,7 @@ export default function TemplateMessage() {
 
     const read = async id =>
         axios
-            .get(`http://localhost:8000/api/messages/${id}/read`, {
+            .get(`${_URL}/api/messages/${id}/read`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"

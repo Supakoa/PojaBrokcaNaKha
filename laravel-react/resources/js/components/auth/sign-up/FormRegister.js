@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import {_URL} from "../../middleware/URL";
 
 export default function FormRegister() {
     const { t, i18n } = useTranslation();
@@ -74,7 +75,7 @@ export default function FormRegister() {
         check = Object.values(_forms).length < 8;
         setConfirm(check && !password);
         if (!check && password) {
-            await Axios.post(`http://localhost:8000/api/register`, {
+            await Axios.post(`${_URL}/api/register`, {
                 ..._forms,
                 role_id: 3
             }).then(res => {

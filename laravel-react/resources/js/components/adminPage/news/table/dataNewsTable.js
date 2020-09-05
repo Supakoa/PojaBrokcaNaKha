@@ -6,6 +6,7 @@ import ColumnActions from "./ColumsAction";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { newsActions } from "../../../../redux/actions";
+import {_URL} from "../../../middleware/URL";
 
 const dataNewsTable = () => {
 
@@ -41,7 +42,7 @@ const dataNewsTable = () => {
     };
 
     const getNews = async () => {
-        await Axios.get("http://localhost:8000/api/news", {
+        await Axios.get(`${_URL}/api/news`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

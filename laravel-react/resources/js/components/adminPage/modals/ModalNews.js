@@ -7,6 +7,7 @@ import { newsActions } from "../../../redux/actions";
 import {useTranslation} from 'react-i18next';
 import { first } from "lodash";
 import Swal from "sweetalert2";
+import {_URL} from "../../middleware/URL";
 
 export default function ModalNews(props) {
     // attibute type if true are Modal Add or false are Modale Edit
@@ -16,7 +17,7 @@ export default function ModalNews(props) {
     const [isShow, setIsShow] = React.useState(false);
     const { t } = useTranslation();
 
-    const apiPath = `http://localhost:8000/api/news`
+    const apiPath = `${_URL}/api/news`
 
     // redux
     const redux_form = useSelector(state => state.newsForm)

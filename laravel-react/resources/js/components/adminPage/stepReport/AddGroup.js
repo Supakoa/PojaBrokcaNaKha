@@ -53,7 +53,7 @@ export const AddGroup = (props) => {
         sendData.append('group_id', selectData)
         sendData.append('state', (step + 1))
 
-        await Axios.post(`http://localhost:8000/api/forms/${response.id}/groups`, sendData, {
+        await Axios.post(`${_URL}/api/forms/${response.id}/groups`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

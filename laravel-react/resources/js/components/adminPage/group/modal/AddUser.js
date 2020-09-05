@@ -4,6 +4,7 @@ import Axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { first } from "lodash";
 import Swal from "sweetalert2";
+import {_URL} from "../../../middleware/URL";
 
 const AddUser = (props) => {
 
@@ -62,7 +63,7 @@ const AddUser = (props) => {
         sendData.append('group_id', group.id)
         sendData.append('type', group.type)
 
-        Axios.post(`http://localhost:8000/api/groups/${group.id}/users`, sendData, {
+        Axios.post(`${_URL}/api/groups/${group.id}/users`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

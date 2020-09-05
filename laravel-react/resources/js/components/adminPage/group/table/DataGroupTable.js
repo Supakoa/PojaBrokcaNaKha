@@ -9,6 +9,7 @@ import {
     showApproversAction,
     showSubjectsAction
 } from "../../../../redux/actions";
+import {_URL} from "../../../middleware/URL";
 
 const DataGroupTable = () => {
     const [rows, setRows] = React.useState([]);
@@ -31,7 +32,7 @@ const DataGroupTable = () => {
     };
 
     const getGroup = async () => {
-        await Axios.get(`http://localhost:8000/api/groups`, {
+        await Axios.get(`${_URL}/api/groups`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
@@ -41,7 +42,7 @@ const DataGroupTable = () => {
     };
 
     const getApproversToRedux = async () => {
-        await Axios.get(`http://localhost:8000/api/users`, {
+        await Axios.get(`${_URL}/api/users`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
@@ -56,7 +57,7 @@ const DataGroupTable = () => {
     };
 
     const getSubjectsToRedux = async () => {
-        await Axios.get(`http://localhost:8000/api/subjects`, {
+        await Axios.get(`${_URL}/api/subjects`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }

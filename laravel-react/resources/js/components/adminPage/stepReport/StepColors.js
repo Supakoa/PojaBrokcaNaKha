@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AddGroup } from "./AddGroup";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import {_URL} from "../../middleware/URL";
 
 export const StepColors = props => {
     // props
@@ -91,7 +92,7 @@ export const StepColors = props => {
             cancelButtonColor: '#d33',
           }).then((result) => {
             if (result.value) {
-                Axios.delete(`http://localhost:8000/api/forms/${item.pivot.form_id}/groups`, {
+                Axios.delete(`${_URL}/api/forms/${item.pivot.form_id}/groups`, {
                     data: {
                         group_id: item.id
                     },

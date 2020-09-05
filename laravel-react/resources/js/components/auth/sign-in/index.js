@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import SwitchingLanguageBtn from "../../middleware/switchingLanguage";
 import { useTranslation } from "react-i18next";
 import alertResetPassword from "./AlertResetPassword";
+import {_URL} from "../../middleware/URL";
 
 export default function SignIn() {
     let _history = useHistory();
@@ -79,7 +80,7 @@ export default function SignIn() {
         if (validate) {
             setLoading(false);
             const postToken = await axios
-                .post(`http://localhost:8000/api/login`, _user)
+                .post(`${_URL}/api/login`, _user)
                 .then(res => {
                     if (res.status === 200) {
                         return res.data.success.token;

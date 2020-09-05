@@ -85,7 +85,7 @@ export const AddApprover = props => {
     };
 
     const initState = async () => {
-        const users = await Axios.get(`http://localhost:8000/api/users`, {
+        const users = await Axios.get(`${_URL}/api/users`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

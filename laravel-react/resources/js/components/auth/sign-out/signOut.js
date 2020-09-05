@@ -1,8 +1,9 @@
 import axios from "axios";
+import {_URL} from "../../middleware/URL";
 
 export const _signOut = async _props => {
     await axios
-        .post(`http://localhost:8000/api/logout`, _props.token, {
+        .post(`${_URL}/api/logout`, _props.token, {
             headers: {
                 Authorization: `Bearer ${_props.token}`,
                 "Content-Type": "application/json",

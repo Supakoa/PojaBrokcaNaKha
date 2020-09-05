@@ -1,8 +1,9 @@
 import axios from "axios";
+import {_URL} from "../../middleware/URL";
 
 const postToken = async item => {
     const authToken = await axios
-        .post(`http://localhost:8000/api/register`, item)
+        .post(`${_URL}/api/register`, item)
         .then(res => {
             const token = res.data.success.token;
             return { status: true, token: token };
