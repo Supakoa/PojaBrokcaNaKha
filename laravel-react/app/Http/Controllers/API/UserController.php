@@ -125,7 +125,7 @@ class UserController extends Controller
         foreach ($documents as $index => $document) {
             $document->approver = $document->approver()->wherePivot('state', "<", $document->state)->get();
             $document->user;
-            
+            $document->userCancel;
         }
         return response()->json(['success' => gettype($documents) == "object" ? $documents : array_values($documents)  ], $this->successStatus);
 
