@@ -1,6 +1,7 @@
 import React from "react";
 import {Carousel, Image} from "react-bootstrap";
 import Axios from "axios";
+import {_URL} from "../../../middleware/URL";
 
 export default function News () {
     const [news, setNews] = React.useState([])
