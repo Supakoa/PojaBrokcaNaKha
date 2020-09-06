@@ -3,7 +3,7 @@ import { columns } from "./columns";
 import { useTranslation } from "react-i18next";
 import Axios from "axios";
 import mapDocuments from "./mapDocumentsData";
-import {_URL} from "../../../middleware/URL";
+import { _URL } from "../../../middleware/URL";
 
 export default function dataReport() {
     const [rows, setRows] = React.useState([]);
@@ -23,7 +23,7 @@ export default function dataReport() {
                 return [];
             });
         setRows(mapDocuments(response, t, i18n, setRows));
-        console.log(rows);
+        // console.log(rows);
     };
 
     React.useEffect(() => {

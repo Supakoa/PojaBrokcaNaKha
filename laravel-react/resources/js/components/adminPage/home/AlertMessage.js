@@ -2,6 +2,7 @@ import React from "react";
 import { Card, ListGroup, Badge, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { getMessages } from "../../middleware/axios/getMessages";
+import LoadingComponent from "../../LoadingComponent/Loading";
 
 export default function AlertMessage() {
     const { t } = useTranslation();
@@ -59,9 +60,7 @@ export default function AlertMessage() {
                             );
                         })
                     ) : (
-                        <div className="d-flex align-items-center justify-content-center py-2">
-                            <Spinner animation="border" />
-                        </div>
+                        <LoadingComponent />
                     )}
                 </ListGroup>
             </Card.Body>

@@ -19,7 +19,8 @@ import { _urlGetMessages } from "../../middleware/apis";
 import headerConfig from "../../middleware/headerConfig";
 import Swal from "sweetalert2";
 import { forEach } from "react-bootstrap/cjs/ElementChildren";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
+import LoadingComponent from "../../LoadingComponent/Loading";
 
 export default function TemplateMessage() {
     const [_listUsers, setListUsers] = React.useState([]);
@@ -134,9 +135,7 @@ export default function TemplateMessage() {
                                 );
                             })
                         ) : (
-                            <div className="d-flex align-items-center justify-content-center py-2">
-                                <Spinner animation="border" />
-                            </div>
+                            <LoadingComponent />
                         )}
                     </ListGroup>
                 </Col>

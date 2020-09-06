@@ -13,7 +13,7 @@ const dataNewsTable = () => {
     const localImagePath = `/storage/`
 
     const [rows, setRows] = React.useState([]);
-    const { t } = useTranslation("", { useSuspense: false });
+    const { t } = useTranslation();
 
     // redux
     const redux_showNews = useSelector(state => state.showNews)

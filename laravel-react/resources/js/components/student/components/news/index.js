@@ -1,10 +1,12 @@
 import React from "react";
-import {Carousel, Image} from "react-bootstrap";
+import { Carousel, Image, Spinner } from "react-bootstrap";
 import Axios from "axios";
-import {_URL} from "../../../middleware/URL";
+import { _URL } from "../../../middleware/URL";
+import LoadingComponent from "../../../LoadingComponent/Loading";
+// import { Link } from "react-router-dom";
 
-export default function News () {
-    const [news, setNews] = React.useState([])
+export default function News() {
+    const [news, setNews] = React.useState([]);
     const [index, setIndex] = React.useState(0);
 
     const fetchNews = async () => {
@@ -13,33 +15,32 @@ export default function News () {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(res => {
-            setNews(res.data)
+            setNews(res.data);
         });
     };
-
-    console.log(news)
-
 
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
     };
-    React.useEffect(()=>{
-        const abort = new AbortController()
-        if (news.length === 0){
-            fetchNews({signal:abort.signal})
-        }
-        return ()=>{
-            abort.abort()
-        }
-    },[])
 
+    const handleToLink = e => {
+        window.open(e.target.alt);
+    };
+
+    React.useEffect(() => {
+        const abort = new AbortController();
+        if (news.length === 0) {
+            fetchNews({ signal: abort.signal });
+        }
+        return () => {
+            abort.abort();
+        };
+    }, []);
 
     return (
-            <div>
-                <Carousel
-                    activeIndex={index}
-                    onSelect={handleSelect}
-                >
+        <div>
+            {news.length > 0 ? (
+                <Carousel activeIndex={index} onSelect={handleSelect}>
                     {news.map((image, index) => {
                         return (
                             <Carousel.Item key={index.toString()}>
@@ -49,12 +50,15 @@ export default function News () {
                                     src={`storage/${image.image}`}
                                     alt={image.ref}
                                     fluid
+                                    onClick={handleToLink}
                                 />
                             </Carousel.Item>
                         );
                     })}
                 </Carousel>
-            </div>
-        );
-
+            ) : (
+                <LoadingComponent />
+            )}
+        </div>
+    );
 }
