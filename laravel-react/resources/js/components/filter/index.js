@@ -11,7 +11,8 @@ const FilterSort = ({
     arrayData,
     filterValid,
     setFilterVaild,
-    noti
+    noti,
+    maxState
 }) => {
     const [_defSort, setDefSort] = React.useState("all");
     const { t } = useTranslation();
