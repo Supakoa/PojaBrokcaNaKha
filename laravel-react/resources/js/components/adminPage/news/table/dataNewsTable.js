@@ -6,12 +6,17 @@ import ColumnActions from "./ColumsAction";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { newsActions } from "../../../../redux/actions";
+import {_URL} from "../../../middleware/URL";
 
 const dataNewsTable = (setData) => {
     // props
 
     // local state
     // const [rows, setRows] = React.useState([]);
+    const localImagePath = `/storage/`
+
+    const [rows, setRows] = React.useState([]);
+    const { t } = useTranslation();
 
     // redux
     const redux_showNews = useSelector(state => state.showNews)

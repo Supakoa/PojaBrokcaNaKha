@@ -15,18 +15,16 @@ import { useSelector } from "react-redux";
 import NoMatch from "./NotMatch404";
 import clearLocalStorge from "./middleware/method/clearLocalStorage";
 import Approvers from "./Approvers";
+import { useTranslation } from "react-i18next";
 
 function App() {
     let _isAuthLocal = localStorage.getItem("_authLocal");
+    const { i18n } = useTranslation();
     return (
         <Router>
             <Switch>
-                <Route path="/login">
-                    <SignIn />
-                </Route>
-                <Route path="/register">
-                    <SignUp />
-                </Route>
+                <Route path="/login" component={SignIn} />
+                <Route path="/register" component={SignUp} />
                 <PrivateRoute path="/admin">
                     <AdminPage />
                 </PrivateRoute>
@@ -41,9 +39,7 @@ function App() {
                         to={!_isAuthLocal ? "/login" : clearLocalStorge()}
                     />
                 </Route>
-                <Route path="*">
-                    <NoMatch />
-                </Route>
+                <Route path="*" component={NoMatch} />
             </Switch>
         </Router>
     );

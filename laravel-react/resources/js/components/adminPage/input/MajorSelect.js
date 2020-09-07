@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Col } from "react-bootstrap";
 import Axios from "axios";
 import { useTranslation } from "react-i18next";
+import {_URL} from "../../middleware/URL";
 
 export default function MajorSelect({
     defaultData,
@@ -20,7 +21,7 @@ export default function MajorSelect({
 
     const initMajor = async id => {
         if (!!id) {
-            await Axios.get(`http://127.0.0.1:8000/api/faculties/${Number(id)}/majors`).then(
+            await Axios.get(`${_URL}/api/faculties/${Number(id)}/majors`).then(
                 res => {
                     // console.log(res);
                     setMajor(res.data);

@@ -6,6 +6,7 @@ import { first, filter } from "lodash";
 import { useSelector, useDispatch } from 'react-redux'
 import { chipGroupAction } from "../../../redux/actions";
 import { data } from "jquery";
+import {_URL} from "../../middleware/URL";
 
 export const AddApprover = props => {
     // props
@@ -85,7 +86,7 @@ export const AddApprover = props => {
     };
 
     const initState = async () => {
-        const users = await Axios.get(`http://localhost:8000/api/users`, {
+        const users = await Axios.get(`${_URL}/api/users`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

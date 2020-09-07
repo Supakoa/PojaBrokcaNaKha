@@ -3,11 +3,12 @@ import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import Axios from "axios";
 import {useTranslation} from 'react-i18next';
+import {_URL} from "../../middleware/URL";
 
 export default function ModalDelete(props) {
     const { id, api } = props;
     const {t} = useTranslation();
-    const apiPath = `http://localhost:8000/api/${api}`
+    const apiPath = `${_URL}/api/${api}`
 
     const handleClick = () => {
         Swal.fire({

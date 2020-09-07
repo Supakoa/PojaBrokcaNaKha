@@ -70,6 +70,15 @@ Route::group(['middleware' => 'auth:api'], function() {
         return  $imagePath;
 
     });
+    Route::post("/uploadNews",function (Request $request){
+
+        $imagePath = request('image')->store('uploads','public');
+        $image = Image::make(public_path("storage/{$imagePath}"));
+        $image->fit(1140, 420);
+        $image->save();
+        return  $imagePath;
+
+    });
 
 });
 

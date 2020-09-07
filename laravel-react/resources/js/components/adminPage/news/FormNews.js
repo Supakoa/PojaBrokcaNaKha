@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { initNewsForm, updateFile, updateRef } from "../../../redux/actions/";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import {_URL} from "../../middleware/URL";
 
 // modal add new news
 
@@ -75,9 +76,7 @@ function FormNews({
         formData.append("image", file);
 
         // console.log('file', file)
-        await Axios.post(
-            `http://localhost:8000/api/uploads`,
-            formData,
+        await Axios.post(`${_URL}/api/uploadNews`, formData,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(

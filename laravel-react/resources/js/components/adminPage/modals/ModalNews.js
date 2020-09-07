@@ -7,6 +7,7 @@ import { newsActions, initNewsForm } from "../../../redux/actions";
 import {useTranslation} from 'react-i18next';
 import { first } from "lodash";
 import Swal from "sweetalert2";
+import {_URL} from "../../middleware/URL";
 
 export default function ModalNews(props) {
     const { t } = useTranslation();
@@ -24,7 +25,8 @@ export default function ModalNews(props) {
     const [disabledAddButton, setDisabledAddButton] = useState(true)
 
     // local variable
-    const apiPath = `http://localhost:8000/api/news`
+    // const apiPath = `http://localhost:8000/api/news`
+    const apiPath = `${_URL}/api/news`
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',

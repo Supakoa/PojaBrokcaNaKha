@@ -9,6 +9,7 @@ import {
 import Axios from "axios";
 import qs from "qs";
 import { useTranslation } from "react-i18next";
+import {_URL} from "../../middleware/URL";
 
 export default function ModalUser({ isCreatedProp, id }) {
     const { t } = useTranslation();
@@ -50,7 +51,7 @@ export default function ModalUser({ isCreatedProp, id }) {
                 c_password: redux_formUser.confirmPassword
             };
 
-            await Axios.post(`http://localhost:8000/api/register`, data);
+            await Axios.post(`${_URL}/api/register`, data);
         } else {
             const data = qs.stringify({
                 email: redux_formUser.email,
@@ -62,7 +63,7 @@ export default function ModalUser({ isCreatedProp, id }) {
                 role_id: redux_formUser.roleId
             });
 
-            await Axios.put(`http://localhost:8000/api/users/${id}`, data, {
+            await Axios.put(`${_URL}/api/users/${id}`, data, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     Authorization: `Bearer ${localStorage.getItem(
@@ -94,11 +95,13 @@ export default function ModalUser({ isCreatedProp, id }) {
     return (
         <>
             <Button
+                className="mx-2"
                 name="modalUser"
                 variant={!isCreatedProp ? "warning" : "info"}
                 size="sm"
                 onClick={() => setModalUser(true)}
             >
+                <i className="fas fa-user-plus"></i>{" "}
                 {!isCreatedProp ? t("edit") : t("add")}
             </Button>
 

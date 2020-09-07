@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Col, Form } from "react-bootstrap";
 import Axios from "axios";
 import { useTranslation } from "react-i18next";
+import {_URL} from "../../middleware/URL";
 
 export default function FacultySelect({
     defaultData,
@@ -13,7 +14,7 @@ export default function FacultySelect({
     const [faculty, setFaculty] = useState([]);
     const [selected, setSelected] = React.useState(0);
 
-    const apiPath = `http://localhost:8000/api/faculties`;
+    const apiPath = `${_URL}/api/faculties`;
 
     const selectedFaculty = e => {
         setSelected(e.target.value);

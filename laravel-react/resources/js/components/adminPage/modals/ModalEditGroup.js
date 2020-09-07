@@ -22,6 +22,7 @@ import ModalNewGroup from "../group/modal/ModalNewGroup";
 import Swal from "sweetalert2";
 import AddSubject from "../group/modal/AddSubject";
 import { Chip } from "@material-ui/core";
+import {_URL} from "../../middleware/URL";
 
 const ModalEditGroup = ({ isCreateProps, response }) => {
     // local state
@@ -136,7 +137,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
             setResultSubjects(response.subjects_id);
             setShowGroupUsers(response.users);
         }, Math.max((response.users.length + 1) * 20, 500));
-        // Axios.get(`http://localhost:8000/api/groups/${response.id}/users`, {
+        // Axios.get(`${_URL}/api/groups/${response.id}/users`, {
         //     headers: {
         //         Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
         //     }
@@ -193,7 +194,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
 
         if (groupDetail.type == "normal") {
             await Axios.delete(
-                `http://localhost:8000/api/groups/${response.id}/users`,
+                `${_URL}/api/groups/${response.id}/users`,
                 {
                     data: {
                         user_id: tmp_deleteVal.userId,
@@ -229,7 +230,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
             tmp_subjectId = tmp_subjectId.id;
 
             await Axios.delete(
-                `http://localhost:8000/api/groups/${response.id}/users`,
+                `${_URL}/api/groups/${response.id}/users`,
                 {
                     data: {
                         user_id: tmp_deleteVal.userId,

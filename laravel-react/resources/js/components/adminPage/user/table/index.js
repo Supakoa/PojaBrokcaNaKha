@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import dataTableUser from "./dataTableUsers";
 import { MDBDataTable } from "mdbreact";
 import { columns } from "./columns";
+import { useTranslation } from "react-i18next";
 
 export default function TableUser({ paging }) {
+
+    // external module
+    const { t } = useTranslation();
 
     // local state
     const [data, setData] = useState({
@@ -28,7 +32,18 @@ export default function TableUser({ paging }) {
             {dataTableUser(setData)}
             <MDBDataTable
                 noBottomColumns={true}
-                entriesLabel="จำนวนที่แสดง"
+                entriesLabel={t("students.table.header.pagination")}
+                infoLabel={[
+                    t("students.table.footer.show"),
+                    "-",
+                    t("students.table.footer.of"),
+                    t("students.table.footer.list")
+                ]}
+                paginationLabel={[
+                    t("students.table.footer.prev"),
+                    t("students.table.footer.next")
+                ]}
+                searchLabel={t("students.table.header.search")}
                 entriesOptions={[5, 10, 15]}
                 entries={5}
                 displayEntries={paging}

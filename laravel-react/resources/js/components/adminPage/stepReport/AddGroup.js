@@ -4,6 +4,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Axios from 'axios';
 import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2';
+import {_URL} from "../../middleware/URL";
 
 export const AddGroup = (props) => {
 
@@ -53,7 +54,7 @@ export const AddGroup = (props) => {
         sendData.append('group_id', selectData)
         sendData.append('state', (step + 1))
 
-        await Axios.post(`http://localhost:8000/api/forms/${response.id}/groups`, sendData, {
+        await Axios.post(`${_URL}/api/forms/${response.id}/groups`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

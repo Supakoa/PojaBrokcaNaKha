@@ -5,6 +5,7 @@ import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { showGroupAction, showFormsAction } from "../../../../redux/actions";
 import Swal from "sweetalert2";
+import {_URL} from "../../../middleware/URL";
 
 export default function dataTableStepReport() {
     // props
@@ -18,7 +19,7 @@ export default function dataTableStepReport() {
     const dispatch = useDispatch();
 
     // local variable
-    const pathGetForms = `http://localhost:8000/api/forms`;
+    const pathGetForms = `${_URL}/api/forms`;
     // const Toast = Swal.mixin({
     //     toast: true,
     //     position: 'top-end',
@@ -61,7 +62,7 @@ export default function dataTableStepReport() {
     };
 
     const initShowGroupsRedux = () => {
-        Axios.get(`http://localhost:8000/api/groups`, {
+        Axios.get(`${_URL}/api/groups`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
