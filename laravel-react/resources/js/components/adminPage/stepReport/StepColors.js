@@ -9,14 +9,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { AddGroup } from "./AddGroup";
 import Axios from "axios";
 import Swal from "sweetalert2";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
 
-export const StepColors = props => {
+export const StepColors = ({
+    numberStep,
+    setModalShow,
+    response,
+    groupSteps,
+    setGroupSteps,
+    step
+}) => {
     // props
-    const { numberStep, setModalShow, response, groupSteps, setGroupSteps, step } = props;
 
     // local state
-    const [groupUserSteps, setGroupUserSteps] = useState(null)
+    const [groupUserSteps, setGroupUserSteps] = useState(null);
 
     //redux
     const rerdux_chipGroup = useSelector(state => state.chipGroup);
@@ -25,14 +31,14 @@ export const StepColors = props => {
     // local variable
     const Toast = Swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: "top-end",
         showConfirmButton: false,
         timer: 2000,
-        onOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        onOpen: toast => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
         }
-    })
+    });
 
     // function
     const initState = () => {
@@ -42,7 +48,7 @@ export const StepColors = props => {
 
     // FIXME: not to use now
     const deleteUserOnStep = (item, onStep) => {
-        let selectStep
+        let selectStep;
         switch (onStep + 1) {
             case 1:
                 selectStep = rerdux_chipGroup.data.step1;
@@ -65,32 +71,32 @@ export const StepColors = props => {
                 break;
         }
         selectStep = selectStep.filter(interest => {
-            return interest.id != item.id
-        })
+            return interest.id != item.id;
+        });
 
         const sendReduxData = {
             sendChip: selectStep
-        }
-        dispatch(chipGroupAction(`UPDATE_STEP_${onStep + 1}`, sendReduxData))
-    }
+        };
+        dispatch(chipGroupAction(`UPDATE_STEP_${onStep + 1}`, sendReduxData));
+    };
 
     const initGroupUserSteps = () => {
         // console.log('initGroupUserSteps')
         // console.log('numberStep', numberStep)
         // console.log('groupSteps', groupSteps)
-    }
+    };
 
-    const handleClickGroup = (item) => {
+    const handleClickGroup = item => {
         Swal.fire({
-            title: 'ยืนยันการลบ?',
+            title: "ยืนยันการลบ?",
             text: `คุณต้องการที่จะลบข้อมูล [${item.id}: ${item.th_name}] หรือไม่!`,
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
             confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก",
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-          }).then((result) => {
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+        }).then(result => {
             if (result.value) {
                 Axios.delete(`${_URL}/api/forms/${item.pivot.form_id}/groups`, {
                     data: {
@@ -102,36 +108,35 @@ export const StepColors = props => {
                         )}`
                     }
                 }).then(res => {
-
-                    let tmp_newGroupSteps = groupSteps
-                    tmp_newGroupSteps[item.pivot.state - 1] = res.data
-                    setGroupSteps(tmp_newGroupSteps)
+                    let tmp_newGroupSteps = groupSteps;
+                    tmp_newGroupSteps[item.pivot.state - 1] = res.data;
+                    setGroupSteps(tmp_newGroupSteps);
 
                     if (res.status == 200) {
                         Toast.fire({
-                            icon: 'success',
-                            title: 'ลบข้อมูลกลุ่มสำเร็จ'
-                        })
+                            icon: "success",
+                            title: "ลบข้อมูลกลุ่มสำเร็จ"
+                        });
                     } else {
                         Toast.fire({
-                            icon: 'warning',
-                            title: 'เกิดข้อผิดพลาดในการลบข้อมูล'
-                        })
+                            icon: "warning",
+                            title: "เกิดข้อผิดพลาดในการลบข้อมูล"
+                        });
                     }
-                })
+                });
             }
-          })
-    }
+        });
+    };
 
     // useEffect
     React.useEffect(() => {
         initState();
-        initGroupUserSteps()
+        initGroupUserSteps();
     }, [numberStep, groupSteps]);
 
     // component with condition
     // FIXME: not to use now
-    const returnStepComponent = (index) => {
+    const returnStepComponent = index => {
         let selectComponent;
         switch (index + 1) {
             case 1:
@@ -170,28 +175,34 @@ export const StepColors = props => {
                             <span aria-hidden="true">&times;</span>
                         </Button>
                     </Badge>
-                )
-            })
+                );
+            });
         }
     };
 
-    const MapStepComponent = (props) => {
-        const { thisStep } = props
+    const MapStepComponent = props => {
+        const { thisStep } = props;
 
         if (thisStep) {
             return thisStep.map((item, idx) => {
                 return (
-                    <Button onClick={() => handleClickGroup(item)} className="m-1" key={idx} variant={(item.type == "normal" ? "info" : "warning")}>
-                        <Badge pill variant="light">{`${item.id}`}</Badge> {`${item.th_name}`}
+                    <Button
+                        onClick={() => handleClickGroup(item)}
+                        className="m-1"
+                        key={idx}
+                        variant={item.type == "normal" ? "info" : "warning"}
+                    >
+                        <Badge pill variant="light">{`${item.id}`}</Badge>{" "}
+                        {`${item.th_name}`}
                     </Button>
-                )
-            })
+                );
+            });
         } else {
-            return (<></>)
+            return <></>;
         }
-    }
+    };
 
-    const rowSteps = (number) => {
+    const rowSteps = number => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
         const _num = Number(number);
 
@@ -201,14 +212,23 @@ export const StepColors = props => {
                     <div key={index}>
                         <Row className="mb-2">
                             <Col xs={12} md={10}>
-                                <Alert variant={_colorSet[index]} className="p-2 mb-0">
+                                <Alert
+                                    variant={_colorSet[index]}
+                                    className="p-2 mb-0"
+                                >
                                     step {index + 1}:{" "}
                                     {/* {returnStepComponent(index)} */}
                                     <MapStepComponent thisStep={item} />
                                 </Alert>
                             </Col>
                             <Col>
-                                <AddGroup setGroupSteps={setGroupSteps} groupSteps={groupSteps} step={index} setModalShow={setModalShow} response={response} />
+                                <AddGroup
+                                    setGroupSteps={setGroupSteps}
+                                    groupSteps={groupSteps}
+                                    step={index}
+                                    setModalShow={setModalShow}
+                                    response={response}
+                                />
                             </Col>
                         </Row>
                         <hr />
@@ -218,9 +238,5 @@ export const StepColors = props => {
         });
     };
 
-    return (
-        <>
-            { rowSteps(numberStep) }
-        </>
-    )
+    return <>{rowSteps(numberStep)}</>;
 };
