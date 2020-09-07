@@ -23,7 +23,7 @@ const LoadingComponent = () => {
             >
                 <span>
                     <Spinner animation="border" size="sm" />{" "}
-                    {i18n.language === "th" ? "กำลังโลหด" : "Loading"}...
+                    {i18n.language === "th" ? "กำลังโหลด" : "Loading"}...
                 </span>
             </div>
         );

@@ -50,6 +50,7 @@ const ShowDetail = ({ setRowsToInit }) => {
 
         return () => abort.abort();
     }, [id, _userDoc]);
+
     if (Object.keys(_detail).length > 0) {
         return (
             <Card>
