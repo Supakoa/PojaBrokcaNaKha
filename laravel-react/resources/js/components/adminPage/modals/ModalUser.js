@@ -111,16 +111,17 @@ export default function ModalUser({ isCreatedProp, id, res }) {
             })
         } else {
             const data = qs.stringify({
-                email: redux_formUser.email,
-                title: redux_formUser.title,
-                first_name: redux_formUser.firstName,
-                last_name: redux_formUser.lastName,
-                major_id: redux_formUser.majorId,
-                telephone: redux_formUser.phoneNumber,
-                role_id: redux_formUser.roleId
+                email: formUser.email,
+                title: formUser.title,
+                first_name: formUser.firstName,
+                last_name: formUser.lastName,
+                major_id: formUser.majorId,
+                telephone: formUser.phoneNumber,
+                role_id: Number(formUser.userType),
+                student_id: Number(formUser.studentId)
             });
 
-            await Axios.put(`${_URL}/api/users/${id}`, data, {
+            Axios.put(`${_URL}/api/users/${id}`, data, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     Authorization: `Bearer ${localStorage.getItem(
@@ -128,6 +129,7 @@ export default function ModalUser({ isCreatedProp, id, res }) {
                     )}`
                 }
             }).then(async res => {
+                console.log('res', res)
                 let tempUsers = redux_users.data;
                 const indexResult = redux_users.data.findIndex(item => {
                     return item.id == id;
@@ -137,10 +139,13 @@ export default function ModalUser({ isCreatedProp, id, res }) {
                     ...tempUsers[indexResult],
                     ...res.data
                 };
-                dispatch(updateShowUsers(tempUsers));
-                window.location.reload(false);
+                dispatch(showUserAction("INIT_SHOW_USERS", tempUsers));
+                // showUserAction("INIT_SHOW_USERS", tmp_showUsers)
+                // window.location.reload(false);
             });
         }
+
+        setModalUser(false)
     };
 
     const initFormUsers = () => {

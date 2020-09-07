@@ -20,7 +20,6 @@ const dataTableUser = (setData, refresh) => {
     // function
     const fetchRowData = _data => {
         const resData = _data.map((res, idx) => {
-            console.log('res', res)
             return {
                 action: <ColumnAction key={idx} idx={idx} res={res} refresh={refresh} />,
                 id: idx + 1,
