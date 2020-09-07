@@ -188,3 +188,17 @@ export const showFormsAction = (action, data) => {
         data: data
     };
 };
+
+export const showFacultyAction = (action, data) => {
+    return {
+        type: action,
+        data: data
+    }
+}
+
+export const showUserAction = (action, data) => {
+    return {
+        type: action,
+        data: data
+    }
+}

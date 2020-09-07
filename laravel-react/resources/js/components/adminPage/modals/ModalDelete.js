@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import {_URL} from "../../middleware/URL";
 
 export default function ModalDelete(props) {
-    const { id, api } = props;
+    const { id, api, refresh } = props;
     const {t} = useTranslation();
     const apiPath = `${_URL}/api/${api}`
 
@@ -28,7 +28,8 @@ export default function ModalDelete(props) {
                     }
                 }).then(res => {
                     Swal.fire(t('modalDelete.deleted'),`${api} ${t('modalDelete.hasBeetDeleted')}`, t('modalDelete.success'));
-                    window.location.reload(false);
+                    refresh()
+                    // window.location.reload(false);
                 })
             }
         });

@@ -16,6 +16,7 @@ import showNewsReducer from "./showNews";
 import chipGroupReducer from "./chipGroup";
 import showGroupReducer from "./showGroup";
 import showApproversReducer from "./showApprovers";
+import showFacultyReducer from "./showFaculty";
 
 import { combineReducers } from "redux";
 import showSubjectsReducer from "./showSubjects";
@@ -51,7 +52,8 @@ const allReducers = combineReducers({
     showApprovers: showApproversReducer,
     showSubjects: showSubjectsReducer,
     allUsers: allUsersReducer,
-    showForm: showFormsReducer
+    showForm: showFormsReducer,
+    showFaculty: showFacultyReducer
 });
 
 export default rootReducer;

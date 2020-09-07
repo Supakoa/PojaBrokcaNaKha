@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { initShowUsers } from "../../../../redux/actions";
 import {_URL} from "../../../middleware/URL";
 
-const dataTableUser = (setData) => {
+const dataTableUser = (setData, refresh) => {
     // init state
-    const [rows, setRows] = React.useState([]);
+    // const [rows, setRows] = React.useState([]);
 
     // redux
     const redux_showUsers = useSelector(state => state.showUsers);
@@ -20,8 +20,9 @@ const dataTableUser = (setData) => {
     // function
     const fetchRowData = _data => {
         const resData = _data.map((res, idx) => {
+            console.log('res', res)
             return {
-                action: <ColumnAction key={idx} idx={idx} res={res} />,
+                action: <ColumnAction key={idx} idx={idx} res={res} refresh={refresh} />,
                 id: idx + 1,
                 name: res.title + " " + res.first_name + " " + res.last_name,
                 role: userRole(res.role_id),

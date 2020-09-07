@@ -6,6 +6,7 @@ use App\Major ;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use faculty as GlobalFaculty;
 
 class FacultyController extends Controller
 {
@@ -17,7 +18,12 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        return  response()->json(['success' => Faculty::all()]);
+        $faculties = Faculty::all();
+        foreach ($faculties as $faculty) {
+            $faculty->majors;
+        }
+
+        return  response()->json(['success' => $faculties]);
     }
 
     /**
