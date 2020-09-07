@@ -3,11 +3,10 @@ import { Button, Modal } from "react-bootstrap";
 import FormNews from "../news/FormNews";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { newsActions, initNewsForm } from "../../../redux/actions";
-import {useTranslation} from 'react-i18next';
-import { first } from "lodash";
+import { newsActions } from "../../../redux/actions";
+import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
 
 export default function ModalNews(props) {
     const { t } = useTranslation();
@@ -20,58 +19,44 @@ export default function ModalNews(props) {
     const [isShow, setIsShow] = React.useState(false);
     const [formNews, setFormNews] = useState({
         image: null,
-        ref: null,
-    })
-    const [disabledAddButton, setDisabledAddButton] = useState(true)
+        ref: null
+    });
+    const [disabledAddButton, setDisabledAddButton] = useState(true);
 
     // local variable
     // const apiPath = `http://localhost:8000/api/news`
-    const apiPath = `${_URL}/api/news`
+    const apiPath = `${_URL}/api/news`;
     const Toast = Swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: "top-end",
         showConfirmButton: false,
         timer: 2000,
-        onOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        onOpen: toast => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
         }
-    })
+    });
 
     // redux
-    const redux_form = useSelector(state => state.newsForm)
-    const redux_showNews = useSelector(state => state.showNews)
-    const dispatch = useDispatch()
-
-    const isCreateTitile = context => {
-        return context ? t("add") : t("edit");
-    };
+    const redux_showNews = useSelector(state => state.showNews);
+    const dispatch = useDispatch();
 
     const checkAddNews = () => {
         if (formNews.image && formNews.ref) {
-            setDisabledAddButton(false)
+            setDisabledAddButton(false);
         } else {
-            setDisabledAddButton(true)
+            setDisabledAddButton(true);
         }
-    }
-
-    // not use ofr init
-    // React.useEffect(() => {
-    //     const abortController = new AbortController();
-
-    //     return () => {
-    //         abortController.abort();
-    //     };
-    // }, []);
+    };
 
     const initlocalFormNews = () => {
         if (!isCreateProps) {
             setFormNews({
                 image: response.image,
-                ref: response.ref,
-            })
+                ref: response.ref
+            });
         }
-    }
+    };
 
     const saveFormToDB = async () => {
         if (isCreateProps) {
@@ -83,85 +68,71 @@ export default function ModalNews(props) {
                 }
             }).then(res => {
                 if (res.status == 201) {
-                    let tmp_showNews = [
-                        ...redux_showNews.data,
-                        res.data,
-                    ]
+                    let tmp_showNews = [...redux_showNews.data, res.data];
 
-                    dispatch(newsActions("INIT_SHOW_NEWS", tmp_showNews))
+                    dispatch(newsActions("INIT_SHOW_NEWS", tmp_showNews));
 
-                    setIsShow(false)
+                    setIsShow(false);
 
                     Toast.fire({
-                        icon: 'success',
-                        title: 'เพิ่มข้อมูลสำเร็จ'
-                    })
+                        icon: "success",
+                        title: "เพิ่มข้อมูลสำเร็จ"
+                    });
                 } else {
                     Toast.fire({
-                        icon: 'error',
-                        title: 'เพิ่มข้อมูลไม่สำเร็จ'
-                    })
+                        icon: "error",
+                        title: "เพิ่มข้อมูลไม่สำเร็จ"
+                    });
                 }
-
-                // const newNews = res.data
-                // let tempShowNews = new Array(redux_showNews.data.length + 1)
-                // for (let i = 0; i < redux_showNews.data.length; i++) {
-                //     tempShowNews[i] = redux_showNews.data[i]
-                // }
-                // tempShowNews[redux_showNews.data.length] = newNews
-                // setIsShow(false)
-                // dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
-            })
+            });
         } else {
             const id = response.id;
 
             Axios.patch(`${apiPath}/${id}`, formNews, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("_authLocal")}`
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
                 }
             }).then(res => {
-                console.log('res', res)
+                console.log("res", res);
                 if (res.status == 200) {
-                    let tempShowNews = redux_showNews.data
+                    let tempShowNews = redux_showNews.data;
 
                     let updateIndex = tempShowNews.findIndex(item => {
-                        return item.id == res.data.id
-                    })
+                        return item.id == res.data.id;
+                    });
 
                     tempShowNews[updateIndex] = {
                         ...tempShowNews[updateIndex],
                         ...res.data
-                    }
+                    };
 
-                    dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews))
+                    dispatch(newsActions("INIT_SHOW_NEWS", tempShowNews));
 
-                    setIsShow(false)
+                    setIsShow(false);
 
                     Toast.fire({
-                        icon: 'success',
-                        title: 'แก้ไขสำเร็จ'
-                    })
+                        icon: "success",
+                        title: "แก้ไขสำเร็จ"
+                    });
                 } else {
                     Toast.fire({
-                        icon: 'error',
-                        title: 'แก้ไขไม่สำเร็จ'
-                    })
+                        icon: "error",
+                        title: "แก้ไขไม่สำเร็จ"
+                    });
                 }
-            })
+            });
         }
-    }
+    };
 
     useEffect(() => {
-        initlocalFormNews()
-    }, [])
+        initlocalFormNews();
+    }, []);
 
     useEffect(() => {
-        checkAddNews()
-    }, [formNews])
-
-    const isReturnCreateForm = () => {
-        return <FormNews response={response} isCreateProps={isCreateProps} formNews={formNews} setFormNews={setFormNews} />
-    }
+        checkAddNews();
+    }, [formNews]);
 
     return (
         <>
@@ -171,7 +142,10 @@ export default function ModalNews(props) {
                 onClick={() => setIsShow(true)}
                 variant={isCreateProps ? "info" : "warning"}
                 className="text-light"
-            >{" "}{isCreateTitile(isCreateProps)}{" "}</Button>
+            >
+                {" "}
+                {isCreateProps ? t("add") : t("edit")}{" "}
+            </Button>
 
             {/* Modal for edit or create : will convert by isCreateProps state*/}
             <Modal
@@ -185,24 +159,36 @@ export default function ModalNews(props) {
             >
                 <Modal.Header>
                     <Modal.Title id="example-modal-sizes-title-lg">
-                        {isCreateTitile(isCreateProps)}
+                        {isCreateProps ? t("add") : t("edit")}
                     </Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>{isReturnCreateForm()}</Modal.Body>
+                <Modal.Body>
+                    <FormNews
+                        response={response}
+                        isCreateProps={isCreateProps}
+                        formNews={formNews}
+                        setFormNews={setFormNews}
+                    />
+                </Modal.Body>
 
                 <Modal.Footer>
                     <Button
                         variant="secondary"
                         onClick={() => setIsShow(false)}
-                    >{" "}{t("close")}{" "}</Button>
+                    >
+                        {" "}
+                        {t("close")}{" "}
+                    </Button>
 
                     <Button
                         variant={isCreateProps ? "info" : "warning"}
                         onClick={() => saveFormToDB()}
                         disabled={disabledAddButton}
-                    >{" "}{t("save")}{" "}</Button>
-
+                    >
+                        {" "}
+                        {t("save")}{" "}
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

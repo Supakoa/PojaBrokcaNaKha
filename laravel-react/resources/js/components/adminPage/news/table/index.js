@@ -1,34 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import dataNewsTable from "./dataNewsTable";
 import { MDBDataTable } from "mdbreact";
 import { useTranslation } from "react-i18next";
 import { columns } from "./columns";
 
 export default function TableNews({ paging }) {
-
     // library require
     const { t } = useTranslation();
 
     // local state
-    // const [rows, setRows] = useState([])
     const [data, setData] = useState({
         columns: columns(t),
         rows: []
-    })
-
-    //redux
-
-    // local variable
-
-    // function
-    const initState = () => {
-        // dataNewsTable()
-    }
-
-    // useEffect
-    // useEffect(() => {
-    //     initState()
-    // }, [data])
+    });
 
     // return component
 
@@ -63,5 +47,5 @@ export default function TableNews({ paging }) {
                 searchLabel={t("students.table.header.search")}
             />
         </>
-    )
+    );
 }

@@ -1,41 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import { useDispatch } from "react-redux";
-import { initNewsForm, updateFile, updateRef } from "../../../redux/actions/";
 import Axios from "axios";
 import Swal from "sweetalert2";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
+import { useTranslation } from "react-i18next";
 
 // modal add new news
 
-function FormNews({
-        response,
-        isCreateProps,
-        setFormNews,
-        formNews
-    }) {
-
-    // local state
-    const [_state, _setState] = React.useState({});
-    const [inputText, setInputText] = useState("");
-
-    // redux
-    // const file = useSelector(state => state.file) not use
-    const dispatch = useDispatch();
-
+function FormNews({ isCreateProps, setFormNews, formNews }) {
+    const { i18n } = useTranslation();
     // local variable
     const Toast = Swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: "top-end",
         showConfirmButton: false,
         timer: 2000,
-        onOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        onOpen: toast => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
         }
-    })
+    });
 
     // function
     const _handleImageChange = e => {
@@ -44,81 +30,45 @@ function FormNews({
         if (e.target.name === "upload") {
             createImage(e);
         } else {
-            const val = e.target.value
+            const val = e.target.value;
             setFormNews({
                 image: formNews.image,
                 ref: val
-            })
-
-            // setFormNews(preState => {
-            //     return {
-            //         ...preState,
-            //         ref: e.target.value
-            //     }
-            // })
-
-            // _setState({
-            //     ..._state,
-            //     [_name]: _value
-            // });
-
-            // // update component and redux
-            // setInputText(e.target.value);
-            // dispatch(updateRef(e.target.value));
+            });
         }
     };
 
     const createImage = async e => {
-        const reader = new FileReader();
         const file = e.target.files[0];
 
         const formData = new FormData();
         formData.append("image", file);
 
-        // console.log('file', file)
-        await Axios.post(`${_URL}/api/uploadNews`, formData,
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "_authLocal"
-                    )}`
-                }
+        await Axios.post(`${_URL}/api/uploadNews`, formData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
-        ).then(res => {
+        }).then(res => {
             if (res.status == 200) {
                 Toast.fire({
-                    icon: 'success',
-                    title: 'อัพโหลดสำเร็จ'
-                })
+                    icon: "success",
+                    title: "อัพโหลดสำเร็จ"
+                });
 
-                console.log('res pathImage:', res)
                 setFormNews({
                     image: res.data,
                     url: formNews.url
-                })
+                });
             } else {
                 Toast.fire({
-                    icon: 'warning',
-                    title: 'เกิดข้อผิดพลาดในการอัพโหลด'
-                })
-
+                    icon: "warning",
+                    title: "เกิดข้อผิดพลาดในการอัพโหลด"
+                });
             }
-        })
-
-        // reader.onloadend = e => {
-        //     _setState({
-        //         ..._state,
-        //         file: file,
-        //         imagePreviewUrl: pathImage
-        //     });
-        //     dispatch(updateFile(pathImage));
-        // };
-
-        // reader.readAsDataURL(file);
+        });
     };
 
     const _previewImage = () => {
-        let { imagePreviewUrl } = _state;
         let _imagePreview = null;
 
         if (formNews.image) {
@@ -136,64 +86,33 @@ function FormNews({
         return _imagePreview;
     };
 
-    const initState = () => {
-        // init state
-        // !isCreateProps
-        //     ? _setState({
-        //           ..._state,
-        //           imagePreviewUrl: response.image,
-        //           url: response.ref
-        //       })
-        //     : _setState({ files: "", imagePreviewUrl: "", url: "" });
-
-        // init redux state
-        // if (!isCreateProps) {
-        //     setInputText(response.ref);
-
-        //     dispatch(
-        //         initNewsForm({
-        //             file: response.image,
-        //             ref: response.ref
-        //         })
-        //     );
-        // } else {
-        //     dispatch(
-        //         initNewsForm({
-        //             file: "",
-        //             ref: ""
-        //         })
-        //     );
-        // }
-    }
-
     // usesEffect
     useEffect(() => {
-        initState()
-
         return () => {
             if (isCreateProps) {
                 setFormNews({
                     image: null,
-                    ref: null,
-                })
+                    ref: null
+                });
             }
-        }
-    }, [])
+        };
+    }, []);
 
     // return component
 
     return (
         <Container>
             <Form>
-                <Form.Label>Image</Form.Label>
+                <Form.Label>
+                    {i18n.language === "th" ? "รูปข่าว" : "Image"}
+                </Form.Label>
                 <Container
                     className="w-100 d-flex justify-content-center border rounded p-0"
                     style={{ minHeight: "200px" }}
                 >
-
                     {_previewImage()}
 
-                    <input
+                    <Form.File
                         accept="image/*"
                         className="d-none"
                         id="icon-button-file"
@@ -222,9 +141,11 @@ function FormNews({
                     <Form.Control
                         type="url"
                         name="urlImage"
-                        placeholder="URL"
+                        placeholder={
+                            i18n.language === "th" ? "ที่อยู่รูป" : "URL"
+                        }
                         // value={e => console.log(e)}
-                        value={formNews.ref}
+                        defaultValue={formNews.ref}
                         onChange={_handleImageChange}
                     />
                 </Form.Group>
