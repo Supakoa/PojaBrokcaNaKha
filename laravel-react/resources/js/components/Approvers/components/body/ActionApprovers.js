@@ -106,9 +106,6 @@ const ActionApprovers = ({
         }
     };
 
-    console.log("maxState : ", maxState);
-    console.log("stateDocument : ", stateDocument);
-
     if (
         (stateDocument === Number(stateApprovers) &&
             statusDocument === "pending") ||
