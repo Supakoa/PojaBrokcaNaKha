@@ -25,6 +25,8 @@ import LoadingComponent from "../../LoadingComponent/Loading";
 export default function TemplateMessage() {
     const [_listUsers, setListUsers] = React.useState([]);
     const [isopen, setIsOpen] = React.useState(true);
+    const [userIdOpen, setUserIdOpen] = React.useState(0);
+
     const { t } = useTranslation();
 
     const fetchMessages = async token => {
@@ -32,32 +34,38 @@ export default function TemplateMessage() {
         if (_getAll) setListUsers(_getAll);
     };
 
-    const read = async id =>
-        axios
-            .get(`${_URL}/api/messages/${id}/read`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "_authLocal"
-                    )}`
-                }
-            })
-            .then(res => {
-                let user = _listUsers.find(value => {
-                    console.log("value", value.id);
-                    console.log("e.target.name ", id);
-                    return value.id == id;
+    const read = async id =>{
+        let user = _listUsers.find(value => {
+            // console.log("value", value.id);
+            return value.id == id;
+        });
+        console.log("userIdOpen ",userIdOpen);
+        console.log("e.target.name ", id);
+
+        if (!!user && user.count_unread > 0 && (userIdOpen==0 ? true : userIdOpen == id) ) {
+            axios
+                .get(`${_URL}/api/messages/${id}/read`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "_authLocal"
+                        )}`
+                    }
+                })
+                .then(res => {
+                    if (!!user) {
+                        user.count_unread = 0;
+                        setListUsers([..._listUsers]);
+                    }
                 });
-                if (!!user) {
-                    console.log("user ", user);
-                    user.count_unread = 0;
-                    setListUsers([..._listUsers]);
-                }
-            });
+        }
+    };
     let channel = window.Echo.channel("channel-chat");
     channel.listen(".event-chat-admin", async function(data) {
+
         let user = _listUsers.find(value => value.id === data.user_id);
         setIsOpen(true);
         if (!!user) {
+
             user["count_unread"] = data.count_messages_unread;
             let tmp_message = {};
             tmp_message.id = data.count_messages + 1;
@@ -66,30 +74,41 @@ export default function TemplateMessage() {
             tmp_message.user_id = data.user_id;
             if (
                 user.messages.findIndex(
-                    value => value.id === tmp_message.id
+                    value => value.id == tmp_message.id
                 ) === -1
             ) {
+                console.log("Data : ",data);
                 user.messages.push(tmp_message);
                 setListUsers([..._listUsers]);
             }
-        } else if (data.count_messages === 1) {
+        } else if (data.count_messages == 1) {
             const _getAll = await getMessages(localStorage._authLocal);
             if (_getAll) setListUsers(_getAll);
+        }
+        if (userIdOpen == data.user_id){
+            read(data.user_id);
         }
         var element = document.getElementById("chatBody");
         element.scrollTop = element.scrollHeight;
     });
 
     const scrollToBottom = e => {
+        let id = e.target.name;
+
         if (isopen) {
-            let id = e.target.name;
-            read(id);
             setIsOpen(false);
             setTimeout(() => {
                 var element = document.getElementById("chatBody");
                 element.scrollTop = element.scrollHeight;
             }, 200);
         }
+            setUserIdOpen(id) ;
+            setTimeout(function () {
+                console.log(2000)
+                read(id)
+            },2000)
+
+
     };
 
     React.useEffect(() => {
@@ -100,6 +119,11 @@ export default function TemplateMessage() {
             abort.abort();
         };
     }, [localStorage._authLocal]);
+
+    React.useEffect(() => {
+
+        console.log("_listUsers : ",_listUsers)
+    }, [_listUsers]);
 
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">
@@ -181,6 +205,7 @@ export default function TemplateMessage() {
                                                 userId={userMessages.id}
                                                 _listUsers={_listUsers}
                                                 setListUsers={setListUsers}
+                                                read = {read}
                                             />
                                         </Card.Footer>
                                     </Card>
