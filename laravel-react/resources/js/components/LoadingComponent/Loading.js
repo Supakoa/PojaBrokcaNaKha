@@ -7,14 +7,18 @@ const LoadingComponent = () => {
     const { i18n } = useTranslation();
 
     React.useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             setOutLoading(true);
-        }, 2500);
-        return () => clearTimeout();
+        }, 3000);
+        return () => clearTimeout(timer);
     });
 
     if (outLoading) {
-        return null;
+        return (
+            <div className="d-flex align-content-center justify-content-center py-3">
+                <i className="fas fa-cogs"></i>
+            </div>
+        );
     } else {
         return (
             <div
@@ -23,7 +27,7 @@ const LoadingComponent = () => {
             >
                 <span>
                     <Spinner animation="border" size="sm" />{" "}
-                    {i18n.language === "th" ? "กำลังโลหด" : "Loading"}...
+                    {i18n.language === "th" ? "กำลังโหลด" : "Loading"}...
                 </span>
             </div>
         );

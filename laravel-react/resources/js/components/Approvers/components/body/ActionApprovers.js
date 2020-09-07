@@ -22,7 +22,7 @@ const ActionApprovers = ({
     const [_pivot, setPivot] = React.useState({});
     const _userId = useSelector(s => s.userState.id);
     const _dispatch = useDispatch();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     let _history = useHistory();
     const [_loading, setLoading] = React.useState(false);
 
@@ -152,7 +152,11 @@ const ActionApprovers = ({
                                     {t("approvers.action.place-status")}
                                 </option>
                                 <option value="approved">
-                                    {t("filter.approved")}
+                                    {stateDocument !== maxState
+                                        ? i18n.language === "th"
+                                            ? "ลงนาม"
+                                            : "Sign"
+                                        : t("filter.approved")}
                                 </option>
                                 <option value="edited">
                                     {t("filter.edit")}

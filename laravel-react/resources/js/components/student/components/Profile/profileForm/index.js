@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import { Row, Col, Form, Button, Spinner, Image } from "react-bootstrap";
 import Swal from "sweetalert2";
 import axios from "axios";
 import validateIndex from "../../../../middleware/validate";
@@ -12,6 +12,7 @@ import { _urlUsers } from "../../../../middleware/apis";
 import headerConfig from "../../../../middleware/headerConfig";
 import { useTranslation } from "react-i18next";
 import uploadsImage from "../../../../middleware/axios/uploads";
+import ModalImage from "../../tableReport/modal/ModalImage";
 
 const ProfileForm = ({ role }) => {
     const _dispatch = useDispatch();
@@ -320,6 +321,16 @@ const ProfileForm = ({ role }) => {
                                             : "import licence"
                                     }
                                 />
+                                {_profile.license ? (
+                                    <ModalImage src={_profile.license} />
+                                ) : (
+                                    <span>
+                                        <i className="far fa-image"></i>{" "}
+                                        {i18n.language === "th"
+                                            ? "ไม่พบรูป"
+                                            : "image not found"}
+                                    </span>
+                                )}
                             </Col>
                         </Form.Group>
 

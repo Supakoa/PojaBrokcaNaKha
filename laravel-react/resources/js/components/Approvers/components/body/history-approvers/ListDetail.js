@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import StatusBadgeDoc from "../../../../student/components/tableReport/statusDocument";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import ModalImage from "../../../../student/components/tableReport/modal/ModalImage";
 
 const ListDetailApprovers = ({ translate, approvers }) => {
     const { i18n } = useTranslation();
@@ -15,10 +17,10 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                         : "Aprover History"}
                     :
                 </h5>
-                <Row>
-                    {approvers.map((approver, idx) => {
-                        return (
-                            <Col key={idx} lg={6} md={6}>
+                {approvers.map((approver, idx) => {
+                    return (
+                        <Row key={idx}>
+                            <Col lg={6} md={6}>
                                 <dl className="row mb-0">
                                     <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
                                         {translate(
@@ -46,9 +48,29 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                     </dd>
                                 </dl>
                             </Col>
-                        );
-                    })}
-                </Row>
+                            <Col
+                                md={6}
+                                lg={6}
+                                className="d-flex align-items-center justify-content-center"
+                            >
+                                {approvers.license ? (
+                                    <ModalImage src={approver.license} />
+                                ) : (
+                                    <Link
+                                        style={{ fontSize: "22px" }}
+                                        className="text-secondary"
+                                        to="/Approvers/profile"
+                                    >
+                                        <i className="far fa-image"></i>{" "}
+                                        {i18n.language === "th"
+                                            ? "ไม่พบรูป"
+                                            : "image not found"}
+                                    </Link>
+                                )}
+                            </Col>
+                        </Row>
+                    );
+                })}
             </Card.Body>
         </Card>
     );
