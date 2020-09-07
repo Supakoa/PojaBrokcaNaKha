@@ -53,7 +53,7 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                 lg={6}
                                 className="d-flex align-items-center justify-content-center"
                             >
-                                {approvers.license ? (
+                                {approver.license ? (
                                     <ModalImage src={approver.license} />
                                 ) : (
                                     <Link
