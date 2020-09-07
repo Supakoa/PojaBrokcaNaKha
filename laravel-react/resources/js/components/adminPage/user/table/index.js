@@ -4,7 +4,7 @@ import { MDBDataTable } from "mdbreact";
 import { columns } from "./columns";
 import { useTranslation } from "react-i18next";
 
-export default function TableUser({ paging }) {
+export default function TableUser({ paging, initUsers }) {
 
     // external module
     const { t } = useTranslation();
@@ -29,7 +29,7 @@ export default function TableUser({ paging }) {
     return (
         <>
             {/* init data */}
-            {dataTableUser(setData)}
+            {dataTableUser(setData, initUsers)}
             <MDBDataTable
                 noBottomColumns={true}
                 entriesLabel={t("students.table.header.pagination")}

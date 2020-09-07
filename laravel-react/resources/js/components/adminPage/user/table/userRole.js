@@ -1,5 +1,5 @@
 export const userRole = _role => {
-    switch (_role) {
+    switch (Number(_role)) {
         case 1:
             return "ผู้ดูแลระบบ";
         case 2:
