@@ -127,7 +127,11 @@ class UserController extends Controller
                 break;
         }
         foreach ($documents as $index => $document) {
-            $document->approver = $document->approver()->wherePivot('state', "<", $document->state)->get();
+            if ($document->state == $document->max_state){
+                $document->approver = $document->approver()->get();
+            }else{
+                $document->approver = $document->approver()->wherePivot('state', "<", $document->state)->get();
+            }
             $document->user;
             $document->userCancel;
         }
