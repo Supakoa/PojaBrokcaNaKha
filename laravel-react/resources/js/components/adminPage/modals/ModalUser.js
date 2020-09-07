@@ -176,6 +176,20 @@ export default function ModalUser({ isCreatedProp, id, res }) {
         }
     }
 
+    const eventOpenOnSave = () => {
+        if (formUser) {
+            if (isCreatedProp) {
+                let tmp_result = ( formUser.email == "" || formUser.password == "" || formUser.confirmPassword == ""
+                                                        || formUser.studentId == "" || formUser.title == "" || formUser.firstName == ""
+                                                        || formUser.lastName == "" || formUser.phoneNumber == "" || formUser.userType == 0
+                                                        || formUser.majorId == 0)
+                return tmp_result
+            } else {
+                return false
+            }
+        }
+    }
+
     // useEffect
     useEffect(() => {
         initFormUsers()
@@ -242,6 +256,7 @@ export default function ModalUser({ isCreatedProp, id, res }) {
                     <Button
                         variant="primary"
                         onClick={sendDataToDB}
+                        disabled={eventOpenOnSave()}
                     >
                         {t("save")}
                     </Button>

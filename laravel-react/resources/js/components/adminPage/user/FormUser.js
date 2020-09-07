@@ -20,6 +20,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
 
     // redux
     const redux_showFaculty = useSelector(state => state.showFaculty)
+    const redux_userState = useSelector(state => state.userState)
 
     // local variable
 
@@ -67,7 +68,9 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
 
     const initMajor = () => {
         if (isCreatedProp) {
-            setselectFacultyId(user.major.faculty_id)
+            if (user.major) {
+                setselectFacultyId(user.major.faculty_id)
+            }
         }
     }
 
@@ -157,7 +160,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
 
             <hr />
             <Form.Group
-                // hidden={user.role_id !== 3}
+                hidden={user.role_id !== 3}
                 controlId="formUserStudentID"
             >
                 <Form.Label>รหัสนักศึกษา</Form.Label>
@@ -255,6 +258,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                         as="select"
                         name="role_id"
                         onChange={selecetedRole}
+                        disabled={redux_userState.id == user.id}
                         // value={user.role_id ? user.role_id : selected}
                         defaultValue={formUser.userType}
                     >

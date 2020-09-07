@@ -20,6 +20,7 @@ const dataTableUser = (setData, refresh) => {
     // function
     const fetchRowData = _data => {
         const resData = _data.map((res, idx) => {
+            // console.log('res', res)
             return {
                 action: <ColumnAction key={idx} idx={idx} res={res} refresh={refresh} />,
                 id: idx + 1,
@@ -27,8 +28,8 @@ const dataTableUser = (setData, refresh) => {
                 role: userRole(res.role_id),
                 email: res.email,
                 phone: res.telephone,
-                faculty: res.major_id !== null ? res.major.faculty.name : "-",
-                major: res.major_id !== null ? res.major.name : "-"
+                faculty: (res.major_id !== null) ? res.major.faculty.name : "-",
+                major: (res.major_id !== null) ? res.major.name : "-"
             };
         })
 
