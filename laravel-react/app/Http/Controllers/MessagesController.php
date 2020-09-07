@@ -62,10 +62,10 @@ class MessagesController extends Controller
         $count_messages = Message::query()->where("user_id", $user_id)->count();
         if ($is_admin) {
            $count_unread =  Message::query()->where("user_id", $user_id)->whereNotNull("admin_id")->where("read",0)->count();
-            event(new ChatEchoToUser($request->get("message"), $user_id,auth()->id(), $count_messages, $count_unread));
+            event(new ChatEchoToUser($request->get("message"),$message->id, $user_id,auth()->id(), $count_messages, $count_unread));
         } else {
             $count_unread =  Message::query()->where("user_id", $user_id)->whereNull("admin_id")->where("read",0)->count();
-            event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
+            event(new ChatEchoToAdmin($request->get("message"),$message->id, $user_id, $count_messages, $count_unread));
         }
         $message["count_messages"] = $count_messages;
         $message["count_unread"] = $count_unread;

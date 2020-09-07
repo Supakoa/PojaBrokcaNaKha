@@ -12,6 +12,7 @@ class ChatEchoToUser implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $message_id;
 
     private $user_id;
 
@@ -24,14 +25,16 @@ class ChatEchoToUser implements ShouldBroadcast
     /**
      * ChatEchoToUser constructor.
      * @param $message
+     * @param $message_id
      * @param $user_id
      * @param $admin_id
      * @param $count_messages
      * @param $count_messages_unread
      */
-    public function __construct($message, $user_id,$admin_id, $count_messages, $count_messages_unread)
+    public function __construct($message, $message_id, $user_id, $admin_id, $count_messages, $count_messages_unread)
     {
         $this->message = $message;
+        $this->message_id = $message_id;
         $this->user_id = $user_id;
         $this->admin_id = $admin_id;
         $this->count_messages = $count_messages;

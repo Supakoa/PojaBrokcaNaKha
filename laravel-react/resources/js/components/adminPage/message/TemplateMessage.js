@@ -25,6 +25,7 @@ import LoadingComponent from "../../LoadingComponent/Loading";
 export default function TemplateMessage() {
     const [_listUsers, setListUsers] = React.useState([]);
     const [isopen, setIsOpen] = React.useState(true);
+    const [lockRead, setLockRead] = React.useState(false);
     const [userIdOpen, setUserIdOpen] = React.useState(0);
 
     const {t} = useTranslation();
@@ -39,11 +40,8 @@ export default function TemplateMessage() {
             // console.log("value", value.id);
             return value.id == id;
         });
-        console.log("userIdOpen ", userIdOpen);
-        console.log("e.target.name ", id);
-
-        if (!!user && user.count_unread > 0 && (userIdOpen == 0 ? true : userIdOpen == id)) {
-            axios
+        if (!!user && user.count_unread > 0 && (userIdOpen == 0 ? true : userIdOpen == id) ) {
+          await  axios
                 .get(`${_URL}/api/messages/${id}/read`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
@@ -59,23 +57,24 @@ export default function TemplateMessage() {
                 });
         }
     };
-    let channel = window.Echo.channel("channel-chat");
+    const channel = window.Echo.channel("channel-chat");
     channel.listen(".event-chat-admin", async function (data) {
-        console.log(data)
+        // console.log(dd)
         let user = _listUsers.find(value => value.id === data.user_id);
         setIsOpen(true);
         if (!!user) {
-            if (data.count_messages != (Number(user.count_messages) + 1)) {
-                console.log("data.count_messages : ", data.count_messages)
-                console.log("user.count_messages : ", Number(user.count_messages) + 1)
-                getMessages(localStorage._authLocal).then(value => {
-                    setListUsers(value)
-                    // setAPI(false);
-                })
-            } else {
+
+            // if ( (data.message_id != user.messages.reverse()[0].id) && (data.count_messages != (user.count_messages) + 1) && (data.message_id != user.messages.reverse()[0].id)) {
+            //
+            //    await getMessages(localStorage._authLocal).then(value => {
+            //         setListUsers(value)
+            //         // setAPI(false);
+            //     })
+            // } else {
                 user["count_unread"] = data.count_messages_unread;
+                user["count_messages"] = data.count_messages;
                 let tmp_message = {};
-                tmp_message.id = data.count_messages + 1;
+                tmp_message.id = data.message_id;
                 tmp_message.message = data.message;
                 tmp_message.admin_id = null;
                 tmp_message.user_id = data.user_id;
@@ -84,20 +83,25 @@ export default function TemplateMessage() {
                         value => value.id == tmp_message.id
                     ) === -1
                 ) {
-                    console.log("Data : ", data);
+                    // console.log("Data : ", data);
                     user.messages.push(tmp_message);
                     setListUsers([..._listUsers]);
                 }
-            }
-
+            // }
+            // if (userIdOpen == data.user_id && !a) {
+            //     a=true;
+            //     setTimeout(function () {
+            //         console.log("lockRead",a)
+            //         read(data.user_id)
+            //         a=false
+            //     }, 2000)
+            // }
         } else if (data.count_messages == 1) {
             const _getAll = await getMessages(localStorage._authLocal);
             if (_getAll) setListUsers(_getAll);
         }
-        if (userIdOpen == data.user_id) {
-            read(data.user_id);
-        }
-        var element = document.getElementById("chatBody");
+
+        var element = document.getElementById("chatBody"+data.user_id);
         element.scrollTop = element.scrollHeight;
     });
 
@@ -107,15 +111,14 @@ export default function TemplateMessage() {
         if (isopen) {
             setIsOpen(false);
             setTimeout(() => {
-                var element = document.getElementById("chatBody");
+                var element = document.getElementById("chatBody"+id);
                 element.scrollTop = element.scrollHeight;
             }, 200);
         }
         setUserIdOpen(id);
         setTimeout(function () {
-            console.log(2000)
             read(id)
-        }, 2000)
+        }, 1000)
 
 
     };
@@ -123,16 +126,16 @@ export default function TemplateMessage() {
     React.useEffect(() => {
         const abort = new AbortController();
         fetchMessages(localStorage._authLocal, {signal: abort.signal});
-
         return () => {
             abort.abort();
         };
     }, [localStorage._authLocal]);
 
     React.useEffect(() => {
-
-        console.log("_listUsers : ", _listUsers)
-    }, [_listUsers]);
+        // console.log("_listUsers : ", _listUsers)
+    }, [_listUsers]);  React.useEffect(() => {
+       read(userIdOpen)
+    }, [userIdOpen]);
 
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">
@@ -184,7 +187,7 @@ export default function TemplateMessage() {
                                 >
                                     <Card>
                                         <Card.Body
-                                            id="chatBody"
+                                            id= {`chatBody${userMessages.id}`}
                                             style={{
                                                 minHeight: "20vh",
                                                 height: "100%",

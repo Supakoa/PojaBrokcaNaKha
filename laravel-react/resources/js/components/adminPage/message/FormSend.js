@@ -15,14 +15,13 @@ const FormSend = ({ userId, _listUsers, setListUsers,read }) => {
         // console.log(e.key)
 
         if (e.key === "Enter") {
-            var element = document.getElementById("chatBody");
-            element.scrollTop = element.scrollHeight;
             onClickHandle();
         }
     };
 
     const onClickHandle = async () => {
         if (!!_message) {
+            console.log(_message)
             let tpm_message = _message;
             setMessage("");
             let new_message = await postMessage(localStorage._authLocal, {
@@ -30,16 +29,19 @@ const FormSend = ({ userId, _listUsers, setListUsers,read }) => {
                 user_id: userId
             });
             if (new_message) {
-                let user = _listUsers.find(value => value.id === userId);
+                let user = _listUsers.find(value => value.id == userId);
 
                 if (!!user) {
                     if (
                         user.messages.findIndex(
-                            value => value.id === new_message.count_messages + 1
+                            value => value.id === new_message.id
                         ) === -1
                     ) {
+                        user.count_messages = user.count_messages+1
                         user.messages.push(new_message);
                         setListUsers([..._listUsers]);
+                        var element = document.getElementById("chatBody"+userId);
+                        element.scrollTop = element.scrollHeight;
                     }
                 }
             }

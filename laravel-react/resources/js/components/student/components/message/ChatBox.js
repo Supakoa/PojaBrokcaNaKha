@@ -26,7 +26,7 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
 
             if (
                 _messages.findIndex(
-                    value => value.id === new_message.count_messages + 1
+                    value => value.id === new_message.id
                 ) === -1
             ) {
                 new_message["admin_id"] = null;
@@ -41,7 +41,7 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
     channel.listen(".event-chat-user-" + user.id, function(data) {
         if (_messages.length || data.count_messages === 1) {
             let tmp_message = {};
-            tmp_message.id = data.count_messages + 1;
+            tmp_message.id = data.message_id;
             tmp_message.message = data.message;
             tmp_message.admin_id = data.admin_id;
             tmp_message.user_id = user.id;
@@ -50,8 +50,11 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
             ) {
                 _messages.push(tmp_message);
                 setMessages([..._messages]);
+
             }
         }
+        var element = document.getElementById("chatBody");
+        element.scrollTop = element.scrollHeight;
     });
 
     const { t } = useTranslation();

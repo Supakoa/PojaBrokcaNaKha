@@ -12,6 +12,7 @@ class ChatEchoToAdmin implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $message_id;
 
     public $user_id;
 
@@ -22,13 +23,15 @@ class ChatEchoToAdmin implements ShouldBroadcast
     /**
      * ChatEchoToAdmin constructor.
      * @param $message
+     * @param $message_id
      * @param $user_id
      * @param $count_messages
      * @param $count_messages_unread
      */
-    public function __construct($message, $user_id, $count_messages, $count_messages_unread)
+    public function __construct($message, $message_id, $user_id, $count_messages, $count_messages_unread)
     {
         $this->message = $message;
+        $this->message_id = $message_id;
         $this->user_id = $user_id;
         $this->count_messages = $count_messages;
         $this->count_messages_unread = $count_messages_unread;
