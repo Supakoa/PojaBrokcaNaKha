@@ -3,7 +3,7 @@ import { Button, InputGroup, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { postMessage } from "../../middleware/axios/postMessage";
 
-const FormSend = ({ userId, _listUsers, setListUsers }) => {
+const FormSend = ({ userId, _listUsers, setListUsers,read }) => {
     const [_message, setMessage] = React.useState("");
     const { t } = useTranslation();
     const handleChange = e => {
