@@ -1,72 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Container, Image } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { useDispatch } from "react-redux";
 import { initNewsForm, updateFile, updateRef } from "../../../redux/actions/";
 import Axios from "axios";
+import Swal from "sweetalert2";
 
 // modal add new news
 
-function FormNews({ response, isCreateProps }) {
+function FormNews({
+        response,
+        isCreateProps,
+        setFormNews,
+        formNews
+    }) {
+
+    // local state
+    const [_state, _setState] = React.useState({});
+    const [inputText, setInputText] = useState("");
+
     // redux
     // const file = useSelector(state => state.file) not use
     const dispatch = useDispatch();
 
-    const [_state, _setState] = React.useState({});
-
-    const [inputText, setInputText] = useState("");
-
-    React.useEffect(() => {
-        // init state
-        !isCreateProps
-            ? _setState({
-                  ..._state,
-                  imagePreviewUrl: response.image,
-                  url: response.ref
-              })
-            : _setState({ files: "", imagePreviewUrl: "", url: "" });
-
-        // init redux state
-        if (!isCreateProps) {
-            // update news
-            setInputText(response.ref);
-
-            dispatch(
-                initNewsForm({
-                    file: response.image,
-                    ref: response.ref
-                })
-            );
-        } else {
-            // create new news
-            dispatch(
-                initNewsForm({
-                    file: "",
-                    ref: ""
-                })
-            );
+    // local variable
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-    }, []);
+    })
 
+    // function
     const _handleImageChange = e => {
         e.preventDefault();
-
-        let _name = e.target.name;
 
         if (e.target.name === "upload") {
             createImage(e);
         } else {
-            const _value = e.target.value;
+            const val = e.target.value
+            setFormNews({
+                image: formNews.image,
+                ref: val
+            })
 
-            _setState({
-                ..._state,
-                [_name]: _value
-            });
+            // setFormNews(preState => {
+            //     return {
+            //         ...preState,
+            //         ref: e.target.value
+            //     }
+            // })
 
-            // update component and redux
-            setInputText(e.target.value);
-            dispatch(updateRef(e.target.value));
+            // _setState({
+            //     ..._state,
+            //     [_name]: _value
+            // });
+
+            // // update component and redux
+            // setInputText(e.target.value);
+            // dispatch(updateRef(e.target.value));
         }
     };
 
@@ -78,37 +75,57 @@ function FormNews({ response, isCreateProps }) {
         formData.append("image", file);
 
         // console.log('file', file)
-        const pathImage = await Axios.post(
-            `http://localhost:8000/api/uploadNews`,
-            formData,{headers: {
+        await Axios.post(
+            `http://localhost:8000/api/uploads`,
+            formData,
+            {
+                headers: {
                     Authorization: `Bearer ${localStorage.getItem(
                         "_authLocal"
                     )}`
-                }}
+                }
+            }
         ).then(res => {
-            return res.data;
-        });
+            if (res.status == 200) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'อัพโหลดสำเร็จ'
+                })
 
-        reader.onloadend = e => {
-            _setState({
-                ..._state,
-                file: file,
-                imagePreviewUrl: pathImage
-            });
-            dispatch(updateFile(pathImage));
-        };
+                console.log('res pathImage:', res)
+                setFormNews({
+                    image: res.data,
+                    url: formNews.url
+                })
+            } else {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'เกิดข้อผิดพลาดในการอัพโหลด'
+                })
 
-        reader.readAsDataURL(file);
+            }
+        })
+
+        // reader.onloadend = e => {
+        //     _setState({
+        //         ..._state,
+        //         file: file,
+        //         imagePreviewUrl: pathImage
+        //     });
+        //     dispatch(updateFile(pathImage));
+        // };
+
+        // reader.readAsDataURL(file);
     };
 
     const _previewImage = () => {
         let { imagePreviewUrl } = _state;
         let _imagePreview = null;
 
-        if (imagePreviewUrl) {
-            _imagePreview = (
+        if (formNews.image) {
+            return (
                 <Image
-                    src={`/storage/` + imagePreviewUrl}
+                    src={`/storage/` + formNews.image}
                     rounded
                     className="mt-4"
                     width="auto"
@@ -120,13 +137,61 @@ function FormNews({ response, isCreateProps }) {
         return _imagePreview;
     };
 
+    const initState = () => {
+        // init state
+        // !isCreateProps
+        //     ? _setState({
+        //           ..._state,
+        //           imagePreviewUrl: response.image,
+        //           url: response.ref
+        //       })
+        //     : _setState({ files: "", imagePreviewUrl: "", url: "" });
+
+        // init redux state
+        // if (!isCreateProps) {
+        //     setInputText(response.ref);
+
+        //     dispatch(
+        //         initNewsForm({
+        //             file: response.image,
+        //             ref: response.ref
+        //         })
+        //     );
+        // } else {
+        //     dispatch(
+        //         initNewsForm({
+        //             file: "",
+        //             ref: ""
+        //         })
+        //     );
+        // }
+    }
+
+    // usesEffect
+    useEffect(() => {
+        initState()
+
+        return () => {
+            if (isCreateProps) {
+                setFormNews({
+                    image: null,
+                    ref: null,
+                })
+            }
+        }
+    }, [])
+
+    // return component
+
     return (
         <Container>
             <Form>
+                <Form.Label>Image</Form.Label>
                 <Container
                     className="w-100 d-flex justify-content-center border rounded p-0"
                     style={{ minHeight: "200px" }}
                 >
+
                     {_previewImage()}
 
                     <input
@@ -156,11 +221,11 @@ function FormNews({ response, isCreateProps }) {
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label>URL</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="url"
                         name="urlImage"
                         placeholder="URL"
                         // value={e => console.log(e)}
-                        value={inputText}
+                        value={formNews.ref}
                         onChange={_handleImageChange}
                     />
                 </Form.Group>

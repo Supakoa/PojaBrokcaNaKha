@@ -6,16 +6,19 @@ import { columns } from "./columns";
 import { useSelector, useDispatch } from "react-redux";
 import { initShowUsers } from "../../../../redux/actions";
 
-export const dataTableUser = () => {
+const dataTableUser = (setData) => {
     // init state
     const [rows, setRows] = React.useState([]);
 
     // redux
     const redux_showUsers = useSelector(state => state.showUsers);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
+    // local variable
+
+    // function
     const fetchRowData = _data => {
-        const _row = _data.map((res, idx) => {
+        const resData = _data.map((res, idx) => {
             return {
                 action: <ColumnAction key={idx} idx={idx} res={res} />,
                 id: idx + 1,
@@ -26,48 +29,57 @@ export const dataTableUser = () => {
                 faculty: res.major_id !== null ? res.major.faculty.name : "-",
                 major: res.major_id !== null ? res.major.name : "-"
             };
-        });
+        })
 
-        return _row;
-    };
-
-    const getUsers = async () => {
-        await axios
-            .get("http://127.0.0.1:8000/api/users", {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "_authLocal"
-                    )}`
-                }
-            })
-            .then(res => {
-                const { success } = res.data;
-                dispatch(initShowUsers(success));
-            });
+        setData(preSstate => {
+            return {
+                ...preSstate,
+                rows: resData
+            }
+        })
     };
 
     const initUsers = () => {
-        if (!!redux_showUsers.data) {
-            const _items = fetchRowData(redux_showUsers.data);
-            setRows(_items);
+        if (redux_showUsers.data) {
+            fetchRowData(redux_showUsers.data);
         }
     };
 
-    React.useEffect(() => {
-        // mount
-        const abort = new AbortController();
-        getUsers({ signal: abort.signal });
-
-        // willmount
-        return () => {
-            abort.abort();
-        };
-        // update
-    }, []);
-
+    // useState
     useEffect(() => {
         initUsers();
     }, [redux_showUsers]);
 
-    return { columns, rows };
+    // returrn component
+
+    // const getUsers = async () => {
+    //     await axios
+    //         .get("http://127.0.0.1:8000/api/users", {
+    //             headers: {
+    //                 Authorization: `Bearer ${localStorage.getItem(
+    //                     "_authLocal"
+    //                 )}`
+    //             }
+    //         })
+    //         .then(res => {
+    //             const { success } = res.data;
+    //             dispatch(initShowUsers(success));
+    //         });
+    // };
+
+    // React.useEffect(() => {
+    //     // mount
+    //     const abort = new AbortController();
+    //     getUsers({ signal: abort.signal });
+
+    //     // willmount
+    //     return () => {
+    //         abort.abort();
+    //     };
+    //     // update
+    // }, []);
+
+    return ;
 };
+
+export default dataTableUser

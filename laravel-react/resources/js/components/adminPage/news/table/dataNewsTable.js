@@ -7,54 +7,47 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { newsActions } from "../../../../redux/actions";
 
-const dataNewsTable = () => {
+const dataNewsTable = (setData) => {
+    // props
 
-    const localImagePath = `/storage/`
-
-    const [rows, setRows] = React.useState([]);
-    const { t } = useTranslation("", { useSuspense: false });
+    // local state
+    // const [rows, setRows] = React.useState([]);
 
     // redux
     const redux_showNews = useSelector(state => state.showNews)
-    const dispatch = useDispatch()
 
+    // local variable
+    const localImagePath = `/storage/`
+
+    // function
     const fetchRowData = _data => {
-        setRows(
-            _data.map((res, idx) => {
-                // type: File, URL
-                const responData = {
-                    id: idx+1,
-                    images: (
-                        <Image
-                            src={localImagePath + res.image}
-                            width="200px"
-                            height="70px"
-                            rounded
-                        />
-                    ),
-                    url: res.ref,
-                    action: ColumnActions(idx, res)
-                };
-                return responData;
-            })
-        );
-    };
-
-    const getNews = async () => {
-        await Axios.get("http://localhost:8000/api/news", {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    "_authLocal"
-                )}`
+        const resData = _data.map((res, idx) => {
+            return {
+                id: idx+1,
+                images: (
+                    <Image
+                        src={localImagePath + res.image}
+                        width="200px"
+                        height="70px"
+                        rounded
+                    />
+                ),
+                url: res.ref,
+                action: ColumnActions(idx, res)
             }
-        }).then(async res => {
-            await dispatch(newsActions("INIT_SHOW_NEWS", res.data))
-        });
-    };
+        })
+
+        setData(preState => {
+            return {
+                ...preState,
+                rows: resData
+            }
+        })
+    }
 
     const initShowNews = () => {
-        if (typeof redux_showNews.data != 'undefined') {
-            const _items = fetchRowData(redux_showNews.data);
+        if (redux_showNews.data) {
+            fetchRowData(redux_showNews.data);
         }
     }
 
@@ -62,16 +55,16 @@ const dataNewsTable = () => {
         initShowNews()
     }, [redux_showNews])
 
-    React.useEffect(() => {
-        const abortController = new AbortController();
-        getNews({ signal: abortController.signal });
+    // React.useEffect(() => {
+    //     const abortController = new AbortController();
+    //     getNews({ signal: abortController.signal });
 
-        return () => {
-            abortController.abort();
-        };
-    }, []);
+    //     return () => {
+    //         abortController.abort();
+    //     };
+    // }, []);
 
-    return { columns: columns(t), rows };
+    return ;
 };
 
 export default dataNewsTable;
