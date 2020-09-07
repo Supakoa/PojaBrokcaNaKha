@@ -191,14 +191,18 @@ class UserController extends Controller
             });
             foreach ($users as $user) {
                 $count_unread =  Message::query()->where("user_id", $user->id)->whereNull("admin_id")->where("read",0)->count();
-//                event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
                 $user["count_unread"] = $count_unread;
+//                event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
+                $count_messages =  Message::query()->where("user_id", $user->id)->count();
+                $user["count_messages"] = $count_messages;
             }
             return response()->json(['success' => array_values($users->all())], $this->successStatus);
         } else {
-                $count_unread =  Message::query()->where("user_id", $user->id)->whereNull("admin_id")->where("read",0)->count();
+                $count_unread =  Message::query()->where("user_id", $user->id)->whereNotNull("admin_id")->where("read",0)->count();
 //                event(new ChatEchoToAdmin($request->get("message"), $user_id, $count_messages, $count_unread));
-            return response()->json(['success' => $user->messages,'count_unread',$count_unread], $this->successStatus);
+            $count_messages =  Message::query()->where("user_id", $user->id)->count();
+
+            return response()->json(['success' => $user->messages,'count_unread'=>$count_unread,"count_messages"=>$count_messages], $this->successStatus);
         }
     }
 
