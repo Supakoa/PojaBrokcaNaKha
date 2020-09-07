@@ -11,6 +11,7 @@ import ListMajors from "./ListMajors";
 import { _urlUsers } from "../../../../middleware/apis";
 import headerConfig from "../../../../middleware/headerConfig";
 import { useTranslation } from "react-i18next";
+import uploadsImage from "../../../../middleware/axios/uploads";
 
 const ProfileForm = ({ role }) => {
     const _dispatch = useDispatch();
@@ -37,13 +38,19 @@ const ProfileForm = ({ role }) => {
         };
     }, []);
 
-    const handleChange = e => {
+    const handleChange = async e => {
         const { name, value, files } = e.target;
-        if (name === "file") {
-            setProfile({
-                ..._profile,
-                [name]: files.files[0]
-            });
+        if (name === "license") {
+            const pathImage = await uploadsImage(
+                files[0],
+                localStorage._authLocal
+            );
+            if (pathImage) {
+                setProfile({
+                    ..._profile,
+                    [name]: pathImage
+                });
+            }
         }
         const _valid = validateIndex(name, value);
         setIsUpdate(true);
@@ -65,6 +72,7 @@ const ProfileForm = ({ role }) => {
     };
 
     const handleSubmit = async () => {
+        console.log(_profile);
         if (_isUpdate && _isSubmit) {
             //set Loading
             setLoading(true);
@@ -304,7 +312,7 @@ const ProfileForm = ({ role }) => {
                             >
                                 <Form.File
                                     className="position-relative"
-                                    name="file"
+                                    name="license"
                                     onChange={handleChange}
                                     label={
                                         i18n.language === "th"

@@ -3,7 +3,7 @@ import { Card, Button, Form } from "react-bootstrap";
 import TableUser from "./table";
 import ModalUser from "../modals/ModalUser";
 import Axios from "axios";
-import { newsActions, initShowUsers } from "../../../redux/actions";
+import { newsActions, initShowUsers, showFacultyAction } from "../../../redux/actions";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -89,9 +89,22 @@ export default function User({t}) {
         });
     }
 
+    const initShowFaculties = () => {
+        Axios.get("http://localhost:8000/api/faculties", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(res => {
+            dispatch(showFacultyAction("INIT_SHOW_FACULTY", res.data.success))
+        })
+    }
+
     // useEffect
     useEffect(() => {
         initUsers()
+        initShowFaculties()
     }, [])
 
     // return component
@@ -149,8 +162,8 @@ export default function User({t}) {
                         </a>
                     </div>
                 </div>
-                
-                <TableUser paging={true} />
+
+                <TableUser initUsers={initUsers} paging={true} />
             </Card.Body>
         </Card>
     )

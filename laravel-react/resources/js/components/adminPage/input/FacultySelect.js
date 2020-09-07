@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Form } from "react-bootstrap";
 import Axios from "axios";
 import { useTranslation } from "react-i18next";
@@ -10,12 +10,19 @@ export default function FacultySelect({
     isSelect,
     setIdFac
 }) {
+    // external module
     const { t } = useTranslation();
+
+    // local state
     const [faculty, setFaculty] = useState([]);
     const [selected, setSelected] = React.useState(0);
 
+    // redux
+
+    // local variable
     const apiPath = `${_URL}/api/faculties`;
 
+    // function
     const selectedFaculty = e => {
         setSelected(e.target.value);
         setIdFac(e.target.value);
@@ -30,11 +37,17 @@ export default function FacultySelect({
         setFaculty(getFaculty);
     };
 
+    // useEffect
+    useEffect(() => {
+    }, [])
+
     React.useEffect(() => {
         if (faculty.length === 0) {
             initFaculty();
         }
     }, [selected]);
+
+    // return component
 
     return (
         <Form.Group as={Col} controlId="formGroupFacultySelect">

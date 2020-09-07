@@ -23,6 +23,8 @@ export const validateIndex = (name, value) => {
             return true;
         case "major_id":
             return true;
+        case "license":
+            return true;
         default:
             return _state;
     }
