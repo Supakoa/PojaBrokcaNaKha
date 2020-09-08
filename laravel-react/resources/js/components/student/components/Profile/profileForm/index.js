@@ -46,7 +46,6 @@ const ProfileForm = ({ role }) => {
                 files[0],
                 localStorage._authLocal
             );
-
             if (pathImage) {
                 setProfile({
                     ..._profile,
@@ -74,7 +73,6 @@ const ProfileForm = ({ role }) => {
     };
 
     const handleSubmit = async () => {
-        console.log(_profile);
         if (_isUpdate && _isSubmit) {
             //set Loading
             setLoading(true);
@@ -87,7 +85,7 @@ const ProfileForm = ({ role }) => {
                 )
                 .then(res => {
                     _dispatch(user(res.data));
-
+                    console.log("res.data", res.data);
                     //set isLoading
                     setIsUpdate(false);
                     Swal.fire(
