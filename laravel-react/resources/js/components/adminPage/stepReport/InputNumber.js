@@ -36,19 +36,14 @@ export const InputNumber = props => {
 
     // function
     const handleClick = () => {
-        console.log('naja')
-
         let tmp_groupStep = new Array()
         for (let i = 0; i < _state; i++) {
-            console.log('redux_showForm.data[(response.id - 1)].groups[i]', redux_showForm.data[(response.id - 1)].groups[i])
             if (redux_showForm.data[(response.id - 1)].groups[i]) {
                 tmp_groupStep.push(redux_showForm.data[(response.id - 1)].groups[i])
             } else {
                 tmp_groupStep.push([])
             }
         }
-
-        console.log('tmp_groupStep', tmp_groupStep)
 
         setGroupSteps(tmp_groupStep)
 
