@@ -67,6 +67,8 @@ class UserController extends Controller
                 'telephone' => 'required|digits:10|numeric',
                 'c_password' => 'required|same:password',
             ]);
+            $request['major_id'] = null ;
+            $request['student_id'] = null;
         }
 
 
