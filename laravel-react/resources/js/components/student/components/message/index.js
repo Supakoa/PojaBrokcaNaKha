@@ -89,7 +89,7 @@ const MessageElements = ({token}) => {
             abort.abort();
             channel.stopListening(".event-chat-user-" + user.id)
         }
-    }, [_messages]);
+    }, [_messages,count_unread]);
     React.useEffect(() => {
         const abort = new AbortController();
 
