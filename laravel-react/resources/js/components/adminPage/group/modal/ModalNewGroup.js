@@ -113,7 +113,7 @@ const ModalNewGroup = ({
                 type: select
             });
 
-            await Axios.patch(`${_URL}/api/users/${res.id}`, sendData, {
+            await Axios.patch(`${_URL}/api/groups/${res.id}`, sendData, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         Authorization: `Bearer ${localStorage.getItem(
