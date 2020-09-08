@@ -30,7 +30,7 @@ export default function Approvers() {
         return () => {
             abort.abort();
         };
-    }, [_user, abort]);
+    }, [_user]);
 
     return (
         <div className="w-100" style={{ minHeight: "70vh" }}>
