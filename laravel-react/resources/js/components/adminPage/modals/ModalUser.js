@@ -139,6 +139,7 @@ export default function ModalUser({ isCreatedProp, id, res }) {
                     ...tempUsers[indexResult],
                     ...res.data
                 };
+
                 dispatch(showUserAction("INIT_SHOW_USERS", tempUsers));
                 // showUserAction("INIT_SHOW_USERS", tmp_showUsers)
                 // window.location.reload(false);
@@ -170,8 +171,8 @@ export default function ModalUser({ isCreatedProp, id, res }) {
                 firstName: res.first_name,
                 lastName: res.last_name,
                 phoneNumber: res.telephone,
-                userType: res.role_id,
-                majorId: res.major_id
+                userType: Number(res.role_id),
+                majorId: Number(res.major_id)
             })
         }
     }
@@ -179,7 +180,6 @@ export default function ModalUser({ isCreatedProp, id, res }) {
     const eventOpenOnSave = () => {
         if (formUser) {
             if (isCreatedProp) {
-                console.log('formUser.userType', formUser.userType)
                 if (formUser.userType == 3) {
                     let tmp_result = ( formUser.email == "" || formUser.password == "" || formUser.confirmPassword == ""
                                                         || formUser.studentId == "" || formUser.title == "" || formUser.firstName == ""

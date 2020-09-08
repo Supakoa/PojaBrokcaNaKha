@@ -77,6 +77,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
     // useEffect
     useEffect(() => {
         initMajor()
+        console.log('formUser.userType', formUser.userType)
     }, [])
 
     // return component
@@ -273,7 +274,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                 />
             </Form.Group>
 
-            <Form.Row hidden={user.role_id !== 3 && isCreatedProp}>
+            <Form.Row>
                 {/* <FacultySelect
                     defaultData={user.major ? user.major : ""}
                     onSelectOption={onChangeState}
