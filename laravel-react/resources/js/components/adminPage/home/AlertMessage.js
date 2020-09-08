@@ -11,7 +11,7 @@ export default function AlertMessage() {
 
     const fetchMessages = async token => {
         const _getAll = await getMessages(token);
-        if (_getAll) setListUsers(_getAll);
+        if (_getAll) setListUsers(_getAll.success);
     };
     const scrollToBottom = () => {
         if (isopen) {

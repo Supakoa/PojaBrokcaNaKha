@@ -6,12 +6,12 @@ import { postMessage } from "../../../middleware/axios/postMessage";
 import ListMessages from "./list-message";
 import { useSelector } from "react-redux";
 
-const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
+const ChatBox = ({ show, closeMessage, _messages, setMessages,setCount_unread }) => {
     const [_newMsg, setNewMsg] = React.useState("");
     const handleChange = e => {
         setNewMsg(e.target.value);
     };
-    const user = useSelector(state => state.userState);
+
     const handleOnKeyDown = e => {
         // console.log(e.key)
         if (e.key === "Enter") handleSendMsg();
@@ -37,25 +37,7 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
         var element = document.getElementById("chatBody");
         element.scrollTop = element.scrollHeight;
     };
-    let channel = window.Echo.channel("channel-chat");
-    channel.listen(".event-chat-user-" + user.id, function(data) {
-        if (_messages.length || data.count_messages === 1) {
-            let tmp_message = {};
-            tmp_message.id = data.message_id;
-            tmp_message.message = data.message;
-            tmp_message.admin_id = data.admin_id;
-            tmp_message.user_id = user.id;
-            if (
-                _messages.findIndex(value => value.id === tmp_message.id) === -1
-            ) {
-                _messages.push(tmp_message);
-                setMessages([..._messages]);
 
-            }
-        }
-        var element = document.getElementById("chatBody");
-        element.scrollTop = element.scrollHeight;
-    });
 
     const { t } = useTranslation();
 
