@@ -5,6 +5,7 @@ import TableNews from "./table";
 import { useDispatch } from "react-redux";
 import { newsActions } from "../../../redux/actions";
 import Axios from "axios";
+import {_URL} from "../../middleware/URL";
 
 const News = ({ t }) => {
     // state variable
@@ -16,7 +17,7 @@ const News = ({ t }) => {
 
     // fucntion
     const initShowNews = async () => {
-        await Axios.get("http://localhost:8000/api/news", {
+        await Axios.get(`${_URL}/api/news`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

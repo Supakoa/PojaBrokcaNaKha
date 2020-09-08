@@ -90,7 +90,7 @@ export default function User({t}) {
     }
 
     const initShowFaculties = () => {
-        Axios.get("http://localhost:8000/api/faculties", {
+        Axios.get(`${_URL}/api/faculties`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"

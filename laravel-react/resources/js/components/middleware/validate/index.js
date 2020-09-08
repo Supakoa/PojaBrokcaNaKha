@@ -23,7 +23,7 @@ export const validateIndex = (name, value) => {
             return true;
         case "major_id":
             return true;
-        case "license":
+        case "file_license":
             return true;
         default:
             return _state;

@@ -1,4 +1,4 @@
-import {_URL} from "../URL";
+import { _URL } from "../URL";
 
 const _www = `${_URL}`;
 

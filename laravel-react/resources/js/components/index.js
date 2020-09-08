@@ -23,7 +23,12 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/login" component={SignIn} />
+                <Route exact path="/">
+                    <Redirect
+                        to={!_isAuthLocal ? "/login" : clearLocalStorge()}
+                    />
+                </Route>
+                <Route exact path="/login" component={SignIn} />
                 <Route path="/register" component={SignUp} />
                 <PrivateRoute path="/admin">
                     <AdminPage />
@@ -34,11 +39,7 @@ function App() {
                 <PrivateRoute path="/Approvers">
                     <Approvers />
                 </PrivateRoute>
-                <Route path="/">
-                    <Redirect
-                        to={!_isAuthLocal ? "/login" : clearLocalStorge()}
-                    />
-                </Route>
+
                 <Route path="*" component={NoMatch} />
             </Switch>
         </Router>
