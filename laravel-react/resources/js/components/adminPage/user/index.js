@@ -76,7 +76,7 @@ export default function User({t}) {
     };
 
     const initUsers = () => {
-        Axios.get("http://127.0.0.1:8000/api/users", {
+        Axios.get(`${_URL}/api/users`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
                     "_authLocal"
