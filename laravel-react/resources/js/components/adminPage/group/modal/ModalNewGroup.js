@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import { initNewsForm } from "../../../../redux/actions";
 import TableGroups from "../table";
 import {_URL} from "../../../middleware/URL";
+import { useSelector, useDispatch } from "react-redux";
+import { showGroupAction } from "../../../../redux/actions";
 
 const ModalNewGroup = ({
     isCreateProps,
@@ -23,8 +25,21 @@ const ModalNewGroup = ({
     const [selectTypeGroup, setSelectTypeGroup] = useState("");
 
     // redux
+    const redux_showGroup = useSelector(state => state.showGroup)
+    const dispatch = useDispatch()
 
     // local variable
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        // timerProgressBar: true,
+        onOpen: toast => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        }
+    });
 
     // import variable
     const { t } = useTranslation("", { useSuspense: false }); // not use now
@@ -47,21 +62,29 @@ const ModalNewGroup = ({
                     )}`
                 }
             }).then(res => {
-                // console.log(res);
-
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    // timerProgressBar: true,
-                    onOpen: toast => {
-                        toast.addEventListener("mouseenter", Swal.stopTimer);
-                        toast.addEventListener("mouseleave", Swal.resumeTimer);
-                    }
-                });
-
                 if (res.status == 201) {
+                    let tmp_showGroup = redux_showGroup.data
+                    let nameType = Number(res.data.type)
+                    switch (nameType) {
+                        case 1:
+                            nameType = 'normal'
+                            break;
+
+                        case 2:
+                            nameType = 'subject'
+                            break
+                    }
+                    console.log('nameType', nameType)
+                    tmp_showGroup.push(res.data)
+                    tmp_showGroup[tmp_showGroup.length - 1] = {
+                        ...tmp_showGroup[tmp_showGroup.length - 1],
+                        type: nameType,
+                        subject_id: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,],
+                        users: []
+                    }
+
+                    dispatch(showGroupAction('INIT_SHOW_GROUP', tmp_showGroup))
+
                     Toast.fire({
                         icon: "success",
                         title: "สร้างกลุ่มสำเร็จ"
@@ -72,7 +95,7 @@ const ModalNewGroup = ({
                         title: "เกิดข้อผิดพลาดในการสร้างกลุ่ม"
                     });
                 }
-                window.location.reload(false);
+                // window.location.reload(false);
                 handleClose();
             });
         } else {
@@ -102,6 +125,19 @@ const ModalNewGroup = ({
                     }
                 }
             ).then(res => {
+                let tmp_showGroup = redux_showGroup.data
+                tmp_showGroup = tmp_showGroup.findIndex((item) => {
+                    return item.id == res.data.id
+                })
+
+                let tmp_data = redux_showGroup.data
+                tmp_data[tmp_showGroup] = {
+                    ...tmp_data[tmp_showGroup],
+                    ...res.data
+                }
+
+                dispatch(showGroupAction("INIT_SHOW_GROUP", tmp_data))
+
                 setgroupDetail({
                     th_name: res.data.th_name,
                     eng_name: res.data.eng_name,
@@ -125,9 +161,17 @@ const ModalNewGroup = ({
 
     const initGroupForm = () => {
         if (!isCreateProps) {
-            setThNameGroup(res.th_name);
-            setEngNameGroup(res.eng_name);
-            if (res.type == "normal") {
+            let tmp_thisGroup = redux_showGroup.data
+            tmp_thisGroup = tmp_thisGroup.findIndex((item) => {
+                return item.id == res.id
+            })
+
+            tmp_thisGroup = redux_showGroup.data[tmp_thisGroup]
+
+            setThNameGroup(tmp_thisGroup.th_name);
+            setEngNameGroup(tmp_thisGroup.eng_name);
+
+            if (tmp_thisGroup.type == "normal") {
                 setSelectTypeGroup(1);
             } else {
                 setSelectTypeGroup(2);

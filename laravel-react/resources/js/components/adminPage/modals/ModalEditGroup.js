@@ -25,10 +25,12 @@ import { Chip } from "@material-ui/core";
 import {_URL} from "../../middleware/URL";
 
 const ModalEditGroup = ({ isCreateProps, response }) => {
+    // external module
+    const { t } = useTranslation();
+
     // local state
     const [show, setShow] = React.useState(false);
     const [modalHidden, setModalHidden] = useState(false);
-    const { t } = useTranslation();
     const [table, setTable] = React.useState({
         columns: [
             { title: "วิชา", field: "subject" },
@@ -132,7 +134,6 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
     };
 
     const getGroupUser = response => {
-        // console.log("response", response);
         setTimeout(() => {
             setResultSubjects(response.subjects_id);
             setShowGroupUsers(response.users);
