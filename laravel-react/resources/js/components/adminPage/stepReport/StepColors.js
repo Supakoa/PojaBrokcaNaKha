@@ -4,7 +4,7 @@ import { AddApprover } from "./AddApprover";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import { array, number } from "prop-types";
-import { chipGroupAction } from "../../../redux/actions";
+import { chipGroupAction, showFormsAction } from "../../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { AddGroup } from "./AddGroup";
 import Axios from "axios";
@@ -15,7 +15,7 @@ export const StepColors = ({
     numberStep,
     setModalShow,
     response,
-    groupSteps,
+    groupSteps, // TODO: see here
     setGroupSteps,
     step
 }) => {
@@ -26,6 +26,7 @@ export const StepColors = ({
 
     //redux
     const rerdux_chipGroup = useSelector(state => state.chipGroup);
+    const redux_showForm = useSelector(state => state.showForm)
     const dispatch = useDispatch();
 
     // local variable
@@ -41,6 +42,7 @@ export const StepColors = ({
     });
 
     // function
+    // FIXME: not to use now
     const initState = () => {
         dispatch(chipGroupAction("NEW_CHIP_GROUP", numberStep));
         // initFormGroupStep()
@@ -80,6 +82,7 @@ export const StepColors = ({
         dispatch(chipGroupAction(`UPDATE_STEP_${onStep + 1}`, sendReduxData));
     };
 
+    // FIXME: not to use now
     const initGroupUserSteps = () => {
         // console.log('initGroupUserSteps')
         // console.log('numberStep', numberStep)
@@ -108,11 +111,19 @@ export const StepColors = ({
                         )}`
                     }
                 }).then(res => {
-                    let tmp_newGroupSteps = groupSteps;
-                    tmp_newGroupSteps[item.pivot.state - 1] = res.data;
-                    setGroupSteps(tmp_newGroupSteps);
-
                     if (res.status == 200) {
+                        let tmp_newGroupSteps = groupSteps;
+                        tmp_newGroupSteps[item.pivot.state - 1] = res.data;
+
+                        let tmp_showForm = redux_showForm
+                        tmp_showForm.data[step].groups = [
+                            ...tmp_newGroupSteps
+                        ]
+
+                        setGroupSteps(tmp_newGroupSteps)
+
+                        dispatch(showFormsAction("INIT_SHOW_FORM", tmp_showForm.data))
+
                         Toast.fire({
                             icon: "success",
                             title: "ลบข้อมูลกลุ่มสำเร็จ"
@@ -129,10 +140,14 @@ export const StepColors = ({
     };
 
     // useEffect
-    React.useEffect(() => {
-        initState();
-        initGroupUserSteps();
-    }, [numberStep, groupSteps]);
+    useEffect(() => {
+        // console.log('response', response)
+    }, [])
+
+    // React.useEffect(() => {
+    //     initState();
+    //     initGroupUserSteps();
+    // }, [numberStep, groupSteps]);
 
     // component with condition
     // FIXME: not to use now
@@ -202,41 +217,36 @@ export const StepColors = ({
         }
     };
 
-    const rowSteps = number => {
+    const rowSteps = (number, groupSteps) => {
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
         const _num = Number(number);
 
-        return groupSteps[step].map((item, index) => {
-            if (index + 1 <= _num) {
-                return (
-                    <div key={index}>
-                        <Row className="mb-2">
-                            <Col xs={12} md={10}>
-                                <Alert
-                                    variant={_colorSet[index]}
-                                    className="p-2 mb-0"
-                                >
-                                    step {index + 1}:{" "}
-                                    {/* {returnStepComponent(index)} */}
-                                    <MapStepComponent thisStep={item} />
-                                </Alert>
-                            </Col>
-                            <Col>
-                                <AddGroup
-                                    setGroupSteps={setGroupSteps}
-                                    groupSteps={groupSteps}
-                                    step={index}
-                                    setModalShow={setModalShow}
-                                    response={response}
-                                />
-                            </Col>
-                        </Row>
-                        <hr />
-                    </div>
-                );
-            }
-        });
+        if (groupSteps) {
+            return groupSteps.map((item, index) => {
+                if (index + 1 <= _num) {
+                    return (
+                        <div key={index}>
+                            <Row className="mb-2">
+                                <Col xs={12} md={10}>
+                                    <Alert variant={_colorSet[index]} className="p-2 mb-0">
+                                        step {index + 1}:{" "}
+                                        {/* {returnStepComponent(index)} */}
+                                        <MapStepComponent thisStep={item} />
+                                    </Alert>
+                                </Col>
+                                <Col>
+                                    <AddGroup setGroupSteps={setGroupSteps} groupSteps={groupSteps} step={index} setModalShow={setModalShow} response={response} />
+                                </Col>
+                            </Row>
+                            <hr />
+                        </div>
+                    );
+                }
+            });
+        }
+
+        return
     };
 
-    return <>{rowSteps(numberStep)}</>;
+    return <>{rowSteps(numberStep, groupSteps)}</>;
 };
