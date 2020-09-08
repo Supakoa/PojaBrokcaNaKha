@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import SwitchingLanguageBtn from "../../middleware/switchingLanguage";
 import { useTranslation } from "react-i18next";
 import alertResetPassword from "./AlertResetPassword";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
 
 export default function SignIn() {
     let _history = useHistory();
