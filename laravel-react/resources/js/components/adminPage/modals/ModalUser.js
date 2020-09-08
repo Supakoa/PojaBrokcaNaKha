@@ -179,11 +179,19 @@ export default function ModalUser({ isCreatedProp, id, res }) {
     const eventOpenOnSave = () => {
         if (formUser) {
             if (isCreatedProp) {
-                let tmp_result = ( formUser.email == "" || formUser.password == "" || formUser.confirmPassword == ""
+                console.log('formUser.userType', formUser.userType)
+                if (formUser.userType == 3) {
+                    let tmp_result = ( formUser.email == "" || formUser.password == "" || formUser.confirmPassword == ""
                                                         || formUser.studentId == "" || formUser.title == "" || formUser.firstName == ""
                                                         || formUser.lastName == "" || formUser.phoneNumber == "" || formUser.userType == 0
                                                         || formUser.majorId == 0)
-                return tmp_result
+                    return tmp_result
+                } else {
+                    let tmp_result = ( formUser.email == "" || formUser.password == "" || formUser.confirmPassword == ""
+                                                            || formUser.title == "" || formUser.firstName == ""
+                                                            || formUser.lastName == "" || formUser.phoneNumber == "" || formUser.userType == 0)
+                    return tmp_result
+                }
             } else {
                 return false
             }

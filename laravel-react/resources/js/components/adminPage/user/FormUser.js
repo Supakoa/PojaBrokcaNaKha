@@ -31,7 +31,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
         setFormUser(preState => {
             return {
                 ...preState,
-                userType: value
+                userType: Number(value)
             }
         })
     }
@@ -118,11 +118,13 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
     }
 
     const mapFacultyOption = () => {
-        return redux_showFaculty.data.map((item, index) => {
-            return (<>
-                <option key={`faculty-${index + 1}`} value={item.id}>{item.name}</option>
-            </>)
-        })
+        if (redux_showFaculty.data) {
+            return redux_showFaculty.data.map((item, index) => {
+                return (<option key={`faculty-${index + 1}`} value={item.id}>{item.name}</option>)
+            })
+        }
+
+        return
     }
 
     const mapMajorOption = () => {
@@ -132,9 +134,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
             })
 
             return tmp_selectMajor.majors.map((item, index) => {
-                return (<>
-                    <option key={`major-${index + 1}`} value={item.id}>{item.name}</option>
-                </>)
+                return (<option key={`major-${index + 1}`} value={item.id}>{item.name}</option>)
             })
         } else {
             return
@@ -159,21 +159,6 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
             {whenUpdateUser(isCreatedProp)}
 
             <hr />
-            <Form.Group
-                hidden={user.role_id !== 3}
-                controlId="formUserStudentID"
-            >
-                <Form.Label>รหัสนักศึกษา</Form.Label>
-                <Form.Control
-                    // key={"studentId"}
-                    onChange={onChangeState}
-                    type="text"
-                    name="studentId"
-                    placeholder="xxxxxxxxxxx"
-                    // defaultValue={user.student_id ? user.student_id : ""}
-                    defaultValue={(formUser.studentId) ? formUser.studentId : ""}
-                />
-            </Form.Group>
 
             <Form.Row>
                 <Form.Group
@@ -270,6 +255,24 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                 </Form.Group>
             </Form.Row>
 
+            <hr hidden={formUser.userType !== 3} />
+
+            <Form.Group
+                hidden={formUser.userType !== 3}
+                controlId="formUserStudentID"
+            >
+                <Form.Label>รหัสนักศึกษา</Form.Label>
+                <Form.Control
+                    // key={"studentId"}
+                    onChange={onChangeState}
+                    type="text"
+                    name="studentId"
+                    placeholder="xxxxxxxxxxx"
+                    // defaultValue={user.student_id ? user.student_id : ""}
+                    defaultValue={(formUser.studentId) ? formUser.studentId : ""}
+                />
+            </Form.Group>
+
             <Form.Row hidden={user.role_id !== 3 && isCreatedProp}>
                 {/* <FacultySelect
                     defaultData={user.major ? user.major : ""}
@@ -284,7 +287,11 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                     facultyId={facultyId}
                 /> */}
 
-                <Form.Group as={Col} controlId="formGroupFacultySelect">
+                <Form.Group
+                    as={Col}
+                    controlId="formGroupFacultySelect"
+                    hidden={formUser.userType !== 3}
+                >
                     <Form.Label>{t("faculty.index")}</Form.Label>
 
                     <Form.Control
@@ -308,7 +315,11 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formGroupMajorSelect">
+                <Form.Group
+                    as={Col}
+                    controlId="formGroupMajorSelect"
+                    hidden={formUser.userType !== 3}
+                >
                     <Form.Label>{t("major.index")}</Form.Label>
 
                     <Form.Control

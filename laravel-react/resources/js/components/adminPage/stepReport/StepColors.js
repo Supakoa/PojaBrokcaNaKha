@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Alert, Button, Badge } from "react-bootstrap";
+import { Container, Row, Col, Alert, Button, Badge, ListGroup } from "react-bootstrap";
 import { AddApprover } from "./AddApprover";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
@@ -27,6 +27,7 @@ export const StepColors = ({
     //redux
     const rerdux_chipGroup = useSelector(state => state.chipGroup);
     const redux_showForm = useSelector(state => state.showForm)
+    const redux_showGroup = useSelector(state => state.showGroup)
     const dispatch = useDispatch();
 
     // local variable
@@ -90,9 +91,23 @@ export const StepColors = ({
     };
 
     const handleClickGroup = item => {
+        console.log('----------')
+        let tmp_findGroup = redux_showGroup.data.findIndex(i => {
+            return i.id == item.id
+        })
+
+        let tmp_showGroup = redux_showGroup.data
+        console.log('tmp_findGroup', tmp_findGroup)
+        console.log('tmp_showGroup', tmp_showGroup)
+        console.log('tmp_showGroup[tmp_findGroup].users', tmp_showGroup[tmp_findGroup].users)
+        tmp_showGroup = tmp_showGroup[tmp_findGroup].users.map((item, idx) => {
+            return `<br/>${item.id}: ${item.title} ${item.first_name} ${item.last_name}`
+        })
+
         Swal.fire({
             title: "ยืนยันการลบ?",
-            text: `คุณต้องการที่จะลบข้อมูล [${item.id}: ${item.th_name}] หรือไม่!`,
+            // text: `คุณต้องการที่จะลบข้อมูล [${item.id}: ${item.th_name}] หรือไม่!`,
+            html: `คุณต้องการที่จะลบข้อมูล [${item.id}: ${item.th_name}] หรือไม่!` + '<br/>ข้อมูลผู้ตรวจในกลุ่มมีดังนี้<br/>' + tmp_showGroup,
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "ลบ",
