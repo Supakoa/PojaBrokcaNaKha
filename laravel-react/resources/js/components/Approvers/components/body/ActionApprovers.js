@@ -76,7 +76,6 @@ const ActionApprovers = ({
                         documentID
                     ).then(res => {
                         if (res) {
-                            setLoading(false);
                             Swal.fire(
                                 "เรียบร้อย!",
                                 "ยืนยันการตรวจเรียบร้อย!",
@@ -88,6 +87,7 @@ const ActionApprovers = ({
                                         id: _userId
                                     });
                                     if (_newDocs) {
+                                        setLoading(false);
                                         _dispatch(userDocument(_newDocs));
                                         setRows([]);
                                         _history.push("/Approvers");
@@ -101,9 +101,10 @@ const ActionApprovers = ({
                                 "error"
                             ).then(() => setLoading(false));
                         }
-                        setLoading(false);
                     });
+                    setLoading(false);
                 }
+                setLoading(false);
             });
         }
     };

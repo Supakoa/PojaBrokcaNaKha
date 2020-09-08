@@ -308,9 +308,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                         //         : selected
                         // }
                     >
-                        <option key="faculty-0" value={0}>
-                            {t("faculty.selectFaculty")}
-                        </option>
+                        <option key={"faculty-0"} value={0} >{t("faculty.selectFaculty")}</option>
                         {mapFacultyOption()}
                     </Form.Control>
                 </Form.Group>
@@ -336,7 +334,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                         //         : selected
                         // }
                     >
-                        <option key={"major-0"} value={0}>{t("major.selectMajor")}</option>
+                        <option key={"major-0"} value={0} >{t("major.selectMajor")}</option>
                         {mapMajorOption()}
                     </Form.Control>
                 </Form.Group>

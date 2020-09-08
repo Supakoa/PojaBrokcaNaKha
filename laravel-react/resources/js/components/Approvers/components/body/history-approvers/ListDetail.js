@@ -8,6 +8,7 @@ import { _URL } from "../../../../middleware/URL";
 
 const ListDetailApprovers = ({ translate, approvers }) => {
     const { i18n } = useTranslation();
+    React.useEffect(() => {}, [approvers]);
     return (
         <Card>
             <Card.Body>

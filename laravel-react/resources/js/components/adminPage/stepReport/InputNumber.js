@@ -3,7 +3,8 @@ import { Button, Modal, Form } from "react-bootstrap";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import {_URL} from "../../middleware/URL";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { showFormsAction } from "../../../redux/actions";
 
 export const InputNumber = props => {
     // props
@@ -15,6 +16,7 @@ export const InputNumber = props => {
 
     // redux
     const redux_showForm = useSelector(state => state.showForm)
+    const dispatch = useDispatch()
 
     // local variable
     const Toast = Swal.mixin({
@@ -34,12 +36,10 @@ export const InputNumber = props => {
 
     // function
     const handleClick = () => {
-        // console.log('response', response)
-
         let tmp_groupStep = new Array()
         for (let i = 0; i < _state; i++) {
             if (groupSteps[i]) {
-                tmp_groupStep.push(groupSteps[i])
+                tmp_groupStep.push(redux_showForm.data[(response.id - 1)].groups[i])
             } else {
                 tmp_groupStep.push([])
             }
@@ -59,8 +59,13 @@ export const InputNumber = props => {
                 )}`
             }
         }).then(res => {
-
             if (res.status == 200) {
+                let tmp_showForm = redux_showForm.data
+                tmp_showForm[(response.id - 1)].groups = tmp_groupStep
+                tmp_showForm[(response.id - 1)].all_state = tmp_showForm[(response.id - 1)].all_state + 1
+
+                dispatch(showFormsAction('INIT_SHOW_FORM', tmp_showForm))
+
                 Toast.fire({
                     icon: 'success',
                     title: 'แก้ไขข้อมูลจำนวนขั้นตอนการตรวจสำเร็จ'
