@@ -6,7 +6,7 @@ import {_URL} from "../../middleware/URL";
 
 export const InputNumber = props => {
     // props
-    const { setColors, groupSteps, setGroupSteps, response } = props;
+    const { setColors, groupSteps, setGroupSteps, response } = props; // TODO: see groupSteps and setGroupSteps
 
     // local state
     const [_state, setState] = React.useState(0);
@@ -26,6 +26,11 @@ export const InputNumber = props => {
         }
     })
 
+    // redux
+
+    // local variable
+
+    // function
     const handleClick = () => {
         // console.log('response', response)
 
@@ -37,12 +42,14 @@ export const InputNumber = props => {
                 tmp_groupStep.push([])
             }
         }
+
         setGroupSteps(tmp_groupStep)
 
         const qs = require('qs')
         let sendData = qs.stringify({
             all_state: _state
         })
+
         Axios.patch(`${_URL}/api/forms/${response.id}`, sendData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(
@@ -66,14 +73,9 @@ export const InputNumber = props => {
 
         setColors(_state);
         setInputNumber(false);
-        setState(0)
+        // setState(0)
     };
 
-    // redux
-
-    // local variable
-
-    // function
     const handleChange = e => {
         const { value } = e.target;
 
@@ -91,7 +93,14 @@ export const InputNumber = props => {
         setState(0)
     }
 
+    const initStepNumber = () => {
+        setState(groupSteps.length)
+    }
+
     // useEffect
+    useEffect(() => {
+        initStepNumber()
+    }, [])
 
     // return component
 
@@ -123,6 +132,7 @@ export const InputNumber = props => {
                             placeholder="ใส่จำนวนตัวเลข"
                             name="numberStep"
                             onChange={handleChange}
+                            defaultValue={_state}
                         />
                         <Form.Text className="text-muted">{"ใส่จำนวนขั้นตอนตั้งแต่ 1-5"}</Form.Text>
                     </Form.Group>

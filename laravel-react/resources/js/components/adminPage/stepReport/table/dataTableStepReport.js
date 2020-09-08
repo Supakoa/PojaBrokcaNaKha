@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ColumsAction from "./ColumnsAction";
 import { columns } from "./columns";
 import Axios from "axios";
@@ -7,19 +7,18 @@ import { showGroupAction, showFormsAction } from "../../../../redux/actions";
 import Swal from "sweetalert2";
 import {_URL} from "../../../middleware/URL";
 
-export default function dataTableStepReport() {
+const dataTableStepReport = (setData) => {
     // props
 
     // local state
-    const [rows, setRows] = React.useState([]);
+    // const [rows, setRows] = React.useState([]);
     // const [showForms, setShowForms] = useState(null)
 
     // redux
-    const redux_showForms = useSelector(state => state.showForm); // not to use now
-    const dispatch = useDispatch();
+    const redux_showForms = useSelector(state => state.showForm);
+    // const dispatch = useDispatch(); not use now
 
     // local variable
-    const pathGetForms = `${_URL}/api/forms`;
     // const Toast = Swal.mixin({
     //     toast: true,
     //     position: 'top-end',
@@ -33,57 +32,75 @@ export default function dataTableStepReport() {
 
     // function
     const fetchRowData = _rows => {
+        console.log('_rows', _rows)
         const _row = _rows.map((res, idx) => {
-            const _response = {
+            return {
                 id: res.id,
                 name: res.th_name,
                 all_state: res.all_state,
                 // code: res.code,
                 // action: <ColumsAction idx={idx} res={res} />
                 action: ColumsAction(idx, res)
-            };
-            return _response;
-        });
-        return _row;
-    };
-
-    const initShowStepReports = async () => {
-        const showForms = await Axios.get(pathGetForms, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
-        }).then(res => {
-            return res.data;
         });
 
-        dispatch(showFormsAction("INIT_SHOW_FORM", showForms));
-
-        setRows(fetchRowData(showForms));
-    };
-
-    const initShowGroupsRedux = () => {
-        Axios.get(`${_URL}/api/groups`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+        setData(preState => {
+            return {
+                ...preState,
+                rows: _row
             }
-        }).then(res => {
-            dispatch(showGroupAction("INIT_SHOW_GROUP", res.data));
-        });
+        })
     };
+
+    const initShowForm = () => {
+        if (redux_showForms.data) {
+            fetchRowData(redux_showForms.data)
+        }
+    }
+
+    // const initShowStepReports = async () => {
+    //     const showForms = await Axios.get(pathGetForms, {
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+    //         }
+    //     }).then(res => {
+    //         return res.data;
+    //     });
+
+    //     dispatch(showFormsAction("INIT_SHOW_FORM", showForms));
+
+    //     setRows(fetchRowData(showForms));
+    // };
+
+    // const initShowGroupsRedux = () => {
+    //     Axios.get(`${_URL}/api/groups`, {
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+    //         }
+    //     }).then(res => {
+    //         dispatch(showGroupAction("INIT_SHOW_GROUP", res.data));
+    //     });
+    // };
 
     // useEffect
-    React.useEffect(() => {
-        const abort = new AbortController();
+    useEffect(() => {
+        initShowForm()
+    }, [redux_showForms])
 
-        initShowStepReports({ signal: abort.signal });
-        initShowGroupsRedux();
+    // React.useEffect(() => {
+    //     const abort = new AbortController();
 
-        return () => {
-            abort.abort();
-        };
-    }, []);
+    //     initShowStepReports({ signal: abort.signal });
+    //     initShowGroupsRedux();
+
+    //     return () => {
+    //         abort.abort();
+    //     };
+    // }, []);
 
     //return component
 
-    return { columns, rows };
+    return
 }
+
+export default dataTableStepReport

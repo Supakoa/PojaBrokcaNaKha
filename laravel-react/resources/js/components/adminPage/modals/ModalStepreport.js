@@ -21,6 +21,9 @@ export function StepAdd(props) {
 }
 
 export function ModalStepReport(props) {
+
+    // external module
+
     // prop
     const { response, step } = props;
 
@@ -54,11 +57,13 @@ export function ModalStepReport(props) {
     //     console.log('redux_chipGroup', redux_chipGroup)
     // }
 
-    const initGroupStep = async () => {
-        let tmp_chipGroupVal = new Array()
-        redux_showForms.data.map(i => {
-            tmp_chipGroupVal.push(i.groups)
-        })
+    const initGroupStep = () => {
+        // let tmp_chipGroupVal = new Array()
+        // redux_showForms.data.map(i => {
+        //     tmp_chipGroupVal.push(i.groups)
+        // })
+
+        let tmp_chipGroupVal = redux_showForms.data[step].groups
 
         setGroupSteps(tmp_chipGroupVal)
     }
@@ -70,9 +75,9 @@ export function ModalStepReport(props) {
     }
 
     useEffect(() => {
-        initState()
         initGroupStep()
         initNumberStep()
+        // initState()
     }, [])
 
     // React.useEffect(() => {
