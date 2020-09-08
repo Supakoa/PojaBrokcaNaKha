@@ -11,7 +11,6 @@ export default function ReportForm() {
     const _inputTemp = useSelector(s => s.inputTemps);
     const { i18n } = useTranslation();
     const _dispatch = useDispatch();
-    const abort = new AbortController();
 
     const post2Inputs = _docTemp => {
         let _arrInputs = [];
@@ -25,16 +24,15 @@ export default function ReportForm() {
     };
 
     React.useEffect(() => {
+        const abort = new AbortController();
+
         if (_docTemp.length !== 0 && _inputTemp.length === 0) {
             post2Inputs(_docTemp, { signal: abort.signal });
         }
-    }, [_docTemp, _inputTemp]);
-
-    React.useEffect(() => {
         return () => {
             abort.abort;
         };
-    }, []);
+    }, [_docTemp, _inputTemp]);
 
     return (
         <Accordion defaultActiveKey="1">

@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 export default function Profile() {
     const [_faculties, setFaculties] = React.useState([]);
     const [_loading, setLoading] = React.useState(true);
-    const abort = new AbortController();
     const { t } = useTranslation();
 
     const fetchFaculties = async () => {
@@ -22,16 +21,16 @@ export default function Profile() {
     };
 
     React.useEffect(() => {
+        const abort = new AbortController();
+
         if (_faculties.length === 0) {
             fetchFaculties({ signal: abort.signal });
         }
-    }, [_faculties]);
-
-    React.useEffect(() => {
         return () => {
             abort.abort();
         };
-    }, []);
+    }, [_faculties]);
+
 
     return (
         <Card>

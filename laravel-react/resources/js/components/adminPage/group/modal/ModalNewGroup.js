@@ -72,7 +72,7 @@ const ModalNewGroup = ({
                         title: "เกิดข้อผิดพลาดในการสร้างกลุ่ม"
                     });
                 }
-                window.location.reload(false);
+                window.location.reload(true);
                 handleClose();
             });
         } else {

@@ -3,9 +3,7 @@ import { Col, Form, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { _urlMajors } from "../../../../middleware/apis";
 
-const MajorsOption = props => {
-    const { facultiesId } = props;
-    // console.log(facultiesId);
+const MajorsOption = ({ facultiesId }) => {
     const [_majors, setMajors] = React.useState([]);
 
     const _fetchMajor = async _facId => {

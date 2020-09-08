@@ -15,11 +15,9 @@ import { useSelector } from "react-redux";
 import NoMatch from "./NotMatch404";
 import clearLocalStorge from "./middleware/method/clearLocalStorage";
 import Approvers from "./Approvers";
-import { useTranslation } from "react-i18next";
 
 function App() {
     let _isAuthLocal = localStorage.getItem("_authLocal");
-    // const { i18n } = useTranslation();
     return (
         <Router
             getUserConfirmation={(message, callback) => {

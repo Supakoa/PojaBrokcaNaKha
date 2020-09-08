@@ -14,13 +14,13 @@ import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-function NavHeader(props) {
+function NavHeader({ url }) {
     const { t } = useTranslation();
     const _user = useSelector(state => state.userState);
     return (
         <Navbar bg="info" expand="sm">
             <Container fluid>
-                <Navbar.Brand href={props.url} className="text-light">
+                <Navbar.Brand href={url} className="text-light">
                     <img
                         src={Logo}
                         width="35"
@@ -32,15 +32,12 @@ function NavHeader(props) {
                 <Navbar.Toggle aria-controls="petition-nav" />
                 <Navbar.Collapse id="petition-nav">
                     <Nav>
-                        <Link
-                            className="nav-link text-light"
-                            to={`${props.url}`}
-                        >
+                        <Link className="nav-link text-light" to={`${url}`}>
                             {t("students.navbar-top.home")}
                         </Link>
                         <Link
                             className="nav-link text-light"
-                            to={`${props.url}/profile`}
+                            to={`${url}/profile`}
                         >
                             {t("students.navbar-top.profile")}
                         </Link>
