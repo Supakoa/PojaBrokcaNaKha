@@ -41,31 +41,36 @@ const ProfileForm = ({ role }) => {
 
     const handleChange = async e => {
         const { name, value, files } = e.target;
-        if (name === "license") {
+        const _valid = validateIndex(name, value);
+
+        if (name === "file_license") {
             const pathImage = await uploadsImage(
                 files[0],
                 localStorage._authLocal
             );
+
+            console.log(pathImage);
+
             if (pathImage) {
                 setProfile({
                     ..._profile,
-                    [name]: pathImage
+                    license: pathImage
+                });
+            }
+        } else {
+            if (_valid) {
+                if (name === "faculty_id") {
+                    setDisOption(false);
+                    setFacultyId(Number(value));
+                }
+                setProfile({
+                    ..._profile,
+                    [name]: value
                 });
             }
         }
-        const _valid = validateIndex(name, value);
         setIsUpdate(true);
         setIsSubmit(_valid);
-        if (_valid) {
-            if (name === "faculty_id") {
-                setDisOption(false);
-                setFacultyId(Number(value));
-            }
-            setProfile({
-                ..._profile,
-                [name]: value
-            });
-        }
         setValidate({
             ..._validate,
             [name]: _valid
@@ -313,7 +318,7 @@ const ProfileForm = ({ role }) => {
                             >
                                 <Form.File
                                     className="position-relative"
-                                    name="license"
+                                    name="file_license"
                                     onChange={handleChange}
                                     label={
                                         i18n.language === "th"
