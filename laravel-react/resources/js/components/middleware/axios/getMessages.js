@@ -7,7 +7,7 @@ export const getMessages = async _token => {
     const _all = await axios
         .get(_urlGetMessages(), headerConfig(_token, 3000))
         .then(res => {
-            return res.data.success;
+            return res.data;
         })
         .catch(er => {
             Swal.fire("error", er, "error");

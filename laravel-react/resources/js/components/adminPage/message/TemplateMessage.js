@@ -32,7 +32,7 @@ export default function TemplateMessage() {
 
     const fetchMessages = async token => {
         const _getAll = await getMessages(token);
-        if (_getAll) setListUsers(_getAll);
+        if (_getAll) setListUsers(_getAll.success);
     };
 
     const read = async id => {
@@ -57,53 +57,7 @@ export default function TemplateMessage() {
                 });
         }
     };
-    const channel = window.Echo.channel("channel-chat");
-    channel.listen(".event-chat-admin", async function (data) {
-        // console.log(dd)
-        let user = _listUsers.find(value => value.id === data.user_id);
-        setIsOpen(true);
-        if (!!user) {
 
-            // if ( (data.message_id != user.messages.reverse()[0].id) && (data.count_messages != (user.count_messages) + 1) && (data.message_id != user.messages.reverse()[0].id)) {
-            //
-            //    await getMessages(localStorage._authLocal).then(value => {
-            //         setListUsers(value)
-            //         // setAPI(false);
-            //     })
-            // } else {
-                user["count_unread"] = data.count_messages_unread;
-                user["count_messages"] = data.count_messages;
-                let tmp_message = {};
-                tmp_message.id = data.message_id;
-                tmp_message.message = data.message;
-                tmp_message.admin_id = null;
-                tmp_message.user_id = data.user_id;
-                if (
-                    user.messages.findIndex(
-                        value => value.id == tmp_message.id
-                    ) === -1
-                ) {
-                    // console.log("Data : ", data);
-                    user.messages.push(tmp_message);
-                    setListUsers([..._listUsers]);
-                }
-            // }
-            // if (userIdOpen == data.user_id && !a) {
-            //     a=true;
-            //     setTimeout(function () {
-            //         console.log("lockRead",a)
-            //         read(data.user_id)
-            //         a=false
-            //     }, 2000)
-            // }
-        } else if (data.count_messages == 1) {
-            const _getAll = await getMessages(localStorage._authLocal);
-            if (_getAll) setListUsers(_getAll);
-        }
-
-        var element = document.getElementById("chatBody"+data.user_id);
-        element.scrollTop = element.scrollHeight;
-    });
 
     const scrollToBottom = e => {
         let id = e.target.name;
@@ -132,10 +86,65 @@ export default function TemplateMessage() {
     }, [localStorage._authLocal]);
 
     React.useEffect(() => {
-        // console.log("_listUsers : ", _listUsers)
-    }, [_listUsers]);  React.useEffect(() => {
-       read(userIdOpen)
-    }, [userIdOpen]);
+        const abort = new AbortController();
+
+        const channel = window.Echo.channel("channel-chat");
+        channel.listen(".event-chat-admin", async function (data) {
+            // console.log("data : ",data)
+            let user = _listUsers.find(value => value.id === data.user_id);
+            setIsOpen(true);
+            if (!!user) {
+
+                // if ( (data.message_id != user.messages.reverse()[0].id) && (data.count_messages != (user.count_messages) + 1) && (data.message_id != user.messages.reverse()[0].id)) {
+                //
+                //    await getMessages(localStorage._authLocal).then(value => {
+                //         setListUsers(value)
+                //         // setAPI(false);
+                //     })
+                // } else {
+                user["count_unread"] = data.count_messages_unread;
+                user["count_messages"] = data.count_messages;
+                let tmp_message = {};
+                tmp_message.id = data.message_id;
+                tmp_message.message = data.message;
+                tmp_message.admin_id = null;
+                tmp_message.user_id = data.user_id;
+                if (
+                    user.messages.findIndex(
+                        value => value.id == tmp_message.id
+                    ) === -1
+                ) {
+                    // console.log("Data : ", data);
+                    if (userIdOpen == data.user_id){
+                        setUserIdOpen(data.user_id)
+                    }
+                    user.messages.push(tmp_message);
+                    setListUsers([..._listUsers]);
+                }
+                // }
+                // if (userIdOpen == data.user_id && !a) {
+                //     a=true;
+                //     setTimeout(function () {
+                //         console.log("lockRead",a)
+                //         read(data.user_id)
+                //         a=false
+                //     }, 2000)
+                // }
+            } else if (data.count_messages == 1) {
+                const _getAll = await getMessages(localStorage._authLocal);
+                if (_getAll) setListUsers(_getAll.success);
+            }
+
+            var element = document.getElementById("chatBody"+data.user_id);
+            element.scrollTop = element.scrollHeight;
+        });
+
+        read(userIdOpen);
+        return () => {
+            abort.abort();
+            channel.stopListening(".event-chat-admin")
+        };
+    }, [userIdOpen,_listUsers]);
 
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#default">
