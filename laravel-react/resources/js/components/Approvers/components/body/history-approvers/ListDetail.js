@@ -9,6 +9,7 @@ import { _URL } from "../../../../middleware/URL";
 const ListDetailApprovers = ({ translate, approvers }) => {
     const { i18n } = useTranslation();
     React.useEffect(() => {}, [approvers]);
+    console.log("approvers", approvers);
     return (
         <Card>
             <Card.Body>
@@ -19,11 +20,7 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                         : "Aprover History"}
                     :
                 </h5>
-                {!!approvers ? (
-                    <div className="text-center">
-                        <i className="fas fa-signature"></i>
-                    </div>
-                ) : approvers.length === 0 ? (
+                {!!approvers && approvers.length === 0 ? (
                     <div className="text-center">
                         <i className="fas fa-signature"></i>
                     </div>
@@ -33,14 +30,14 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                             <Row key={idx}>
                                 <Col lg={8} md={8}>
                                     <dl className="row mb-0">
-                                        <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
+                                        <dt className="col-lg-6 col-md-6  pr-0">
                                             {translate(
                                                 "approvers.show-detail.user.fullname"
                                             )}
                                             :
                                         </dt>
-                                        <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
-                                            {`${idx + 1}${approver.title} ${
+                                        <dd className="col-lg-3 col-md-3  px-0">
+                                            {`${idx + 1} ${approver.title} ${
                                                 approver.first_name
                                             } ${approver.last_name}`}
                                         </dd>

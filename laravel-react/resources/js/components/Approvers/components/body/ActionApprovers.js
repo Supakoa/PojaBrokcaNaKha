@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { fetchUserDoc } from "../../../middleware/axios/fetchUserDoc";
 import { useTranslation } from "react-i18next";
 import ProgressState from "./history-approvers/ProgressState";
+import uploadsReturnFile from "../../../middleware/axios/uploadsReturnFile";
 
 const ActionApprovers = ({
     stateApprovers,
@@ -31,7 +32,7 @@ const ActionApprovers = ({
         if (type === "file") {
             const file = files[0];
 
-            const _pathImg = await uploadsImage(file, localStorage._authLocal);
+            const _pathImg = await uploadsReturnFile(file, localStorage._authLocal);
             if (_pathImg) {
                 setPivot({
                     ..._pivot,
