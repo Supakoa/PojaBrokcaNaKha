@@ -159,21 +159,6 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
             {whenUpdateUser(isCreatedProp)}
 
             <hr />
-            <Form.Group
-                hidden={formUser.userType !== 3}
-                controlId="formUserStudentID"
-            >
-                <Form.Label>รหัสนักศึกษา</Form.Label>
-                <Form.Control
-                    // key={"studentId"}
-                    onChange={onChangeState}
-                    type="text"
-                    name="studentId"
-                    placeholder="xxxxxxxxxxx"
-                    // defaultValue={user.student_id ? user.student_id : ""}
-                    defaultValue={(formUser.studentId) ? formUser.studentId : ""}
-                />
-            </Form.Group>
 
             <Form.Row>
                 <Form.Group
@@ -269,6 +254,24 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                     </Form.Control>
                 </Form.Group>
             </Form.Row>
+
+            <hr hidden={formUser.userType !== 3} />
+
+            <Form.Group
+                hidden={formUser.userType !== 3}
+                controlId="formUserStudentID"
+            >
+                <Form.Label>รหัสนักศึกษา</Form.Label>
+                <Form.Control
+                    // key={"studentId"}
+                    onChange={onChangeState}
+                    type="text"
+                    name="studentId"
+                    placeholder="xxxxxxxxxxx"
+                    // defaultValue={user.student_id ? user.student_id : ""}
+                    defaultValue={(formUser.studentId) ? formUser.studentId : ""}
+                />
+            </Form.Group>
 
             <Form.Row hidden={user.role_id !== 3 && isCreatedProp}>
                 {/* <FacultySelect
