@@ -164,14 +164,16 @@ export default function SignIn() {
                                     </>
                                 ) : (
                                     <div className="d-flex text-center w-100">
-                                        <Spinner
-                                            className="m-auto"
-                                            animation="border"
-                                            size="sm"
-                                        />{" "}
-                                        {i18n.language === "th"
-                                            ? "กำลังโหลด..."
-                                            : "Loading..."}
+                                        <span>
+                                            <Spinner
+                                                className="m-auto"
+                                                animation="border"
+                                                size="sm"
+                                            />{" "}
+                                            {i18n.language === "th"
+                                                ? "กำลังโหลด..."
+                                                : "Loading..."}
+                                        </span>
                                     </div>
                                 )}
                             </section>
