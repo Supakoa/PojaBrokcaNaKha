@@ -3,6 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import {_URL} from "../../middleware/URL";
+import { useSelector } from "react-redux";
 
 export const InputNumber = props => {
     // props
@@ -13,6 +14,7 @@ export const InputNumber = props => {
     const [inputNumber, setInputNumber] = React.useState(false);
 
     // redux
+    const redux_showForm = useSelector(state => state.showForm)
 
     // local variable
     const Toast = Swal.mixin({
@@ -100,7 +102,7 @@ export const InputNumber = props => {
     // useEffect
     useEffect(() => {
         initStepNumber()
-    }, [])
+    }, [redux_showForm])
 
     // return component
 

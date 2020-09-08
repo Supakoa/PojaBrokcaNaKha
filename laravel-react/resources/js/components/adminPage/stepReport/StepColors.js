@@ -216,6 +216,10 @@ export const StepColors = ({
         const _colorSet = ["primary", "info", "success", "warning", "danger"];
         const _num = Number(number);
 
+        // console.log('response', response)
+        // console.log('redux_showForm', redux_showForm)
+        // console.log('redux_showForm[response.id - 1]', redux_showForm.data[response.id - 1])
+
         if (groupSteps) {
             return groupSteps.map((item, index) => {
                 if (index + 1 <= _num) {

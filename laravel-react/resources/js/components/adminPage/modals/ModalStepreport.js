@@ -70,6 +70,7 @@ export function ModalStepReport(props) {
 
     const initNumberStep = () => {
         if (response.all_state > 0 || response.all_state != null) {
+            console.log('update number')
             setStepColors(response.all_state)
         }
     }

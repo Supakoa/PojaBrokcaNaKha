@@ -25,7 +25,6 @@ export default function StepReport() {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(res => {
-            console.log('res initShowStepReports:', res)
             dispatch(showFormsAction("INIT_SHOW_FORM", res.data));
         });
     };
@@ -36,7 +35,6 @@ export default function StepReport() {
                 Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(res => {
-            console.log('res initShowGroupsRedux:', res)
             dispatch(showGroupAction("INIT_SHOW_GROUP", res.data));
         });
     };
