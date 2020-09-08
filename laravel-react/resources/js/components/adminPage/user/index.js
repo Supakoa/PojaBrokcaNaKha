@@ -26,33 +26,31 @@ export default function User({t}) {
     // local variable
 
     // function
-    // FIXME: not to use
     const templateUser = () => {
-        //  Axios.get("http://localhost:8000/api/users/import", {
-        //     headers: {
-        //         Authorization: `Bearer ${localStorage.getItem(
-        //             "_authLocal"
-        //         )}`
-        //     }
-        // }).then(async res => {
-        //      console.log(res.data)
-        //
-        //      fileDownload(res.data, 'templateUser.xlsx');
-        // });
+         Axios.get(`${_URL}/api/users/import`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "_authLocal"
+                )}`
+            }
+        }).then(async res => {
+             console.log(res.data)
+
+             fileDownload(res.data, 'templateUser.xlsx');
+        });
     }
 
-    // FIXME: not to use
     const exportUsers = () => {
-        //      Axios.get("http://localhost:8000/api/users/export", {
-        //         headers: {
-        //             Authorization: `Bearer ${localStorage.getItem(
-        //                 "_authLocal"
-        //             )}`
-        //         }
-        //     }).then(async res => {
-        //          console.log(res.data)
-        //          fileDownload(res.data, 'exportUsers.xlsx');
-        //     });
+             Axios.get(`${_URL}/api/users/export`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "_authLocal"
+                    )}`
+                }
+            }).then(async res => {
+                 console.log(res.data)
+                 fileDownload(res.data, 'exportUsers.xlsx');
+            });
     }
 
     const importUsers = (e) => {
@@ -133,7 +131,7 @@ export default function User({t}) {
                         <Form.File
                             // className="position-relative" TODO: not to use
                             name="file"
-                            // onChange={importUsers}
+                            onChange={importUsers}
                             id="validationFormik107"
                         />
                     </Form.Group>
@@ -146,7 +144,7 @@ export default function User({t}) {
                             size="sm"
                             variant="info"
                             href={"../api/users/export"}
-                            // onClick={exportUsers}
+                            onClick={exportUsers}
                         >
                             <i className="fas fa-file-export"></i>{" "}{i18n.language === "th" ? "นำออก" : "Export"}
                         </a>
@@ -156,7 +154,7 @@ export default function User({t}) {
                             href={"../api/users/import"}
                             size="sm"
                             variant="secondary"
-                            // onClick={templateUser}
+                            onClick={templateUser}
                         >
                             <i className="far fa-file"></i>{" "}{(i18n.language === "th") ? "รูปแบบ" : "Template"}
                         </a>
