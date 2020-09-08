@@ -13,7 +13,9 @@ const FirstDot = ({ value, now, status }) => {
             <i
                 style={{ fontSize: "50px" }}
                 className={`far fa-check-circle ${
-                    now === value ? `text-secondary` : `text-success`
+                    now === value && status !== "approved"
+                        ? `text-secondary`
+                        : `text-success`
                 }`}
             ></i>
         );
@@ -99,7 +101,7 @@ const StepProgress = ({ steps, stateNow, status }) => {
     }
 
     return (
-        <div className="w-100 d-flex align-items-center justify-content-around">
+        <div className="w-100 d-flex align-items-center justify-content-around px-3 py-3">
             {childrenDot}
         </div>
     );

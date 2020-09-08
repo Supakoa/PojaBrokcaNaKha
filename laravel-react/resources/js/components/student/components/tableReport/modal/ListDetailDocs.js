@@ -15,9 +15,13 @@ const ListDetailDocs = ({ subjects, data, inputData }) => {
     };
 
     React.useEffect(() => {
+        const abort = new AbortController();
         if (!!subjects && newSubject.length === 0) {
-            getSubjectByAttNone(localStorage._authLocal);
+            getSubjectByAttNone(localStorage._authLocal, {
+                signal: abort.signal
+            });
         }
+        return () => abort.abort();
     }, [subjects, newSubject]);
 
     switch (data.tag_type) {

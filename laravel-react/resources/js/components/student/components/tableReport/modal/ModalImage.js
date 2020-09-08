@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Image, Button } from "react-bootstrap";
+import { Modal, Image } from "react-bootstrap";
 
 const ModalImage = ({ src, isNewImage }) => {
     const [modalShow, setModalShow] = React.useState(false);
@@ -9,8 +9,8 @@ const ModalImage = ({ src, isNewImage }) => {
             <Image
                 rounded
                 className="d-block m-auto py-2"
-                width="250"
-                height="250"
+                width="150"
+                height="170"
                 src={isNewImage ? src : `/storage/${src}`}
                 onClick={() => setModalShow(true)}
             />
