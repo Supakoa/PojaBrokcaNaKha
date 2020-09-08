@@ -1,23 +1,23 @@
 import React from "react";
 import {Badge, Button, ListGroup} from "react-bootstrap";
 import ChatBox from "./ChatBox";
-import { useTranslation } from "react-i18next";
-import { getMessages } from "../../../middleware/axios/getMessages";
+import {useTranslation} from "react-i18next";
+import {getMessages} from "../../../middleware/axios/getMessages";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import {_URL} from "../../../middleware/URL";
 
-const MessageElements = ({ token }) => {
+const MessageElements = ({token}) => {
     const [show, setShow] = React.useState(false);
     const [_messages, setMessages] = React.useState([]);
     const [count_unread, setCount_unread] = React.useState(0);
     const user = useSelector(state => state.userState);
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const fetchUserMessage = async token => {
 
         const _getAll = await getMessages(token);
-        if (!!_getAll){
+        if (!!_getAll) {
             setMessages(_getAll.success);
             setCount_unread(_getAll.count_unread)
 
@@ -32,8 +32,8 @@ const MessageElements = ({ token }) => {
         }, 800);
     };
     const read = async id => {
-        if ( count_unread > 0 ) {
-            await  axios
+        if (count_unread > 0) {
+            await axios
                 .get(`${_URL}/api/messages/${id}/read`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
@@ -50,22 +50,51 @@ const MessageElements = ({ token }) => {
     };
     React.useEffect(() => {
         const abort = new AbortController();
-        if (show ) {
-            fetchUserMessage(token, { signal: abort.signal });
+        if (show) {
+            fetchUserMessage(token, {signal: abort.signal});
         }
         return () => abort.abort();
     }, [token, show]);
     React.useEffect(() => {
         const abort = new AbortController();
-        if (user&&show)
-        read(user.id)
+        if (user && show)
+            read(user.id)
         return () => abort.abort();
     }, [count_unread]);
     React.useEffect(() => {
         const abort = new AbortController();
+        let channel = window.Echo.channel("channel-chat");
+        channel.listen(".event-chat-user-" + user.id, function (data) {
+            // console.log("data ",data)
+            if (_messages.length || data.count_messages === 1) {
+                let tmp_message = {};
+                tmp_message.id = data.message_id;
+                tmp_message.message = data.message;
+                tmp_message.admin_id = data.admin_id;
+                tmp_message.user_id = user.id;
+
+                if (
+                    _messages.findIndex(value => value.id === tmp_message.id) === -1
+                ) {
+                    // console.log("Data : ",data)
+                    _messages.push(tmp_message);
+                    setMessages([..._messages]);
+                    setCount_unread(data.count_messages_unread)
+                }
+            }
+            var element = document.getElementById("chatBody");
+            element.scrollTop = element.scrollHeight;
+        });
+        return () => {
+            abort.abort();
+            channel.stopListening(".event-chat-user-" + user.id)
+        }
+    }, [_messages]);
+    React.useEffect(() => {
+        const abort = new AbortController();
 
         if (token)
-            fetchUserMessage(token, { signal: abort.signal });
+            fetchUserMessage(token, {signal: abort.signal});
 
         return () => abort.abort();
     }, []);
@@ -73,34 +102,13 @@ const MessageElements = ({ token }) => {
     //     fetchUserMessage(token, { signal: abort.signal });
     //     return () => abort.abort();
     // },[])
-    let channel = window.Echo.channel("channel-chat");
-    channel.listen(".event-chat-user-" + user.id, function(data) {
-        console.log("data ",data)
-        if (_messages.length || data.count_messages === 1) {
-            let tmp_message = {};
-            tmp_message.id = data.message_id;
-            tmp_message.message = data.message;
-            tmp_message.admin_id = data.admin_id;
-            tmp_message.user_id = user.id;
 
-            if (
-                _messages.findIndex(value => value.id === tmp_message.id) === -1
-            ) {
-                console.log("Data : ",data)
-                _messages.push(tmp_message);
-                setMessages([..._messages]);
-                setCount_unread(data.count_messages_unread)
-            }
-        }
-        var element = document.getElementById("chatBody");
-        element.scrollTop = element.scrollHeight;
-    });
     return (
         <>
             <div className="px-3 py-3 clearfix">
                 <Button
                     variant="info"
-                    style={{ bottom: "0" }}
+                    style={{bottom: "0"}}
                     className={` float-left position-sticky ${
                         show ? `d-none` : ``
                     }`}
@@ -126,7 +134,7 @@ const MessageElements = ({ token }) => {
                 closeMessage={setShow}
                 _messages={_messages}
                 setMessages={setMessages}
-                setCount_unread = {setCount_unread}
+                setCount_unread={setCount_unread}
             />
         </>
     );

@@ -87,9 +87,10 @@ export default function TemplateMessage() {
 
     React.useEffect(() => {
         const abort = new AbortController();
+
         const channel = window.Echo.channel("channel-chat");
         channel.listen(".event-chat-admin", async function (data) {
-            // console.log(dd)
+            // console.log("data : ",data)
             let user = _listUsers.find(value => value.id === data.user_id);
             setIsOpen(true);
             if (!!user) {
@@ -137,9 +138,11 @@ export default function TemplateMessage() {
             var element = document.getElementById("chatBody"+data.user_id);
             element.scrollTop = element.scrollHeight;
         });
+
         read(userIdOpen);
         return () => {
             abort.abort();
+            channel.stopListening(".event-chat-admin")
         };
     }, [userIdOpen,_listUsers]);
 
