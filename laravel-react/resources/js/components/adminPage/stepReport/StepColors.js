@@ -96,7 +96,7 @@ export const StepColors = ({
         })
 
         let tmp_showGroup = redux_showGroup.data
-        
+
         tmp_showGroup = tmp_showGroup[tmp_findGroup].users.map((item, idx) => {
             return `<br/>${item.id}: ${item.title} ${item.first_name} ${item.last_name}`
         })
@@ -148,10 +148,6 @@ export const StepColors = ({
     };
 
     // useEffect
-    useEffect(() => {
-        // console.log('response', response)
-    }, [])
-
     // React.useEffect(() => {
     //     initState();
     //     initGroupUserSteps();
@@ -234,8 +230,8 @@ export const StepColors = ({
         // console.log('redux_showForm[response.id - 1]', redux_showForm.data[response.id - 1])
 
         // เมื่อก่อนใช้ groupSteps
-        if (groupSteps) {
-            return redux_showForm.data[response.id - 1].groups.map((item, index) => {
+        if (redux_showForm.data[step].groups) {
+            let tmp_data = redux_showForm.data[step].groups.map((item, index) => {
                 if (index + 1 <= _num) {
                     return (
                         <div key={index}>
@@ -256,10 +252,12 @@ export const StepColors = ({
                     );
                 }
             });
-        }
 
-        return
+            return tmp_data
+        } else {
+            return
+        }
     };
 
-    return <>{rowSteps(numberStep, groupSteps)}</>;
+    return <>{ rowSteps(numberStep, groupSteps) }</>;
 };

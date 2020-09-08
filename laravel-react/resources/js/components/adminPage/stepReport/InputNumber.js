@@ -37,6 +37,7 @@ export const InputNumber = props => {
     // function
     const handleClick = () => {
         let tmp_groupStep = new Array()
+
         for (let i = 0; i < _state; i++) {
             if (redux_showForm.data[(response.id - 1)].groups[i]) {
                 tmp_groupStep.push(redux_showForm.data[(response.id - 1)].groups[i])
