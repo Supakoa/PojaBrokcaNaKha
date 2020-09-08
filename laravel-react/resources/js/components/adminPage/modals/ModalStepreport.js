@@ -78,7 +78,7 @@ export function ModalStepReport(props) {
         initGroupStep()
         initNumberStep()
         // initState()
-    }, [redux_showForms])
+    }, [redux_showForms, _stepColors])
 
     // React.useEffect(() => {
     //     const abort = new AbortController();
