@@ -90,7 +90,7 @@ const ModalNewGroup = ({
                 type: select
             });
 
-            await Axios.put(
+            await Axios.patch(
                 `${_URL}/api/groups/${res.id}`,
                 sendData,
                 {

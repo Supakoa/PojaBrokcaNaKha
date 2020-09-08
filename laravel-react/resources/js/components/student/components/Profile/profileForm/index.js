@@ -84,7 +84,7 @@ const ProfileForm = ({ role }) => {
             setLoading(true);
             //update User to server service
             await axios
-                .put(
+                .patch(
                     `${_urlUsers()}/${_profile.id}`,
                     _profile,
                     headerConfig(localStorage._authLocal, 3600)

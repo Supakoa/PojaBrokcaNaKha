@@ -121,7 +121,7 @@ export default function ModalUser({ isCreatedProp, id, res }) {
                 student_id: Number(formUser.studentId)
             });
 
-            Axios.put(`${_URL}/api/users/${id}`, data, {
+            Axios.patch(`${_URL}/api/users/${id}`, data, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     Authorization: `Bearer ${localStorage.getItem(
