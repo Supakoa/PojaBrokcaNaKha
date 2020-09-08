@@ -4,7 +4,7 @@ import StatusBadgeDoc from "../../../../student/components/tableReport/statusDoc
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ModalImage from "../../../../student/components/tableReport/modal/ModalImage";
-import {_URL} from "../../../../middleware/URL";
+import { _URL } from "../../../../middleware/URL";
 
 const ListDetailApprovers = ({ translate, approvers }) => {
     const { i18n } = useTranslation();
@@ -24,7 +24,6 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                     </div>
                 ) : (
                     approvers.map((approver, idx) => {
-                        console.log(approver);
                         return (
                             <Row key={idx}>
                                 <Col lg={8} md={8}>
@@ -78,7 +77,9 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                             {approver.pivot.return_file !==
                                             null ? (
                                                 <a
-                                                    href={ _URL+"/public/storage/"+
+                                                    href={
+                                                        _URL +
+                                                        "/public/storage/" +
                                                         approver.pivot
                                                             .return_file
                                                     }
