@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { _URL } from "../../../middleware/URL";
 
-const dataNewsTable = setData => {
+const dataNewsTable = (setData, refresh) => {
     // props
 
     // redux
@@ -29,7 +29,7 @@ const dataNewsTable = setData => {
                     />
                 ),
                 url: res.ref,
-                action: ColumnActions(idx, res)
+                action: ColumnActions(idx, res, refresh)
             };
         });
 
