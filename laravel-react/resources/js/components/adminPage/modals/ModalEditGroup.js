@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {
     Button,
     Modal,
@@ -11,27 +11,27 @@ import {
     Badge,
     ListGroup
 } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 import MaterialTable from "material-table";
 import AddUser from "../group/modal/AddUser";
 import Axios from "axios";
-import { updateShowUsers } from "../../../redux/actions";
-import { useSelector } from "react-redux";
-import { first } from "lodash";
+import {updateShowUsers} from "../../../redux/actions";
+import {useSelector} from "react-redux";
+import {first} from "lodash";
 import ModalNewGroup from "../group/modal/ModalNewGroup";
 import Swal from "sweetalert2";
 import AddSubject from "../group/modal/AddSubject";
-import { Chip } from "@material-ui/core";
+import {Chip} from "@material-ui/core";
 import {_URL} from "../../middleware/URL";
 
-const ModalEditGroup = ({ isCreateProps, response }) => {
+const ModalEditGroup = ({isCreateProps, response}) => {
     // local state
     const [show, setShow] = React.useState(false);
     const [modalHidden, setModalHidden] = useState(false);
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const [table, setTable] = React.useState({
         columns: [
-            { title: "วิชา", field: "subject" },
+            {title: "วิชา", field: "subject"},
             {
                 title: "ID",
                 field: "userId",
@@ -41,9 +41,9 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                     </Badge>
                 )
             },
-            { title: "คำนำหน้า", field: "titleName" },
-            { title: "ชื่อ", field: "firstName" },
-            { title: "นามสกุล", field: "lastName" }
+            {title: "คำนำหน้า", field: "titleName"},
+            {title: "ชื่อ", field: "firstName"},
+            {title: "นามสกุล", field: "lastName"}
         ],
         data: []
     });
@@ -104,16 +104,16 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                             </Badge>
                         )
                     },
-                    { title: "คำนำหน้า", field: "titleName" },
-                    { title: "ชื่อ", field: "firstName" },
-                    { title: "นามสกุล", field: "lastName" }
+                    {title: "คำนำหน้า", field: "titleName"},
+                    {title: "ชื่อ", field: "firstName"},
+                    {title: "นามสกุล", field: "lastName"}
                 ]
             });
         } else {
             setTable({
                 ...table,
                 columns: [
-                    { title: "วิชา", field: "subjectName" },
+                    {title: "วิชา", field: "subjectName"},
                     {
                         title: "ID",
                         field: "userId",
@@ -123,9 +123,9 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                             </Badge>
                         )
                     },
-                    { title: "คำนำหน้า", field: "titleName" },
-                    { title: "ชื่อ", field: "firstName" },
-                    { title: "นามสกุล", field: "lastName" }
+                    {title: "คำนำหน้า", field: "titleName"},
+                    {title: "ชื่อ", field: "firstName"},
+                    {title: "นามสกุล", field: "lastName"}
                 ]
             });
         }
@@ -193,13 +193,13 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
         });
 
         if (groupDetail.type == "normal") {
-            await Axios.delete(
-                `${_URL}/api/groups/${response.id}/users`,
+            await Axios.post(
+                `${_URL}/api/groups/${response.id}/users/delete`,
                 {
-                    data: {
-                        user_id: tmp_deleteVal.userId,
-                        subject_id: 0
-                    },
+                    user_id: tmp_deleteVal.userId,
+                    subject_id: 0
+                },
+                {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
                             "_authLocal"
@@ -211,7 +211,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                     Toast.fire({
                         icon: "success",
                         title: "ลบผู้ตรวจสำเร็จ"
-                    }).then((res)=>{
+                    }).then((res) => {
                         window.location.reload(false);
                     });
                 } else {
@@ -229,13 +229,13 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
 
             tmp_subjectId = tmp_subjectId.id;
 
-            await Axios.delete(
-                `${_URL}/api/groups/${response.id}/users`,
+            await Axios.post(
+                `${_URL}/api/groups/${response.id}/users/delete`,
                 {
-                    data: {
-                        user_id: tmp_deleteVal.userId,
-                        subject_id: tmp_subjectId
-                    },
+                    user_id: tmp_deleteVal.userId,
+                    subject_id: tmp_subjectId
+                },
+                {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
                             "_authLocal"
@@ -268,9 +268,9 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                         Toast.fire({
                             icon: "success",
                             title: "ลบผู้ตรวจสำเร็จ"
-                        }).then((res)=>{
+                        }).then((res) => {
                             window.location.reload(false)
-                    });
+                        });
                     } else {
                         Toast.fire({
                             icon: "warning",
@@ -293,7 +293,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
     // useEffect
     useEffect(() => {
         const abort = new AbortController();
-        initState(response, { signal: abort.signal });
+        initState(response, {signal: abort.signal});
 
         // willmount
         return () => {
@@ -368,7 +368,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                     <Container className="mb-1">
                         วิชาที่ยังไม่ได้เลือก: {tmp_resultSubject.length} วิชา
                     </Container>
-                    <hr className="mt-0 mb-0" />
+                    <hr className="mt-0 mb-0"/>
                     <Container className="ml-2 mr-2 p-0">
                         {mapToComponent()}
                     </Container>
@@ -500,7 +500,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                                             />
                                         </Container>
                                     </Form.Group>
-                                    <hr className="mt-0 mb-0" />
+                                    <hr className="mt-0 mb-0"/>
                                     <Form.Group className="mt-2">
                                         <Container>
                                             <Form.Label>ประเภทกลุ่ม</Form.Label>
@@ -514,7 +514,7 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                                 </Card>
                                 <Card
                                     className="mt-3"
-                                    style={{ border: "none" }}
+                                    style={{border: "none"}}
                                 >
                                     {returnByGroupType()}
                                     <ModalNewGroup
@@ -529,13 +529,13 @@ const ModalEditGroup = ({ isCreateProps, response }) => {
                         </Row>
                         <Row>
                             <Col className="pl-0 pr-0">
-                                <ResultNotUseSubject />
+                                <ResultNotUseSubject/>
                             </Col>
                         </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={()=>setShow(false)}>
+                    <Button variant="secondary" onClick={() => setShow(false)}>
                         {t("close")}
                     </Button>
                     <Button variant="primary" onClick={handleClose}>

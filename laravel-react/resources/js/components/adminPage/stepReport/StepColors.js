@@ -101,16 +101,17 @@ export const StepColors = ({
             cancelButtonColor: "#d33"
         }).then(result => {
             if (result.value) {
-                Axios.delete(`${_URL}/api/forms/${item.pivot.form_id}/groups`, {
-                    data: {
+                Axios.post(`${_URL}/api/forms/${item.pivot.form_id}/groups/delete`,
+                    {
                         group_id: item.id
-                    },
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "_authLocal"
-                        )}`
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                "_authLocal"
+                            )}`
+                        }
                     }
-                }).then(res => {
+                ).then(res => {
                     if (res.status == 200) {
                         let tmp_showForm = redux_showForm.data
                         tmp_showForm[(response.id - 1)].groups = res.data

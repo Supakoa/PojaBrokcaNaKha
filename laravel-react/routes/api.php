@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::get('users/messages', 'API\UserController@messages');
     Route::resource('ChatMessenger','CRUD\ChatMessengerController');
+    Route::post('users/{user}/delete', 'API\UserController@destroy');
     Route::resource('users', 'API\UserController');
     Route::get('users/{user}/documents', 'API\UserController@documents');
     Route::resource('documents', 'DocumentsController', ['except' => ['create', 'edit']]);
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::resource('messages', 'MessagesController', ['except' => ['create', 'edit']]);
     Route::get('messages/{user}/read', 'MessagesController@read');
 
+    Route::post('news/{news}/delete', 'NewsController@destroy');
     Route::resource('news', 'NewsController', ['except' => ['create', 'edit']]);
 
     Route::resource('subjects', 'SubjectsController', ['except' => ['create', 'edit']]);
@@ -54,13 +56,14 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('forms/{form}/groups','formsController@groups');
     Route::get('forms/{form}/groups/{state}','formsController@groupsByState');
     Route::post('forms/{form}/groups','formsController@addGroup');
-    Route::delete('forms/{form}/groups','formsController@deleteGroup');
+    Route::post('forms/{form}/groups/delete','formsController@deleteGroup');
 
     //Groups
+    Route::post('groups/{group}/delete', 'GroupsController@destroy');
     Route::resource('groups', 'GroupsController', ['except' => ['create', 'edit']]);
     Route::get('groups/{group}/users','GroupsController@users');
     Route::post('groups/{group}/users','GroupsController@addUser');
-    Route::delete('groups/{group}/users','GroupsController@deleteUser');
+    Route::post('groups/{group}/users/delete','GroupsController@deleteUser');
 
     Route::post("/uploads",function (Request $request){
 
