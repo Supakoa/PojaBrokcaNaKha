@@ -251,7 +251,10 @@ const TemplateDocuments = ({
             </Form.Row>
 
             {_isLoad ? (
-                <Spinner animation="border" size="sm" />
+                <span>
+                    <Spinner animation="border" size="sm" />
+                    {i18n.language === "th" ? "กำลังโหลด..." : "Loading..."}
+                </span>
             ) : (
                 <Button
                     variant="info"

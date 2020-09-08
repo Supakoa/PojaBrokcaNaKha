@@ -19,7 +19,7 @@ import { _URL } from "../../middleware/URL";
 
 export default function SignIn() {
     let _history = useHistory();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const [_loading, setLoading] = React.useState(true);
     const [forgetPass, setForgetPass] = React.useState(false);
@@ -167,7 +167,11 @@ export default function SignIn() {
                                         <Spinner
                                             className="m-auto"
                                             animation="border"
-                                        />
+                                            size="sm"
+                                        />{" "}
+                                        {i18n.language === "th"
+                                            ? "กำลังโหลด..."
+                                            : "Loading..."}
                                     </div>
                                 )}
                             </section>
