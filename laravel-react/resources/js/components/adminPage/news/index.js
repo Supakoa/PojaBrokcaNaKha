@@ -44,7 +44,7 @@ const News = ({ t }) => {
             </Card.Header>
             <Card.Body>
                 <ModalNews isCreateProps={true} />
-                <TableNews paging={true} />
+                <TableNews paging={true} refresh={initShowNews} />
             </Card.Body>
         </Card>
     )
