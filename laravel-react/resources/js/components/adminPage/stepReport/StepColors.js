@@ -112,17 +112,12 @@ export const StepColors = ({
                     }
                 }).then(res => {
                     if (res.status == 200) {
-                        let tmp_newGroupSteps = groupSteps;
-                        tmp_newGroupSteps[item.pivot.state - 1] = res.data;
+                        let tmp_showForm = redux_showForm.data
+                        tmp_showForm[(response.id - 1)].groups = res.data
 
-                        let tmp_showForm = redux_showForm
-                        tmp_showForm.data[step].groups = [
-                            ...tmp_newGroupSteps
-                        ]
+                        // setGroupSteps(tmp_newGroupSteps)
 
-                        setGroupSteps(tmp_newGroupSteps)
-
-                        dispatch(showFormsAction("INIT_SHOW_FORM", tmp_showForm.data))
+                        dispatch(showFormsAction("INIT_SHOW_FORM", tmp_showForm))
 
                         Toast.fire({
                             icon: "success",
