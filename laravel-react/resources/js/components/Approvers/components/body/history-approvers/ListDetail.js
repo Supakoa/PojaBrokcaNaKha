@@ -23,9 +23,10 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                     </div>
                 ) : (
                     approvers.map((approver, idx) => {
+                        console.log(approver);
                         return (
                             <Row key={idx}>
-                                <Col lg={6} md={6}>
+                                <Col lg={8} md={8}>
                                     <dl className="row mb-0">
                                         <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
                                             {translate(
@@ -52,10 +53,48 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                             />
                                         </dd>
                                     </dl>
+                                    <dl className="row mb-0">
+                                        <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
+                                            {i18n.language === "th"
+                                                ? "คำอธิบาย"
+                                                : "Note"}
+                                            :
+                                        </dt>
+                                        <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
+                                            {approver.pivot.comment !== null
+                                                ? approver.pivot.comment
+                                                : "-"}
+                                        </dd>
+                                    </dl>
+                                    <dl className="row mb-0">
+                                        <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
+                                            {i18n.language === "th"
+                                                ? "โหลดไฟล์แนบ"
+                                                : "Download file"}
+                                            :
+                                        </dt>
+                                        <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
+                                            {approver.pivot.return_file !==
+                                            null ? (
+                                                <a
+                                                    href={
+                                                        approver.pivot
+                                                            .return_file
+                                                    }
+                                                >
+                                                    {i18n.language === "th"
+                                                        ? "โหลด"
+                                                        : "Download"}
+                                                </a>
+                                            ) : (
+                                                "-"
+                                            )}
+                                        </dd>
+                                    </dl>
                                 </Col>
                                 <Col
-                                    md={6}
-                                    lg={6}
+                                    md={4}
+                                    lg={4}
                                     className="d-flex align-items-center justify-content-center"
                                 >
                                     {approver.license ? (
