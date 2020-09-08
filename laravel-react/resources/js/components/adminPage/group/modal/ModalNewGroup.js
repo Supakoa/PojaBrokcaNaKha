@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal, Form, Container, Col, Row } from "react-bootstrap";
-import { useTranslation, composeInitialProps } from "react-i18next";
+import React, {useState, useEffect} from "react";
+import {Button, Modal, Form, Container, Col, Row} from "react-bootstrap";
+import {useTranslation, composeInitialProps} from "react-i18next";
 import Axios from "axios";
 import Swal from "sweetalert2";
-import { initNewsForm } from "../../../../redux/actions";
+import {initNewsForm} from "../../../../redux/actions";
 import TableGroups from "../table";
 import {_URL} from "../../../middleware/URL";
-import { useSelector, useDispatch } from "react-redux";
-import { showGroupAction } from "../../../../redux/actions";
+import {useSelector, useDispatch} from "react-redux";
+import {showGroupAction} from "../../../../redux/actions";
 
 const ModalNewGroup = ({
-    isCreateProps,
-    res,
-    setModalHidden,
-    setgroupDetail,
-    groupDetail,
-    groups, setGroups
-}) => {
+                           isCreateProps,
+                           res,
+                           setModalHidden,
+                           setgroupDetail,
+                           groupDetail,
+                           groups, setGroups
+                       }) => {
     // local state
     const [show, setShow] = useState(false);
     const [showCreateButton, setshowCreateButton] = useState(false);
@@ -42,7 +42,7 @@ const ModalNewGroup = ({
     });
 
     // import variable
-    const { t } = useTranslation("", { useSuspense: false }); // not use now
+    const {t} = useTranslation("", {useSuspense: false}); // not use now
 
     // function
     const handleClose = () => setShow(false);
@@ -79,7 +79,7 @@ const ModalNewGroup = ({
                     tmp_showGroup[tmp_showGroup.length - 1] = {
                         ...tmp_showGroup[tmp_showGroup.length - 1],
                         type: nameType,
-                        subject_id: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,],
+                        subject_id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,],
                         users: []
                     }
 
@@ -113,8 +113,9 @@ const ModalNewGroup = ({
                 type: select
             });
 
-            await Axios.patch(
-          "Content-Type": "application/x-www-form-urlencoded",
+            await Axios.patch(`${_URL}/api/users/${id}`, data, {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
                         Authorization: `Bearer ${localStorage.getItem(
                             "_authLocal"
                         )}`
@@ -256,7 +257,7 @@ const ModalNewGroup = ({
                                 onChange={e => setEngNameGroup(e.target.value)}
                             />
                         </Form.Group>
-                        <hr />
+                        <hr/>
                         <Form.Group as={Row}>
                             <Form.Label as="legend" column>
                                 ประเภทกลุ่ม
