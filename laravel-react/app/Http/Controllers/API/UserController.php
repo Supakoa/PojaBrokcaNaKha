@@ -127,7 +127,7 @@ class UserController extends Controller
                 break;
         }
         foreach ($documents as $index => $document) {
-            if ($document->state == $document->max_state){
+            if ($document->state == $document->max_state && $document->status != "pending"){
                 $document->approver = $document->approver()->get();
             }else{
                 $document->approver = $document->approver()->wherePivot('state', "<", $document->state)->get();
