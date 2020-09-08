@@ -104,14 +104,14 @@ export const AddGroup = (props) => {
     }
 
     // useeffect
-    useEffect(() => {
-        // console.log('naja')
-        // initState()
-    }, [])
+    // useEffect(() => {
+    //     // console.log('naja')
+    //     // initState()
+    // }, [])
 
-    useEffect(() => {
-        // handlerShowAddGroup()
-    }, [showModal])
+    // useEffect(() => {
+    //     // handlerShowAddGroup()
+    // }, [showModal])
 
     // return component
     const RenderGroupOptions = () => {
