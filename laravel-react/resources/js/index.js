@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components";
+import "./notZoom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createStore } from "redux";
 import allReducers from "./redux/reducers";
@@ -19,7 +20,9 @@ const LoadSuspense = () => {
             style={{ minHeight: "100vh", width: "100%" }}
             className="d-flex align-items-center justify-content-center"
         >
-            <Spinner animation="border" variant="info" />
+            <span>
+                <Spinner animation="border" variant="info" size="sm" /> Loading...
+            </span>
         </Container>
     );
 };
