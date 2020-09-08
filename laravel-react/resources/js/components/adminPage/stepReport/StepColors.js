@@ -91,15 +91,12 @@ export const StepColors = ({
     };
 
     const handleClickGroup = item => {
-        console.log('----------')
         let tmp_findGroup = redux_showGroup.data.findIndex(i => {
             return i.id == item.id
         })
 
         let tmp_showGroup = redux_showGroup.data
-        console.log('tmp_findGroup', tmp_findGroup)
-        console.log('tmp_showGroup', tmp_showGroup)
-        console.log('tmp_showGroup[tmp_findGroup].users', tmp_showGroup[tmp_findGroup].users)
+        
         tmp_showGroup = tmp_showGroup[tmp_findGroup].users.map((item, idx) => {
             return `<br/>${item.id}: ${item.title} ${item.first_name} ${item.last_name}`
         })
