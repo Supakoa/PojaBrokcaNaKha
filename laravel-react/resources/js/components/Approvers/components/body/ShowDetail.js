@@ -43,12 +43,15 @@ const ShowDetail = ({ setRowsToInit }) => {
         if (id && _userDoc.length !== 0) {
             findingDocument(_userDoc, id, { signal: abort.signal });
         } else if (_location.pathname !== "/profile") {
-            setTimeout(() => {
+            const timeouteApprove = setTimeout(() => {
                 _history.push("/Approvers");
             }, 2000);
         }
 
-        return () => abort.abort();
+        return () => {
+            abort.abort();
+            clearTimeout(timeouteApprove);
+        };
     }, [id, _userDoc]);
 
     if (Object.keys(_detail).length > 0) {

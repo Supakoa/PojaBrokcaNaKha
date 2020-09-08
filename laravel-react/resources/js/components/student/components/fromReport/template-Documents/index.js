@@ -153,6 +153,7 @@ const TemplateDocuments = ({
         filterRequiredInput(patternInput, { signal: abort.signal });
         return () => abort.abort();
     });
+
     return (
         <Form className="py-3">
             <Form.Row>

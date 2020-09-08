@@ -22,7 +22,7 @@ export default function ModalDelete(props) {
             confirmButtonText: t('modalDelete.confirmButtonText')
         }).then(result => {
             if (result.value) {
-                Axios.delete(`${apiPath}/${id}`, {
+                Axios.post(`${apiPath}/${id}/delete`, "",{
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("_authLocal")}`,
                     }

@@ -9,7 +9,6 @@ import post2User from "../middleware/post2Redux/postToUser";
 export default function Approvers() {
     const _dispatch = useDispatch();
     let _history = useHistory();
-    const abort = new AbortController();
     const _token = localStorage._authLocal;
     const _user = useSelector(s => s.userState);
 
@@ -23,16 +22,15 @@ export default function Approvers() {
     };
 
     React.useEffect(() => {
+        const abort = new AbortController();
+
         if (Object.keys(_user).length === 0 && _token) {
             post2User(_props, { signal: abort.signal });
         }
-    }, [_user, abort]);
-
-    React.useEffect(() => {
         return () => {
             abort.abort();
         };
-    }, [abort]);
+    }, [_user, abort]);
 
     return (
         <div className="w-100" style={{ minHeight: "70vh" }}>

@@ -2,8 +2,12 @@ import React from "react";
 import { Col, Form, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-const ListFaculties = props => {
-    const { methodHandle, userMajor, faculties, nowFacultyId } = props;
+const ListFaculties = ({
+    methodHandle,
+    userMajor,
+    faculties,
+    nowFacultyId
+}) => {
     const { t } = useTranslation();
     React.useEffect(() => {}, [nowFacultyId]);
 

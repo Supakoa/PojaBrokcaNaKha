@@ -24,20 +24,18 @@ const ProfileForm = ({ role }) => {
     const [_facultyId, setFacultyId] = React.useState(null);
     const [_isUpdate, setIsUpdate] = React.useState(false);
     const [_loading, setLoading] = React.useState(false);
-    const abort = new AbortController();
     const [_validate, setValidate] = React.useState({});
 
     React.useEffect(() => {
+        const abort = new AbortController();
+
         if (Object.keys(_profile).length === 0) {
             setProfile(_studentProfile, { signal: abort.signal });
         }
-    }, [_studentProfile, _profile]);
-
-    React.useEffect(() => {
         return () => {
             abort.abort();
         };
-    }, []);
+    }, [_studentProfile, _profile]);
 
     const handleChange = async e => {
         const { name, value, files } = e.target;
@@ -48,8 +46,6 @@ const ProfileForm = ({ role }) => {
                 files[0],
                 localStorage._authLocal
             );
-
-            console.log(pathImage);
 
             if (pathImage) {
                 setProfile({
@@ -84,7 +80,7 @@ const ProfileForm = ({ role }) => {
             setLoading(true);
             //update User to server service
             await axios
-                .put(
+                .patch(
                     `${_urlUsers()}/${_profile.id}`,
                     _profile,
                     headerConfig(localStorage._authLocal, 3600)
