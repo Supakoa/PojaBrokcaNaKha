@@ -4,7 +4,7 @@ import { MDBDataTable } from "mdbreact";
 import { useTranslation } from "react-i18next";
 import { columns } from "./columns";
 
-export default function TableNews({ paging }) {
+export default function TableNews({ paging, refresh }) {
     // library require
     const { t } = useTranslation();
 
@@ -19,7 +19,7 @@ export default function TableNews({ paging }) {
     return (
         <>
             {/* init data */}
-            {dataNewsTable(setData)}
+            {dataNewsTable(setData, refresh)}
             <MDBDataTable
                 noBottomColumns={true}
                 entriesOptions={[5, 10, 15]}
