@@ -17,7 +17,7 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                         : "Aprover History"}
                     :
                 </h5>
-                {!!approvers || approvers.length === 0 ? (
+                {approvers.length === 0 ? (
                     <div className="text-center">
                         <i className="fas fa-signature"></i>
                     </div>
