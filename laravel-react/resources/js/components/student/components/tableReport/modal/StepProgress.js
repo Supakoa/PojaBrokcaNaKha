@@ -1,7 +1,7 @@
 import React from "react";
 
 const FirstDot = ({ value, now, status }) => {
-    if (now <= value && status !== "approved") {
+    if (now <= value - 1 && status !== "approved") {
         return (
             <i
                 style={{ fontSize: "50px" }}
@@ -48,8 +48,8 @@ const DotBorder = ({ value, now, status }) => {
                         : `bg-secondary`
                 }`}
             />
-            {(now === value && status === "cancelled") ||
-            (now === value && status === "rejected") ? (
+            {(now === value - 1 && status === "cancelled") ||
+            (now === value - 1 && status === "rejected") ? (
                 <i
                     style={{ fontSize: "50px" }}
                     className="far fa-times-circle text-danger"
