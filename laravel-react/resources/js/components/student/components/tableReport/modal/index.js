@@ -17,7 +17,7 @@ const contentStyle = {
 const UserModalDoc = ({ document, setRows }) => {
     const [show, setShow] = React.useState(false);
     const [_status, setStatus] = React.useState(false);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const deleteDoc = () =>
         Swal.fire({
@@ -94,7 +94,13 @@ const UserModalDoc = ({ document, setRows }) => {
                                 document={document}
                                 styles={contentStyle}
                             />
-                            <div className="d-flex aling-items-center w-100 justify-content-center">
+                            <div className="d-table aling-items-center w-100 justify-content-center text-center">
+                                <span>
+                                    <i className="fas fa-tasks"></i>{" "}
+                                    {i18n.language === "th"
+                                        ? "สถานะเอกสาร"
+                                        : "status document"}
+                                </span>
                                 <StepProgress
                                     steps={document.max_state}
                                     stateNow={document.state}

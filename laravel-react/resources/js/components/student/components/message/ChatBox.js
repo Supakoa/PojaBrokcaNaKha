@@ -6,7 +6,7 @@ import { postMessage } from "../../../middleware/axios/postMessage";
 import ListMessages from "./list-message";
 import { useSelector } from "react-redux";
 
-const ChatBox = ({ show, closeMessage, _messages, setMessages,setCount_unread }) => {
+const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
     const [_newMsg, setNewMsg] = React.useState("");
     const handleChange = e => {
         setNewMsg(e.target.value);
@@ -25,9 +25,7 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages,setCount_unread })
             });
 
             if (
-                _messages.findIndex(
-                    value => value.id === new_message.id
-                ) === -1
+                _messages.findIndex(value => value.id === new_message.id) === -1
             ) {
                 new_message["admin_id"] = null;
                 _messages.push(new_message);
@@ -37,7 +35,6 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages,setCount_unread })
         var element = document.getElementById("chatBody");
         element.scrollTop = element.scrollHeight;
     };
-
 
     const { t } = useTranslation();
 
@@ -54,8 +51,8 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages,setCount_unread })
             }`}
         >
             <Card style={{ width: "100%", maxWidth: "350px" }}>
-                <Card.Title className="clearfix mb-0 px-1 py-1">
-                    <h6 className="float-left mb-0">
+                <Card.Title className="clearfix mb-0 px-1 pl-2 py-2">
+                    <h6 className="float-left mb-0 py-2">
                         {t("students.message.title")}{" "}
                         <i className="fas fa-comment-dots"></i>
                     </h6>

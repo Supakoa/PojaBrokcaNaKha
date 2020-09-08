@@ -20,7 +20,7 @@ function NavHeader({ url }) {
     return (
         <Navbar bg="info" expand="sm">
             <Container fluid>
-                <Navbar.Brand href={url} className="text-light">
+                <Navbar.Brand href={url} className="text-light text-truncate">
                     <img
                         src={Logo}
                         width="35"
@@ -32,11 +32,14 @@ function NavHeader({ url }) {
                 <Navbar.Toggle aria-controls="petition-nav" />
                 <Navbar.Collapse id="petition-nav">
                     <Nav>
-                        <Link className="nav-link text-light" to={`${url}`}>
+                        <Link
+                            className="nav-link text-light text-truncate"
+                            to={`${url}`}
+                        >
                             {t("students.navbar-top.home")}
                         </Link>
                         <Link
-                            className="nav-link text-light"
+                            className="nav-link text-light text-truncate"
                             to={`${url}/profile`}
                         >
                             {t("students.navbar-top.profile")}

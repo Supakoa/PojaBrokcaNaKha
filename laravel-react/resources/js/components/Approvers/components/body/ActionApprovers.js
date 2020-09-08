@@ -26,18 +26,27 @@ const ActionApprovers = ({
     const { t, i18n } = useTranslation();
     let _history = useHistory();
     const [_loading, setLoading] = React.useState(false);
+    const [_loadingImg, setLoadingImg] = React.useState(false);
 
     const handleChange = async e => {
         const { id, value, type, files } = e.target;
         if (type === "file") {
             const file = files[0];
-
-            const _pathImg = await uploadsReturnFile(file, localStorage._authLocal);
+            setLoadingImg(true);
+            const _pathImg = await uploadsReturnFile(
+                file,
+                localStorage._authLocal
+            );
             if (_pathImg) {
                 setPivot({
                     ..._pivot,
                     [id]: _pathImg
                 });
+                Swal.fire("สำเร็จ !! ", "อัพไฟล?สำเร็จ", "success").then(
+                    res => {
+                        if (res.value) setLoadingImg(false);
+                    }
+                );
             }
         } else {
             setPivot({
@@ -175,18 +184,24 @@ const ActionApprovers = ({
                             md={6}
                             controlId="return_file"
                         >
-                            <Form.Label>
+                            {/* <Form.Label>
                                 {t("approvers.action.file")}
-                            </Form.Label>
+                            </Form.Label> */}
                             <Form.File
                                 onChange={handleChange}
                                 className="position-relative"
-                                custom
                                 placeholder="eiei"
                                 id="return_file"
                                 label={t("approvers.action.place-file")}
                                 name="file"
                             />
+                            <Form.Text>
+                                {_loadingImg
+                                    ? i18n.language === "th"
+                                        ? "กำลังโหลดไฟล์..."
+                                        : "File Loading..."
+                                    : ""}
+                            </Form.Text>
                         </Form.Group>
                     </Col>
                 </Row>
