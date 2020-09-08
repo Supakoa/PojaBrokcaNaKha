@@ -118,14 +118,25 @@ class FormsController extends Controller
         if ($groups->count() > 0)
             return response()->json("ซ้ำ", 406);
         $form->groups()->attach($request->input("group_id"), ["state" => $request->input("state")]);
-        return $form->groups;
+
+//        return $form->groups;
+        return $this->getGroupsByState($form);
     }
 
     public
     function deleteGroup(Form $form, Request $request)
     {
         $form->groups()->detach($request->input("group_id"));
-        return $form->groups;
+        return $this->getGroupsByState($form);
+    }
+
+    public function getGroupsByState(Form $form){
+        $arrays = array();
+        for ($i = 0 ;$i< $form->all_state;$i++){
+            $array = $form->groups()->wherePivot("state", $i+1)->get();
+            array_push($arrays,$array);
+        }
+        return $arrays;
     }
 
 
