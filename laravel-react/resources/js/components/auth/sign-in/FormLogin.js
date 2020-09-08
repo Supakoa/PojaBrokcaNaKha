@@ -52,7 +52,7 @@ function FormLogin(props) {
                     onChange={props.inputValue}
                 />
             </Form.Group>
-            <Container className="d-flex justify-content-between align-items-end">
+            <Container className="d-table d-md-flex justify-content-between align-items-end">
                 <Form.Group as={Row}>
                     <Button variant="primary" type="submit">
                         {t("sign.component.btn")}

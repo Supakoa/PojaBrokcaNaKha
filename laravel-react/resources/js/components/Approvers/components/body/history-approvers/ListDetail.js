@@ -17,60 +17,66 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                         : "Aprover History"}
                     :
                 </h5>
-                {approvers.map((approver, idx) => {
-                    return (
-                        <Row key={idx}>
-                            <Col lg={6} md={6}>
-                                <dl className="row mb-0">
-                                    <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
-                                        {translate(
-                                            "approvers.show-detail.user.fullname"
-                                        )}
-                                        :
-                                    </dt>
-                                    <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
-                                        {`${idx + 1}${approver.title} ${
-                                            approver.first_name
-                                        } ${approver.last_name}`}
-                                    </dd>
-                                </dl>
-                                <dl className="row mb-0">
-                                    <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
-                                        {i18n.language === "th"
-                                            ? "สถานะ"
-                                            : "Status"}
-                                        :
-                                    </dt>
-                                    <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
-                                        <StatusBadgeDoc
-                                            status={approver.pivot.status}
-                                        />
-                                    </dd>
-                                </dl>
-                            </Col>
-                            <Col
-                                md={6}
-                                lg={6}
-                                className="d-flex align-items-center justify-content-center"
-                            >
-                                {approver.license ? (
-                                    <ModalImage src={approver.license} />
-                                ) : (
-                                    <Link
-                                        style={{ fontSize: "22px" }}
-                                        className="text-secondary"
-                                        to="/Approvers/profile"
-                                    >
-                                        <i className="far fa-image"></i>{" "}
-                                        {i18n.language === "th"
-                                            ? "ไม่พบรูป"
-                                            : "image not found"}
-                                    </Link>
-                                )}
-                            </Col>
-                        </Row>
-                    );
-                })}
+                {!!approvers || approvers.length === 0 ? (
+                    <div className="text-center">
+                        <i className="fas fa-signature"></i>
+                    </div>
+                ) : (
+                    approvers.map((approver, idx) => {
+                        return (
+                            <Row key={idx}>
+                                <Col lg={6} md={6}>
+                                    <dl className="row mb-0">
+                                        <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
+                                            {translate(
+                                                "approvers.show-detail.user.fullname"
+                                            )}
+                                            :
+                                        </dt>
+                                        <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
+                                            {`${idx + 1}${approver.title} ${
+                                                approver.first_name
+                                            } ${approver.last_name}`}
+                                        </dd>
+                                    </dl>
+                                    <dl className="row mb-0">
+                                        <dt className="col-lg-3 col-md-3 col-sm-3 pr-0">
+                                            {i18n.language === "th"
+                                                ? "สถานะ"
+                                                : "Status"}
+                                            :
+                                        </dt>
+                                        <dd className="col-lg-3 col-md-3 col-sm-3 px-0">
+                                            <StatusBadgeDoc
+                                                status={approver.pivot.status}
+                                            />
+                                        </dd>
+                                    </dl>
+                                </Col>
+                                <Col
+                                    md={6}
+                                    lg={6}
+                                    className="d-flex align-items-center justify-content-center"
+                                >
+                                    {approver.license ? (
+                                        <ModalImage src={approver.license} />
+                                    ) : (
+                                        <Link
+                                            style={{ fontSize: "22px" }}
+                                            className="text-secondary"
+                                            to="/Approvers/profile"
+                                        >
+                                            <i className="far fa-image"></i>{" "}
+                                            {i18n.language === "th"
+                                                ? "ไม่พบรูป"
+                                                : "image not found"}
+                                        </Link>
+                                    )}
+                                </Col>
+                            </Row>
+                        );
+                    })
+                )}
             </Card.Body>
         </Card>
     );

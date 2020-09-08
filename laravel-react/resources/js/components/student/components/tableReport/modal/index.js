@@ -49,8 +49,6 @@ const UserModalDoc = ({ document, setRows }) => {
             }
         });
 
-    // console.log(document);
-
     return (
         <div>
             <Button variant="info" size="sm" onClick={() => setShow(true)}>

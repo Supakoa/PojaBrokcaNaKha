@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import ConvertDate from "../../../../middleware/method/convertDate";
 import StatusBadgeDoc from "../statusDocument";
+import ListDetailApprovers from "../../../../Approvers/components/body/history-approvers/ListDetail";
 
 const DetailDocument = ({ document, styles }) => {
     const { t } = useTranslation();
     const _userName = useSelector(state => state.userState);
+
     return (
         <Container style={styles}>
             <dl className="row border-left border-right border-bottom rounded">
@@ -124,6 +126,8 @@ const DetailDocument = ({ document, styles }) => {
                     {document.note !== null ? document.note : "-"}
                 </Col>
             </dl>
+
+            <ListDetailApprovers translate={t} approvers={document.approver} />
         </Container>
     );
 };

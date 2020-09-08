@@ -26,7 +26,9 @@ export default function SignOutBtn(props) {
             to="/login"
             onClick={() => _signOut(_props)}
         >
-            <i className="fas fa-sign-out-alt"></i> {t("sign-out")}
+            <span>
+                <i className="fas fa-sign-out-alt"></i> {t("sign-out")}
+            </span>
         </Link>
     );
 }

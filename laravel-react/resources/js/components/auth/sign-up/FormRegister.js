@@ -1,12 +1,12 @@
 import React from "react";
 import LogoRegis from "./LogoReagis";
-import { Col, Form, Button, Spinner, Row } from "react-bootstrap";
+import { Col, Form, Button, Spinner, Row, InputGroup } from "react-bootstrap";
 import validateIndex from "../../middleware/validate";
 import { useTranslation } from "react-i18next";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
 
 export default function FormRegister() {
     const { t, i18n } = useTranslation();
@@ -18,8 +18,11 @@ export default function FormRegister() {
     const [password, setPassword] = React.useState(false);
     const [confirm, setConfirm] = React.useState(false);
     const [_loading, setLoading] = React.useState(true);
+    const [_loadMajor, setLoadMajor] = React.useState(false);
     const [_validator, setValidator] = React.useState(false);
     const [_forms, serForms] = React.useState({});
+    const arrTitleTh = ["นาย", "นาง", "นางสาว"];
+    const arrTitleEng = ["Mr.", "Miss."];
 
     const fetchFaculties = async () => {
         await axios.get(`${_URL}/api/faculties`, {}).then(res => {
@@ -33,11 +36,13 @@ export default function FormRegister() {
             .get(`${_URL}/api/faculties/${Number(_facId)}/majors`)
             .then(res => {
                 setMajors(res.data);
+                setLoadMajor(false);
             });
     };
 
     const handleChanges = event => {
         const { name, value } = event.target;
+        let _string = "";
         if (name == "c_password" || name == "password") {
             if (name == "password" && value.length >= 6) {
                 setPassword(true);
@@ -47,24 +52,30 @@ export default function FormRegister() {
                 [name]: value
             });
         } else {
-            const valid = validateIndex(name, value);
+            if (name === "email") {
+                _string = `s${value}@ssru.ac.th`;
+            } else {
+                _string = value;
+            }
+            const valid = validateIndex(name, _string);
 
             setValidator({
                 ..._validator,
                 [name]: !valid
             });
             if (name == "faculty_id") {
-                setSelectedFaculty(value);
+                setSelectedFaculty(_string);
+                setLoadMajor(true);
             } else if (name == "major_id") {
-                setSelectedMajor(value);
+                setSelectedMajor(_string);
                 serForms({
                     ..._forms,
-                    [name]: value
+                    [name]: _string
                 });
             } else {
                 serForms({
                     ..._forms,
-                    [name]: value
+                    [name]: _string
                 });
             }
         }
@@ -72,6 +83,7 @@ export default function FormRegister() {
 
     const handleOnClick = async e => {
         let check = false;
+        setLoading(false);
         check = Object.values(_forms).length < 8;
         setConfirm(check && !password);
         if (!check && password) {
@@ -84,6 +96,7 @@ export default function FormRegister() {
                         res => {
                             if (res.value) {
                                 _history.push("/login");
+                                setLoading(true);
                             }
                         }
                     );
@@ -98,6 +111,7 @@ export default function FormRegister() {
             _fetchMajors(selectedFaculty);
         }
     }, [_facs, selectedFaculty]);
+
     return (
         <Form className="p-4  m-auto">
             <LogoRegis />
@@ -106,10 +120,40 @@ export default function FormRegister() {
             </Form.Text>
             <Form.Row className="mt-4">
                 <Form.Group as={Col} controlId="title" sm={2} md={3} lg={3}>
-                    <Form.Label >
-                        {t("user.title")}
-                    </Form.Label>
+                    <Form.Label>{t("user.title")}</Form.Label>
                     <Form.Control
+                        required
+                        as="select"
+                        isInvalid={
+                            _validator.title
+                                ? _validator.title
+                                : confirm && !!!_forms.title
+                        }
+                        name="title"
+                        onChange={handleChanges}
+                    >
+                        <option value="0">
+                            {i18n.language === "th"
+                                ? "เลือกคำนำหน้า"
+                                : "Choose title"}
+                        </option>
+                        {i18n.language === "th"
+                            ? arrTitleTh.map((item, idx) => {
+                                  return (
+                                      <option key={idx} value={item}>
+                                          {item}
+                                      </option>
+                                  );
+                              })
+                            : arrTitleEng.map((item, idx) => {
+                                  return (
+                                      <option key={idx} value={item}>
+                                          {item}
+                                      </option>
+                                  );
+                              })}
+                    </Form.Control>
+                    {/* <Form.Control
                         required
                         type="text"
                         placeholder={t("user.title")}
@@ -118,7 +162,7 @@ export default function FormRegister() {
                             _validator.title ? _validator.title : confirm && !!!_forms.title
                         }
                         onChange={handleChanges}
-                    />
+                    /> */}
                 </Form.Group>
                 <Form.Group as={Col} controlId="first_name">
                     <Form.Label>{t("user.firstName")}</Form.Label>
@@ -212,9 +256,36 @@ export default function FormRegister() {
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} controlId="email">
+                <Form.Group as={Col} md={12} lg={8} controlId="email">
                     <Form.Label>{t("user.email")}</Form.Label>
-                    <Form.Control
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">
+                                s
+                            </InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control
+                            placeholder="59xxxxxxxx"
+                            required
+                            maxLength={11}
+                            type="text"
+                            isInvalid={
+                                _validator.email
+                                    ? _validator.email
+                                    : confirm && !!!_forms.email
+                            }
+                            name="email"
+                            onChange={handleChanges}
+                            aria-describedby="basic-addon1"
+                        />
+                        <InputGroup.Append>
+                            <InputGroup.Text id="basic-addon1">
+                                @ssru.ac.th
+                            </InputGroup.Text>
+                        </InputGroup.Append>
+                    </InputGroup>
+
+                    {/* <Form.Control
                         required
                         type="email"
                         isInvalid={
@@ -225,13 +296,13 @@ export default function FormRegister() {
                         placeholder="s59xxxxxxxx@ssru.ac.th"
                         name="email"
                         onChange={handleChanges}
-                    />
+                    /> */}
                     <Form.Text className="text-muted pl-2">
                         {t("students.forms.mail.text")}
                     </Form.Text>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="telephone">
+                <Form.Group as={Col} md={6} controlId="telephone">
                     <Form.Label>{t("user.phoneNumber")}</Form.Label>
                     <Form.Control
                         maxLength={10}
@@ -280,29 +351,37 @@ export default function FormRegister() {
 
                 <Form.Group as={Col} controlId="major_id">
                     <Form.Label>{t("user.major")}</Form.Label>
-                    <Form.Control
-                        required
-                        as="select"
-                        custom
-                        name="major_id"
-                        isInvalid={
-                            _validator.major_id
-                                ? _validator.major_id
-                                : confirm && selectedMajor == 0
-                        }
-                        onChange={handleChanges}
-                        disabled={selectedFaculty === 0}
-                        value={selectedMajor > 0 ? selectedMajor : 0}
-                    >
-                        <option value="0">{t("user.major")}</option>
-                        {_majors.map((item, idx) => {
-                            return (
-                                <option key={idx} value={item.id}>
-                                    {item.name}
-                                </option>
-                            );
-                        })}
-                    </Form.Control>
+                    {selectedFaculty !== 0 &&
+                    _loadMajor &&
+                    _majors.length === 0 ? (
+                        <div className="py-2 px-3">
+                            <Spinner animation="border" size="sm" />
+                        </div>
+                    ) : (
+                        <Form.Control
+                            required
+                            as="select"
+                            custom
+                            name="major_id"
+                            isInvalid={
+                                _validator.major_id
+                                    ? _validator.major_id
+                                    : confirm && selectedMajor == 0
+                            }
+                            onChange={handleChanges}
+                            disabled={selectedFaculty === 0}
+                            value={selectedMajor > 0 ? selectedMajor : 0}
+                        >
+                            <option value="0">{t("user.major")}</option>
+                            {_majors.map((item, idx) => {
+                                return (
+                                    <option key={idx} value={item.id}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
+                        </Form.Control>
+                    )}
                 </Form.Group>
             </Form.Row>
             <Row>

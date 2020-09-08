@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Container, Button } from "react-bootstrap";
+import { Form, Container, Button, Spinner } from "react-bootstrap";
 import SelectOfDocApi from "./formTemplates/SelectOfDocApi";
 import SelectorOfDoc from "./formTemplates/SelectorOfDoc";
 import FileOfDoc from "./formTemplates/FileOfDoc";
@@ -31,6 +31,7 @@ const TemplateDocuments = ({
     const [_isRequire, setIsRequire] = React.useState({});
     const [_numRequired, setNumRequired] = React.useState(0);
     const [_isSubmit, setIsSubmit] = React.useState(false);
+    const [_isLoad, setIsLoad] = React.useState(false);
     const [_document, setDocument] = React.useState({});
 
     const handleChangeForm = async e => {
@@ -43,6 +44,7 @@ const TemplateDocuments = ({
 
             const _pathImg = await uploadsImage(file, localStorage._authLocal);
             if (_pathImg) {
+                setIsLoad(true);
                 const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
@@ -57,6 +59,8 @@ const TemplateDocuments = ({
                 Toast.fire({
                     icon: "success",
                     title: "Upload Success !!"
+                }).then(() => {
+                    setIsLoad(false);
                 });
                 setDocument({
                     ..._document,
@@ -75,6 +79,7 @@ const TemplateDocuments = ({
     const handleSending = async () => {
         let _arry = [];
         let _newDoc = {};
+        setIsLoad(true);
         if (
             Object.keys(_isRequire).length === _numRequired ||
             !!statusDocument
@@ -124,6 +129,7 @@ const TemplateDocuments = ({
                             });
                             if (_newDocs) {
                                 _dispatch(userDocument(_newDocs));
+                                setIsLoad(false);
                                 _history.push("/student");
                                 if (!!statusDocument) setRows([]);
                             }
@@ -132,6 +138,7 @@ const TemplateDocuments = ({
                 );
             }
         } else {
+            setIsLoad(false);
             setIsSubmit(true);
         }
     };
@@ -242,10 +249,20 @@ const TemplateDocuments = ({
                     }
                 })}
             </Form.Row>
-            <Button variant="info" onClick={handleSending}>
-                {i18n.language === "th" ? "ส่ง" : "send"}{" "}
-                <i className="fas fa-paper-plane"></i>
-            </Button>
+
+            {_isLoad ? (
+                <Spinner animation="border" size="sm" />
+            ) : (
+                <Button
+                    variant="info"
+                    disabled={_isLoad}
+                    onClick={handleSending}
+                >
+                    {" "}
+                    {i18n.language === "th" ? "ส่ง" : "send"}{" "}
+                    <i className="fas fa-paper-plane"></i>{" "}
+                </Button>
+            )}
         </Form>
     );
 };
