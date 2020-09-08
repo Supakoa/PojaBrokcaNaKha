@@ -78,11 +78,11 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                             {approver.pivot.return_file !==
                                             null ? (
                                                 <a
-                                                    href={ _URL+"/public/storage/"+
-                                                        approver.pivot
-                                                            .return_file
+                                                    href={"/storage/"+
+                                                    approver.pivot
+                                                        .return_file
                                                     }
-                                                    download={"return_file"}
+                                                    download
                                                 >
                                                     {i18n.language === "th"
                                                         ? "โหลด"
