@@ -18,7 +18,11 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                         : "Aprover History"}
                     :
                 </h5>
-                {approvers.length === 0 ? (
+                {!!approvers ? (
+                    <div className="text-center">
+                        <i className="fas fa-signature"></i>
+                    </div>
+                ) : approvers.length === 0 ? (
                     <div className="text-center">
                         <i className="fas fa-signature"></i>
                     </div>
@@ -78,11 +82,11 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                             null ? (
                                                 <a
                                                     href={
-                                                        _URL +
-                                                        "/public/storage/" +
+                                                        "/storage/" +
                                                         approver.pivot
                                                             .return_file
                                                     }
+                                                    download
                                                 >
                                                     {i18n.language === "th"
                                                         ? "โหลด"
