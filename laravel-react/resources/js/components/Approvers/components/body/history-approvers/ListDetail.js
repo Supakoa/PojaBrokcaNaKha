@@ -82,10 +82,12 @@ const ListDetailApprovers = ({ translate, approvers }) => {
                                                         approver.pivot
                                                             .return_file
                                                     }
+                                                    download={"return_file"}
                                                 >
                                                     {i18n.language === "th"
                                                         ? "โหลด"
                                                         : "Download"}
+
                                                 </a>
                                             ) : (
                                                 "-"
