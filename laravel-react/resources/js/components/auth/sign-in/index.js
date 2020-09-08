@@ -135,7 +135,9 @@ export default function SignIn() {
                             style={{ top: "0", right: "0" }}
                             className="position-absolute py-5 px-5 d-flex align-items-center"
                         >
-                            <span className="px-2">{t("sign.language")} </span>{" "}
+                            <span className="px-2 d-sm-none d-md-block">
+                                {t("sign.language")}{" "}
+                            </span>{" "}
                             <SwitchingLanguageBtn className="nav-link float-right" />
                         </div>
                         <section className="d-table p-4 w-75 m-auto">

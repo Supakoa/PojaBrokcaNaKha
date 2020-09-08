@@ -98,8 +98,9 @@ const ActionApprovers = ({
                                 "ผิดพลาด!",
                                 "การตรวจเรียบร้อยผิดพลาด กรุณาลองอีกครั้ง!",
                                 "error"
-                            );
+                            ).then(() => setLoading(false));
                         }
+                        setLoading(false);
                     });
                 }
             });

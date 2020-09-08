@@ -63,7 +63,9 @@ export default function ReportForm() {
                     );
                 })
             ) : (
-                <Loading />
+                <div className="py-5 d-flex align-items-center justify-content-center">
+                    <Loading />
+                </div>
             )}
         </Accordion>
     );
