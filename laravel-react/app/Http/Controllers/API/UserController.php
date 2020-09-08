@@ -43,19 +43,32 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'role_id' => 'required|numeric',
-            'major_id' => 'required|numeric',
-            'student_id' => 'required|unique:users|digits:11|numeric',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'telephone' => 'required|digits:10|numeric',
-            'c_password' => 'required|same:password',
+        if ($request->get("role_id") == 3){
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'role_id' => 'required|numeric',
+                'major_id' => 'required|numeric',
+                'student_id' => 'required|unique:users|digits:11|numeric',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6',
+                'telephone' => 'required|digits:10|numeric',
+                'c_password' => 'required|same:password',
+            ]);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'role_id' => 'required|numeric',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|unique:users',
+                'password' => 'required',
+                'telephone' => 'required|digits:10|numeric',
+                'c_password' => 'required|same:password',
+            ]);
+        }
 
-        ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
