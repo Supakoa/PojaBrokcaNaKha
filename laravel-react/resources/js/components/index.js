@@ -19,11 +19,22 @@ import { useTranslation } from "react-i18next";
 
 function App() {
     let _isAuthLocal = localStorage.getItem("_authLocal");
-    const { i18n } = useTranslation();
+    // const { i18n } = useTranslation();
     return (
-        <Router>
+        <Router
+            getUserConfirmation={(message, callback) => {
+                // this is the default behavior
+                const allowTransition = window.confirm(message);
+                callback(allowTransition);
+            }}
+        >
             <Switch>
-                <Route path="/login" component={SignIn} />
+                <Route exact path="/">
+                    <Redirect
+                        to={!_isAuthLocal ? "/login" : clearLocalStorge()}
+                    />
+                </Route>
+                <Route exact path="/login" component={SignIn} />
                 <Route path="/register" component={SignUp} />
                 <PrivateRoute path="/admin">
                     <AdminPage />
@@ -34,11 +45,7 @@ function App() {
                 <PrivateRoute path="/Approvers">
                     <Approvers />
                 </PrivateRoute>
-                <Route path="/">
-                    <Redirect
-                        to={!_isAuthLocal ? "/login" : clearLocalStorge()}
-                    />
-                </Route>
+
                 <Route path="*" component={NoMatch} />
             </Switch>
         </Router>
