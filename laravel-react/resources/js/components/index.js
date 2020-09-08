@@ -19,9 +19,15 @@ import { useTranslation } from "react-i18next";
 
 function App() {
     let _isAuthLocal = localStorage.getItem("_authLocal");
-    const { i18n } = useTranslation();
+    // const { i18n } = useTranslation();
     return (
-        <Router>
+        <Router
+            getUserConfirmation={(message, callback) => {
+                // this is the default behavior
+                const allowTransition = window.confirm(message);
+                callback(allowTransition);
+            }}
+        >
             <Switch>
                 <Route exact path="/">
                     <Redirect
