@@ -64,34 +64,15 @@ export const AddGroup = (props) => {
                 )}`
             }
         }).then((res) => {
-            console.log('res.data', res.data)
-            let tmp_lastRes = res.data[res.data.length - 1]
-            let indexForm = tmp_reduxShowForm.findIndex(item => {
-                return item.id == response.id
-            })
-            let tmp_groupStep = tmp_reduxShowForm[indexForm].groups
-            let tmp_lastIndex = (tmp_lastRes.pivot.state - 1)
-
-            console.log('step', step)
-            console.log('tmp_groupStep', tmp_groupStep)
-            console.log('tmp_lastIndex', tmp_lastIndex)
-            console.log('tmp_reduxShowForm', tmp_reduxShowForm)
-
-            tmp_groupStep[tmp_lastIndex].push(tmp_lastRes)
-
-            let tmp_showForm = tmp_reduxShowForm
-            tmp_showForm[step].groups = [
-                ...tmp_groupStep
-            ]
-
-            console.log('tmp_showForm naja', tmp_showForm)
-
-            // setGroupSteps(tmp_groupStep)
-
-            dispatch(showFormsAction("INIT_SHOW_FORM", tmp_showForm.data))
-
-
             if (res.status == 200) {
+                let tmp_showForm = tmp_reduxShowForm
+
+                tmp_showForm[(response.id - 1)].groups = res.data
+
+                // setGroupSteps(tmp_groupStep)
+
+                dispatch(showFormsAction("INIT_SHOW_FORM", tmp_showForm))
+
                 Toast.fire({
                     icon: 'success',
                     title: 'เพิ่มกลุ่มในเส้นทางเอกสารสำเร็จ'

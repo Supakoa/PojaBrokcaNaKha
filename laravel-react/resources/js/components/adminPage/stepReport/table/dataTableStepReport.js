@@ -32,7 +32,6 @@ const dataTableStepReport = (setData) => {
 
     // function
     const fetchRowData = _rows => {
-        console.log('_rows', _rows)
         const _row = _rows.map((res, idx) => {
             return {
                 id: res.id,
