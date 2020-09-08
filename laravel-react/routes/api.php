@@ -66,11 +66,16 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('groups/{group}/users/delete','GroupsController@deleteUser');
 
     Route::post("/uploads",function (Request $request){
-
+        
         $imagePath = request('image')->store('uploads','public');
         $image = Image::make(public_path("storage/{$imagePath}"));
         $image->save();
         return  $imagePath;
+
+    });
+    Route::post("/uploadsReturnFile",function (Request $request){
+
+        return request('image')->store('uploads','public');
 
     });
     Route::post("/uploadNews",function (Request $request){
