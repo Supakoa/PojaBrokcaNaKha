@@ -220,8 +220,9 @@ export const StepColors = ({
         // console.log('redux_showForm', redux_showForm)
         // console.log('redux_showForm[response.id - 1]', redux_showForm.data[response.id - 1])
 
+        // เมื่อก่อนใช้ groupSteps
         if (groupSteps) {
-            return groupSteps.map((item, index) => {
+            return redux_showForm.data[response.id - 1].groups.map((item, index) => {
                 if (index + 1 <= _num) {
                     return (
                         <div key={index}>
