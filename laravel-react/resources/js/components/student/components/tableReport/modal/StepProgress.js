@@ -1,7 +1,7 @@
 import React from "react";
 
 const FirstDot = ({ value, now, status }) => {
-    if (now <= value - 1 && status !== "approved") {
+    if (now <= value && status === "cancelled") {
         return (
             <i
                 style={{ fontSize: "50px" }}
@@ -13,7 +13,7 @@ const FirstDot = ({ value, now, status }) => {
             <i
                 style={{ fontSize: "50px" }}
                 className={`far fa-check-circle ${
-                    now < value ? `text-secondary` : `text-success`
+                    now === value ? `text-secondary` : `text-success`
                 }`}
             ></i>
         );
@@ -48,8 +48,8 @@ const DotBorder = ({ value, now, status }) => {
                         : `bg-secondary`
                 }`}
             />
-            {(now === value - 1 && status === "cancelled") ||
-            (now === value - 1 && status === "rejected") ? (
+            {(now === value && status === "cancelled") ||
+            (now === value && status === "rejected") ? (
                 <i
                     style={{ fontSize: "50px" }}
                     className="far fa-times-circle text-danger"
@@ -58,7 +58,7 @@ const DotBorder = ({ value, now, status }) => {
                 <div
                     style={{ height: "50px", minWidth: "50px" }}
                     className={`shadow rounded-circle text-center py-2 ${
-                        now > value
+                        now - 1 > value
                             ? `bg-success`
                             : status !== "pending"
                             ? colorSteps(status)

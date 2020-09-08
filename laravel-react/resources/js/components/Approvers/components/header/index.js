@@ -68,7 +68,9 @@ const HeaderApprover = () => {
                                     {`${_user.title} ${_user.first_name} ${_user.last_name}`}
                                 </Dropdown.Toggle>
                             ) : (
-                                <Spinner animation="border" size="sm" />
+                                <div className="py-2 px-3">
+                                    <Spinner animation="border" size="sm" />
+                                </div>
                             )}
 
                             <Dropdown.Menu className="bg-info">
