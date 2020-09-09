@@ -1,4 +1,5 @@
 import React from "react";
+import "./i18n";
 import ReactDOM from "react-dom";
 import App from "./components";
 import "./notZoom.css";
@@ -6,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { createStore } from "redux";
 import allReducers from "./redux/reducers";
 import { Provider } from "react-redux";
-import "./i18n";
 import { Container, Spinner } from "react-bootstrap";
 
 const store = createStore(
@@ -21,7 +21,8 @@ const LoadSuspense = () => {
             className="d-flex align-items-center justify-content-center"
         >
             <span>
-                <Spinner animation="border" variant="info" size="sm" /> Loading...
+                <Spinner animation="border" variant="info" size="sm" />{" "}
+                Loading...
             </span>
         </Container>
     );

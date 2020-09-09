@@ -26,6 +26,6 @@
         <div id="root"></div>
 
 
-    <script src="{{ asset('js/app.js')}}"></script>
+    <script language="JavaScript" src="{{ mix('js/app.js')}}"></script>
     </body>
 </html>
