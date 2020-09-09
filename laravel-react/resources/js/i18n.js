@@ -16,9 +16,10 @@ i18n.use(Backend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        fallbackLng: "en",
+        fallbackLng: "th",
 
         ns: ["translations"],
+        lng: ["th", "en"],
         defaultNS: "translations",
         debug: true,
         interpolation: {
@@ -26,6 +27,9 @@ i18n.use(Backend)
         },
         react: {
             wait: true
+        },
+        backend: {
+            loadPath: "/locales/{{lng}}/{{ns}}.json"
         }
     });
 export default i18n;
