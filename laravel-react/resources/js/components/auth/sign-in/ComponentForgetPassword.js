@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import validateIndex from "../../middleware/validate";
@@ -13,6 +13,7 @@ function ComponentForgetPassword(props) {
     const [isDisBtn, setIsDisBtn] = React.useState(true);
     const [isInValid, setIsInValid] = React.useState(false);
     const [isSend, setIssend] = React.useState(false);
+
     const language = i18n.language == "th";
 
     const handleForget = e => {
@@ -75,11 +76,14 @@ function ComponentForgetPassword(props) {
                     placeholder={t("sign.sign-in.username")}
                 />
                 <Form.Text>
-                    {isSend
-                        ? i18n.language === "th"
-                            ? "กำลังส่ง..."
-                            : "Sending..."
-                        : ""}
+                    {isSend ? (
+                        <span>
+                            <Spinner animation="border" size="sm" />{" "}
+                            {language ? "กำลังส่ง..." : "Sending..."}
+                        </span>
+                    ) : (
+                        ""
+                    )}
                 </Form.Text>
                 <Form.Control.Feedback type="invalid">
                     {language ? "อีเมลไม่ถูกต้อง" : "Invalid email"} !!

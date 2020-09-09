@@ -1,19 +1,24 @@
 import React, { Component, useEffect } from "react";
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Button, Form, Spinner } from "react-bootstrap";
 import TableUser from "./table";
 import ModalUser from "../modals/ModalUser";
 import Axios from "axios";
-import { newsActions, initShowUsers, showFacultyAction } from "../../../redux/actions";
+import {
+    newsActions,
+    initShowUsers,
+    showFacultyAction
+} from "../../../redux/actions";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 // import fileDownload from "js-file-download";
-import {_URL} from "../../middleware/URL";
+import { _URL } from "../../middleware/URL";
 // import fileDownload from "js-file-download";
 
-export default function User({t}) {
+export default function User({ t }) {
     // import module
     const { i18n } = useTranslation();
+    const [isSend, setIsSend] = React.useState(false);
 
     // props
 
@@ -21,89 +26,86 @@ export default function User({t}) {
     const [nameFile, setNameFile] = React.useState("");
 
     // redux
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     // local variable
 
     // function
     const templateUser = () => {
-         Axios.get(`${_URL}/api/users/import`, {
+        Axios.get(`${_URL}/api/users/import`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    "_authLocal"
-                )}`
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(async res => {
-             console.log(res.data)
+            console.log(res.data);
 
-             fileDownload(res.data, 'templateUser.xlsx');
+            fileDownload(res.data, "templateUser.xlsx");
         });
-    }
+    };
 
     const exportUsers = () => {
-             Axios.get(`${_URL}/api/users/export`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(
-                        "_authLocal"
-                    )}`
-                }
-            }).then(async res => {
-                 console.log(res.data)
-                 fileDownload(res.data, 'exportUsers.xlsx');
-            });
-    }
+        Axios.get(`${_URL}/api/users/export`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
+            }
+        }).then(async res => {
+            console.log(res.data);
+            fileDownload(res.data, "exportUsers.xlsx");
+        });
+    };
 
-    const importUsers = (e) => {
-        console.log(e.target.files[0]);
+    const importUsers = e => {
         let formData = new FormData();
         formData.append("file", e.target.files[0]);
         setNameFile(e.target.files[0].name);
+        setIsSend(true);
         Axios.post(`${_URL}/api/users/import`, formData, {
             headers: {
                 Authorization: `Bearer ${localStorage._authLocal}`,
                 "Content-Type": "application/json",
                 "Retry-After": 3600
             }
-        }).then(res => {
-            if (res.status == 200) {
-                Swal.fire("success", "import Success", "success");
-            } else {
-                Swal.fire("Error", "import Error", "error");
-            }
-        });
+        })
+            .then(res => {
+                if (res.status == 200) {
+                    Swal.fire("success", "import Success", "success").then(() =>
+                        setIssend(false)
+                    );
+                } else {
+                    Swal.fire("Error", "import Error", "error").then(() =>
+                        setIssend(false)
+                    );
+                }
+            })
+            .then(() => setIssend(false));
     };
 
     const initUsers = () => {
         Axios.get(`${_URL}/api/users`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    "_authLocal"
-                )}`
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
-        })
-        .then(res => {
+        }).then(res => {
             const { success } = res.data;
             dispatch(initShowUsers(success));
         });
-    }
+    };
 
     const initShowFaculties = () => {
         Axios.get(`${_URL}/api/faculties`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                    "_authLocal"
-                )}`
+                Authorization: `Bearer ${localStorage.getItem("_authLocal")}`
             }
         }).then(res => {
-            dispatch(showFacultyAction("INIT_SHOW_FACULTY", res.data.success))
-        })
-    }
+            dispatch(showFacultyAction("INIT_SHOW_FACULTY", res.data.success));
+        });
+    };
 
     // useEffect
     useEffect(() => {
-        initUsers()
-        initShowFaculties()
-    }, [])
+        initUsers();
+        initShowFaculties();
+    }, []);
 
     // return component
 
@@ -125,8 +127,11 @@ export default function User({t}) {
                 <div className="d-flex align-items-center justify-content-between">
                     <Form.Group>
                         <Form.Label>
-                            <i className="fas fa-file-import"></i>
-                            {" "}{(i18n.language === "th") ? "นำเข้าไฟล์" : "import file"}{" "} - {nameFile}
+                            <i className="fas fa-file-import"></i>{" "}
+                            {i18n.language === "th"
+                                ? "นำเข้าไฟล์"
+                                : "import file"}{" "}
+                            - {nameFile}
                         </Form.Label>
                         <Form.File
                             // className="position-relative" TODO: not to use
@@ -134,6 +139,18 @@ export default function User({t}) {
                             onChange={importUsers}
                             id="validationFormik107"
                         />
+                        <Form.Text>
+                            {isSend ? (
+                                <span>
+                                    <Spinner animation="border" size="sm" />{" "}
+                                    {i18n.language === "th"
+                                        ? "กำลังส่ง..."
+                                        : "Sending..."}
+                                </span>
+                            ) : (
+                                ""
+                            )}
+                        </Form.Text>
                     </Form.Group>
 
                     <div className="w-100 d-flex align-items-center justify-content-end py-2">
@@ -146,7 +163,8 @@ export default function User({t}) {
                             href={"../api/users/export"}
                             onClick={exportUsers}
                         >
-                            <i className="fas fa-file-export"></i>{" "}{i18n.language === "th" ? "นำออก" : "Export"}
+                            <i className="fas fa-file-export"></i>{" "}
+                            {i18n.language === "th" ? "นำออก" : "Export"}
                         </a>
 
                         <a
@@ -156,7 +174,8 @@ export default function User({t}) {
                             variant="secondary"
                             onClick={templateUser}
                         >
-                            <i className="far fa-file"></i>{" "}{(i18n.language === "th") ? "รูปแบบ" : "Template"}
+                            <i className="far fa-file"></i>{" "}
+                            {i18n.language === "th" ? "รูปแบบ" : "Template"}
                         </a>
                     </div>
                 </div>
@@ -164,5 +183,5 @@ export default function User({t}) {
                 <TableUser initUsers={initUsers} paging={true} />
             </Card.Body>
         </Card>
-    )
+    );
 }
