@@ -23,6 +23,11 @@ class DocumentsController extends Controller
             $document->user;
             $document->form;
             $document->userCancel;
+            if ($document->state == $document->max_state && $document->status != "pending"){
+                $document->approver = $document->approver()->get();
+            }else{
+                $document->approver = $document->approver()->wherePivot('state', "<", $document->state)->get();
+            }
 //            $document['code'] =
         }
         return $documents;
