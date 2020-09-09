@@ -77,7 +77,8 @@ export default function User({ t }) {
                     );
                 }
             })
-            .then(() => setIssend(false));
+            .catch(() => setIssend(false));
+        if(isSend) setIssend(false);
     };
 
     const initUsers = () => {
@@ -144,8 +145,8 @@ export default function User({ t }) {
                                 <span>
                                     <Spinner animation="border" size="sm" />{" "}
                                     {i18n.language === "th"
-                                        ? "กำลังส่ง..."
-                                        : "Sending..."}
+                                        ? "กำลังโหลดไฟล์..."
+                                        : "File Loading..."}
                                 </span>
                             ) : (
                                 ""
