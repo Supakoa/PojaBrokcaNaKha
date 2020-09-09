@@ -12,6 +12,7 @@ function ComponentForgetPassword(props) {
     const [mailForget, setMailForget] = React.useState("");
     const [isDisBtn, setIsDisBtn] = React.useState(true);
     const [isInValid, setIsInValid] = React.useState(false);
+    const [isSend, setIssend] = React.useState(false);
     const language = i18n.language == "th";
 
     const handleForget = e => {
@@ -23,12 +24,17 @@ function ComponentForgetPassword(props) {
     };
 
     const sendMail = async () => {
+        setIssend(true);
         if (!!mailForget) {
-            Axios.post(_urlPostForgetPasswordEmail(), {email : mailForget}, {
-                headers: {
-                    "Content-Type": "application/json"
+            Axios.post(
+                _urlPostForgetPasswordEmail(),
+                { email: mailForget },
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
                 }
-            })
+            )
                 .then(res => {
                     if (res.data.status == 200) {
                         Swal.fire(
@@ -37,20 +43,22 @@ function ComponentForgetPassword(props) {
                                 ? "ยืนยันอีเมลเรียบร้อย"
                                 : res.data.message,
                             "success"
-                        );
+                        ).then(() => setIssend(false));
                     } else {
                         setIsInValid(true);
                         Swal.fire(
                             language ? "ลองอีกครั้ง" : "Try Again!",
                             language ? "อีเมลไม่ถูกต้อง" : res.data.message,
                             "error"
-                        );
+                        ).then(() => setIssend(false));
                     }
                 })
                 .catch(er => {
                     setIsInValid(true);
+                    setIssend(false);
                 });
         }
+        if (isSend) setIssend(false);
     };
 
     return (
@@ -66,6 +74,13 @@ function ComponentForgetPassword(props) {
                     name="email"
                     placeholder={t("sign.sign-in.username")}
                 />
+                <Form.Text>
+                    {isSend
+                        ? i18n.language === "th"
+                            ? "กำลังส่ง..."
+                            : "Sending..."
+                        : ""}
+                </Form.Text>
                 <Form.Control.Feedback type="invalid">
                     {language ? "อีเมลไม่ถูกต้อง" : "Invalid email"} !!
                 </Form.Control.Feedback>
