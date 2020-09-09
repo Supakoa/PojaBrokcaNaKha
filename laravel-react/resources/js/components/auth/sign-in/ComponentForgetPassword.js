@@ -24,7 +24,7 @@ function ComponentForgetPassword(props) {
 
     const sendMail = async () => {
         if (!!mailForget) {
-            Axios.post(_urlPostForgetPasswordEmail(), mailForget, {
+            Axios.post(_urlPostForgetPasswordEmail(), {email : mailForget}, {
                 headers: {
                     "Content-Type": "application/json"
                 }
