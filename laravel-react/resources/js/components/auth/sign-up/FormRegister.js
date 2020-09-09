@@ -219,7 +219,7 @@ export default function FormRegister() {
                     <Form.Label>{t("user.password")}</Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="password"
                         isInvalid={
                             (confirm &&
                                 _forms.password !== _forms.c_password &&
@@ -241,7 +241,7 @@ export default function FormRegister() {
                     <Form.Label>{t("user.confirmPassword")}</Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="password"
                         isInvalid={
                             _forms.c_password
                                 ? _forms.password !== _forms.c_password

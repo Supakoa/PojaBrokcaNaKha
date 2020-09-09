@@ -47,7 +47,7 @@ function FormLogin(props) {
                             : ""
                     }
                     name="password"
-                    type="text"
+                    type="password"
                     placeholder={t("sign.sign-in.password")}
                     onChange={props.inputValue}
                 />

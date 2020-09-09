@@ -150,7 +150,7 @@ export default function FormUser({ isCreatedProp, user, onChangeState, formUser,
                     onChange={onChangeState}
                     type="email"
                     name="email"
-                    placeholder="name@example.com"
+                    placeholder="s59xxxxxxxxx@ssru.ac.th"
                     disabled={isCreatedProp}
                     defaultValue={formUser.email}
                 />
