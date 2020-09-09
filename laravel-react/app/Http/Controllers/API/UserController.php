@@ -168,7 +168,13 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-
+      if ($request->has("major_id") && $request->get("major_id") == 0)  {
+         unset($request['major_id']);
+      }
+      if ($request->has("student_id") && $request->get("student_id") == 0)  {
+         unset($request['student_id']);
+      }
+      
         $user = User::findOrFail($id);
         $user->update($request->all());
         if ($user->major != null)
