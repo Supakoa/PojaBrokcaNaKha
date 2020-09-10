@@ -148,7 +148,7 @@ export default function SignIn() {
                                     width="80"
                                     height="80"
                                 />
-                                <p className="text-info">GE Petition</p>
+                                <p className="text-info">GE Request</p>
 
                                 {_loading ? (
                                     <>

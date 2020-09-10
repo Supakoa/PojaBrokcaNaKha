@@ -153,16 +153,6 @@ export default function FormRegister() {
                                   );
                               })}
                     </Form.Control>
-                    {/* <Form.Control
-                        required
-                        type="text"
-                        placeholder={t("user.title")}
-                        name="title"
-                        isInvalid={
-                            _validator.title ? _validator.title : confirm && !!!_forms.title
-                        }
-                        onChange={handleChanges}
-                    /> */}
                 </Form.Group>
                 <Form.Group as={Col} controlId="first_name">
                     <Form.Label>{t("user.firstName")}</Form.Label>
@@ -390,7 +380,12 @@ export default function FormRegister() {
                         {_loading ? (
                             t("user.btn")
                         ) : (
-                            <Spinner animation="border" />
+                            <span>
+                                <Spinner animation="border" size="sm" />{" "}
+                                {i18n.language === "th"
+                                    ? "กำลังโหลด..."
+                                    : "Loading..."}
+                            </span>
                         )}
                     </Button>
                 </Col>

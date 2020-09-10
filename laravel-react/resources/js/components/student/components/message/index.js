@@ -101,7 +101,7 @@ const MessageElements = ({ token }) => {
                 <Button
                     variant="info"
                     style={{ bottom: "0" }}
-                    className={` float-left position-sticky ${
+                    className={`float-left position-sticky text-truncate ${
                         show ? `d-none` : ``
                     }`}
                     onClick={scrollToBottom}

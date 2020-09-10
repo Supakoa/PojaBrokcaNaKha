@@ -15,7 +15,7 @@
     "sign": {
         "language": "English",
         "component": {
-            "whatIs": "What is Petition ?",
+            "whatIs": "What is Request ?",
             "mean": "Website for submitting applications from Suan Sunandha Rajabhat University",
             "you-need": "Would you like to Sign-in ?",
             "you-need-regist": "Do you want to submit a request but have not registered yet ?",
@@ -85,7 +85,7 @@
     "check": "Check",
     "search": "Search",
     "sign-out": "Sign-out",
-    "txt-logo": "Petition Website",
+    "txt-logo": "Request Website",
     "students": {
         "table": {
             "header": {
@@ -114,7 +114,7 @@
         "nav-left": {
             "title": "Menu",
             "history": "Pettion history",
-            "form": "Send Petition"
+            "form": "Send Request"
         },
         "forms": {
             "title": "Title",
@@ -171,7 +171,7 @@
                 "no": "No",
                 "then": {
                     "title": "Canceled",
-                    "text": "Your petition has been cancel."
+                    "text": "Your Request has been cancel."
                 }
             }
         }
@@ -186,7 +186,7 @@
                 "major": "Major",
                 "phoneNumber": "Phone number"
             },
-            "document": "Petition Information."
+            "document": "Request Information."
         },
         "table": {
             "header": {
