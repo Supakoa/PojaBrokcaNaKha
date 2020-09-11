@@ -1,6 +1,13 @@
 import React from "react";
 import { Animated } from "react-animated-css";
-import { Card, Container, Form, Button, InputGroup } from "react-bootstrap";
+import {
+    Card,
+    Container,
+    Form,
+    Button,
+    InputGroup,
+    Row
+} from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { postMessage } from "../../../middleware/axios/postMessage";
 import ListMessages from "./list-message";
@@ -50,7 +57,7 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
                 show ? `d-block` : `d-none`
             }`}
         >
-            <Card style={{ width: "100%", maxWidth: "350px" }}>
+            <Card style={{ width: "100%", maxWidth: "370px" }}>
                 <Card.Title className="clearfix mb-0 px-1 pl-2 py-2">
                     <h6 className="float-left mb-0 py-2">
                         {t("students.message.title")}{" "}
@@ -71,18 +78,21 @@ const ChatBox = ({ show, closeMessage, _messages, setMessages }) => {
                             minHeight: "20vh",
                             height: "100%",
                             maxHeight: "40vh",
-                            overflowY: "scroll"
+                            overflowY: "scroll",
+                            minWidth: "350px"
                         }}
-                        className="w-100 border border-secondary rounded clearfix pt-3"
+                        className="border border-secondary rounded clearfix pt-3"
                         id="chatBody"
                     >
                         {_messages.map((item, idx) => {
                             return (
-                                <ListMessages
-                                    key={idx}
-                                    data={item}
-                                    isSender={item.admin_id === null}
-                                />
+                                <Row key={idx}>
+                                    <ListMessages
+
+                                        data={item}
+                                        isSender={item.admin_id === null}
+                                    />
+                                </Row>
                             );
                         })}
                     </Container>
