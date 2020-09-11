@@ -7,6 +7,7 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { _URL } from "../../middleware/URL";
+import Loading from "../../student/components/loading";
 
 export default function FormRegister() {
     const { t, i18n } = useTranslation();
@@ -82,26 +83,31 @@ export default function FormRegister() {
     };
 
     const handleOnClick = async e => {
-        let check = false;
-        setLoading(false);
-        check = Object.values(_forms).length < 8;
+        let check = Object.values(_forms).length < 8;
         setConfirm(check && !password);
         if (!check && password) {
+            setLoading(false);
+
             await Axios.post(`${_URL}/api/register`, {
                 ..._forms,
                 role_id: 3
-            }).then(res => {
-                if (res.data.success.token)
-                    Swal.fire("success", "resgister success", "success").then(
-                        res => {
+            })
+                .then(res => {
+                    if (res.data.success.token)
+                        Swal.fire(
+                            "success",
+                            "resgister success",
+                            "success"
+                        ).then(res => {
                             if (res.value) {
                                 _history.push("/login");
                                 setLoading(true);
                             }
-                        }
-                    );
-            });
+                        });
+                })
+                .catch(() => setLoading(true));
         }
+        if (!_loading) setLoading(true);
     };
 
     React.useEffect(() => {
@@ -110,7 +116,7 @@ export default function FormRegister() {
         } else if (Number(selectedFaculty) > 0) {
             _fetchMajors(selectedFaculty);
         }
-    }, [_facs, selectedFaculty]);
+    }, [_facs, selectedFaculty, _loading]);
 
     return (
         <Form className="p-4  m-auto">
