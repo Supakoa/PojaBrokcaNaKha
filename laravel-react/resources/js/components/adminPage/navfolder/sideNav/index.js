@@ -1,0 +1,128 @@
+import React from "react";
+import "./navbarStyle.css";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import GroupsIcon from "@material-ui/icons/Group";
+// import ExpandMore from "@material-ui/icons/ExpandMore";
+import PeopleIcon from "@material-ui/icons/People";
+import LinkIcon from "@material-ui/icons/Link";
+import DescriptionIcon from "@material-ui/icons/Description";
+// import ForumIcon from "@material-ui/icons/Forum";
+import HomeIcon from "@material-ui/icons/Home";
+import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
+import {useTranslation} from 'react-i18next';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: "100%",
+        fontSize: 5,
+        backgroundColor: theme.palette.background.paper
+    }
+}));
+
+export default function SideNav({ url }) {
+    // console.log(url);
+    const {t, i18n, ready} = useTranslation('', {useSuspense: false});
+    const linkClass = "text-dark";
+
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    return (
+        <List
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            subheader={
+                <ListSubheader component="div" id="nested-list-subheader">
+                    {t('menu.menu')}
+                </ListSubheader>
+            }
+            className={classes.root}
+        >
+            <Link className={linkClass} to={`${url}`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={t('menu.home')}
+                    />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={`${url}/inbox`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={t('menu.message')}
+                    />
+                </ListItem>
+            </Link>
+
+            <Link className={linkClass} to={`${url}/report`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <DescriptionIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={t('menu.documents')}
+                    />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={`${url}/user`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <PeopleIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={t('menu.users')}
+                    />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={`${url}/news`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <LinkIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={t('menu.news')}
+                    />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={`${url}/group`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <GroupsIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={"ตั้งค่ากลุ่ม"}
+                    />
+                </ListItem>
+            </Link>
+            <Link className={linkClass} to={`${url}/step-report`}>
+                <ListItem button>
+                    <ListItemIcon>
+                        <LibraryAddCheckIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        className="d-lg-block d-sm-none"
+                        primary={t('menu.forms')}
+                    />
+                </ListItem>
+            </Link>
+        </List>
+    );
+}

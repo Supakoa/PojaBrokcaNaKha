@@ -6,6 +6,7 @@ use App\Major ;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use faculty as GlobalFaculty;
 
 class FacultyController extends Controller
 {
@@ -13,11 +14,16 @@ class FacultyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return  response()->json(['success' => Faculty::all()]);
+        $faculties = Faculty::all();
+        foreach ($faculties as $faculty) {
+            $faculty->majors;
+        }
+
+        return  response()->json(['success' => $faculties]);
     }
 
     /**
@@ -86,6 +92,13 @@ class FacultyController extends Controller
     {
         //
     }
+
+    public function getFacultyByMajorId(Major $major) {
+        // return $major->faculties;
+        return "";
+        // return response()->json(['success' => $major]);
+    }
+
     public function getMajorByFacultyId(Faculty $faculty){
 
         return $faculty->majors;

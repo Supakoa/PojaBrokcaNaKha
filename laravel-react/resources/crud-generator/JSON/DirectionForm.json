@@ -1,0 +1,21 @@
+{
+    "fields": [
+        {
+            "name": "state",
+            "type": "tinyint",
+            "default": "0"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "forms",
+            "type": "hasMany",
+            "class": "App\\Form"
+        },
+        {
+            "name": "groups",
+            "type": "hasMany",
+            "class": "App\\Group"
+        }
+    ]
+}

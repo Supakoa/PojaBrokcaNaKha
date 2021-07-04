@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\App;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'student_id','title','first_name','last_name', 'email', 'password','role_id','telephone','major_id',
+        'student_id','title','first_name','last_name', 'email', 'password','role_id','telephone','major_id','license'
     ];
 
     /**
@@ -38,4 +39,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function documents()
+    {
+    return   $this->hasMany('App\Document');
+    }
+
+     public function approve_documents(){
+         return $this->belongsToMany(Document::class,"user_approve")->withPivot(["comment","return_file","state","status"])->withTimestamps();
+     }
+
+    public function major()
+    {
+     return  $this->belongsTo(Major::class);
+    }
+
+    public function groups(){
+        return $this->belongsToMany(Group::class,"user_group")
+            ->withPivot("subject_id")->withTimestamps();
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
 }

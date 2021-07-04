@@ -1,0 +1,28 @@
+{
+    "fields": [
+        {
+            "name": "th_name",
+            "type": "string"
+        },
+        {
+            "name": "eng_name",
+            "type": "string"
+        },
+        {
+            "name": "data",
+            "type": "json"
+        },
+        {
+            "name": "all_state",
+            "type": "tinyint",
+            "default": "0"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "documents",
+            "type": "hasMany",
+            "class": "App\\Document"
+        }
+    ]
+}

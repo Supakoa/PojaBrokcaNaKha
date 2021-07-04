@@ -1,0 +1,92 @@
+import React from "react";
+import Logo from "../../../images/logo.png";
+import {
+    Navbar,
+    Spinner,
+    Image,
+    Container,
+    Nav,
+    Dropdown
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import SwitchingLanguageBtn from "../../../middleware/switchingLanguage";
+import SignOutBtn from "../../../auth/sign-out";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
+const HeaderApprover = () => {
+    const _user = useSelector(s => s.userState);
+    const { t, i18n } = useTranslation();
+    return (
+        <Navbar
+            bg="info"
+            expand="sm"
+            className="d-flex align-items-center justify-content-around sticky-top"
+            variant="dark"
+        >
+            <Container>
+                <Navbar.Brand className="mr-auto">
+                    <img
+                        alt=""
+                        src={Logo}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                    />{" "}
+                    {t("txt-logo")}
+                </Navbar.Brand>
+
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="text-white px-2">
+                        <Nav.Item
+                            as={Link}
+                            className="text-light list-unstyled"
+                            to="/Approvers/profile"
+                        >
+                            {i18n.language === "th"
+                                ? "ข้อมูลส่วนตัว"
+                                : "Profile"}
+                        </Nav.Item>
+                    </Nav>
+                    <Nav className="ml-auto">
+                        <Dropdown>
+                            {Object.keys(_user).length > 0 ? (
+                                <Dropdown.Toggle
+                                    as={Link}
+                                    id="dropdown-custom-components"
+                                    to="#"
+                                    className="text-light d-flex align-items-center justify-content-start mr-lg-3 mr-md-3 py-2"
+                                >
+                                    <Image
+                                        src="https://img.icons8.com/plasticine/2x/user.png"
+                                        className="d-inline-block align-top"
+                                        width="30"
+                                        height="30"
+                                        rounded="true"
+                                    />{" "}
+                                    {`${_user.title} ${_user.first_name} ${_user.last_name}`}
+                                </Dropdown.Toggle>
+                            ) : (
+                                <div className="py-2 px-3">
+                                    <Spinner animation="border" size="sm" />
+                                </div>
+                            )}
+
+                            <Dropdown.Menu className="bg-info">
+                                <Dropdown.Item
+                                    as={SignOutBtn}
+                                    className="text-light d-flex align-items-center justify-content-start py-2 pl-2"
+                                />
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        <SwitchingLanguageBtn />
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+    );
+};
+
+export default HeaderApprover;

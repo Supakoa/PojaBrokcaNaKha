@@ -17,30 +17,33 @@ class status extends Seeder
         $data = array(
             array(
                 'name' => 'ไม่ผ่าน',
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ),
             array(
                 'name' => 'ผ่าน',
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ),
             array(
                 'name' => 'แก้ไข',
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ),
-            array('name' => 'กำลังดำเนินการ',
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now()
+            array(
+                'name' => 'กำลังดำเนินการ',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ),
-            array('name' => 'อนุมัติ',
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now()
+            array(
+                'name' => 'อนุมัติ',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ),
-            array('name' => 'ไม่อนุมัติ',
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now()
+            array(
+                'name' => 'ไม่อนุมัติ',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ),
         );
 

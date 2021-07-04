@@ -72,13 +72,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 How to setup php
 - composer install
 - php artisan migrate:fresh
+- php artisan db:seed
 - php artisan passport:install
 - php artisan storage:link
 - php artisan key:gen
+---------------------------------------------------------------------
+TODO: You should to check your .env file when you clone this Project.
+---------------------------------------------------------------------
 How to setup nodeJS
 - npm i --save
 How to run app
 - open xampp/mamp
-- php artisan serve
-- npm run dev
+- php artisan serve (first terminal)
+- npm run dev (second terminal)
 

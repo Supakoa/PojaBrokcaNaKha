@@ -1,0 +1,230 @@
+{
+    "user": {
+        "title": "Title",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "studentId": "Student Id",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "email": "Email",
+        "phoneNumber": "Phone number",
+        "faculty": "Faculty",
+        "major": "Major",
+        "btn": "Submit"
+    },
+    "sign": {
+        "language": "English",
+        "component": {
+            "whatIs": "What is Request ?",
+            "mean": "Website for submitting applications from Suan Sunandha Rajabhat University",
+            "you-need": "Would you like to Sign-in ?",
+            "you-need-regist": "Do you want to submit a request but have not registered yet ?",
+            "btn": "Sign-in",
+            "btn-regist": "register"
+        },
+        "sign-in": {
+            "signIn": "Sign-in",
+            "username": "Email",
+            "password": "Password"
+        },
+        "forget": "Forget Password"
+    },
+    "menu": {
+        "menu": "Menu",
+        "home": "Home",
+        "message": "Message",
+        "documents": "Documents",
+        "users": "Users",
+        "news": "News",
+        "forms": "Forms"
+    },
+    "faculty": {
+        "index": " Faculty",
+        "selectFaculty": "Choose your faculty"
+    },
+    "major": {
+        "index": "Major",
+        "selectMajor": "Choose your major"
+    },
+    "modalDelete": {
+        "btnModal": "Delete",
+        "title": "Are you shure?",
+        "text": "You won't be able to revert this!",
+        "cancelButtonText": "No!",
+        "confirmButtonText": "Yes, delete it!",
+        "deleted": "Deleted",
+        "hasBeetDeleted": "Has been deleted.",
+        "success": "success"
+    },
+    "pr": {
+        "index": "Public relations",
+        "link": "URL",
+        "image": "Image"
+    },
+    "document": {
+        "form": "Forms",
+        "creat": "Created at",
+        "update": "Updated at",
+        "status": "Status",
+        "code" : "Code"
+    },
+    "documentStatus": {
+        "cancelled": "Cancelled",
+        "pending": "Pending",
+        "edited": "Edited",
+        "rejected": "Rejected",
+        "approved": "Approved"
+    },
+    "day&time": "Day / Time",
+    "selectToShowMessage": "Please select a name To display the message",
+    "sender": "Sender",
+    "add": "Add",
+    "edit": "Edit",
+    "close": "Close",
+    "save": "Save",
+    "check": "Check",
+    "search": "Search",
+    "sign-out": "Sign-out",
+    "txt-logo": "Request Website",
+    "students": {
+        "table": {
+            "header": {
+                "search": "Search",
+                "pagination": "Show Data"
+            },
+            "columns": {
+                "status": "Status",
+                "form": "Forms",
+                "create": "Created at",
+                "edit": "Edit at",
+                "action": "Action"
+            },
+            "footer": {
+                "show": "Show now",
+                "of": "Of",
+                "list": "Lists",
+                "prev": "Previous",
+                "next": "Next"
+            }
+        },
+        "navbar-top": {
+            "home": "Home",
+            "profile": "Profile"
+        },
+        "nav-left": {
+            "title": "Menu",
+            "history": "Pettion history",
+            "form": "Send Request"
+        },
+        "forms": {
+            "title": "Title",
+            "firstname": {
+                "title": "Firstname",
+                "text": "Please use it as Mr., Mrs. or Miss."
+            },
+            "lastname": "Lastname",
+            "student-id": "Student ID",
+            "phone": {
+                "title": "Phone",
+                "text": "Please enter a number that you can contact immediately."
+            },
+            "mail": {
+                "title": "Email",
+                "text": "Please save the university email."
+            },
+            "faculty": {
+                "title": "Faculty",
+                "option": "Choose Faculty",
+                "text": "You must select or change faculties to be able to select a major."
+            },
+            "major": "Major",
+            "btn": {
+                "save": "Save",
+                "update": "Updated"
+            }
+        },
+        "message": {
+            "title": "Help",
+            "place-holder": "message"
+        },
+        "modal": {
+            "btn-title": "more",
+            "status-documents": {
+                "title": "Document Status",
+                "create": "Created at",
+                "edit": "Edit at",
+                "cancel": "Cancel at",
+                "status": "Status",
+                "sender": "Sender",
+                "canceler": "Canceler",
+                "note": "Note"
+            },
+            "detail": "Detail Document",
+            "btn": {
+                "cancel": "Cancel Document",
+                "close": "Close"
+            },
+            "swal": {
+                "title": "Are you sure ?",
+                "text": "That you want to cancel this pettion !",
+                "yes": "Yes!",
+                "no": "No",
+                "then": {
+                    "title": "Canceled",
+                    "text": "Your Request has been cancel."
+                }
+            }
+        }
+    },
+    "approvers": {
+        "show-detail": {
+            "user": {
+                "title": "Sender Information.",
+                "fullname": "Fullname",
+                "studentId": "Student ID",
+                "faculty": "Faculty",
+                "major": "Major",
+                "phoneNumber": "Phone number"
+            },
+            "document": "Request Information."
+        },
+        "table": {
+            "header": {
+                "search": "Search",
+                "pagination": "Show Data"
+            },
+            "columns": {
+                "status": "Status",
+                "form": "Forms",
+                "create": "Created at",
+                "name_sender": "Sender",
+                "action": "Action"
+            },
+            "footer": {
+                "show": "Show now",
+                "of": "of",
+                "list": "lists",
+                "prev": "Previous",
+                "next": "Next"
+            }
+        },
+        "emptyDetail": "You not selected documents.",
+        "action": {
+            "comment": "Comment.",
+            "status": "Status.",
+            "file": "File.",
+            "place-comment": "Add Your Comment",
+            "place-status": "Choose Status.",
+            "place-file": "Choose File.",
+            "btn": "Submit"
+        }
+    },
+    "filter": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "cancel": "Canceled",
+        "edit": "Edit",
+        "all": "All",
+        "reject": "Reject"
+    }
+}
